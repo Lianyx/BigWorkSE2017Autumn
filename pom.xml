@@ -10,10 +10,6 @@
     <name>ERPnju</name>
     <url>http://maven.apache.org</url>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <modules><!-- 这个父工程下包含了下面2个子工程 -->
         <module>Client</module>
         <module>Server</module>
