@@ -3,7 +3,7 @@ package dataServiceDriver;
 import dataService.StockDataService;
 import po.StockReceiptPO;
 import po.StockRelatedReceiptPO;
-import util.ResultMessage;
+import bl.util.ResultMessage;
 
 /**
  * Created by tiberius on 2017/10/22.

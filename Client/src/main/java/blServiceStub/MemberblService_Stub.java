@@ -1,7 +1,7 @@
 package blServiceStub;
 
-import util.ResultMessage;
-import util.SearchConditions;
+import bl.util.ResultMessage;
+import bl.util.SearchConditions;
 import blService.MemberblService;
 import vo.MemberVO;
 

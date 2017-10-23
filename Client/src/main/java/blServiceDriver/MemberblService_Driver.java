@@ -1,7 +1,7 @@
 package blServiceDriver;
 
 import blServiceStub.MemberblService_Stub;
-import util.SearchConditions;
+import bl.util.SearchConditions;
 import blService.MemberblService;
 import vo.MemberVO;
 

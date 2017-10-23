@@ -1,6 +1,6 @@
 package blService;
 
-import util.ResultMessage;
+import bl.util.ResultMessage;
 import vo.PromotionVO;
 import vo.SalesRelatedReceiptVO;
 

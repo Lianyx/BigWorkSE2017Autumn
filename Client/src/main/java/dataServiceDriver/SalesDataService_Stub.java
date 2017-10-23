@@ -3,7 +3,7 @@ package dataServiceDriver;
 import dataService.SalesDataService;
 import po.SalesReceiptPO;
 import po.SalesRelatedReceiptPO;
-import util.ResultMessage;
+import bl.util.ResultMessage;
 
 /**
  * Created by tiberius on 2017/10/22.

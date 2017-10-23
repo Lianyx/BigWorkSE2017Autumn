@@ -1,6 +1,6 @@
 package vo;
 
-import util.MemberCategory;
+import bl.util.MemberCategory;
 
 /**
  * Created by tiberius on 2017/10/21.

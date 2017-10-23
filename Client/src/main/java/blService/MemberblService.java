@@ -1,7 +1,7 @@
 package blService;
 
-import util.ResultMessage;
-import util.SearchConditions;
+import bl.util.ResultMessage;
+import bl.util.SearchConditions;
 import vo.MemberVO;
 
 import java.util.ArrayList;
