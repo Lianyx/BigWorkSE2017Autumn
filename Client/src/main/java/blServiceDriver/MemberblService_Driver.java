@@ -2,7 +2,7 @@ package blServiceDriver;
 
 import blServiceStub.MemberblService_Stub;
 import bl.util.SearchConditions;
-import blService.MemberblService;
+import blService.memberblService.MemberblService;
 import vo.MemberVO;
 
 /**

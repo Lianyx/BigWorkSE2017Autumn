@@ -1,4 +1,4 @@
-package blService;
+package blService.stockblService;
 
 import bl.util.ResultMessage;
 import vo.StockRelatedReceiptVO;

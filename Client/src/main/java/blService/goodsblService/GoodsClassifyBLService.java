@@ -1,4 +1,4 @@
-package blService;
+package blService.goodsblService;
 
 import java.util.ArrayList;
 

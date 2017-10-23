@@ -1,9 +1,8 @@
 package dataServiceStub;
 
-import dataService.StockDataService;
+import dataService.stockdataService.StockDataService;
 import dataServiceDriver.StockDataService_Stub;
 import po.StockReceiptPO;
-import po.StockRelatedReceiptPO;
 
 /**
  * Created by tiberius on 2017/10/22.

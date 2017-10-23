@@ -1,9 +1,8 @@
 package blServiceDriver;
 
 import blServiceStub.StockblService_Stub;
-import blService.StockblService;
+import blService.stockblService.StockblService;
 import vo.StockReceiptVO;
-import vo.StockRelatedReceiptVO;
 import vo.StockReturnReceiptVO;
 
 /**

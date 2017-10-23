@@ -1,4 +1,4 @@
-package blService;
+package blService.inventoryblService;
 
 import main.VO.InventoryBillVO;
 import main.VO.InventoryCheckVO;

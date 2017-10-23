@@ -1,4 +1,4 @@
-package blService;
+package blService.checkblService;
 
 import po.ReceiptPO;
 

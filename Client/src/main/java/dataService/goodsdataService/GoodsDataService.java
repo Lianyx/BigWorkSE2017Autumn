@@ -1,18 +1,17 @@
-package dataService;
+package dataService.goodsdataService;
 
 import java.util.ArrayList;
 
-import PO.GoodsClassifyPO;
 import PO.GoodsPO;
 import utility.ResultMessage;
 
-public interface GoodsClassifyDataService {
+public interface GoodsDataService {
 	/**
 	 * 向序列化文件中添加一个po
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage insert(GoodsClassifyPO po);
+	public ResultMessage insert(GoodsPO po);
 
 	/**
 	 * 根据ID删除
@@ -26,17 +25,25 @@ public interface GoodsClassifyDataService {
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage update(GoodsClassifyPO po);
+	public ResultMessage update(GoodsPO po);
 
 	/**
 	 * 显示全部po
 	 * @return 返回所有po的集合
 	 */
-	public ArrayList<GoodsClassifyPO> show();
+	public ArrayList<GoodsPO> show();
+	
+
+	/**
+	 * 根据keywords查看商品，
+	 * @param keywords
+	 * @return 商品持久化数据
+	 */
+	public ArrayList<GoodsPO> find(String keywords);
 	
 	/**
-	 * @param fatherID 分类父类的ID
-	 * @return 新建分类的ID
+	 * @param fatherID 商品父类的ID
+	 * @return 新建商品的ID
 	 */
 	public String getID(String fatherID);
 }

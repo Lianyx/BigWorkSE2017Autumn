@@ -1,9 +1,8 @@
 package dataServiceStub;
 
-import dataService.SalesDataService;
+import dataService.salesdataService.SalesDataService;
 import dataServiceDriver.SalesDataService_Stub;
 import po.SalesReceiptPO;
-import po.SalesRelatedReceiptPO;
 
 /**
  * Created by tiberius on 2017/10/22.

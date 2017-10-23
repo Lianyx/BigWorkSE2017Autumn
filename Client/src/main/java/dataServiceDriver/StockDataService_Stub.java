@@ -1,6 +1,6 @@
 package dataServiceDriver;
 
-import dataService.StockDataService;
+import dataService.stockdataService.StockDataService;
 import po.StockReceiptPO;
 import po.StockRelatedReceiptPO;
 import bl.util.ResultMessage;

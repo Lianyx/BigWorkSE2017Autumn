@@ -13,6 +13,7 @@
     <modules><!-- 这个父工程下包含了下面2个子工程 -->
         <module>Client</module>
         <module>Server</module>
+        <module>Common</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

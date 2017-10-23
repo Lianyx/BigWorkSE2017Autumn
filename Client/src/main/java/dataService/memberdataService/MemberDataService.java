@@ -1,4 +1,4 @@
-package dataService;
+package dataService.memberdataService;
 
 import po.MemberPO;
 import bl.util.ResultMessage;
@@ -13,5 +13,5 @@ public interface MemberDataService {
     public ResultMessage insert(MemberPO memberPO);
     public ResultMessage update(MemberPO memberPO);
     public ResultMessage delete(String id);
-    public ArrayList<MemberPO> search(SearchConditions sc);
+    public ArrayList<MemberPO> search(String keyword);
 }

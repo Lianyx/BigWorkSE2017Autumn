@@ -1,4 +1,4 @@
-package blService;
+package blService.promotionblService;
 import po.PromotionPO;
 public interface PromotionblService {
     public void init();

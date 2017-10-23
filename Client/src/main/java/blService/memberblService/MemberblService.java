@@ -1,4 +1,4 @@
-package blService;
+package blService.memberblService;
 
 import bl.util.ResultMessage;
 import bl.util.SearchConditions;

@@ -2,7 +2,7 @@ package blServiceStub;
 
 import bl.util.ResultMessage;
 import bl.util.SearchConditions;
-import blService.MemberblService;
+import blService.memberblService.MemberblService;
 import vo.MemberVO;
 
 import java.util.ArrayList;

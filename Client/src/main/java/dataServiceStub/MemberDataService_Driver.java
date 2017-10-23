@@ -1,6 +1,6 @@
 package dataServiceStub;
 
-import dataService.MemberDataService;
+import dataService.memberdataService.MemberDataService;
 import dataServiceDriver.MemberDataService_Stub;
 import po.MemberPO;
 

@@ -1,6 +1,6 @@
 package dataServiceDriver;
 
-import dataService.SalesDataService;
+import dataService.salesdataService.SalesDataService;
 import po.SalesReceiptPO;
 import po.SalesRelatedReceiptPO;
 import bl.util.ResultMessage;

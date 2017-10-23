@@ -1,4 +1,4 @@
-package blService;
+package blService.salesblService;
 
 import bl.util.ResultMessage;
 import vo.PromotionVO;

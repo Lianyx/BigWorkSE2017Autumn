@@ -1,9 +1,8 @@
 package blServiceDriver;
 
 import blServiceStub.SalesblService_Stub;
-import blService.SalesblService;
+import blService.salesblService.SalesblService;
 import vo.SalesReceiptVO;
-import vo.SalesRelatedReceiptVO;
 
 /**
  * Created by tiberius on 2017/10/21.

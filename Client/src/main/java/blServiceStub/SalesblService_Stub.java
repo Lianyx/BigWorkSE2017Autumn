@@ -1,6 +1,6 @@
 package blServiceStub;
 
-import blService.SalesblService;
+import blService.salesblService.SalesblService;
 import bl.util.ResultMessage;
 import vo.PromotionVO;
 import vo.SalesReceiptVO;

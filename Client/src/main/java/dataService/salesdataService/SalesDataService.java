@@ -1,4 +1,4 @@
-package dataService;
+package dataService.salesdataService;
 
 import po.SalesRelatedReceiptPO;
 import bl.util.ResultMessage;

@@ -1,4 +1,4 @@
-package dataService;
+package dataService.inventorydataService;
 
 import java.util.ArrayList;
 

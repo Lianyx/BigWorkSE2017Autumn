@@ -1,4 +1,4 @@
-package blService;
+package blService.logblService;
 import po.LogPO;
 
 import java.util.*;

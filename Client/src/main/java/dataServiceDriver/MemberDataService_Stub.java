@@ -1,6 +1,6 @@
 package dataServiceDriver;
 
-import dataService.MemberDataService;
+import dataService.memberdataService.MemberDataService;
 import po.MemberPO;
 import bl.util.ResultMessage;
 import bl.util.SearchConditions;

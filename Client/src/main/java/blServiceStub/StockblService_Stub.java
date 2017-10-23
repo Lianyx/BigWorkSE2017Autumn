@@ -1,6 +1,6 @@
 package blServiceStub;
 
-import blService.StockblService;
+import blService.stockblService.StockblService;
 import bl.util.ResultMessage;
 import vo.StockReceiptVO;
 import vo.StockRelatedReceiptVO;
