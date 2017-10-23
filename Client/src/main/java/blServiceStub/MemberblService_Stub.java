@@ -1,7 +1,7 @@
 package blServiceStub;
 
-import utilitybl.ResultMessage;
-import utilitybl.SearchConditions;
+import util.ResultMessage;
+import util.SearchConditions;
 import blService.MemberblService;
 import vo.MemberVO;
 
@@ -32,7 +32,7 @@ public class MemberblService_Stub implements MemberblService {
     @Override
     public ArrayList<MemberVO> search(SearchConditions sc) {
         ArrayList<MemberVO> members = new ArrayList<>();
-        members.add(new MemberVO("00002", "��С��"));
+        members.add(new MemberVO("00002", "王小明"));
         return members;
     }
 }

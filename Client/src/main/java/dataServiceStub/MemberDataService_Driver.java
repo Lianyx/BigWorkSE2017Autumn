@@ -11,8 +11,8 @@ public class MemberDataService_Driver {
     public static void main(String[] args) {
         MemberDataService memberDataService = new MemberDataService_Stub();
         System.out.println(memberDataService.delete("00001"));
-        System.out.println(memberDataService.insert(new MemberPO("00001", "ÍõĞ¡Ã÷")));
-        System.out.println(memberDataService.update(new MemberPO("00001", "ÍõĞ¡Ã÷")));
+        System.out.println(memberDataService.insert(new MemberPO("00001", "ç‹å°æ˜")));
+        System.out.println(memberDataService.update(new MemberPO("00001", "ç‹å°æ˜")));
         memberDataService.search(null).forEach(System.out::println);
     }
 }

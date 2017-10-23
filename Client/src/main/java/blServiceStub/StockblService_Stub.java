@@ -1,7 +1,8 @@
 package blServiceStub;
 
 import blService.StockblService;
-import utilitybl.ResultMessage;
+import util.ResultMessage;
+import vo.StockReceiptVO;
 import vo.StockRelatedReceiptVO;
 
 import java.util.ArrayList;
@@ -39,14 +40,14 @@ public class StockblService_Stub implements StockblService {
 
     @Override
     public StockRelatedReceiptVO find(String id) {
-        return new StockRelatedReceiptVO(id, "��Ӧ�̼�", "�ֿ��",  "����Ա��", null, "no remark", 1000);
+        return new StockReceiptVO(id, "供应商甲", "仓库甲",  "操作员甲", null, "no remark", 1000);
     }
 
     @Override
     public ArrayList<String> getGoodsNames() {
         ArrayList<String> goods = new ArrayList<>();
-        goods.add("��Ʒ��1");
-        goods.add("��Ʒ��1");
+        goods.add("商品甲1");
+        goods.add("商品乙1");
         return goods;
     }
 

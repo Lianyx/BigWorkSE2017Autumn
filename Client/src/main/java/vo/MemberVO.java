@@ -7,17 +7,17 @@ import util.MemberCategory;
  */
 public class MemberVO {
     private String id;
-    private MemberCategory memberCatogory; // 分为进货商和销售商
+    private MemberCategory memberCatogory; // 鍒嗕负杩涜揣鍟嗗拰閿�鍞晢
     private int VIPgrade; // 1~5
     private String name;
     private String phoneNumber;
     private String address;
     private String zipCode;
     private String emailAddress;
-    private int debtCeiling; // 应收额度
+    private int debtCeiling; // 搴旀敹棰濆害
     private int debt;
     private int credit;
-    private String defaultOperatorID; // 默认业务员id
+    private String defaultOperatorID; // 榛樿涓氬姟鍛榠d
 
     public MemberVO(String id, String name) {
         this.id = id;

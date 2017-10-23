@@ -14,11 +14,11 @@ public class StockblService_Driver {
         StockblService stockblService = new StockblService_Stub();
         System.out.println(stockblService.getStockReceiptID());
         System.out.println(stockblService.getStockReturnReceiptID());
-        System.out.println(stockblService.submit(new StockReceiptVO("00001", "¹©Ó¦ÉÌ¼×", "²Ö¿â¼×",  "²Ù×÷Ô±¼×", null, "no remark", 1000)));
-        System.out.println(stockblService.update(new StockReturnReceiptVO("00001", "¹©Ó¦ÉÌ¼×", "²Ö¿â¼×",  "²Ù×÷Ô±¼×", null, "no remark", 1000)));
+        System.out.println(stockblService.submit(new StockReceiptVO("00001", "ä¾›åº”å•†ç”²", "ä»“åº“ç”²",  "æ“ä½œå‘˜ç”²", null, "no remark", 1000)));
+        System.out.println(stockblService.update(new StockReturnReceiptVO("00001", "ä¾›åº”å•†ç”²", "ä»“åº“ç”²",  "æ“ä½œå‘˜ç”²", null, "no remark", 1000)));
         System.out.println(stockblService.delete("JHD-20171022-00001"));
         System.out.println(stockblService.find("JHD-20171022-00001"));
         stockblService.getGoodsNames().forEach(System.out::println);
-        System.out.println(stockblService.getPrice("ÉÌÆ·¼×", "ĞÍºÅÒÒ"));
+        System.out.println(stockblService.getPrice("å•†å“ç”²", "å‹å·ä¹™"));
     }
 }

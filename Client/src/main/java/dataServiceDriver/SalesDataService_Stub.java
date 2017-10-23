@@ -1,8 +1,9 @@
 package dataServiceDriver;
 
 import dataService.SalesDataService;
+import po.SalesReceiptPO;
 import po.SalesRelatedReceiptPO;
-import utilitybl.ResultMessage;
+import util.ResultMessage;
 
 /**
  * Created by tiberius on 2017/10/22.
@@ -25,6 +26,6 @@ public class SalesDataService_Stub implements SalesDataService {
 
     @Override
     public SalesRelatedReceiptPO find(String id) {
-        return new SalesRelatedReceiptPO("00002", "00001", "�ֿ���");
+        return new SalesReceiptPO("00002", "00001", "仓库乙");
     }
 }

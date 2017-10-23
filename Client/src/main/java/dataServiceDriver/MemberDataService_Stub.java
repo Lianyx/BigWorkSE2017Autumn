@@ -2,8 +2,8 @@ package dataServiceDriver;
 
 import dataService.MemberDataService;
 import po.MemberPO;
-import utilitybl.ResultMessage;
-import utilitybl.SearchConditions;
+import util.ResultMessage;
+import util.SearchConditions;
 import vo.MemberVO;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class MemberDataService_Stub implements MemberDataService {
     @Override
     public ArrayList<MemberPO> search(SearchConditions sc) {
         ArrayList<MemberPO> members = new ArrayList<>();
-        members.add(new MemberPO("00001", "��С��"));
+        members.add(new MemberPO("00001", "王小明"));
         return members;
     }
 }

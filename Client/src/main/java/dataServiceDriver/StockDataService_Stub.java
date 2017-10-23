@@ -1,8 +1,9 @@
 package dataServiceDriver;
 
 import dataService.StockDataService;
+import po.StockReceiptPO;
 import po.StockRelatedReceiptPO;
-import utilitybl.ResultMessage;
+import util.ResultMessage;
 
 /**
  * Created by tiberius on 2017/10/22.
@@ -25,6 +26,6 @@ public class StockDataService_Stub implements StockDataService {
 
     @Override
     public StockRelatedReceiptPO find(String id) {
-        return new StockRelatedReceiptPO("00001", "00002", "�ֿ��", "�", null, "", 1000);
+        return new StockReceiptPO("00001", "00002", "仓库丙", "李康", null, "", 1000);
     }
 }

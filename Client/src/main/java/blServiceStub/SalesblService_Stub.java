@@ -1,8 +1,9 @@
 package blServiceStub;
 
 import blService.SalesblService;
-import utilitybl.ResultMessage;
+import util.ResultMessage;
 import vo.PromotionVO;
+import vo.SalesReceiptVO;
 import vo.SalesRelatedReceiptVO;
 
 import java.util.ArrayList;
@@ -40,14 +41,14 @@ public class SalesblService_Stub implements SalesblService {
 
     @Override
     public SalesRelatedReceiptVO find(String id) {
-        return new SalesRelatedReceiptVO("00001", "00002", "�ֿ���");
+        return new SalesReceiptVO("00001", "00002", "仓库乙");
     }
 
     @Override
     public ArrayList<String> getGoodsNames() {
         ArrayList<String> goods = new ArrayList<>();
-        goods.add("��Ʒ��");
-        goods.add("��Ʒ��");
+        goods.add("商品甲");
+        goods.add("商品乙");
         return goods;
     }
 
@@ -59,7 +60,7 @@ public class SalesblService_Stub implements SalesblService {
     @Override
     public ArrayList<PromotionVO> getPromotions() {
         ArrayList<PromotionVO> promotions = new ArrayList<>();
-        promotions.add(new PromotionVO("����"));
+        promotions.add(new PromotionVO("七折"));
         return promotions;
     }
 }

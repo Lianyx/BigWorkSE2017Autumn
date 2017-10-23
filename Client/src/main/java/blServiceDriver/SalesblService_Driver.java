@@ -13,12 +13,12 @@ public class SalesblService_Driver {
         SalesblService salesblService = new SalesblService_Stub();
         System.out.println(salesblService.getSalesReceiptID());
         System.out.println(salesblService.getSalesReturnReceiptID());
-        System.out.println(salesblService.submit(new SalesReceiptVO("00001", "00001", "²Ö¿â¼×")));
-        System.out.println(salesblService.update(new SalesReceiptVO("00001", "00001", "²Ö¿âÒÒ")));
+        System.out.println(salesblService.submit(new SalesReceiptVO("00001", "00001", "ä»“åº“ç”²")));
+        System.out.println(salesblService.update(new SalesReceiptVO("00001", "00001", "ä»“åº“ä¹™")));
         System.out.println(salesblService.delete("XSD-20171022-00001"));
         System.out.println(salesblService.find("XSD-20171022-00001"));
         salesblService.getGoodsNames().forEach(System.out::println);
-        System.out.println(salesblService.getPrice("ÉÌÆ·¼×", "ĞÍºÅÒÒ"));
+        System.out.println(salesblService.getPrice("å•†å“ç”²", "å‹å·ä¹™"));
         salesblService.getPromotions().forEach(System.out::println);
     }
 }

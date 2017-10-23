@@ -8,18 +8,18 @@ import java.util.ArrayList;
  * Created by tiberius on 2017/10/21.
  */
 public abstract class SalesRelatedReceiptVO {
-    private String id; // ¸ñÊ½Îª£ºJHD-yyyyMMdd-xxxxx£¬ºóÎåÎ»Ã¿Ìì´Ó1¿ªÊ¼±àºÅ£¬ËùÒÔÒ»Ìì×î¶à¿ÉÒÔÉú³É99999Ìõµ¥×Ó
-    private String buyerID; // ¿Í»§£¨ÏúÊÛÉÌ£©id
+    private String id; // æ ¼å¼ä¸ºï¼šJHD-yyyyMMdd-xxxxxï¼Œåäº”ä½æ¯å¤©ä»1å¼€å§‹ç¼–å·ï¼Œæ‰€ä»¥ä¸€å¤©æœ€å¤šå¯ä»¥ç”Ÿæˆ99999æ¡å•å­
+    private String buyerID; // å®¢æˆ·ï¼ˆé”€å”®å•†ï¼‰id
     private String warehouse;
-    private String operatorID; // ²Ù×÷Ô±id
+    private String operatorID; // æ“ä½œå‘˜id
     private ArrayList<GoodsItemPO> goodsList;
-    private String remark; // ±¸×¢
-    private int total; // ½áËãºó×Ü¶î
+    private String remark; // å¤‡æ³¨
+    private int total; // ç»“ç®—åæ€»é¢
 
     private int totalBeforeDiscount;
-    private int discount; // ÕÛÈÃ¼Û¸ñ
-    private int tokenAmount; // Ê¹ÓÃ´ú½ğ„»½ğ¶î
-    private String agentID; // ÒµÎñÔ±id
+    private int discount; // æŠ˜è®©ä»·æ ¼
+    private int tokenAmount; // ä½¿ç”¨ä»£é‡‘åŠµé‡‘é¢
+    private String agentID; // ä¸šåŠ¡å‘˜id
 
     public SalesRelatedReceiptVO(String id, String buyerID, String warehouse) {
         this.id = id;

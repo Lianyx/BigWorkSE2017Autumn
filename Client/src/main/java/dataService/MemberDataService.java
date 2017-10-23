@@ -1,8 +1,8 @@
 package dataService;
 
 import po.MemberPO;
-import utilitybl.ResultMessage;
-import utilitybl.SearchConditions;
+import util.ResultMessage;
+import util.SearchConditions;
 import vo.MemberVO;
 
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package dataService;
 
 import po.StockRelatedReceiptPO;
-import utilitybl.ResultMessage;
+import util.ResultMessage;
 
 /**
  * Created by tiberius on 2017/10/22.

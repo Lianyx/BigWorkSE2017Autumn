@@ -1,6 +1,6 @@
 package blService;
 
-import utilitybl.ResultMessage;
+import util.ResultMessage;
 import vo.StockRelatedReceiptVO;
 
 import java.util.ArrayList;
