@@ -1,6 +1,6 @@
 package blService.userblService;
 
-import bl.util.ResultMessage;
+import util.ResultMessage;
 
 public interface UserblService {
 

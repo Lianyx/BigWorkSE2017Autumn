@@ -1,6 +1,6 @@
 package blService.userblService;
 
-import bl.util.ResultMessage;
+import util.ResultMessage;
 import po.UserPO;
 import java.util.ArrayList;
 

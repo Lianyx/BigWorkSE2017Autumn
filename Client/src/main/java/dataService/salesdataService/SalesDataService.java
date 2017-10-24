@@ -1,7 +1,6 @@
 package dataService.salesdataService;
 
-import po.SalesRelatedReceiptPO;
-import bl.util.ResultMessage;
+import util.ResultMessage;
 
 /**
  * Created by tiberius on 2017/10/22.
