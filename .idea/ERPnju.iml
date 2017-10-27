@@ -12,7 +12,15 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jfoenix-1.9.1" level="project" />
+    <orderEntry type="library" name="fontawesomefx-commons-8.15" level="project" />
+    <orderEntry type="library" name="fontawesomefx-fontawesome-4.7.0-5-sources" level="project" />
+    <orderEntry type="library" name="core-8.0.1-sources" level="project" />
+    <orderEntry type="library" name="flow-8.0.1-sources" level="project" />
+    <orderEntry type="library" name="fontawesomefx-fontawesome-4.7.0-5-sources (2)" level="project" />
+    <orderEntry type="library" name="fontawesomefx-fontawesome-4.7.0-5-sources (3)" level="project" />
+    <orderEntry type="library" name="fontawesomefx-fontawesome-4.7.0-5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:3.8.1" level="project" />
     <orderEntry type="library" name="Maven: com.jfoenix:jfoenix:1.9.1" level="project" />
+    <orderEntry type="library" name="Maven: de.jensd:fontawesomefx:8.9" level="project" />
   </component>
 </module>
