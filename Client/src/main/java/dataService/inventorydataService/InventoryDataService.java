@@ -1,62 +1,63 @@
 package dataService.inventorydataService;
 
+import po.InventoryManagerPO.BillType;
+import po.InventoryManagerPO.InventoryPO;
+import util.ResultMessage;
+
 import java.util.ArrayList;
 
-import PO.InventoryPO;
-import utility.BillType;
-import utility.ResultMessage;
 
 public interface InventoryDataService {
 	/**
-	 * ÏòĞòÁĞ»¯ÎÄ¼şÖĞÌí¼ÓÒ»¸öpo
+	 * å‘åºåˆ—åŒ–æ–‡ä»¶ä¸­æ·»åŠ ä¸€ä¸ªpo
 	 * @param po
-	 * @return ´¦Àí½á¹û
+	 * @return å¤„ç†ç»“æœ
 	 */
 	public ResultMessage insert(InventoryPO po);
 
 	/**
-	 * ¸ù¾İIDÉ¾³ı
+	 * æ ¹æ®IDåˆ é™¤
 	 * @param ID
-	 * @return ´¦Àí½á¹û
+	 * @return å¤„ç†ç»“æœ
 	 */
 	public ResultMessage delete(String ID);
 
 	/**
-	 * ¸üĞÂpo
+	 * æ›´æ–°po
 	 * @param po
-	 * @return ´¦Àí½á¹û
+	 * @return å¤„ç†ç»“æœ
 	 */
 	public ResultMessage update(InventoryPO po);
 
 	/**
-	 * ÏÔÊ¾È«²¿po
-	 * @return ·µ»ØËùÓĞpoµÄ¼¯ºÏ
+	 * æ˜¾ç¤ºå…¨éƒ¨po
+	 * @return è¿”å›æ‰€æœ‰poçš„é›†åˆ
 	 */
 	public ArrayList<InventoryPO> show();
-	
+
 	/**
-	 * @return ĞÂµÄ±¨Òçµ¥µÄID
+	 * @return æ–°çš„æŠ¥æº¢å•çš„ID
 	 */
 	public String getOverflowID();
 
 	/**
-	 * @return ĞÂµÄ±¨Ëğµ¥µÄID
+	 * @return æ–°çš„æŠ¥æŸå•çš„ID
 	 */
 	public String getLossID();
 
 	/**
-	 * @return ĞÂµÄ±¨¾¯µ¥µÄID
+	 * @return æ–°çš„æŠ¥è­¦å•çš„ID
 	 */
 	public String getAlarmID();
 
 	/**
-	 * @return ĞÂµÄÔùËÍµ¥µÄID
+	 * @return æ–°çš„èµ é€å•çš„ID
 	 */
 	public String getGiftID();
-	
+
 	/**
-	 * @param type µ¥¾İÀàĞÍ
-	 * @return °´ÕÕµ¥¾İÀàĞÍ·µ»Øµ¥¾İ
+	 * @param type å•æ®ç±»å‹
+	 * @return æŒ‰ç…§å•æ®ç±»å‹è¿”å›å•æ®
 	 */
 	public ArrayList<InventoryPO> show(BillType type);
 
