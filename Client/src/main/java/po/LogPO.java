@@ -5,19 +5,27 @@ import util.UserCategory;
 
 import java.io.Serializable;
 
-public class LogPO implements Serializable {
+public class LogPO{
     private int ID;
     private String username;
     private UserCategory userCategory;
     private EventCategory eventCategory;
-    private String time;
+    private String comment;
+    private boolean isDelete=false;
 
-    public LogPO(int ID, String username, UserCategory userCategory, EventCategory eventCategory, String time) {
-        this.ID = ID;
+    public LogPO(String username, UserCategory userCategory, EventCategory eventCategory, String comment) {
         this.username = username;
         this.userCategory = userCategory;
         this.eventCategory = eventCategory;
-        this.time = time;
+        this.comment = comment;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 
     public int getID() {
@@ -52,21 +60,11 @@ public class LogPO implements Serializable {
         this.eventCategory = eventCategory;
     }
 
-    public String getTime() {
-        return time;
+    public String getComment() {
+        return comment;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    @Override
-    public String toString() {
-        return "LogPO{" +
-                ", username='" + username + '\'' +
-                ", userCategory=" + userCategory +
-                ", eventCategory=" + eventCategory +
-                ", time='" + time + '\'' +
-                '}';
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

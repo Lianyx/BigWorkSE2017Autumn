@@ -1,13 +1,22 @@
 package dataService.stockdataService;
 
+import po.StockReceiptPO;
 import util.ResultMessage;
+import vo.StockReceiptListVO;
+import vo.StockReceiptVO;
+import vo.StockSearchVO;
 
-/**
- * Created by tiberius on 2017/10/22.
- */
-public interface StockDataService {
-    public ResultMessage insert(StockRelatedReceiptPO stockReceiptPO);
-    public ResultMessage update(StockRelatedReceiptPO stockReceiptPO);
-    public ResultMessage delete(String id);
-    public StockRelatedReceiptPO find(String id);
+import java.util.ArrayList;
+import java.util.Set;
+
+public interface StockdataService {
+    public ResultMessage insert(StockReceiptPO stockReceiptPO);
+    public ResultMessage delete(int id);
+    public ResultMessage delete(ArrayList<Integer> list);
+
+    public ResultMessage update(StockReceiptPO stockReceiptPO);
+    public ArrayList<StockReceiptPO> select(StockSearchVO stockSearchVO);
+    public ArrayList<StockReceiptPO> select(String keyword);
+    public StockReceiptVO showDetail(int id);
+    public ArrayList<StockReceiptPO> getALL();
 }

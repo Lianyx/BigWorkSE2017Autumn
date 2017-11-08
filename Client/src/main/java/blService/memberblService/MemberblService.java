@@ -1,17 +1,21 @@
 package blService.memberblService;
 
 import util.ResultMessage;
-import util.SearchConditions;
-import vo.MemberVO;
+import vo.*;
 
 import java.util.ArrayList;
+import java.util.Set;
 
-/**
- * Created by tiberius on 2017/10/21.
- */
 public interface MemberblService {
-    ResultMessage insert(MemberVO memberVO);
-    ResultMessage update(MemberVO memberVO);
-    ResultMessage delete(String id);
-    public ArrayList<MemberVO> search(SearchConditions sc);
+    public ResultMessage add(MemberVO MemberVO);
+    public ResultMessage delete(int id);
+    public ResultMessage delete(ArrayList<Integer> list);
+
+    public ResultMessage update(MemberVO MemberVO);
+    public Set<MemberListVO> search(MemberSearchVO memberSearchVO);
+    public Set<MemberListVO> search(String keyword);
+    public MemberVO showDetail(int id);
+    public Set<MemberListVO> getAll();
+
+
 }

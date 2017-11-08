@@ -1,20 +1,25 @@
 package po;
 
+import util.EventCategory;
+import util.UserCategory;
+
 import java.io.Serializable;
 
-public class MessagePO implements Serializable
-{
+public class MessagePO {
     private int ID;
-    private String message;
-    private String username;
-    private String time;
-    private String receiver;
-    public MessagePO(int ID, String message, String username, String time, String receiver) {
-        this.ID = ID;
-        this.message = message;
-        this.username = username;
+    private long time;
+    private boolean isDelete=false;
+    private EventCategory eventCategory;
+    private UserCategory userCategory;
+    private String userName;
+    private String comment;
+
+    public MessagePO(long time, EventCategory eventCategory, UserCategory userCategory, String userName, String comment) {
         this.time = time;
-        this.receiver=receiver;
+        this.eventCategory = eventCategory;
+        this.userCategory = userCategory;
+        this.userName = userName;
+        this.comment = comment;
     }
 
     public int getID() {
@@ -25,36 +30,51 @@ public class MessagePO implements Serializable
         this.ID = ID;
     }
 
-    public String getMessage() {
-        return message;
+    public boolean isDelete() {
+        return isDelete;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 
-    @Override
-    public String toString() {
-        return "MessagePO{" +
-                "message='" + message + '\'' +
-                ", username='" + username + '\'' +
-                ", time='" + time + '\'' +
-                '}';
+    public EventCategory getEventCategory() {
+        return eventCategory;
+    }
+
+    public void setEventCategory(EventCategory eventCategory) {
+        this.eventCategory = eventCategory;
+    }
+
+    public UserCategory getUserCategory() {
+        return userCategory;
+    }
+
+    public void setUserCategory(UserCategory userCategory) {
+        this.userCategory = userCategory;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }
