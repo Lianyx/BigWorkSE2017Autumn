@@ -17,7 +17,7 @@ ApproveHelper负责实现审批通过后的后续操作。
 |Checkbl.approveBatch|public ResultMessage approveBatch(ArrayList\<Integer> ids);|总经理审批同意单据|系统改变单据状态并储存并发送消息|
 |Checkbl.approveBatch|public ResultMessage rejectBatch(ArrayList\<Integer> ids);|总经理审批拒绝单据|系统改变单据状态并储存并发送消息|
 |Checkbl.update|public ResultMessage update(ReceiptVO receiptVO)|总经理修改单据|系统修改单据信息|
-|Checkbl.search|public ArrayList\<ReceiptVO> search(SearchVO searchVO)|总经理搜索单据|返回符合条件的待审批单据|
+|Checkbl.search|public ArrayList\<ReceiptVO> search(CheckSearchVO checkSearchVO)|总经理搜索单据|返回符合条件的待审批单据|
 
 
 
@@ -82,7 +82,7 @@ Promotionbl负责实现对应于审界面的服务。
 |Promotionbl.add|ublic ResultMessage add(PromotionVO promotionVO);|总经理必须已经被识别和授权|系统增加销售策略|
 |Promotionbl.update|public ResultMessage update(PromotionVO promotionVO);|总经理必须已经被识别和授权|系统修改销售策略|
 |Promotionbl.delete|public ResultMessage delete(int id);|总经理必须已经被识别和授权|删除销售策略|
-|Promotionbl.search|public ArrayList\<PromotionPO> search(SearchVO searchVO)|总经理必须已经被识别和授权|返回符合条件的待审批单据|
+|Promotionbl.search|public ArrayList\<PromotionPO> search(PromotionSearchVO promotionSearchVO)|总经理必须已经被识别和授权|返回符合条件的待审批单据|
 
 
 |**需接口名**|**服务**|

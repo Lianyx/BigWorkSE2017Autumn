@@ -7,14 +7,16 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Client" />
+        <module name="Common" />
         <module name="ERPnju" />
         <module name="Server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Client" target="1.8" />
-      <module name="ERPnju" target="1.5" />
-      <module name="Server" target="1.5" />
+      <module name="Common" target="1.8" />
+      <module name="ERPnju" target="1.8" />
+      <module name="Server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
