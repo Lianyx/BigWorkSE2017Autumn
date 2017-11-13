@@ -1,0 +1,109 @@
+## Checkbl包相关
+
+CheckController负责控制对应于审批界面所需要的服务。
+Checkbl负责实现对应于审界面的服务。
+ApproveHelper负责实现审批通过后的后续操作。
+
+#### CheckController
+// 和checkbl一样，checkService接口也是
+
+#### Checkbl
+|**供接口名**|**语法**|**前置条件**|**后置条件**|
+|----|----|----|----|
+|Checkbl.initCheck|public ArrayList\<ReceiptVO> initCheck();|总经理启动审批单据模块|系统加载完毕界面数据|
+|Checkbl.showDetail|public ReceiptVO showDetail(int id);|总经理查看单据信息|系统加载单据信息|
+|Checkbl.approve|public ResultMessage approve(int id);|总经理审批同意单据|系统改变单据状态并储存并发送消息|
+|Checkbl.reject|public ResultMessage reject(int id);|总经理审批拒绝单据|系统改变单据状态并储存并发送消息|
+|Checkbl.approveBatch|public ResultMessage approveBatch(ArrayList\<Integer> ids);|总经理审批同意单据|系统改变单据状态并储存并发送消息|
+|Checkbl.approveBatch|public ResultMessage rejectBatch(ArrayList\<Integer> ids);|总经理审批拒绝单据|系统改变单据状态并储存并发送消息|
+|Checkbl.update|public ResultMessage update(ReceiptVO receiptVO)|总经理修改单据|系统修改单据信息|
+|Checkbl.search|public ArrayList\<ReceiptVO> search(SearchVO searchVO)|总经理搜索单据|返回符合条件的待审批单据|
+
+
+
+|**需接口名**|**服务**|
+|---|---|
+|DataBaseFactory.getCheckDatabase|得到Check数据库引用|
+|CheckDataService.initCheck|返回单据列表|
+|CheckDataService.update|更新系统单据持久化|
+|CheckDataService.reject|拒绝单据|
+|CheckDataService.approve|通过单据|
+|CheckDataService.rejectBatch|批量拒绝单据|
+|CheckDataService.approveBatch|批量通过单据|
+|CheckDataService.select|搜索单据|
+|LogInfo.insert|记录日志|
+|MessageInfo.send|发送消息|
+|ApproveHelper.approve|执行通过单据后的后续行为|
+
+#### ApproveHelper
+|**供接口名**|**语法**|**前置条件**|**后置条件**|
+|----|----|----|----|
+|Approvehelper.approve|approve(ReceiptPO receiptPO)|单据审批通过|根据不同单据的类型执行相应的后绪操作|
+
+|**需接口名**|**服务**|
+|---|---|
+|StockInfo.approve|执行通过进货类单据的后续操作|
+|SalesInfo.approve|执行通过销售类单据的后续操作|
+|BillInfo.approve|执行通过付款单收款单的后续操作|
+|InventaryInfo.approve|执行通过库存类单据的后续操作|
+
+
+## CheckDataService
+
+// 和接口一样
+
+|**供接口名**|**语法**|**前置条件**|**后置条件**|
+|----|----|----|----|
+|CheckDataService.initCheck|public ArrayList\<ReceiptPO> initCheck()|数据层申请|返回当前待审批单据列表|
+|CheckDataService.update|public ResultMessage update(ReceiptPO receiptPO)|数据层申请|更新系统单据持久化|
+|CheckDataService.reject|public ResultMessage reject(int id);|数据层申请|拒绝单据|
+|CheckDataService.approve|public ResultMessage approve(int id);|数据层申请|通过单据|
+|CheckDataService.rejectBatch|public ResultMessage rejectBatch(ArrayList\<Integer> ids)|数据层申请|批量拒绝单据|
+|CheckDataService.approveBatch|public ResultMessage approveBatch(ArrayList\<Integer> ids)|数据层申请|批量通过单据|
+|CheckDataService.search|public ArrayList\<ReceiptPO> search(SearchVO searchVO)|数据层申请|返回符合条件的待审批单据|
+
+## Promotion包相关
+
+PromotionInfo负责对bl同层内的提供服务
+PromotionController负责控制对应于制作单据界面所需要的服务。
+Promotionbl负责实现对应于审界面的服务。
+
+#### PromotionInfo
+|**供接口名**|**语法**|**前置条件**|**后置条件**|
+|----|----|----|----|
+|PromotionInfo.getCurrentPromotions|public ArrayList\<PromotionPO> getCurrentPromotions()|无|返回当前在时间内的所有促销策略|
+
+#### Promotionbl
+|**供接口名**|**语法**|**前置条件**|**后置条件**|
+|----|----|----|----|
+|Promotionbl.initPromotion|public ArrayList\<PromotionVO> initPromotion();|总经理必须已经被识别和授权|初始化销售策略数据|
+|Promotionbl.showDetail|public PromotionVO showDetail(int id);|总经理必须已经被识别和授权|显示策略详细信息|
+|Promotionbl.getID|public int getID()|总经理新建促销策略|返回生成的ID|
+|Promotionbl.add|ublic ResultMessage add(PromotionVO promotionVO);|总经理必须已经被识别和授权|系统增加销售策略|
+|Promotionbl.update|public ResultMessage update(PromotionVO promotionVO);|总经理必须已经被识别和授权|系统修改销售策略|
+|Promotionbl.delete|public ResultMessage delete(int id);|总经理必须已经被识别和授权|删除销售策略|
+|Promotionbl.search|public ArrayList\<PromotionPO> search(SearchVO searchVO)|总经理必须已经被识别和授权|返回符合条件的待审批单据|
+
+
+|**需接口名**|**服务**|
+|---|---|
+|DataBaseFactory.getPromotionDatabase|得到Promotion数据库引用|
+|PromotionDataService.getID|返国新策略的ID|
+|PromotionDataService.insert|系统新增Promotion|
+|PromotionDataService.delete|系统删除Promotion|
+|PromotionDataService.update|系统更新Promotion|
+|PromotionDataService.select|系统查找返回PromotionPO|
+|LogInfo.insert|记录日志|
+|MessageInfo.send|发送消息|
+|GoodInfo.getGoods|获得可以用于制作促销策略的商品列表|
+
+#### PromotionDataService
+
+|**供接口名**|**语法**|**前置条件**|**后置条件**|
+|----|----|----|----|
+|PromotionDataService.initPromotion|public ArrayList\<PromotionPO> initPromotion();||初始化销售策略数据|
+|PromotionDataService.getID|public int getID()||返回生成的ID|
+|PromotionDataService.insert|public ResultMessage insert(PromotionPO promotionPO);||系统增加销售策略|
+|PromotionDataService.update|public ResultMessage update(PromotionPO promotionPO);||系统修改销售策略|
+|PromotionDataService.delete|public ResultMessage delete(int id);||删除销售策略|
+|PromotionDataService.select|public ArrayList\<PromotionPO> select(SearchVO searchVO)|数据层申请|返回符合条件的待审批单据|
