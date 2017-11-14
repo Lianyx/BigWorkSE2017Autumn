@@ -1,13 +1,17 @@
-## Checkbl包相关
-
+### Checkbl模块
+#### 1. 模块概述
+模块的需求和职责参见规格需求文档以及体系结构设计概述
+#### 2. 整体结构
 CheckController负责控制对应于审批界面所需要的服务。
 Checkbl负责实现对应于审界面的服务。
 ApproveHelper负责实现审批通过后的后续操作。
+![审批单据类图](总经理类图顺序图/审批单据类图.png)  
+#### 3. 模块内部类的接口规范
 
-#### CheckController
-// 和checkbl一样，checkService接口也是
+##### CheckController的接口规范
+参见checkbl
 
-#### Checkbl
+##### Checkbl
 |**供接口名**|**语法**|**前置条件**|**后置条件**|
 |----|----|----|----|
 |Checkbl.initCheck|public ArrayList\<ReceiptVO> initCheck();|总经理启动审批单据模块|系统加载完毕界面数据|
@@ -35,7 +39,7 @@ ApproveHelper负责实现审批通过后的后续操作。
 |MessageInfo.send|发送消息|
 |ApproveHelper.approve|执行通过单据后的后续行为|
 
-#### ApproveHelper
+##### ApproveHelper
 |**供接口名**|**语法**|**前置条件**|**后置条件**|
 |----|----|----|----|
 |Approvehelper.approve|approve(ReceiptPO receiptPO)|单据审批通过|根据不同单据的类型执行相应的后绪操作|
@@ -47,11 +51,20 @@ ApproveHelper负责实现审批通过后的后续操作。
 |BillInfo.approve|执行通过付款单收款单的后续操作|
 |InventaryInfo.approve|执行通过库存类单据的后续操作|
 
+#### 4. 业务逻辑层的动态模型
+下为审批销售单的顺序图
+![审批单据顺序图](总经理类图顺序图/审批单据顺序图（销售单）.png)  
 
-## CheckDataService
+#### 5. 设计原理
+委托式设计
 
-// 和接口一样
-
+### CheckDataService模块
+#### 1. 模块概述
+模块的需求和职责参见规格需求文档以及体系结构设计概述
+#### 2. 整体结构
+CheckDataService实现审批单据时对持久化层的操作
+#### 3. 模块内部类的接口规范
+##### CheckDataService接口规范
 |**供接口名**|**语法**|**前置条件**|**后置条件**|
 |----|----|----|----|
 |CheckDataService.initCheck|public ArrayList\<ReceiptPO> initCheck()|数据层申请|返回当前待审批单据列表|
@@ -62,18 +75,22 @@ ApproveHelper负责实现审批通过后的后续操作。
 |CheckDataService.approveBatch|public ResultMessage approveBatch(ArrayList\<Integer> ids)|数据层申请|批量通过单据|
 |CheckDataService.search|public ArrayList\<ReceiptPO> search(SearchVO searchVO)|数据层申请|返回符合条件的待审批单据|
 
-## Promotion包相关
-
+### Promotionbl模块
+#### 1. 模块概述
+模块的需求和职责参见规格需求文档以及体系结构设计概述
+#### 2. 整体结构
 PromotionInfo负责对bl同层内的提供服务
 PromotionController负责控制对应于制作单据界面所需要的服务。
 Promotionbl负责实现对应于审界面的服务。
+![促销策略类图](总经理类图顺序图/促销策略类图.png)
+#### 3. 模块内部类的接口规范
 
-#### PromotionInfo
+##### PromotionInfo的接口规范
 |**供接口名**|**语法**|**前置条件**|**后置条件**|
 |----|----|----|----|
 |PromotionInfo.getCurrentPromotions|public ArrayList\<PromotionPO> getCurrentPromotions()|无|返回当前在时间内的所有促销策略|
 
-#### Promotionbl
+##### Promotionbl的接口规范
 |**供接口名**|**语法**|**前置条件**|**后置条件**|
 |----|----|----|----|
 |Promotionbl.initPromotion|public ArrayList\<PromotionVO> initPromotion();|总经理必须已经被识别和授权|初始化销售策略数据|
@@ -97,7 +114,18 @@ Promotionbl负责实现对应于审界面的服务。
 |MessageInfo.send|发送消息|
 |GoodInfo.getGoods|获得可以用于制作促销策略的商品列表|
 
-#### PromotionDataService
+#### 4. 业务逻辑层的动态模型
+![促销策略顺序图](总经理类图顺序图/促销策略顺序图.png)
+#### 5. 设计原理
+委托式设计
+
+### PromotionDataService模块
+#### 1. 模块概述
+模块的需求和职责参见规格需求文档以及体系结构设计概述
+#### 2. 整体结构
+PromotionDataService实现制定促销策略时对持久化层的操作
+#### 3. 模块内部类的接口规范
+##### PromotionDataService
 
 |**供接口名**|**语法**|**前置条件**|**后置条件**|
 |----|----|----|----|
