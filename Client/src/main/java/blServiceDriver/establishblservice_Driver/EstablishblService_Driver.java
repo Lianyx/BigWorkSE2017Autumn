@@ -1,6 +1,6 @@
 package blServiceDriver.establishblservice_Driver;
 
-import blService.establishblservice.EstablishblService;
+import blService.establishblService.EstablishblService;
 import blServiceStub.establishblservice_Stub.EstablishblService_Stub;
 
 public class EstablishblService_Driver {
