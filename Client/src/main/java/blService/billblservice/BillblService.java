@@ -1,4 +1,4 @@
-package blService.billblservice;
+package blService.billblService;
 
 import po.BillPO;
 import util.ResultMessage;

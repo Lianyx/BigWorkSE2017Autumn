@@ -1,4 +1,4 @@
-package blService.businessblservice;
+package blService.businessblService;
 
 public class BusinessProgressInfo {
 }

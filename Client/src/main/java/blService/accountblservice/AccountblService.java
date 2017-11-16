@@ -1,4 +1,4 @@
-package blService.accountblservice;
+package blService.accountblService;
 
 import util.ResultMessage;
 import vo.AccountVO;

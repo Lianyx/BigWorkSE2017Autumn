@@ -1,4 +1,4 @@
-package blService.establishblservice;
+package blService.establishblService;
 
 import vo.EstablishVO;
 
