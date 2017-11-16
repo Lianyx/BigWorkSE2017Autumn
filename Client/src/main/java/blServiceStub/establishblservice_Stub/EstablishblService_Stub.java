@@ -1,6 +1,6 @@
 package blServiceStub.establishblservice_Stub;
 
-import blService.establishblservice.EstablishblService;
+import blService.establishblService.EstablishblService;
 import vo.EstablishVO;
 
 public class EstablishblService_Stub implements EstablishblService{
