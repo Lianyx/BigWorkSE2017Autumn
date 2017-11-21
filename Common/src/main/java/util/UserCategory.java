@@ -1,7 +1,7 @@
 package util;
 
 public enum UserCategory {
-     InventoryManager,Salesman,Accountant,GeneralManager;
+     InventoryManager,Salesman,SalesManager,Accountant,GeneralManager;
      private final int value;
 
      private UserCategory() {
