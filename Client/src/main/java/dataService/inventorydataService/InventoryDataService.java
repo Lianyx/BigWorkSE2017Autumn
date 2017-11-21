@@ -1,7 +1,7 @@
 package dataService.inventorydataService;
 
-import po.InventoryManagerPO.BillType;
-import po.InventoryManagerPO.InventoryPO;
+import util.InventoryBillCategory;
+import po.InventoryManagerPO.InventoryBillPO;
 import util.ResultMessage;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public interface InventoryDataService {
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage insert(InventoryPO po);
+	public ResultMessage insert(InventoryBillPO po);
 
 	/**
 	 * 根据ID删除
@@ -27,13 +27,13 @@ public interface InventoryDataService {
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage update(InventoryPO po);
+	public ResultMessage update(InventoryBillPO po);
 
 	/**
 	 * 显示全部po
 	 * @return 返回所有po的集合
 	 */
-	public ArrayList<InventoryPO> show();
+	public ArrayList<InventoryBillPO> show();
 
 	/**
 	 * @return 新的报溢单的ID
@@ -59,7 +59,7 @@ public interface InventoryDataService {
 	 * @param type 单据类型
 	 * @return 按照单据类型返回单据
 	 */
-	public ArrayList<InventoryPO> show(BillType type);
+	public ArrayList<InventoryBillPO> show(InventoryBillCategory type);
 
 
 }

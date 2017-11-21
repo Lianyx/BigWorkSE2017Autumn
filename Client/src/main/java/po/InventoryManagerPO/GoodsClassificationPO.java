@@ -13,14 +13,14 @@ public class GoodsClassificationPO {
 
     private ArrayList<String> childrenID;
 
-    private ArrayList<String> commoditiesID;
+    private ArrayList<String> goodsID;
 
-    public GoodsClassificationPO(String ID, String name, String fatherID, ArrayList<String> childrenID, ArrayList<String> commoditiesID) {
+    public GoodsClassificationPO(String ID, String name, String fatherID, ArrayList<String> childrenID, ArrayList<String> goodsID) {
         this.ID=ID;
         this.name = name;
         this.fatherID = fatherID;
         this.childrenID = childrenID;
-        this.commoditiesID = commoditiesID;
+        this.goodsID = goodsID;
     }
 
     public String getName() {
@@ -35,7 +35,7 @@ public class GoodsClassificationPO {
         return childrenID;
     }
 
-    public ArrayList<String> getCommoditiesID() {
-        return commoditiesID;
+    public ArrayList<String> getGoodsID() {
+        return goodsID;
     }
 }

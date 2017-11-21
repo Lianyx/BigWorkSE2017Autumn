@@ -1,5 +1,5 @@
-package po.InventoryManagerPO;
+package util;
 
-public enum BillType {
+public enum InventoryBillCategory {
     InventoryGift,InventoryDamage,InventoryOverflow,InventoryWarning;
 }
