@@ -1,4 +1,4 @@
-package po.InventoryManagerPO;
+package po;
 
 /**
  * 商品持久化对象

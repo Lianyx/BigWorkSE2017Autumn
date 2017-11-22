@@ -1,8 +1,5 @@
 package po;
 
-import po.InventoryManagerPO.GoodsPO;
-import po.PromotionPO;
-
 import java.util.Date;
 
 public class TotalPromotionPO extends PromotionPO{

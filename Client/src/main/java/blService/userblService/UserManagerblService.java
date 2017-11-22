@@ -11,6 +11,7 @@ import java.util.Set;
 public interface UserManagerblService {
     public ResultMessage add(UserVO UserVO);
     public ResultMessage delete(int id);
+
     public ResultMessage delete(ArrayList<Integer> list);
 
     public ResultMessage update(UserVO UserVO);

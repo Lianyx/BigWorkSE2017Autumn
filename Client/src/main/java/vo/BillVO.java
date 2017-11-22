@@ -1,5 +1,8 @@
 package vo;
 
+import util.BillState;
+import util.BillType;
+
 public class BillVO{
 	
 	public BillType type;
@@ -8,8 +11,7 @@ public class BillVO{
 	
 	public String account;
 	
-	public ArrayList<CashItemVO> bills;
-	
+
 	public double total;
 	
 	public BillState state;

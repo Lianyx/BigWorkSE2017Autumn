@@ -1,6 +1,6 @@
 package mock;
 
-import po.InventoryManagerPO.GoodsPO;
+import po.GoodsPO;
 import util.ResultMessage;
 
 import java.util.ArrayList;

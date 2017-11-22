@@ -1,7 +1,5 @@
 package po;
 
-import po.InventoryManagerPO.GoodsPO;
-
 import java.util.ArrayList;
 import java.util.Date;
 

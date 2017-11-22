@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXRippler?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import ui.userui.usermanagerui.UserListView?>
+<?import utilComponent.CircleImageView?>
+
+<AnchorPane fx:id="UserList" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/List.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.userui.usermanagerui.UserManagerUIController">
+   <children>
+
+      <JFXListView fx:id="navigation" layoutY="40.0" prefHeight="553.0" prefWidth="160.0">
+          <HBox spacing="10">
+              <padding><Insets bottom="8" top="8" /></padding>
+              <children>
+                  <JFXRippler position="BACK" styleClass="icons-rippler">
+                      <StackPane>
+                          <FontAwesomeIconView fx:id="supervisionicon" size="1em" styleClass="icon" />
+                      </StackPane>
+                  </JFXRippler>
+                  <Label text="Supervision" />
+              </children>
+          </HBox>
+          <HBox spacing="10">
+              <padding><Insets bottom="8" top="8" /></padding>
+
+              <children>
+
+                  <JFXRippler position="BACK" styleClass="icons-rippler">
+                      <StackPane>
+                          <FontAwesomeIconView fx:id="userlisticon" size="1em" styleClass="icon" />
+                      </StackPane>
+                  </JFXRippler>
+                  <Label text="UserList" />
+              </children>
+          </HBox>
+      </JFXListView>
+
+      <AnchorPane prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: white">
+          <children>
+            <ImageView fitHeight="40.0" fitWidth="126.0" layoutX="14.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../default/logo.jpg" />
+               </image>
+            </ImageView>
+
+          </children>
+      </AnchorPane>
+
+      <JFXButton fx:id="delete" layoutX="661.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#deleteList" text="Delete" />
+      <AnchorPane fx:id="bar" layoutX="160.0" prefHeight="43.0" prefWidth="640.0">
+          <children>
+          <JFXRippler fx:id="close" maskType="CIRCLE" position="BACK" styleClass="icons-rippler">
+              <StackPane style="-fx-padding: 8;" />
+          </JFXRippler>
+
+          <HBox spacing="20">
+              <children>
+                  <Label fx:id="managername" />
+              </children>
+          </HBox>
+            <CircleImageView fx:id="manager" layoutX="506.0" layoutY="22.0" radius="15" stroke="dimgrey" strokeType="INSIDE" />
+            <FontAwesomeIconView glyphName="CLOSE" layoutX="611.0" layoutY="27.0" onMouseClicked="#close" size="1.5em" styleClass="icon" />
+          </children>
+      </AnchorPane>
+
+      <AnchorPane fx:id="mylistview" layoutX="180.0" layoutY="130.0" prefHeight="455.0" prefWidth="600.0">
+         <children>
+             <UserListView fx:id="ulv" layoutY="40.0" prefHeight="415.0" prefWidth="600.0" />
+            <AnchorPane fx:id="labellist" prefHeight="40.0" prefWidth="600.0">
+                <children>
+                    <Label layoutX="70.0" prefHeight="37.0" prefWidth="87.0" text="Username" />
+                    <Label layoutX="220.0" prefHeight="37.0" prefWidth="77.0" text="Usertype" />
+                    <Label layoutX="335.0" prefHeight="37.0" prefWidth="47.0" text="email" />
+                    <Label layoutX="493.0" prefHeight="37.0" prefWidth="56.0" text="phone" />
+                </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

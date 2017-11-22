@@ -1,0 +1,93 @@
+
+
+#ulv .scroll-bar:horizontal .increment-arrow,
+#ulv .scroll-bar:horizontal .decrement-arrow,
+#ulv .scroll-bar:horizontal .increment-button,
+#ulv .scroll-bar:horizontal .decrement-button {
+    -fx-padding:0;
+}
+
+#ulv{
+    -fx-background-color: #FCFDFD;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+#ulv.scroll-bar:vertical{
+    -fx-background-color:transparent;
+
+}
+
+#ulv .scroll-bar:vertical .thumb {
+    -fx-background-color:derive(black,90%);
+    -fx-background-insets: 0, 0, 0;
+    -fx-background-radius: 0em;
+
+}
+
+#ulv.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color:derive(#b6b6b6,80%);
+
+    -fx-background-radius: 0em;
+    -fx-border-radius:0em;
+}
+
+#ulv .scroll-bar:vertical .increment-button ,
+#ulv.scroll-bar:vertical .decrement-button {
+
+    -fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 8 0 0;
+
+}
+#ulv .scroll-bar .increment-arrow,
+#ulv .scroll-bar .decrement-arrow
+{
+    -fx-shape: " ";
+    -fx-padding:0;
+}
+
+
+#ulv .list-cell:filled:selected:focused, #ulv .list-cell:filled:selected {
+    -fx-background-color: #3983D7;
+    -fx-text-fill: #FCFDFD;
+}
+
+#ulv .list-cell:odd {
+    -fx-cell-hover-color: #0093ff;
+    -fx-background-color: #eff8ff;
+}
+#navigation {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-effect: dropshadow(one-pass-box, silver, 10, 0.1, 1, 1);
+}
+#navigation .list-cell:filled:selected:focused{
+    -fx-background-color: transparent;
+}
+#navigation .list-cell:filled:selected:focused .label{
+    -fx-text-fill: #3983D7;
+}
+#navigation .list-cell:filled:selected:focused #supervisionicon,#navigation .list-cell:filled:selected:focused #userlisticon{
+    -fx-fill: #3983D7;
+}
+
+
+#navigation .list-cell{
+    -fx-background-radius: 5px;
+    -fx-background-insets: 2;
+    -fx-padding: 10;
+}
+
+#labellist{
+    -fx-background-color: derive(#CFD2D4, 10%);
+}
+
+#mylistview{
+    -fx-effect: dropshadow(gaussian, darkgrey, 10, 0.1, 0, 0);
+}
+
+#bar{
+    -fx-background-color: derive(#FCFDFD, 5%);
+    -fx-effect: dropshadow(one-pass-box, gray, 10, 0.1, 3, 0);
+}

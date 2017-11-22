@@ -1,5 +1,6 @@
 package po.InventoryManagerPO;
 
+import po.GoodsPO;
 import util.BillState;
 import util.InventoryBillCategory;
 
