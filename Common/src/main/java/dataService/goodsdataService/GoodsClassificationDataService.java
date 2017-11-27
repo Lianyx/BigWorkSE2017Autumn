@@ -1,6 +1,6 @@
 package dataService.goodsdataService;
 
-import po.InventoryManagerPO.GoodsClassificationPO;
+import po.GoodsClassificationPO;
 import util.ResultMessage;
 
 

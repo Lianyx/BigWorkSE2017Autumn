@@ -1,4 +1,4 @@
-package po.InventoryManagerPO;
+package po;
 
 import java.util.ArrayList;
 

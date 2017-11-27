@@ -1,7 +1,7 @@
 package dataService.inventorydataService;
 
 import util.InventoryBillCategory;
-import po.InventoryManagerPO.InventoryBillPO;
+import po.InventoryBillPO;
 import util.ResultMessage;
 
 import java.util.ArrayList;
