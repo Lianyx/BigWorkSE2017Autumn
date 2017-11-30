@@ -1,10 +1,14 @@
-这个目前只是复制用的草稿
+这个现在只是复制用的草稿
+
+drop table MemberPromotion;
+drop table TotalPromotion;
+drop table CombinePromotion;
 
 create table MemberPromotion(
-  id integer,
+  dayId integer,
 
   createTime bigint,
-  lastModifedTime bigint,
+  lastModifiedTime bigint,
   beginTime bigint,
   endTime bigint,
 
@@ -15,14 +19,14 @@ create table MemberPromotion(
 
 
 create table TotalPromotion(
-  id integer,
+  dayId integer,
 
   createTime bigint,
-  lastModifed bigint,
+  lastModifiedTime bigint,
   beginTime bigint,
   endTime bigint,
 
-  totalAmount double,
+  requiredTotal double,
   tokenAmount double,
   gifts varchar(1000)
 );
@@ -30,19 +34,13 @@ create table TotalPromotion(
 
 
 create table CombinePromotion(
-  id integer,
+  dayId integer,
 
   createTime bigint,
-  lastModifed bigint,
+  lastModifiedTime bigint,
   beginTime bigint,
   endTime bigint,
 
   discountAmount double,
   goodsCombination varchar(1000)
 );
-
-
-
-drop table MemberPromotion;
-drop table TotalPromotion;
-drop table CombinePromotion;

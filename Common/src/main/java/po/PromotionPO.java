@@ -3,7 +3,7 @@ package po;
 import java.time.LocalDateTime;
 
 public abstract class PromotionPO {
-    private int id;
+    private int dayId;
 
     private LocalDateTime createTime;
     private LocalDateTime lastModifiedTime;
@@ -13,20 +13,20 @@ public abstract class PromotionPO {
     public PromotionPO() {
     }
 
-    public PromotionPO(int id, LocalDateTime createTime, LocalDateTime lastModifiedTime, LocalDateTime beginTime, LocalDateTime endTime) {
-        this.id = id;
+    public PromotionPO(int dayId, LocalDateTime createTime, LocalDateTime lastModifiedTime, LocalDateTime beginTime, LocalDateTime endTime) {
+        this.dayId = dayId;
         this.createTime = createTime;
         this.lastModifiedTime = lastModifiedTime;
         this.beginTime = beginTime;
         this.endTime = endTime;
     }
 
-    public int getId() {
-        return id;
+    public int getDayId() {
+        return dayId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDayId(int dayId) {
+        this.dayId = dayId;
     }
 
     public LocalDateTime getCreateTime() {

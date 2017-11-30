@@ -1,22 +1,25 @@
 package po;
 
-public class PromotionGoodsItemPO {
-    private String id;
+import java.io.Serializable;
+
+public class PromotionGoodsItemPO implements Serializable {
+    private int id;
     private int num;
 
-    public PromotionGoodsItemPO(String id, int num) {
-        this.id = id;
-        this.num = num;
-    }
 
     public PromotionGoodsItemPO() {
     }
 
-    public String getId() {
+    public PromotionGoodsItemPO(int id, int num) {
+        this.id = id;
+        this.num = num;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

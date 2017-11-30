@@ -4,26 +4,26 @@ package po;
 import java.time.LocalDateTime;
 
 public class TotalPromotionPO extends PromotionPO {
-    private double totalAmount; // required total amount
+    private double requiredTotal;
     private double tokenAmount;
     private PromotionGoodsItemPO[] gifts;
 
     public TotalPromotionPO() {
     }
 
-    public TotalPromotionPO(int id, LocalDateTime create, LocalDateTime lastModified, LocalDateTime begin, LocalDateTime end, double totalAmount, double tokenAmount, PromotionGoodsItemPO[] gifts) {
+    public TotalPromotionPO(int id, LocalDateTime create, LocalDateTime lastModified, LocalDateTime begin, LocalDateTime end, double requiredTotal, double tokenAmount, PromotionGoodsItemPO[] gifts) {
         super(id, create, lastModified, begin, end);
-        this.totalAmount = totalAmount;
+        this.requiredTotal = requiredTotal;
         this.tokenAmount = tokenAmount;
         this.gifts = gifts;
     }
 
-    public double getTotalAmount() {
-        return totalAmount;
+    public double getRequiredTotal() {
+        return requiredTotal;
     }
 
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setRequiredTotal(double requiredTotal) {
+        this.requiredTotal = requiredTotal;
     }
 
     public double getTokenAmount() {
