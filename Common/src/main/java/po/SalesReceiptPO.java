@@ -1,59 +1,49 @@
 package po;
 
-import util.GoodsList;
-import util.ReceiptCategory;
+import util.ReceiptState;
 
-public class SalesReceiptPO {
-    private int ID;
-    private ReceiptCategory receiptCategory;
-    private int number;
-    private int supplierid;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
+public abstract class SalesReceiptPO extends ReceiptPO{
+    private int clientId;
+    private String clerkName; // 业务员
     private String stockName;
-    private String operator;
-    private GoodsList goodsList;
+    private ReceiptGoodsItemPO[] goodsList;
+    private double discountAmount;
+    private double tokenAmount;
+    private double originSum;
     private String comment;
-    private int sum;
 
-    public SalesReceiptPO(ReceiptCategory receiptCategory, int number, int supplier, String stockName, String operator, String comment, int sum) {
-        this.receiptCategory = receiptCategory;
-        this.number = number;
-        this.supplierid = supplier;
+    public SalesReceiptPO() {
+    }
+
+    public SalesReceiptPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientId, String clerkName, String stockName, ReceiptGoodsItemPO[] goodsList, double discountAmount, double tokenAmount, double originSum, String comment) {
+        super(dayId, operatorId, createTime, lastModifiedTime, receiptState);
+        this.clientId = clientId;
+        this.clerkName = clerkName;
         this.stockName = stockName;
-        this.operator = operator;
+        this.goodsList = goodsList;
+        this.discountAmount = discountAmount;
+        this.tokenAmount = tokenAmount;
+        this.originSum = originSum;
         this.comment = comment;
-        this.sum = sum;
     }
 
-    public int getID() {
-        return ID;
+    public int getClientId() {
+        return clientId;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 
-    public ReceiptCategory getReceiptCategory() {
-        return receiptCategory;
+    public String getClerkName() {
+        return clerkName;
     }
 
-    public void setReceiptCategory(ReceiptCategory receiptCategory) {
-        this.receiptCategory = receiptCategory;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public int getSupplier() {
-        return supplierid;
-    }
-
-    public void setSupplier(int supplier) {
-        this.supplierid = supplier;
+    public void setClerkName(String clerkName) {
+        this.clerkName = clerkName;
     }
 
     public String getStockName() {
@@ -64,20 +54,36 @@ public class SalesReceiptPO {
         this.stockName = stockName;
     }
 
-    public String getOperator() {
-        return operator;
-    }
-
-    public void setOperator(String operator) {
-        this.operator = operator;
-    }
-
-    public GoodsList getGoodsList() {
+    public ReceiptGoodsItemPO[] getGoodsList() {
         return goodsList;
     }
 
-    public void setGoodsList(GoodsList goodsList) {
+    public void setGoodsList(ReceiptGoodsItemPO[] goodsList) {
         this.goodsList = goodsList;
+    }
+
+    public double getDiscountAmount() {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(double discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+
+    public double gettokenAmount() {
+        return tokenAmount;
+    }
+
+    public void settokenAmount(double tokenAmount) {
+        this.tokenAmount = tokenAmount;
+    }
+
+    public double getOriginSum() {
+        return originSum;
+    }
+
+    public void setOriginSum(double originSum) {
+        this.originSum = originSum;
     }
 
     public String getComment() {
@@ -88,11 +94,17 @@ public class SalesReceiptPO {
         this.comment = comment;
     }
 
-    public int getSum() {
-        return sum;
-    }
-
-    public void setSum(int sum) {
-        this.sum = sum;
+    @Override
+    public String toString() {
+        return "SalesReceiptPO{" +
+                "clientId=" + clientId +
+                ", clerkName='" + clerkName + '\'' +
+                ", stockName='" + stockName + '\'' +
+                ", goodsList=" + Arrays.toString(goodsList) +
+                ", discountAmount=" + discountAmount +
+                ", tokenAmount=" + tokenAmount +
+                ", originSum=" + originSum +
+                ", comment='" + comment + '\'' +
+                '}';
     }
 }

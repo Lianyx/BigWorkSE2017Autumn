@@ -1,6 +1,6 @@
 package vo;
 
-import util.BillState;
+import util.ReceiptState;
 import util.BillType;
 
 public class BillVO{
@@ -14,7 +14,7 @@ public class BillVO{
 
 	public double total;
 	
-	public BillState state;
+	public ReceiptState state;
 	
 	
 }

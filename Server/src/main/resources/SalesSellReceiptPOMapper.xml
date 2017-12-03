@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.salesdata.SalesSellReceiptPOMapper">
+    <resultMap id="resultMap" type="po.SalesSellReceiptPO">
+        <result typeHandler="MyJsonHandler" column="goodsList" property="goodsList" />
+    </resultMap>
+
+    <select id="getDayId" resultType="int">
+        select max(dayId)+1 from SalesSellReceipt where createTime &gt;= #{today}
+    </select>
+    <insert id="insert">
+        insert into SalesSellReceipt(dayId, operatorId, createTime, lastModifiedTime, receiptState, clientId, clerkName, stockName, goodsList, discountAmount, tokenAmount, originSum, comment)
+        values(#{dayId}, #{operatorId}, #{createTime}, #{lastModifiedTime}, #{receiptState}, #{clientId}, #{clerkName}, #{stockName}, #{goodsList, typeHandler=MyJsonHandler}, #{discountAmount}, #{tokenAmount}, #{originSum}, #{comment})
+    </insert>
+    <update id="update">
+        update SalesSellReceipt set lastModifiedTime=#{lastModifiedTime}, receiptState=#{receiptState}, clientId=#{clientId}, clerkName=#{clerkName}, stockName=#{stockName}, goodsList=#{goodsList, typeHandler=MyJsonHandler}, discountAmount=#{discountAmount}, tokenAmount=#{tokenAmount}, originSum=#{originSum}, comment=#{comment}
+        where dayId=#{dayId} and createTime=#{createTime}
+    </update>
+    <delete id="delete">
+        delete from SalesSellReceipt where dayId=#{dayId} and createTime=#{createTime}
+    </delete>
+    <select id="selectBetween" resultMap="resultMap">
+        select * from SalesSellReceipt where createTime &gt;= #{begin} and createTime &lt;= #{end}
+    </select>
+    <select id="selectByState" resultMap="resultMap">
+        select * from SalesSellReceipt where receiptState=#{receiptState}
+    </select>
+
+</mapper>

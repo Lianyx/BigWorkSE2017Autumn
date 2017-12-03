@@ -1,10 +1,10 @@
 package data.promotiondata;
 
-import dataService.promotiondataService.PromotiondataService;
+import dataService.promotiondataService.PromotionDataService;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.binding.BindingException;
 import org.apache.ibatis.session.SqlSession;
-import po.TotalPromotionPO;
+import po.PromotionPO;
 import util.ResultMessage;
 
 import java.time.LocalDate;
@@ -12,14 +12,21 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-public class TotalPromotionData implements PromotiondataService<TotalPromotionPO>{
+public class PromotionData<T extends PromotionPO> implements PromotionDataService<T> {
+    // because we cannot use T.class
+    private Class<? extends PromotionPOMapper<T>> mapperClass = null;
+
+    public PromotionData(Class<? extends PromotionPOMapper<T>> mapperClass) {
+        this.mapperClass = mapperClass;
+    }
+
     @Override
     public int getDayId() {
         LocalDateTime today = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
 
         int resultID;
-        try(SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            TotalPromotionPOMapper mapper = session.getMapper(TotalPromotionPOMapper.class);
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            PromotionPOMapper<T> mapper = session.getMapper(mapperClass);
             resultID = mapper.getDayId(today);
             // TODO add branch if resultID > 99999?
             session.commit();
@@ -30,12 +37,12 @@ public class TotalPromotionData implements PromotiondataService<TotalPromotionPO
     }
 
     @Override
-    public ResultMessage insert(TotalPromotionPO promotionPO) {
+    public ResultMessage insert(T promotionPO) {
         promotionPO.setCreateTime(LocalDateTime.now());
         promotionPO.setLastModifiedTime(LocalDateTime.now());
 
-        try(SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            TotalPromotionPOMapper mapper = session.getMapper(TotalPromotionPOMapper.class);
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            PromotionPOMapper<T> mapper = session.getMapper(mapperClass);
             mapper.insert(promotionPO);
             session.commit();
         }
@@ -43,11 +50,11 @@ public class TotalPromotionData implements PromotiondataService<TotalPromotionPO
     }
 
     @Override
-    public ResultMessage update(TotalPromotionPO promotionPO) {
+    public ResultMessage update(T promotionPO) {
         promotionPO.setLastModifiedTime(LocalDateTime.now());
 
-        try(SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            TotalPromotionPOMapper mapper = session.getMapper(TotalPromotionPOMapper.class);
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            PromotionPOMapper<T> mapper = session.getMapper(mapperClass);
             mapper.update(promotionPO);
             session.commit();
         }
@@ -55,9 +62,9 @@ public class TotalPromotionData implements PromotiondataService<TotalPromotionPO
     }
 
     @Override
-    public ResultMessage delete(TotalPromotionPO promotionPO) {
-        try(SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            TotalPromotionPOMapper mapper = session.getMapper(TotalPromotionPOMapper.class);
+    public ResultMessage delete(T promotionPO) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            PromotionPOMapper<T> mapper = session.getMapper(mapperClass);
             mapper.delete(promotionPO);
             session.commit();
         }
@@ -65,14 +72,14 @@ public class TotalPromotionData implements PromotiondataService<TotalPromotionPO
     }
 
     @Override
-    public List<TotalPromotionPO> selectInEffect() {
+    public List<T> selectInEffect() {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime nextDayZero = LocalDateTime.of(now.plusDays(1).toLocalDate(), LocalTime.MIN);
 
-        List<TotalPromotionPO> resultList;
+        List<T> resultList;
 
-        try(SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            TotalPromotionPOMapper mapper = session.getMapper(TotalPromotionPOMapper.class);
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            PromotionPOMapper<T> mapper = session.getMapper(mapperClass);
             resultList = mapper.selectInEffect(now, nextDayZero);
             session.commit();
         }

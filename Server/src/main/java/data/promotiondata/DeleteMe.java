@@ -1,5 +1,6 @@
 package data.promotiondata;
 
+import po.CombinePromotionPO;
 import po.MemberPromotionPO;
 import po.PromotionGoodsItemPO;
 import po.TotalPromotionPO;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class DeleteMe {
     static void testM() {
-        MemberPromotionData mdao = new MemberPromotionData();
+        PromotionData<MemberPromotionPO> mdao = new PromotionData<>(MemberPromotionPOMapper.class);
 
         // insert
         MemberPromotionPO mpo1 = new MemberPromotionPO();
@@ -37,19 +38,21 @@ public class DeleteMe {
     }
 
     static void testT() {
-        TotalPromotionData tdao = new TotalPromotionData();
+//        TotalPromotionData tdao = new TotalPromotionData();
+
+        PromotionData<TotalPromotionPO> tdao = new PromotionData<>(TotalPromotionPOMapper.class);
 
         // insert. (insert twice in a row. then commented)
-//        TotalPromotionPO tpo1 = new TotalPromotionPO();
-//        tpo1.setDayId(tdao.getDayId());
-//        tpo1.setCreateTime(LocalDateTime.now());
-//        tpo1.setBeginTime(LocalDateTime.of(2017, 11, 1, 0, 0));
-//        tpo1.setEndTime(LocalDateTime.of(2017, 12, 10, 0, 0));
-//        tpo1.setRequiredTotal(100);
-//        tpo1.setTokenAmount(5);
-//        tpo1.setGifts(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO(0, 10), new PromotionGoodsItemPO(1, 2)});
-//
-//        tdao.insert(tpo1);
+        TotalPromotionPO tpo1 = new TotalPromotionPO();
+        tpo1.setDayId(tdao.getDayId());
+        tpo1.setCreateTime(LocalDateTime.now());
+        tpo1.setBeginTime(LocalDateTime.of(2017, 11, 1, 0, 0));
+        tpo1.setEndTime(LocalDateTime.of(2017, 12, 10, 0, 0));
+        tpo1.setRequiredTotal(100);
+        tpo1.setTokenAmount(5);
+        tpo1.setGifts(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO(0, 10), new PromotionGoodsItemPO(1, 2)});
+
+        tdao.insert(tpo1);
 
 
         // select. (de-comment after insert)
@@ -76,11 +79,23 @@ public class DeleteMe {
     }
 
     static void testC() {
+        PromotionData<CombinePromotionPO> cdao = new PromotionData<>(CombinePromotionPOMapper.class);
 
+        CombinePromotionPO cpo1 = new CombinePromotionPO();
+        cpo1.setDayId(cdao.getDayId());
+        cpo1.setCreateTime(LocalDateTime.now());
+        cpo1.setBeginTime(LocalDateTime.of(2017, 11, 1, 0, 0));
+        cpo1.setEndTime(LocalDateTime.of(2017, 12, 10, 0, 0));
+        cpo1.setDiscountAmount(40);
+        cpo1.setGoodsCombination(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO(0, 10), new PromotionGoodsItemPO(1, 2)});
+
+        cdao.insert(cpo1);
     }
 
     public static void main(String[] args) {
 //        testM();
-        testT();
+//        testT();
+//        testC();
+        System.out.println("end Main");
     }
 }

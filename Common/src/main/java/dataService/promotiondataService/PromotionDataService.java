@@ -5,7 +5,7 @@ import util.ResultMessage;
 
 import java.util.List;
 
-public interface PromotiondataService<T extends PromotionPO> {
+public interface PromotionDataService<T extends PromotionPO> {
     int getDayId();
 
     ResultMessage insert(T promotionPO);

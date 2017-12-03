@@ -44,3 +44,20 @@ create table CombinePromotion(
   discountAmount double,
   goodsCombination varchar(1000)
 );
+
+create table SalesSellReceipt(
+  dayId integer,
+  operatorId integer,
+  createTime bigint,
+  lastModifiedTime bigint,
+  receiptState integer,
+
+  clientId integer,
+  clerkName varchar(30),
+  stockName varchar(30),
+  goodsList varchar(1000),
+  discountAmount double,
+  tokenAmount double,
+  originSum double,
+  comment varchar(150)
+);

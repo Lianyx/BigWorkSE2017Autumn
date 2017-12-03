@@ -1,6 +1,6 @@
 package vo;
 
-import util.BillState;
+import util.ReceiptState;
 import util.InventoryBillCategory;
 
 import java.util.Set;
@@ -15,9 +15,9 @@ public class InventoryBillVO {
     /** 添加备注 */
     public String remark;
     /** 单据状态 */
-    public BillState state;
+    public ReceiptState state;
 
-    public InventoryBillVO(String ID, InventoryBillCategory billType, Set<GoodsVO> goods, String remark, BillState state) {
+    public InventoryBillVO(String ID, InventoryBillCategory billType, Set<GoodsVO> goods, String remark, ReceiptState state) {
         this.ID = ID;
         this.billType = billType;
         this.goods = goods;

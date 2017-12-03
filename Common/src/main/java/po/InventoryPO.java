@@ -1,6 +1,6 @@
 package po;
 
-import util.BillState;
+import util.ReceiptState;
 import util.BillType;
 
 import java.util.ArrayList;
@@ -13,20 +13,20 @@ public class InventoryPO {
     /** 单子类型，报损／报溢／报警/赠送 */
     private BillType billType;
     /** 单据状态 */
-    private BillState state;
+    private ReceiptState state;
 
     public InventoryPO(String ID, BillType billType, ArrayList<GoodsPO> goods, String remark) {
         this.ID = ID;
         this.billType = billType;
         this.goods = goods;
-        this.state = BillState.APPROVALING;
+        this.state = ReceiptState.APPROVED;
     }
 
-    public BillState getState() {
+    public ReceiptState getState() {
         return this.state;
     }
 
-    public void setState(BillState state) {
+    public void setState(ReceiptState state) {
         this.state = state;
     }
 

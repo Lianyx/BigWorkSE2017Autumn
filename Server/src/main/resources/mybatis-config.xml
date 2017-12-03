@@ -11,6 +11,7 @@
     <typeHandlers>
         <typeHandler handler="MyJsonHandler"/>
         <typeHandler handler="MyDateTypeHandler"/>
+        <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="util.ReceiptState"/>
     </typeHandlers>
     <environments default='development'>
         <environment id='development'>
@@ -26,5 +27,7 @@
     <mappers>
         <mapper resource='MemberPromotionPOMapper.xml'/>
         <mapper resource="TotalPromotionPOMapper.xml" />
+        <mapper resource="CombinePromotionPOMapper.xml"/>
+        <mapper resource="SalesSellReceiptPOMapper.xml"/>
     </mappers>
 </configuration>

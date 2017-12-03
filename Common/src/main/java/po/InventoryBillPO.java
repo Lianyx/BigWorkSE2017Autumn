@@ -1,7 +1,6 @@
 package po;
 
-import po.GoodsPO;
-import util.BillState;
+import util.ReceiptState;
 import util.InventoryBillCategory;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public class InventoryBillPO {
     /** 单子类型，报损／报溢／报警/赠送 */
     private InventoryBillCategory billType;
     /** 单据状态 */
-    private BillState state;
+    private ReceiptState state;
     /** 操作员 */
     private String operater;
     /** 商品的实际数量 */
@@ -41,7 +40,7 @@ public class InventoryBillPO {
     }
 
     /** 提供给报损报溢单的构造器*/
-    public InventoryBillPO(String ID, ArrayList<GoodsPO> goods, InventoryBillCategory billType, BillState state, String operater, ArrayList<Integer> goodsAcutalNum) {
+    public InventoryBillPO(String ID, ArrayList<GoodsPO> goods, InventoryBillCategory billType, ReceiptState state, String operater, ArrayList<Integer> goodsAcutalNum) {
         this.ID = ID;
         this.goods = goods;
         this.billType = billType;
@@ -51,7 +50,7 @@ public class InventoryBillPO {
     }
 
     /** 提供给赠送报警单的构造器*/
-    public InventoryBillPO(String ID, ArrayList<GoodsPO> goods, InventoryBillCategory billType, BillState state, String operater) {
+    public InventoryBillPO(String ID, ArrayList<GoodsPO> goods, InventoryBillCategory billType, ReceiptState state, String operater) {
         this.ID = ID;
         this.goods = goods;
         this.billType = billType;
@@ -59,11 +58,11 @@ public class InventoryBillPO {
         this.operater = operater;
     }
 
-    public BillState getState() {
+    public ReceiptState getState() {
         return this.state;
     }
 
-    public void setState(BillState state) {
+    public void setState(ReceiptState state) {
         this.state = state;
     }
 

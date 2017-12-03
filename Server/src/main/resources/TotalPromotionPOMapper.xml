@@ -28,8 +28,5 @@
     <select id="selectInEffect" resultMap="resultMap">
         select * from totalPromotion where beginTime &lt;= #{begin} and endTime &gt;= #{end}
     </select>
-    <!--<select id="getAll" resultMap="resultMap">-->
-        <!--select * from totalPromotion-->
-    <!--</select>-->
 
 </mapper>
