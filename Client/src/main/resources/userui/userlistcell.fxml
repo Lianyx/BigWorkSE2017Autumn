@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import com.jfoenix.controls.JFXRippler?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import utilComponent.CircleImageView?>
+<?import ui.util.CircleImageView?>
 <fx:root type="javafx.scene.layout.HBox" spacing="35" prefHeight="40" alignment="CENTER"  xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"  >
     <padding><Insets top="-1" bottom="-8" right="30" /></padding>
     <children>
@@ -24,9 +24,9 @@
         <Label fx:id="usertype" translateY="-5"/>
         <Label fx:id="email" translateY="-5"/>
         <Label fx:id="phone" translateY="-5"/>
-        <JFXRippler fx:id="rippler" position="BACK" styleClass="icons-rippler" maskType="CIRCLE" >
-            <StackPane style="-fx-padding: 10;" translateY="5">
-                <FontAwesomeIconView glyphName="TAG" size="1em"
+        <JFXRippler fx:id="rippler" position="BACK" styleClass="icons-rippler" maskType="CIRCLE" translateY="2">
+            <StackPane style="-fx-padding: 10;" >
+                <FontAwesomeIconView glyphName="ELLIPSIS_V" size="1.5em"
                                      styleClass="icon"/>
             </StackPane>
         </JFXRippler>

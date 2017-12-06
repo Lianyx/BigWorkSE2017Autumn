@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXRippler?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import ui.util.CircleImageView?>
+
+<fx:root type="AnchorPane" prefHeight="140.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" >
+      <children>
+            <ImageView fitHeight="134.0" fitWidth="142.0" layoutX="29.0" pickOnBounds="true" preserveRatio="true" />
+            <JFXButton layoutX="207.0" layoutY="88.0" mnemonicParsing="false" text="Button" />
+         </children>
+</fx:root>

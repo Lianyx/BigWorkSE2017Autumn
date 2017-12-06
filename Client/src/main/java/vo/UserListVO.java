@@ -1,5 +1,6 @@
 package vo;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;
@@ -9,7 +10,7 @@ import util.UserCategory;
 import java.io.Serializable;
 import java.util.Comparator;
 
-public class UserListVO implements Serializable,Comparable<UserListVO> {
+public class UserListVO extends RecursiveTreeObject<UserListVO> implements Serializable,Comparable<UserListVO> {
 
     private long userid;
     private Image image;
@@ -17,6 +18,17 @@ public class UserListVO implements Serializable,Comparable<UserListVO> {
     private UserCategory userCategory;
     private String email;
     private String phone;
+    private SimpleBooleanProperty selected=new SimpleBooleanProperty(false);
+
+    public UserListVO(long userid, Image image, String username, UserCategory userCategory, String email, String phone, boolean selected) {
+        this.userid = userid;
+        this.image = image;
+        this.username = username;
+        this.userCategory = userCategory;
+        this.email = email;
+        this.phone = phone;
+        this.selected.setValue(false);
+    }
 
     public UserListVO(long userid, Image image, String username, UserCategory userCategory, String email, String phone) {
         this.userid = userid;
@@ -35,6 +47,17 @@ public class UserListVO implements Serializable,Comparable<UserListVO> {
         this.phone = phone;
     }
 
+    public boolean isSelected() {
+        return selected.get();
+    }
+
+    public SimpleBooleanProperty selectedProperty() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected.set(selected);
+    }
 
     public long getUserid() {
         return userid;
@@ -92,5 +115,13 @@ public class UserListVO implements Serializable,Comparable<UserListVO> {
         else if(userid<o.getUserid())
             return -1;
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "UserListVO{" +
+                "userid=" + userid +
+                ", selected=" + selected +
+                '}';
     }
 }

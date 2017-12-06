@@ -1,4 +1,4 @@
-package utilComponent;
+package ui.util;
 
 
 import javafx.scene.image.Image;

@@ -62,6 +62,7 @@ public class Usermanagerblservice_Stub implements UserManagerblService{
         set.add(new UserListVO(10007,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","110"));
         set.add(new UserListVO(10008,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","110"));
         set.add(new UserListVO(10009,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","110"));
+        set.add(new UserListVO(10010,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","110"));
 
 
 
