@@ -79,6 +79,9 @@
     -fx-padding: 10;
 }
 
+
+
+
 #labellist{
     -fx-background-color: derive(#CFD2D4, 10%);
 }

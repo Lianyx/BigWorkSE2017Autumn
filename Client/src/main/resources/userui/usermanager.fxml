@@ -14,33 +14,11 @@
 <?import ui.util.CircleImageView?>
 
 <?import ui.userui.usermanagerui.UserListPane?>
-<AnchorPane fx:id="UserList" fx:controller="ui.userui.usermanagerui.UserManagerUIController"  prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/List.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.Separator?>
+<AnchorPane fx:id="UserList" fx:controller="ui.userui.usermanagerui.UserManagerUIController" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/List.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
 
-      <JFXListView fx:id="navigation" layoutY="40.0" prefHeight="562.0" prefWidth="160.0">
-         <HBox fx:id="usermodify" spacing="10">
-              <padding><Insets bottom="8" left="20" top="8" /></padding>
-              <children>
-                  <JFXRippler position="BACK" styleClass="icons-rippler">
-                      <StackPane>
-                          <FontAwesomeIconView fx:id="supervisionicon" size="1em" styleClass="icon" />
-                      </StackPane>
-                  </JFXRippler>
-                  <Label text="UserModify" />
-              </children>
-          </HBox>
-          <HBox fx:id="userlist" spacing="10">
-              <padding><Insets bottom="8" left="20" top="8" /></padding>
-              <children>
-                  <JFXRippler position="BACK" styleClass="icons-rippler">
-                      <StackPane>
-                          <FontAwesomeIconView fx:id="userlisticon" size="1em" styleClass="icon" />
-                      </StackPane>
-                  </JFXRippler>
-                  <Label text="UserList" />
-              </children>
-          </HBox>
-      </JFXListView>
+
 
 
 
@@ -81,22 +59,23 @@
                       <FontAwesomeIconView glyphName="BELL" size="1.5em" styleClass="icon" />
                   </StackPane>
               </JFXBadge>
-              <JFXRippler fx:id="closebutton" layoutX="611.0" layoutY="4.0" maskType="RECT" onMouseClicked="#close" position="BACK" styleClass="icons-rippler">
+              <Separator orientation="VERTICAL" prefHeight="25" layoutX="570" layoutY="10" />
+              <JFXRippler fx:id="closebutton" layoutX="611.0" layoutY="2.0" maskType="RECT" onMouseClicked="#close" position="BACK" styleClass="icons-rippler">
                   <StackPane style="-fx-padding: 8;">
                       <FontAwesomeIconView glyphName="CLOSE" size="1.5em" styleClass="icon" />
                   </StackPane>
               </JFXRippler>
-              <JFXRippler fx:id="hidebutton" layoutX="580.0" layoutY="4.0" maskType="RECT" onMouseClicked="#hide" position="BACK" styleClass="icons-rippler">
+              <JFXRippler fx:id="hidebutton" layoutX="580.0" layoutY="2.0" maskType="RECT" onMouseClicked="#hide" position="BACK" styleClass="icons-rippler">
                   <StackPane style="-fx-padding: 8;">
                       <FontAwesomeIconView glyphName="MINUS" size="1.5em" styleClass="icon" />
                   </StackPane>
               </JFXRippler>
-              <JFXRippler fx:id="back" layoutX="60.0" layoutY="4.0" maskType="RECT" position="BACK" onMouseClicked="#goback" styleClass="icons-rippler">
+              <JFXRippler fx:id="back" layoutX="60.0" layoutY="2.0" maskType="RECT" position="BACK" onMouseClicked="#goback" styleClass="icons-rippler">
                   <StackPane style="-fx-padding: 8;">
                       <FontAwesomeIconView glyphName="ANGLE_LEFT" size="1.5em" styleClass="icon" />
                   </StackPane>
               </JFXRippler>
-              <JFXRippler fx:id="forward" layoutX="90.0" layoutY="4.0" maskType="RECT" position="BACK" onMouseClicked="#goforward" styleClass="icons-rippler">
+              <JFXRippler fx:id="forward" layoutX="90.0" layoutY="2.0" maskType="RECT" position="BACK" onMouseClicked="#goforward" styleClass="icons-rippler">
                   <StackPane style="-fx-padding: 8;">
                       <FontAwesomeIconView glyphName="ANGLE_RIGHT" size="1.5em" styleClass="icon" />
                   </StackPane>
@@ -105,6 +84,23 @@
       </AnchorPane>
 
      <fx:include  fx:id="board" source="board.fxml" layoutX="160" layoutY="40"/>
+
+
+
+       <JFXListView fx:id="navigation" layoutY="40.0" prefHeight="562.0" prefWidth="160.0">
+           <HBox fx:id="userlist" spacing="10">
+               <padding><Insets bottom="8" left="20" top="8" /></padding>
+               <children>
+                   <JFXRippler position="BACK" styleClass="icons-rippler">
+                       <StackPane>
+                           <FontAwesomeIconView fx:id="userlisticon" size="1em" styleClass="icon" />
+                       </StackPane>
+                   </JFXRippler>
+                   <Label text="UserList" />
+               </children>
+           </HBox>
+       </JFXListView>
+
 
    </children>
 </AnchorPane>

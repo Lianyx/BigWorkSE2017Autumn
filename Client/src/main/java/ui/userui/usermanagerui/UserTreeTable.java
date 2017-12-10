@@ -30,6 +30,7 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
     private ObservableList<UserListVO> observableList = FXCollections.observableArrayList();
     private ObservableList<UserListVO> observableListtemp;
     private int rowsPerPage = 6;
+    private BoardController boardController;
 
 
     public ObservableList<UserListVO> getObservableList() {
@@ -40,6 +41,9 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
         return rowsPerPage;
     }
 
+    public void setBoardController(BoardController boardController) {
+        this.boardController = boardController;
+    }
 
     public UserTreeTable() {
         super();
@@ -95,7 +99,20 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
             }
         });
 
+        this.setRowFactory(tableView->{
+            JFXTreeTableRow row=new JFXTreeTableRow();
+            row.setOnMouseClicked((MouseEvent event) -> {
+                if(event.getClickCount()==2){
+                    try{
+                    boardController.switchTo(new UserDetailPane((UserListVO) row.getTreeItem().getValue()));
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
 
+            });
+            return row;
+        });
         this.setShowRoot(false);
 
 
@@ -143,7 +160,6 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
                     }
                 }
             });
-
 
 
         }

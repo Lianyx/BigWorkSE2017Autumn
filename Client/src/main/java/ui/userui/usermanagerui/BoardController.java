@@ -48,23 +48,13 @@ public class BoardController{
     }
 
     public void switchTo(AnchorPane pane){
-
-
-
         if(HistoricalRecord.addRecord(pane)){
             paneSwitchAnimation.setNode(pane);
         }
-        System.out.println(pane.getId());
-        System.out.println(HistoricalRecord.getIndex());
-
     }
 
     public void historicalSwitchTo(AnchorPane pane){
-
         paneSwitchAnimation.setNode(pane);
-        System.out.println(pane.getId());
-
-        System.out.println(HistoricalRecord.getIndex());
     }
 
 

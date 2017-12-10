@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.control.Rating?>
+
+<fx:root prefHeight="300" prefWidth="200" type="VBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fitHeight="50" fitWidth="50" />
+        <Rating scaleX="0.5" scaleY="0.5" rating="2" />
+        <HBox spacing="40">
+            <children>
+                <Label text="Username" />
+                <Label fx:id="username" text="LimKruscal" />
+            </children>
+        </HBox>
+        <HBox spacing="40">
+            <children>
+                <Label text="Usertype" />
+                <Label fx:id="usertype" text="SalesManager" />
+            </children>
+        </HBox>
+
+
+    </children>
+
+
+</fx:root>

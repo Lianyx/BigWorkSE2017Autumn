@@ -56,6 +56,8 @@ public class PaneSwitchAnimation{
     }
 
 
+
+
     public ImageView getPlaceholder() {
         return placeholder;
     }

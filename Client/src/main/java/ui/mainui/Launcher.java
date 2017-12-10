@@ -1,18 +1,15 @@
 package ui.mainui;
 
-import com.jfoenix.controls.JFXDecorator;
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import ui.userui.usermanagerui.UserManagerUIController;
+import ui.util.RippleGenerator;
 
 public class Launcher extends Application {
 
@@ -50,6 +47,7 @@ public class Launcher extends Application {
                     y_stage = primaryStage.getY();
                 }
             });
+
 
             scene.setFill(Color.TRANSPARENT);
             primaryStage.setScene(scene);
