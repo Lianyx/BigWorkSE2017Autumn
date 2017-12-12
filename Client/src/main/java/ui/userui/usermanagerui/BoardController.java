@@ -63,11 +63,6 @@ public class BoardController{
         return board.getChildren().get(0).getId();
     }
 
-    public void clear(){
-        board.getChildren().clear();
-    }
-
-
 
 
 

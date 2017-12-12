@@ -118,6 +118,14 @@ public class UserManagerUIController implements Initializable{
         managerpopup.setOnMouseClicked(e -> managerPopOver.show(managerpopup));
 
 
+        PopOver messagePopOver = new PopOver();
+        messagePopOver.setContentNode(new Manager());
+        messagePopOver.setDetachable(false);
+        messagePopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
+
+        managerpopup.setOnMouseClicked(e -> messagePopOver.show(managerpopup));
+
+
 
 
 

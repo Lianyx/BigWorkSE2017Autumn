@@ -42,6 +42,9 @@ public class HistoricalRecord {
             canForward.setValue(false);
         return true;
       }
+
+
+
     public static Pane pop(){
         index--;
         if(index==0)
@@ -55,6 +58,8 @@ public class HistoricalRecord {
         return record.get(index);
     }
 
+
+
     public static Pane push(){
         index++;
         if(index==0)
@@ -67,6 +72,7 @@ public class HistoricalRecord {
             canForward.setValue(true);
         return record.get(index);
     }
+
     public static void addPane(Pane pane){
         record.add(pane);
     }

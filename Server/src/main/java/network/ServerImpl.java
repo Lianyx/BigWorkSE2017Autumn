@@ -1,5 +1,7 @@
 package network;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -11,8 +13,12 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
 
     private ArrayList<Client> list = new ArrayList<>();
 
+
+
     protected ServerImpl() throws RemoteException {
     }
+
+
 
     @Override
     public void addClient(Client client) throws RemoteException {
@@ -25,6 +31,12 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
         list.add(client);
     }
 
+    @Override
+    public Object dataInteration(String classname, String method,Object object) throws Exception {
+        Class klass = this.getClass();
+        return null;
+    }
+
 
     public void notifyClient() throws RemoteException{
         for(Client client:list){
@@ -33,12 +45,22 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
     }
     public static void main(String args[]){
         try {
+            TestImpl1 testImpl1 = new TestImpl1();
+
+            TestImpl2 testImpl2 = new TestImpl2();
+
             ServerImpl server = new ServerImpl();
             String registry = "localhost";
             int port=1099;
             LocateRegistry.createRegistry(port);
-            String registration = "rmi://" + registry +":" + port + "/Server";
-            Naming.rebind(registration, server);
+            String registrationpre = "rmi://" + registry +":" + port;
+            String registration = registrationpre + "/Server";
+            Naming.bind(registration, server);
+            String test1 = registrationpre + "/TestdataService1";
+            Naming.bind(test1,testImpl1);
+            String test2 = registrationpre + "/TestdataService2";
+            Naming.bind(test2,testImpl2);
+
 
         } catch (Exception e) {
             System.err.println ("Error - " + e);

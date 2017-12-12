@@ -8,4 +8,5 @@ import java.rmi.RemoteException;
 public interface Server extends Remote{
     void addClient(Client client) throws RemoteException;
     void removeClient(Client client) throws RemoteException;
+    public Object dataInteration(String classname,String method,Object object) throws Exception;
 }
