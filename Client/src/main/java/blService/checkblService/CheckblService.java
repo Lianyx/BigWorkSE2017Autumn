@@ -4,15 +4,15 @@ import util.ResultMessage;
 import vo.CheckSearchVO;
 import vo.ReceiptVO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface CheckblService {
-    public ArrayList<ReceiptVO> initCheck();
-    public ReceiptVO showDetail(int id);
-    public ResultMessage approve(int id);
-    public ResultMessage reject(int id);
-    public ResultMessage approveBatch(ArrayList<Integer> ids);
-    public ResultMessage rejectBatch(ArrayList<Integer> ids);
-    public ResultMessage update(ReceiptVO receiptVO);
-    public ArrayList<ReceiptVO> search(CheckSearchVO checkSearchVO);
+    ArrayList<ReceiptVO> initCheck() throws RemoteException;
+//    public ReceiptVO showDetail(int id);
+    ResultMessage approve(ReceiptVO receiptVO) throws RemoteException;
+    ResultMessage reject(ReceiptVO receiptVO) throws RemoteException;
+    ResultMessage update(ReceiptVO receiptVO) throws RemoteException;
+//    public ArrayList<ReceiptVO> search(CheckSearchVO checkSearchVO);
 }

@@ -8,21 +8,25 @@ import po.ReceiptPO;
 import util.ReceiptState;
 import util.ResultMessage;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 // TODO 这个和promotionData重复太多了…想提一个父类来
-public class ReceiptData<T extends ReceiptPO> implements ReceiptDataService<T> {
+public class ReceiptData<T extends ReceiptPO> extends UnicastRemoteObject implements ReceiptDataService<T> {
     private Class<? extends ReceiptPOMapper<T>> mapperClass = null;
 
-    public ReceiptData(Class<? extends ReceiptPOMapper<T>> mapperClass) {
+    public ReceiptData(Class<? extends ReceiptPOMapper<T>> mapperClass) throws RemoteException{
         this.mapperClass = mapperClass;
     }
 
     @Override
-    public int getDayId() {
+    public int getDayId() throws RemoteException {
         LocalDateTime today = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
 
         int resultID;
@@ -37,7 +41,7 @@ public class ReceiptData<T extends ReceiptPO> implements ReceiptDataService<T> {
     }
 
     @Override
-    public ResultMessage insert(T promotionPO) {
+    public ResultMessage insert(T promotionPO) throws RemoteException {
         promotionPO.setCreateTime(LocalDateTime.now());
         promotionPO.setLastModifiedTime(LocalDateTime.now());
 
@@ -50,7 +54,7 @@ public class ReceiptData<T extends ReceiptPO> implements ReceiptDataService<T> {
     }
 
     @Override
-    public ResultMessage update(T promotionPO) {
+    public ResultMessage update(T promotionPO) throws RemoteException{
         promotionPO.setLastModifiedTime(LocalDateTime.now());
 
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
@@ -62,7 +66,7 @@ public class ReceiptData<T extends ReceiptPO> implements ReceiptDataService<T> {
     }
 
     @Override
-    public ResultMessage delete(T promotionPO) {
+    public ResultMessage delete(T promotionPO) throws RemoteException{
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             ReceiptPOMapper<T> mapper = session.getMapper(mapperClass);
             mapper.delete(promotionPO);
@@ -72,24 +76,25 @@ public class ReceiptData<T extends ReceiptPO> implements ReceiptDataService<T> {
     }
 
     @Override
-    public List<T> selectBetween(LocalDateTime begin, LocalDateTime end) {
-        List<T> resultList;
+    public ArrayList<T> selectBetween(LocalDateTime begin, LocalDateTime end) throws RemoteException{
+        ArrayList<T> resultList;
 
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             ReceiptPOMapper<T> mapper = session.getMapper(mapperClass);
-            resultList = mapper.selectBetween(begin, end);
+            resultList = new ArrayList<>(mapper.selectBetween(begin, end));
+            // TODO 为什么这里返回就不是arraylist，下面就是
             session.commit();
         }
         return resultList;
     }
 
     @Override
-    public List<T> selectPending() {
-        List<T> resultList;
+    public ArrayList<T> selectByState(ReceiptState receiptState) throws RemoteException {
+        ArrayList<T> resultList;
 
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             ReceiptPOMapper<T> mapper = session.getMapper(mapperClass);
-            resultList = mapper.selectByState(ReceiptState.PENDING);
+            resultList = mapper.selectByState(receiptState);
             session.commit();
         }
         return resultList;

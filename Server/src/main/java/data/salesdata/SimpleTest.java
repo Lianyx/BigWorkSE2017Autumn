@@ -5,12 +5,13 @@ import po.ReceiptGoodsItemPO;
 import po.SalesSellReceiptPO;
 import util.ReceiptState;
 
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 
 public class SimpleTest {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RemoteException{
         ReceiptData<SalesSellReceiptPO> rdao = new ReceiptData<>(SalesSellReceiptPOMapper.class);
 
 
@@ -32,7 +33,7 @@ public class SimpleTest {
 
 
         // get by state and update
-        SalesSellReceiptPO ssrpA = rdao.selectPending().get(0);
+        SalesSellReceiptPO ssrpA = rdao.selectByState(ReceiptState.PENDING).get(0);
         ssrpA.setComment("get and update");
 
         rdao.update(ssrpA);
@@ -55,6 +56,7 @@ public class SimpleTest {
 
         // prove delete
         System.out.println(rdao.getDayId());
+        // TODO 为什么这个test跑完以后好像还是没有停？
 
     }
 }
