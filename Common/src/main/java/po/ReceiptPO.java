@@ -2,13 +2,14 @@ package po;
 
 import util.ReceiptState;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public abstract class ReceiptPO {
-    // TODO 不确定要不要有一个ReceiptType
+public abstract class ReceiptPO implements Serializable{
+    // 感觉上不需要有一个ReceiptType
     private int dayId;
     private int operatorId;
-    // TODO 还是用的id，没有用String operatorName。但是下面业务员用的String，因为业务员不一定是系统里的吧？
+    // 还是用的id，没有用String operatorName。但是下面业务员用的String，因为业务员不一定是系统里的吧？
 
     private LocalDateTime createTime;
     private LocalDateTime lastModifiedTime;

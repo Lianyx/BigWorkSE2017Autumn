@@ -97,6 +97,7 @@ public abstract class SalesReceiptPO extends ReceiptPO{
     @Override
     public String toString() {
         return "SalesReceiptPO{" +
+                "Id=" + getDayId() + ", " +
                 "clientId=" + clientId +
                 ", clerkName='" + clerkName + '\'' +
                 ", stockName='" + stockName + '\'' +
