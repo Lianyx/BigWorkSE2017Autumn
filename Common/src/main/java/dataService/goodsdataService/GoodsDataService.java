@@ -42,9 +42,10 @@ public interface GoodsDataService {
 	 */
 	public ArrayList<GoodsPO> select(String keywords);
 
-	/**
-	 * @param fatherID 商品父类的ID
-	 * @return 新建商品的ID
-	 */
-	public String getID(String fatherID);
+//	/**
+//	 * @param fatherId 商品父类的ID
+//	 * @return 新建商品的ID
+//	 */
+//
+//	public String getID(String fatherId);
 }

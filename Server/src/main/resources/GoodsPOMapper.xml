@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.goodsdata.GoodsPOMapper">
+    <!--
+         商品PO的添加操作
+    -->
+    <insert id="insert">
+        insert into goods(id,goodName,goodType,classifyId,inventoryNum,purPrice,salePrice,recentPurPrice,recentSalePrice,alarmNumber)
+        values(#{id},#{goodName},#{goodType},#{classifyId},#{inventoryNum},#{purPrice},#{salePrice},#{recentPurPrice},#{recentSalePrice},#{alarmNumber})
+    </insert>
+
+    <!--
+         商品PO的删除操作
+    -->
+    <delete id="delete">
+        delete from goods where id = #{id}
+    </delete>
+
+    <!--
+         商品PO的修改操作
+    -->
+    <update id="update">
+        update goods set id=#{id},goodName=#{goodName},goodType=#{goodType},classifyId=#{classifyId},inventoryNum = #{inventoryNum},purPrice =#{purPrice},salePrice= #{salePrice},recentPurPrice = #{recentPurPrice},
+        recentSalePrice = #{recentSalePrice},alarmNumber = #{alarmNumber} where id=#{id}
+    </update>
+
+    <!--
+         获取所有商品
+    -->
+    <select id="show" resultType="po.GoodsPO">
+        select * from goods
+    </select>
+
+    <!--
+          进行模糊查询
+    -->
+    <select id="select" parameterType="java.lang.String" resultType="po.GoodsPO">
+        select * from goods where id like CONCAT('%',#{key},'%') or goodName like CONCAT('%',#{key},'%') or goodType like
+        CONCAT('%',#{key},'%') or classifyId like CONCAT('%',#{key},'%')
+    </select>
+</mapper>
