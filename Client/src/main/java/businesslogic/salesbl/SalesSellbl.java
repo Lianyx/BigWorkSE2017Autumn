@@ -16,7 +16,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO 这个实在需要泛型，而且一定要提取出来“增删改”给所有人用，另外查一定要尽快写，不能再往后拖了
 public class SalesSellbl implements SalesSellblService, CheckInfo {
     private ReceiptDataService<SalesSellReceiptPO> receiptDataService;
     private Class<? extends ReceiptPO> receiptPOClass;
@@ -65,17 +64,17 @@ public class SalesSellbl implements SalesSellblService, CheckInfo {
     }
 
     @Override
-    public ResultMessage insert(SalesSellReceiptVO promotionVO) {
+    public ResultMessage insert(SalesSellReceiptVO receiptVO) {
         return null;
     }
 
     @Override
-    public ResultMessage update(SalesSellReceiptVO promotionVO) {
+    public ResultMessage update(SalesSellReceiptVO receiptVO) {
         return null;
     }
 
     @Override
-    public ResultMessage delete(SalesSellReceiptVO promotionVO) {
+    public ResultMessage delete(SalesSellReceiptVO receiptVO) {
         return null;
     }
 
