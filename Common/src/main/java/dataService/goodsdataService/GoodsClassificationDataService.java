@@ -38,6 +38,7 @@ public interface GoodsClassificationDataService {
 	/**
 	 * @param fatherID 分类父类的ID
 	 * @return 新建分类的ID
-	 */
+	 *
 	public String getID(String fatherID);
+	*/
 }

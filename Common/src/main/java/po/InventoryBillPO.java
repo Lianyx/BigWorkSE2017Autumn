@@ -3,74 +3,57 @@ package po;
 import util.ReceiptState;
 import util.InventoryBillCategory;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class InventoryBillPO {
-    private static final long serialVersionUID = 1L;
-    private String ID;
-    /** 商品集合（赠送单） */
-    private ArrayList<GoodsPO> goods;
-    /** 单子类型，报损／报溢／报警/赠送 */
-    private InventoryBillCategory billType;
-    /** 单据状态 */
-    private ReceiptState state;
-    /** 操作员 */
-    private String operater;
-    /** 商品的实际数量 */
-    private ArrayList<Integer> goodsAcutalNum;
+public class InventoryBillPO extends ReceiptPO{
+    private String clerkName; // 业务员
 
-    public String getID() {
-        return ID;
+    private InventoryBillGoodsItemPO[] goodsList;
+
+    /** 备注*/
+    private String comment;
+    public InventoryBillPO() {}
+
+    public InventoryBillPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime,
+                           ReceiptState receiptState, String clerkName, InventoryBillGoodsItemPO[] goodsList, String comment) {
+        super(dayId, operatorId, createTime, lastModifiedTime, receiptState);
+        this.clerkName = clerkName;
+        this.goodsList = goodsList;
+        this.comment = comment;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public String getClerkName() {
+        return clerkName;
     }
 
-    public void setBillType(InventoryBillCategory billType) {
-        this.billType = billType;
+    public void setClerkName(String clerkName) {
+        this.clerkName = clerkName;
     }
 
-    public String getOperater() {
-        return operater;
+    public InventoryBillGoodsItemPO[] getGoodsList() {
+        return goodsList;
     }
 
-    public void setOperater(String operater) {
-        this.operater = operater;
+    public void setGoodsList(InventoryBillGoodsItemPO[] goodsList) {
+        this.goodsList = goodsList;
     }
 
-    /** 提供给报损报溢单的构造器*/
-    public InventoryBillPO(String ID, ArrayList<GoodsPO> goods, InventoryBillCategory billType, ReceiptState state, String operater, ArrayList<Integer> goodsAcutalNum) {
-        this.ID = ID;
-        this.goods = goods;
-        this.billType = billType;
-        this.state = state;
-        this.operater = operater;
-        this.goodsAcutalNum = goodsAcutalNum;
+    public String getComment() {
+        return comment;
     }
 
-    /** 提供给赠送报警单的构造器*/
-    public InventoryBillPO(String ID, ArrayList<GoodsPO> goods, InventoryBillCategory billType, ReceiptState state, String operater) {
-        this.ID = ID;
-        this.goods = goods;
-        this.billType = billType;
-        this.state = state;
-        this.operater = operater;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
-    public ReceiptState getState() {
-        return this.state;
-    }
-
-    public void setState(ReceiptState state) {
-        this.state = state;
-    }
-
-    public InventoryBillCategory getBillType() {
-        return billType;
-    }
-
-    public ArrayList<GoodsPO> getgoods() {
-        return goods;
+    @Override
+    public String toString() {
+        return "InventoryBillPO{" +
+                ", clerkName='" + clerkName + '\'' +
+                ", goodsList=" + Arrays.toString(goodsList) +
+                ", comment='" + comment + '\'' +
+                '}';
     }
 }
