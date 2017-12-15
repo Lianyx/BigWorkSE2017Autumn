@@ -1,6 +1,8 @@
 package po;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class GoodsClassificationPO {
     private String id;
@@ -9,7 +11,8 @@ public class GoodsClassificationPO {
 
     private String fatherId;
 
-    private ArrayList<String> goodsID;
+    private String[] childrenId;
+    private String[] goodsId;
 
     public GoodsClassificationPO() {
     }
@@ -20,13 +23,35 @@ public class GoodsClassificationPO {
         this.fatherId = fatherID;
     }
 
-    public GoodsClassificationPO(String ID, String name, String fatherID, ArrayList<String> goodsID) {
+    public GoodsClassificationPO(String ID, String name, String fatherID, String[] childrenId,String[] goodsID) {
         this.id=ID;
         this._name = name;
         this.fatherId = fatherID;
-
-        this.goodsID = goodsID;
+        this.childrenId = childrenId;
+        this.goodsId = goodsID;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void set_name(String _name) {
+        this._name = _name;
+    }
+
+    public void setFatherId(String fatherId) {
+        this.fatherId = fatherId;
+    }
+
+    public void setChildrenId(String[] childrenId) {
+        this.childrenId = childrenId;
+    }
+
+    public void setGoodsId(String[] goodsID) {
+        this.goodsId = goodsID;
+    }
+
+    public String getId() { return id; }
 
     public String getName() {
         return _name;
@@ -36,8 +61,12 @@ public class GoodsClassificationPO {
         return fatherId;
     }
 
-    public ArrayList<String> getGoodsID() {
-        return goodsID;
+    public String[] getGoodsId() {
+        return goodsId;
+    }
+
+    public String[] getChildrenId() {
+        return childrenId;
     }
 
     @Override
@@ -45,8 +74,8 @@ public class GoodsClassificationPO {
         return "GoodsClassificationPO{" +
                 "id='" + id + '\'' +
                 ", _name='" + _name + '\'' +
-                ", fatherId='" + fatherId + '\'' +
-                ", goodsID=" + goodsID +
+                ", fatherId='" + fatherId + '\'' + ", childrenId='"+ Arrays.toString(childrenId)+'\''+
+                ", goodsId=" + Arrays.toString(goodsId) +
                 '}';
     }
 }

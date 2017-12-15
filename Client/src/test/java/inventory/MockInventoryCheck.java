@@ -1,6 +1,6 @@
 package inventory;
 
-import businesslogic.Inventory.InventoryCheck;
+import businesslogic.inventorybl.InventoryCheck;
 
 public class MockInventoryCheck extends InventoryCheck{
     public MockInventoryCheck(MockGoodsList goodsList, String today, String lot) {

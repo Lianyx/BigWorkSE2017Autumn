@@ -72,4 +72,9 @@ public class GoodsClassificationData implements GoodsClassificationDataService {
         return list;
     }
 
+    @Override
+    public GoodsClassificationPO getFather(String fatherId) {
+        return null;
+    }
+
 }

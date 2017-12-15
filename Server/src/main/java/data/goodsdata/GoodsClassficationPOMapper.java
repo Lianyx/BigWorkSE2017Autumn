@@ -14,4 +14,5 @@ public interface GoodsClassficationPOMapper {
 
     public ArrayList<GoodsClassificationPO> show();
 
+    public GoodsClassificationPO getFather(String fatherId);
 }

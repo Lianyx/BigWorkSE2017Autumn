@@ -4,13 +4,14 @@ import util.ResultMessage;
 import vo.GoodsVO;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public interface GoodsblService {
     /**
      * 显示所有商品
      */
-    public Set<GoodsVO> show();
+    public List<GoodsVO> show();
 
     /**
      * 增加商品
@@ -37,12 +38,12 @@ public interface GoodsblService {
      * @param ID
      * @return
      */
-    public Set<GoodsVO> SearchGoods(String info);
+    public List<GoodsVO> SearchGoods(String info);
 
     /**
      * 根据分类编号和添加次序生成编号
      * @param upID
      * @return
      */
-    public String getID(String upID);
+    public String getID(String upID ,int order);
 }

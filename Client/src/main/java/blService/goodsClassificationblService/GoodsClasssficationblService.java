@@ -1,17 +1,20 @@
 package blService.goodsClassificationblService;
 
+import exception.ExistException;
 import util.ResultMessage;
 import vo.GoodsClassificationVO;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public interface GoodsClasssficationblService {
     /**
      * 显示所有商品分类
+     *
      * @return
      */
-    public Set<GoodsClassificationVO> show();
+    public List<GoodsClassificationVO> show();
 
     /**
      * 创建商品分类时调用，根据上层分类编号生成编号
@@ -22,11 +25,10 @@ public interface GoodsClasssficationblService {
 
     /**
      * 增加分类
-     * @param name
-     * @param upID
+     * @param vo
      * @return
      */
-    public ResultMessage addGoodsClassification(String name, String upID);
+    public ResultMessage addGoodsClassification(GoodsClassificationVO vo) throws ExistException;
 
     /**
      * 删除商品分类
@@ -37,9 +39,8 @@ public interface GoodsClasssficationblService {
 
     /**
      * 修改分类
-     * @param ID
-     * @param name
+     * @param vo
      * @return
      */
-    public ResultMessage updateGoodsClassification(String ID,String name);
+    public ResultMessage updateGoodsClassification(GoodsClassificationVO vo);
 }

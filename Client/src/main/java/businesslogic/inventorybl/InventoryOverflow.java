@@ -1,4 +1,4 @@
-package businesslogic.Inventory;
+package businesslogic.inventorybl;
 
 public class InventoryOverflow {
 }

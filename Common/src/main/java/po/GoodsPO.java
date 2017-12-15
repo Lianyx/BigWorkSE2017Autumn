@@ -19,15 +19,17 @@ public class GoodsPO {
     private int inventoryNum;
     /** 商品进价 */
     private double purPrice;
+
     /** 商品零售价 */
+
     private double salePrice;
+
     /** 商品最近进价 */
     private double recentPurPrice;
     /** 商品最近零售价 */
     private double recentSalePrice;
     /** 商品警戒数量 */
     private int alarmNumber;
-
     public GoodsPO() {
     }
 
@@ -43,6 +45,26 @@ public class GoodsPO {
         this.recentPurPrice = recentPurPrice;
         this.recentSalePrice = recentSalePrice;
         this.alarmNumber = alarmNumber;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getGoodName() {
+        return goodName;
+    }
+
+    public void setGoodName(String goodName) {
+        this.goodName = goodName;
+    }
+
+    public String getGoodType() {
+        return goodType;
+    }
+
+    public void setGoodType(String goodType) {
+        this.goodType = goodType;
     }
 
     public String getId() {

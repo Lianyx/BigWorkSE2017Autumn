@@ -1,6 +1,6 @@
 package po;
 
-public class InventoryBillGoodsItemPO {
+public class InventoryReceiptGoodsItemPO {
     /**编号*/
     private String id;
     /** 商品名称 */
@@ -12,10 +12,10 @@ public class InventoryBillGoodsItemPO {
     /** 当前现实数量*/
     private int factNumber;
 
-    public InventoryBillGoodsItemPO() {
+    public InventoryReceiptGoodsItemPO() {
     }
 
-    public InventoryBillGoodsItemPO(String id, String goodName, String goodType, int inventoryNum, int factNumber) {
+    public InventoryReceiptGoodsItemPO(String id, String goodName, String goodType, int inventoryNum, int factNumber) {
         this.id = id;
         this.goodName = goodName;
         this.goodType = goodType;
@@ -61,7 +61,7 @@ public class InventoryBillGoodsItemPO {
 
     @Override
     public String toString() {
-        return "InventoryBillGoodsItemPO{" +
+        return "InventoryReceiptGoodsItemPO{" +
                 "id='" + id + '\'' +
                 ", goodName='" + goodName + '\'' +
                 ", goodType='" + goodType + '\'' +

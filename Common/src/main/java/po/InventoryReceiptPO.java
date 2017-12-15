@@ -1,23 +1,21 @@
 package po;
 
 import util.ReceiptState;
-import util.InventoryBillCategory;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 
-public class InventoryBillPO extends ReceiptPO{
+public class InventoryReceiptPO extends ReceiptPO{
     private String clerkName; // 业务员
 
-    private InventoryBillGoodsItemPO[] goodsList;
+    private InventoryReceiptGoodsItemPO[] goodsList;
 
     /** 备注*/
     private String comment;
-    public InventoryBillPO() {}
+    public InventoryReceiptPO() {}
 
-    public InventoryBillPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime,
-                           ReceiptState receiptState, String clerkName, InventoryBillGoodsItemPO[] goodsList, String comment) {
+    public InventoryReceiptPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime,
+                              ReceiptState receiptState, String clerkName, InventoryReceiptGoodsItemPO[] goodsList, String comment) {
         super(dayId, operatorId, createTime, lastModifiedTime, receiptState);
         this.clerkName = clerkName;
         this.goodsList = goodsList;
@@ -32,11 +30,11 @@ public class InventoryBillPO extends ReceiptPO{
         this.clerkName = clerkName;
     }
 
-    public InventoryBillGoodsItemPO[] getGoodsList() {
+    public InventoryReceiptGoodsItemPO[] getGoodsList() {
         return goodsList;
     }
 
-    public void setGoodsList(InventoryBillGoodsItemPO[] goodsList) {
+    public void setGoodsList(InventoryReceiptGoodsItemPO[] goodsList) {
         this.goodsList = goodsList;
     }
 
@@ -50,7 +48,7 @@ public class InventoryBillPO extends ReceiptPO{
 
     @Override
     public String toString() {
-        return "InventoryBillPO{" +
+        return "InventoryReceiptPO{" +
                 ", clerkName='" + clerkName + '\'' +
                 ", goodsList=" + Arrays.toString(goodsList) +
                 ", comment='" + comment + '\'' +
