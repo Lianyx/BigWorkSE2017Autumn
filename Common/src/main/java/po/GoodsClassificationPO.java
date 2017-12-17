@@ -1,41 +1,81 @@
 package po;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class GoodsClassificationPO {
-    private static final long serialVersionUID = 1L;
+    private String id;
 
-    private String ID;
+    private String _name;
 
-    private String name;
+    private String fatherId;
 
-    private String fatherID;
+    private String[] childrenId;
+    private String[] goodsId;
 
-    private ArrayList<String> childrenID;
-
-    private ArrayList<String> goodsID;
-
-    public GoodsClassificationPO(String ID, String name, String fatherID, ArrayList<String> childrenID, ArrayList<String> goodsID) {
-        this.ID=ID;
-        this.name = name;
-        this.fatherID = fatherID;
-        this.childrenID = childrenID;
-        this.goodsID = goodsID;
+    public GoodsClassificationPO() {
     }
 
+    public GoodsClassificationPO(String ID, String name, String fatherID) {
+        this.id = ID;
+        this._name = name;
+        this.fatherId = fatherID;
+    }
+
+    public GoodsClassificationPO(String ID, String name, String fatherID, String[] childrenId,String[] goodsID) {
+        this.id=ID;
+        this._name = name;
+        this.fatherId = fatherID;
+        this.childrenId = childrenId;
+        this.goodsId = goodsID;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void set_name(String _name) {
+        this._name = _name;
+    }
+
+    public void setFatherId(String fatherId) {
+        this.fatherId = fatherId;
+    }
+
+    public void setChildrenId(String[] childrenId) {
+        this.childrenId = childrenId;
+    }
+
+    public void setGoodsId(String[] goodsID) {
+        this.goodsId = goodsID;
+    }
+
+    public String getId() { return id; }
+
     public String getName() {
-        return name;
+        return _name;
     }
 
     public String getFatherID() {
-        return fatherID;
+        return fatherId;
     }
 
-    public ArrayList<String> getChildrenID() {
-        return childrenID;
+    public String[] getGoodsId() {
+        return goodsId;
     }
 
-    public ArrayList<String> getGoodsID() {
-        return goodsID;
+    public String[] getChildrenId() {
+        return childrenId;
+    }
+
+    @Override
+    public String toString() {
+        return "GoodsClassificationPO{" +
+                "id='" + id + '\'' +
+                ", _name='" + _name + '\'' +
+                ", fatherId='" + fatherId + '\'' + ", childrenId='"+ Arrays.toString(childrenId)+'\''+
+                ", goodsId=" + Arrays.toString(goodsId) +
+                '}';
     }
 }

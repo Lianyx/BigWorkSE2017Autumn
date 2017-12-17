@@ -1,6 +1,6 @@
 package goods;
 
-import businesslogic.goods.Goods;
+import businesslogic.goodsbl.Goods;
 
 public class MockGoods extends Goods {
     String id;

@@ -1,6 +1,6 @@
 package goods;
 
-import businesslogic.goods.GoodsItem;
+import businesslogic.goodsbl.GoodsItem;
 
 public class MockGoodsItem extends GoodsItem{
     MockGoods good;

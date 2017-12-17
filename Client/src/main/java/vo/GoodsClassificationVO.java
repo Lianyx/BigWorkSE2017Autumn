@@ -1,23 +1,66 @@
 package vo;
 
-import java.util.Set;
+import java.util.List;
 
 public class GoodsClassificationVO {
-    public String ID;
+    private String ID;
 
-    public String name;
+    private String name;
 
-    public String fatherID;
+    private String fatherID;
 
-    public Set<String> childrenID;
+    private List<String> childrenId;
 
-    public Set<String> commoditiesID;
+    private List<String> goodsID;
 
-    public GoodsClassificationVO(String ID, String name, String fatherID, Set<String> childrenID, Set<String> commoditiesID) {
-        this.name = name;
+    public GoodsClassificationVO() {
+    }
+
+    public GoodsClassificationVO(String ID, String name, String fatherID, List<String> goodsID, List<String> childrenId) {
         this.ID = ID;
+        this.name = name;
         this.fatherID = fatherID;
-        this.childrenID = childrenID;
-        this.commoditiesID = commoditiesID;
+        this.goodsID = goodsID;
+        this.childrenId = childrenId;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFatherID() {
+        return fatherID;
+    }
+
+    public void setFatherID(String fatherID) {
+        this.fatherID = fatherID;
+    }
+
+    public List<String> getGoodsID() {
+        return goodsID;
+    }
+
+    public void setGoodsID(List<String> goodsID) {
+        this.goodsID = goodsID;
+    }
+
+    public List<String> getChildrenId() {
+        return childrenId;
+    }
+
+    public void setChildrenId(List<String> childrenId) {
+        this.childrenId = childrenId;
     }
 }

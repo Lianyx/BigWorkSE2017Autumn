@@ -36,8 +36,9 @@ public interface GoodsClassificationDataService {
 	public ArrayList<GoodsClassificationPO> show();
 
 	/**
-	 * @param fatherID 分类父类的ID
-	 * @return 新建分类的ID
+	 * @param fatherId 分类父类的ID
+	 * @return 父类
 	 */
-	public String getID(String fatherID);
+	public GoodsClassificationPO getFather(String fatherId);
+
 }

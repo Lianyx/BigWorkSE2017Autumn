@@ -7,17 +7,15 @@ import org.apache.ibatis.session.SqlSession;
 import po.ReceiptPO;
 import util.ReceiptState;
 import util.ResultMessage;
+import util.ReceiptSearchCondition;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 
-// TODO 这个和promotionData重复太多了…想提一个父类来
 public class ReceiptData<T extends ReceiptPO> extends UnicastRemoteObject implements ReceiptDataService<T> {
     private Class<? extends ReceiptPOMapper<T>> mapperClass = null;
 
@@ -34,7 +32,7 @@ public class ReceiptData<T extends ReceiptPO> extends UnicastRemoteObject implem
             ReceiptPOMapper<T> mapper = session.getMapper(mapperClass);
             resultID = mapper.getDayId(today);
             session.commit();
-        } catch (BindingException e) {
+        } catch (BindingException e) { // TODO 这样好像不好…
             return 0;
         }
         return resultID;
@@ -54,6 +52,7 @@ public class ReceiptData<T extends ReceiptPO> extends UnicastRemoteObject implem
     }
 
     @Override
+    // TODO 如果审批本来就通过，那么不应该改
     public ResultMessage update(T promotionPO) throws RemoteException{
         promotionPO.setLastModifiedTime(LocalDateTime.now());
 
@@ -81,7 +80,7 @@ public class ReceiptData<T extends ReceiptPO> extends UnicastRemoteObject implem
 
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             ReceiptPOMapper<T> mapper = session.getMapper(mapperClass);
-            resultList = new ArrayList<>(mapper.selectBetween(begin, end));
+            resultList = mapper.selectBetween(begin, end);
             // TODO 为什么这里返回就不是arraylist，下面就是
             session.commit();
         }
@@ -95,6 +94,18 @@ public class ReceiptData<T extends ReceiptPO> extends UnicastRemoteObject implem
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             ReceiptPOMapper<T> mapper = session.getMapper(mapperClass);
             resultList = mapper.selectByState(receiptState);
+            session.commit();
+        }
+        return resultList;
+    }
+
+    @Override
+    public ArrayList<T> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
+        ArrayList<T> resultList;
+
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            ReceiptPOMapper<T> mapper = session.getMapper(mapperClass);
+            resultList = mapper.search(receiptSearchCondition);
             session.commit();
         }
         return resultList;
