@@ -4,6 +4,7 @@ import data.checkdata.ReceiptData;
 import po.ReceiptGoodsItemPO;
 import po.SalesSellReceiptPO;
 import util.ReceiptState;
+import util.ReceiptSearchCondition;
 
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
@@ -47,12 +48,17 @@ public class SimpleTest {
         LocalDateTime begin = LocalDateTime.now().minusDays(1);
         LocalDateTime end = LocalDateTime.now().plusDays(2);
 
-        SalesSellReceiptPO ssrpB = rdao.selectBetween(begin, end).get(0);
+//        SalesSellReceiptPO ssrpB = rdao.selectBetween(begin, end).get(0);
 
-        rdao.delete(ssrpB);
+        SalesSellReceiptPO ssrpC = rdao.search(new ReceiptSearchCondition(null, LocalDateTime.now(), null, "Wang Er Xiao", null, null)).get(0);
 
         System.out.println("get and delete: ");
-        System.out.println(ssrpB);
+        System.out.println(ssrpC);
+
+        // delete
+        rdao.delete(ssrpC);
+
+
 
         // prove delete
         System.out.println(rdao.getDayId());

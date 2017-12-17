@@ -16,10 +16,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 // TODO 一定要提取出来“增删改”给所有人用，另外查（分为模糊和非模糊）一定要尽快写，不能再往后拖了
-public class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements ReceiptblService<TV>, CheckInfo {
-    private ReceiptDataService<TP> receiptDataService;
+public class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements ReceiptblService<TV>, CheckInfo<TP> {
     private Class<? extends ReceiptPO> receiptPOClass;
     private Class<? extends ReceiptVO> receiptVOClass;
+
+    private ReceiptDataService<TP> receiptDataService;
 
     public Receiptbl(Class<? extends ReceiptPO> receiptPOClass, Class<? extends ReceiptVO> receiptVOClass, String className) throws RemoteException, NotBoundException, MalformedURLException {
         this.receiptPOClass = receiptPOClass;
@@ -55,30 +56,27 @@ public class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements Re
         return receiptDataService.delete(convertToPO(receiptVO));
     }
 
+
+
     @Override
-    public <TF extends ReceiptPO> ResultMessage update(TF receiptPO) throws RemoteException {
-        if (!receiptPOClass.isInstance(receiptPO)) {
-            return ResultMessage.FAIL;
-        }
+    public ResultMessage update(TP receiptPO) throws RemoteException {
         // TODO
-        return null;
+        return receiptDataService.update(receiptPO);
     }
 
     @Override
-    public <TF extends ReceiptPO> ResultMessage approve(TF receiptPO) throws RemoteException {
-        if (!receiptPOClass.isInstance(receiptPO)) {
-            return ResultMessage.FAIL;
-        }
+    public ResultMessage approve(TP receiptPO) throws RemoteException {
         receiptPO.setReceiptState(ReceiptState.APPROVED);
-        receiptDataService.update(castBack(receiptPO));
+        receiptDataService.update(receiptPO);
 
         // TODO 更新其他数据
 
         return ResultMessage.SUCCESS;
     }
 
+
     @Override
-    public ArrayList<? extends ReceiptPO> selectPending() throws RemoteException {
+    public ArrayList<TP> selectPending() throws RemoteException {
         return receiptDataService.selectByState(ReceiptState.PENDING);
     }
 
