@@ -1,5 +1,6 @@
 package businesslogic.goodsbl;
 
+import businesslogic.goodsClassificationbl.GoodsClassificationInfo;
 import dataService.goodsdataService.GoodsDataService;
 import exception.ExistException;
 import po.GoodsPO;
@@ -13,20 +14,38 @@ public class Goods {
 
     private GoodsPOVOChanger changer;
 
+    private GoodsClassificationInfo info = new GoodsClassificationInfo();
+
+    /**
+     * 返回所有商品
+     * @return
+     */
     public List<GoodsVO> show() {
         List<GoodsPO> POList = dataService.show();
         List<GoodsVO> VOList = changer.allToVO(POList);
         return VOList;
     }
 
+    /**
+     * 添加商品
+     * @param goodsVO
+     * @return
+     */
     public ResultMessage addGoods(GoodsVO goodsVO) {
         GoodsPO po = changer.oneToPO(goodsVO);
+
         dataService.insert(po);
+
+        info.addGoods(po.getClassifyId(),po.getId());
+
         return ResultMessage.SUCCESS;
     }
 
-    public ResultMessage deleteGoods(String ID) {
-        dataService.delete(ID);
+    public ResultMessage deleteGoods(GoodsVO goodsVO) {
+        dataService.delete(goodsVO.getId());
+
+        info.deleteGoods(goodsVO.getClassifyId(),goodsVO.getId());
+
         return ResultMessage.SUCCESS;
     }
 
@@ -37,26 +56,20 @@ public class Goods {
     }
 
     public List<GoodsVO> SearchGoods(String info) {
-        return null;
+        /* 虽然前面使用了策略模式实现模糊查询及查询方式的可拓展性，但实际上他们调的是Controller的同一个方法，再调这个方法，所以是假模糊查询，待讨论*/
+        List<GoodsPO> POList = dataService.select(info);
+        List<GoodsVO> VOList = changer.allToVO(POList);
+        return VOList;
     }
 
     /**
-     * 这里将商品编号设置为 分类ID + 添加次序的形式（最多为999，最小为001；暂时考虑为这样，到时候参考其他人写的形式应该会有改动）
+     * 这里将商品编号设置为 分类ID + 添加次序的形式
      * @param upID
      * @param order
      * @return
      */
     public String getID(String upID, int order) {
-        String id = upID;
-        int[] ladder = {0,10,100,1000};
-        for (int i = 0; i < ladder.length-1; i++) {
-            if(order >= ladder[i] && order <= ladder[i+1]){
-                for (int j = 0; j < ladder.length-1-i;j++)
-                    id += "0";
-                id += order;
-                break;
-            }
-        }
+        String id = upID+order;
         return id;
     }
 }

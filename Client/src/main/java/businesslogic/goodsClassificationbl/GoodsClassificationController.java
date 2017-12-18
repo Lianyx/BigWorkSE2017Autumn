@@ -2,10 +2,13 @@ package businesslogic.goodsClassificationbl;
 
 import blService.goodsClassificationblService.GoodsClasssficationblService;
 import exception.ExistException;
+import po.GoodsClassificationPO;
 import util.ResultMessage;
 import vo.GoodsClassificationVO;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
 
 public class GoodsClassificationController implements GoodsClasssficationblService {
@@ -16,8 +19,9 @@ public class GoodsClassificationController implements GoodsClasssficationblServi
     }
 
     @Override
-    public String getID(String upID) {
-        return null;
+    public String getID(String fatherId,int order) {
+        String id = goodsClassification.getID(fatherId,order);
+        return id;
     }
 
     @Override
@@ -26,9 +30,9 @@ public class GoodsClassificationController implements GoodsClasssficationblServi
     }
 
     @Override
-    public ResultMessage deleteGoodsClassification(String ID) {
-
-        return goodsClassification.deleteGoodsClassification(ID);
+    public ResultMessage deleteGoodsClassification(GoodsClassificationVO vo) {
+        ResultMessage resultMessage = goodsClassification.deleteGoodsClassification(vo);
+        return resultMessage;
     }
 
     @Override

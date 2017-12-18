@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.CombinePromotionPOMapper">
+    <resultMap id="resultMap" type="po.promotionPO.CombinePromotionPO">
+        <!--<result typeHandler="MyDateTypeHandler" column="createTime" property="createTime"/>-->
+        <!--<result typeHandler="MyDateTypeHandler" column="lastModifiedTime" property="lastModifiedTime"/>-->
+        <!--<result typeHandler="MyDateTypeHandler" column="beginTime" property="beginTime"/>-->
+        <!--<result typeHandler="MyDateTypeHandler" column="endTime" property="endTime"/>-->
+        <result typeHandler="MyJsonHandler" column="goodsCombination" property="goodsCombination" />
+    </resultMap>
+
+    <select id="getDayId" resultType="int">
+        select max(dayId)+1 from combinePromotion where createTime &gt;= #{today}
+    </select>
+    <insert id="insert">
+        insert into combinePromotion(dayId, createTime, lastModifiedTime, beginTime, endTime, discountAmount, goodsCombination)
+        values(#{dayId}, #{createTime}, #{lastModifiedTime}, #{beginTime}, #{endTime}, #{discountAmount}, #{goodsCombination, typeHandler=MyJsonHandler})
+    </insert>
+    <update id="update">
+        update combinePromotion set lastModifiedTime=#{lastModifiedTime}, beginTime=#{beginTime}, endTime=#{endTime}, discountAmount=#{discountAmount}, goodsCombination=#{goodsCombination, typeHandler=MyJsonHandler}
+        where dayId=#{dayId} and createTime=#{createTime}
+    </update>
+    <delete id="delete">
+        delete from combinePromotion where dayId=#{dayId} and createTime=#{createTime}
+    </delete>
+    <select id="selectInEffect" resultMap="resultMap">
+        select * from combinePromotion where beginTime &lt;= #{begin} and endTime &gt;= #{end}
+    </select>
+
+</mapper>

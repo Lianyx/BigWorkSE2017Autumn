@@ -11,31 +11,37 @@ public class GoodsController implements GoodsblService {
 
     @Override
     public List<GoodsVO> show() {
-        return null;
+        List<GoodsVO> goodsList = goods.show();
+        return goodsList;
     }
 
     @Override
     public ResultMessage addGoods(GoodsVO goodsVO) {
-        return null;
+        ResultMessage resultMessage = goods.addGoods(goodsVO);
+        return resultMessage;
     }
 
     @Override
-    public ResultMessage deleteGoods(String ID) {
-        return null;
+    public ResultMessage deleteGoods(GoodsVO goodsVO) {
+        ResultMessage resultMessage = goods.deleteGoods(goodsVO);
+        return resultMessage;
     }
 
     @Override
     public ResultMessage updateGoods(GoodsVO goodsVO) {
-        return null;
+        ResultMessage resultMessage = goods.updateGoods(goodsVO);
+        return resultMessage;
     }
 
     @Override
     public List<GoodsVO> SearchGoods(String info) {
-        return null;
+        List<GoodsVO> goodsList = goods.SearchGoods(info);
+        return goodsList;
     }
 
     @Override
     public String getID(String upID, int order) {
-        return null;
+        String id = goods.getID(upID,order);
+        return id;
     }
 }

@@ -2,22 +2,21 @@ package businesslogic.checkbl;
 
 import blService.checkblService.CheckInfo;
 import blService.checkblService.CheckblService;
-import po.SalesSellReceiptPO;
+import businesslogic.salesbl.SalesSellbl;
 import util.ResultMessage;
-import vo.ReceiptVO;
+import vo.ReceiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Checkbl implements CheckblService {
     CheckInfo salesSellReceiptCheck;
 
     public Checkbl() throws RemoteException, NotBoundException, MalformedURLException {
         // TODO factory?
-//        salesSellReceiptCheck = new SalesSellbl(SalesSellReceiptPO.class);
+        salesSellReceiptCheck = new SalesSellbl();
     }
 
     @Override

@@ -73,19 +73,19 @@ public class GoodsClassificationData implements GoodsClassificationDataService {
     }
 
     @Override
-    public GoodsClassificationPO getFather(String fatherId) {
+    public GoodsClassificationPO getById(String id) {
         SqlSession session = null;
-        GoodsClassificationPO father;
+        GoodsClassificationPO po;
         try {
             session = MyBatisUtil.getSqlSessionFactory().openSession();
             GoodsClassficationPOMapper mapper = session.getMapper(GoodsClassficationPOMapper.class);
-            father = mapper.getFather(fatherId);
+            po = mapper.getById(id);
         }finally {
             if(session != null)
                 session.commit();
             session.close();
         }
-        return father;
+        return po;
     }
 
 }

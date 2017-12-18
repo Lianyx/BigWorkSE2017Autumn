@@ -1,8 +1,6 @@
 package goods;
 
-import businesslogic.goodsbl.GoodsItem;
-
-public class MockGoodsItem extends GoodsItem{
+public class MockGoodsItem {
     MockGoods good;
     String id;
     int factCount;

@@ -1,8 +1,6 @@
 package inventory;
 
-import businesslogic.inventorybl.InventoryCheck;
-
-public class MockInventoryCheck extends InventoryCheck{
+public class MockInventoryCheck {
     public MockInventoryCheck(MockGoodsList goodsList, String today, String lot) {
         this.goodsList = goodsList;
         this.today = today;

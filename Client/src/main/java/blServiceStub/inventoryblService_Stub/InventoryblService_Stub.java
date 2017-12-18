@@ -6,14 +6,13 @@ import vo.InventoryCheckVO;
 import vo.InventoryViewVO;
 
 import java.util.HashSet;
-import java.util.Set;
 
 public class InventoryblService_Stub {
     /**
      * 查看此时间段内的出/入库数量/金额，销售/进货的数量/金额
      */
     public InventoryViewVO viewInventory(String beginDate, String endDate){
-        return new InventoryViewVO(1, 1, 1, 1);
+        return new InventoryViewVO();
     }
 
     /**

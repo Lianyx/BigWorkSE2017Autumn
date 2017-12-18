@@ -1,11 +1,12 @@
 package po;
 
+import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
-public class InventoryReceiptPO extends ReceiptPO{
+public class InventoryReceiptPO extends ReceiptPO {
     private String clerkName; // 业务员
 
     private InventoryReceiptGoodsItemPO[] goodsList;

@@ -1,27 +1,30 @@
 package data.promotiondata;
 
 import dataService.promotiondataService.PromotionDataService;
+import mapper.generic.PromotionPOMapper;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.binding.BindingException;
 import org.apache.ibatis.session.SqlSession;
-import po.PromotionPO;
+import po.promotionPO.PromotionPO;
 import util.ResultMessage;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-public class PromotionData<T extends PromotionPO> implements PromotionDataService<T> {
+public class PromotionData<T extends PromotionPO> extends UnicastRemoteObject implements PromotionDataService<T> {
     // because we cannot use T.class
     private Class<? extends PromotionPOMapper<T>> mapperClass = null;
 
-    public PromotionData(Class<? extends PromotionPOMapper<T>> mapperClass) {
+    public PromotionData(Class<? extends PromotionPOMapper<T>> mapperClass) throws RemoteException {
         this.mapperClass = mapperClass;
     }
 
     @Override
-    public int getDayId() {
+    public int getDayId() throws RemoteException {
         LocalDateTime today = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
 
         int resultID;
@@ -37,7 +40,7 @@ public class PromotionData<T extends PromotionPO> implements PromotionDataServic
     }
 
     @Override
-    public ResultMessage insert(T promotionPO) {
+    public ResultMessage insert(T promotionPO) throws RemoteException {
         promotionPO.setCreateTime(LocalDateTime.now());
         promotionPO.setLastModifiedTime(LocalDateTime.now());
 
@@ -50,7 +53,7 @@ public class PromotionData<T extends PromotionPO> implements PromotionDataServic
     }
 
     @Override
-    public ResultMessage update(T promotionPO) {
+    public ResultMessage update(T promotionPO) throws RemoteException {
         promotionPO.setLastModifiedTime(LocalDateTime.now());
 
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
@@ -62,7 +65,7 @@ public class PromotionData<T extends PromotionPO> implements PromotionDataServic
     }
 
     @Override
-    public ResultMessage delete(T promotionPO) {
+    public ResultMessage delete(T promotionPO) throws RemoteException {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             PromotionPOMapper<T> mapper = session.getMapper(mapperClass);
             mapper.delete(promotionPO);
@@ -72,7 +75,7 @@ public class PromotionData<T extends PromotionPO> implements PromotionDataServic
     }
 
     @Override
-    public List<T> selectInEffect() {
+    public List<T> selectInEffect() throws RemoteException {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime nextDayZero = LocalDateTime.of(now.plusDays(1).toLocalDate(), LocalTime.MIN);
 

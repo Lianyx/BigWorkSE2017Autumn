@@ -8,6 +8,7 @@ package po;
 public class GoodsPO {
     private static final long serialVersionUID = 1L;
     /**编号*/
+    private String  GoodsID;
     private String id;
     /** 商品名称 */
     private String goodName;
@@ -45,6 +46,14 @@ public class GoodsPO {
         this.recentPurPrice = recentPurPrice;
         this.recentSalePrice = recentSalePrice;
         this.alarmNumber = alarmNumber;
+    }
+
+    public String getGoodsID() {
+        return GoodsID;
+    }
+
+    public void setGoodsID(String goodsID) {
+        GoodsID = goodsID;
     }
 
     public void setId(String id) {

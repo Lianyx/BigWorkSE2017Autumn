@@ -1,8 +1,6 @@
 package inventory;
 
-import businesslogic.inventorybl.InventoryDamage;
-
-public class MockInventoryDamage extends InventoryDamage {
+public class MockInventoryDamage {
     String id;
     MockGoodsList goodsList;
     String userName;

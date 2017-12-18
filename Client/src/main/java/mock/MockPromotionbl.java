@@ -1,7 +1,6 @@
 package mock;
 
-import po.PromotionPO;
-import util.PromotionType;
+import po.promotionPO.PromotionPO;
 
 import java.util.ArrayList;
 

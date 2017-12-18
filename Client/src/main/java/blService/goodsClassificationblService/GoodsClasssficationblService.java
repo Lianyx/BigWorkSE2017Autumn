@@ -18,10 +18,11 @@ public interface GoodsClasssficationblService {
 
     /**
      * 创建商品分类时调用，根据上层分类编号生成编号
-     * @param upID
+     * @param fatherId
+     * @param order
      * @return
      */
-    public String getID(String upID);
+    public String getID(String fatherId, int order);
 
     /**
      * 增加分类
@@ -32,10 +33,10 @@ public interface GoodsClasssficationblService {
 
     /**
      * 删除商品分类
-     * @param ID
+     * @param vo
      * @return
      */
-    public ResultMessage deleteGoodsClassification(String ID);
+    public ResultMessage deleteGoodsClassification(GoodsClassificationVO vo);
 
     /**
      * 修改分类

@@ -5,8 +5,6 @@ import inventory.MockGoodsList;
 import inventory.MockGoodsListItem;
 import inventory.MockInventoryDamage;
 import org.junit.Test;
-import org.junit.Before; 
-import org.junit.After; 
 
 /** 
 * MockInventoryDamage Tester. 

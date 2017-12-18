@@ -61,3 +61,71 @@ create table SalesSellReceipt(
   originSum double,
   comment varchar(150)
 );
+
+
+create table account(
+    ID int auto increment primary key,
+    name varchar(255),
+    balance double
+);
+
+
+create table PaymentBillReceipt(
+    dayId integer,
+    operatorId integer,
+    createTime bigint,
+    lastModifiedTime bigint,
+    receiptState integer,
+
+    clerkName varchar(30),
+    clientId integer,
+    transferList varchar(1000),
+    sum double
+);
+
+create table PaymentBillReceipt(
+    dayId integer,
+    operatorId integer,
+    createTime bigint,
+    lastModifiedTime bigint,
+    receiptState integer,
+
+    clerkName varchar(30),
+    clientId integer,
+    transferList varchar(1000),
+    sum double
+);
+
+create table PaymentBillReceipt(
+    dayId integer,
+    operatorId integer,
+    createTime bigint,
+    lastModifiedTime bigint,
+    receiptState integer,
+
+    clerkName varchar(30),
+    accountID INTEGER,
+    total double;
+    itemList varchar(1000);
+
+);
+
+
+create table SalesDetail(
+    date bigint,
+    goodsName varchar(30),
+    goodsID integer,
+    number integer,
+    price double,
+    total double,
+
+    clientID integer,
+    clerkName varchar(30)
+    stockID integer
+)
+
+
+create table BusinessCondition(
+    income double,
+    expense double
+)
