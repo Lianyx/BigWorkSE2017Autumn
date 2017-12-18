@@ -1,10 +1,7 @@
-package data.promotiondata;
+package mapper;
 
-import org.apache.ibatis.annotations.Param;
+import mapper.generic.PromotionPOMapper;
 import po.MemberPromotionPO;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 public interface MemberPromotionPOMapper extends PromotionPOMapper<MemberPromotionPO> {
 //    int getDayId(@Param("today") LocalDateTime today);

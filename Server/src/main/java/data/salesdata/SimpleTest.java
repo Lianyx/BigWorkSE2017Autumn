@@ -1,6 +1,7 @@
 package data.salesdata;
 
 import data.checkdata.ReceiptData;
+import mapper.SalesSellReceiptPOMapper;
 import po.ReceiptGoodsItemPO;
 import po.SalesSellReceiptPO;
 import util.ReceiptState;

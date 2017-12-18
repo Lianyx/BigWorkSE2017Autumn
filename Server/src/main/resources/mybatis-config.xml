@@ -25,14 +25,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource='MemberPromotionPOMapper.xml'/>
-        <mapper resource="TotalPromotionPOMapper.xml" />
-        <mapper resource="CombinePromotionPOMapper.xml"/>
-        <mapper resource="SalesSellReceiptPOMapper.xml"/>
-        <mapper resource="GoodsClassificationPOMapper.xml"/>
-        <mapper resource="GoodsPOMapper.xml"/>
-        <mapper resource="InventoryGiftBillPOMapper.xml"/>
-        <mapper resource="InventoryDamageBillPOMapper.xml"/>
-        <mapper resource="InventoryOverflowBillPOMapper.xml"/>
+        <package name="mapper"/>
     </mappers>
 </configuration>

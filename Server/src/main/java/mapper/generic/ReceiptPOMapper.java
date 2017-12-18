@@ -1,4 +1,4 @@
-package data.checkdata;
+package mapper.generic;
 
 import org.apache.ibatis.annotations.Param;
 import util.ReceiptState;

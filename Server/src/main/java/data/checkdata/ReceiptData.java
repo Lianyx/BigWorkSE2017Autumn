@@ -1,6 +1,7 @@
 package data.checkdata;
 
 import dataService.checkdataService.ReceiptDataService;
+import mapper.generic.ReceiptPOMapper;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.binding.BindingException;
 import org.apache.ibatis.session.SqlSession;

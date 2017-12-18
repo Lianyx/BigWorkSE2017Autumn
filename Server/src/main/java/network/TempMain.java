@@ -1,11 +1,10 @@
 package network;
 
 import data.checkdata.ReceiptData;
-import data.salesdata.SalesSellReceiptPOMapper;
+import mapper.SalesSellReceiptPOMapper;
 import po.SalesSellReceiptPO;
 
 import java.rmi.Naming;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
 public class TempMain {

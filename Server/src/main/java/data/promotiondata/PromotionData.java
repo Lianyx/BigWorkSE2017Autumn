@@ -1,6 +1,7 @@
 package data.promotiondata;
 
 import dataService.promotiondataService.PromotionDataService;
+import mapper.generic.PromotionPOMapper;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.binding.BindingException;
 import org.apache.ibatis.session.SqlSession;

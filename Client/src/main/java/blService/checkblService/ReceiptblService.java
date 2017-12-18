@@ -1,10 +1,12 @@
 package blService.checkblService;
 
 import po.ReceiptPO;
+import util.ReceiptSearchCondition;
 import util.ResultMessage;
 import vo.ReceiptVO;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public interface ReceiptblService<T extends ReceiptVO> {
     int getDayId() throws RemoteException;
@@ -15,5 +17,5 @@ public interface ReceiptblService<T extends ReceiptVO> {
 
     ResultMessage delete(T receiptVO) throws RemoteException;
 
-    // TODO 这里至少还要加Search的。
+    ArrayList<T> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException;
 }

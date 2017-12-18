@@ -1,6 +1,6 @@
-package data.salesdata;
+package mapper;
 
-import data.checkdata.ReceiptPOMapper;
+import mapper.generic.ReceiptPOMapper;
 import po.SalesSellReceiptPO;
 
 public interface SalesSellReceiptPOMapper extends ReceiptPOMapper<SalesSellReceiptPO> {

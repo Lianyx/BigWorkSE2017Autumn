@@ -2,6 +2,7 @@ package businesslogic.checkbl;
 
 import blService.checkblService.CheckInfo;
 import blService.checkblService.CheckblService;
+import businesslogic.salesbl.SalesSellbl;
 import po.SalesSellReceiptPO;
 import util.ResultMessage;
 import vo.ReceiptVO;
@@ -17,7 +18,7 @@ public class Checkbl implements CheckblService {
 
     public Checkbl() throws RemoteException, NotBoundException, MalformedURLException {
         // TODO factory?
-//        salesSellReceiptCheck = new SalesSellbl(SalesSellReceiptPO.class);
+        salesSellReceiptCheck = new SalesSellbl();
     }
 
     @Override

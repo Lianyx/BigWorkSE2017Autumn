@@ -1,4 +1,4 @@
-package data.promotiondata;
+package mapper.generic;
 
 import org.apache.ibatis.annotations.Param;
 

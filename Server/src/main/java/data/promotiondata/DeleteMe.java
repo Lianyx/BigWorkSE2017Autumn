@@ -1,5 +1,8 @@
 package data.promotiondata;
 
+import mapper.CombinePromotionPOMapper;
+import mapper.MemberPromotionPOMapper;
+import mapper.TotalPromotionPOMapper;
 import po.CombinePromotionPO;
 import po.MemberPromotionPO;
 import po.PromotionGoodsItemPO;
@@ -95,7 +98,7 @@ public class DeleteMe {
     public static void main(String[] args) {
 //        testM();
 //        testT();
-//        testC();
+        testC();
         System.out.println("end Main");
     }
 }

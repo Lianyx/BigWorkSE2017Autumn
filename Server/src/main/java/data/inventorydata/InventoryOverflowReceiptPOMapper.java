@@ -1,6 +1,6 @@
 package data.inventorydata;
 
-import data.checkdata.ReceiptPOMapper;
+import mapper.generic.ReceiptPOMapper;
 import po.InventoryOverflowReceiptPO;
 
 public interface InventoryOverflowReceiptPOMapper extends ReceiptPOMapper<InventoryOverflowReceiptPO> {
