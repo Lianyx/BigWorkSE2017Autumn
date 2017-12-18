@@ -6,27 +6,30 @@ import com.jfoenix.controls.*;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.PopOver;
-import ui.util.ContainerAnimations;
-import ui.util.PaneSwitchAnimation;
-import ui.util.RippleGenerator;
+import ui.util.*;
 
 import javax.annotation.PostConstruct;
+import javax.jws.soap.SOAPBinding;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -63,6 +66,12 @@ public class UserManagerUIController implements Initializable{
 
     @FXML
     JFXRippler managerpopup;
+
+    @FXML
+    CircleImageView user;
+
+    @FXML
+    Label username;
     @FXML
     private BoardController boardController;
 
@@ -73,6 +82,10 @@ public class UserManagerUIController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        user.setImage(UserInfomation.userimage);
+        username.setText(UserInfomation.username);
+
         usermanagerblservice_stub = new Usermanagerblservice_Stub();
 
         back.disableProperty().bind(HistoricalRecord.canBack.not());
@@ -81,7 +94,7 @@ public class UserManagerUIController implements Initializable{
         //set default pane
         try {
 
-            boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(320), ContainerAnimations.SWIPE_RIGHT, board));
+            boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150), ContainerAnimations.SWIPE_RIGHT, board));
             UserListPane userListPane = new UserListPane(usermanagerblservice_stub,boardController);
             board.getChildren().setAll(userListPane);
             HistoricalRecord.addPane(userListPane);
@@ -109,7 +122,7 @@ public class UserManagerUIController implements Initializable{
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+/*
         PopOver managerPopOver = new PopOver();
         managerPopOver.setContentNode(new Manager());
         managerPopOver.setDetachable(false);
@@ -117,13 +130,18 @@ public class UserManagerUIController implements Initializable{
 
         managerpopup.setOnMouseClicked(e -> managerPopOver.show(managerpopup));
 
-
+*/
         PopOver messagePopOver = new PopOver();
-        messagePopOver.setContentNode(new Manager());
+        MessageListView messageListView = new MessageListView();
+        BorderPane anchorPane = new BorderPane();
+        anchorPane.setCenter(messageListView);
+
+        anchorPane.setPadding(new Insets(10,10,10,10));
+        messagePopOver.setContentNode(anchorPane);
         messagePopOver.setDetachable(false);
         messagePopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
 
-        managerpopup.setOnMouseClicked(e -> messagePopOver.show(managerpopup));
+        message.setOnMouseClicked(e -> messagePopOver.show(message));
 
 
 
@@ -156,4 +174,8 @@ public class UserManagerUIController implements Initializable{
         boardController.historicalSwitchTo((AnchorPane)HistoricalRecord.push());
     }
 
+
+
 }
+
+

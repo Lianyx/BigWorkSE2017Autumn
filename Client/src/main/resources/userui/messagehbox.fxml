@@ -8,11 +8,15 @@
 
 <?import ui.util.CircleImageView?>
 <?import com.jfoenix.controls.JFXCheckBox?>
-<fx:root type="HBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="HBox" spacing="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <JFXCheckBox fx:id="checkbox" mnemonicParsing="false" text=""/>
         <CircleImageView  fx:id="civ" stroke="dimgrey" strokeType="INSIDE" radius="15"/>
-        <Label fx:id="username" text="Limkruscal"/>
+        <VBox >
+            <children>
+                <Label text="LimKruscal"/>
+                <Label text="you are stupid"/>
+            </children>
+        </VBox>
 
     </children>
 </fx:root>

@@ -15,24 +15,14 @@
 
 <?import ui.userui.usermanagerui.UserListPane?>
 <?import javafx.scene.control.Separator?>
-<AnchorPane fx:id="UserList" fx:controller="ui.userui.usermanagerui.UserManagerUIController" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/List.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 
+<StackPane fx:id="mainpane"  prefHeight="600.0" prefWidth="800.0"  fx:controller="ui.userui.usermanagerui.UserManagerUIController" stylesheets="@../css/List.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
 
+<AnchorPane fx:id="UserList"  prefHeight="600.0" prefWidth="800.0" >
+    <children>
 
-
-
-
-
-      <AnchorPane  prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: white">
-          <children>
-            <ImageView fitHeight="52.0" fitWidth="98.0" layoutX="24.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../default/logo.jpg" />
-               </image>
-            </ImageView>
-          </children>
-      </AnchorPane>
 
 
 
@@ -41,10 +31,10 @@
           <children>
           <HBox layoutX="380" layoutY="6" spacing="20">
               <children>
-                  <CircleImageView fx:id="manager" radius="15" stroke="dimgrey" strokeType="INSIDE" />
+                  <CircleImageView fx:id="user" radius="15" />
                   <HBox>
                       <children>
-                          <Label fx:id="managername" text="LimKruscal" translateY="8" />
+                          <Label fx:id="username" text="" translateY="8" />
                           <JFXRippler fx:id="managerpopup" maskType="RECT" position="BACK" styleClass="icons-rippler" translateY="-2">
                               <StackPane style="-fx-padding: 8;">
                                   <FontAwesomeIconView glyphName="ANGLE_DOWN" size="1.5em" styleClass="icon" />
@@ -60,14 +50,14 @@
                   </StackPane>
               </JFXBadge>
               <Separator orientation="VERTICAL" prefHeight="25" layoutX="570" layoutY="10" />
-              <JFXRippler fx:id="closebutton" layoutX="611.0" layoutY="2.0" maskType="RECT" onMouseClicked="#close" position="BACK" styleClass="icons-rippler">
+              <JFXRippler fx:id="closebutton" layoutX="600.0" layoutY="2.0" maskType="RECT" onMouseClicked="#close" position="BACK" styleClass="icons-rippler">
                   <StackPane style="-fx-padding: 8;">
-                      <FontAwesomeIconView glyphName="CLOSE" size="1.5em" styleClass="icon" />
+                     <MaterialDesignIconView glyphName="CLOSE" size="1.5em" styleClass="icon" />
                   </StackPane>
               </JFXRippler>
-              <JFXRippler fx:id="hidebutton" layoutX="580.0" layoutY="2.0" maskType="RECT" onMouseClicked="#hide" position="BACK" styleClass="icons-rippler">
+              <JFXRippler fx:id="hidebutton" layoutX="571.0" layoutY="2.0" maskType="RECT" onMouseClicked="#hide" position="BACK" styleClass="icons-rippler">
                   <StackPane style="-fx-padding: 8;">
-                      <FontAwesomeIconView glyphName="MINUS" size="1.5em" styleClass="icon" />
+                      <MaterialDesignIconView glyphName="MINUS" size="1.5em" styleClass="icon" />
                   </StackPane>
               </JFXRippler>
               <JFXRippler fx:id="back" layoutX="60.0" layoutY="2.0" maskType="RECT" position="BACK" onMouseClicked="#goback" styleClass="icons-rippler">
@@ -87,9 +77,9 @@
 
 
 
-       <JFXListView fx:id="navigation" layoutY="40.0" prefHeight="562.0" prefWidth="160.0">
+       <JFXListView fx:id="navigation" layoutY="40.0" prefHeight="560.0" prefWidth="160.0">
            <HBox fx:id="userlist" spacing="10">
-               <padding><Insets bottom="8" left="20" top="8" /></padding>
+               <padding><Insets bottom="8" left="10" top="8" /></padding>
                <children>
                    <JFXRippler position="BACK" styleClass="icons-rippler">
                        <StackPane>
@@ -101,6 +91,16 @@
            </HBox>
        </JFXListView>
 
-
+        <AnchorPane fx:id="logopane"  prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: white">
+            <children>
+                <ImageView fitHeight="52.0" fitWidth="98.0" layoutX="24.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../default/logo.jpg" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
    </children>
 </AnchorPane>
+    </children>
+</StackPane>
