@@ -18,6 +18,10 @@ public class GoodsClassification {
     public GoodsClassification() {
     }
 
+    /**
+     * 得到所有的商品分类
+     * @return List
+     */
     public List<GoodsClassificationVO> show() {
         List<GoodsClassificationPO> POList = goodsClassificationData.show();
 
@@ -29,19 +33,20 @@ public class GoodsClassification {
     }
 
     /**
-     * 这里先不写id，因为感觉这个在ui层面生成编号更简单，否则需要改动的很多
+     * 得到id
      * */
-    public String getID(String fatherID) {
-        return "";
+    public String getID(String fatherId, int order) {
+        String id = fatherId + " " + order;
+        return id;
     }
 
+    /**
+     * 添加商品分类
+     */
     public ResultMessage addGoodsClassification(GoodsClassificationVO vo) throws ExistException {
         //如果商品分类下有商品，则不能添加分类
-        /**
-         * 此处修改了dataService，写完之后需要补充,添加getFatherID方法
-         */
         String fatherId = vo.getFatherID();
-        if(hasLeaf(fatherId)){
+        if(!hasLeaf(fatherId)){
             GoodsClassificationPO po = changer.oneToPO(vo);
 
             goodsClassificationData.insert(po);
@@ -53,8 +58,37 @@ public class GoodsClassification {
         }
     }
 
-    public ResultMessage deleteGoodsClassification(String ID) {
-        goodsClassificationData.delete(ID);
+    /**
+     * 对商品分类进行删除，共有三种情况
+     *
+     */
+    public ResultMessage deleteGoodsClassification(GoodsClassificationVO vo) {
+        boolean hasGoods = vo.getGoodsID().isEmpty();
+        boolean isLeaf = vo.getChildrenId().isEmpty();
+
+        String id = vo.getID();
+        //是叶节点且无商品的时候直接删除
+        if(!hasGoods && isLeaf){
+            goodsClassificationData.delete(id);
+        }else if(hasGoods && isLeaf){
+            //是叶节点且有商品，这个时候要把其下面的商品也删除，需要提供的接口
+            goodsClassificationData.delete(id);
+            /**
+             * .....
+             */
+        }else if (!hasGoods && !isLeaf){
+            //中间节点，删除该分类后，用递归一一删除其子分类
+            goodsClassificationData.delete(id);
+            GoodsClassificationPO po = goodsClassificationData.getById(id);
+            String[] childrenId = po.getChildrenId();
+
+            for (int i = 0; i < childrenId.length; i++) {
+                //进行递归
+                GoodsClassificationPO tmpPO = goodsClassificationData.getById(childrenId[i]);
+                GoodsClassificationVO tmpVO = changer.oneToVO(tmpPO);
+                deleteGoodsClassification(tmpVO);
+            }
+        }
         return ResultMessage.SUCCESS;
     }
 
@@ -65,34 +99,47 @@ public class GoodsClassification {
     }
 
     public boolean hasLeaf(String fatherId){
-        GoodsClassificationPO po = goodsClassificationData.getFather(fatherId);
-        List<String> goodsID = po.getGoodsID();
-        return goodsID.isEmpty();
+        GoodsClassificationPO po = goodsClassificationData.getById(fatherId);
+        String[] goodsID = po.getGoodsId();
+        return !(goodsID.length == 0);
+    }
+
+
+    public GoodsClassificationPO getById(String id){
+        return goodsClassificationData.getById(id);
     }
 
     private List<GoodsClassificationVO> getTree(List<GoodsClassificationPO> POList){
         List<GoodsClassificationVO> VOList = new ArrayList<>(POList.size());
 
-        GoodsClassificationPO root = POList.get(0);
-        VOList.add(changer.oneToVO(root));
-        POList.remove(0);
+        GoodsClassificationVO head = changer.oneToVO(POList.get(0));
+        VOList.add(head);
 
-        GoodsClassificationPO father = root;
-        String fatherId;
-        Queue<GoodsClassificationPO> queue = new LinkedList<>();
-        queue.offer(father);
+        GoodsClassificationVO vo = head;
 
-        while(!queue.isEmpty()){
-            fatherId = queue.poll().getId();
-            for (int i = 0; i < POList.size(); i++) {
-                GoodsClassificationPO son = POList.get(i);
-                if(son.getFatherID().equals(fatherId)){
-                    queue.offer(son);
-                    VOList.add(changer.oneToVO(son));
-                    POList.remove(i);
+        Queue<GoodsClassificationVO> que = new LinkedList<>();
+        que.offer(vo);
+
+        while (!que.isEmpty()){
+            vo = que.poll();
+            VOList.add(vo);
+            List<String> childrenId = vo.getChildrenId();
+
+            if(childrenId.size() == 0)
+                continue;
+
+            for (int i = 1; i < POList.size(); i++) {
+                GoodsClassificationPO po = POList.get(i);
+                String tmpId = po.getId();
+
+                if(childrenId.indexOf(tmpId) != -1){
+                    GoodsClassificationVO tmpVO = changer.oneToVO(po);
+                    VOList.add(tmpVO);
+                    que.offer(tmpVO);
                 }
             }
         }
+
         return VOList;
     }
 

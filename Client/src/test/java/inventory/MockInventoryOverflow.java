@@ -1,8 +1,6 @@
 package inventory;
 
-import businesslogic.inventorybl.InventoryOverflow;
-
-public class MockInventoryOverflow extends InventoryOverflow{
+public class MockInventoryOverflow {
     String id;
     MockGoodsList goodsList;
     String userName;

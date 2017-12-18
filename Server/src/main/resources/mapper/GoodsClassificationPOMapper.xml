@@ -38,8 +38,8 @@
     <!--
          得到父类
     -->
-    <select id="getFather" resultMap="resultMap">
-        select * from goodsclassification where id=#{fatherId}
+    <select id="getById" resultMap="resultMap">
+        select * from goodsclassification where id=#{id}
     </select>
 
 </mapper>

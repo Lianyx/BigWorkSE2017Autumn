@@ -21,10 +21,10 @@ public interface GoodsblService {
 
     /**
      * 删除商品
-     * @param ID
+     * @param goodsVO
      * @return
      */
-    public ResultMessage deleteGoods(String ID);
+    public ResultMessage deleteGoods(GoodsVO goodsVO);
 
     /**
      * 更改商品属性
@@ -35,7 +35,7 @@ public interface GoodsblService {
 
     /**
      * 根据商品编号或名称查找商品
-     * @param ID
+     * @param info
      * @return
      */
     public List<GoodsVO> SearchGoods(String info);
