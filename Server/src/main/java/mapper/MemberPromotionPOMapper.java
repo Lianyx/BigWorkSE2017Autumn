@@ -1,7 +1,7 @@
 package mapper;
 
 import mapper.generic.PromotionPOMapper;
-import po.MemberPromotionPO;
+import po.promotionPO.MemberPromotionPO;
 
 public interface MemberPromotionPOMapper extends PromotionPOMapper<MemberPromotionPO> {
 //    int getDayId(@Param("today") LocalDateTime today);

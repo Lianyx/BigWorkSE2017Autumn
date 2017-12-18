@@ -3,16 +3,17 @@ package data.promotiondata;
 import mapper.CombinePromotionPOMapper;
 import mapper.MemberPromotionPOMapper;
 import mapper.TotalPromotionPOMapper;
-import po.CombinePromotionPO;
-import po.MemberPromotionPO;
+import po.promotionPO.CombinePromotionPO;
+import po.promotionPO.MemberPromotionPO;
 import po.PromotionGoodsItemPO;
-import po.TotalPromotionPO;
+import po.promotionPO.TotalPromotionPO;
 
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class DeleteMe {
-    static void testM() {
+public class Test {
+    static void testM() throws RemoteException {
         PromotionData<MemberPromotionPO> mdao = new PromotionData<>(MemberPromotionPOMapper.class);
 
         // insert
@@ -40,7 +41,7 @@ public class DeleteMe {
         System.out.println("finish testM");
     }
 
-    static void testT() {
+    static void testT() throws RemoteException {
 //        TotalPromotionData tdao = new TotalPromotionData();
 
         PromotionData<TotalPromotionPO> tdao = new PromotionData<>(TotalPromotionPOMapper.class);
@@ -81,7 +82,7 @@ public class DeleteMe {
 //        System.out.println("finish testM");
     }
 
-    static void testC() {
+    static void testC() throws RemoteException{
         PromotionData<CombinePromotionPO> cdao = new PromotionData<>(CombinePromotionPOMapper.class);
 
         CombinePromotionPO cpo1 = new CombinePromotionPO();
@@ -95,7 +96,7 @@ public class DeleteMe {
         cdao.insert(cpo1);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RemoteException{
 //        testM();
 //        testT();
         testC();

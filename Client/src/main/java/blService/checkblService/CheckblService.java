@@ -1,12 +1,10 @@
 package blService.checkblService;
 
 import util.ResultMessage;
-import vo.CheckSearchVO;
-import vo.ReceiptVO;
+import vo.ReceiptVO.ReceiptVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.List;
 
 public interface CheckblService {
     ArrayList<ReceiptVO> initCheck() throws RemoteException;

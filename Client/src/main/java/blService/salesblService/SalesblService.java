@@ -3,7 +3,7 @@ package blService.salesblService;
 import vo.SalesReceiptListVO;
 import vo.SalesSearchVO;
 import util.ResultMessage;
-import vo.SalesReceiptVO;
+import vo.ReceiptVO.SalesReceiptVO;
 
 import java.util.ArrayList;
 import java.util.Set;

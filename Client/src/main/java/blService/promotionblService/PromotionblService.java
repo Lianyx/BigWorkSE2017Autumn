@@ -1,17 +1,16 @@
 package blService.promotionblService;
 
-import po.ReceiptPO;
 import util.ResultMessage;
-import vo.PromotionSearchVO;
+import vo.promotionVO.PromotionVO;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface PromotionblService {
-    public ArrayList<ReceiptPO> initCheck();
-    public ResultMessage update(ReceiptPO receiptPO);
-    public ResultMessage reject(int id);
-    public ResultMessage approve(int id);
-    public ResultMessage rejectBatch(ArrayList<Integer> ids);
-    public ResultMessage approveBatch(ArrayList<Integer> ids);
-    public ArrayList<ReceiptPO> search(PromotionSearchVO promotionSearchVO);
+public interface PromotionblService<T extends PromotionVO> {
+    int getDayId() throws RemoteException;
+    ResultMessage insert(T promotionVO) throws RemoteException;
+    ResultMessage update(T promotionVO) throws RemoteException;
+    ResultMessage delete(T promotionVO) throws RemoteException;
+    ArrayList<T> selectInEffect() throws RemoteException;
+    // TODO 肯定还需要有其他select的方法
 }

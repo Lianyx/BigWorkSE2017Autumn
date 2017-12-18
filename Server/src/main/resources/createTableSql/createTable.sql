@@ -45,6 +45,8 @@ create table CombinePromotion(
   goodsCombination varchar(1000)
 );
 
+drop table SalesSellReceipt;
+
 create table SalesSellReceipt(
   dayId integer,
   operatorId integer,
@@ -59,5 +61,8 @@ create table SalesSellReceipt(
   discountAmount double,
   tokenAmount double,
   originSum double,
-  comment varchar(150)
+  comment varchar(150),
+
+  gifts varchar(1000),
+  giveTokenAmount double
 );

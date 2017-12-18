@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.MemberPromotionPOMapper">
-    <!--<resultMap id="resultMap" type="po.MemberPromotionPO">-->
+    <!--<resultMap id="resultMap" type="po.promotionPO.MemberPromotionPO">-->
         <!--<result typeHandler="MyDateTypeHandler" column="createTime" property="createTime"/>-->
         <!--<result typeHandler="MyDateTypeHandler" column="lastModifiedTime" property="lastModifiedTime"/>-->
         <!--<result typeHandler="MyDateTypeHandler" column="beginTime" property="beginTime"/>-->
@@ -24,10 +24,10 @@
     <delete id="delete">
         delete from memberPromotion where dayId=#{dayId} and createTime=#{createTime}
     </delete>
-    <select id="selectInEffect" resultType="po.MemberPromotionPO">
+    <select id="selectInEffect" resultType="po.promotionPO.MemberPromotionPO">
         select * from memberPromotion where beginTime &lt;= #{begin} and endTime &gt;= #{end}
     </select>
-    <select id="getAll" resultType="po.MemberPromotionPO">
+    <select id="getAll" resultType="po.promotionPO.MemberPromotionPO">
       select * from memberPromotion
     </select>
 

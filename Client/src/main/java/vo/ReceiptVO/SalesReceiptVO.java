@@ -1,7 +1,8 @@
-package vo;
+package vo.ReceiptVO;
 
 import po.ReceiptGoodsItemPO;
 import util.ReceiptState;
+import vo.ReceiptVO.ReceiptVO;
 
 import java.time.LocalDateTime;
 

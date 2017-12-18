@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.SalesSellReceiptPOMapper">
-    <resultMap id="resultMap" type="po.SalesSellReceiptPO">
+    <resultMap id="resultMap" type="po.receiptPO.SalesSellReceiptPO">
         <result typeHandler="MyJsonHandler" column="goodsList" property="goodsList" />
     </resultMap>
 
@@ -11,11 +11,11 @@
         select max(dayId)+1 from SalesSellReceipt where createTime &gt;= #{today}
     </select>
     <insert id="insert">
-        insert into SalesSellReceipt(dayId, operatorId, createTime, lastModifiedTime, receiptState, clientId, clerkName, stockName, goodsList, discountAmount, tokenAmount, originSum, comment)
-        values(#{dayId}, #{operatorId}, #{createTime}, #{lastModifiedTime}, #{receiptState}, #{clientId}, #{clerkName}, #{stockName}, #{goodsList, typeHandler=MyJsonHandler}, #{discountAmount}, #{tokenAmount}, #{originSum}, #{comment})
+        insert into SalesSellReceipt(dayId, operatorId, createTime, lastModifiedTime, receiptState, clientId, clerkName, stockName, goodsList, discountAmount, tokenAmount, originSum, comment, gifts, giveTokenAmount)
+        values(#{dayId}, #{operatorId}, #{createTime}, #{lastModifiedTime}, #{receiptState}, #{clientId}, #{clerkName}, #{stockName}, #{goodsList, typeHandler=MyJsonHandler}, #{discountAmount}, #{tokenAmount}, #{originSum}, #{comment}, #{gifts, typeHandler=MyJsonHandler}, #{giveTokenAmount})
     </insert>
     <update id="update">
-        update SalesSellReceipt set lastModifiedTime=#{lastModifiedTime}, receiptState=#{receiptState}, clientId=#{clientId}, clerkName=#{clerkName}, stockName=#{stockName}, goodsList=#{goodsList, typeHandler=MyJsonHandler}, discountAmount=#{discountAmount}, tokenAmount=#{tokenAmount}, originSum=#{originSum}, comment=#{comment}
+        update SalesSellReceipt set lastModifiedTime=#{lastModifiedTime}, receiptState=#{receiptState}, clientId=#{clientId}, clerkName=#{clerkName}, stockName=#{stockName}, goodsList=#{goodsList, typeHandler=MyJsonHandler}, discountAmount=#{discountAmount}, tokenAmount=#{tokenAmount}, originSum=#{originSum}, comment=#{comment}, gifts=#{gifts, typeHandler=MyJsonHandler}, giveTokenAmount=#{giveTokenAmount}
         where dayId=#{dayId} and createTime=#{createTime}
     </update>
     <delete id="delete">

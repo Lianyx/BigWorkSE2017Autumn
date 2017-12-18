@@ -3,11 +3,11 @@ package businesslogic.checkbl;
 import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
 import dataService.checkdataService.ReceiptDataService;
-import po.ReceiptPO;
+import po.receiptPO.ReceiptPO;
 import util.ReceiptSearchCondition;
 import util.ReceiptState;
 import util.ResultMessage;
-import vo.ReceiptVO;
+import vo.ReceiptVO.ReceiptVO;
 
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
@@ -15,7 +15,6 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 // TODO 一定要提取出来“增删改”给所有人用，另外查（分为模糊和非模糊）一定要尽快写，不能再往后拖了
 public class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements ReceiptblService<TV>, CheckInfo<TP> {

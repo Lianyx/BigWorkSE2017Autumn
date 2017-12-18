@@ -1,11 +1,10 @@
 package dataService.salesdataService;
 
-import po.SalesReceiptPO;
+import po.receiptPO.SalesReceiptPO;
 import util.ResultMessage;
 
 
 import java.util.ArrayList;
-import java.util.Set;
 
 public interface SalesdataService {
     public ResultMessage insert(SalesReceiptPO salesReceiptPO);

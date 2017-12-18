@@ -1,4 +1,4 @@
-package po;
+package po.promotionPO;
 
 import java.time.LocalDateTime;
 

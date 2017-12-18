@@ -1,6 +1,6 @@
 package dataService.checkdataService;
 
-import po.ReceiptPO;
+import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
 import util.ResultMessage;
 import util.ReceiptSearchCondition;

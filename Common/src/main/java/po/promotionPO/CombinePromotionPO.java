@@ -1,4 +1,7 @@
-package po;
+package po.promotionPO;
+
+import po.PromotionGoodsItemPO;
+import po.promotionPO.PromotionPO;
 
 import java.time.LocalDateTime;
 

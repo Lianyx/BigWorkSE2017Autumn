@@ -1,9 +1,8 @@
 package blService.checkblService;
 
-import po.ReceiptPO;
 import util.ReceiptSearchCondition;
 import util.ResultMessage;
-import vo.ReceiptVO;
+import vo.ReceiptVO.ReceiptVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;

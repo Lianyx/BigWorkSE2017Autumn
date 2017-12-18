@@ -1,11 +1,10 @@
 package blService.checkblService;
 
-import po.ReceiptPO;
+import po.receiptPO.ReceiptPO;
 import util.ResultMessage;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.List;
 
 public interface CheckInfo<T extends ReceiptPO> {
     ResultMessage update(T receiptPO) throws RemoteException;
