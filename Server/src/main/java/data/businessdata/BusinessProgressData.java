@@ -3,7 +3,8 @@ package data.businessdata;
 import dataService.businessdataService.BusinessProgressDataService;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
-import po.ReceiptPO;
+
+import po.receiptPO.ReceiptPO;
 import util.BusinessProgressInfo;
 
 import java.util.List;

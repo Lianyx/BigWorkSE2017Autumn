@@ -1,6 +1,7 @@
 package dataService.businessdataService;
 
-import po.ReceiptPO;
+
+import po.receiptPO.ReceiptPO;
 import util.BusinessProgressInfo;
 
 import java.rmi.Remote;

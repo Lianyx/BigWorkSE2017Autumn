@@ -1,6 +1,7 @@
 package data.businessdata;
 
-import po.ReceiptPO;
+
+import po.receiptPO.ReceiptPO;
 import util.BusinessProgressInfo;
 
 import java.util.List;
