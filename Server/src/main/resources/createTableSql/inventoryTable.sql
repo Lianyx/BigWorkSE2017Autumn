@@ -32,3 +32,39 @@ create table inventoryGiftRecipt(
      goodsList varchar(1000),
      comment varchar(150),
 )
+
+create table inventoryDamageRecipt(
+     dayId integer,
+     operatorId integer,
+     createTime bigint,
+     lastModifiedTime bigint,
+     receiptState integer,
+
+     clerkName varchar(20),
+     goodsList varchar(1000),
+     comment varchar(150),
+)
+
+create table inventoryOverflowRecipt(
+     dayId integer,
+     operatorId integer,
+     createTime bigint,
+     lastModifiedTime bigint,
+     receiptState integer,
+
+     clerkName varchar(20),
+     goodsList varchar(1000),
+     comment varchar(150),
+)
+
+create table inventoryWarningRecipt(
+     dayId integer,
+     operatorId integer,
+     createTime bigint,
+     lastModifiedTime bigint,
+     receiptState integer,
+
+     clerkName varchar(20),
+     goodsList varchar(1000),
+     comment varchar(150),
+)

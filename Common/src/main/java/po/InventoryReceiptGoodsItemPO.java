@@ -11,16 +11,23 @@ public class InventoryReceiptGoodsItemPO {
     private int inventoryNum;
     /** 当前现实数量*/
     private int factNumber;
+    /** 商品赠送数量*/
+    private int sengNumber;
+    /** 商品警戒数量*/
+    private int alarmNumber;
 
     public InventoryReceiptGoodsItemPO() {
     }
 
-    public InventoryReceiptGoodsItemPO(String id, String goodName, String goodType, int inventoryNum, int factNumber) {
+    public InventoryReceiptGoodsItemPO(String id, String goodName, String goodType, int inventoryNum, int factNumber,
+                                       int sengNumber, int alarmNumber) {
         this.id = id;
         this.goodName = goodName;
         this.goodType = goodType;
         this.inventoryNum = inventoryNum;
         this.factNumber = factNumber;
+        this.sengNumber = sengNumber;
+        this.alarmNumber = alarmNumber;
     }
 
     public String getId() {
@@ -59,13 +66,32 @@ public class InventoryReceiptGoodsItemPO {
 
     public void setFactNumber(int factNumber) { this.factNumber = factNumber; }
 
+    public int getSengNumber() {
+        return sengNumber;
+    }
+
+    public void setSengNumber(int sengNumber) {
+        this.sengNumber = sengNumber;
+    }
+
+    public int getAlarmNumber() {
+        return alarmNumber;
+    }
+
+    public void setAlarmNumber(int alarmNumber) {
+        this.alarmNumber = alarmNumber;
+    }
+
     @Override
     public String toString() {
         return "InventoryReceiptGoodsItemPO{" +
                 "id='" + id + '\'' +
                 ", goodName='" + goodName + '\'' +
                 ", goodType='" + goodType + '\'' +
-                ", inventoryNum=" + inventoryNum + '\'' +
+                ", inventoryNum=" + inventoryNum +
+                ", factNumber=" + factNumber +
+                ", sengNumber=" + sengNumber +
+                ", alarmNumber=" + alarmNumber +
                 '}';
     }
 }
