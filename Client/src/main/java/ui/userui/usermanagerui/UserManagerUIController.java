@@ -94,7 +94,7 @@ public class UserManagerUIController implements Initializable{
         //set default pane
         try {
 
-            boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150), ContainerAnimations.SWIPE_RIGHT, board));
+            boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150),  board));
             UserListPane userListPane = new UserListPane(usermanagerblservice_stub,boardController);
             board.getChildren().setAll(userListPane);
             HistoricalRecord.addPane(userListPane);
@@ -166,11 +166,13 @@ public class UserManagerUIController implements Initializable{
 
     @FXML
     public void goback(){
+        boardController.setRightAnimation();
         boardController.historicalSwitchTo((AnchorPane) HistoricalRecord.pop());
     }
 
     @FXML
     public void goforward(){
+        boardController.setLeftAnimation();
         boardController.historicalSwitchTo((AnchorPane)HistoricalRecord.push());
     }
 

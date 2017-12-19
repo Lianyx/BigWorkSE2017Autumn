@@ -23,24 +23,15 @@ public class PaneSwitchAnimation{
     private Timeline animation;
     private ImageView placeholder;
 
-
-
-
-    public PaneSwitchAnimation(Duration duration, ContainerAnimations animation, StackPane view) {
-        this(duration, animation.getAnimationProducer(),view);
-    }
-
-    public PaneSwitchAnimation(Duration duration, Function<PaneSwitchAnimation, List<KeyFrame>>
-            animationProducer, StackPane view) {
+    public PaneSwitchAnimation(Duration duration, StackPane view) {
         this.view=view;
         this.duration = duration;
-        this.animationProducer = animationProducer;
         placeholder = new ImageView();
         placeholder.setPreserveRatio(true);
         placeholder.setSmooth(true);
     }
 
-    public void changeAnimation(ContainerAnimations animation) {
+    public void setAnimation(ContainerAnimations animation) {
         this.animationProducer = animation.getAnimationProducer();
     }
 

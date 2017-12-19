@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
+import ui.util.ContainerAnimations;
 import ui.util.PaneSwitchAnimation;
 
 
@@ -51,6 +52,7 @@ public class BoardController{
             public void run() {
                 try {
                  if(HistoricalRecord.addRecord(pane)){
+                        setLeftAnimation();
                         paneSwitchAnimation.setNode(pane);
                     }
                 }catch (Exception e){
@@ -64,6 +66,10 @@ public class BoardController{
          board.getChildren().setAll(new Loading());
     }
 
+
+    public void setLeftAnimation(){ paneSwitchAnimation.setAnimation(ContainerAnimations.SWIPE_LEFT);  }
+
+    public void setRightAnimation(){ paneSwitchAnimation.setAnimation(ContainerAnimations.SWIPE_RIGHT);}
 
     public void historicalSwitchTo(AnchorPane pane){
         paneSwitchAnimation.setNode(pane);

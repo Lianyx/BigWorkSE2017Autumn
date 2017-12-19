@@ -93,7 +93,7 @@ public class Login implements Initializable{
 
         pane.getChildren().remove(3,8);
         Loading loading = new Loading();
-        loading.setLayoutX(100);
+        loading.setLayoutX(95);
         loading.setLayoutY(170);
         pane.getChildren().add(loading);
         task.valueProperty().addListener(new ChangeListener<Boolean>() {

@@ -176,7 +176,6 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
 
         timeline.play();
 
-
         return new BorderPane(this);
     }
 
