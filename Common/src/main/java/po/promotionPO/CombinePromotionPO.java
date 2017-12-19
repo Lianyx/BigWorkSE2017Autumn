@@ -1,8 +1,5 @@
 package po.promotionPO;
 
-import po.PromotionGoodsItemPO;
-import po.promotionPO.PromotionPO;
-
 import java.time.LocalDateTime;
 
 public class CombinePromotionPO extends PromotionPO {

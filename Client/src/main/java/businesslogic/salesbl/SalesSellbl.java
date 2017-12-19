@@ -13,6 +13,6 @@ import java.rmi.RemoteException;
 // 这个有点交叉继承的感觉了
 public class SalesSellbl extends Receiptbl<SalesSellReceiptVO, SalesSellReceiptPO> implements SalesSellblService {
     public SalesSellbl() throws RemoteException, NotBoundException, MalformedURLException {
-        super(SalesSellReceiptPO.class, SalesSellReceiptVO.class, "SalesSellReceiptData");
+        super(SalesSellReceiptVO.class, SalesSellReceiptPO.class, "SalesSellReceiptData");
     }
 }

@@ -1,6 +1,6 @@
 package po.receiptPO;
 
-import po.PromotionGoodsItemPO;
+import po.promotionPO.PromotionGoodsItemPO;
 import po.ReceiptGoodsItemPO;
 import util.ReceiptState;
 

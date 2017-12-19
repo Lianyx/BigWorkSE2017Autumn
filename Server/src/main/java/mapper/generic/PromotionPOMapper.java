@@ -3,6 +3,7 @@ package mapper.generic;
 import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface PromotionPOMapper<T> {
@@ -10,5 +11,5 @@ public interface PromotionPOMapper<T> {
     void insert(T promotionPO);
     void update(T promotionPO);
     void delete(T promotionPO);
-    List<T> selectInEffect(@Param("begin") LocalDateTime begin, @Param("end") LocalDateTime end);
+    ArrayList<T> selectInEffect(@Param("begin") LocalDateTime begin, @Param("end") LocalDateTime end);
 }

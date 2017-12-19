@@ -18,14 +18,14 @@ import java.util.ArrayList;
 
 // TODO 一定要提取出来“增删改”给所有人用，另外查（分为模糊和非模糊）一定要尽快写，不能再往后拖了
 public class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements ReceiptblService<TV>, CheckInfo<TP> {
-    private Class<? extends ReceiptPO> receiptPOClass;
     private Class<? extends ReceiptVO> receiptVOClass;
+    private Class<? extends ReceiptPO> receiptPOClass;
 
     private ReceiptDataService<TP> receiptDataService;
 
-    public Receiptbl(Class<? extends ReceiptPO> receiptPOClass, Class<? extends ReceiptVO> receiptVOClass, String className) throws RemoteException, NotBoundException, MalformedURLException {
-        this.receiptPOClass = receiptPOClass;
+    public Receiptbl(Class<? extends ReceiptVO> receiptVOClass, Class<? extends ReceiptPO> receiptPOClass, String className) throws RemoteException, NotBoundException, MalformedURLException {
         this.receiptVOClass = receiptVOClass;
+        this.receiptPOClass = receiptPOClass;
 
         String registry = "localhost";
         int port = 1099;
@@ -35,7 +35,9 @@ public class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements Re
     }
 
 
-    /** implement receiptblService */
+    /**
+     * implement receiptblService
+     */
 
     @Override
     public int getDayId() throws RemoteException {
@@ -70,7 +72,9 @@ public class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements Re
         return receiptDataService.update(receiptPO);
     }
 
-    /** implement checkInfo */
+    /**
+     * implement checkInfo
+     */
 
     @Override
     public ResultMessage approve(TP receiptPO) throws RemoteException {
@@ -93,7 +97,9 @@ public class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements Re
     }
 
 
-    /** private methods */
+    /**
+     * private methods
+     */
 
     private TP convertToPO(TV receiptVO) {
         Constructor<? extends ReceiptPO> cstr = null;
