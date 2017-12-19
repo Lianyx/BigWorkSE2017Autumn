@@ -83,7 +83,7 @@ create table PaymentBillReceipt(
     sum double
 );
 
-create table PaymentBillReceipt(
+create table ChargeBillReceipt(
     dayId integer,
     operatorId integer,
     createTime bigint,
@@ -96,7 +96,7 @@ create table PaymentBillReceipt(
     sum double
 );
 
-create table PaymentBillReceipt(
+create table CashBillReceipt(
     dayId integer,
     operatorId integer,
     createTime bigint,

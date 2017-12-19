@@ -1,7 +1,7 @@
 package blService.salesblService;
 
 import blService.checkblService.ReceiptblService;
-import vo.ReceiptVO.SalesSellReceiptVO;
+import vo.receiptVO.SalesSellReceiptVO;
 
 public interface SalesSellblService extends ReceiptblService<SalesSellReceiptVO> {
 }
