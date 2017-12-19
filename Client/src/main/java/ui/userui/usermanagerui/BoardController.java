@@ -2,13 +2,11 @@ package ui.userui.usermanagerui;
 
 
 import blService.userblService.UserManagerblService;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.util.Duration;
 import ui.util.PaneSwitchAnimation;
 
@@ -48,10 +46,24 @@ public class BoardController{
     }
 
     public void switchTo(AnchorPane pane){
-        if(HistoricalRecord.addRecord(pane)){
-            paneSwitchAnimation.setNode(pane);
-        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                 if(HistoricalRecord.addRecord(pane)){
+                        paneSwitchAnimation.setNode(pane);
+                    }
+                }catch (Exception e){
+
+                }
+            }
+        });
     }
+
+    public void Loading(){
+         board.getChildren().setAll(new Loading());
+    }
+
 
     public void historicalSwitchTo(AnchorPane pane){
         paneSwitchAnimation.setNode(pane);

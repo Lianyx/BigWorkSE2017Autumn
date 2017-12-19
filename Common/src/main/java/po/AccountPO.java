@@ -1,23 +1,29 @@
 package po;
 
 public class AccountPO {
-    private int ID;
+    private Integer ID;
     private String name;
-    private double banlance;
+    private double balance;
 
-    public AccountPO(int ID, String name, double banlance) {
+
+    public AccountPO(){
+        super();
+    }
+
+    public AccountPO(Integer ID, String name, double banlance) {
+        super();
         this.ID = ID;
         this.name = name;
-        this.banlance = banlance;
+        this.balance = banlance;
     }
 
 
 
-    public int getID() {
+    public Integer getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(Integer ID) {
         this.ID = ID;
     }
 
@@ -29,12 +35,12 @@ public class AccountPO {
         this.name = name;
     }
 
-    public double getBanlance() {
-        return banlance;
+    public double getBalance() {
+        return balance;
     }
 
-    public void setBanlance(double banlance) {
-        this.banlance = banlance;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
 

@@ -3,16 +3,22 @@ package ui.userui.usermanagerui;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,6 +26,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 
+import javafx.util.Duration;
 import ui.mainui.Test;
 import ui.util.CircleImageView;
 import vo.UserListVO;
@@ -29,7 +36,7 @@ import java.util.Set;
 public class UserTreeTable extends JFXTreeTableView<UserListVO> {
     private ObservableList<UserListVO> observableList = FXCollections.observableArrayList();
     private ObservableList<UserListVO> observableListtemp;
-    private int rowsPerPage = 6;
+    private int rowsPerPage = 7;
     private BoardController boardController;
 
 
@@ -48,7 +55,7 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
     public UserTreeTable() {
         super();
         JFXTreeTableColumn<UserListVO,Boolean> choose = new JFXTreeTableColumn("  ");
-        choose.setPrefWidth(50);
+        choose.setPrefWidth(40);
         Callback<TreeTableColumn<UserListVO,Boolean>, TreeTableCell<UserListVO,Boolean>> chooseCellFactory = (TreeTableColumn<UserListVO,Boolean> p) -> new ChooseBoxCell();
         choose.setCellValueFactory((TreeTableColumn.CellDataFeatures<UserListVO, Boolean> param) -> {
             if (choose.validateValue(param)) {
@@ -61,7 +68,7 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
 
 
         JFXTreeTableColumn image = new JFXTreeTableColumn("  ");
-        image.setPrefWidth(50);
+        image.setPrefWidth(40);
         Callback<TreeTableColumn, TreeTableCell> imageCellFactory = (TreeTableColumn p) -> new ImageCell();
         image.setCellValueFactory(new TreeItemPropertyValueFactory<>("image"));
         image.setCellFactory(imageCellFactory);
@@ -101,6 +108,8 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
 
         this.setRowFactory(tableView->{
             JFXTreeTableRow row=new JFXTreeTableRow();
+            row.setPrefHeight(55);
+            row.setStyle("-fx-border-color: rgb(233,237,239); -fx-border-width: 0.3;");
             row.setOnMouseClicked((MouseEvent event) -> {
                 if(event.getClickCount()==2){
                     try{
@@ -111,8 +120,16 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
                 }
 
             });
+            row.selectedProperty().addListener(e->{
+                if(row.isSelected()){
+                    row.toFront();
+                }else{
+                    row.setEffect(null);
+                }
+            });
             return row;
         });
+        setCurrentItemsCount(rowsPerPage);
         this.setShowRoot(false);
 
 
@@ -138,6 +155,28 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
         observableListtemp = FXCollections.observableList(observableList.subList(fromIndex, toIndex));
         final TreeItem<UserListVO> root = new RecursiveTreeItem<>(observableListtemp, RecursiveTreeObject::getChildren);
         this.setRoot(root);
+        this.setStyle("-fx-border-color: transparent; -fx-padding: 0; -fx-background-color: transparent");
+
+
+
+        Timeline timeline = new Timeline();
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.ZERO,
+                        new KeyValue(this.opacityProperty(), 0)
+                )
+        );
+
+        for (int i = 1; i <= 10; i++) {
+            timeline.getKeyFrames().add(
+                    new KeyFrame(new Duration(i * 80),
+                            new KeyValue(this.opacityProperty(), i / 10.0)
+                    )
+            );
+        }
+
+        timeline.play();
+
+
         return new BorderPane(this);
     }
 
@@ -194,8 +233,10 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
                 setGraphic(null);
             }else{
                 civ.setImage((Image)item);
-                civ.setRadius(15);
+                civ.setRadius(17);
+                civ.setTranslateY(-8);
                 setGraphic(civ);
+
             }
 
 

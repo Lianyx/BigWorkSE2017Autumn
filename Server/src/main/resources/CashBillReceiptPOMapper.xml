@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.billreceiptdata.CashBillReceiptPOMapper">
+    <resultMap id="resultMap" type="po.CashBillReceiptPO">
+        <result typeHandler="MyJsonHandler" column="itemList" property="itemList" />
+    </resultMap>
+
+    <select id="getDayId" resultType="int">
+        select max(dayId)+1 from CashBillReceipt where createTime &gt;= #{today}
+    </select>
+
+    <insert id="insert">
+        insert into CashBillReceipt(dayId, operatorId, createTime, lastModifiedTime, receiptState, accountID,total,itemList)
+        values(#{dayId}, #{operatorId}, #{createTime}, #{lastModifiedTime}, #{receiptState}, #{accountId},#{total},#{itemList, typeHandler=MyJsonHandler})
+    </insert>
+
+    <update id="update">
+        update CashBillReceipt
+        set lastModifiedTime=#{lastModifiedTime}, receiptState=#{receiptState}, accountId=#{accountId}, total=#{total}, itemList=#{itemList, typeHandler=MyJsonHandler}}
+        where dayId=#{dayId} and createTime=#{createTime}
+    </update>
+
+    <delete id="delete">
+        delete from CashBillReceipt where dayId=#{dayId} and createTime=#{createTime}
+    </delete>
+
+    <select id="selectBetween" resultMap="resultMap">
+        select * from CashBillReceipt where createTime &gt;= #{begin} and createTime &lt;= #{end}
+    </select>
+    <select id="selectByState" resultMap="resultMap">
+        select * from CashBillReceipt where receiptState=#{receiptState}
+    </select>
+
+    <select id="search" resultMap="resultMap">
+        select * from ChargeBillReceipt
+        <where>
+            <if test="clientId != null">
+                clientId=#{clientId}
+            </if>
+            <if test="clerkName != null">
+                AND clerkName=#{clerkName}
+            </if>
+            <if test="begin != null">
+                AND createTime &gt;= #{begin}
+            </if>
+            <if test="end != null">
+                AND createTime &lt;= #{end}
+            </if>
+        </where>
+    </select>
+</mapper>

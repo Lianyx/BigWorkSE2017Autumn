@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import ui.util.CircleImageView?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<fx:root type="HBox" spacing="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <CircleImageView  fx:id="civ" stroke="dimgrey" strokeType="INSIDE" radius="15"/>
+        <VBox >
+            <children>
+                <Label text="LimKruscal"/>
+                <Label text="you are stupid"/>
+            </children>
+        </VBox>
+
+    </children>
+</fx:root>

@@ -1,29 +1,37 @@
 package po;
 
+import java.time.LocalDateTime;
+
 public class SalesDetailPO {
-    private String date;
+    private LocalDateTime date;
+    private String goodsName;
     private int goodsID;
     private int number;
     private double price;
     private double total;
-    private String goodsName;
+    private int clientID;
+    private String clerkName;
+    private int stockID;
 
-    public SalesDetailPO(String date, String goodsName, int goodsID, int number, double price, double total) {
+
+    public SalesDetailPO(LocalDateTime date, String goodsName, int goodsID, int number, double price, double total, int clientID, String clerkName, int stockID) {
         this.date = date;
         this.goodsName = goodsName;
         this.goodsID = goodsID;
         this.number = number;
         this.price = price;
         this.total = total;
+        this.clientID = clientID;
+        this.clerkName = clerkName;
+        this.stockID = stockID;
     }
 
 
-
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -67,5 +75,27 @@ public class SalesDetailPO {
         this.total = total;
     }
 
+    public int getClientID() {
+        return clientID;
+    }
 
+    public void setClientID(int clientID) {
+        this.clientID = clientID;
+    }
+
+    public String getClerkName() {
+        return clerkName;
+    }
+
+    public void setClerkName(String clerkName) {
+        this.clerkName = clerkName;
+    }
+
+    public int getStockID() {
+        return stockID;
+    }
+
+    public void setStockID(int stockID) {
+        this.stockID = stockID;
+    }
 }

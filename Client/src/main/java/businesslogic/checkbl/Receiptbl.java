@@ -7,7 +7,7 @@ import po.receiptPO.ReceiptPO;
 import util.ReceiptSearchCondition;
 import util.ReceiptState;
 import util.ResultMessage;
-import vo.ReceiptVO.ReceiptVO;
+import vo.receiptVO.ReceiptVO;
 
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;

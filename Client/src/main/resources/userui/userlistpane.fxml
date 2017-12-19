@@ -36,13 +36,13 @@
 
 
 
-            <JFXButton fx:id="add" layoutX="484.0" layoutY="35.0" mnemonicParsing="false" text="Add">
+            <JFXButton fx:id="add" layoutX="494.0" layoutY="35.0" mnemonicParsing="false" text="Add">
                 <graphic>
                     <HBox>
                         <children>
                             <JFXRippler position="BACK" styleClass="icons-rippler">
                                 <StackPane>
-                                    <FontAwesomeIconView glyphName="PLUS" size="1em" styleClass="icon" />
+                                    <FontAwesomeIconView fill="white" glyphName="PLUS" size="1em" styleClass="icon" />
                                 </StackPane>
                             </JFXRippler>
                         </children>
