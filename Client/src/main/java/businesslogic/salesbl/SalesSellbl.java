@@ -4,7 +4,7 @@ package businesslogic.salesbl;
 import blService.salesblService.SalesSellblService;
 import businesslogic.checkbl.Receiptbl;
 import po.receiptPO.SalesSellReceiptPO;
-import vo.ReceiptVO.SalesSellReceiptVO;
+import vo.receiptVO.SalesSellReceiptVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;

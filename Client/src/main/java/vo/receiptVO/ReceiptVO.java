@@ -1,4 +1,4 @@
-package vo.ReceiptVO;
+package vo.receiptVO;
 
 import util.ReceiptState;
 

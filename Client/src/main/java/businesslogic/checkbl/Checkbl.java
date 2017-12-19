@@ -4,7 +4,7 @@ import blService.checkblService.CheckInfo;
 import blService.checkblService.CheckblService;
 import businesslogic.salesbl.SalesSellbl;
 import util.ResultMessage;
-import vo.ReceiptVO.ReceiptVO;
+import vo.receiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
