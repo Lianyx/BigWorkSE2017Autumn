@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="data.businessdata.BusinessConditionPOMapper">
+<mapper namespace="mapper.BusinessConditionPOMapper">
 
     <select id="select" resultType="po.BusinessConditionPO">
         select * from SalesDetail where select * from SalesDetail where date >= #{begin} and date &lt;= #{end}

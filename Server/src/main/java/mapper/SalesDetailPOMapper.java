@@ -1,4 +1,4 @@
-package data.businessdata;
+package mapper;
 
 import po.SalesDetailPO;
 import util.SalesDetailInfo;

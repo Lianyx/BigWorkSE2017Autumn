@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="data.inventorydata.InventoryGiftReceiptPOMapper">
+<mapper namespace="mapper.InventoryGiftReceiptPOMapper">
     <resultMap id="resultMap" type="po.InventoryGiftReceiptPO">
         <result typeHandler="MyJsonHandler" column="goodsList" property="goodsList" />
     </resultMap>

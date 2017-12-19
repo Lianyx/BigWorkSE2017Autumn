@@ -1,6 +1,5 @@
 package blService.businessblservice;
 
-import po.ReceiptPO;
 import util.BusinessProgressInfo;
 import vo.ReceiptVO;
 

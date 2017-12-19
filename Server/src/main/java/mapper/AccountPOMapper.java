@@ -1,4 +1,4 @@
-package data.accountdata;
+package mapper;
 
 import po.AccountPO;
 

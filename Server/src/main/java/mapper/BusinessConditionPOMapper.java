@@ -1,4 +1,4 @@
-package data.businessdata;
+package mapper;
 
 import org.apache.ibatis.annotations.Param;
 import po.BusinessConditionPO;

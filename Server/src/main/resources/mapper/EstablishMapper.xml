@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="data.establishdata.EstablishMapper">
+<mapper namespace="mapper.EstablishMapper">
 
     <insert id = "transfer">
         insert into ${time}account select * from account

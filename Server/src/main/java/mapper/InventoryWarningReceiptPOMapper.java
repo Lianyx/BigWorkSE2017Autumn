@@ -1,4 +1,4 @@
-package data.inventorydata;
+package mapper;
 
 import mapper.generic.ReceiptPOMapper;
 import po.InventoryWarningReceiptPO;

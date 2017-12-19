@@ -1,6 +1,7 @@
 package data.goodsdata;
 
 import dataService.goodsdataService.GoodsClassificationDataService;
+import mapper.GoodsClassficationPOMapper;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import po.GoodsClassificationPO;
@@ -8,7 +9,6 @@ import util.ResultMessage;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GoodsClassificationData implements GoodsClassificationDataService {
     @Override
