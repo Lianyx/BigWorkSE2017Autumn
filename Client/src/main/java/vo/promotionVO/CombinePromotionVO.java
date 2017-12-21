@@ -24,7 +24,7 @@ public class CombinePromotionVO extends PromotionVO {
 
     }
 
-    @Override // TODO unchecked overriding…
+    @Override // unchecked overriding…
     public CombinePromotionPO toPO() {
         return new CombinePromotionPO(Integer.parseInt(getId().substring(getId().length() - 5)),
                 createTime,
