@@ -1,4 +1,4 @@
-package po;
+package po.receiptPO;
 
 import util.ReceiptState;
 

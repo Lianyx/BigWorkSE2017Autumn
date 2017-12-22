@@ -2,13 +2,11 @@ package ui.userui.usermanagerui;
 
 import blService.userblService.UserManagerblService;
 import blServiceStub.usermanagerblService_Stub.Usermanagerblservice_Stub;
-import com.jfoenix.controls.JFXListCell;
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXPopup;
-import com.jfoenix.controls.JFXRippler;
+import com.jfoenix.controls.*;
 import exception.ProblemException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -28,14 +26,15 @@ public class UserListPane extends AnchorPane{
     @FXML
     BorderPane borderpane;
 
-    @FXML
-    JFXRippler postsearch;
 
     BoardController boardController;
 
     UserManagerblService userManagerblService;
 
     Pagination pagination;
+
+    StackPane mainpane;
+
 
     public UserListPane(UserManagerblService userManagerblService,BoardController boardController) throws Exception{
         super();
@@ -62,6 +61,10 @@ public class UserListPane extends AnchorPane{
         this.userManagerblService=userManagerblService;
     }
 
+    public void setMainpane(StackPane mainpane) {
+        this.mainpane = mainpane;
+    }
+
     public void setListView()
     {
         ulv.setUser(userManagerblService.getAll());
@@ -86,12 +89,11 @@ public class UserListPane extends AnchorPane{
     }
 
     @FXML
-    public void conditionsearch(){
-        JFXPopup popup = new JFXPopup(new UserSearchBox());
-        popup.show(postsearch, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT);
-
-
+    public void add(){
+        JFXDialog dialog = new JFXDialog(mainpane,new AddPane(),JFXDialog.DialogTransition.CENTER);
+        dialog.show();
     }
+
 
 
 

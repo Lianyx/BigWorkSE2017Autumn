@@ -17,13 +17,13 @@ public class ClientImpl extends UnicastRemoteObject implements Client{
     static Server server;
 
     protected ClientImpl() throws RemoteException {
+
     }
 
 
     @Override
-    public void doSomething() throws RemoteException {
-
-
+    public void doSomething(String s) throws RemoteException {
+        System.out.println(s);
 
     }
 
@@ -31,6 +31,8 @@ public class ClientImpl extends UnicastRemoteObject implements Client{
     public Object dataInteration(String klassname,String method,Object object) throws Exception{
         return server.dataInteration(klassname,method,object);
     }
+
+
 
 
     public static void main(String args[]){
@@ -45,7 +47,7 @@ public class ClientImpl extends UnicastRemoteObject implements Client{
 
             Client client = new ClientImpl();
             server.addClient(client);
-
+            server.notify("hahaha");
             TestdataService1 testdataService1 = (TestdataService1) Naming.lookup("rmi://" + registry + ":" + port + "/TestdataService1");
             String test1 = testdataService1.test();
             System.out.println(test1);

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 
 public abstract class SalesReceiptPO extends ReceiptPO {
-    private int clientId;
+    private int memberid;
     private String clerkName; // 业务员
     private String stockName;
     private ReceiptGoodsItemPO[] goodsList;
@@ -20,9 +20,9 @@ public abstract class SalesReceiptPO extends ReceiptPO {
     public SalesReceiptPO() {
     }
 
-    public SalesReceiptPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientId, String clerkName, String stockName, ReceiptGoodsItemPO[] goodsList, double discountAmount, double tokenAmount, double originSum, String comment) {
+    public SalesReceiptPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberid, String clerkName, String stockName, ReceiptGoodsItemPO[] goodsList, double discountAmount, double tokenAmount, double originSum, String comment) {
         super(dayId, operatorId, createTime, lastModifiedTime, receiptState);
-        this.clientId = clientId;
+        this.memberid = memberid;
         this.clerkName = clerkName;
         this.stockName = stockName;
         this.goodsList = goodsList;
@@ -32,12 +32,12 @@ public abstract class SalesReceiptPO extends ReceiptPO {
         this.comment = comment;
     }
 
-    public int getClientId() {
-        return clientId;
+    public int getMemberid() {
+        return memberid;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setMemberid(int memberid) {
+        this.memberid = memberid;
     }
 
     public String getClerkName() {
@@ -100,7 +100,7 @@ public abstract class SalesReceiptPO extends ReceiptPO {
     public String toString() {
         return "SalesReceiptPO{" +
                 "Id=" + getDayId() + ", " +
-                "clientId=" + clientId +
+                "memberid=" + memberid +
                 ", clerkName='" + clerkName + '\'' +
                 ", stockName='" + stockName + '\'' +
                 ", goodsList=" + Arrays.toString(goodsList) +

@@ -18,13 +18,19 @@
 
             <JFXTextField layoutX="27.0" layoutY="28.0" prefHeight="30.0" prefWidth="150.0" />
 
-            <JFXRippler fx:id="postsearch" layoutX="207" layoutY="22" maskType="CIRCLE" position="BACK" styleClass="icons-rippler">
-                <StackPane style="-fx-padding: 8;" translateY="5">
-                    <FontAwesomeIconView glyphName="TAG" size="1.5em" styleClass="icon" />
-                </StackPane>
-            </JFXRippler>
-
-
+    <JFXButton fx:id="filter" layoutX="420.0" layoutY="35.0" mnemonicParsing="false" text="Filter">
+        <graphic>
+            <HBox>
+                <children>
+                    <JFXRippler position="BACK" styleClass="icons-rippler">
+                        <StackPane>
+                            <FontAwesomeIconView fill="white" glyphName="PLUS" size="1em" styleClass="icon" />
+                        </StackPane>
+                    </JFXRippler>
+                </children>
+            </HBox>
+        </graphic>
+    </JFXButton>
             <JFXRippler fx:id="search" layoutX="177" layoutY="22" maskType="CIRCLE" position="BACK" styleClass="icons-rippler">
                 <StackPane style="-fx-padding: 8;" translateY="5">
                     <FontAwesomeIconView glyphName="SEARCH" size="1.5em" styleClass="icon" />
@@ -36,7 +42,7 @@
 
 
 
-            <JFXButton fx:id="add" layoutX="494.0" layoutY="35.0" mnemonicParsing="false" text="Add">
+            <JFXButton fx:id="add" onMouseClicked="#add" layoutX="494.0" layoutY="35.0" mnemonicParsing="false" text="Add">
                 <graphic>
                     <HBox>
                         <children>

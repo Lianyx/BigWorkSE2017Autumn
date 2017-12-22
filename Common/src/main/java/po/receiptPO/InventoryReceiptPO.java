@@ -1,6 +1,5 @@
-package po;
+package po.receiptPO;
 
-import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
 
 import java.time.LocalDateTime;

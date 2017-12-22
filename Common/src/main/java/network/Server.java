@@ -9,4 +9,5 @@ public interface Server extends Remote{
     void addClient(Client client) throws RemoteException;
     void removeClient(Client client) throws RemoteException;
     public Object dataInteration(String classname,String method,Object object) throws Exception;
+    void notify(String s) throws RemoteException;
 }

@@ -10,16 +10,24 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<?import javafx.scene.control.Accordion?>
+<?import ui.userui.usermanagerui.IconButton?>
+<?import com.jfoenix.controls.JFXRippler?>
+<?import javafx.scene.layout.StackPane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <fx:root fx:id="userdetail" prefHeight="560.0" prefWidth="640.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
       <children>
-          <Label text="UserDetail" layoutY="30" layoutX="30" style="-fx-font-weight: bold; -fx-font-size: 20;"/>
-          <AnchorPane style="-fx-background-color: rgb(254,254,254);-fx-effect: dropshadow(one-pass-box, silver, 30, 0.01, 0, 0)" layoutX="100" layoutY="70" prefWidth="500" prefHeight="450">
-              <children>
-            <ImageView fx:id="imageview" fitHeight="109.0" fitWidth="125.0" layoutX="20.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
-            <JFXButton fx:id="choose" layoutX="207.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#choosefile" text="Choose" />
-         <Separator layoutY="120" orientation="HORIZONTAL" prefHeight="2" prefWidth="300" />
-      <GridPane  layoutY="154.0">
+          <Separator layoutY="161.0" orientation="HORIZONTAL" prefWidth="640" />
+          <Separator layoutX="158.0" layoutY="57.0" orientation="HORIZONTAL" prefWidth="450" />
+          <JFXRippler layoutX="550.0" layoutY="20.0" fx:id="back" translateX="10" maskType="RECT" onMouseClicked="#modify" position="BACK" styleClass="icons-rippler">
+              <StackPane style="-fx-padding: 8;">
+                  <FontAwesomeIconView glyphName="BOOK" size="1.5em" styleClass="icon" />
+              </StackPane>
+          </JFXRippler>
+
+                  <Label layoutX="168.0" layoutY="24.0" text="Username" />
+            <ImageView fx:id="imageview" fitHeight="109.0" fitWidth="125.0" layoutX="25.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label layoutY="170" text="Infomation" />
+                  <GridPane layoutY="200.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
@@ -31,15 +39,13 @@
             <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Username" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
-            <JFXTextField fx:id="username" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-             <Label text="Usertype" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-             <JFXTextField fx:id="usertype" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label text="Username" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label fx:id="username" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+             <Label text="Usertype" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+             <Label fx:id="usertype" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
 
          </children>
       </GridPane>
               </children>
-          </AnchorPane>
-      </children>
-
+    
 </fx:root>

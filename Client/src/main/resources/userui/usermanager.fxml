@@ -17,7 +17,8 @@
 <?import javafx.scene.control.Separator?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 
-<StackPane fx:id="mainpane"  prefHeight="600.0" prefWidth="800.0"  fx:controller="ui.userui.usermanagerui.UserManagerUIController" stylesheets="@../css/List.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<?import ui.util.TopBar?>
+<StackPane fx:id="mainpane" prefHeight="600.0" prefWidth="800.0" fx:controller="ui.userui.usermanagerui.UserManagerUIController" stylesheets="@../css/List.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
 
 <AnchorPane fx:id="UserList"  prefHeight="600.0" prefWidth="800.0" >
@@ -27,52 +28,7 @@
 
 
 
-      <AnchorPane fx:id="bar" layoutX="160.0" prefHeight="40.0" prefWidth="640.0">
-          <children>
-          <HBox layoutX="380" layoutY="6" spacing="20">
-              <children>
-                  <CircleImageView fx:id="user" radius="15" />
-                  <HBox>
-                      <children>
-                          <Label fx:id="username" text="" translateY="8" />
-                          <JFXRippler fx:id="managerpopup" maskType="RECT" position="BACK" styleClass="icons-rippler" translateY="-2">
-                              <StackPane style="-fx-padding: 8;">
-                                  <FontAwesomeIconView glyphName="ANGLE_DOWN" size="1.5em" styleClass="icon" />
-                              </StackPane>
-                          </JFXRippler>
-                      </children>
-                  </HBox>
-              </children>
-          </HBox>
-              <JFXBadge fx:id="message" layoutX="520" layoutY="4" position="TOP_RIGHT" styleClass="icons-badge" text="0">
-                  <StackPane style="-fx-padding: 8;">
-                      <FontAwesomeIconView glyphName="BELL" size="1.5em" styleClass="icon" />
-                  </StackPane>
-              </JFXBadge>
-              <Separator orientation="VERTICAL" prefHeight="25" layoutX="570" layoutY="10" />
-              <JFXRippler fx:id="closebutton" layoutX="600.0" layoutY="2.0" maskType="RECT" onMouseClicked="#close" position="BACK" styleClass="icons-rippler">
-                  <StackPane style="-fx-padding: 8;">
-                     <MaterialDesignIconView glyphName="CLOSE" size="1.5em" styleClass="icon" />
-                  </StackPane>
-              </JFXRippler>
-              <JFXRippler fx:id="hidebutton" layoutX="571.0" layoutY="2.0" maskType="RECT" onMouseClicked="#hide" position="BACK" styleClass="icons-rippler">
-                  <StackPane style="-fx-padding: 8;">
-                      <MaterialDesignIconView glyphName="MINUS" size="1.5em" styleClass="icon" />
-                  </StackPane>
-              </JFXRippler>
-              <JFXRippler fx:id="back" layoutX="60.0" layoutY="2.0" maskType="RECT" position="BACK" onMouseClicked="#goback" styleClass="icons-rippler">
-                  <StackPane style="-fx-padding: 8;">
-                      <FontAwesomeIconView glyphName="ANGLE_LEFT" size="1.5em" styleClass="icon" />
-                  </StackPane>
-              </JFXRippler>
-              <JFXRippler fx:id="forward" layoutX="90.0" layoutY="2.0" maskType="RECT" position="BACK" onMouseClicked="#goforward" styleClass="icons-rippler">
-                  <StackPane style="-fx-padding: 8;">
-                      <FontAwesomeIconView glyphName="ANGLE_RIGHT" size="1.5em" styleClass="icon" />
-                  </StackPane>
-              </JFXRippler>
-          </children>
-      </AnchorPane>
-
+     <TopBar fx:id="bar" layoutX="160"/>
      <fx:include  fx:id="board" source="board.fxml" layoutX="160" layoutY="40"/>
 
 

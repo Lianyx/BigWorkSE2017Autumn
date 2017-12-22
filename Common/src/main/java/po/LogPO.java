@@ -4,14 +4,15 @@ import util.EventCategory;
 import util.UserCategory;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class LogPO{
     private int ID;
+    private LocalDateTime createTime;
     private String username;
     private UserCategory userCategory;
     private EventCategory eventCategory;
     private String comment;
-    private boolean isDelete=false;
 
     public LogPO(String username, UserCategory userCategory, EventCategory eventCategory, String comment) {
         this.username = username;
@@ -20,12 +21,24 @@ public class LogPO{
         this.comment = comment;
     }
 
-    public boolean isDelete() {
-        return isDelete;
+
+    public LogPO(int ID, LocalDateTime createTime, String username, UserCategory userCategory, EventCategory eventCategory, String comment) {
+        this.ID = ID;
+        this.createTime = createTime;
+        this.username = username;
+        this.userCategory = userCategory;
+        this.eventCategory = eventCategory;
+        this.comment = comment;
     }
 
-    public void setDelete(boolean delete) {
-        isDelete = delete;
+    public LogPO(){}
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
 
     public int getID() {

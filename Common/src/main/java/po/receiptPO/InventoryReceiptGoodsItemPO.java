@@ -1,4 +1,4 @@
-package po;
+package po.receiptPO;
 
 public class InventoryReceiptGoodsItemPO {
     /**编号*/

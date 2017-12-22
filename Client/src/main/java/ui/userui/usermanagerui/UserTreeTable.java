@@ -106,6 +106,14 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
             }
         });
 
+        JFXTreeTableColumn userstate = new JFXTreeTableColumn("Userstate");
+        userstate.setPrefWidth(100);
+        Callback<TreeTableColumn, TreeTableCell> buttonCellFactory = (TreeTableColumn p) -> new ButtonCell();
+        userstate.setCellValueFactory(new TreeItemPropertyValueFactory<>("userstate"));
+
+        userstate.setCellFactory(buttonCellFactory);
+
+
         this.setRowFactory(tableView->{
             JFXTreeTableRow row=new JFXTreeTableRow();
             row.setPrefHeight(55);
@@ -113,7 +121,7 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
             row.setOnMouseClicked((MouseEvent event) -> {
                 if(event.getClickCount()==2){
                     try{
-                    boardController.switchTo(new UserDetailPane((UserListVO) row.getTreeItem().getValue()));
+                    boardController.switchTo(new UserDetailPane((UserListVO) row.getTreeItem().getValue(),boardController));
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -133,7 +141,7 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
         this.setShowRoot(false);
 
 
-        this.getColumns().addAll(choose,image, username, usertype, userid);
+        this.getColumns().addAll(choose,image, username, usertype, userid, userstate);
 
     }
 
@@ -175,7 +183,6 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
         }
 
         timeline.play();
-
         return new BorderPane(this);
     }
 
@@ -237,6 +244,29 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
                 setGraphic(civ);
 
             }
+
+
+        }
+
+
+
+    }
+    private class ButtonCell extends JFXTreeTableCell {
+        private JFXButton civ = new JFXButton("sabi");
+
+        @Override
+        public void updateItem(Object item,boolean empty){
+            super.updateItem(item,empty);
+            if(empty){
+                setGraphic(null);
+            }else{
+                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                civ.setStyle("-fx-background-color: rgba(182,0,107,0.19); -fx-text-fill: white;-fx-background-radius: 10;");
+                setGraphic(civ);
+            }
+
+
+
 
 
         }

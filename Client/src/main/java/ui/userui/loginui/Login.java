@@ -165,6 +165,7 @@ public class Login implements Initializable{
         Parent root = FXMLLoader.load(getClass().getResource("/userui/usermanager.fxml"));
         Stage stage = (Stage) pane.getScene().getWindow();
         Scene scene = new Scene(root);
+
         Timeline timeline = new Timeline();
         timeline.getKeyFrames().add(
                 new KeyFrame(Duration.ZERO,

@@ -1,9 +1,9 @@
 package blService.inventoryblService;
 
-import po.InventoryDamageReceiptPO;
-import po.InventoryGiftReceiptPO;
-import po.InventoryOverflowReceiptPO;
-import po.InventoryWarningReceiptPO;
+import po.receiptPO.InventoryDamageReceiptPO;
+import po.receiptPO.InventoryGiftReceiptPO;
+import po.receiptPO.InventoryOverflowReceiptPO;
+import po.receiptPO.InventoryWarningReceiptPO;
 import vo.InventoryCheckVO;
 import vo.InventoryViewVO;
 

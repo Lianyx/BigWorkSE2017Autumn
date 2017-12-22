@@ -1,5 +1,6 @@
-package po;
+package po.receiptPO;
 
+import po.TransferItemPO;
 import po.receiptPO.ReceiptPO;
 import util.BillCategory;
 import util.ReceiptState;

@@ -19,7 +19,7 @@ public class UserListVO extends RecursiveTreeObject<UserListVO> implements Seria
     private String email;
     private String phone;
     private SimpleBooleanProperty selected=new SimpleBooleanProperty(false);
-
+    private String userstate="sabi";
     public UserListVO(long userid, Image image, String username, UserCategory userCategory, String email, String phone, boolean selected) {
         this.userid = userid;
         this.image = image;

@@ -1,4 +1,4 @@
-package ui.userui.usermanagerui;
+package ui.util;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.beans.binding.Bindings;
@@ -18,8 +18,8 @@ import java.util.TreeSet;
 public class HistoricalRecord {
     private static ObservableList<Pane> record= FXCollections.observableArrayList();
     private static int index=0;
-    static SimpleBooleanProperty canBack = new SimpleBooleanProperty(false);
-    static SimpleBooleanProperty canForward = new SimpleBooleanProperty(false);
+    public static SimpleBooleanProperty canBack = new SimpleBooleanProperty(false);
+    public static SimpleBooleanProperty canForward = new SimpleBooleanProperty(false);
 
 
 

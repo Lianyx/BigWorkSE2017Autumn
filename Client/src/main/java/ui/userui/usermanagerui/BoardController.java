@@ -4,11 +4,9 @@ package ui.userui.usermanagerui;
 import blService.userblService.UserManagerblService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.layout.*;
-import javafx.util.Duration;
 import ui.util.ContainerAnimations;
+import ui.util.HistoricalRecord;
 import ui.util.PaneSwitchAnimation;
 
 
@@ -21,11 +19,6 @@ public class BoardController{
 
     UserManagerblService userManagerblService;
 
-
-    UserListPane userListpane;
-
-    UserDetailPane userDetailPane;
-
     PaneSwitchAnimation paneSwitchAnimation;
 
     public void setUserManagerUIController(UserManagerUIController userManagerUIController){
@@ -36,9 +29,6 @@ public class BoardController{
         this.userManagerblService = userManagerblService;
     }
 
-    public void setUserListpane(UserListPane userListpane) {
-        this.userListpane = userListpane;
-    }
 
 
 

@@ -1,5 +1,6 @@
-package po;
+package po.receiptPO;
 
+import po.CashItemPO;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
 

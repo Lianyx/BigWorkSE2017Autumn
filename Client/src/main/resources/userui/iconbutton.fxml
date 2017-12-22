@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXRippler?>
+
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<fx:root type="JFXRippler" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <StackPane style="-fx-padding: 8">
+        <children>
+            <VBox>
+                <children>
+            <MaterialDesignIconView fx:id="view" glyphName="POLL" size="1.5em" fill="#000000" styleClass="icon" />
+            <Label text="" />
+                </children>
+            </VBox>
+        </children>
+
+    </StackPane>
+
+</fx:root>

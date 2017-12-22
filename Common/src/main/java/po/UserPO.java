@@ -8,18 +8,45 @@ import java.io.Serializable;
 public class UserPO implements Serializable{
 
     private int ID;
-    private String name;
+    private String username;
     private String password;
-    private String answer1,answer2,answer3;
+    private String answer1;
+    String answer2;
+    String answer3;
     private UserCategory userCategory;
+    private String phone;
+    private String email;
+    private boolean isDelete = false;
 
-    public UserPO(String name, String password, String answer1, String answer2, String answer3, UserCategory userCategory) {
-        this.name = name;
+    public UserPO(int ID, String username, String password, String answer1, String answer2, String answer3, UserCategory userCategory, String phone, String email) {
+        this.ID = ID;
+        this.username = username;
         this.password = password;
         this.answer1 = answer1;
         this.answer2 = answer2;
         this.answer3 = answer3;
         this.userCategory = userCategory;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public UserPO(){}
+
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAnswer2() {
@@ -46,12 +73,12 @@ public class UserPO implements Serializable{
         this.ID = ID;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserame(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

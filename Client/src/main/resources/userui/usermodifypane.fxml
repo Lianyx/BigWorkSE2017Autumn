@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <?import com.jfoenix.controls.JFXButton?>
-<fx:root type="AnchorPane" fx:id="usermodify" prefHeight="560.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
-<children>
-    <JFXButton fx:id="filechooser" text="wocao" layoutX="50" layoutY="100" onMouseClicked="#choosefile"/>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
+<fx:root fx:id="usermodify" prefHeight="560.0" prefWidth="640.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+    <Separator layoutY="55.0" orientation="HORIZONTAL" prefWidth="640" />
+
+    <JFXButton fx:id="choose" layoutX="470.0" layoutY="190.0" mnemonicParsing="false" onMouseClicked="#choosefile" text="Choose" />
+<ImageView fx:id="imageview" fitHeight="109.0" fitWidth="125.0" layoutX="441.0" layoutY="74.0" />
+      <Label layoutX="35.0" layoutY="14.0" text="Modify" />
 </children>
 
 </fx:root>

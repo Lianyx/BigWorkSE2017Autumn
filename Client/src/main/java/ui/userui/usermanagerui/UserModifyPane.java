@@ -5,9 +5,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
+import vo.UserListVO;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,14 +21,19 @@ public class UserModifyPane extends AnchorPane {
 
     final FileChooser fileChooser = new FileChooser();
 
+    UserListVO userListVO;
+    BoardController boardController;
 
-    public UserModifyPane() throws Exception{
+    @FXML
+    ImageView imageview;
+    public UserModifyPane(UserListVO userListVO) throws Exception{
         super();
         FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("/userui/usermodifypane.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         fxmlLoader.load();
-
+        this.userListVO = userListVO;
+        imageview.setImage(userListVO.getImage());
 
     }
     @FXML

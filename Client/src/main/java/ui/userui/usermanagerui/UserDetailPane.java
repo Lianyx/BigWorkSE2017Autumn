@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -21,16 +22,18 @@ public class UserDetailPane extends AnchorPane{
     final FileChooser fileChooser = new FileChooser();
 
 
+    BoardController boardController;
+
     @FXML
-    JFXTextField username;
+    Label username;
     @FXML
-    JFXTextField usertype;
+    Label usertype;
     @FXML
     JFXButton choose;
     @FXML
     ImageView imageview;
 
-    public UserDetailPane(UserListVO userListVO) {
+    public UserDetailPane(UserListVO userListVO,BoardController boardController) {
         super();
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/userui/userdetail.fxml"));
@@ -41,7 +44,7 @@ public class UserDetailPane extends AnchorPane{
             e.printStackTrace();
         }
         this.userListVO=userListVO;
-
+        this.boardController = boardController;
         username.setText(userListVO.getUsername());
         usertype.setText(userListVO.getUserCategory().name());
         imageview.setImage(userListVO.getImage());
@@ -75,6 +78,15 @@ public class UserDetailPane extends AnchorPane{
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
 
+    }
+
+    @FXML
+    public void modify(){
+        try{
+            boardController.switchTo(new UserModifyPane(userListVO));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

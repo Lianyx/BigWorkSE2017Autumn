@@ -4,22 +4,33 @@ import util.EventCategory;
 import util.UserCategory;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class MessagePO {
     private int ID;
-    private long time;
-    private boolean isDelete=false;
+    private LocalDateTime createTime;
     private EventCategory eventCategory;
     private UserCategory userCategory;
     private String userName;
     private String comment;
 
-    public MessagePO(long time, EventCategory eventCategory, UserCategory userCategory, String userName, String comment) {
-        this.time = time;
+    public MessagePO(int ID, LocalDateTime createTime, EventCategory eventCategory, UserCategory userCategory, String userName, String comment) {
+        this.ID = ID;
+        this.createTime = createTime;
         this.eventCategory = eventCategory;
         this.userCategory = userCategory;
         this.userName = userName;
         this.comment = comment;
+    }
+
+    public MessagePO(){}
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
 
     public int getID() {
@@ -30,21 +41,6 @@ public class MessagePO {
         this.ID = ID;
     }
 
-    public boolean isDelete() {
-        return isDelete;
-    }
-
-    public void setDelete(boolean delete) {
-        isDelete = delete;
-    }
-
-    public long getTime() {
-        return time;
-    }
-
-    public void setTime(long time) {
-        this.time = time;
-    }
 
     public EventCategory getEventCategory() {
         return eventCategory;
