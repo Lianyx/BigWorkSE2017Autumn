@@ -1,6 +1,6 @@
-package data.billreceiptdata;
+package mapper;
 
-import data.checkdata.ReceiptPOMapper;
+import mapper.generic.ReceiptPOMapper;
 import po.ChargeBillReceiptPO;
 
 public interface CashBillReceiptPOMapper extends ReceiptPOMapper<ChargeBillReceiptPO> {

@@ -8,6 +8,7 @@ import javafx.scene.layout.*;
 import ui.util.ContainerAnimations;
 import ui.util.HistoricalRecord;
 import ui.util.PaneSwitchAnimation;
+import ui.util.Refreshable;
 
 
 public class BoardController{
@@ -36,7 +37,7 @@ public class BoardController{
         this.paneSwitchAnimation = paneSwitchAnimation;
     }
 
-    public void switchTo(AnchorPane pane){
+    public void switchTo(Refreshable pane){
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

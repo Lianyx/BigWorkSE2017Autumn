@@ -1,4 +1,33 @@
 
+/* The main scrollbar CSS class of ListView */
+.tree-table-view .scroll-bar:horizontal ,
+.tree-table-view  .scroll-bar:vertical{
+    -fx-background-color:transparent;
+
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+.tree-table-view .increment-button ,.tree-table-view .decrement-button {
+    -fx-background-color-color:derive(rgba(0, 85, 128, 0.44),80%);
+}
+
+/* The main scrollbar **track** CSS class  */
+.tree-table-view .scroll-bar:horizontal .track ,
+.tree-table-view .scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color:transparent;
+    -fx-background-radius: 0em;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.tree-table-view .scroll-bar:horizontal .thumb,
+.tree-table-view .scroll-bar:vertical .thumb {
+    -fx-background-color: linear-gradient(to bottom right, rgba(140, 162, 246, 0.70), rgba(101, 158, 251, 0.70));
+    -fx-background-insets: 0, 0, 0;
+    -fx-background-radius: 0em;
+
+}
+
 .tree-table-view .scroll-bar{
     -fx-padding: 0;
 }
@@ -7,7 +36,6 @@
     -fx-effect: dropshadow(one-pass-box, #999999, 30, 0.01, 0, 0);
     -fx-background-radius: 1.4;
 }
-
 
 .tree-table-view{
     -fx-background-color: rgb(254,254,254);
@@ -50,7 +78,7 @@
 .pagination > .pagination-control > .control-box > .bullet-button:selected{
     -fx-background-insets: 0;
     -fx-background-color: #8CA2F6;
-    -fx-text-fill: grey;
+    -fx-text-fill: white;
 }
 
 
@@ -78,6 +106,7 @@
 
 .tree-table-view .scroll-bar:horizontal{
     -fx-border-color: transparent;
+
 }
 
 

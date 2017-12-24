@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<fx:root prefHeight="250.0" prefWidth="230.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+<Separator layoutX="10.0" layoutY="80.0" orientation="HORIZONTAL" prefHeight="0.0" prefWidth="210.0" />
+      <JFXCheckBox layoutX="24.0" layoutY="101.0" mnemonicParsing="false" text="CheckBox" unCheckedColor="#1408f1" />
+      <JFXCheckBox layoutX="24.0" layoutY="135.0" mnemonicParsing="false" text="CheckBox" unCheckedColor="#1408f1" />
+      <JFXCheckBox layoutX="24.0" layoutY="172.0" mnemonicParsing="false" text="CheckBox" unCheckedColor="#1408f1" />
+      <JFXComboBox layoutX="24.0" layoutY="27.0" prefWidth="150.0" unFocusColor="#00b52a" />
+
+</children>
+</fx:root>

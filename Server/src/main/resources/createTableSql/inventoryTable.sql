@@ -11,7 +11,7 @@ create table goods(
      recentPurPrice double(8,2) unsigned,
      recentSalePrice double(8,2) unsigned,
      alarmNumber int
-)
+);
 
 create table goodsclassification(
      id varchar(20),
@@ -19,7 +19,7 @@ create table goodsclassification(
      fatherId varchar(20),
      childrenId varchar(1000),
      goodsId varchar(1000)
-)
+);
 
 create table inventoryGiftRecipt(
      dayId integer,
@@ -30,8 +30,8 @@ create table inventoryGiftRecipt(
 
      clerkName varchar(20),
      goodsList varchar(1000),
-     comment varchar(150),
-)
+     comment varchar(150)
+);
 
 create table inventoryDamageRecipt(
      dayId integer,
@@ -42,8 +42,8 @@ create table inventoryDamageRecipt(
 
      clerkName varchar(20),
      goodsList varchar(1000),
-     comment varchar(150),
-)
+     comment varchar(150)
+);
 
 create table inventoryOverflowRecipt(
      dayId integer,
@@ -54,8 +54,8 @@ create table inventoryOverflowRecipt(
 
      clerkName varchar(20),
      goodsList varchar(1000),
-     comment varchar(150),
-)
+     comment varchar(150)
+);
 
 create table inventoryWarningRecipt(
      dayId integer,
@@ -66,5 +66,5 @@ create table inventoryWarningRecipt(
 
      clerkName varchar(20),
      goodsList varchar(1000),
-     comment varchar(150),
-)
+     comment varchar(150)
+);

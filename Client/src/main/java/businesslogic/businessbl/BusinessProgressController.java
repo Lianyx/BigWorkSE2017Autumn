@@ -1,6 +1,6 @@
 package businesslogic.businessbl;
-
-import blService.businessblService.BusinessProgressblService;
+/*
+import blService.businessblservice.BusinessProgressblService;
 import util.BusinessProgressInfo;
 import vo.ReceiptVO;
 
@@ -16,8 +16,7 @@ public class BusinessProgressController implements BusinessProgressblService{
 
     @Override
     public List<ReceiptVO> select(BusinessProgressInfo businessProgressInfo){
-
         return null;
     }
 
-}
+}*/

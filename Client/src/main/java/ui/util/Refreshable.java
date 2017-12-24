@@ -1,5 +1,7 @@
 package ui.util;
 
-public interface Refreshable {
-    public void refresh();
+import javafx.scene.layout.AnchorPane;
+
+public abstract class Refreshable extends AnchorPane{
+    public abstract void refresh();
 }

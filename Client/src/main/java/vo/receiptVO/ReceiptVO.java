@@ -1,5 +1,6 @@
 package vo.receiptVO;
 
+import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,8 @@ public abstract class ReceiptVO {
         this.lastModifiedTime = lastModifiedTime;
         this.receiptState = receiptState;
     }
+
+    public abstract <T extends ReceiptPO> T toPO();
 
     public String getId() {
         return id;

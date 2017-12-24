@@ -5,7 +5,7 @@ import util.ResultMessage;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.List;
+import java.util.ArrayList;
 
 public interface PromotionDataService<T extends PromotionPO> extends Remote {
     int getDayId() throws RemoteException;
@@ -16,6 +16,6 @@ public interface PromotionDataService<T extends PromotionPO> extends Remote {
 
     ResultMessage delete(T promotionPO) throws RemoteException;
 
-    List<T> selectInEffect() throws RemoteException;
+    ArrayList<T> selectInEffect() throws RemoteException;
 
 }

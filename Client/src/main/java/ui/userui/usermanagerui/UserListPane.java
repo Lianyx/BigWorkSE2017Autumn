@@ -3,9 +3,11 @@ package ui.userui.usermanagerui;
 import blService.userblService.UserManagerblService;
 import blServiceStub.usermanagerblService_Stub.Usermanagerblservice_Stub;
 import com.jfoenix.controls.*;
+import com.sun.javafx.scene.control.skin.FXVK;
 import exception.ProblemException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.input.MouseEvent;
@@ -13,13 +15,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
+import org.controlsfx.control.PopOver;
+import ui.util.Refreshable;
 import vo.UserListVO;
 
 import javax.annotation.PostConstruct;
 import java.beans.EventHandler;
 import java.util.TreeSet;
 
-public class UserListPane extends AnchorPane{
+public class UserListPane extends Refreshable{
 
     UserTreeTable ulv=new UserTreeTable();
 
@@ -35,6 +39,8 @@ public class UserListPane extends AnchorPane{
 
     StackPane mainpane;
 
+    @FXML
+    JFXButton filter;
 
     public UserListPane(UserManagerblService userManagerblService,BoardController boardController) throws Exception{
         super();
@@ -47,6 +53,13 @@ public class UserListPane extends AnchorPane{
 
         this.boardController=boardController;
         ulv.setBoardController(boardController);
+
+        PopOver filterPopOver = new PopOver();
+        filterPopOver.setDetachable(false);
+        filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
+        filterPopOver.setContentNode(new FilterPane());
+        filter.setOnMouseClicked(e -> filterPopOver.show(filter));
+
 
         pagination = new Pagination((ulv.getObservableList().size() /ulv.getRowsPerPage()+1 ), 0);
         pagination.setPageFactory(ulv::createPage);
@@ -95,6 +108,8 @@ public class UserListPane extends AnchorPane{
     }
 
 
-
-
+    @Override
+    public void refresh() {
+        setListView();
+    }
 }

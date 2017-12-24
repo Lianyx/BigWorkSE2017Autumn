@@ -5,7 +5,7 @@ import mapper.MemberPromotionPOMapper;
 import mapper.TotalPromotionPOMapper;
 import po.promotionPO.CombinePromotionPO;
 import po.promotionPO.MemberPromotionPO;
-import po.PromotionGoodsItemPO;
+import po.promotionPO.PromotionGoodsItemPO;
 import po.promotionPO.TotalPromotionPO;
 
 import java.rmi.RemoteException;
@@ -89,11 +89,14 @@ public class Test {
         cpo1.setDayId(cdao.getDayId());
         cpo1.setCreateTime(LocalDateTime.now());
         cpo1.setBeginTime(LocalDateTime.of(2017, 11, 1, 0, 0));
-        cpo1.setEndTime(LocalDateTime.of(2017, 12, 10, 0, 0));
+        cpo1.setEndTime(LocalDateTime.of(2017, 12, 30, 0, 0));
         cpo1.setDiscountAmount(40);
         cpo1.setGoodsCombination(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO(0, 10), new PromotionGoodsItemPO(1, 2)});
 
         cdao.insert(cpo1);
+
+
+
     }
 
     public static void main(String[] args) throws RemoteException{

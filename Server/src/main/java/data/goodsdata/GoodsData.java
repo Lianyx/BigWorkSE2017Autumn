@@ -1,6 +1,7 @@
 package data.goodsdata;
 
 import dataService.goodsdataService.GoodsDataService;
+import mapper.GoodsPOMapper;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import po.GoodsPO;

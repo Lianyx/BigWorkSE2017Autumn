@@ -11,6 +11,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.CacheHint;
 import javafx.scene.Node;
@@ -148,8 +149,6 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
 
     public void setUser(Set<UserListVO> users){
         observableList.setAll(users);
-
-
     }
 
     public void removeUser(UserListVO userListVO){
@@ -164,7 +163,6 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
         final TreeItem<UserListVO> root = new RecursiveTreeItem<>(observableListtemp, RecursiveTreeObject::getChildren);
         this.setRoot(root);
         this.setStyle("-fx-border-color: transparent; -fx-padding: 0; -fx-background-color: transparent");
-
 
 
         Timeline timeline = new Timeline();

@@ -1,8 +1,9 @@
 package po.promotionPO;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public abstract class PromotionPO {
+public abstract class PromotionPO implements Serializable {
     private int dayId;
 
     private LocalDateTime createTime;

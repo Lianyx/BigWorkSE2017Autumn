@@ -12,11 +12,12 @@ import javafx.scene.control.Control;
 import javafx.scene.layout.Pane;
 import vo.UserListVO;
 
+import java.sql.Ref;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class HistoricalRecord {
-    private static ObservableList<Pane> record= FXCollections.observableArrayList();
+    private static ObservableList<Refreshable> record= FXCollections.observableArrayList();
     private static int index=0;
     public static SimpleBooleanProperty canBack = new SimpleBooleanProperty(false);
     public static SimpleBooleanProperty canForward = new SimpleBooleanProperty(false);
@@ -24,7 +25,7 @@ public class HistoricalRecord {
 
 
 
-    static public boolean addRecord(Pane pane){
+    static public boolean addRecord(Refreshable pane){
         if(record.get(index).getId().equals(pane.getId())){
             if(index>0)
                 canBack.setValue(true);
@@ -45,7 +46,7 @@ public class HistoricalRecord {
 
 
 
-    public static Pane pop(){
+    public static Refreshable pop(){
         index--;
         if(index==0)
             canBack.setValue(false);
@@ -55,6 +56,8 @@ public class HistoricalRecord {
             canForward.setValue(false);
         else
             canForward.setValue(true);
+
+        record.get(index).refresh();
         return record.get(index);
     }
 
@@ -73,7 +76,7 @@ public class HistoricalRecord {
         return record.get(index);
     }
 
-    public static void addPane(Pane pane){
+    public static void addPane(Refreshable pane){
         record.add(pane);
     }
 

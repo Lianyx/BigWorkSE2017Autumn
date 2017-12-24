@@ -4,6 +4,7 @@ package businesslogic.salesbl;
 import blService.salesblService.SalesSellblService;
 import businesslogic.checkbl.Receiptbl;
 import po.receiptPO.SalesSellReceiptPO;
+import util.ResultMessage;
 import vo.receiptVO.SalesSellReceiptVO;
 
 import java.net.MalformedURLException;
@@ -13,6 +14,11 @@ import java.rmi.RemoteException;
 // 这个有点交叉继承的感觉了
 public class SalesSellbl extends Receiptbl<SalesSellReceiptVO, SalesSellReceiptPO> implements SalesSellblService {
     public SalesSellbl() throws RemoteException, NotBoundException, MalformedURLException {
-        super(SalesSellReceiptPO.class, SalesSellReceiptVO.class, "SalesSellReceiptData");
+        super(SalesSellReceiptVO.class, SalesSellReceiptPO.class, "SalesSellReceiptData");
+    }
+
+    @Override
+    public ResultMessage approve(SalesSellReceiptPO receiptPO) throws RemoteException {
+        return null;
     }
 }

@@ -1,4 +1,4 @@
-package data.establishdata;
+package mapper;
 
 import org.apache.ibatis.annotations.Param;
 

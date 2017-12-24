@@ -1,13 +1,13 @@
 package data.businessdata;
 
 import dataService.businessdataService.SalesDetailDataService;
+import mapper.SalesDetailPOMapper;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import po.SalesDetailPO;
 import util.SalesDetailInfo;
 
 import java.util.List;
-import java.util.Map;
 
 public class SalesDetailData implements SalesDetailDataService{
 

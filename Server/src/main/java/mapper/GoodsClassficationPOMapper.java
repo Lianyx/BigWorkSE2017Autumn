@@ -1,4 +1,4 @@
-package data.goodsdata;
+package mapper;
 
 import po.GoodsClassificationPO;
 

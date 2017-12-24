@@ -15,17 +15,18 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 // TODO 一定要提取出来“增删改”给所有人用，另外查（分为模糊和非模糊）一定要尽快写，不能再往后拖了
-public class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements ReceiptblService<TV>, CheckInfo<TP> {
-    private Class<? extends ReceiptPO> receiptPOClass;
+public abstract class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements ReceiptblService<TV>, CheckInfo<TP> {
     private Class<? extends ReceiptVO> receiptVOClass;
+    private Class<? extends ReceiptPO> receiptPOClass;
 
-    private ReceiptDataService<TP> receiptDataService;
+    protected ReceiptDataService<TP> receiptDataService;
 
-    public Receiptbl(Class<? extends ReceiptPO> receiptPOClass, Class<? extends ReceiptVO> receiptVOClass, String className) throws RemoteException, NotBoundException, MalformedURLException {
-        this.receiptPOClass = receiptPOClass;
+    public Receiptbl(Class<? extends ReceiptVO> receiptVOClass, Class<? extends ReceiptPO> receiptPOClass, String className) throws RemoteException, NotBoundException, MalformedURLException {
         this.receiptVOClass = receiptVOClass;
+        this.receiptPOClass = receiptPOClass;
 
         String registry = "localhost";
         int port = 1099;
@@ -35,7 +36,9 @@ public class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements Re
     }
 
 
-    /** implement receiptblService */
+    /**
+     * implement receiptblService
+     */
 
     @Override
     public int getDayId() throws RemoteException {
@@ -44,23 +47,22 @@ public class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements Re
 
     @Override
     public ResultMessage insert(TV receiptVO) throws RemoteException {
-        return receiptDataService.insert(convertToPO(receiptVO));
+        return receiptDataService.insert(receiptVO.toPO());
     }
 
     @Override
     public ResultMessage update(TV receiptVO) throws RemoteException {
-        return receiptDataService.update(convertToPO(receiptVO));
+        return receiptDataService.update(receiptVO.toPO());
     }
 
     @Override
     public ResultMessage delete(TV receiptVO) throws RemoteException {
-        return receiptDataService.delete(convertToPO(receiptVO));
+        return receiptDataService.delete(receiptVO.toPO());
     }
 
     @Override
     public ArrayList<TV> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
-//        return receiptDataService.search(receiptSearchCondition).stream().map(this::convertToPO).collect(Collectors.toCollection(ArrayList::new));
-        return null;
+        return receiptDataService.search(receiptSearchCondition).stream().map(this::convertToVO).collect(Collectors.toCollection(ArrayList::new));
     }
 
 
@@ -70,17 +72,19 @@ public class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements Re
         return receiptDataService.update(receiptPO);
     }
 
-    /** implement checkInfo */
+    /**
+     * implement checkInfo
+     */
 
-    @Override
-    public ResultMessage approve(TP receiptPO) throws RemoteException {
-        receiptPO.setReceiptState(ReceiptState.APPROVED);
-        receiptDataService.update(receiptPO);
-
-        // TODO 更新其他数据
-
-        return ResultMessage.SUCCESS;
-    }
+//    @Override
+//    public ResultMessage approve(TP receiptPO) throws RemoteException {
+//        receiptPO.setReceiptState(ReceiptState.APPROVED);
+//        receiptDataService.update(receiptPO);
+//
+//         TODO 更新其他数据
+//
+//        return ResultMessage.SUCCESS;
+//    }
 
     @Override
     public ResultMessage reject(TP receiptPO) throws RemoteException {
@@ -93,13 +97,15 @@ public class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements Re
     }
 
 
-    /** private methods */
+    /**
+     * private methods
+     */
 
-    private TP convertToPO(TV receiptVO) {
-        Constructor<? extends ReceiptPO> cstr = null;
+    private TV convertToVO(TP receiptPO) {
+        Constructor<? extends ReceiptVO> cstr = null;
         try {
-            cstr = receiptPOClass.getConstructor(receiptVOClass);
-            return (TP) (cstr.newInstance(receiptVO));
+            cstr = receiptVOClass.getConstructor(receiptPOClass);
+            return (TV) (cstr.newInstance(receiptPO));
         } catch (Exception e) {
             e.printStackTrace();
             return null;

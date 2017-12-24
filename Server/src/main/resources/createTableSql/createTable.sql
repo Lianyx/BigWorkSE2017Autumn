@@ -64,7 +64,7 @@ create table SalesSellReceipt(
 
 
 create table account(
-    ID int auto increment primary key,
+    ID int auto_increment primary key,
     name varchar(255),
     balance double
 );
@@ -105,8 +105,8 @@ create table CashBillReceipt(
 
     clerkName varchar(30),
     accountID INTEGER,
-    total double;
-    itemList varchar(1000);
+    total double,
+    itemList varchar(1000)
 
 );
 
@@ -120,12 +120,12 @@ create table SalesDetail(
     total double,
 
     clientID integer,
-    clerkName varchar(30)
+    clerkName varchar(30),
     stockID integer
-)
+);
 
 
 create table BusinessCondition(
     income double,
     expense double
-)
+);

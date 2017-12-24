@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
+import ui.util.Refreshable;
 import vo.UserListVO;
 
 import java.io.File;
@@ -16,7 +17,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserModifyPane extends AnchorPane {
+public class UserModifyPane  extends Refreshable {
 
 
     final FileChooser fileChooser = new FileChooser();
@@ -63,6 +64,11 @@ public class UserModifyPane extends AnchorPane {
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
+
+    }
+
+    @Override
+    public void refresh() {
 
     }
 }

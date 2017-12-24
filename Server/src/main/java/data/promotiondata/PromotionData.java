@@ -13,6 +13,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PromotionData<T extends PromotionPO> extends UnicastRemoteObject implements PromotionDataService<T> {
@@ -75,11 +76,11 @@ public class PromotionData<T extends PromotionPO> extends UnicastRemoteObject im
     }
 
     @Override
-    public List<T> selectInEffect() throws RemoteException {
+    public ArrayList<T> selectInEffect() throws RemoteException {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime nextDayZero = LocalDateTime.of(now.plusDays(1).toLocalDate(), LocalTime.MIN);
 
-        List<T> resultList;
+        ArrayList<T> resultList;
 
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             PromotionPOMapper<T> mapper = session.getMapper(mapperClass);

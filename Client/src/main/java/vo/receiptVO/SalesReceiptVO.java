@@ -1,11 +1,12 @@
 package vo.receiptVO;
 
 import po.ReceiptGoodsItemPO;
+import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
 
 import java.time.LocalDateTime;
 
-public class SalesReceiptVO extends ReceiptVO {
+public abstract class SalesReceiptVO extends ReceiptVO {
     private int clientId;
     private String clerkName; // 业务员
     private String stockName;

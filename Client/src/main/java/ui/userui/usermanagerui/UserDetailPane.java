@@ -8,12 +8,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import ui.util.Refreshable;
 import vo.UserListVO;
 import vo.UserVO;
 
 import java.io.File;
 
-public class UserDetailPane extends AnchorPane{
+public class UserDetailPane  extends Refreshable {
 
     UserVO userVO;
 
@@ -89,4 +90,8 @@ public class UserDetailPane extends AnchorPane{
         }
     }
 
+    @Override
+    public void refresh() {
+
+    }
 }
