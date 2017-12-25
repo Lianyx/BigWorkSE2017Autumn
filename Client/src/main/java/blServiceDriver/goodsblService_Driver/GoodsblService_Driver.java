@@ -2,9 +2,8 @@ package blServiceDriver.goodsblService_Driver;
 
 import blServiceStub.goodsblService_Stub.GoodsblService_Stub;
 import util.ResultMessage;
-import vo.GoodsVO;
+import vo.inventoryVO.GoodsVO;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 public class GoodsblService_Driver {

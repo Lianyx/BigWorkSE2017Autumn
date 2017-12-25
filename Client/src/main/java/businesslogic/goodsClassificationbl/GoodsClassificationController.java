@@ -2,14 +2,10 @@ package businesslogic.goodsClassificationbl;
 
 import blService.goodsClassificationblService.GoodsClasssficationblService;
 import exception.ExistException;
-import po.GoodsClassificationPO;
 import util.ResultMessage;
-import vo.GoodsClassificationVO;
+import vo.inventoryVO.GoodsClassificationVO;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-import java.util.Set;
 
 public class GoodsClassificationController implements GoodsClasssficationblService {
     GoodsClassification goodsClassification = new GoodsClassification();

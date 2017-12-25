@@ -1,9 +1,9 @@
 package blServiceStub.inventoryblService_Stub;
 
 import util.ResultMessage;
-import vo.InventoryCheckItemVO;
-import vo.InventoryCheckVO;
-import vo.InventoryViewVO;
+import vo.inventoryVO.InventoryCheckItemVO;
+import vo.inventoryVO.InventoryCheckVO;
+import vo.inventoryVO.InventoryViewVO;
 
 import java.util.HashSet;
 

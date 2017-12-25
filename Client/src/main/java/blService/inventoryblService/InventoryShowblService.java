@@ -4,8 +4,8 @@ import po.receiptPO.InventoryDamageReceiptPO;
 import po.receiptPO.InventoryGiftReceiptPO;
 import po.receiptPO.InventoryOverflowReceiptPO;
 import po.receiptPO.InventoryWarningReceiptPO;
-import vo.InventoryCheckVO;
-import vo.InventoryViewVO;
+import vo.inventoryVO.InventoryCheckVO;
+import vo.inventoryVO.InventoryViewVO;
 
 import java.util.List;
 

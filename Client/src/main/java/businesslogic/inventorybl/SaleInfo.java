@@ -1,7 +1,7 @@
 package businesslogic.inventorybl;
 
-import vo.InventoryCheckVO;
-import vo.InventoryViewVO;
+import vo.inventoryVO.InventoryCheckVO;
+import vo.inventoryVO.InventoryViewVO;
 
 public class SaleInfo {
 

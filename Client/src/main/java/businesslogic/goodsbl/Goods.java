@@ -2,10 +2,9 @@ package businesslogic.goodsbl;
 
 import businesslogic.goodsClassificationbl.GoodsClassificationInfo;
 import dataService.goodsdataService.GoodsDataService;
-import exception.ExistException;
 import po.GoodsPO;
 import util.ResultMessage;
-import vo.GoodsVO;
+import vo.inventoryVO.GoodsVO;
 
 import java.util.List;
 
@@ -52,6 +51,11 @@ public class Goods {
     public ResultMessage updateGoods(GoodsVO goodsVO) {
         GoodsPO po = changer.oneToPO(goodsVO);
         dataService.update(po);
+        return ResultMessage.SUCCESS;
+    }
+
+    public ResultMessage updateGoods(GoodsPO goodsPO) {
+        dataService.update(goodsPO);
         return ResultMessage.SUCCESS;
     }
 

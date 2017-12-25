@@ -1,6 +1,6 @@
-package po.receiptPO;
+package vo.inventoryVO;
 
-public class InventoryReceiptGoodsItemPO {
+public class InventoryReceiptGoodsItemVO {
     /**编号*/
     private String id;
     /** 商品名称 */
@@ -11,24 +11,27 @@ public class InventoryReceiptGoodsItemPO {
     private int inventoryNum;
     /** 当前现实数量*/
     private int factNumber;
-    /** 商品赠送数量*/
-    private int sendNumber;
-    /** 商品警戒数量*/
-    private int alarmNumber;
 
-    public InventoryReceiptGoodsItemPO() {
+    public InventoryReceiptGoodsItemVO() {
     }
 
-    public InventoryReceiptGoodsItemPO(String id, String goodName, String goodType, int inventoryNum, int factNumber,
-                                       int sendNumber, int alarmNumber) {
+    public InventoryReceiptGoodsItemVO(String id, String goodName, String goodType, int inventoryNum, int factNumber) {
         this.id = id;
         this.goodName = goodName;
         this.goodType = goodType;
         this.inventoryNum = inventoryNum;
         this.factNumber = factNumber;
-        this.sendNumber = sendNumber;
-        this.alarmNumber = alarmNumber;
     }
+
+    //for gift Receipt
+    public InventoryReceiptGoodsItemVO(String id, String goodName, String goodType, int inventoryNum) {
+        this.id = id;
+        this.goodName = goodName;
+        this.goodType = goodType;
+        this.inventoryNum = inventoryNum;
+    }
+
+
 
     public String getId() {
         return id;
@@ -62,36 +65,22 @@ public class InventoryReceiptGoodsItemPO {
         this.inventoryNum = inventoryNum;
     }
 
-    public int getFactNumber() { return factNumber; }
-
-    public void setFactNumber(int factNumber) { this.factNumber = factNumber; }
-
-    public int getsendNumber() {
-        return sendNumber;
+    public int getFactNumber() {
+        return factNumber;
     }
 
-    public void setsendNumber(int sendNumber) {
-        this.sendNumber = sendNumber;
-    }
-
-    public int getAlarmNumber() {
-        return alarmNumber;
-    }
-
-    public void setAlarmNumber(int alarmNumber) {
-        this.alarmNumber = alarmNumber;
+    public void setFactNumber(int factNumber) {
+        this.factNumber = factNumber;
     }
 
     @Override
     public String toString() {
-        return "InventoryReceiptGoodsItemPO{" +
+        return "InventoryReceiptGoodsItemVO{" +
                 "id='" + id + '\'' +
                 ", goodName='" + goodName + '\'' +
                 ", goodType='" + goodType + '\'' +
                 ", inventoryNum=" + inventoryNum +
                 ", factNumber=" + factNumber +
-                ", sendNumber=" + sendNumber +
-                ", alarmNumber=" + alarmNumber +
                 '}';
     }
 }

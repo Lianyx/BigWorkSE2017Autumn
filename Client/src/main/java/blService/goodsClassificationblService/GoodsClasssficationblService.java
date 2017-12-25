@@ -2,11 +2,9 @@ package blService.goodsClassificationblService;
 
 import exception.ExistException;
 import util.ResultMessage;
-import vo.GoodsClassificationVO;
+import vo.inventoryVO.GoodsClassificationVO;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public interface GoodsClasssficationblService {
     /**
