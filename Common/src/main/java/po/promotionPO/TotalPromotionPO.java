@@ -11,8 +11,8 @@ public class TotalPromotionPO extends PromotionPO {
     public TotalPromotionPO() {
     }
 
-    public TotalPromotionPO(int id, LocalDateTime create, LocalDateTime lastModified, LocalDateTime begin, LocalDateTime end, double requiredTotal, double tokenAmount, PromotionGoodsItemPO[] gifts) {
-        super(id, create, lastModified, begin, end);
+    public TotalPromotionPO(int dayId, LocalDateTime createTime, LocalDateTime lastModifiedTime, LocalDateTime beginTime, LocalDateTime endTime, String comment, double requiredTotal, double tokenAmount, PromotionGoodsItemPO[] gifts) {
+        super(dayId, createTime, lastModifiedTime, beginTime, endTime, comment);
         this.requiredTotal = requiredTotal;
         this.tokenAmount = tokenAmount;
         this.gifts = gifts;

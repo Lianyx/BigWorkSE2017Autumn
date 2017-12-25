@@ -1,11 +1,12 @@
 package vo;
 
 import po.TransferItemPO;
+import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
 
 import java.time.LocalDateTime;
 
-public class PaymentBillReceiptVO extends ReceiptVO{
+public class PaymentBillReceiptVO extends ReceiptVO {
     private int supplierID;
     private TransferItemVO[] transferList;
     private double sum;
@@ -13,6 +14,8 @@ public class PaymentBillReceiptVO extends ReceiptVO{
     public PaymentBillReceiptVO(){
 
     }
+
+
 
     public PaymentBillReceiptVO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int supplierID, TransferItemVO[] transferList, double sum) {
         super(dayId, operatorId, createTime, lastModifiedTime, receiptState);
@@ -44,6 +47,7 @@ public class PaymentBillReceiptVO extends ReceiptVO{
     public void setSum(double sum) {
         this.sum = sum;
     }
+
 }
 
 

@@ -16,9 +16,12 @@ public abstract class ReceiptPO implements Serializable{
 
     private ReceiptState receiptState;
 
+//    private String comment;
+
     public ReceiptPO() {
     }
 
+    // TODO 这个constructor保留只是为了其他类不会报错，肯定要删
     public ReceiptPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState) {
         this.dayId = dayId;
         this.operatorId = operatorId;
@@ -26,6 +29,7 @@ public abstract class ReceiptPO implements Serializable{
         this.lastModifiedTime = lastModifiedTime;
         this.receiptState = receiptState;
     }
+
 
     public int getDayId() {
         return dayId;

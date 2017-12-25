@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.PaymentBillReceiptPOMapper">
-    <resultMap id="resultMap" type="po.PaymentBillReceiptPO">
+    <resultMap id="resultMap" type="po.receiptPO.PaymentBillReceiptPO">
         <result typeHandler="MyJsonHandler" column="transferList" property="transferList" />
     </resultMap>
 

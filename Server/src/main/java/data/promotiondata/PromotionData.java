@@ -6,6 +6,7 @@ import mybatis.MyBatisUtil;
 import org.apache.ibatis.binding.BindingException;
 import org.apache.ibatis.session.SqlSession;
 import po.promotionPO.PromotionPO;
+import util.PromotionSearchCondition;
 import util.ResultMessage;
 
 import java.rmi.RemoteException;
@@ -35,7 +36,7 @@ public class PromotionData<T extends PromotionPO> extends UnicastRemoteObject im
             // TODO add branch if resultID > 99999?
             session.commit();
         } catch (BindingException e) { // TODO This is aimed to handle the first call in a day. But I'm not sure about its correctness.
-            return 0;
+            resultID = 0;
         }
         return resultID;
     }
@@ -85,6 +86,18 @@ public class PromotionData<T extends PromotionPO> extends UnicastRemoteObject im
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             PromotionPOMapper<T> mapper = session.getMapper(mapperClass);
             resultList = mapper.selectInEffect(now, nextDayZero);
+            session.commit();
+        }
+        return resultList;
+    }
+
+    @Override
+    public ArrayList<T> search(PromotionSearchCondition promotionSearchCondition) throws RemoteException {
+        ArrayList<T> resultList;
+
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            PromotionPOMapper<T> mapper = session.getMapper(mapperClass);
+            resultList = mapper.search(promotionSearchCondition);
             session.commit();
         }
         return resultList;

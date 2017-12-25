@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import ui.util.TopBar?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.JFXRippler?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<StackPane fx:id="mainpane"
+           xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+           fx:controller="ui.managerui.ManagerUIController"
+           prefHeight="600" prefWidth="800"
+           stylesheets="@../css/tempInNeed.css">
+    <AnchorPane fx:id="mainAnchorPane" prefHeight="600" prefWidth="800">
+
+        <AnchorPane fx:id="logopane" prefHeight="40" prefWidth="160" style="-fx-background-color: white">
+            <ImageView fitHeight="52.0" fitWidth="98.0" layoutX="24.0" layoutY="2.0"
+                       pickOnBounds="true" preserveRatio="true">
+                <Image url="@../default/logo.jpg"/>
+            </ImageView>
+        </AnchorPane>
+
+        <TopBar fx:id="bar" layoutX="160"/>
+
+        <fx:include source="/userui/board.fxml" fx:id="board" layoutX="160" layoutY="40"/> <!--为什么报错？-->
+
+        <JFXListView fx:id="navigation" layoutY="40" prefHeight="560" prefWidth="160">
+            <Label fx:id="checkList" text="审批单据" style="-fx-padding: 8 0 8 10;">
+                <graphic>
+                    <StackPane style="-fx-padding: 0 10 0 0;">
+                        <FontAwesomeIconView fx:id="ckeckListIcon" size="1em"/>
+                    </StackPane>
+                </graphic>
+            </Label>
+            <Label fx:id="promotionList" text="促销策略" style="-fx-padding: 8 0 8 10;">
+                <graphic>
+                    <StackPane style="-fx-padding: 0 10 0 0;">
+                        <FontAwesomeIconView fx:id="promotionListIcon" size="1em"/>
+                    </StackPane>
+                </graphic>
+            </Label>
+        </JFXListView>
+
+    </AnchorPane>
+</StackPane>

@@ -1,14 +1,13 @@
 package po.receiptPO;
 
 import po.ReceiptGoodsItemPO;
-import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
 public abstract class SalesReceiptPO extends ReceiptPO {
-    private int memberid;
+    private int memberId;
     private String clerkName; // 业务员
     private String stockName;
     private ReceiptGoodsItemPO[] goodsList;
@@ -22,7 +21,7 @@ public abstract class SalesReceiptPO extends ReceiptPO {
 
     public SalesReceiptPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberid, String clerkName, String stockName, ReceiptGoodsItemPO[] goodsList, double discountAmount, double tokenAmount, double originSum, String comment) {
         super(dayId, operatorId, createTime, lastModifiedTime, receiptState);
-        this.memberid = memberid;
+        this.memberId = memberid;
         this.clerkName = clerkName;
         this.stockName = stockName;
         this.goodsList = goodsList;
@@ -32,12 +31,12 @@ public abstract class SalesReceiptPO extends ReceiptPO {
         this.comment = comment;
     }
 
-    public int getMemberid() {
-        return memberid;
+    public int getMemberId() {
+        return memberId;
     }
 
-    public void setMemberid(int memberid) {
-        this.memberid = memberid;
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
     }
 
     public String getClerkName() {
@@ -100,7 +99,7 @@ public abstract class SalesReceiptPO extends ReceiptPO {
     public String toString() {
         return "SalesReceiptPO{" +
                 "Id=" + getDayId() + ", " +
-                "memberid=" + memberid +
+                "memberId=" + memberId +
                 ", clerkName='" + clerkName + '\'' +
                 ", stockName='" + stockName + '\'' +
                 ", goodsList=" + Arrays.toString(goodsList) +

@@ -6,6 +6,7 @@ import po.promotionPO.CombinePromotionPO;
 import po.promotionPO.PromotionGoodsItemPO;
 import po.promotionPO.PromotionPO;
 import po.receiptPO.ReceiptPO;
+import util.PromotionSearchCondition;
 import util.ResultMessage;
 import vo.promotionVO.CombinePromotionVO;
 import vo.promotionVO.PromotionVO;
@@ -63,6 +64,11 @@ public class Promotionbl<TV extends PromotionVO, TP extends PromotionPO> impleme
     @Override
     public ArrayList<TV> selectInEffect() throws RemoteException {
         return promotionDataService.selectInEffect().stream().map(this::convertToVO).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    @Override
+    public ArrayList<TV> search(PromotionSearchCondition promotionSearchCondition) throws RemoteException {
+        return promotionDataService.search(promotionSearchCondition).stream().map(this::convertToVO).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**

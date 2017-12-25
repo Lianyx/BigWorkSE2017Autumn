@@ -1,7 +1,5 @@
 package util;
 
-import util.BillType;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -10,7 +8,7 @@ public class ReceiptSearchCondition {
     private ArrayList<BillType> billTypes;
     private String clerkName;
     private String stockName;
-    private Integer clientId;
+    private Integer memberId;
 
     public ReceiptSearchCondition() {
     }
@@ -21,7 +19,7 @@ public class ReceiptSearchCondition {
         this.billTypes = billTypes;
         this.clerkName = clerkName;
         this.stockName = stockName;
-        this.clientId = clientId;
+        this.memberId = clientId;
     }
 
     public LocalDateTime getBegin() {
@@ -65,10 +63,10 @@ public class ReceiptSearchCondition {
     }
 
     public Integer getClientId() {
-        return clientId;
+        return memberId;
     }
 
     public void setClientId(Integer clientId) {
-        this.clientId = clientId;
+        this.memberId = clientId;
     }
 }
