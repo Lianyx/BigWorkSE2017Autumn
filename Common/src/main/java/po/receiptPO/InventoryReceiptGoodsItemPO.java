@@ -12,7 +12,7 @@ public class InventoryReceiptGoodsItemPO {
     /** 当前现实数量*/
     private int factNumber;
     /** 商品赠送数量*/
-    private int sengNumber;
+    private int sendNumber;
     /** 商品警戒数量*/
     private int alarmNumber;
 
@@ -20,13 +20,13 @@ public class InventoryReceiptGoodsItemPO {
     }
 
     public InventoryReceiptGoodsItemPO(String id, String goodName, String goodType, int inventoryNum, int factNumber,
-                                       int sengNumber, int alarmNumber) {
+                                       int sendNumber, int alarmNumber) {
         this.id = id;
         this.goodName = goodName;
         this.goodType = goodType;
         this.inventoryNum = inventoryNum;
         this.factNumber = factNumber;
-        this.sengNumber = sengNumber;
+        this.sendNumber = sendNumber;
         this.alarmNumber = alarmNumber;
     }
 
@@ -66,12 +66,12 @@ public class InventoryReceiptGoodsItemPO {
 
     public void setFactNumber(int factNumber) { this.factNumber = factNumber; }
 
-    public int getSengNumber() {
-        return sengNumber;
+    public int getsendNumber() {
+        return sendNumber;
     }
 
-    public void setSengNumber(int sengNumber) {
-        this.sengNumber = sengNumber;
+    public void setsendNumber(int sendNumber) {
+        this.sendNumber = sendNumber;
     }
 
     public int getAlarmNumber() {
@@ -90,7 +90,7 @@ public class InventoryReceiptGoodsItemPO {
                 ", goodType='" + goodType + '\'' +
                 ", inventoryNum=" + inventoryNum +
                 ", factNumber=" + factNumber +
-                ", sengNumber=" + sengNumber +
+                ", sendNumber=" + sendNumber +
                 ", alarmNumber=" + alarmNumber +
                 '}';
     }

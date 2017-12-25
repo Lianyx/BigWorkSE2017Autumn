@@ -11,7 +11,7 @@ import util.ReceiptState;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 
-public class SimpleTest {
+public class TestSalesSellData {
 
     public static void test() throws RemoteException {
         ReceiptData<SalesSellReceiptPO> rdao = new ReceiptData<>(SalesSellReceiptPOMapper.class);
@@ -25,7 +25,7 @@ public class SimpleTest {
         ssrp.setClerkName("Wang Er Xiao");
         ssrp.setGoodsList(new ReceiptGoodsItemPO[]{new ReceiptGoodsItemPO(1, 1, 2, "first")});
         ssrp.setOriginSum(100);
-        ssrp.setComment("insert");
+        ssrp.setComment("如果建表的时候不明确说明utf8，之后能用吗");
         ssrp.setGifts(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO(0, 10), new PromotionGoodsItemPO(1, 2)});
 
         rdao.insert(ssrp);

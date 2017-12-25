@@ -1,9 +1,8 @@
 package blServiceStub.goodsblService_Stub;
 
 import util.ResultMessage;
-import vo.GoodsVO;
+import vo.inventoryVO.GoodsVO;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 

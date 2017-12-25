@@ -9,8 +9,8 @@ public class CombinePromotionPO extends PromotionPO {
     public CombinePromotionPO() {
     }
 
-    public CombinePromotionPO(int id, LocalDateTime create, LocalDateTime lastModified, LocalDateTime begin, LocalDateTime end, PromotionGoodsItemPO[] goodsCombination, double discountAmount) {
-        super(id, create, lastModified, begin, end);
+    public CombinePromotionPO(int dayId, LocalDateTime createTime, LocalDateTime lastModifiedTime, LocalDateTime beginTime, LocalDateTime endTime, String comment, PromotionGoodsItemPO[] goodsCombination, double discountAmount) {
+        super(dayId, createTime, lastModifiedTime, beginTime, endTime, comment);
         this.goodsCombination = goodsCombination;
         this.discountAmount = discountAmount;
     }

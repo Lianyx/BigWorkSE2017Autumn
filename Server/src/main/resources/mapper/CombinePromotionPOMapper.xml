@@ -15,11 +15,11 @@
         select max(dayId)+1 from combinePromotion where createTime &gt;= #{today}
     </select>
     <insert id="insert">
-        insert into combinePromotion(dayId, createTime, lastModifiedTime, beginTime, endTime, discountAmount, goodsCombination)
-        values(#{dayId}, #{createTime}, #{lastModifiedTime}, #{beginTime}, #{endTime}, #{discountAmount}, #{goodsCombination, typeHandler=MyJsonHandler})
+        insert into combinePromotion(dayId, createTime, lastModifiedTime, beginTime, endTime, comment, discountAmount, goodsCombination)
+        values(#{dayId}, #{createTime}, #{lastModifiedTime}, #{beginTime}, #{endTime}, #{comment}, #{discountAmount}, #{goodsCombination, typeHandler=MyJsonHandler})
     </insert>
     <update id="update">
-        update combinePromotion set lastModifiedTime=#{lastModifiedTime}, beginTime=#{beginTime}, endTime=#{endTime}, discountAmount=#{discountAmount}, goodsCombination=#{goodsCombination, typeHandler=MyJsonHandler}
+        update combinePromotion set lastModifiedTime=#{lastModifiedTime}, beginTime=#{beginTime}, endTime=#{endTime}, comment=#{comment}, discountAmount=#{discountAmount}, goodsCombination=#{goodsCombination, typeHandler=MyJsonHandler}
         where dayId=#{dayId} and createTime=#{createTime}
     </update>
     <delete id="delete">
@@ -27,6 +27,29 @@
     </delete>
     <select id="selectInEffect" resultMap="resultMap">
         select * from combinePromotion where beginTime &lt;= #{begin} and endTime &gt;= #{end}
+    </select>
+    <select id="search" resultMap="resultMap">
+        select * from combinePromotion
+        <where>
+            <if test="lastModifiedFloor != null">
+                lastModifiedTime &gt;= #{lastModifiedFloor}
+            </if>
+            <if test="lastModifiedCeil != null">
+                AND lastModifiedTime &lt;= #{lastModifiedCeil}
+            </if>
+            <if test="beginFloor != null">
+                AND beginTime &gt;= #{beginFloor}
+            </if>
+            <if test="beginCeil != null">
+                AND beginTime &lt;= #{beginCeil}
+            </if>
+            <if test="endFloor != null">
+                AND endTime &gt;= #{endFloor}
+            </if>
+            <if test="endCeil != null">
+                AND endTime &lt;= #{endCeil}
+            </if>
+        </where>
     </select>
 
 </mapper>

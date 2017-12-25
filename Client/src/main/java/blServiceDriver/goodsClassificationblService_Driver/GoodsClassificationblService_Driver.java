@@ -2,9 +2,8 @@ package blServiceDriver.goodsClassificationblService_Driver;
 
 import blServiceStub.goodsClassificationblService_Stub.GoodsClassificationblService_Stub;
 import util.ResultMessage;
-import vo.GoodsClassificationVO;
+import vo.inventoryVO.GoodsClassificationVO;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 public class GoodsClassificationblService_Driver {

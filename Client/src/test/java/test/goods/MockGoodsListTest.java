@@ -24,7 +24,7 @@ public class MockGoodsListTest {
 */ 
 @Test
 public void testGetTotalCount() throws Exception { 
-//TODO: Test goes here...
+//TODO: TestPromotionbl goes here...
     MockGoodsList mgl = new MockGoodsList();
     MockGoods mg1 = new MockGoods("123","中国灯",100);
     MockGoods mg2 = new MockGoods("124","美国灯",101);

@@ -34,6 +34,8 @@ public class TempMain {
             Naming.rebind(registrationpre + "/TotalPromotionData", totalPromotionData);
             Naming.rebind(registrationpre + "/MemberPromotionData", memberPromotionData);
 
+
+            System.out.println("server starts");
         } catch (Exception e) {
             e.printStackTrace();
         }

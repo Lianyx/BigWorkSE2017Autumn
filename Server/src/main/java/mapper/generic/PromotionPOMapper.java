@@ -1,6 +1,7 @@
 package mapper.generic;
 
 import org.apache.ibatis.annotations.Param;
+import util.PromotionSearchCondition;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,4 +13,5 @@ public interface PromotionPOMapper<T> {
     void update(T promotionPO);
     void delete(T promotionPO);
     ArrayList<T> selectInEffect(@Param("begin") LocalDateTime begin, @Param("end") LocalDateTime end);
+    ArrayList<T> search(PromotionSearchCondition promotionSearchCondition);
 }

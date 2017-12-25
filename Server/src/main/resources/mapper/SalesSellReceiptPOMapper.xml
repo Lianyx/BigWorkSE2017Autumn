@@ -11,11 +11,11 @@
         select max(dayId)+1 from SalesSellReceipt where createTime &gt;= #{today}
     </select>
     <insert id="insert">
-        insert into SalesSellReceipt(dayId, operatorId, createTime, lastModifiedTime, receiptState, clientId, clerkName, stockName, goodsList, discountAmount, tokenAmount, originSum, comment, gifts, giveTokenAmount)
-        values(#{dayId}, #{operatorId}, #{createTime}, #{lastModifiedTime}, #{receiptState}, #{clientId}, #{clerkName}, #{stockName}, #{goodsList, typeHandler=MyJsonHandler}, #{discountAmount}, #{tokenAmount}, #{originSum}, #{comment}, #{gifts, typeHandler=MyJsonHandler}, #{giveTokenAmount})
+        insert into SalesSellReceipt(dayId, operatorId, createTime, lastModifiedTime, receiptState, memberId, clerkName, stockName, goodsList, discountAmount, tokenAmount, originSum, comment, gifts, giveTokenAmount)
+        values(#{dayId}, #{operatorId}, #{createTime}, #{lastModifiedTime}, #{receiptState}, #{memberId}, #{clerkName}, #{stockName}, #{goodsList, typeHandler=MyJsonHandler}, #{discountAmount}, #{tokenAmount}, #{originSum}, #{comment}, #{gifts, typeHandler=MyJsonHandler}, #{giveTokenAmount})
     </insert>
     <update id="update">
-        update SalesSellReceipt set lastModifiedTime=#{lastModifiedTime}, receiptState=#{receiptState}, clientId=#{clientId}, clerkName=#{clerkName}, stockName=#{stockName}, goodsList=#{goodsList, typeHandler=MyJsonHandler}, discountAmount=#{discountAmount}, tokenAmount=#{tokenAmount}, originSum=#{originSum}, comment=#{comment}, gifts=#{gifts, typeHandler=MyJsonHandler}, giveTokenAmount=#{giveTokenAmount}
+        update SalesSellReceipt set lastModifiedTime=#{lastModifiedTime}, receiptState=#{receiptState}, memberId=#{memberId}, clerkName=#{clerkName}, stockName=#{stockName}, goodsList=#{goodsList, typeHandler=MyJsonHandler}, discountAmount=#{discountAmount}, tokenAmount=#{tokenAmount}, originSum=#{originSum}, comment=#{comment}, gifts=#{gifts, typeHandler=MyJsonHandler}, giveTokenAmount=#{giveTokenAmount}
         where dayId=#{dayId} and createTime=#{createTime}
     </update>
     <delete id="delete">
@@ -30,8 +30,8 @@
     <select id="search" resultMap="resultMap">
         select * from SalesSellReceipt
         <where>
-            <if test="clientId != null">
-                clientId=#{clientId}
+            <if test="memberId != null">
+                memberId=#{memberId}
             </if>
             <if test="clerkName != null">
                 AND clerkName=#{clerkName}

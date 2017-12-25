@@ -12,10 +12,12 @@ create table MemberPromotion(
   beginTime bigint,
   endTime bigint,
 
+  comment varchar(150),
+
   requiredLevel integer,
   discountFraction double,
   tokenAmount double
-);
+) character set = utf8;
 
 
 create table TotalPromotion(
@@ -26,10 +28,12 @@ create table TotalPromotion(
   beginTime bigint,
   endTime bigint,
 
+  comment varchar(150),
+
   requiredTotal double,
   tokenAmount double,
   gifts varchar(1000)
-);
+) character set = utf8;
 
 
 
@@ -41,9 +45,11 @@ create table CombinePromotion(
   beginTime bigint,
   endTime bigint,
 
+  comment varchar(150),
+
   discountAmount double,
   goodsCombination varchar(1000)
-);
+) character set = utf8;
 
 create table SalesSellReceipt(
   dayId integer,
@@ -52,15 +58,19 @@ create table SalesSellReceipt(
   lastModifiedTime bigint,
   receiptState integer,
 
-  clientId integer,
+  comment varchar(150),
+
+  memberId integer,
   clerkName varchar(30),
   stockName varchar(30),
   goodsList varchar(1000),
   discountAmount double,
   tokenAmount double,
   originSum double,
-  comment varchar(150)
-);
+
+  gifts varchar(1000),
+  giveTokenAmount double
+) character set = utf8;
 
 
 create table account(

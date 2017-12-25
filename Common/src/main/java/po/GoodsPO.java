@@ -6,9 +6,7 @@ package po;
  *
  */
 public class GoodsPO {
-    private static final long serialVersionUID = 1L;
     /**编号*/
-    private String  GoodsID;
     private String id;
     /** 商品名称 */
     private String goodName;
@@ -48,14 +46,6 @@ public class GoodsPO {
         this.alarmNumber = alarmNumber;
     }
 
-    public String getGoodsID() {
-        return GoodsID;
-    }
-
-    public void setGoodsID(String goodsID) {
-        GoodsID = goodsID;
-    }
-
     public void setId(String id) {
         this.id = id;
     }
@@ -81,22 +71,6 @@ public class GoodsPO {
     }
 
     public void setID(String id) { id = id;}
-
-    public String getgoodName() {
-        return goodName;
-    }
-
-    public void setgoodName(String goodName) {
-        this.goodName = goodName;
-    }
-
-    public String getgoodType() {
-        return goodType;
-    }
-
-    public void setgoodType(String goodType) {
-        this.goodType = goodType;
-    }
 
     public String getClassifyId() {
         return classifyId;

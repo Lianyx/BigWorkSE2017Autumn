@@ -1,5 +1,6 @@
 package blService.promotionblService;
 
+import util.PromotionSearchCondition;
 import util.ResultMessage;
 import vo.promotionVO.PromotionVO;
 
@@ -12,5 +13,5 @@ public interface PromotionblService<T extends PromotionVO> {
     ResultMessage update(T promotionVO) throws RemoteException;
     ResultMessage delete(T promotionVO) throws RemoteException;
     ArrayList<T> selectInEffect() throws RemoteException;
-    // TODO 肯定还需要有其他select的方法
+    ArrayList<T> search(PromotionSearchCondition promotionSearchCondition) throws RemoteException;
 }

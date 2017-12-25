@@ -9,14 +9,14 @@ public class MemberPromotionPO extends PromotionPO {
     private double discountFraction; // a fraction between 0 ~ 1
     private double tokenAmount;
 
-    public MemberPromotionPO(int id, LocalDateTime create, LocalDateTime lastModified, LocalDateTime begin, LocalDateTime end, int requiredLevel, double discountFraction, double tokenAmount) {
-        super(id, create, lastModified, begin, end);
+    public MemberPromotionPO() {
+    }
+
+    public MemberPromotionPO(int dayId, LocalDateTime createTime, LocalDateTime lastModifiedTime, LocalDateTime beginTime, LocalDateTime endTime, String comment, int requiredLevel, double discountFraction, double tokenAmount) {
+        super(dayId, createTime, lastModifiedTime, beginTime, endTime, comment);
         this.requiredLevel = requiredLevel;
         this.discountFraction = discountFraction;
         this.tokenAmount = tokenAmount;
-    }
-
-    public MemberPromotionPO() {
     }
 
     public int getRequiredLevel() {

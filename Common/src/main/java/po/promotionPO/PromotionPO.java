@@ -11,15 +11,18 @@ public abstract class PromotionPO implements Serializable {
     private LocalDateTime beginTime;
     private LocalDateTime endTime;
 
+    private String comment;
+
     public PromotionPO() {
     }
 
-    public PromotionPO(int dayId, LocalDateTime createTime, LocalDateTime lastModifiedTime, LocalDateTime beginTime, LocalDateTime endTime) {
+    public PromotionPO(int dayId, LocalDateTime createTime, LocalDateTime lastModifiedTime, LocalDateTime beginTime, LocalDateTime endTime, String comment) {
         this.dayId = dayId;
         this.createTime = createTime;
         this.lastModifiedTime = lastModifiedTime;
         this.beginTime = beginTime;
         this.endTime = endTime;
+        this.comment = comment;
     }
 
     public int getDayId() {
@@ -60,5 +63,13 @@ public abstract class PromotionPO implements Serializable {
 
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

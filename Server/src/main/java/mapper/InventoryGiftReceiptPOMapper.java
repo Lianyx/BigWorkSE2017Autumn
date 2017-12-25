@@ -1,7 +1,7 @@
 package mapper;
 
 import mapper.generic.ReceiptPOMapper;
-import po.InventoryGiftReceiptPO;
+import po.receiptPO.InventoryGiftReceiptPO;
 
 public interface InventoryGiftReceiptPOMapper extends ReceiptPOMapper<InventoryGiftReceiptPO> {
 }

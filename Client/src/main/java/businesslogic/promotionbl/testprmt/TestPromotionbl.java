@@ -1,5 +1,6 @@
-package businesslogic.promotionbl;
+package businesslogic.promotionbl.testprmt;
 
+import businesslogic.promotionbl.CombinePromotionbl;
 import po.promotionPO.PromotionGoodsItemPO;
 import po.promotionPO.CombinePromotionPO;
 import vo.promotionVO.CombinePromotionVO;
@@ -10,7 +11,7 @@ import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Test {
+public class TestPromotionbl {
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException {
         CombinePromotionbl combinePromotionbl = new CombinePromotionbl();
 

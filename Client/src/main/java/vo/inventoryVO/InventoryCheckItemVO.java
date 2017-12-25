@@ -1,4 +1,4 @@
-package vo;
+package vo.inventoryVO;
 
 public class InventoryCheckItemVO {
     /** 商品名 */

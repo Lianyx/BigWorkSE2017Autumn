@@ -1,12 +1,12 @@
 package businesslogic.goodsbl.goodsSearch.concreteStrategy;
 
 import businesslogic.goodsbl.GoodsController;
-import businesslogic.goodsbl.goodsSearch.GetGoodsStategy;
-import vo.GoodsVO;
+import businesslogic.goodsbl.goodsSearch.GoodsSearchStrategy;
+import vo.inventoryVO.GoodsVO;
 
 import java.util.List;
 
-public class GoodTypeStrategy implements GetGoodsStategy {
+public class GoodTypeStrategy implements GoodsSearchStrategy {
     private String goodsType;
     private GoodsController controller;
 
