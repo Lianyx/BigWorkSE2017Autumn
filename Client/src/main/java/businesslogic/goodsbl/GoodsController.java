@@ -1,8 +1,9 @@
 package businesslogic.goodsbl;
 
 import blService.goodsblService.GoodsblService;
+import po.GoodsPO;
 import util.ResultMessage;
-import vo.GoodsVO;
+import vo.inventoryVO.GoodsVO;
 
 import java.util.List;
 
@@ -31,6 +32,18 @@ public class GoodsController implements GoodsblService {
     public ResultMessage updateGoods(GoodsVO goodsVO) {
         ResultMessage resultMessage = goods.updateGoods(goodsVO);
         return resultMessage;
+    }
+
+    public ResultMessage updateGoods(GoodsPO goodsPO) {
+        ResultMessage resultMessage = goods.updateGoods(goodsPO);
+        return resultMessage;
+    }
+
+    public ResultMessage updateGoods(List<GoodsPO> goodsList){
+        for (GoodsPO po:goodsList) {
+            goods.updateGoods(po);
+        }
+        return ResultMessage.SUCCESS;
     }
 
     @Override

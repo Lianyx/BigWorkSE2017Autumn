@@ -1,15 +1,12 @@
 package businesslogic.goodsbl.goodsSearch.concreteStrategy;
 
-import businesslogic.goodsbl.Goods;
 import businesslogic.goodsbl.GoodsController;
-import businesslogic.goodsbl.GoodsPOVOChanger;
-import businesslogic.goodsbl.goodsSearch.GetGoodsStategy;
-import po.GoodsPO;
-import vo.GoodsVO;
+import businesslogic.goodsbl.goodsSearch.GoodsSearchStrategy;
+import vo.inventoryVO.GoodsVO;
 
 import java.util.List;
 
-public class IdStrategy implements GetGoodsStategy {
+public class IdStrategy implements GoodsSearchStrategy {
     private String id;
     private GoodsController controller;
 

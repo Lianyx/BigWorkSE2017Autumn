@@ -4,7 +4,7 @@ import dataService.goodsdataService.GoodsClassificationDataService;
 import exception.ExistException;
 import po.GoodsClassificationPO;
 import util.ResultMessage;
-import vo.GoodsClassificationVO;
+import vo.inventoryVO.GoodsClassificationVO;
 
 import java.util.*;
 

@@ -20,10 +20,38 @@
 
     <!--
          商品PO的修改操作
+         报错，之后回来测试并且修改
     -->
     <update id="update">
-        update goods set id=#{id},goodName=#{goodName},goodType=#{goodType},classifyId=#{classifyId},inventoryNum = #{inventoryNum},purPrice =#{purPrice},salePrice= #{salePrice},recentPurPrice = #{recentPurPrice},
-        recentSalePrice = #{recentSalePrice},alarmNumber = #{alarmNumber} where id=#{id}
+        update goods set id=#{id},
+        <if test="goodName != null">
+            goodName=#{goodName},
+        </if>
+        <if test="goodType != null">
+            goodType=#{goodType},
+        </if>
+        <if test="classifyId != null">
+            classifyId=#{classifyId},
+        </if>
+        <if test="inventoryNum != 0">
+            inventoryNum = #{inventoryNum},
+        </if>
+        <if test="purPrice != 0.0">
+            purPrice =#{purPrice},
+        </if>
+        <if test="salePrice != 0.0">
+            salePrice= #{salePrice},
+        </if>
+        <if test="recentPurPrice != 0.0">
+            recentPurPrice = #{recentPurPrice},
+        </if>
+        <if test="recentSalePrice != 0.0">
+            recentSalePrice = #{recentSalePrice},
+        </if>
+        <if test="alarmNumber != 0">
+            alarmNumber = #{alarmNumber}
+        </if>
+         where id=#{id}
     </update>
 
     <!--

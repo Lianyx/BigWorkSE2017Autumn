@@ -1,7 +1,7 @@
 package businesslogic.goodsClassificationbl;
 
 import po.GoodsClassificationPO;
-import vo.GoodsClassificationVO;
+import vo.inventoryVO.GoodsClassificationVO;
 
 import java.util.ArrayList;
 import java.util.Iterator;

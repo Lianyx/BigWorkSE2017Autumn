@@ -1,9 +1,8 @@
 package blServiceStub.goodsClassificationblService_Stub;
 
 import util.ResultMessage;
-import vo.GoodsClassificationVO;
+import vo.inventoryVO.GoodsClassificationVO;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 

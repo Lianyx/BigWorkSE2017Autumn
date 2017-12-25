@@ -1,4 +1,4 @@
-package vo;
+package vo.inventoryVO;
 
 public class InventoryViewVO {
     /** 开始日期 */

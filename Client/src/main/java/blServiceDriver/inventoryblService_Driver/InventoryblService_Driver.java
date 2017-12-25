@@ -2,8 +2,8 @@ package blServiceDriver.inventoryblService_Driver;
 
 import blServiceStub.inventoryblService_Stub.InventoryblService_Stub;
 import util.ResultMessage;
-import vo.InventoryCheckVO;
-import vo.InventoryViewVO;
+import vo.inventoryVO.InventoryCheckVO;
+import vo.inventoryVO.InventoryViewVO;
 
 public class InventoryblService_Driver {
     private InventoryblService_Stub inventoryBLService_Stub = new InventoryblService_Stub();

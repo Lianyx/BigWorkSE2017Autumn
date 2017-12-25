@@ -1,7 +1,7 @@
 package businesslogic.goodsbl;
 
 import po.GoodsPO;
-import vo.GoodsVO;
+import vo.inventoryVO.GoodsVO;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,8 +12,8 @@ public class GoodsPOVOChanger {
         GoodsVO vo = new GoodsVO();
 
         vo.setId(po.getId());
-        vo.setGoodName(po.getgoodName());
-        vo.setGoodType(po.getgoodType());
+        vo.setGoodName(po.getGoodName());
+        vo.setGoodType(po.getGoodType());
         vo.setClassifyId(po.getClassifyId());
         vo.setAlarmNumber(po.getAlarmNumber());
         vo.setInventoryNum(po.getInventoryNum());

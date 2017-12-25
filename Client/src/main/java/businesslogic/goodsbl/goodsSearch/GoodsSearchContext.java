@@ -1,15 +1,15 @@
 package businesslogic.goodsbl.goodsSearch;
 
-import vo.GoodsVO;
+import vo.inventoryVO.GoodsVO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //模糊查询的上下文
-public class GoodsContext {
+public class GoodsSearchContext {
     private static final int DEFAULT_SIZE = 50;
 
-    GetGoodsStategy stategy;
+    GoodsSearchStrategy stategy;
 
     //模糊查询
     public List<GoodsVO> getGoods(){
@@ -21,7 +21,7 @@ public class GoodsContext {
     }
 
     //设置策略
-    public void setGetGoodsStrategy (GetGoodsStategy getGoodsStrategy){
-        stategy = getGoodsStrategy;
+    public void setGoodsStrategy (GoodsSearchStrategy goodsStrategy){
+        stategy = goodsStrategy;
     }
 }
