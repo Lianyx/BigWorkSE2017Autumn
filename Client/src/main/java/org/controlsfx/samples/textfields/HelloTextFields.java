@@ -47,7 +47,7 @@ import org.controlsfx.samples.Utils;
 
 public class HelloTextFields extends ControlsFXSample {
     
-    private static final Image image = new Image("/org/controlsfx/samples/security-low.png");
+    private static final Image image = new Image("/security-low.png");
     
     @Override public String getSampleName() {
         return "TextFields";

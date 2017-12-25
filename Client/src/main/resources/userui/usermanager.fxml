@@ -34,17 +34,19 @@
 
 
        <JFXListView fx:id="navigation" layoutY="40.0" prefHeight="560.0" prefWidth="160.0">
-           <HBox fx:id="userlist" spacing="10">
-               <padding><Insets bottom="8" left="10" top="8" /></padding>
-               <children>
+               <Label fx:id="userlist" textFill="#78909c">
+                   <padding><Insets bottom="8" left="10" top="8" /></padding>
+                   UserList
+                   <graphic>
+
                    <JFXRippler position="BACK" styleClass="icons-rippler">
-                       <StackPane>
-                           <FontAwesomeIconView fx:id="userlisticon" size="1em" styleClass="icon" />
-                       </StackPane>
-                   </JFXRippler>
-                   <Label text="UserList" />
-               </children>
-           </HBox>
+                   <StackPane>
+                       <padding><Insets right="10" /></padding>
+                       <MaterialDesignIconView fx:id="userlisticon" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)" glyphName="ACCOUNT" size="1.5em" styleClass="icon" />
+                   </StackPane>
+               </JFXRippler>
+                   </graphic>
+               </Label>
        </JFXListView>
 
         <AnchorPane fx:id="logopane"  prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: white">

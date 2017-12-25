@@ -1,6 +1,7 @@
 package ui.userui.usermanagerui;
 
 import com.jfoenix.controls.JFXRippler;
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,9 +29,9 @@ public class IconButton extends JFXRippler {
         }
     }
 
-    public IconButton(MaterialDesignIconView view){
+    public IconButton(MaterialDesignIcon icon){
         this();
-        this.view=view;
+        view.setIcon(icon);
     }
     public void setIconFill(Paint paint){
         view.setFill(paint);

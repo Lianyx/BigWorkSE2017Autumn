@@ -63,7 +63,7 @@ public class UserListPane extends Refreshable{
 
         pagination = new Pagination((ulv.getObservableList().size() /ulv.getRowsPerPage()+1 ), 0);
         pagination.setPageFactory(ulv::createPage);
-        pagination.setPrefSize(600,450);
+        pagination.setPrefWidth(600);
         borderpane.setCenter(pagination);
 
 
@@ -92,7 +92,7 @@ public class UserListPane extends Refreshable{
         int current=pagination.getCurrentPageIndex();
         pagination = new Pagination((ulv.getObservableList().size() /ulv.getRowsPerPage()+1 ), 0);
         pagination.setPageFactory(ulv::createPage);
-        pagination.setPrefSize(600,450);
+        pagination.setPrefWidth(600);
         borderpane.setCenter(pagination);
         if(current-1>=0)
         pagination.setCurrentPageIndex(current-1);

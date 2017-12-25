@@ -3,12 +3,10 @@ package network;
 
 import dataService.test.TestdataService1;
 import dataService.test.TestdataService2;
-import ui.mainui.Test;
 
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
 public class ClientImpl extends UnicastRemoteObject implements Client{

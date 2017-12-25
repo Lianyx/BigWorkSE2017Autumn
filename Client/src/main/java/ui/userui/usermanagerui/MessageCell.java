@@ -10,6 +10,7 @@ public class MessageCell extends JFXListCell {
         if(!empty)
         {
             messageHBox = new MessageHBox();
+
             setGraphic(messageHBox);
         }else{
             setGraphic(null);

@@ -1,4 +1,7 @@
 package ui.userui.loginui;
 
-public class FindPassword {
+import javafx.scene.layout.StackPane;
+
+public class FindPassword extends StackPane {
+
 }

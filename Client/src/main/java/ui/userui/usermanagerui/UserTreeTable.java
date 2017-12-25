@@ -3,32 +3,24 @@ package ui.userui.usermanagerui;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.paint.Paint;
 import javafx.util.Callback;
 
 import javafx.util.Duration;
-import ui.mainui.Test;
 import ui.util.CircleImageView;
 import vo.UserListVO;
 import java.util.Set;
@@ -69,7 +61,7 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
 
 
         JFXTreeTableColumn image = new JFXTreeTableColumn("  ");
-        image.setPrefWidth(40);
+        image.setPrefWidth(50);
         Callback<TreeTableColumn, TreeTableCell> imageCellFactory = (TreeTableColumn p) -> new ImageCell();
         image.setCellValueFactory(new TreeItemPropertyValueFactory<>("image"));
         image.setCellFactory(imageCellFactory);
@@ -77,7 +69,7 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
 
 
         JFXTreeTableColumn<UserListVO, String> username = new JFXTreeTableColumn("Username");
-        username.setPrefWidth(100);
+        username.setPrefWidth(80);
         username.setCellValueFactory((TreeTableColumn.CellDataFeatures<UserListVO, String> param) -> {
             if (username.validateValue(param)) {
                 return new ReadOnlyObjectWrapper(param.getValue().getValue().getUsername());
@@ -87,18 +79,10 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
         });
 
 
-        JFXTreeTableColumn<UserListVO, String> usertype = new JFXTreeTableColumn("Usertype");
-        usertype.setPrefWidth(100);
-        usertype.setCellValueFactory((TreeTableColumn.CellDataFeatures<UserListVO, String> param) -> {
-            if (username.validateValue(param)) {
-                return new ReadOnlyObjectWrapper(param.getValue().getValue().getUserCategory().name());
-            } else {
-                return username.getComputedValue(param);
-            }
-        });
+
 
         JFXTreeTableColumn<UserListVO, Long> userid = new JFXTreeTableColumn("Userid");
-        userid.setPrefWidth(100);
+        userid.setPrefWidth(120);
         userid.setCellValueFactory((TreeTableColumn.CellDataFeatures<UserListVO, Long> param) -> {
             if (userid.validateValue(param)) {
                 return new ReadOnlyObjectWrapper(param.getValue().getValue().getUserid());
@@ -107,12 +91,38 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
             }
         });
 
-        JFXTreeTableColumn userstate = new JFXTreeTableColumn("Userstate");
-        userstate.setPrefWidth(100);
-        Callback<TreeTableColumn, TreeTableCell> buttonCellFactory = (TreeTableColumn p) -> new ButtonCell();
-        userstate.setCellValueFactory(new TreeItemPropertyValueFactory<>("userstate"));
+        JFXTreeTableColumn<UserListVO, String> usertype = new JFXTreeTableColumn("Usertype");
+        usertype.setPrefWidth(125);
+        usertype.setCellValueFactory((TreeTableColumn.CellDataFeatures<UserListVO, String> param) -> {
+            if (usertype.validateValue(param)) {
+                return new ReadOnlyObjectWrapper(param.getValue().getValue().getUserCategory().name());
+            } else {
+                return usertype.getComputedValue(param);
+            }
+        });
+        Callback<TreeTableColumn<UserListVO, String>, TreeTableCell<UserListVO, String>> typeCellFactory = (TreeTableColumn<UserListVO, String> p) -> new ButtonCell();
+        usertype.setCellFactory(typeCellFactory);
 
-        userstate.setCellFactory(buttonCellFactory);
+
+        JFXTreeTableColumn<UserListVO, String> phone = new JFXTreeTableColumn("Phone");
+        phone.setPrefWidth(150);
+        phone.setCellValueFactory((TreeTableColumn.CellDataFeatures<UserListVO, String> param) -> {
+            if (phone.validateValue(param)) {
+                return new ReadOnlyObjectWrapper(param.getValue().getValue().getPhone());
+            } else {
+                return phone.getComputedValue(param);
+            }
+        });
+        Callback<TreeTableColumn<UserListVO, String>, TreeTableCell<UserListVO, String>> tokenCellFactory = (TreeTableColumn<UserListVO, String> p) -> new TokenCell();
+        phone.setCellFactory(tokenCellFactory);
+
+
+        JFXTreeTableColumn more = new JFXTreeTableColumn("");
+        more.setPrefWidth(20);
+        Callback<TreeTableColumn, TreeTableCell> moreCellFactory = (TreeTableColumn p) -> new MoreCell();
+        more.setCellFactory(moreCellFactory);
+
+
 
 
         this.setRowFactory(tableView->{
@@ -142,7 +152,7 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
         this.setShowRoot(false);
 
 
-        this.getColumns().addAll(choose,image, username, usertype, userid, userstate);
+        this.getColumns().addAll(choose,image, username,  userid,usertype,phone,more);
 
     }
 
@@ -188,6 +198,7 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
         private JFXCheckBox cb = new JFXCheckBox("");
 
         public ChooseBoxCell(){
+            cb.setStyle("-jfx-checked-color: #DA4CEE; -jfx-unchecked-color:#78909C;");
             cb.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -249,29 +260,53 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
 
 
     }
-    private class ButtonCell extends JFXTreeTableCell {
-        private JFXButton civ = new JFXButton("sabi");
+    private class ButtonCell extends JFXTreeTableCell<UserListVO,String> {
+        private JFXButton civ = new JFXButton("");
 
         @Override
-        public void updateItem(Object item,boolean empty){
+        public void updateItem(String item,boolean empty){
             super.updateItem(item,empty);
             if(empty){
                 setGraphic(null);
             }else{
                 setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                civ.setStyle("-fx-background-color: rgba(182,0,107,0.19); -fx-text-fill: white;-fx-background-radius: 10;");
+                civ.setText(item);
+                civ.setStyle("-fx-background-color: linear-gradient(to top right , rgba(170,17,242,0.7),rgba(218,76,238,0.7)); -fx-text-fill: white;-fx-background-radius: 10;");
                 setGraphic(civ);
             }
+        }
+    }
 
 
+    private class TokenCell extends JFXTreeTableCell<UserListVO,String> {
+        private TokenLabel tl = new TokenLabel("");
 
+        @Override
+        public void updateItem(String item,boolean empty){
+            super.updateItem(item,empty);
+            if(empty){
+                setGraphic(null);
+            }else{
+                tl.setColor(Paint.valueOf("#AA11F2"));
+                tl.setText(item);
+                setGraphic(tl);
+            }
+        }
+    }
+    private class MoreCell extends JFXTreeTableCell {
+        private IconButton iconButton = new IconButton(MaterialDesignIcon.DOTS_HORIZONTAL);
 
-
+        @Override
+        public void updateItem(Object item,boolean empty){
+            super.updateItem(item,empty);
+                iconButton.setTranslateY(-8);
+                setGraphic(iconButton);
+            }
         }
 
 
 
-    }
+
 }
 
 

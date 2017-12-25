@@ -2,12 +2,18 @@ package ui.userui.usermanagerui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import org.controlsfx.control.textfield.TextFields;
 import ui.util.Refreshable;
 import vo.UserListVO;
 import vo.UserVO;
@@ -26,13 +32,23 @@ public class UserDetailPane  extends Refreshable {
     BoardController boardController;
 
     @FXML
-    Label username;
+    TextField username;
     @FXML
-    Label usertype;
+    TextField usertype;
+    @FXML
+    TextField email;
+    @FXML
+    TextField phone;
     @FXML
     JFXButton choose;
     @FXML
     ImageView imageview;
+    @FXML
+    JFXButton sure;
+    @FXML
+    JFXButton modify;
+
+    SimpleBooleanProperty modifyState = new SimpleBooleanProperty(false);
 
     public UserDetailPane(UserListVO userListVO,BoardController boardController) {
         super();
@@ -48,6 +64,15 @@ public class UserDetailPane  extends Refreshable {
         this.boardController = boardController;
         username.setText(userListVO.getUsername());
         usertype.setText(userListVO.getUserCategory().name());
+        email.setText(userListVO.getEmail());
+        phone.setText(userListVO.getPhone());
+        username.disableProperty().bind(modifyState.not());
+        usertype.disableProperty().bind(modifyState.not());
+        email.disableProperty().bind(modifyState.not());
+        phone.disableProperty().bind(modifyState.not());
+        sure.visibleProperty().bind(modifyState);
+
+
         imageview.setImage(userListVO.getImage());
     }
 
@@ -83,11 +108,13 @@ public class UserDetailPane  extends Refreshable {
 
     @FXML
     public void modify(){
-        try{
-            boardController.switchTo(new UserModifyPane(userListVO));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+       modifyState.setValue(!modifyState.getValue());
+       if(modifyState.getValue()==true){
+           modify.setBackground(new Background(new BackgroundFill(Color.valueOf("#DA4CEE"), modify.getBackground() == null ? null : modify.getBackground().getFills().get(0).getRadii(), null)));
+       }else{
+           modify.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, modify.getBackground().getFills().get(0).getRadii(), null)));
+
+       }
     }
 
     @Override

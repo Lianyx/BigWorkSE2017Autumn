@@ -32,10 +32,10 @@ public class UserManagerUIController implements Initializable{
     TopBar bar;
 
     @FXML
-    JFXListView<HBox> navigation;
+    JFXListView<Label> navigation;
 
     @FXML
-    HBox userlist;
+    Label userlist;
 
     @FXML
     StackPane board;

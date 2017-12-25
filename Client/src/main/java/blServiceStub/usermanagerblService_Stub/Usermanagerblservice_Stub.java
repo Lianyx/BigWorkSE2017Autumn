@@ -18,17 +18,17 @@ public class Usermanagerblservice_Stub implements UserManagerblService{
 
 
     public Usermanagerblservice_Stub(){
-        set.add(new UserListVO(10000,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","110"));
-        set.add(new UserListVO(10001,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","110"));
-        set.add(new UserListVO(10002,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","110"));
-        set.add(new UserListVO(10003,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","110"));
-        set.add(new UserListVO(10004,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","110"));
-        set.add(new UserListVO(10005,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","110"));
-        set.add(new UserListVO(10006,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","110"));
-        set.add(new UserListVO(10007,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","110"));
-        set.add(new UserListVO(10008,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","110"));
-        set.add(new UserListVO(10009,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","110"));
-        set.add(new UserListVO(10010,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","110"));
+        set.add(new UserListVO(10000,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
+        set.add(new UserListVO(10001,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
+        set.add(new UserListVO(10002,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
+        set.add(new UserListVO(10003,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
+        set.add(new UserListVO(10004,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
+        set.add(new UserListVO(10005,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
+        set.add(new UserListVO(10006,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
+        set.add(new UserListVO(10007,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
+        set.add(new UserListVO(10008,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
+        set.add(new UserListVO(10009,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
+        set.add(new UserListVO(10010,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
     }
 
 

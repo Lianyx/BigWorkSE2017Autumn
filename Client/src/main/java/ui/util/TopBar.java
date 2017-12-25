@@ -2,6 +2,9 @@ package ui.util;
 
 import com.jfoenix.controls.JFXBadge;
 import com.jfoenix.controls.JFXRippler;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -9,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.controlsfx.control.PopOver;
 import ui.userui.usermanagerui.BoardController;
@@ -32,6 +36,12 @@ public class TopBar extends HBox {
     JFXRippler forward;
 
     @FXML
+    FontAwesomeIconView left;
+
+    @FXML
+    FontAwesomeIconView right;
+
+    @FXML
     JFXRippler managerpopup;
 
     @FXML
@@ -53,6 +63,27 @@ public class TopBar extends HBox {
 
             back.disableProperty().bind(HistoricalRecord.canBack.not());
             forward.disableProperty().bind(HistoricalRecord.canForward.not());
+
+            back.disableProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    if(newValue==true){
+                        left.setFill(Paint.valueOf("#9fc1d6"));
+                    }else{
+                        left.setFill(Paint.valueOf("#000000"));
+                    }
+                }
+            });
+            forward.disableProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    if(newValue==true){
+                        right.setFill(Paint.valueOf("#9fc1d6"));
+                    }else{
+                        right.setFill(Paint.valueOf("#000000"));
+                    }
+                }
+            });
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -77,7 +108,6 @@ public class TopBar extends HBox {
         messagePopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
 
         message.setOnMouseClicked(e -> messagePopOver.show(message));
-
 
 
 
