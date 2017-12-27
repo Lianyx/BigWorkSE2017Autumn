@@ -1,11 +1,13 @@
 package vo.promotionVO;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import po.promotionPO.PromotionGoodsItemPO;
 
-public class PromotionGoodsItemVO {
-    private int id;
+public class PromotionGoodsItemVO extends RecursiveTreeObject<PromotionGoodsItemVO> {
+    private String id;
     private String name;
     private int num;
+    private int unitPrice;
 
     public PromotionGoodsItemVO(){
     }
@@ -14,6 +16,8 @@ public class PromotionGoodsItemVO {
         id = promotionGoodsItemPO.getId();
         // TODO 需要使用service
         name = String.valueOf(promotionGoodsItemPO.getId());
+        unitPrice = 50;
+
         num = promotionGoodsItemPO.getNum();
     }
 
@@ -21,11 +25,11 @@ public class PromotionGoodsItemVO {
         return new PromotionGoodsItemPO(id, num);
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -43,5 +47,13 @@ public class PromotionGoodsItemVO {
 
     public void setNum(int num) {
         this.num = num;
+    }
+
+    public int getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(int unitPrice) {
+        this.unitPrice = unitPrice;
     }
 }

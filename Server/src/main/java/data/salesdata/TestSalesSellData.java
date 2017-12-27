@@ -26,7 +26,7 @@ public class TestSalesSellData {
         ssrp.setGoodsList(new ReceiptGoodsItemPO[]{new ReceiptGoodsItemPO(1, 1, 2, "first")});
         ssrp.setOriginSum(100);
         ssrp.setComment("如果建表的时候不明确说明utf8，之后能用吗");
-        ssrp.setGifts(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO(0, 10), new PromotionGoodsItemPO(1, 2)});
+        ssrp.setGifts(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO("0", 10), new PromotionGoodsItemPO("1", 2)});
 
         rdao.insert(ssrp);
 

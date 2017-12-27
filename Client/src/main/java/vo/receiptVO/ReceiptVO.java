@@ -1,5 +1,6 @@
 package vo.receiptVO;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
 
@@ -13,6 +14,8 @@ public abstract class ReceiptVO {
     private LocalDateTime lastModifiedTime;
 
     private ReceiptState receiptState;
+
+    private SimpleBooleanProperty selected = new SimpleBooleanProperty(false);
 
     public ReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState) {
         this.id = id;
@@ -62,5 +65,17 @@ public abstract class ReceiptVO {
 
     public void setReceiptState(ReceiptState receiptState) {
         this.receiptState = receiptState;
+    }
+
+    public boolean isSelected() {
+        return selected.get();
+    }
+
+    public SimpleBooleanProperty selectedProperty() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected.set(selected);
     }
 }

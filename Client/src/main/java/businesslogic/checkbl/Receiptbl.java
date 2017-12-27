@@ -17,7 +17,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-// TODO 一定要提取出来“增删改”给所有人用，另外查（分为模糊和非模糊）一定要尽快写，不能再往后拖了
 public abstract class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements ReceiptblService<TV>, CheckInfo<TP> {
     private Class<? extends ReceiptVO> receiptVOClass;
     private Class<? extends ReceiptPO> receiptPOClass;

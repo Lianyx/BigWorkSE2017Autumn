@@ -5,8 +5,11 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
+import ui.managerui.promotion.PromotionListPane;
 import ui.userui.usermanagerui.BoardController;
 import ui.util.HistoricalRecord;
+import ui.util.PaneSwitchAnimation;
 import ui.util.TopBar;
 
 
@@ -27,6 +30,9 @@ public class ManagerUIController {
         bar.setBoardController(boardController);
         // TODO 实际上默认的是checkListPane，但先用promotion来测试，不过就算不改也无伤大雅
         PromotionListPane initialPane = new PromotionListPane(mainpane, boardController);
+
+        // TODO 这里不能boardController内部解决吗？
+        boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(250),  board));
 
         // 这里感觉好坑啊？
         board.getChildren().setAll(initialPane);

@@ -16,7 +16,8 @@ create table MemberPromotion(
 
   requiredLevel integer,
   discountFraction double,
-  tokenAmount double
+  tokenAmount double,
+  gifts varchar(1000)
 ) character set = utf8;
 
 

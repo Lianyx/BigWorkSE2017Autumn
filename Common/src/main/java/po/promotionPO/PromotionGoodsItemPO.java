@@ -3,23 +3,23 @@ package po.promotionPO;
 import java.io.Serializable;
 
 public class PromotionGoodsItemPO implements Serializable {
-    private int id;
+    private String id;
     private int num;
 
 
     public PromotionGoodsItemPO() {
     }
 
-    public PromotionGoodsItemPO(int id, int num) {
+    public PromotionGoodsItemPO(String id, int num) {
         this.id = id;
         this.num = num;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
