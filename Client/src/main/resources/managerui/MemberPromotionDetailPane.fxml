@@ -70,7 +70,7 @@
 
                 </GridPane>
             </StackPane>
-            <StackPane id="infoPane2" layoutX="93" layoutY="300" prefWidth="400" style="-fx-padding: 6 12 26 12;">
+            <StackPane id="infoPane2" layoutX="93" layoutY="500" prefWidth="400" style="-fx-padding: 6 12 26 12;">
                 <GridPane id="infoGridPane2" prefWidth="400">
                     <columnConstraints>
                         <ColumnConstraints prefWidth="150"/>

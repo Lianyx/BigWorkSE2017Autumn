@@ -7,6 +7,7 @@ import po.ReceiptGoodsItemPO;
 import po.receiptPO.SalesSellReceiptPO;
 import util.ReceiptSearchCondition;
 import util.ReceiptState;
+import util.RespectiveReceiptSearchCondition;
 
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
@@ -52,7 +53,9 @@ public class TestSalesSellData {
 
 //        SalesSellReceiptPO ssrpB = rdao.selectBetween(begin, end).get(0);
 
-        SalesSellReceiptPO ssrpC = rdao.search(new ReceiptSearchCondition(null, LocalDateTime.now(), null, "Wang Er Xiao", null, null)).get(0);
+//        SalesSellReceiptPO ssrpC = rdao.search(new ReceiptSearchCondition(null, LocalDateTime.now(), null, "Wang Er Xiao", null, null)).get(0);
+        SalesSellReceiptPO ssrpC = rdao.search(new RespectiveReceiptSearchCondition()).get(0);
+        System.out.println(ssrpC.getCreateTime());
 
         System.out.println("get and delete: ");
         System.out.println(ssrpC);

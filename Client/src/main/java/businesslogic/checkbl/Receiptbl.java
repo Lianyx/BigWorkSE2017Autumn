@@ -6,6 +6,7 @@ import dataService.checkdataService.ReceiptDataService;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptSearchCondition;
 import util.ReceiptState;
+import util.RespectiveReceiptSearchCondition;
 import util.ResultMessage;
 import vo.receiptVO.ReceiptVO;
 
@@ -64,6 +65,10 @@ public abstract class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> impl
         return receiptDataService.search(receiptSearchCondition).stream().map(this::convertToVO).collect(Collectors.toCollection(ArrayList::new));
     }
 
+    @Override
+    public ArrayList<TV> search(RespectiveReceiptSearchCondition respectiveReceiptSearchCondition) throws RemoteException {
+        return receiptDataService.search(respectiveReceiptSearchCondition).stream().map(this::convertToVO).collect(Collectors.toCollection(ArrayList::new));
+    }
 
     @Override
     public ResultMessage update(TP receiptPO) throws RemoteException {

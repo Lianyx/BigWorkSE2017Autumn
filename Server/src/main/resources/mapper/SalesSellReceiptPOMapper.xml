@@ -27,7 +27,7 @@
     <select id="selectByState" resultMap="resultMap">
         select * from SalesSellReceipt where receiptState=#{receiptState}
     </select>
-    <select id="search" resultMap="resultMap">
+    <select id="searchForBusiness" resultMap="resultMap">
         select * from SalesSellReceipt
         <where>
             <if test="memberId != null">
@@ -44,6 +44,32 @@
             </if>
             <if test="end != null">
                 AND createTime &lt;= #{end}
+            </if>
+        </where>
+    </select>
+    <select id="search" resultMap="resultMap">
+        select * from SalesSellReceipt
+        <where>
+            <if test="operatorId != null">
+                operatorId=#{operatorId}
+            </if>
+            <if test="dayId != null">
+                AND dayId=#{dayId}
+            </if>
+            <if test="receiptState != null">
+                AND receiptState=#{receiptState}
+            </if>
+            <if test="createTimeFloor != null">
+                AND createTime &gt;= #{createTimeFloor}
+            </if>
+            <if test="createTimeCeil != null">
+                AND createTime &lt;= #{createTimeCeil}
+            </if>
+            <if test="lastModifiedTimeFloor != null">
+                AND lastModifiedTime &gt;= #{lastModifiedTimeFloor}
+            </if>
+            <if test="lastModifiedTimeCeil != null">
+                AND lastModifiedTime &lt;= #{lastModifiedTimeCeil}
             </if>
         </where>
     </select>

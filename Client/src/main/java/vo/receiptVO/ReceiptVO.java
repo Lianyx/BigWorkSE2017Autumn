@@ -1,12 +1,13 @@
 package vo.receiptVO;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleBooleanProperty;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
 
 import java.time.LocalDateTime;
 
-public abstract class ReceiptVO {
+public abstract class ReceiptVO extends RecursiveTreeObject<ReceiptVO> {
     private String id;
     private int operatorId; // 很可能会改成名字之类
 
@@ -16,6 +17,9 @@ public abstract class ReceiptVO {
     private ReceiptState receiptState;
 
     private SimpleBooleanProperty selected = new SimpleBooleanProperty(false);
+
+    public ReceiptVO() {
+    }
 
     public ReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState) {
         this.id = id;
