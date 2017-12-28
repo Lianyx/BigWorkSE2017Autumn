@@ -1,13 +1,15 @@
 package vo.promotionVO;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import po.promotionPO.PromotionGoodsItemPO;
 
 public class PromotionGoodsItemVO extends RecursiveTreeObject<PromotionGoodsItemVO> {
     private String id;
     private String name;
-    private int num;
     private int unitPrice;
+    private IntegerProperty num;
 
     public PromotionGoodsItemVO(){
     }
@@ -18,11 +20,11 @@ public class PromotionGoodsItemVO extends RecursiveTreeObject<PromotionGoodsItem
         name = String.valueOf(promotionGoodsItemPO.getId());
         unitPrice = 50;
 
-        num = promotionGoodsItemPO.getNum();
+        num = new SimpleIntegerProperty(promotionGoodsItemPO.getNum());
     }
 
     public PromotionGoodsItemPO toPO() {
-        return new PromotionGoodsItemPO(id, num);
+        return new PromotionGoodsItemPO(id, num.get());
     }
 
     public String getId() {
@@ -41,19 +43,23 @@ public class PromotionGoodsItemVO extends RecursiveTreeObject<PromotionGoodsItem
         this.name = name;
     }
 
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
-    }
-
     public int getUnitPrice() {
         return unitPrice;
     }
 
     public void setUnitPrice(int unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public int getNum() {
+        return num.get();
+    }
+
+    public IntegerProperty numProperty() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num.set(num);
     }
 }
