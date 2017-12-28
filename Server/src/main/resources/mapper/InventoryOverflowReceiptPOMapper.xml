@@ -27,6 +27,29 @@
     <select id="selectByState" resultMap="resultMap">
         select * from inventoryoverflowreceipt where receiptState=#{receiptState}
     </select>
+
+    <select id="searchForBusiness" resultMap="resultMap">
+        select * from SalesSellReceipt
+        <where>
+            <if test="memberId != null">
+                memberId=#{memberId}
+            </if>
+            <if test="clerkName != null">
+                AND clerkName=#{clerkName}
+            </if>
+            <if test="stockName != null">
+                AND stockName=#{stockName}
+            </if>
+            <if test="begin != null">
+                AND createTime &gt;= #{begin}
+            </if>
+            <if test="end != null">
+                AND createTime &lt;= #{end}
+            </if>
+        </where>
+    </select>
+
+
     <select id="search" resultMap="resultMap">
         select * from SalesSellReceipt
         <where>
