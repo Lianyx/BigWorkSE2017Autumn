@@ -7,6 +7,7 @@ import org.apache.ibatis.binding.BindingException;
 import org.apache.ibatis.session.SqlSession;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
+import util.RespectiveReceiptSearchCondition;
 import util.ResultMessage;
 import util.ReceiptSearchCondition;
 
@@ -82,7 +83,6 @@ public class ReceiptData<T extends ReceiptPO> extends UnicastRemoteObject implem
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             ReceiptPOMapper<T> mapper = session.getMapper(mapperClass);
             resultList = mapper.selectBetween(begin, end);
-            // TODO 为什么这里返回就不是arraylist，下面就是
             session.commit();
         }
         return resultList;
@@ -106,7 +106,19 @@ public class ReceiptData<T extends ReceiptPO> extends UnicastRemoteObject implem
 
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             ReceiptPOMapper<T> mapper = session.getMapper(mapperClass);
-            resultList = mapper.search(receiptSearchCondition);
+            resultList = mapper.searchForBusiness(receiptSearchCondition);
+            session.commit();
+        }
+        return resultList;
+    }
+
+    @Override
+    public ArrayList<T> search(RespectiveReceiptSearchCondition respectiveReceiptSearchCondition) throws RemoteException {
+        ArrayList<T> resultList;
+
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            ReceiptPOMapper<T> mapper = session.getMapper(mapperClass);
+            resultList = mapper.search(respectiveReceiptSearchCondition);
             session.commit();
         }
         return resultList;

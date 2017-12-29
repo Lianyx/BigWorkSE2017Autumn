@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class Promotionbl<TV extends PromotionVO, TP extends PromotionPO> implements PromotionblService<TV> {
+public abstract class Promotionbl<TV extends PromotionVO, TP extends PromotionPO> implements PromotionblService<TV> {
     private Class<? extends PromotionPO> promotionPOClass;
     private Class<? extends PromotionVO> promotionVOClass;
 
@@ -97,7 +97,7 @@ public class Promotionbl<TV extends PromotionVO, TP extends PromotionPO> impleme
         cpo1.setBeginTime(LocalDateTime.of(2017, 11, 1, 0, 0));
         cpo1.setEndTime(LocalDateTime.of(2017, 12, 30, 0, 0));
         cpo1.setDiscountAmount(40);
-        cpo1.setGoodsCombination(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO(0, 10), new PromotionGoodsItemPO(1, 2)});
+        cpo1.setGoodsCombination(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO("0", 10), new PromotionGoodsItemPO("1", 2)});
 
 
         CombinePromotionVO cv1 = new CombinePromotionVO(cpo1);

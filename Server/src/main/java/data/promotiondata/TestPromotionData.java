@@ -28,6 +28,7 @@ public class TestPromotionData {
         mpo1.setRequiredLevel(3);
         mpo1.setTokenAmount(5);
         mpo1.setComment("会员返利。Can't use Chinese? 能用中文吗");
+        mpo1.setGifts(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO("0", 10), new PromotionGoodsItemPO("a1", 2)});
         mdao.insert(mpo1);
 
 
@@ -53,7 +54,7 @@ public class TestPromotionData {
         tpo1.setEndTime(LocalDateTime.of(2017, 12, 10, 0, 0));
         tpo1.setRequiredTotal(100);
         tpo1.setTokenAmount(5);
-        tpo1.setGifts(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO(0, 10), new PromotionGoodsItemPO(1, 2)});
+        tpo1.setGifts(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO("0", 10), new PromotionGoodsItemPO("1", 2)});
         tpo1.setComment("满"+tpo1.getDayId()+"00 减100");
 
         tdao.insert(tpo1);
@@ -91,7 +92,7 @@ public class TestPromotionData {
         cpo1.setBeginTime(LocalDateTime.of(2017, 11, 1, 0, 0));
         cpo1.setEndTime(LocalDateTime.of(2017, 12, 30, 0, 0));
         cpo1.setDiscountAmount(40);
-        cpo1.setGoodsCombination(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO(0, 10), new PromotionGoodsItemPO(1, 2)});
+        cpo1.setGoodsCombination(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO("0", 10), new PromotionGoodsItemPO("1", 2)});
         cpo1.setComment("皮包买三送一啦");
 
         cdao.insert(cpo1);
@@ -105,8 +106,8 @@ public class TestPromotionData {
 
     public static void main(String[] args) throws RemoteException{
         testM();
-        testT();
-        testC();
+//        testT();
+//        testC();
         System.out.println("end Main");
     }
 }

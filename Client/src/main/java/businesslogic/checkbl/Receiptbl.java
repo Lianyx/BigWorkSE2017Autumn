@@ -6,6 +6,7 @@ import dataService.checkdataService.ReceiptDataService;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptSearchCondition;
 import util.ReceiptState;
+import util.RespectiveReceiptSearchCondition;
 import util.ResultMessage;
 import vo.receiptVO.ReceiptVO;
 
@@ -17,7 +18,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-// TODO 一定要提取出来“增删改”给所有人用，另外查（分为模糊和非模糊）一定要尽快写，不能再往后拖了
 public abstract class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements ReceiptblService<TV>, CheckInfo<TP> {
     private Class<? extends ReceiptVO> receiptVOClass;
     private Class<? extends ReceiptPO> receiptPOClass;
@@ -65,6 +65,10 @@ public abstract class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> impl
         return receiptDataService.search(receiptSearchCondition).stream().map(this::convertToVO).collect(Collectors.toCollection(ArrayList::new));
     }
 
+    @Override
+    public ArrayList<TV> search(RespectiveReceiptSearchCondition respectiveReceiptSearchCondition) throws RemoteException {
+        return receiptDataService.search(respectiveReceiptSearchCondition).stream().map(this::convertToVO).collect(Collectors.toCollection(ArrayList::new));
+    }
 
     @Override
     public ResultMessage update(TP receiptPO) throws RemoteException {

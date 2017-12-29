@@ -3,7 +3,9 @@ package vo.promotionVO;
 import blService.promotionblService.PromotionblService;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import dataService.promotiondataService.PromotionDataService;
+import javafx.scene.layout.Pane;
 import po.promotionPO.PromotionPO;
+import ui.managerui.promotion.PromotionDetailPane;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -36,10 +38,12 @@ public abstract class PromotionVO extends RecursiveTreeObject<PromotionVO> {
         this.lastModifiedTime = promotionPO.getLastModifiedTime();
         this.beginTime = promotionPO.getBeginTime();
         this.endTime = promotionPO.getEndTime();
+        this.comment = promotionPO.getComment();
     }
 
     public abstract <T extends PromotionPO> T toPO();
     public abstract PromotionblService getService() throws RemoteException, NotBoundException, MalformedURLException;
+    public abstract PromotionDetailPane getDetailPane();
 
     // TODO 这个应该和receipt全并
     protected static String formatId(String codeName, PromotionPO promotionPO) {
@@ -93,5 +97,13 @@ public abstract class PromotionVO extends RecursiveTreeObject<PromotionVO> {
 
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

@@ -7,6 +7,7 @@ import po.ReceiptGoodsItemPO;
 import po.receiptPO.SalesSellReceiptPO;
 import util.ReceiptSearchCondition;
 import util.ReceiptState;
+import util.RespectiveReceiptSearchCondition;
 
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
@@ -26,7 +27,7 @@ public class TestSalesSellData {
         ssrp.setGoodsList(new ReceiptGoodsItemPO[]{new ReceiptGoodsItemPO(1, 1, 2, "first")});
         ssrp.setOriginSum(100);
         ssrp.setComment("如果建表的时候不明确说明utf8，之后能用吗");
-        ssrp.setGifts(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO(0, 10), new PromotionGoodsItemPO(1, 2)});
+        ssrp.setGifts(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO("0", 10), new PromotionGoodsItemPO("1", 2)});
 
         rdao.insert(ssrp);
 
@@ -52,7 +53,9 @@ public class TestSalesSellData {
 
 //        SalesSellReceiptPO ssrpB = rdao.selectBetween(begin, end).get(0);
 
-        SalesSellReceiptPO ssrpC = rdao.search(new ReceiptSearchCondition(null, LocalDateTime.now(), null, "Wang Er Xiao", null, null)).get(0);
+//        SalesSellReceiptPO ssrpC = rdao.search(new ReceiptSearchCondition(null, LocalDateTime.now(), null, "Wang Er Xiao", null, null)).get(0);
+        SalesSellReceiptPO ssrpC = rdao.search(new RespectiveReceiptSearchCondition()).get(0);
+        System.out.println(ssrpC.getCreateTime());
 
         System.out.println("get and delete: ");
         System.out.println(ssrpC);

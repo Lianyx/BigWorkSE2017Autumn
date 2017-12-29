@@ -22,7 +22,7 @@ public class TestPromotionbl {
         cpo1.setBeginTime(LocalDateTime.of(2017, 11, 1, 0, 0));
         cpo1.setEndTime(LocalDateTime.of(2100, 12, 30, 0, 0));
         cpo1.setDiscountAmount(40);
-        cpo1.setGoodsCombination(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO(0, 10), new PromotionGoodsItemPO(1, 2)});
+        cpo1.setGoodsCombination(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO("0", 10), new PromotionGoodsItemPO("1", 2)});
 
         CombinePromotionVO cv1 = new CombinePromotionVO(cpo1);
 

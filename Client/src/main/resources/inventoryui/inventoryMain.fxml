@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXRippler?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<?import ui.util.TopBar?>
+<StackPane fx:id="mainpane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/List.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.inventoryManagerui.InventoryUIController">
+
+    <children>
+
+    <AnchorPane fx:id="GoodsList" prefHeight="600.0" prefWidth="800.0">
+        <children>
+
+
+            <TopBar fx:id="bar" layoutX="160"/>
+            <fx:include  fx:id="board" source="/userui/board.fxml" layoutX="160" layoutY="40"/>
+
+            <JFXListView fx:id="navigation" layoutY="40.0" prefHeight="560.0" prefWidth="160.0">
+
+                <Label fx:id="goodslist" text="商品分类" textFill="#106186">
+                    <padding><Insets bottom="8" left="10" top="8" /></padding>
+                    <graphic>
+
+                        <JFXRippler position="BACK" styleClass="icons-rippler">
+                            <StackPane>
+                                <padding><Insets right="10" /></padding>
+                                <MaterialDesignIconView fx:id="goodslisticon" glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)" styleClass="icon" />
+                            </StackPane>
+                        </JFXRippler>
+                    </graphic>
+                  <font>
+                     <Font name="Microsoft YaHei Bold" size="15.0" />
+                  </font>
+                </Label>
+
+                <Label fx:id="inventoryCheck" text="库存查看" textFill="#106186">
+                    <padding><Insets bottom="8" left="10" top="8" /></padding>
+                    <graphic>
+
+                        <JFXRippler position="BACK" styleClass="icons-rippler">
+                            <StackPane>
+                                <padding><Insets right="10" /></padding>
+                                <MaterialDesignIconView fx:id="inventoryCheckicon" glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)" styleClass="icon" />
+                            </StackPane>
+                        </JFXRippler>
+                    </graphic>
+                    <font>
+                        <Font name="Microsoft YaHei Bold" size="15.0" />
+                    </font>
+                </Label>
+
+            </JFXListView>
+
+
+
+            <AnchorPane fx:id="logopane" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: white">
+                <children>
+                    <ImageView fitHeight="52.0" fitWidth="98.0" layoutX="24.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../default/logo.jpg" />
+                        </image>
+                    </ImageView>
+                </children>
+            </AnchorPane>
+        </children>
+
+
+    </AnchorPane>
+
+
+    </children>
+</StackPane>

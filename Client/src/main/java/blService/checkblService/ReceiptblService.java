@@ -1,6 +1,7 @@
 package blService.checkblService;
 
 import util.ReceiptSearchCondition;
+import util.RespectiveReceiptSearchCondition;
 import util.ResultMessage;
 import vo.receiptVO.ReceiptVO;
 
@@ -17,4 +18,5 @@ public interface ReceiptblService<T extends ReceiptVO> {
     ResultMessage delete(T receiptVO) throws RemoteException;
 
     ArrayList<T> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException;
+    ArrayList<T> search(RespectiveReceiptSearchCondition respectiveReceiptSearchCondition) throws RemoteException;
 }

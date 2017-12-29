@@ -2,8 +2,10 @@ package vo.promotionVO;
 
 import blService.promotionblService.PromotionblService;
 import businesslogic.promotionbl.PromotionFactory;
+import javafx.scene.layout.Pane;
 import po.promotionPO.PromotionGoodsItemPO;
 import po.promotionPO.CombinePromotionPO;
+import ui.managerui.promotion.PromotionDetailPane;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -46,6 +48,11 @@ public class CombinePromotionVO extends PromotionVO {
     @Override
     public PromotionblService getService() throws RemoteException, NotBoundException, MalformedURLException {
         return PromotionFactory.getCombinePromotionblSerivce();
+    }
+
+    @Override
+    public PromotionDetailPane getDetailPane() {
+        return null;
     }
 
     public ArrayList<PromotionGoodsItemVO> getGoodsCombination() {
