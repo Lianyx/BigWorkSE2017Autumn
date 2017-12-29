@@ -6,6 +6,7 @@ import vo.inventoryVO.GoodsVO;
 
 import java.util.Set;
 
+/*
 public class GoodsblService_Driver {
     private GoodsblService_Stub goodsBLService_Stub = new GoodsblService_Stub();
     private GoodsVO goodsVO;
@@ -55,3 +56,4 @@ public class GoodsblService_Driver {
             System.out.println("failed");
     }
 }
+*/

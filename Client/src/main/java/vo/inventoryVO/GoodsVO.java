@@ -1,6 +1,12 @@
 package vo.inventoryVO;
 
-public class GoodsVO {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.SimpleBooleanProperty;
+
+import javafx.scene.image.Image;
+import java.io.Serializable;
+
+public class GoodsVO extends RecursiveTreeObject<GoodsVO> implements Serializable,Comparable<GoodsVO>{
     /**编号*/
     private String id;
     /** 商品名称 */
@@ -21,8 +27,13 @@ public class GoodsVO {
     private double recentSalePrice;
     /** 商品警戒数量 */
     private int alarmNumber;
+    /** 来表示是否被选中*/
+    private SimpleBooleanProperty selected=new SimpleBooleanProperty(false);
+
+    private Image image = new Image("/default/light.jpg");
 
     public GoodsVO() {
+     //   this.image = new Image("/default/light.jpg");
     }
 
     public GoodsVO(String ID, String name, String type, String sortID, int inventoryNum, double purPrice, double salePrice, double recentPurpPrice, double recentSalePrice, int alarmNumber) {
@@ -37,7 +48,17 @@ public class GoodsVO {
         this.recentSalePrice = recentSalePrice;
         this.alarmNumber = alarmNumber;
     }
+    public boolean isSelected() {
+        return selected.get();
+    }
 
+    public SimpleBooleanProperty selectedProperty() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected.set(selected);
+    }
 
     public String getId() {
         return id;
@@ -117,5 +138,20 @@ public class GoodsVO {
 
     public void setAlarmNumber(int alarmNumber) {
         this.alarmNumber = alarmNumber;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    //因为要放进treeset，必须实现compareTo的方法
+    @Override
+    public int compareTo(GoodsVO o) {
+        int result = this.getId().compareTo(o.getId());
+        return (result > 0) ? 1:-1;
     }
 }
