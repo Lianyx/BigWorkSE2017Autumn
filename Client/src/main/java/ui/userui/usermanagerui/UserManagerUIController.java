@@ -4,6 +4,10 @@ import blService.userblService.UserManagerblService;
 import blServiceStub.usermanagerblService_Stub.Usermanagerblservice_Stub;
 import com.jfoenix.controls.*;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -15,10 +19,14 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.PopOver;
+import ui.stockui.StockReceiptPane;
 import ui.util.*;
+import vo.UserListVO;
+import vo.UserVO;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 
 public class UserManagerUIController implements Initializable{
@@ -47,8 +55,9 @@ public class UserManagerUIController implements Initializable{
     private BoardController boardController;
 
 
+    Set<UserListVO> set;
 
-    UserManagerblService usermanagerblservice_stub;
+    UserManagerblService userManagerblService;
 
 
     @Override
@@ -56,28 +65,31 @@ public class UserManagerUIController implements Initializable{
 
 
         bar.setBoardController(boardController);
-        usermanagerblservice_stub = new Usermanagerblservice_Stub();
+        userManagerblService = new Usermanagerblservice_Stub();
 
 
         //set default pane
         try {
 
             boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150),  board));
-            UserListPane userListPane = new UserListPane(usermanagerblservice_stub,boardController);
-            userListPane.setMainpane(mainpane);
-            board.getChildren().setAll(userListPane);
-            HistoricalRecord.addPane(userListPane);
+            try {
+                UserListPane userListPane = new UserListPane( userManagerblService, boardController,mainpane);
+                userListPane.historyAdd=true;
+                userListPane.refresh(false);
+            //    board.getChildren().setAll(userListPane);
+           //     HistoricalRecord.addPane(userListPane);
+            //    board.getChildren().setAll(new StockReceiptPane());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             navigation.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
                 new Thread(() -> {
                     Platform.runLater(() -> {
                         try {
                             if (newVal != null) {
-                              /*  if (newVal.getId().equals("usermodify")) {
-                                    boardController.switchTo(new UserModifyPane());
-                                } else*/ if (newVal.getId().equals("userlist")) {
-                                    UserListPane listPane = new UserListPane(usermanagerblservice_stub,boardController);
-                                    userListPane.setMainpane(mainpane);
-                                    boardController.switchTo(listPane);
+                                if (newVal.getId().equals("userlist")) {
+                                    UserListPane userListPane = new UserListPane(userManagerblService,boardController,mainpane);
+                                    userListPane.refresh(true);
                                 }
 
 
@@ -95,8 +107,6 @@ public class UserManagerUIController implements Initializable{
         }
 
     }
-
-
 }
 
 

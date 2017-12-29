@@ -1,4 +1,4 @@
-package ui.userui.usermanagerui;
+package ui.messageui;
 
 import com.jfoenix.controls.JFXListCell;
 

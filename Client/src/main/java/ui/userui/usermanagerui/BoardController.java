@@ -4,6 +4,7 @@ package ui.userui.usermanagerui;
 import blService.userblService.UserManagerblService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.layout.*;
 import ui.util.ContainerAnimations;
 import ui.util.HistoricalRecord;
@@ -11,71 +12,73 @@ import ui.util.PaneSwitchAnimation;
 import ui.util.Refreshable;
 
 
-public class BoardController{
+public class BoardController {
 
     @FXML
     StackPane board;
 
-    UserManagerUIController userManagerUIController;
-
-    UserManagerblService userManagerblService;
-
     PaneSwitchAnimation paneSwitchAnimation;
 
-    public void setUserManagerUIController(UserManagerUIController userManagerUIController){
-        this.userManagerblService=userManagerblService;
-    }
-
-    public void setUserManagerblService(UserManagerblService userManagerblService) {
-        this.userManagerblService = userManagerblService;
-    }
-
-
-
+    AnchorPane anchorPane;
 
     public void setPaneSwitchAnimation(PaneSwitchAnimation paneSwitchAnimation) {
         this.paneSwitchAnimation = paneSwitchAnimation;
     }
 
-    public void switchTo(Refreshable pane){
+    public void refresh(){
+        ((Refreshable)board.getChildren().get(0)).refresh(false);
+    }
+
+
+    public void switchTo(Refreshable pane) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 try {
-                 if(HistoricalRecord.addRecord(pane)){
+                    if (HistoricalRecord.addRecord(pane)) {
                         setLeftAnimation();
                         paneSwitchAnimation.setNode(pane);
+                    }else{
+                        board.getChildren().setAll(pane);
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
             }
         });
     }
 
-    public void Loading(){
-         board.getChildren().setAll(new Loading());
+    public void Loading() {
+        if(!board.getChildren().isEmpty())
+        anchorPane = (AnchorPane) board.getChildren().get(0);
+        Loading loading = new Loading();
+        board.getChildren().setAll(loading);
+        loading.setTranslateX(280);
     }
 
+    public void setAll(Node node){ board.getChildren().setAll(node);}
 
-    public void setLeftAnimation(){ paneSwitchAnimation.setAnimation(ContainerAnimations.SWIPE_LEFT);  }
+    public void Ret(){
+        if(anchorPane!=null)
+        board.getChildren().setAll(anchorPane);
+    }
 
-    public void setRightAnimation(){ paneSwitchAnimation.setAnimation(ContainerAnimations.SWIPE_RIGHT);}
+    public void setLeftAnimation() {
+        paneSwitchAnimation.setAnimation(ContainerAnimations.SWIPE_LEFT);
+    }
 
-    public void historicalSwitchTo(AnchorPane pane){
+    public void setRightAnimation() {
+        paneSwitchAnimation.setAnimation(ContainerAnimations.SWIPE_RIGHT);
+    }
+
+    public void historicalSwitchTo(AnchorPane pane) {
         paneSwitchAnimation.setNode(pane);
     }
 
 
-
-    public String getId(){
+    public String getId() {
         return board.getChildren().get(0).getId();
     }
-
-
-
-
-
 
 
 }

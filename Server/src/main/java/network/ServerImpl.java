@@ -37,10 +37,15 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
         return null;
     }
 
+    @Override
+    public void notify(String s) throws RemoteException {
+
+    }
+
 
     public void notifyClient() throws RemoteException{
         for(Client client:list){
-            client.doSomething();
+            client.doSomething("");
         }
     }
     public static void main(String args[]){

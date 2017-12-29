@@ -52,7 +52,7 @@ public class PromotionListPane extends Refreshable { // TODO 抽象类？
     }
 
     @Override
-    public void refresh() {
+    public void refresh(boolean toSwtich) {
 
     }
 }

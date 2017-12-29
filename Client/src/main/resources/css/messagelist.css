@@ -1,6 +1,7 @@
 .list-view{
 
     -fx-border-color: transparent;
+    -fx-background-color: transparent;
     -fx-padding: 0;
     -fx-background-insets: 0;
 }
@@ -51,6 +52,10 @@
     -fx-background-color: transparent, -fx-background ;
     -fx-background-insets: 0px, 5px ;
     -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, #dfe1ff, 10, 0.1, 0, 0);
+}
+.list-cell:selected{
+    -fx-background-color: #3983D7;
 }
 
 .list-cell:empty {

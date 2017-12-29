@@ -56,8 +56,6 @@ public class HistoricalRecord {
             canForward.setValue(false);
         else
             canForward.setValue(true);
-
-        record.get(index).refresh();
         return record.get(index);
     }
 

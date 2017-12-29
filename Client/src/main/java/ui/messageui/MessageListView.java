@@ -1,4 +1,4 @@
-package ui.userui.usermanagerui;
+package ui.messageui;
 
 import com.jfoenix.controls.JFXListCell;
 import com.jfoenix.controls.JFXListView;
@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Control;
 import javafx.util.Callback;
+import ui.messageui.MessageCell;
 
 public class MessageListView extends JFXListView {
 

@@ -12,7 +12,7 @@ public interface UserManagerblService {
     public ResultMessage add(UserVO UserVO);
     public ResultMessage delete(int id);
 
-    public ResultMessage delete(ArrayList<Integer> list);
+    public ResultMessage delete(ArrayList<UserListVO> list);
 
     public ResultMessage update(UserVO UserVO);
     public Set<UserListVO> search(UserSearchVO userSearchVO);

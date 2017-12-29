@@ -16,7 +16,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.controlsfx.control.PopOver;
 import ui.userui.usermanagerui.BoardController;
-import ui.userui.usermanagerui.MessageListView;
+import ui.messageui.MessageListView;
 
 import java.io.IOException;
 
@@ -50,6 +50,11 @@ public class TopBar extends HBox {
     @FXML
     Label username;
 
+    @FXML
+    JFXRippler refresh;
+
+
+
     BoardController boardController;
     public TopBar(){
         super();
@@ -69,6 +74,7 @@ public class TopBar extends HBox {
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                     if(newValue==true){
                         left.setFill(Paint.valueOf("#9fc1d6"));
+
                     }else{
                         left.setFill(Paint.valueOf("#000000"));
                     }
@@ -100,6 +106,7 @@ public class TopBar extends HBox {
         PopOver messagePopOver = new PopOver();
         MessageListView messageListView = new MessageListView();
         BorderPane anchorPane = new BorderPane();
+
         anchorPane.setCenter(messageListView);
 
         anchorPane.setPadding(new Insets(10,10,10,10));
@@ -136,14 +143,19 @@ public class TopBar extends HBox {
     @FXML
     public void goback(){
         boardController.setRightAnimation();
-        boardController.historicalSwitchTo((AnchorPane) HistoricalRecord.pop());
+        boardController.historicalSwitchTo((Refreshable) HistoricalRecord.pop());
+        boardController.refresh();
     }
 
     @FXML
     public void goforward(){
         boardController.setLeftAnimation();
-        boardController.historicalSwitchTo((AnchorPane)HistoricalRecord.push());
+        boardController.historicalSwitchTo((Refreshable)HistoricalRecord.push());
+        boardController.refresh();
     }
 
-
+@FXML
+    public void refresh(){
+        boardController.refresh();
+}
 }

@@ -1,4 +1,4 @@
-package ui.userui.usermanagerui;
+package ui.messageui;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;

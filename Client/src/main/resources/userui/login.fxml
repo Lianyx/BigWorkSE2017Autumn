@@ -19,12 +19,12 @@
 <AnchorPane fx:id="pane" prefHeight="424.0" prefWidth="274.0">
    <children>
 
-      <JFXRippler fx:id="close" ripplerFill="#DA4CEE" layoutX="240" maskType="RECT" onMouseClicked="#close" position="BACK" styleClass="icons-rippler">
+      <JFXRippler fx:id="close" ripplerFill="#03A9F4" layoutX="240" maskType="RECT" onMouseClicked="#close" position="BACK" styleClass="icons-rippler">
          <StackPane style="-fx-padding: 8;">
             <MaterialDesignIconView glyphName="WINDOW_CLOSE" size="1.5em" style="-fx-fill: gray" styleClass="icon" />
          </StackPane>
       </JFXRippler>
-      <JFXRippler fx:id="hide" ripplerFill="#DA4CEE" layoutX="210" maskType="RECT" onMouseClicked="#hide" position="BACK" styleClass="icons-rippler">
+      <JFXRippler fx:id="hide" ripplerFill="#03A9F4" layoutX="210" maskType="RECT" onMouseClicked="#hide" position="BACK" styleClass="icons-rippler">
          <StackPane style="-fx-padding: 8;">
             <MaterialDesignIconView glyphName="MINUS" size="1.5em" style="-fx-fill: gray" styleClass="icon" />
          </StackPane>

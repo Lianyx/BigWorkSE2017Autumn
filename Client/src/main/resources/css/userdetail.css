@@ -1,21 +1,32 @@
 .text-field{
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
+
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-border-color: #78909c;
-    -fx-pref-height: 30;
+    -fx-border-color: #d5dce6;
+    -fx-pref-height: 20;
     -fx-background-color: transparent;
 }
+
 .text-area{
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
     -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-border-color: #78909c;
+    -fx-border-color: #d5dce6;
+    -fx-pref-height: 60;
     -fx-background-color: transparent;
 }
-#imagePane{
+#pane{
     -fx-background-color: white;
-    -fx-effect: dropshadow(gaussian,grey, 10, 0.1, 0, 0);
+    -fx-effect: dropshadow(gaussian, gainsboro, 10, 0.1, 0, 0);
+}
+#delete{
+    -fx-text-fill: white;
+    -fx-background-color: red;
+}
+#reset{
+    -fx-text-fill: white;
+    -fx-background-color: #03A9F4;
+}
+
+#save{
+    -fx-text-fill: white;
+    -fx-background-color: #03A9F4;
 }

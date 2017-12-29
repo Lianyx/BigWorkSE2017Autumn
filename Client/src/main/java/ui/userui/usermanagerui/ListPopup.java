@@ -1,22 +1,17 @@
 package ui.userui.usermanagerui;
 
+import com.jfoenix.controls.JFXListView;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 
-public class Loading extends AnchorPane {
-
-    public Loading(){
+public class ListPopup extends JFXListView {
+    public ListPopup(){
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/userui/loading.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/userui/PopupList.fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
-
-
 }

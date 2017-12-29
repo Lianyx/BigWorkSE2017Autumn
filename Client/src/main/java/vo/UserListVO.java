@@ -12,15 +12,17 @@ import java.util.Comparator;
 
 public class UserListVO extends RecursiveTreeObject<UserListVO> implements Serializable,Comparable<UserListVO> {
 
-    private long userid;
+    private int userid;
     private Image image;
     private String username;
     private UserCategory userCategory;
     private String email;
     private String phone;
     private SimpleBooleanProperty selected=new SimpleBooleanProperty(false);
-    private String userstate="sabi";
-    public UserListVO(long userid, Image image, String username, UserCategory userCategory, String email, String phone, boolean selected) {
+    private boolean multiple = true;
+
+
+    public UserListVO(int userid, Image image, String username, UserCategory userCategory, String email, String phone, boolean selected) {
         this.userid = userid;
         this.image = image;
         this.username = username;
@@ -30,7 +32,7 @@ public class UserListVO extends RecursiveTreeObject<UserListVO> implements Seria
         this.selected.setValue(false);
     }
 
-    public UserListVO(long userid, Image image, String username, UserCategory userCategory, String email, String phone) {
+    public UserListVO(int userid, Image image, String username, UserCategory userCategory, String email, String phone) {
         this.userid = userid;
         this.image = image;
         this.username = username;
@@ -38,7 +40,7 @@ public class UserListVO extends RecursiveTreeObject<UserListVO> implements Seria
         this.email = email;
         this.phone = phone;
     }
-    public UserListVO(long userid, String username, UserCategory userCategory, String email, String phone) {
+    public UserListVO(int userid, String username, UserCategory userCategory, String email, String phone) {
         this.userid = userid;
         this.image = new Image("/default/timg.jpg");
         this.username = username;
@@ -59,11 +61,11 @@ public class UserListVO extends RecursiveTreeObject<UserListVO> implements Seria
         this.selected.set(selected);
     }
 
-    public long getUserid() {
+    public int getUserid() {
         return userid;
     }
 
-    public void setUserid(long userid) {
+    public void setUserid(int userid) {
         this.userid = userid;
     }
 
@@ -107,6 +109,13 @@ public class UserListVO extends RecursiveTreeObject<UserListVO> implements Seria
         this.phone = phone;
     }
 
+    public boolean isMultiple() {
+        return multiple;
+    }
+
+    public void setMultiple(boolean multiple) {
+        this.multiple = multiple;
+    }
 
     @Override
     public int compareTo(UserListVO o) {

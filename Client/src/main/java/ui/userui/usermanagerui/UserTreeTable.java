@@ -1,5 +1,6 @@
 package ui.userui.usermanagerui;
 
+import blService.userblService.UserManagerblService;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -8,22 +9,34 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.util.Callback;
 
 import javafx.util.Duration;
 import ui.util.CircleImageView;
+import util.ResultMessage;
 import vo.UserListVO;
+import vo.UserVO;
+
+import java.security.spec.ECField;
+import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 
 public class UserTreeTable extends JFXTreeTableView<UserListVO> {
@@ -31,7 +44,8 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
     private ObservableList<UserListVO> observableListtemp;
     private int rowsPerPage = 7;
     private BoardController boardController;
-
+    private UserManagerblService userManagerblService;
+    private StackPane mainpane;
 
     public ObservableList<UserListVO> getObservableList() {
         return observableList;
@@ -41,12 +55,14 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
         return rowsPerPage;
     }
 
-    public void setBoardController(BoardController boardController) {
-        this.boardController = boardController;
-    }
 
-    public UserTreeTable() {
+    public UserTreeTable(UserManagerblService userManagerblService,BoardController boardController,StackPane mainpane) {
         super();
+        this.userManagerblService=userManagerblService;
+        this.boardController=boardController;
+        this.mainpane=mainpane;
+
+
         JFXTreeTableColumn<UserListVO,Boolean> choose = new JFXTreeTableColumn("  ");
         choose.setPrefWidth(40);
         Callback<TreeTableColumn<UserListVO,Boolean>, TreeTableCell<UserListVO,Boolean>> chooseCellFactory = (TreeTableColumn<UserListVO,Boolean> p) -> new ChooseBoxCell();
@@ -117,9 +133,16 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
         phone.setCellFactory(tokenCellFactory);
 
 
-        JFXTreeTableColumn more = new JFXTreeTableColumn("");
+        JFXTreeTableColumn<UserListVO, Boolean> more = new JFXTreeTableColumn("");
         more.setPrefWidth(20);
-        Callback<TreeTableColumn, TreeTableCell> moreCellFactory = (TreeTableColumn p) -> new MoreCell();
+        Callback<TreeTableColumn<UserListVO, Boolean>, TreeTableCell<UserListVO, Boolean>> moreCellFactory = (TreeTableColumn<UserListVO, Boolean> p) -> new MoreCell();
+        more.setCellValueFactory((TreeTableColumn.CellDataFeatures<UserListVO, Boolean> param) -> {
+            if (more.validateValue(param)) {
+                return new ReadOnlyObjectWrapper(param.getValue().getValue().isMultiple());
+            } else {
+                return more.getComputedValue(param);
+            }
+        });
         more.setCellFactory(moreCellFactory);
 
 
@@ -131,11 +154,8 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
             row.setStyle("-fx-border-color: rgb(233,237,239); -fx-border-width: 0.3;");
             row.setOnMouseClicked((MouseEvent event) -> {
                 if(event.getClickCount()==2){
-                    try{
-                    boardController.switchTo(new UserDetailPane((UserListVO) row.getTreeItem().getValue(),boardController));
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
+                     UserDetailPane userDetailPane = new UserDetailPane(((UserListVO)row.getTreeItem().getValue()).getUserid(),userManagerblService,boardController,mainpane);
+                     userDetailPane.refresh(true);
                 }
 
             });
@@ -155,7 +175,6 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
         this.getColumns().addAll(choose,image, username,  userid,usertype,phone,more);
 
     }
-
 
     public void setUser(Set<UserListVO> users){
         observableList.setAll(users);
@@ -190,15 +209,18 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
             );
         }
 
-        timeline.play();
         return new BorderPane(this);
     }
+
+
+
+
+
 
     private class ChooseBoxCell extends JFXTreeTableCell<UserListVO,Boolean> {
         private JFXCheckBox cb = new JFXCheckBox("");
 
         public ChooseBoxCell(){
-            cb.setStyle("-jfx-checked-color: #DA4CEE; -jfx-unchecked-color:#78909C;");
             cb.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -271,7 +293,6 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
             }else{
                 setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
                 civ.setText(item);
-                civ.setStyle("-fx-background-color: linear-gradient(to top right , rgba(170,17,242,0.7),rgba(218,76,238,0.7)); -fx-text-fill: white;-fx-background-radius: 10;");
                 setGraphic(civ);
             }
         }
@@ -293,19 +314,21 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
             }
         }
     }
-    private class MoreCell extends JFXTreeTableCell {
+    private class MoreCell extends JFXTreeTableCell<UserListVO, Boolean> {
         private IconButton iconButton = new IconButton(MaterialDesignIcon.DOTS_HORIZONTAL);
 
         @Override
-        public void updateItem(Object item,boolean empty){
+        public void updateItem(Boolean item,boolean empty){
             super.updateItem(item,empty);
+            if(item!=null){
+                ListPopup list = new ListPopup();
                 iconButton.setTranslateY(-8);
+                JFXPopup popup = new JFXPopup(list);
+                iconButton.setOnMouseClicked(e -> popup.show(iconButton, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT));
                 setGraphic(iconButton);
             }
+            }
         }
-
-
-
 
 }
 

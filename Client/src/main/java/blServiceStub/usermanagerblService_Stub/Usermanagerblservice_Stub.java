@@ -2,6 +2,8 @@ package blServiceStub.usermanagerblService_Stub;
 
 import blService.userblService.UserManagerblService;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+import ui.userui.usermanagerui.UserListPane;
 import util.ResultMessage;
 import util.UserCategory;
 import vo.UserListVO;
@@ -45,25 +47,43 @@ public class Usermanagerblservice_Stub implements UserManagerblService{
 
 
 
+
+
+
+
     @Override
     public ResultMessage delete(int id) {
 
-        return null;
+        for(UserListVO u:set){
+            if(u.getUserid()==id){
+                set.remove(u);
+            }
+        }
+        return ResultMessage.SUCCESS;
     }
 
-    @Override
-    public ResultMessage delete(ArrayList<Integer> list) {
-        return null;
-    }
 
     public void delete(UserListVO userListVO) {
          set.remove(userListVO);
     }
-
+    @Override
+    public ResultMessage delete(ArrayList<UserListVO> list){
+        for(UserListVO u:list){
+            set.remove(u);
+        }
+        return ResultMessage.SUCCESS;
+    }
 
     @Override
-    public ResultMessage update(UserVO UserVO) {
-        return null;
+    public ResultMessage update(UserVO userVO) {
+        for(UserListVO u:set){
+            if(u.getUserid()==userVO.getId()){
+                set.remove(u);
+            }
+        }
+        set.add(new UserListVO(userVO.getId(),userVO.getUsername(),userVO.getUsertype(),userVO.getEmail(),userVO.getPhone()));
+        return ResultMessage.SUCCESS;
+
     }
 
     @Override
@@ -76,14 +96,15 @@ public class Usermanagerblservice_Stub implements UserManagerblService{
         return null;
     }
 
+
+
     @Override
     public UserVO showDetail(int id) {
-        return null;
+        return new UserVO(id,new Image("/default/timg.jpg"),"LimKruscal", UserCategory.SalesManager,"","","","gzyz12306@163.com","11111111110","He ie stupid","2017-1-1","admin");
     }
 
     @Override
     public Set<UserListVO> getAll() {
-
         return set;
     }
 }
