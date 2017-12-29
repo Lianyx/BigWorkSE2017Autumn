@@ -13,6 +13,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.stream.Collectors;
 
 
@@ -87,7 +88,7 @@ public class MemberPromotionVO extends PromotionVO{
         return gifts;
     }
 
-    public void setGifts(ArrayList<PromotionGoodsItemVO> gifts) {
-        this.gifts = gifts;
+    public void setGifts(Collection<PromotionGoodsItemVO> gifts) {
+        this.gifts = new ArrayList<>(gifts);
     }
 }
