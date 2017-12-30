@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root prefHeight="250.0" prefWidth="230.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="250.0" prefWidth="230.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
 <children>
-<Separator layoutX="10.0" layoutY="80.0" orientation="HORIZONTAL" prefHeight="0.0" prefWidth="210.0" />
-      <JFXCheckBox layoutX="24.0" layoutY="101.0" mnemonicParsing="false" text="CheckBox" unCheckedColor="#1408f1" />
-      <JFXCheckBox layoutX="24.0" layoutY="135.0" mnemonicParsing="false" text="CheckBox" unCheckedColor="#1408f1" />
-      <JFXCheckBox layoutX="24.0" layoutY="172.0" mnemonicParsing="false" text="CheckBox" unCheckedColor="#1408f1" />
-      <JFXComboBox layoutX="24.0" layoutY="27.0" prefWidth="150.0" unFocusColor="#00b52a" />
+      <JFXButton fx:id="save" onMouseClicked="#save" style="-fx-background-color: #03A9F4" layoutX="88.0" layoutY="207.0" text="Save" textFill="WHITE" />
+      <JFXComboBox fx:id="usertype" layoutX="47.0" layoutY="51.0" prefHeight="33.0" prefWidth="137.0" promptText="UserType" />
 
 </children>
 </fx:root>

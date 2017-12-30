@@ -128,7 +128,7 @@ public class GoodDetailPane extends Refreshable {
 
 
     @Override
-    public void refresh() {
+    public void refresh(boolean toSwitch) {
 
     }
 }

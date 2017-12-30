@@ -108,7 +108,7 @@ public class GoodsListPane extends Refreshable{
 
 
     @Override
-    public void refresh() {
-        setListView();
+    public void refresh(boolean toSwitch) {
+
     }
 }

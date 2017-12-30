@@ -152,9 +152,9 @@ public class MemberPromotionDetailPane extends PromotionDetailPane {
 
     }
 
+
     @Override
-    public void refresh() { // TODO
+    public void refresh(boolean toSwitch) {
 
     }
-
 }
