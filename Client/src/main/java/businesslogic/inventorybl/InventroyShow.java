@@ -18,11 +18,14 @@ public class InventroyShow {
      * @return
      */
     public InventoryViewVO inventoryView(String beginDate, String endDate){
+        /*
         InventoryViewVO tmpVO = saleInfo.inventoryView(beginDate,endDate);
         InventoryViewVO vo = new InventoryViewVO(tmpVO.getBeginDate(),tmpVO.getEndDate(),tmpVO.getSaleNumber(),tmpVO.getPurNumber(),
                 tmpVO.getSaleMoney(),tmpVO.getPurMoney());
 
         return vo;
+        */
+        return new InventoryViewVO();
     }
 
     /**
