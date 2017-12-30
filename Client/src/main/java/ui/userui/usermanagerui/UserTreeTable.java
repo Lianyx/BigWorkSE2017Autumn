@@ -9,19 +9,14 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
@@ -29,26 +24,26 @@ import javafx.util.Callback;
 
 import javafx.util.Duration;
 import ui.util.CircleImageView;
-import util.ResultMessage;
+import ui.util.ListPopup;
 import vo.UserListVO;
-import vo.UserVO;
+import vo.UserSearchVO;
 
-import java.security.spec.ECField;
-import java.util.List;
 import java.util.Set;
-import java.util.Stack;
+import java.util.function.Predicate;
 
 
 public class UserTreeTable extends JFXTreeTableView<UserListVO> {
     private ObservableList<UserListVO> observableList = FXCollections.observableArrayList();
+    private ObservableList<UserListVO> observableListfilter = observableList;
     private ObservableList<UserListVO> observableListtemp;
     private int rowsPerPage = 7;
     private BoardController boardController;
     private UserManagerblService userManagerblService;
     private StackPane mainpane;
+    private UserSearchVO userSearchVO;
 
     public ObservableList<UserListVO> getObservableList() {
-        return observableList;
+        return observableListfilter;
     }
 
     public int getRowsPerPage() {
@@ -184,11 +179,26 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
         observableList.remove(userListVO);
     }
 
+    public UserSearchVO getUserSearchVO() {
+        return userSearchVO;
+    }
+
+    public void setUserSearchVO(UserSearchVO userSearchVO) {
+        this.userSearchVO = userSearchVO;
+    }
+
     public Node createPage(int pageIndex) {
 
+
+        if(userSearchVO.getUserCategory()!=null)
+        observableListfilter=observableList.filtered(t->{
+            return userSearchVO.getUserCategory()==t.getUserCategory();
+        });
+        else
+            observableListfilter=observableList;
         int fromIndex = pageIndex * rowsPerPage;
-        int toIndex = Math.min(fromIndex + rowsPerPage, observableList.size());
-        observableListtemp = FXCollections.observableList(observableList.subList(fromIndex, toIndex));
+        int toIndex = Math.min(fromIndex + rowsPerPage, observableListfilter.size());
+        observableListtemp = FXCollections.observableList(observableListfilter.subList(fromIndex, toIndex));
         final TreeItem<UserListVO> root = new RecursiveTreeItem<>(observableListtemp, RecursiveTreeObject::getChildren);
         this.setRoot(root);
         this.setStyle("-fx-border-color: transparent; -fx-padding: 0; -fx-background-color: transparent");

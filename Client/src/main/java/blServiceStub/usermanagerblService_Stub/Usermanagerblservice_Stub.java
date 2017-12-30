@@ -37,17 +37,16 @@ public class Usermanagerblservice_Stub implements UserManagerblService{
     @Override
     public ResultMessage add(UserVO UserVO) {
 
-
         return ResultMessage.SUCCESS;
     }
 
-
-
-
-
-
-
-
+    public ResultMessage add(UserListVO userListVO) {
+        if (userListVO.getUserid()==0){
+            userListVO.setUserid(set.last().getUserid()+1);
+        }
+        set.add(userListVO);
+        return ResultMessage.SUCCESS;
+    }
 
 
 
@@ -88,12 +87,24 @@ public class Usermanagerblservice_Stub implements UserManagerblService{
 
     @Override
     public Set<UserListVO> search(UserSearchVO userSearchVO) {
-        return null;
+        TreeSet<UserListVO> temp = new TreeSet<>();
+        for(UserListVO userListVO:set){
+            if(userListVO.getUserCategory()==userSearchVO.getUserCategory()){
+                temp.add(userListVO);
+            }
+        }
+        return temp;
     }
 
     @Override
     public Set<UserListVO> search(String keyword) {
-        return null;
+        TreeSet<UserListVO> temp = new TreeSet<>();
+        for(UserListVO userListVO:set){
+            if(userListVO.getUsername().contains(keyword)||userListVO.getPhone().contains(keyword)||userListVO.getEmail().contains(keyword)||userListVO.getUserCategory().name().contains(keyword)){
+                temp.add(userListVO);
+            }
+        }
+        return temp;
     }
 
 

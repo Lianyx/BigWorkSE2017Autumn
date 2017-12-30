@@ -23,7 +23,9 @@ import javafx.util.Callback;
 import org.controlsfx.control.PopOver;
 import ui.util.HistoricalRecord;
 import ui.util.Refreshable;
+import util.UserCategory;
 import vo.UserListVO;
+import vo.UserSearchVO;
 import vo.UserVO;
 
 import javax.annotation.PostConstruct;
@@ -47,6 +49,10 @@ public class UserListPane extends Refreshable{
     Pagination pagination;
 
     StackPane mainpane;
+
+    private static UserSearchVO userSearchVO = new UserSearchVO();
+
+    FilterPane filterPane ;
 
     public boolean historyAdd = false;
 
@@ -86,11 +92,15 @@ public class UserListPane extends Refreshable{
         this.boardController=boardController;
         this.mainpane=mainPane;
         ulv=new UserTreeTable(userManagerblService,boardController,mainpane);
-
+        ulv.setUserSearchVO(this.userSearchVO);
         PopOver filterPopOver = new PopOver();
         filterPopOver.setDetachable(false);
         filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
-        filterPopOver.setContentNode(new FilterPane());
+        filterPane=new FilterPane();
+        filterPane.setUserSearchVO(this.userSearchVO);
+        filterPane.setUlp(this);
+        filterPopOver.setContentNode(filterPane);
+
         filter.setOnMouseClicked(e -> filterPopOver.show(filter));
     }
 
@@ -102,23 +112,31 @@ public class UserListPane extends Refreshable{
     public void deleteList(){
         for(UserListVO userListVO:ChosenItem.getSet()) {
             ulv.removeUser(userListVO);
-            ((Usermanagerblservice_Stub)userManagerblService).delete(userListVO);
+            userManagerblService.delete(userListVO.getUserid());
         }
-        int current=pagination.getCurrentPageIndex();
-        pagination = new Pagination((ulv.getObservableList().size() /ulv.getRowsPerPage()+1 ), 0);
-        pagination.setPageFactory(ulv::createPage);
-        pagination.setPrefWidth(600);
-        borderpane.setCenter(pagination);
-        if(current-1>=0)
-        pagination.setCurrentPageIndex(current-1);
-        else
-        pagination.setCurrentPageIndex(0);
+        refreshUlv();
         ChosenItem.getSet().clear();
     }
 
+    public void refreshUlv(){
+        int current=pagination.getCurrentPageIndex();
+        int max = ulv.getObservableList().size() /ulv.getRowsPerPage()+1;
+        pagination = new Pagination((ulv.getObservableList().size() /ulv.getRowsPerPage()+1 ), 0);
+        System.out.println((ulv.getObservableList().size() /ulv.getRowsPerPage()+1 ));
+        pagination.setPageFactory(ulv::createPage);
+        pagination.setPrefWidth(600);
+        borderpane.setCenter(pagination);
+        if(current-1>=0&&current-1<=max)
+            pagination.setCurrentPageIndex(current-1);
+        else
+            pagination.setCurrentPageIndex(0);
+    }
+
+
     @FXML
     public void add(){
-        JFXDialog dialog = new JFXDialog(mainpane,new AddPane(),JFXDialog.DialogTransition.CENTER);
+        AddPane addPane = new AddPane(userManagerblService);
+        JFXDialog dialog = new JFXDialog(mainpane,addPane,JFXDialog.DialogTransition.CENTER);
         dialog.show();
     }
 
