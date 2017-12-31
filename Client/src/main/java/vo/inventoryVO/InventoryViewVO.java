@@ -1,52 +1,75 @@
 package vo.inventoryVO;
 
-public class InventoryViewVO {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.image.Image;
+
+import java.io.Serializable;
+import java.util.Set;
+
+public class InventoryViewVO{
     /** 开始日期 */
     private String beginDate;
     /** 结束日期 */
     private String endDate;
-    /** 出库数量（也就是销售数量） */
-    private int saleNumber;
-    /** 入库数量（也就是进货数量） */
-    private int purNumber;
-    /** 出库金额（也就是销售金额） */
-    private double saleMoney;
-    /** 入库金额（也就是进货金额） */
-    private double purMoney;
+    /* 库存总数*/
+    private int totalNum;
+
+    private Set<InventoryViewItemVO> viewList;
 
     public InventoryViewVO() {
     }
 
-    public InventoryViewVO(String beginDate, String endDate, int saleNumber, int purNumber, double saleMoney, double purMoney) {
+    public InventoryViewVO(String beginDate, String endDate) {
         this.beginDate = beginDate;
         this.endDate = endDate;
-        this.saleNumber = saleNumber;
-        this.purNumber = purNumber;
-        this.saleMoney = saleMoney;
-        this.purMoney = purMoney;
+    }
+
+    public InventoryViewVO(String beginDate, String endDate, int totalNum, Set<InventoryViewItemVO> viewList) {
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+        this.totalNum = totalNum;
+        this.viewList = viewList;
     }
 
     public String getBeginDate() {
         return beginDate;
     }
 
+    public void setBeginDate(String beginDate) {
+        this.beginDate = beginDate;
+    }
+
     public String getEndDate() {
         return endDate;
     }
 
-    public int getSaleNumber() {
-        return saleNumber;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
-    public int getPurNumber() {
-        return purNumber;
+    public int getTotalNum() {
+        return totalNum;
     }
 
-    public double getSaleMoney() {
-        return saleMoney;
+    public void setTotalNum(int totalNum) {
+        this.totalNum = totalNum;
     }
 
-    public double getPurMoney() {
-        return purMoney;
+    public Set<InventoryViewItemVO> getViewList() {
+        return viewList;
     }
+
+    public void setViewList(Set<InventoryViewItemVO> viewList) {
+        this.viewList = viewList;
+    }
+
+    /*库存数量先摆着
+    public int caculateTotalNum(){
+        totalNum = 0;
+        for (InventoryViewItemVO vo: viewList) {
+            totalNum += vo.
+        }
+    }
+    */
 }

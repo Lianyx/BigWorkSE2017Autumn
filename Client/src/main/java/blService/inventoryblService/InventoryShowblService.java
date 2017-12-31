@@ -13,12 +13,12 @@ public interface InventoryShowblService{
     /**
      * 查看此时间段内的出/入库数量/金额，销售/进货的数量/金额
      */
-    public InventoryViewVO InventoryView(String beginDate, String endDate);
+    public InventoryViewVO inventoryView(String beginDate, String endDate);
 
     /**
      * 盘点的是当天的库存快照
      */
-    public InventoryCheckVO InventoryCheck();
+    public InventoryCheckVO inventoryCheck();
 
     /**
      * 得到所有审核通过的赠送单、报溢单、报损单、报警单

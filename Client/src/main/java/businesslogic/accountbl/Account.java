@@ -4,6 +4,7 @@ import com.sun.org.apache.regexp.internal.RE;
 import dataService.accountDataService.AccountDataService;
 import po.AccountPO;
 import util.ResultMessage;
+import vo.AccountListVO;
 import vo.AccountVO;
 
 import javax.xml.transform.Result;
@@ -32,21 +33,21 @@ public class Account {
         }
     }
 
-    public List<AccountVO> showAllAccounts()throws RemoteException{
+    public List<AccountListVO> showAllAccounts()throws RemoteException{
         List<AccountPO> POList = accountDataService.getAll();
-        List<AccountVO> VOList = new ArrayList<>();
+        List<AccountListVO> VOList = new ArrayList<>();
         for(AccountPO po: POList){
-            AccountVO vo = new AccountVO(po.getID(),po.getName(),po.getBalance());
+            AccountListVO vo = new AccountListVO(po.getID(),po.getName(),po.getBalance());
             VOList.add(vo);
         }
         return VOList;
     }
 
-    public List<AccountVO> search(String keyword)throws RemoteException{
+    public List<AccountListVO> search(String keyword)throws RemoteException{
         List<AccountPO> POList = accountDataService.selectInEffect(keyword);
-        List<AccountVO> VOList = new ArrayList<>();
+        List<AccountListVO> VOList = new ArrayList<>();
         for(AccountPO po: POList){
-            AccountVO vo = new AccountVO(po.getID(),po.getName(),po.getBalance());
+            AccountListVO vo = new AccountListVO(po.getID(),po.getName(),po.getBalance());
             VOList.add(vo);
         }
         return VOList;

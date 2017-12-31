@@ -2,6 +2,7 @@ package businesslogic.accountbl;
 
 import blService.accountblService.AccountblService;
 import util.ResultMessage;
+import vo.AccountListVO;
 import vo.AccountVO;
 
 import java.rmi.RemoteException;
@@ -16,7 +17,7 @@ public class AccountController implements AccountblService{
     }
 
     @Override
-    public List<AccountVO> showAllAccounts(){
+    public List<AccountListVO> showAllAccounts(){
         try{
             return account.showAllAccounts();
         }catch (RemoteException e){
@@ -26,7 +27,7 @@ public class AccountController implements AccountblService{
     }
 
     @Override
-    public List<AccountVO> search(String keyword){
+    public List<AccountListVO> search(String keyword){
         try{
             return account.search(keyword);
         }catch (RemoteException e){

@@ -12,6 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import ui.util.TopBar?>
+<?import com.jfoenix.controls.JFXButton?>
 <StackPane fx:id="mainpane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/List.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.inventoryManagerui.InventoryUIController">
 
     <children>
@@ -41,7 +42,23 @@
                   </font>
                 </Label>
 
-                <Label fx:id="inventoryCheck" text="库存查看" textFill="#106186">
+                <JFXButton fx:id="inventoryView" text="库存查看" textFill="#106186" onMouseClicked="#chooseTimePane">
+                    <padding><Insets bottom="8" left="10" top="8" /></padding>
+                    <graphic>
+
+                        <JFXRippler position="BACK" styleClass="icons-rippler">
+                            <StackPane>
+                                <padding><Insets right="10" /></padding>
+                                <MaterialDesignIconView fx:id="inventoryViewicon" glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)" styleClass="icon" />
+                            </StackPane>
+                        </JFXRippler>
+                    </graphic>
+                    <font>
+                        <Font name="Microsoft YaHei Bold" size="15.0" />
+                    </font>
+                </JFXButton>
+                <!--
+                <Label fx:id="inventoryCheck" text="库存查看" textFill="#106186" onMouseClicked="#chooseTimePane">
                     <padding><Insets bottom="8" left="10" top="8" /></padding>
                     <graphic>
 
@@ -56,6 +73,7 @@
                         <Font name="Microsoft YaHei Bold" size="15.0" />
                     </font>
                 </Label>
+                -->
 
             </JFXListView>
 
