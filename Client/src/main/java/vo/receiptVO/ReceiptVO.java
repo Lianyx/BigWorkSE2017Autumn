@@ -1,13 +1,22 @@
 package vo.receiptVO;
 
+import blService.checkblService.ReceiptblService;
+import blService.promotionblService.PromotionblService;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.Node;
+import po.promotionPO.PromotionPO;
 import po.receiptPO.ReceiptPO;
+import ui.managerui.promotion.PromotionDetailPane;
 import util.ReceiptState;
+import vo.abstractVO.SelectableVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 
-public abstract class ReceiptVO extends RecursiveTreeObject<ReceiptVO> {
+public abstract class ReceiptVO extends SelectableVO<ReceiptVO> {
     private String id;
     private int operatorId; // 很可能会改成名字之类
 
@@ -15,8 +24,6 @@ public abstract class ReceiptVO extends RecursiveTreeObject<ReceiptVO> {
     private LocalDateTime lastModifiedTime;
 
     private ReceiptState receiptState;
-
-    private SimpleBooleanProperty selected = new SimpleBooleanProperty(false);
 
     public ReceiptVO() {
     }
@@ -30,6 +37,23 @@ public abstract class ReceiptVO extends RecursiveTreeObject<ReceiptVO> {
     }
 
     public abstract <T extends ReceiptPO> T toPO();
+
+    public abstract ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException;
+
+    public abstract Node getDetailPane();
+
+    protected static String formatId(String codeName, ReceiptPO receiptPO) {
+        LocalDateTime createTime = receiptPO.getCreateTime();
+        return String.format(codeName + "-%04d%02d%02d-%05d"
+                , createTime.getYear()
+                , createTime.getMonthValue()
+                , createTime.getDayOfMonth()
+                , receiptPO.getDayId());
+    }
+
+    protected int idToDayId() {
+        return Integer.parseInt(id.substring(id.length() - 5));
+    }
 
     public String getId() {
         return id;
@@ -69,17 +93,5 @@ public abstract class ReceiptVO extends RecursiveTreeObject<ReceiptVO> {
 
     public void setReceiptState(ReceiptState receiptState) {
         this.receiptState = receiptState;
-    }
-
-    public boolean isSelected() {
-        return selected.get();
-    }
-
-    public SimpleBooleanProperty selectedProperty() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected.set(selected);
     }
 }
