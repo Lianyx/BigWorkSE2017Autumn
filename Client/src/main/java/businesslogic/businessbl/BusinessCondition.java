@@ -34,8 +34,8 @@ public class BusinessCondition {
         List<BusinessConditionPO> POlist = businessConditionDataService.select(begin,end);
         List<BusinessConditionVO> VOlist = new ArrayList<>();
         for(BusinessConditionPO po:POlist){
-            BusinessConditionVO vo = new BusinessConditionVO(po.getIncome(),po.getExpense());
-            VOlist.add(vo);
+//            BusinessConditionVO vo = new BusinessConditionVO(po.getIncome(),po.getExpense());
+//            VOlist.add(vo);
         }
         return VOlist;
     }
