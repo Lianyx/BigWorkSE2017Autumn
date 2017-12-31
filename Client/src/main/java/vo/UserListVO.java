@@ -49,6 +49,17 @@ public class UserListVO extends RecursiveTreeObject<UserListVO> implements Seria
         this.phone = phone;
     }
 
+    public UserListVO( String username, UserCategory userCategory, String email, String phone) {
+        this.userid = 0;
+        this.image = new Image("/default/timg.jpg");
+        this.username = username;
+        this.userCategory = userCategory;
+        this.email = email;
+        this.phone = phone;
+    }
+
+
+
     public boolean isSelected() {
         return selected.get();
     }

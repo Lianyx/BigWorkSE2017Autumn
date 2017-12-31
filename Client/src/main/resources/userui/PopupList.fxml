@@ -11,7 +11,8 @@
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <fx:root type="JFXListView" xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml" stylesheets="@../css/popup.css" styleClass="custom-jfx-list-view1">
-            <Label fx:id="view">
+    <HBox fx:id="listview">
+            <Label >
                 View
                 <graphic>
                     <StackPane styleClass="custom-jfx-list-view-icon-container">
@@ -20,7 +21,9 @@
                     </StackPane>
                 </graphic>
             </Label>
-    <Label>
+    </HBox>
+    <HBox fx:id="listdelete">
+    <Label >
         Delete
         <graphic>
             <StackPane styleClass="custom-jfx-list-view-icon-container">
@@ -29,4 +32,5 @@
             </StackPane>
         </graphic>
     </Label>
+    </HBox>
 </fx:root>

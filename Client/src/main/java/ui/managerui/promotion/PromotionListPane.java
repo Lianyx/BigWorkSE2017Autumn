@@ -62,8 +62,9 @@ public class PromotionListPane extends Refreshable { // TODO Refreshable改成�
 
     }
 
+
     @Override
-    public void refresh() {
+    public void refresh(boolean toSwitch) {
 
     }
 }

@@ -1,7 +1,11 @@
 package ui.inventoryManagerui;
 
 import blService.goodsblService.GoodsblService;
+import blService.inventoryblService.InventoryShowblService;
 import blServiceStub.goodsblService_Stub.GoodsblService_Stub;
+import blServiceStub.inventoryblService_Stub.InventoryblService_Stub;
+import blServiceStub.inventoryblService_Stub.InventoryblService_Stub2;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXListView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -42,6 +46,7 @@ public class InventoryUIController implements Initializable{
     private BoardController boardController;
 
     GoodsblService goodsblService_stub;
+    InventoryShowblService showblService;
 
 
     @Override
@@ -87,5 +92,14 @@ public class InventoryUIController implements Initializable{
         }catch (Exception e){
 
         }
+    }
+
+    @FXML
+    public void chooseTimePane(){
+        showblService = new InventoryblService_Stub2();
+        ChooseTimePane chooseTimePane = new ChooseTimePane(showblService,boardController,mainpane);
+        JFXDialog dialog = new JFXDialog(mainpane,chooseTimePane,JFXDialog.DialogTransition.CENTER);
+        chooseTimePane.setDialog(dialog);
+        dialog.show();
     }
 }

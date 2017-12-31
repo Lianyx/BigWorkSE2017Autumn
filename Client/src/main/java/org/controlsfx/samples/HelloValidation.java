@@ -89,7 +89,7 @@ public class HelloValidation extends ControlsFXSample {
         root.sceneProperty().addListener(new InvalidationListener() {
             @Override public void invalidated(Observable o) {
                 if (root.getScene() != null) {
-                    root.getScene().getStylesheets().add(HelloDecorator.class.getResource("validation.css").toExternalForm());
+                    root.getScene().getStylesheets().add(HelloDecorator.class.getResource("/validation.css").toExternalForm());
                 }
             }
         });
