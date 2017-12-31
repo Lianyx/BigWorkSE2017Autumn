@@ -2,6 +2,7 @@ package ui.managerui.promotion;
 
 import blService.promotionblService.PromotionListblService;
 import businesslogic.promotionbl.PromotionFactory;
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Pagination;
@@ -47,14 +48,22 @@ public class PromotionListPane extends Refreshable { // TODO Refreshable改成�
         }
 
         pagination = new Pagination((promotionTreeTable.getListSize() / promotionTreeTable.getRowsPerPage() + 1), 0);
-        pagination.setPageFactory(promotionTreeTable::createPage);
-        pagination.setPrefSize(600, 450);
-        borderPane.setCenter(pagination);
+//        pagination.setPageFactory(promotionTreeTable::createPage);
+//        pagination.setPrefSize(600, 450);
+        pagination.currentPageIndexProperty().addListener(((observable, oldValue, newValue) -> {
+            promotionTreeTable.createPage(newValue.intValue());
+        }));
+        borderPane.setBottom(pagination);
+
+        promotionTreeTable.setPrefSize(600, 450);
+        borderPane.setCenter(promotionTreeTable);
+
+
     }
 
     @FXML
     public void delete() {
-
+        promotionTreeTable.testDelete(pagination);
     }
 
     @FXML

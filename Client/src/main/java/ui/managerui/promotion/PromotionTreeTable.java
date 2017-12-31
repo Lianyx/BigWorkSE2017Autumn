@@ -1,35 +1,47 @@
 package ui.managerui.promotion;
 
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableRow;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.*;
+import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import ui.userui.usermanagerui.BoardController;
+import ui.userui.usermanagerui.ChosenItem;
 import vo.UserListVO;
 import vo.promotionVO.PromotionVO;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
     private ObservableList<PromotionVO> observableList = FXCollections.observableArrayList();
+    private ObservableList<PromotionVO> tempList;
     private BoardController boardController;
     private int rowsPerPage = 7;
+    private Set<PromotionVO> chosenItems = new HashSet<>();
 
     public PromotionTreeTable(Collection<PromotionVO> list, BoardController boardController) {
         observableList.setAll(list);
         this.boardController = boardController;
+
+        JFXTreeTableColumn<PromotionVO, Boolean> choose = new JFXTreeTableColumn<>("  ");
+        choose.setPrefWidth(40);
+        choose.setCellValueFactory(param -> param.getValue().getValue().selectedProperty());
+        choose.setCellFactory(p -> new ChooseBoxCell());
 
         JFXTreeTableColumn<PromotionVO, String> idColumn = new JFXTreeTableColumn<>("编号");
         idColumn.setPrefWidth(200);
@@ -69,15 +81,22 @@ public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
         });
 
         setShowRoot(false);
-        getColumns().addAll(idColumn, beginTimeColumn, endTimeColumn, commentColumn);
+        getColumns().addAll(choose, idColumn, beginTimeColumn, endTimeColumn, commentColumn);
+
+        int pageIndex = 0;
+        int fromIndex = pageIndex * rowsPerPage;
+        int toIndex = Math.min(fromIndex + rowsPerPage, observableList.size());
+        tempList = FXCollections.observableList(observableList.subList(fromIndex, toIndex));
+        TreeItem<PromotionVO> root = new RecursiveTreeItem<>(tempList, RecursiveTreeObject::getChildren);
+        this.setRoot(root);
     }
 
     Node createPage(int pageIndex) {
         int fromIndex = pageIndex * rowsPerPage;
         int toIndex = Math.min(fromIndex + rowsPerPage, observableList.size());
-        ObservableList<PromotionVO> tempList = FXCollections.observableList(observableList.subList(fromIndex, toIndex));
+        tempList = FXCollections.observableList(observableList.subList(fromIndex, toIndex));
         TreeItem<PromotionVO> root = new RecursiveTreeItem<>(tempList, RecursiveTreeObject::getChildren);
-        setRoot(root);
+        this.setRoot(root);
 //        this.setStyle("-fx-border-color: transparent; -fx-padding: 0; -fx-background-color: transparent");
 
         Timeline timeline = new Timeline();
@@ -96,16 +115,69 @@ public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
         }
 
         timeline.play();
-        return new BorderPane(this);
+//        return new BorderPane(this);
+        return null;
     }
 
     public void setList(Collection<PromotionVO> list) {
         observableList.setAll(list);
     }
+
     public int getListSize() {
         return observableList.size();
     }
+
     public int getRowsPerPage() {
         return rowsPerPage;
+    }
+
+    public void testDelete(Pagination p) {
+        chosenItems.forEach(i -> {
+            observableList.remove(i);
+            createPage(p.getCurrentPageIndex());
+            p.setPageCount(getListSize() / getRowsPerPage() + 1);
+//            (observableList.indexOf(promotionVO) + 1);
+        });
+
+//        int currentPageIndex = p.getCurrentPageIndex();
+//        System.out.println(currentPageIndex);
+//        p.setCurrentPageIndex(1);
+//        Platform.runLater(() -> p.setCurrentPageIndex(currentPageIndex));
+    }
+
+    private class ChooseBoxCell extends JFXTreeTableCell<PromotionVO, Boolean> {
+        private JFXCheckBox cb = new JFXCheckBox("");
+
+        public ChooseBoxCell() {
+            cb.setOnMouseClicked(e -> {
+//                if (getTreeTableRow() != null && getTreeTableRow().getItem() != null) {
+//                TreeTableView<>
+                PromotionVO promotionVO = getTreeTableRow().getItem();
+                System.out.println(promotionVO);
+                promotionVO.setSelected(!promotionVO.isSelected());
+
+                if (promotionVO.isSelected()) {
+                    chosenItems.add(promotionVO);
+                } else {
+                    chosenItems.remove(promotionVO);
+                }
+//                }
+            });
+        }
+
+
+        @Override
+        public void updateItem(Boolean item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (empty) {
+                setGraphic(null);
+            } else {
+                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                cb.setSelected(item);
+                setGraphic(cb);
+            }
+
+        }
     }
 }

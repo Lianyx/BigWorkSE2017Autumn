@@ -6,19 +6,19 @@ import dataService.promotiondataService.PromotionDataService;
 import javafx.scene.layout.Pane;
 import po.promotionPO.PromotionPO;
 import ui.managerui.promotion.PromotionDetailPane;
+import vo.abstractVO.SelectableVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 
-public abstract class PromotionVO extends RecursiveTreeObject<PromotionVO> {
+public abstract class PromotionVO extends SelectableVO<PromotionVO> {
     protected String id;
 
     protected LocalDateTime createTime, lastModifiedTime, beginTime, endTime;
 
     protected String comment;
-
 
 
     public PromotionVO() {
@@ -42,7 +42,9 @@ public abstract class PromotionVO extends RecursiveTreeObject<PromotionVO> {
     }
 
     public abstract <T extends PromotionPO> T toPO();
+
     public abstract PromotionblService getService() throws RemoteException, NotBoundException, MalformedURLException;
+
     public abstract PromotionDetailPane getDetailPane();
 
     // TODO 这个应该和receipt全并

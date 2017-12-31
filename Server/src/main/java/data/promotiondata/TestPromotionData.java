@@ -106,8 +106,8 @@ public class TestPromotionData {
 
     public static void main(String[] args) throws RemoteException{
         testM();
-//        testT();
-//        testC();
+        testT();
+        testC();
         System.out.println("end Main");
     }
 }
