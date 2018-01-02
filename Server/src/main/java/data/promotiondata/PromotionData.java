@@ -1,12 +1,17 @@
 package data.promotiondata;
 
+import data.generic.ReceipishData;
 import dataService.promotiondataService.PromotionDataService;
+import exceptions.ItemNotFoundException;
+import exceptions.ReachUpperLimitException;
 import mapper.generic.PromotionPOMapper;
+import mapper.generic.ReceipishPOMapper;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.binding.BindingException;
 import org.apache.ibatis.session.SqlSession;
 import po.promotionPO.PromotionPO;
 import util.PromotionSearchCondition;
+import util.PromotionState;
 import util.ResultMessage;
 
 import java.rmi.RemoteException;
@@ -17,63 +22,24 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PromotionData<T extends PromotionPO> extends UnicastRemoteObject implements PromotionDataService<T> {
+public class PromotionData<T extends PromotionPO> extends ReceipishData<T> implements PromotionDataService<T> {
     // because we cannot use T.class
     private Class<? extends PromotionPOMapper<T>> mapperClass = null;
+    private Class<T> promotionClass = null;
 
-    public PromotionData(Class<? extends PromotionPOMapper<T>> mapperClass) throws RemoteException {
+    public PromotionData(Class<? extends PromotionPOMapper<T>> mapperClass, Class<T> promotionClass) throws RemoteException {
         this.mapperClass = mapperClass;
+        this.promotionClass = promotionClass;
     }
 
     @Override
-    public int getDayId() throws RemoteException {
-        LocalDateTime today = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
-
-        int resultID;
-        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            PromotionPOMapper<T> mapper = session.getMapper(mapperClass);
-            resultID = mapper.getDayId(today);
-            // TODO add branch if resultID > 99999?
-            session.commit();
-        } catch (BindingException e) { // TODO This is aimed to handle the first call in a day. But I'm not sure about its correctness.
-            resultID = 0;
-        }
-        return resultID;
+    protected Class<? extends ReceipishPOMapper<T>> getMapperClass() {
+        return mapperClass;
     }
 
     @Override
-    public ResultMessage insert(T promotionPO) throws RemoteException {
-        promotionPO.setCreateTime(LocalDateTime.now());
-        promotionPO.setLastModifiedTime(LocalDateTime.now());
-
-        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            PromotionPOMapper<T> mapper = session.getMapper(mapperClass);
-            mapper.insert(promotionPO);
-            session.commit();
-        }
-        return ResultMessage.SUCCESS;
-    }
-
-    @Override
-    public ResultMessage update(T promotionPO) throws RemoteException {
-        promotionPO.setLastModifiedTime(LocalDateTime.now());
-
-        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            PromotionPOMapper<T> mapper = session.getMapper(mapperClass);
-            mapper.update(promotionPO);
-            session.commit();
-        }
-        return ResultMessage.SUCCESS;
-    }
-
-    @Override
-    public ResultMessage delete(T promotionPO) throws RemoteException {
-        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            PromotionPOMapper<T> mapper = session.getMapper(mapperClass);
-            mapper.delete(promotionPO);
-            session.commit();
-        }
-        return ResultMessage.SUCCESS;
+    protected Class<T> getPOClass() {
+        return promotionClass;
     }
 
     @Override
@@ -85,7 +51,7 @@ public class PromotionData<T extends PromotionPO> extends UnicastRemoteObject im
 
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             PromotionPOMapper<T> mapper = session.getMapper(mapperClass);
-            resultList = mapper.selectInEffect(now, nextDayZero);
+            resultList = mapper.selectInEffect(now, nextDayZero, PromotionState.SAVED);
             session.commit();
         }
         return resultList;
@@ -102,4 +68,6 @@ public class PromotionData<T extends PromotionPO> extends UnicastRemoteObject im
         }
         return resultList;
     }
+
+
 }

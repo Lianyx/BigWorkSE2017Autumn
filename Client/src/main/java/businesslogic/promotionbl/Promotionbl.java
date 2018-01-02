@@ -1,15 +1,21 @@
 package businesslogic.promotionbl;
 
 import blService.promotionblService.PromotionblService;
+import businesslogic.generic.Receipishbl;
+import dataService.generic.ReceipishDataService;
 import dataService.promotiondataService.PromotionDataService;
+import po.generic.ReceipishPO;
 import po.promotionPO.CombinePromotionPO;
 import po.promotionPO.PromotionGoodsItemPO;
 import po.promotionPO.PromotionPO;
 import po.receiptPO.ReceiptPO;
 import util.PromotionSearchCondition;
 import util.ResultMessage;
+import vo.abstractVO.ReceipishVO;
 import vo.promotionVO.CombinePromotionVO;
+import vo.promotionVO.MemberPromotionVO;
 import vo.promotionVO.PromotionVO;
+import vo.promotionVO.TotalPromotionVO;
 import vo.receiptVO.ReceiptVO;
 
 import java.lang.reflect.Constructor;
@@ -21,13 +27,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public abstract class Promotionbl<TV extends PromotionVO, TP extends PromotionPO> implements PromotionblService<TV> {
-    private Class<? extends PromotionPO> promotionPOClass;
-    private Class<? extends PromotionVO> promotionVOClass;
+public abstract class Promotionbl<TV extends PromotionVO, TP extends PromotionPO> extends Receipishbl<TV, TP> implements PromotionblService<TV> {
+    private Class<TP> promotionPOClass;
+    private Class<TV> promotionVOClass;
 
     private PromotionDataService<TP> promotionDataService;
 
-    public Promotionbl(Class<? extends PromotionVO> promotionVOClass, Class<? extends PromotionPO> promotionPOClass, String className) throws RemoteException, NotBoundException, MalformedURLException {
+    public Promotionbl(Class<TV> promotionVOClass, Class<TP> promotionPOClass) throws RemoteException, NotBoundException, MalformedURLException {
         this.promotionVOClass = promotionVOClass;
         this.promotionPOClass = promotionPOClass;
 
@@ -35,31 +41,31 @@ public abstract class Promotionbl<TV extends PromotionVO, TP extends PromotionPO
         int port = 1099;
         String registrationpre = "rmi://" + registry + ":" + port;
 
-        promotionDataService = (PromotionDataService<TP>) Naming.lookup(registrationpre + "/" + className);
+        String poName = promotionPOClass.getName();
+        String promotionDataName = poName.substring(poName.lastIndexOf(".") + 1, poName.length() - 2) + "Data";
+        promotionDataService = (PromotionDataService<TP>) Naming.lookup(registrationpre + "/" + promotionDataName);
+    }
+
+
+    // TODO 其实也可以选择让每一个子类分别来写这两个方法
+    @Override
+    public Class<TV> getVOClass() {
+        return promotionVOClass;
+    }
+
+    @Override
+    public Class<TP> getPOClass() {
+        return promotionPOClass;
+    }
+
+    @Override
+    protected ReceipishDataService<TP> getDataService() {
+        return promotionDataService;
     }
 
     /**
      * implements promotionService
      */
-    @Override
-    public int getDayId() throws RemoteException {
-        return promotionDataService.getDayId();
-    }
-
-    @Override
-    public ResultMessage insert(TV promotionVO) throws RemoteException {
-        return promotionDataService.insert(promotionVO.toPO());
-    }
-
-    @Override
-    public ResultMessage update(TV promotionVO) throws RemoteException {
-        return promotionDataService.update(promotionVO.toPO());
-    }
-
-    @Override
-    public ResultMessage delete(TV promotionVO) throws RemoteException {
-        return promotionDataService.delete(promotionVO.toPO());
-    }
 
     @Override
     public ArrayList<TV> selectInEffect() throws RemoteException {
@@ -70,41 +76,4 @@ public abstract class Promotionbl<TV extends PromotionVO, TP extends PromotionPO
     public ArrayList<TV> search(PromotionSearchCondition promotionSearchCondition) throws RemoteException {
         return promotionDataService.search(promotionSearchCondition).stream().map(this::convertToVO).collect(Collectors.toCollection(ArrayList::new));
     }
-
-    /**
-     * private methods
-     */
-
-    protected TV convertToVO(TP promotionPO) {
-        Constructor<? extends PromotionVO> cstr = null;
-        try {
-            cstr = promotionVOClass.getConstructor(promotionPOClass);
-            return (TV) (cstr.newInstance(promotionPO));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException {
-        CombinePromotionbl combinePromotionbl = new CombinePromotionbl();
-        ArrayList<CombinePromotionVO> cvos = combinePromotionbl.selectInEffect();
-
-        CombinePromotionPO cpo1 = new CombinePromotionPO();
-
-        cpo1.setDayId(combinePromotionbl.getDayId());
-        cpo1.setCreateTime(LocalDateTime.now());
-        cpo1.setBeginTime(LocalDateTime.of(2017, 11, 1, 0, 0));
-        cpo1.setEndTime(LocalDateTime.of(2017, 12, 30, 0, 0));
-        cpo1.setDiscountAmount(40);
-        cpo1.setGoodsCombination(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO("0", 10), new PromotionGoodsItemPO("1", 2)});
-
-
-        CombinePromotionVO cv1 = new CombinePromotionVO(cpo1);
-
-        CombinePromotionVO cv2 = combinePromotionbl.convertToVO(cpo1);
-
-        System.out.println("fads");
-    }
-
 }

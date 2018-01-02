@@ -2,30 +2,36 @@ package vo.promotionVO;
 
 import blService.promotionblService.PromotionblService;
 import businesslogic.promotionbl.PromotionFactory;
-import javafx.scene.layout.Pane;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import po.promotionPO.PromotionGoodsItemPO;
 import po.promotionPO.TotalPromotionPO;
-import ui.managerui.promotion.PromotionDetailPane;
+import ui.managerui.promotionui.PromotionDetailPane;
+import ui.managerui.promotionui.TotalPromotionDetailPane;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class TotalPromotionVO extends PromotionVO{
+public class TotalPromotionVO extends PromotionVO {
     private double requiredTotal;
     private double tokenAmount;
     private ArrayList<PromotionGoodsItemVO> gifts;
+
 
     public TotalPromotionVO() {
     }
 
     public TotalPromotionVO(TotalPromotionPO promotionPO) {
         super(promotionPO);
-        id = formatId("ZJCX", promotionPO);
-
         requiredTotal = promotionPO.getRequiredTotal();
         tokenAmount = promotionPO.getTokenAmount();
         gifts = Arrays.stream(promotionPO.getGifts())
@@ -34,16 +40,17 @@ public class TotalPromotionVO extends PromotionVO{
     }
 
     @Override
+    protected String getCodeName() {
+        return "ZJCX";
+    }
+
+    @Override
     public TotalPromotionPO toPO() {
-        return new TotalPromotionPO(idToDayId(),
-                createTime,
-                lastModifiedTime,
-                beginTime,
-                endTime,
-                comment,
-                requiredTotal,
-                tokenAmount,
-                gifts.stream().map(PromotionGoodsItemVO::toPO).toArray(PromotionGoodsItemPO[]::new));
+        TotalPromotionPO result = toPromotionPO(TotalPromotionPO.class);
+        result.setRequiredTotal(requiredTotal);
+        result.setTokenAmount(tokenAmount);
+        result.setGifts(gifts.stream().map(PromotionGoodsItemVO::toPO).toArray(PromotionGoodsItemPO[]::new));
+        return result;
     }
 
     @Override
@@ -53,7 +60,7 @@ public class TotalPromotionVO extends PromotionVO{
 
     @Override
     public PromotionDetailPane getDetailPane() {
-        return null;
+        return new TotalPromotionDetailPane(this);
     }
 
     public double getRequiredTotal() {

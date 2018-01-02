@@ -15,18 +15,21 @@
         select max(dayId)+1 from combinePromotion where createTime &gt;= #{today}
     </select>
     <insert id="insert">
-        insert into combinePromotion(dayId, createTime, lastModifiedTime, beginTime, endTime, comment, discountAmount, goodsCombination)
-        values(#{dayId}, #{createTime}, #{lastModifiedTime}, #{beginTime}, #{endTime}, #{comment}, #{discountAmount}, #{goodsCombination, typeHandler=MyJsonHandler})
+        insert into combinePromotion(dayId, createTime, lastModifiedTime, beginTime, endTime, comment, promotionState, discountAmount, goodsCombination)
+        values(#{dayId}, #{createTime}, #{lastModifiedTime}, #{beginTime}, #{endTime}, #{comment}, #{promotionState}, #{discountAmount}, #{goodsCombination, typeHandler=MyJsonHandler})
     </insert>
     <update id="update">
-        update combinePromotion set lastModifiedTime=#{lastModifiedTime}, beginTime=#{beginTime}, endTime=#{endTime}, comment=#{comment}, discountAmount=#{discountAmount}, goodsCombination=#{goodsCombination, typeHandler=MyJsonHandler}
+        update combinePromotion set lastModifiedTime=#{lastModifiedTime}, beginTime=#{beginTime}, endTime=#{endTime}, comment=#{comment}, promotionState=#{promotionState}, discountAmount=#{discountAmount}, goodsCombination=#{goodsCombination, typeHandler=MyJsonHandler}
         where dayId=#{dayId} and createTime=#{createTime}
     </update>
     <delete id="delete">
         delete from combinePromotion where dayId=#{dayId} and createTime=#{createTime}
     </delete>
+    <select id="selectByMold" resultType="po.promotionPO.CombinePromotionPO">
+        select * from combinePromotion where dayId=#{dayId} and createTime=#{createTime}
+    </select>
     <select id="selectInEffect" resultMap="resultMap">
-        select * from combinePromotion where beginTime &lt;= #{begin} and endTime &gt;= #{end}
+        select * from combinePromotion where beginTime &lt;= #{begin} and endTime &gt;= #{end} amd promotionState = #{promotionState}
     </select>
     <select id="search" resultMap="resultMap">
         select * from combinePromotion
@@ -48,6 +51,9 @@
             </if>
             <if test="endCeil != null">
                 AND endTime &lt;= #{endCeil}
+            </if>
+            <if test="promotionState != null">
+                AND promotionState = #{promotionState}
             </if>
         </where>
     </select>

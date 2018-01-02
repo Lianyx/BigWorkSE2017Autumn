@@ -23,6 +23,13 @@ public class PromotionGoodsItemVO extends RecursiveTreeObject<PromotionGoodsItem
         num = new SimpleIntegerProperty(promotionGoodsItemPO.getNum());
     }
 
+    public PromotionGoodsItemVO(String id, String name, int unitPrice, IntegerProperty num) {
+        this.id = id;
+        this.name = name;
+        this.unitPrice = unitPrice;
+        this.num = num;
+    }
+
     public PromotionGoodsItemPO toPO() {
         return new PromotionGoodsItemPO(id, num.get());
     }

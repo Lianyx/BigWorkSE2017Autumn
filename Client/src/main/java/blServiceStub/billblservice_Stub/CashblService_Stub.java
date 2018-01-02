@@ -20,6 +20,11 @@ public class CashblService_Stub implements CashBillReceiptblService{
         return 0;
     }
 
+    @Override
+    public CashBillReceiptVO getNew() throws RemoteException {
+        return null;
+    }
+
     public ResultMessage insert(CashBillReceiptVO receiptVO) throws RemoteException{
         return ResultMessage.SUCCESS;
     }

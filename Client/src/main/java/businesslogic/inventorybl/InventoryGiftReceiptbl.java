@@ -20,7 +20,7 @@ public class InventoryGiftReceiptbl extends Inventorybl {
     GoodsUpdateInfo info;
 
     public InventoryGiftReceiptbl(Class<? extends ReceiptVO> receiptVOClass, Class<? extends ReceiptPO> receiptPOClass, String className) throws RemoteException, NotBoundException, MalformedURLException {
-        super(receiptVOClass, receiptPOClass, className);
+        super();
         info = new GoodsUpdate();
     }
 

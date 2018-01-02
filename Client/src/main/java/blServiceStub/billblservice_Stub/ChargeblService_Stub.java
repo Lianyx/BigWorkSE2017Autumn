@@ -20,6 +20,11 @@ public class ChargeblService_Stub implements ChargeBillReceiptblService{
         return 0;
     }
 
+    @Override
+    public ChargeBillReceiptVO getNew() throws RemoteException {
+        return null;
+    }
+
     public ResultMessage insert(ChargeBillReceiptVO receiptVO) throws RemoteException{
         return ResultMessage.SUCCESS;
     }

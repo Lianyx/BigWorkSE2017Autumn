@@ -11,6 +11,6 @@ import java.rmi.RemoteException;
 
 public class MemberPromotionbl extends Promotionbl<MemberPromotionVO, MemberPromotionPO>{
     public MemberPromotionbl() throws RemoteException, NotBoundException, MalformedURLException {
-        super(MemberPromotionVO.class, MemberPromotionPO.class, "MemberPromotionData");
+        super(MemberPromotionVO.class, MemberPromotionPO.class);
     }
 }

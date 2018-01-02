@@ -19,6 +19,11 @@ public class PaymentblService_Stub implements PaymentBillReceiptblService{
         return 0;
     }
 
+    @Override
+    public PaymentBillReceiptVO getNew() throws RemoteException {
+        return null;
+    }
+
     public ResultMessage insert(PaymentBillReceiptVO receiptVO) throws RemoteException{
         return ResultMessage.SUCCESS;
     }
