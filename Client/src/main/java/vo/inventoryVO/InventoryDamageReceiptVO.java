@@ -21,7 +21,12 @@ public class InventoryDamageReceiptVO extends InventoryReceiptVO {
     }
 
     @Override
-    public <T extends ReceiptPO> T toPO() {
+    protected String getCodeName() {
+        return "BSD";
+    }
+
+    @Override
+    public InventoryDamageReceiptVO toPO() {
         return null;
     }
 
@@ -34,4 +39,7 @@ public class InventoryDamageReceiptVO extends InventoryReceiptVO {
     public Node getDetailPane() {
         return null;
     }
+
+
 }
+

@@ -4,23 +4,15 @@ import blService.checkblService.ReceiptblService;
 import javafx.scene.Node;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
-import vo.inventoryVO.uiReceipt.GiftuiGoodsItemVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
-public class InventoryGiftReceiptVO extends InventoryReceiptVO implements Comparable<InventoryGiftReceiptVO>{
+public class InventoryGiftReceiptVO extends InventoryReceiptVO {
     private List<InventroyGiftGoodsItemVO> list;
-
-    public InventoryGiftReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime,
-                                  ReceiptState receiptState, Set<GiftuiGoodsItemVO> set) {
-        super(id, operatorId, createTime, lastModifiedTime, receiptState);
-
-    }
 
 
     public InventoryGiftReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime,
@@ -30,7 +22,12 @@ public class InventoryGiftReceiptVO extends InventoryReceiptVO implements Compar
     }
 
     @Override
-    public <T extends ReceiptPO> T toPO() {
+    protected String getCodeName() {
+        return "ZSD";
+    }
+
+    @Override
+    public InventoryGiftReceiptVO toPO() {
        // return new InventoryGiftReceiptPO(Integer.parseInt(getId()),getOperatorId(),getCreateTime(),getLastModifiedTime(),getReceiptState()
        // ,getClerkName(), list.toArray(new InventoryReceiptGoodsItemPO[list.size()]),getComment());
         return null;
@@ -44,10 +41,5 @@ public class InventoryGiftReceiptVO extends InventoryReceiptVO implements Compar
     @Override
     public Node getDetailPane() {
         return null;
-    }
-
-    @Override
-    public int compareTo(InventoryGiftReceiptVO o) {
-        return this.getId().compareTo(o.getId());
     }
 }

@@ -1,52 +1,27 @@
 package po.promotionPO;
 
+import po.generic.ReceipishPO;
+import util.PromotionState;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public abstract class PromotionPO implements Serializable {
-    private int dayId;
-
-    private LocalDateTime createTime;
-    private LocalDateTime lastModifiedTime;
+public abstract class PromotionPO extends ReceipishPO {
     private LocalDateTime beginTime;
     private LocalDateTime endTime;
 
     private String comment;
+    private PromotionState promotionState;
 
     public PromotionPO() {
     }
 
-    public PromotionPO(int dayId, LocalDateTime createTime, LocalDateTime lastModifiedTime, LocalDateTime beginTime, LocalDateTime endTime, String comment) {
-        this.dayId = dayId;
-        this.createTime = createTime;
-        this.lastModifiedTime = lastModifiedTime;
+    public PromotionPO(int dayId, LocalDateTime createTime, LocalDateTime lastModifiedTime, LocalDateTime beginTime, LocalDateTime endTime, String comment, PromotionState promotionState) {
+        super(dayId, createTime, lastModifiedTime);
         this.beginTime = beginTime;
         this.endTime = endTime;
         this.comment = comment;
-    }
-
-    public int getDayId() {
-        return dayId;
-    }
-
-    public void setDayId(int dayId) {
-        this.dayId = dayId;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public LocalDateTime getLastModifiedTime() {
-        return lastModifiedTime;
-    }
-
-    public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
-        this.lastModifiedTime = lastModifiedTime;
+        this.promotionState = promotionState;
     }
 
     public LocalDateTime getBeginTime() {
@@ -71,5 +46,13 @@ public abstract class PromotionPO implements Serializable {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public PromotionState getPromotionState() {
+        return promotionState;
+    }
+
+    public void setPromotionState(PromotionState promotionState) {
+        this.promotionState = promotionState;
     }
 }

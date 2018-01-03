@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface PromotionblService<T extends PromotionVO> {
-    int getDayId() throws RemoteException;
+    T getNew() throws RemoteException;
     ResultMessage insert(T promotionVO) throws RemoteException;
     ResultMessage update(T promotionVO) throws RemoteException;
     ResultMessage delete(T promotionVO) throws RemoteException;

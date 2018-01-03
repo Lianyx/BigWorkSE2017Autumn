@@ -1,4 +1,4 @@
-package ui.managerui.promotion;
+package ui.managerui.promotionui;
 
 public class CombinePromotionDetailPane {
 }

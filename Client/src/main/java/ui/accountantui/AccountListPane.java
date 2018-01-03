@@ -99,8 +99,8 @@ public class AccountListPane extends Refreshable{
 
     @FXML
     public void add(){
-        JFXDialog dialog = new JFXDialog(mainpane,new AddPane(),JFXDialog.DialogTransition.CENTER);
-        dialog.show();
+//        JFXDialog dialog = new JFXDialog(mainpane,new AddPane(),JFXDialog.DialogTransition.CENTER);
+//        dialog.show();
     }
 
 

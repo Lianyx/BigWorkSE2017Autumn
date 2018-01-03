@@ -21,7 +21,22 @@ public class InventoryOverflowReceiptVO extends InventoryReceiptVO {
     }
 
     @Override
-    public <T extends ReceiptPO> T toPO() {
+    protected String getCodeName() {
+        return "BYD";
+    }
+
+    @Override
+    public InventoryOverflowReceiptVO toPO() {
+        return null;
+    }
+
+    @Override
+    public ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException {
+        return null;
+    }
+
+    @Override
+    public Node getDetailPane() {
         return null;
     }
 

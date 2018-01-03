@@ -1,4 +1,4 @@
-package ui.managerui.promotion;
+package ui.managerui.promotionui;
 
 import blService.promotionblService.PromotionblService;
 import businesslogic.promotionbl.PromotionFactory;
@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.cells.editors.IntegerTextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -19,7 +20,6 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
-import javafx.util.converter.NumberStringConverter;
 import vo.promotionVO.MemberPromotionVO;
 import vo.promotionVO.PromotionGoodsItemVO;
 
@@ -89,30 +89,11 @@ public class MemberPromotionDetailPane extends PromotionDetailPane {
         unitPriceColumn.setPrefWidth(93);
         unitPriceColumn.setCellValueFactory((p) -> new ReadOnlyObjectWrapper<>(p.getValue().getValue().getUnitPrice()));
 
-        JFXTreeTableColumn<PromotionGoodsItemVO, String> numColumn = new JFXTreeTableColumn<>("数量");
+        JFXTreeTableColumn<PromotionGoodsItemVO, Integer> numColumn = new JFXTreeTableColumn<>("数量");
         numColumn.setPrefWidth(93);
-        numColumn.setCellValueFactory(p -> {
-            IntegerProperty ip = p.getValue().getValue().numProperty();
-            StringProperty sp = new SimpleStringProperty();
-            Bindings.bindBidirectional(sp, ip, new StringConverter<Number>() {
-                @Override
-                public String toString(Number integer) {
-                    return String.valueOf(integer);
-                }
-
-                // TODO 其实用下面的setOnEditCommit比较好，出于不知道的原因。如果不是integer就回车不了。但是用下面的这里设成什么呢…
-                @Override
-                public Number fromString(String string) {
-                    if (string.matches("\\d+")) {
-                        return Integer.parseInt(string);
-                    }
-                    return 0;
-                }
-            });
-            return sp;
-        });
-        numColumn.setCellFactory((TreeTableColumn<PromotionGoodsItemVO, String> param) -> new GenericEditableTreeTableCell<>(
-                new TextFieldEditorBuilder()));
+        numColumn.setCellValueFactory(p -> p.getValue().getValue().numProperty().asObject());
+        numColumn.setCellFactory((TreeTableColumn<PromotionGoodsItemVO, Integer> param) -> new GenericEditableTreeTableCell<>(
+                new IntegerTextFieldEditorBuilder()));
 //        numColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<PromotionGoodsItemVO, String> t) -> {
 //            t.getTreeTableView()
 //                    .getTreeItem(t.getTreeTablePosition().getRow())

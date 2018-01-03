@@ -1,47 +1,42 @@
-package ui.managerui.promotion;
+package ui.managerui.promotionui;
 
 import com.jfoenix.controls.*;
-import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.util.Callback;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import ui.managerui.common.ChooseBoxTTCell;
 import ui.userui.usermanagerui.BoardController;
-import ui.userui.usermanagerui.ChosenItem;
-import vo.UserListVO;
 import vo.promotionVO.PromotionVO;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
-    private ObservableList<PromotionVO> observableList = FXCollections.observableArrayList();
+    private StackPane mainpane;
+
+    private ObservableList<PromotionVO> observableList;
     private ObservableList<PromotionVO> tempList;
     private BoardController boardController;
+    private Pagination pagination;
     private int rowsPerPage = 7;
-    private Set<PromotionVO> chosenItems = new HashSet<>();
+    private Set<PromotionVO> chosenItems;
 
-    public PromotionTreeTable(Collection<PromotionVO> list, BoardController boardController) {
-        observableList.setAll(list);
+    public PromotionTreeTable(List<PromotionVO> list, BoardController boardController, StackPane mainpane) {
+        this.observableList = FXCollections.observableArrayList(list);
         this.boardController = boardController;
+        this.mainpane = mainpane;
+        this.chosenItems = new HashSet<>();
 
         JFXTreeTableColumn<PromotionVO, Boolean> choose = new JFXTreeTableColumn<>("  ");
         choose.setPrefWidth(40);
         choose.setCellValueFactory(param -> param.getValue().getValue().selectedProperty());
-        choose.setCellFactory(p -> new ChooseBoxCell());
+        choose.setCellFactory(p -> new ChooseBoxTTCell<>(chosenItems));
 
         JFXTreeTableColumn<PromotionVO, String> idColumn = new JFXTreeTableColumn<>("编号");
         idColumn.setPrefWidth(200);
@@ -49,11 +44,11 @@ public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
 
         JFXTreeTableColumn<PromotionVO, String> beginTimeColumn = new JFXTreeTableColumn<>("开始时间");
         beginTimeColumn.setPrefWidth(100);
-        beginTimeColumn.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getValue().getBeginTime().toLocalDate().toString()));
+        beginTimeColumn.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getValue().getBeginTime().toString()));
 
         JFXTreeTableColumn<PromotionVO, String> endTimeColumn = new JFXTreeTableColumn<>("结束时间");
         endTimeColumn.setPrefWidth(100);
-        endTimeColumn.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getValue().getBeginTime().toLocalDate().toString()));
+        endTimeColumn.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getValue().getBeginTime().toString()));
 
         JFXTreeTableColumn<PromotionVO, String> commentColumn = new JFXTreeTableColumn<>("备注");
         commentColumn.setPrefWidth(100);
@@ -66,6 +61,8 @@ public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
             row.setOnMouseClicked(e -> {
                 if (e.getClickCount() == 2) {
                     PromotionDetailPane promotionDetailPane = row.getTreeItem().getValue().getDetailPane();
+                    promotionDetailPane.setMainpane(mainpane);
+                    promotionDetailPane.setBoardController(boardController);
                     boardController.switchTo(promotionDetailPane);
                 }
             });
@@ -83,21 +80,26 @@ public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
         setShowRoot(false);
         getColumns().addAll(choose, idColumn, beginTimeColumn, endTimeColumn, commentColumn);
 
+//        observableList.addListener((ListChangeListener.Change<? extends PromotionVO> change) -> { // 这里有个坑，必须写明类型
+//            createPage(pagination.getCurrentPageIndex());
+//            pagination.setPageCount(getListSize() / getRowsPerPage() + 1);
+//        });
+
         int pageIndex = 0;
         int fromIndex = pageIndex * rowsPerPage;
         int toIndex = Math.min(fromIndex + rowsPerPage, observableList.size());
-        tempList = FXCollections.observableList(observableList.subList(fromIndex, toIndex));
+        tempList = FXCollections.observableArrayList(observableList.subList(fromIndex, toIndex));
         TreeItem<PromotionVO> root = new RecursiveTreeItem<>(tempList, RecursiveTreeObject::getChildren);
+//        this.setStyle("-fx-border-color: transparent; -fx-padding: 0; -fx-background-color: transparent");
         this.setRoot(root);
     }
 
-    Node createPage(int pageIndex) {
+    void createPage(int pageIndex) {
         int fromIndex = pageIndex * rowsPerPage;
         int toIndex = Math.min(fromIndex + rowsPerPage, observableList.size());
-        tempList = FXCollections.observableList(observableList.subList(fromIndex, toIndex));
+        tempList = (FXCollections.observableArrayList(observableList.subList(fromIndex, toIndex)));
         TreeItem<PromotionVO> root = new RecursiveTreeItem<>(tempList, RecursiveTreeObject::getChildren);
         this.setRoot(root);
-//        this.setStyle("-fx-border-color: transparent; -fx-padding: 0; -fx-background-color: transparent");
 
         Timeline timeline = new Timeline();
         timeline.getKeyFrames().add(
@@ -115,8 +117,6 @@ public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
         }
 
         timeline.play();
-//        return new BorderPane(this);
-        return null;
     }
 
     public void setList(Collection<PromotionVO> list) {
@@ -131,53 +131,55 @@ public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
         return rowsPerPage;
     }
 
-    public void testDelete(Pagination p) {
-        chosenItems.forEach(i -> {
-            observableList.remove(i);
-            createPage(p.getCurrentPageIndex());
-            p.setPageCount(getListSize() / getRowsPerPage() + 1);
-//            (observableList.indexOf(promotionVO) + 1);
-        });
+//    void delete(Set<PromotionVO> itemsToBeDeleted) { // 这个是没有和数据库交互的，不能用吧
+//        if (itemsToBeDeleted.isEmpty()) {
+//            return;
+//        }
+//
+//        observableList.removeAll(itemsToBeDeleted);
+//
+//        int maxPageIndex = (observableList.size() - 1) / rowsPerPage + 1;
+//        pagination.setPageCount(maxPageIndex); // 就算是0好像也不报错的
+//
+//        int currentPageIndex = pagination.getCurrentPageIndex();
+//        int newPageIndex = 0;
+//        if (currentPageIndex - 1 >= 0 && currentPageIndex < maxPageIndex) { // TODO 这里pageIndex在userListPane逻辑有点没看懂…就自己瞎改了
+//            newPageIndex = currentPageIndex;
+//        }
+//        if (newPageIndex == currentPageIndex) {
+//            // 这里写的很丑。
+//            // 因为：如果newPageIndex和原来一样的，只改pagination就不会触发createPage；如果不一样（只有0的情况才不一样吧），还要改pagination
+//            // 要么就是继createPage又改pagination，感觉有可能会两次create。
+//            createPage(newPageIndex);
+//        } else {
+//            pagination.setCurrentPageIndex(newPageIndex);
+//        }
+//    }
 
-//        int currentPageIndex = p.getCurrentPageIndex();
-//        System.out.println(currentPageIndex);
-//        p.setCurrentPageIndex(1);
-//        Platform.runLater(() -> p.setCurrentPageIndex(currentPageIndex));
+    void refresh(List<PromotionVO> list) {
+        this.observableList = FXCollections.observableArrayList(list);
+
+        int maxPageIndex = (observableList.size() - 1) / rowsPerPage + 1;
+        pagination.setPageCount(maxPageIndex); // 就算是0好像也不报错的
+
+        int currentPageIndex = pagination.getCurrentPageIndex();
+        int newPageIndex = 0;
+        if (currentPageIndex - 1 >= 0 && currentPageIndex < maxPageIndex) { // TODO 这里pageIndex在userListPane逻辑有点没看懂…就自己瞎改了
+            newPageIndex = currentPageIndex;
+        }
+        if (newPageIndex == currentPageIndex) {
+            // 这里写的很丑。
+            // 因为：如果newPageIndex和原来一样的，只改pagination就不会触发createPage；如果不一样（只有0的情况才不一样吧），还要改pagination
+            // 要么就是继createPage又改pagination，感觉有可能会两次create。
+            createPage(newPageIndex);
+        } else {
+            pagination.setCurrentPageIndex(newPageIndex);
+        }
     }
 
-    private class ChooseBoxCell extends JFXTreeTableCell<PromotionVO, Boolean> {
-        private JFXCheckBox cb = new JFXCheckBox("");
-
-        public ChooseBoxCell() {
-            cb.setOnMouseClicked(e -> {
-//                if (getTreeTableRow() != null && getTreeTableRow().getItem() != null) {
-//                TreeTableView<>
-                PromotionVO promotionVO = getTreeTableRow().getItem();
-                System.out.println(promotionVO);
-                promotionVO.setSelected(!promotionVO.isSelected());
-
-                if (promotionVO.isSelected()) {
-                    chosenItems.add(promotionVO);
-                } else {
-                    chosenItems.remove(promotionVO);
-                }
-//                }
-            });
-        }
 
 
-        @Override
-        public void updateItem(Boolean item, boolean empty) {
-            super.updateItem(item, empty);
-
-            if (empty) {
-                setGraphic(null);
-            } else {
-                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                cb.setSelected(item);
-                setGraphic(cb);
-            }
-
-        }
+    public void setPagination(Pagination pagination) {
+        this.pagination = pagination;
     }
 }

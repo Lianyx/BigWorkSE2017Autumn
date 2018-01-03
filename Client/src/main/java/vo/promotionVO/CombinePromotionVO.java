@@ -2,14 +2,15 @@ package vo.promotionVO;
 
 import blService.promotionblService.PromotionblService;
 import businesslogic.promotionbl.PromotionFactory;
-import javafx.scene.layout.Pane;
 import po.promotionPO.PromotionGoodsItemPO;
 import po.promotionPO.CombinePromotionPO;
-import ui.managerui.promotion.PromotionDetailPane;
+import ui.managerui.promotionui.PromotionDetailPane;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -18,9 +19,10 @@ public class CombinePromotionVO extends PromotionVO {
     private ArrayList<PromotionGoodsItemVO> goodsCombination;
     private double discountAmount;
 
+    public CombinePromotionVO() {
+    }
     public CombinePromotionVO(CombinePromotionPO promotionPO) {
         super(promotionPO);
-        id = formatId("TJBCX", promotionPO);
 
         discountAmount = promotionPO.getDiscountAmount();
         goodsCombination = Arrays.stream(promotionPO.getGoodsCombination())
@@ -28,21 +30,17 @@ public class CombinePromotionVO extends PromotionVO {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    // for test
-    public CombinePromotionVO() {
-
+    @Override
+    protected String getCodeName() {
+        return "TJBCX";
     }
 
     @Override // unchecked overriding…
     public CombinePromotionPO toPO() {
-        return new CombinePromotionPO(idToDayId(),
-                createTime,
-                lastModifiedTime,
-                beginTime,
-                endTime,
-                comment,
-                goodsCombination.stream().map(PromotionGoodsItemVO::toPO).toArray(PromotionGoodsItemPO[]::new),
-                discountAmount);
+        CombinePromotionPO result = toPromotionPO(CombinePromotionPO.class);
+        result.setDiscountAmount(discountAmount);
+        result.setGoodsCombination(goodsCombination.stream().map(PromotionGoodsItemVO::toPO).toArray(PromotionGoodsItemPO[]::new));
+        return result;
     }
 
     @Override

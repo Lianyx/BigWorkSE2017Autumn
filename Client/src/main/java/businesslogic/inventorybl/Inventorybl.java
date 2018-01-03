@@ -13,7 +13,7 @@ import java.rmi.RemoteException;
 
 public abstract class Inventorybl extends Receiptbl<InventoryReceiptVO,InventoryReceiptPO> implements InventoryblService{
 
-    public Inventorybl(Class<? extends ReceiptVO> receiptVOClass, Class<? extends ReceiptPO> receiptPOClass, String className) throws RemoteException, NotBoundException, MalformedURLException {
-        super(receiptVOClass, receiptPOClass, className);
+    public Inventorybl() throws RemoteException, NotBoundException, MalformedURLException {
+        super(InventoryReceiptVO.class, InventoryReceiptPO.class);
     }
 }
