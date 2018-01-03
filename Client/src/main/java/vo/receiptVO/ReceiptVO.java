@@ -1,24 +1,31 @@
 package vo.receiptVO;
 
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.SimpleBooleanProperty;
+import blService.checkblService.ReceiptblService;
+import javafx.scene.Node;
+import po.generic.ReceipishPO;
+import po.promotionPO.PromotionPO;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
+import vo.abstractVO.ReceipishVO;
+import vo.abstractVO.SelectableVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 
-public abstract class ReceiptVO extends RecursiveTreeObject<ReceiptVO> {
-    private String id;
+public abstract class ReceiptVO extends ReceipishVO<ReceiptVO> {
     private int operatorId; // 很可能会改成名字之类
-
-    private LocalDateTime createTime;
-    private LocalDateTime lastModifiedTime;
 
     private ReceiptState receiptState;
 
-    private SimpleBooleanProperty selected = new SimpleBooleanProperty(false);
-
     public ReceiptVO() {
+    }
+
+    public ReceiptVO(ReceiptPO receiptPO) {
+        super(receiptPO);
+        this.operatorId = receiptPO.getOperatorId(); // TODO 这里以后要改成operator Name吧？或者反正就是自己，不管？
+        this.receiptState = receiptPO.getReceiptState();
     }
 
     public ReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState) {
@@ -29,15 +36,18 @@ public abstract class ReceiptVO extends RecursiveTreeObject<ReceiptVO> {
         this.receiptState = receiptState;
     }
 
-    public abstract <T extends ReceiptPO> T toPO();
-
-    public String getId() {
-        return id;
+    protected <T extends ReceiptPO> T toReceiptPO(Class<T> receiptClass) {
+        T result = toReceipishPO(receiptClass);
+        result.setOperatorId(operatorId);
+        result.setReceiptState(receiptState);
+        return result;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+//    public abstract <T extends ReceiptPO> T toPO();
+
+    public abstract ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException;
+
+    public abstract Node getDetailPane();
 
     public int getOperatorId() {
         return operatorId;
@@ -47,39 +57,11 @@ public abstract class ReceiptVO extends RecursiveTreeObject<ReceiptVO> {
         this.operatorId = operatorId;
     }
 
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public LocalDateTime getLastModifiedTime() {
-        return lastModifiedTime;
-    }
-
-    public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
-        this.lastModifiedTime = lastModifiedTime;
-    }
-
     public ReceiptState getReceiptState() {
         return receiptState;
     }
 
     public void setReceiptState(ReceiptState receiptState) {
         this.receiptState = receiptState;
-    }
-
-    public boolean isSelected() {
-        return selected.get();
-    }
-
-    public SimpleBooleanProperty selectedProperty() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected.set(selected);
     }
 }

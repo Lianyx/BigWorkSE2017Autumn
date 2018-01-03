@@ -2,7 +2,11 @@ package businesslogic.checkbl;
 
 import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
+import businesslogic.generic.Receipishbl;
+import businesslogic.salesbl.SalesSellbl;
 import dataService.checkdataService.ReceiptDataService;
+import dataService.generic.ReceipishDataService;
+import dataService.promotiondataService.PromotionDataService;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptSearchCondition;
 import util.ReceiptState;
@@ -18,13 +22,13 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public abstract class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> implements ReceiptblService<TV>, CheckInfo<TP> {
-    private Class<? extends ReceiptVO> receiptVOClass;
-    private Class<? extends ReceiptPO> receiptPOClass;
+public abstract class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> extends Receipishbl<TV, TP> implements ReceiptblService<TV>, CheckInfo<TP> {
+    private Class<TV> receiptVOClass;
+    private Class<TP> receiptPOClass;
 
-    protected ReceiptDataService<TP> receiptDataService;
+    protected ReceiptDataService<TP> receiptDataService; // 如果需要的话，这里可以再传一个Service的范型
 
-    public Receiptbl(Class<? extends ReceiptVO> receiptVOClass, Class<? extends ReceiptPO> receiptPOClass, String className) throws RemoteException, NotBoundException, MalformedURLException {
+    public Receiptbl(Class<TV> receiptVOClass, Class<TP> receiptPOClass) throws RemoteException, NotBoundException, MalformedURLException {
         this.receiptVOClass = receiptVOClass;
         this.receiptPOClass = receiptPOClass;
 
@@ -32,33 +36,31 @@ public abstract class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> impl
         int port = 1099;
         String registrationpre = "rmi://" + registry + ":" + port;
 
-        receiptDataService = (ReceiptDataService<TP>) Naming.lookup(registrationpre + "/" + className);
+        String poName = receiptPOClass.getName();
+        String receiptDataName = poName.substring(poName.lastIndexOf(".") + 1, poName.length() - 2) + "Data";
+        System.out.println(receiptDataName);
+        receiptDataService = (ReceiptDataService<TP>) Naming.lookup(registrationpre + "/" + receiptDataName);
+
     }
 
+    @Override
+    protected Class<TV> getVOClass() {
+        return receiptVOClass;
+    }
+
+    @Override
+    protected Class<TP> getPOClass() {
+        return receiptPOClass;
+    }
+
+    @Override
+    protected ReceipishDataService<TP> getDataService() {
+        return receiptDataService;
+    }
 
     /**
      * implement receiptblService
      */
-
-    @Override
-    public int getDayId() throws RemoteException {
-        return receiptDataService.getDayId();
-    }
-
-    @Override
-    public ResultMessage insert(TV receiptVO) throws RemoteException {
-        return receiptDataService.insert(receiptVO.toPO());
-    }
-
-    @Override
-    public ResultMessage update(TV receiptVO) throws RemoteException {
-        return receiptDataService.update(receiptVO.toPO());
-    }
-
-    @Override
-    public ResultMessage delete(TV receiptVO) throws RemoteException {
-        return receiptDataService.delete(receiptVO.toPO());
-    }
 
     @Override
     public ArrayList<TV> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
@@ -100,30 +102,16 @@ public abstract class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> impl
         return receiptDataService.selectByState(ReceiptState.PENDING);
     }
 
-
-    /**
-     * private methods
-     */
-
-    private TV convertToVO(TP receiptPO) {
-        Constructor<? extends ReceiptVO> cstr = null;
+    public static void main(String[] args) {
         try {
-            cstr = receiptVOClass.getConstructor(receiptPOClass);
-            return (TV) (cstr.newInstance(receiptPO));
-        } catch (Exception e) {
+            new SalesSellbl();
+        } catch (RemoteException e) {
             e.printStackTrace();
-            return null;
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
     }
 
-
-    //    private static <TF> TF castBack(Object o) {
-//        try {
-//            TF rv = (TF) o;
-//            return rv;
-//        } catch (java.lang.ClassCastException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
 }

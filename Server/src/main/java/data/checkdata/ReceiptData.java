@@ -1,6 +1,8 @@
 package data.checkdata;
 
+import data.generic.ReceipishData;
 import dataService.checkdataService.ReceiptDataService;
+import mapper.generic.ReceipishPOMapper;
 import mapper.generic.ReceiptPOMapper;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.binding.BindingException;
@@ -18,62 +20,22 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class ReceiptData<T extends ReceiptPO> extends UnicastRemoteObject implements ReceiptDataService<T> {
+public class ReceiptData<T extends ReceiptPO> extends ReceipishData<T> implements ReceiptDataService<T> {
     private Class<? extends ReceiptPOMapper<T>> mapperClass = null;
+    private Class<T> receiptClass = null;
 
-    public ReceiptData(Class<? extends ReceiptPOMapper<T>> mapperClass) throws RemoteException{
+    public ReceiptData(Class<? extends ReceiptPOMapper<T>> mapperClass, Class<T> receiptClass) throws RemoteException{
         this.mapperClass = mapperClass;
     }
 
     @Override
-    public int getDayId() throws RemoteException {
-        LocalDateTime today = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
-
-        int resultID;
-        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            ReceiptPOMapper<T> mapper = session.getMapper(mapperClass);
-            resultID = mapper.getDayId(today);
-            session.commit();
-        } catch (BindingException e) { // TODO 这样好像不好…
-            return 0;
-        }
-        return resultID;
+    protected Class<? extends ReceipishPOMapper<T>> getMapperClass() {
+        return mapperClass;
     }
 
     @Override
-    public ResultMessage insert(T promotionPO) throws RemoteException {
-        promotionPO.setCreateTime(LocalDateTime.now());
-        promotionPO.setLastModifiedTime(LocalDateTime.now());
-
-        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            ReceiptPOMapper<T> mapper = session.getMapper(mapperClass);
-            mapper.insert(promotionPO);
-            session.commit();
-        }
-        return ResultMessage.SUCCESS;
-    }
-
-    @Override
-    // TODO 如果审批本来就通过，那么不应该改
-    public ResultMessage update(T promotionPO) throws RemoteException{
-        promotionPO.setLastModifiedTime(LocalDateTime.now());
-
-        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            ReceiptPOMapper<T> mapper = session.getMapper(mapperClass);
-            mapper.update(promotionPO);
-            session.commit();
-        }
-        return ResultMessage.SUCCESS;
-    }
-
-    @Override
-    public ResultMessage delete(T promotionPO) throws RemoteException{
-        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            ReceiptPOMapper<T> mapper = session.getMapper(mapperClass);
-            mapper.delete(promotionPO);
-            session.commit();
-        }
-        return ResultMessage.SUCCESS;
+    protected Class<T> getPOClass() {
+        return receiptClass;
     }
 
     @Override

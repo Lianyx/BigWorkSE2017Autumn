@@ -8,8 +8,9 @@ public class PromotionSearchCondition implements Serializable {
     private LocalDateTime lastModifiedFloor, lastModifiedCeil;
     private LocalDateTime beginFloor, beginCeil;
     private LocalDateTime endFloor, endCeil;
+    private PromotionState promotionState;
     // 但是UI层打算只提供两个。接索时只需要满足在给定的时间里。促销开始的时间比条件中结束的时间早，促销结束的时间比条件中开始的时间晚
-    private ArrayList<PromotionType> promotionTypes;
+    private ArrayList<PromotionType> promotionTypes = new ArrayList<>();
 
     public LocalDateTime getLastModifiedFloor() {
         return lastModifiedFloor;
@@ -65,5 +66,13 @@ public class PromotionSearchCondition implements Serializable {
 
     public void setPromotionTypes(ArrayList<PromotionType> promotionTypes) {
         this.promotionTypes = promotionTypes;
+    }
+
+    public PromotionState getPromotionState() {
+        return promotionState;
+    }
+
+    public void setPromotionState(PromotionState promotionState) {
+        this.promotionState = promotionState;
     }
 }

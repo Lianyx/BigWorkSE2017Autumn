@@ -1,8 +1,13 @@
 package vo.inventoryVO;
 
+import blService.checkblService.ReceiptblService;
+import javafx.scene.Node;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,7 +21,22 @@ public class InventoryOverflowReceiptVO extends InventoryReceiptVO {
     }
 
     @Override
-    public <T extends ReceiptPO> T toPO() {
+    protected String getCodeName() {
+        return "BYD";
+    }
+
+    @Override
+    public InventoryOverflowReceiptVO toPO() {
+        return null;
+    }
+
+    @Override
+    public ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException {
+        return null;
+    }
+
+    @Override
+    public Node getDetailPane() {
         return null;
     }
 }

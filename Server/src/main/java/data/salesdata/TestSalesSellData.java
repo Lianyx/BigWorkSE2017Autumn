@@ -15,12 +15,11 @@ import java.time.LocalDateTime;
 public class TestSalesSellData {
 
     public static void test() throws RemoteException {
-        ReceiptData<SalesSellReceiptPO> rdao = new ReceiptData<>(SalesSellReceiptPOMapper.class);
+        ReceiptData<SalesSellReceiptPO> rdao = new SalesSellReceiptData();
 
 
         // insert
-        SalesSellReceiptPO ssrp = new SalesSellReceiptPO();
-        ssrp.setDayId(rdao.getDayId());
+        SalesSellReceiptPO ssrp = rdao.getNew();
         ssrp.setOperatorId(1);
         ssrp.setReceiptState(ReceiptState.PENDING);
         ssrp.setClerkName("Wang Er Xiao");
@@ -65,8 +64,6 @@ public class TestSalesSellData {
 
 
 
-        // prove delete
-        System.out.println(rdao.getDayId());
     }
 
 

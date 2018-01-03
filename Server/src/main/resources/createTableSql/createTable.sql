@@ -13,6 +13,7 @@ create table MemberPromotion(
   endTime bigint,
 
   comment varchar(150),
+  promotionState integer,
 
   requiredLevel integer,
   discountFraction double,
@@ -30,6 +31,7 @@ create table TotalPromotion(
   endTime bigint,
 
   comment varchar(150),
+  promotionState integer,
 
   requiredTotal double,
   tokenAmount double,
@@ -47,6 +49,7 @@ create table CombinePromotion(
   endTime bigint,
 
   comment varchar(150),
+  promotionState integer,
 
   discountAmount double,
   goodsCombination varchar(1000)

@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface ReceiptblService<T extends ReceiptVO> {
-    int getDayId() throws RemoteException;
+    T getNew() throws RemoteException;
 
     ResultMessage insert(T receiptVO) throws RemoteException;
 

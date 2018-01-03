@@ -106,7 +106,6 @@ public class GoodsListPane extends Refreshable{
         dialog.show();
     }
 
-
     @Override
     public void refresh(boolean toSwitch) {
         setListView();

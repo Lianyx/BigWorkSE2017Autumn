@@ -15,18 +15,21 @@
       select max(dayId)+1 from memberPromotion where createTime &gt;= #{today}
     </select>
     <insert id="insert">
-        insert into memberPromotion(dayId, createTime, lastModifiedTime, beginTime, endTime, comment, requiredLevel, discountFraction, tokenAmount, gifts)
-        values(#{dayId}, #{createTime}, #{lastModifiedTime}, #{beginTime}, #{endTime}, #{comment}, #{requiredLevel}, #{discountFraction}, #{tokenAmount}, #{gifts, typeHandler=MyJsonHandler})
+        insert into memberPromotion(dayId, createTime, lastModifiedTime, beginTime, endTime, comment, promotionState, requiredLevel, discountFraction, tokenAmount, gifts)
+        values(#{dayId}, #{createTime}, #{lastModifiedTime}, #{beginTime}, #{endTime}, #{comment}, #{promotionState}, #{requiredLevel}, #{discountFraction}, #{tokenAmount}, #{gifts, typeHandler=MyJsonHandler})
     </insert>
     <update id="update">
-        update memberPromotion set lastModifiedTime=#{lastModifiedTime}, beginTime=#{beginTime}, endTime=#{endTime}, comment=#{comment}, requiredLevel=#{requiredLevel}, discountFraction=#{discountFraction}, tokenAmount=#{tokenAmount}, gifts=#{gifts, typeHandler=MyJsonHandler}
+        update memberPromotion set lastModifiedTime=#{lastModifiedTime}, beginTime=#{beginTime}, endTime=#{endTime}, comment=#{comment}, promotionState=#{promotionState}, requiredLevel=#{requiredLevel}, discountFraction=#{discountFraction}, tokenAmount=#{tokenAmount}, gifts=#{gifts, typeHandler=MyJsonHandler}
         where dayId=#{dayId} and createTime=#{createTime}
     </update>
     <delete id="delete">
         delete from memberPromotion where dayId=#{dayId} and createTime=#{createTime}
     </delete>
+    <select id="selectByMold" resultType="po.promotionPO.MemberPromotionPO">
+        select * from memberPromotion where dayId=#{dayId} and createTime=#{createTime}
+    </select>
     <select id="selectInEffect" resultType="po.promotionPO.MemberPromotionPO">
-        select * from memberPromotion where beginTime &lt;= #{begin} and endTime &gt;= #{end}
+        select * from memberPromotion where beginTime &lt;= #{begin} and endTime &gt;= #{end} and promotionState = #{promotionState}
     </select>
     <select id="search" resultMap="resultMap">
         select * from memberPromotion
@@ -48,6 +51,9 @@
             </if>
             <if test="endCeil != null">
                 AND endTime &lt;= #{endCeil}
+            </if>
+            <if test="promotionState != null">
+                AND promotionState = #{promotionState}
             </if>
         </where>
     </select>

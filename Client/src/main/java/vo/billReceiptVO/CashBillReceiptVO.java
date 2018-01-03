@@ -1,11 +1,16 @@
 package vo.billReceiptVO;
 
+import blService.checkblService.ReceiptblService;
 import businesslogic.billreceiptbl.CashBillReceipt;
+import javafx.scene.Node;
 import po.CashItemPO;
 import po.receiptPO.CashBillReceiptPO;
 import util.ReceiptState;
 import vo.receiptVO.ReceiptVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,8 +33,23 @@ public class CashBillReceiptVO extends ReceiptVO{
         this.cashList = cashList;
     }
 
+    @Override
+    protected String getCodeName() {
+        return "";
+    }
+
     public CashBillReceiptPO toPO(){
         return new CashBillReceiptPO();
+    }
+
+    @Override
+    public ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException {
+        return null;
+    }
+
+    @Override
+    public Node getDetailPane() {
+        return null;
     }
 
     public int getAccountID() {

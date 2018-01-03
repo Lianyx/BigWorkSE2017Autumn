@@ -11,6 +11,6 @@ import java.rmi.RemoteException;
 
 public class CombinePromotionbl extends Promotionbl<CombinePromotionVO, CombinePromotionPO> {
     public CombinePromotionbl() throws RemoteException, NotBoundException, MalformedURLException {
-        super(CombinePromotionVO.class, CombinePromotionPO.class, "CombinePromotionData");
+        super(CombinePromotionVO.class, CombinePromotionPO.class);
     }
 }
