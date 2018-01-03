@@ -40,9 +40,11 @@ public class InventoryblService_Stub4 implements InventoryblService {
         set.add(new InventoryGiftuiVO("128",321,LocalDateTime.now(),LocalDateTime.now(), "无",ReceiptState.PENDING,goodsSet));
     }
 
+
+
     @Override
-    public int getDayId() throws RemoteException {
-        return 0;
+    public InventoryReceiptVO getNew() throws RemoteException {
+        return null;
     }
 
     @Override

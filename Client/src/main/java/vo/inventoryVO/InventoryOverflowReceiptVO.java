@@ -40,13 +40,5 @@ public class InventoryOverflowReceiptVO extends InventoryReceiptVO {
         return null;
     }
 
-    @Override
-    public ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException {
-        return null;
-    }
 
-    @Override
-    public Node getDetailPane() {
-        return null;
-    }
 }
