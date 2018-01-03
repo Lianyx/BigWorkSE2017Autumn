@@ -5,6 +5,8 @@ import blService.billblService.CashBillReceiptblService;
 import blService.billblService.ChargeBillReceiptblService;
 import blService.billblService.PaymentBillReceiptblService;
 import blService.checkblService.ReceiptblService;
+import blService.stockblService.Stock_Stub;
+import blService.stockblService.StockblService;
 import blServiceStub.accountblservice_Stub.AccountblService_Stub;
 import blServiceStub.billblservice_Stub.CashblService_Stub;
 import blServiceStub.billblservice_Stub.ChargeblService_Stub;
@@ -17,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import ui.stockui.StockReceiptPane;
 import ui.userui.usermanagerui.BoardController;
 import ui.util.HistoricalRecord;
 import ui.util.PaneSwitchAnimation;
@@ -46,9 +49,13 @@ public class AccountantUIController implements Initializable{
     private BoardController boardController;
 
     AccountblService accountblService;
-    ReceiptblService paymentBillReceiptblService;
-    ReceiptblService chargeBillReceiptblService;
-    ReceiptblService cashBillReceiptblService;
+    //ReceiptblService paymentBillReceiptblService;
+    //ReceiptblService chargeBillReceiptblService;
+    //ReceiptblService cashBillReceiptblService;
+    PaymentBillReceiptblService paymentBillReceiptblService;
+    ChargeBillReceiptblService chargeBillReceiptblService;
+    CashBillReceiptblService cashBillReceiptblService;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
@@ -87,24 +94,27 @@ public class AccountantUIController implements Initializable{
                                     System.out.println("付款单");
                                     BillReceiptListPane billReceiptListPane = new BillReceiptListPane(paymentBillReceiptblService,boardController);
                                     billReceiptListPane.setMainpane(mainpane);
-                                    board.getChildren().setAll(billReceiptListPane);
-                                    HistoricalRecord.addPane(billReceiptListPane);
+                                    //board.getChildren().setAll(billReceiptListPane);
+                                    //HistoricalRecord.addPane(billReceiptListPane);
                                     boardController.switchTo(billReceiptListPane);
                                 }
                                 else if (newVal.getText().equals("收款单")) {
                                     System.out.println("收款单");
                                     BillReceiptListPane billReceiptListPane = new BillReceiptListPane(chargeBillReceiptblService,boardController);
                                     billReceiptListPane.setMainpane(mainpane);
-                                    board.getChildren().setAll(billReceiptListPane);
-                                    HistoricalRecord.addPane(billReceiptListPane);
+                                    //board.getChildren().setAll(billReceiptListPane);
+                                    //HistoricalRecord.addPane(billReceiptListPane);
                                     boardController.switchTo(billReceiptListPane);
+                                    //StockblService stockblService= new Stock_Stub();
+                                    //StockReceiptPane stockReceiptPane = new StockReceiptPane(boardController,mainpane);
+                                    //stockReceiptPane.refresh(true);
                                 }
                                 else if (newVal.getText().equals("现金费用单")) {
                                     System.out.println("现金费用单");
                                     BillReceiptListPane billReceiptListPane = new BillReceiptListPane(cashBillReceiptblService,boardController);
                                     billReceiptListPane.setMainpane(mainpane);
-                                    board.getChildren().setAll(billReceiptListPane);
-                                    HistoricalRecord.addPane(billReceiptListPane);
+                                    //board.getChildren().setAll(billReceiptListPane);
+                                    //HistoricalRecord.addPane(billReceiptListPane);
                                     boardController.switchTo(billReceiptListPane);
                                 }
                                 else if (newVal.getText().equals("销售明细")) {

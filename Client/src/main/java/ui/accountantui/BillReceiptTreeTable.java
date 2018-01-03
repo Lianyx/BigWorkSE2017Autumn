@@ -22,11 +22,14 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import ui.userui.usermanagerui.BoardController;
 import ui.util.CircleImageView;
 import vo.AccountListVO;
+import vo.billReceiptVO.CashBillReceiptVO;
+import vo.billReceiptVO.ChargeBillReceiptVO;
 import vo.billReceiptVO.PaymentBillReceiptVO;
 import vo.receiptVO.ReceiptVO;
 
@@ -38,6 +41,7 @@ public class BillReceiptTreeTable extends JFXTreeTableView<ReceiptVO> implements
     private ObservableList<ReceiptVO> observableList = FXCollections.observableArrayList();
     private ObservableList<ReceiptVO> observableListtemp;
     private BoardController boardController;
+    private StackPane mainpane;
     private int rowsPerPage = 7;
 
     private ReceiptblService receiptblService;
@@ -50,13 +54,12 @@ public class BillReceiptTreeTable extends JFXTreeTableView<ReceiptVO> implements
         return rowsPerPage;
     }
 
-    public void setBoardController(BoardController boardController) {
-        this.boardController = boardController;
-    }
 
-    public BillReceiptTreeTable(ReceiptblService receiptblService) {
+    public BillReceiptTreeTable(ReceiptblService receiptblService, BoardController boardController, StackPane mainpane) {
         super();
         this.receiptblService = receiptblService;
+        this.boardController = boardController;
+        this.mainpane = mainpane;
         JFXTreeTableColumn<ReceiptVO,Boolean> choose = new JFXTreeTableColumn("  ");
         choose.setPrefWidth(40);
         Callback<TreeTableColumn<ReceiptVO,Boolean>, TreeTableCell<ReceiptVO,Boolean>> chooseCellFactory = (TreeTableColumn<ReceiptVO,Boolean> p) -> new ChooseBoxCell();
@@ -120,13 +123,17 @@ public class BillReceiptTreeTable extends JFXTreeTableView<ReceiptVO> implements
                     try{
                         if(receiptblService instanceof PaymentblService_Stub){
                             System.out.print("pay");
-                            boardController.switchTo(new PaymentBillReceiptDetailPane((PaymentBillReceiptVO)row.getTreeItem().getValue(),boardController));
+                            //boardController.switchTo(new PaymentBillReceiptDetailPane((PaymentBillReceiptVO)row.getTreeItem().getValue(),boardController));
+                            //boardController.switchTo(new PaymentDetailPane(boardController,mainpane));
+                            boardController.switchTo(new PaymentDetailPane((PaymentBillReceiptVO) row.getTreeItem().getValue(),boardController,mainpane));
                         }
                         else if(receiptblService instanceof ChargeblService_Stub){
                             System.out.print("charge");
+                            boardController.switchTo(new ChargeDetailPane((ChargeBillReceiptVO) row.getTreeItem().getValue(),boardController,mainpane));
                         }
                         else if(receiptblService instanceof CashblService_Stub){
                             System.out.print("Cash");
+                            boardController.switchTo(new CashDetailPane((CashBillReceiptVO) row.getTreeItem().getValue(),boardController,mainpane));
                         }
                         //boardController.switchTo(new UserDetailPane((UserListVO) row.getTreeItem().getValue(),boardController));
                     }catch (Exception e){

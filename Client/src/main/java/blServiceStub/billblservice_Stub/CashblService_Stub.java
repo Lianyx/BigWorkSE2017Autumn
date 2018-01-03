@@ -7,6 +7,7 @@ import util.ReceiptState;
 import util.RespectiveReceiptSearchCondition;
 import util.ResultMessage;
 import vo.billReceiptVO.CashBillReceiptVO;
+import vo.billReceiptVO.CashItemVO;
 import vo.billReceiptVO.ChargeBillReceiptVO;
 
 import java.rmi.RemoteException;
@@ -35,19 +36,25 @@ public class CashblService_Stub implements CashBillReceiptblService{
     public ArrayList<CashBillReceiptVO> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException{
         ArrayList<CashBillReceiptVO> list = new ArrayList<>();
         LocalDateTime time = LocalDateTime.MIN;
+        List<CashItemVO> cashList = new ArrayList<>();
+        cashList.add(new CashItemVO("1",1,"1"));
+        cashList.add(new CashItemVO("1",1,"1"));
+        cashList.add(new CashItemVO("1",1,"1"));
+        cashList.add(new CashItemVO("1",1,"1"));
+        cashList.add(new CashItemVO("1",1,"1"));
         //String dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState,int clientID, TransferItemVO[] transferList, double sum
         //String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int accountID, double total, CashItemVO[] itemList
-        list.add(new CashBillReceiptVO("3111",111,time,time, ReceiptState.APPROVED,111,1111,null));
-        list.add(new CashBillReceiptVO("3112",111,time,time, ReceiptState.APPROVED,111,1111,null));
-        list.add(new CashBillReceiptVO("3113",111,time,time, ReceiptState.APPROVED,111,1111,null));
-        list.add(new CashBillReceiptVO("3114",111,time,time, ReceiptState.APPROVED,111,1111,null));
-        list.add(new CashBillReceiptVO("3115",111,time,time, ReceiptState.APPROVED,111,1111,null));
-        list.add(new CashBillReceiptVO("3116",111,time,time, ReceiptState.APPROVED,111,1111,null));
-        list.add(new CashBillReceiptVO("3117",111,time,time, ReceiptState.APPROVED,111,1111,null));
-        list.add(new CashBillReceiptVO("3118",111,time,time, ReceiptState.APPROVED,111,1111,null));
-        list.add(new CashBillReceiptVO("3119",111,time,time, ReceiptState.APPROVED,111,1111,null));
-        list.add(new CashBillReceiptVO("3120",111,time,time, ReceiptState.APPROVED,111,1111,null));
-        list.add(new CashBillReceiptVO("3121",111,time,time, ReceiptState.APPROVED,111,1111,null));
+        list.add(new CashBillReceiptVO("3111",111,time,time, ReceiptState.APPROVED,111,1111,cashList));
+        list.add(new CashBillReceiptVO("3112",111,time,time, ReceiptState.APPROVED,111,1111,cashList));
+        list.add(new CashBillReceiptVO("3113",111,time,time, ReceiptState.APPROVED,111,1111,cashList));
+        list.add(new CashBillReceiptVO("3114",111,time,time, ReceiptState.APPROVED,111,1111,cashList));
+        list.add(new CashBillReceiptVO("3115",111,time,time, ReceiptState.APPROVED,111,1111,cashList));
+        list.add(new CashBillReceiptVO("3116",111,time,time, ReceiptState.APPROVED,111,1111,cashList));
+        list.add(new CashBillReceiptVO("3117",111,time,time, ReceiptState.APPROVED,111,1111,cashList));
+        list.add(new CashBillReceiptVO("3118",111,time,time, ReceiptState.APPROVED,111,1111,cashList));
+        list.add(new CashBillReceiptVO("3119",111,time,time, ReceiptState.APPROVED,111,1111,cashList));
+        list.add(new CashBillReceiptVO("3120",111,time,time, ReceiptState.APPROVED,111,1111,cashList));
+        list.add(new CashBillReceiptVO("3121",111,time,time, ReceiptState.APPROVED,111,1111,cashList));
         return list;
     }
 

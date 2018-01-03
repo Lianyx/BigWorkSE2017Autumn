@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXRippler?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import ui.stockui.StockListItemTreeTable?>
+<?import ui.accountantui.PaymentItemTreeTable ?>
+
+<fx:root fx:id="paymentreceipt" prefHeight="560.0" prefWidth="640.0" stylesheets="@../css/receipt.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane fx:id="pane" layoutX="124.0" layoutY="66.0" prefHeight="247.0" prefWidth="385.0">
+            <children>
+                <Label layoutX="22.0" layoutY="20.0" text="Receipt">
+                    <font>
+                        <Font name="Arial" size="24.0" />
+                    </font>
+                </Label>
+                <Label layoutX="22.0" layoutY="48.0" text="The basic information of the receipt" textFill="#a1adbc">
+                    <font>
+                        <Font size="12.0" />
+                    </font>
+                </Label>
+                <JFXButton fx:id="modify" layoutX="246.0" layoutY="18.0" text="">
+                    <graphic>
+                        <StackPane style="-fx-padding: 1;">
+                            <MaterialDesignIconView fx:id="pen" glyphName="PENCIL" size="1.5em" styleClass="icon" />
+                        </StackPane>
+                    </graphic>
+                </JFXButton>
+                <JFXButton fx:id="user" layoutX="109.0" layoutY="153.0" text="">
+                    <graphic>
+                        <StackPane>
+                            <MaterialDesignIconView glyphName="ACCOUNT" size="1.5em" styleClass="icon" />
+                        </StackPane>
+                    </graphic>
+                </JFXButton>
+                <JFXButton fx:id="delete" layoutX="297.0" layoutY="18.0" mnemonicParsing="false" prefHeight="28.0" text="Delete">
+                    <graphic>
+                        <HBox>
+                            <children>
+                                <JFXRippler position="BACK" styleClass="icons-rippler">
+                                    <StackPane>
+                                        <MaterialDesignIconView fill="white" glyphName="DELETE" size="1em" styleClass="icon" />
+                                    </StackPane>
+                                </JFXRippler>
+                            </children>
+                        </HBox>
+                    </graphic>
+                </JFXButton>
+                <Label layoutX="19.0" layoutY="97.0" text="JHX-">
+                    <font>
+                        <Font size="12.0" />
+                    </font>
+                </Label>
+                <JFXDatePicker layoutX="51.0" layoutY="92.0" prefHeight="4.0" prefWidth="92.0" />
+                <Label layoutX="136.0" layoutY="98.0" text="-">
+                    <font>
+                        <Font size="12.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="id" layoutX="144.0" layoutY="92.0" prefHeight="26.0" prefWidth="64.0" />
+
+                <TextField fx:id="client" layoutX="242.0" layoutY="93.0" prefHeight="26.0" prefWidth="123.0" />
+                <Label layoutX="242.0" layoutY="73.0" text="Client" textFill="#a1adbc">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+
+                <Label layoutX="22.0" layoutY="73.0" text="ID" textFill="#a1adbc">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+
+                <Label layoutX="24.0" layoutY="131.0" text="Operator" textFill="#a1adbc">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="operator" layoutX="23.0" layoutY="157.0" prefWidth="92.0" />
+
+                <Label layoutX="144.0" layoutY="131.0" text="State" textFill="#a1adbc">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="state" layoutX="144.0" layoutY="157.0" prefWidth="92.0" />
+
+                <!--<Label layoutX="159.0" layoutY="131.0" text="Stock" textFill="#a1adbc">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <TextField layoutX="160.0" layoutY="157.0" prefWidth="92.0" />-->
+
+                <Label layoutX="253.0" layoutY="131.0" text="Sum" textFill="#a1adbc">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="sum" layoutX="253.0" layoutY="157.0" prefHeight="26.0" prefWidth="64.0" />
+
+                <Label layoutX="24.0" layoutY="190.0" text="CreateTime" textFill="#a1adbc">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="createtime" layoutX="24.0" layoutY="216.0" prefHeight="26.0" prefWidth="64.0" />
+
+                <Label layoutX="144.0" layoutY="190.0" text="LastModifiedTime" textFill="#a1adbc">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="lastmodifiedtime" layoutX="144.0" layoutY="216.0" prefHeight="26.0" prefWidth="64.0" />
+
+                <!--<Label layoutX="21.0" layoutY="194.0" text="Comment" textFill="#a1adbc">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <TextArea layoutX="17.0" layoutY="213.0" prefHeight="53.0" prefWidth="361.0" wrapText="true" />-->
+            </children>
+        </AnchorPane>
+
+        <Label layoutX="124.0" layoutY="325.0" text="TransferList">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <JFXRippler fx:id="add" layoutX="500" layoutY="350" ripplerFill="#03A9F4" maskType="CIRCLE" position="BACK" onMouseClicked="#add" styleClass="icons-rippler">
+            <StackPane style="-fx-padding: 8;">
+                <MaterialDesignIconView glyphName="PLUS" size="1.5em" styleClass="icon" />
+            </StackPane>
+        </JFXRippler>
+        <!--<StockListItemTreeTable fx:id="stockListItemTreeTable" layoutX="124" layoutY="380" prefHeight="170" />-->
+        <PaymentItemTreeTable fx:id="paymentItemTreeTable" layoutX="124" layoutY="365" prefHeight="170" />
+        <Label layoutX="24.0" layoutY="12.0" text="PaymentReceipt">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Separator layoutX="24.0" layoutY="44.0" prefHeight="4.0" prefWidth="593.0" />
+        <JFXButton fx:id="save" layoutX="564.0" layoutY="17.0" mnemonicParsing="false" text="Save">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </JFXButton>
+    </children>
+</fx:root>

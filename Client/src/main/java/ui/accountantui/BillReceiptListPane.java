@@ -41,7 +41,7 @@ public class BillReceiptListPane extends Refreshable{
 
     public BillReceiptListPane(ReceiptblService receiptblService, BoardController boardController) throws Exception{
         super();
-        ulv = new BillReceiptTreeTable(receiptblService);
+        ulv = new BillReceiptTreeTable(receiptblService,boardController,mainpane);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/accountantui/billReceiptListPane.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -50,7 +50,7 @@ public class BillReceiptListPane extends Refreshable{
         setListView();
 
         this.boardController=boardController;
-        ulv.setBoardController(boardController);
+        //ulv.setBoardController(boardController);
 
         PopOver filterPopOver = new PopOver();
         filterPopOver.setDetachable(false);
@@ -101,8 +101,8 @@ public class BillReceiptListPane extends Refreshable{
 
     @FXML
     public void add(){
-        JFXDialog dialog = new JFXDialog(mainpane,new AddPane(),JFXDialog.DialogTransition.CENTER);
-        dialog.show();
+        //JFXDialog dialog = new JFXDialog(mainpane,new AddPane(),JFXDialog.DialogTransition.CENTER);
+        //dialog.show();
     }
 
 

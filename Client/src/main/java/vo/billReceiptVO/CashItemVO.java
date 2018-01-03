@@ -1,38 +1,59 @@
 package vo.billReceiptVO;
 
-public class CashItemVO {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
-    private String name;
-    private double sum;
-    private String comment;
+import java.io.Serializable;
 
-    public CashItemVO(String name, double sum, String comment) {
-        this.name = name;
-        this.sum = sum;
-        this.comment = comment;
+public class CashItemVO extends RecursiveTreeObject<CashItemVO> implements Serializable {
+
+    private StringProperty name;
+    private DoubleProperty price;
+    private StringProperty comment;
+
+    public CashItemVO(String name, double price, String comment) {
+        this.name = new SimpleStringProperty(name);
+        this.price = new SimpleDoubleProperty(price);
+        this.comment = new SimpleStringProperty(comment);
     }
 
+
     public String getName() {
+        return name.get();
+    }
+
+    public StringProperty nameProperty() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
-    public double getSum() {
-        return sum;
+    public double getPrice() {
+        return price.get();
     }
 
-    public void setSum(double sum) {
-        this.sum = sum;
+    public DoubleProperty priceProperty() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price.set(price);
     }
 
     public String getComment() {
+        return comment.get();
+    }
+
+    public StringProperty commentProperty() {
         return comment;
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
+        this.comment.set(comment);
     }
 }

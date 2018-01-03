@@ -7,28 +7,25 @@ import util.ReceiptState;
 import vo.receiptVO.ReceiptVO;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class CashBillReceiptVO extends ReceiptVO{
 
     private int accountID;
     private double total;
-    private CashItemVO[] itemList;
+    private List<CashItemVO> cashList;
 
     public CashBillReceiptVO(){
 
     }
 
-    public CashBillReceiptVO(int accountID, double total, CashItemVO[] itemList) {
-        this.accountID = accountID;
-        this.total = total;
-        this.itemList = itemList;
-    }
 
-    public CashBillReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int accountID, double total, CashItemVO[] itemList) {
+
+    public CashBillReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int accountID, double total, List<CashItemVO> cashList) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
         this.accountID = accountID;
         this.total = total;
-        this.itemList = itemList;
+        this.cashList = cashList;
     }
 
     public CashBillReceiptPO toPO(){
@@ -51,11 +48,11 @@ public class CashBillReceiptVO extends ReceiptVO{
         this.total = total;
     }
 
-    public CashItemVO[] getItemList() {
-        return itemList;
+    public List<CashItemVO> getCashList() {
+        return cashList;
     }
 
-    public void setItemList(CashItemVO[] itemList) {
-        this.itemList = itemList;
+    public void setCashList(List<CashItemVO> cashList) {
+        this.cashList = cashList;
     }
 }

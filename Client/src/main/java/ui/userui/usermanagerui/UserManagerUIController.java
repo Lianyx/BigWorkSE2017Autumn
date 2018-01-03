@@ -73,12 +73,12 @@ public class UserManagerUIController implements Initializable{
 
             boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150),  board));
             try {
-                UserListPane userListPane = new UserListPane( userManagerblService, boardController,mainpane);
+               /* UserListPane userListPane = new UserListPane( userManagerblService, boardController,mainpane);
                userListPane.historyAdd=true;
-                userListPane.refresh(false);
+                userListPane.refresh(false);*/
 
 
-                //board.getChildren().setAll(new StockReceiptPane(boardController,mainpane));
+                board.getChildren().setAll(new StockReceiptPane(boardController,mainpane));
             }catch (Exception e){
                 e.printStackTrace();
             }

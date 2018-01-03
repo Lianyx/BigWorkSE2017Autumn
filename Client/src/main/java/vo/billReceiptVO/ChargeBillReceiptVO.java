@@ -5,22 +5,23 @@ import util.ReceiptState;
 import vo.receiptVO.ReceiptVO;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ChargeBillReceiptVO extends ReceiptVO{
 
 
-    private int supplierID;
-    private TransferItemVO[] transferList;
+    private int clientID;
+    private List<TransferItemVO> transferList;
     private double sum;
 
     public ChargeBillReceiptVO(){
 
     }
 
-    public ChargeBillReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState,  int supplierID, TransferItemVO[] transferList, double sum) {
+    public ChargeBillReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState,  int clientID, List<TransferItemVO> transferList, double sum) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
 
-        this.supplierID = supplierID;
+        this.clientID =clientID;
         this.transferList = transferList;
         this.sum = sum;
     }
@@ -29,19 +30,19 @@ public class ChargeBillReceiptVO extends ReceiptVO{
         return new ChargeBillReceiptPO();
     }
 
-    public int getSupplierID() {
-        return supplierID;
+    public int getClientID() {
+        return clientID;
     }
 
-    public void setSupplierID(int supplierID) {
-        this.supplierID = supplierID;
+    public void setClientID(int clientID) {
+        this.clientID = clientID;
     }
 
-    public TransferItemVO[] getTransferList() {
+    public List<TransferItemVO> getTransferList() {
         return transferList;
     }
 
-    public void setTransferList(TransferItemVO[] transferList) {
+    public void setTransferList(List<TransferItemVO> transferList) {
         this.transferList = transferList;
     }
 
