@@ -16,9 +16,7 @@ import java.util.List;
 
 public class PaymentblService_Stub implements PaymentBillReceiptblService{
 
-    public int getDayId() throws RemoteException {
-        return 0;
-    }
+
 
     @Override
     public PaymentBillReceiptVO getNew() throws RemoteException {

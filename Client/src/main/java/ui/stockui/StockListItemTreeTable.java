@@ -50,9 +50,11 @@ public class StockListItemTreeTable extends JFXTreeTableView<ListGoodsItemVO> {
 
 
 
+
         JFXTreeTableColumn<ListGoodsItemVO, String> goodsName = new JFXTreeTableColumn<>("GoodsName");
         goodsName.setPrefWidth(97);
         setupCellValueFactory(goodsName,ListGoodsItemVO::goodsNameProperty);
+        //setupCellValueFactory(goodsName,ListGoodsItemVO::goodsNameProperty);
 
 
 

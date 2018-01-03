@@ -1,9 +1,15 @@
 package vo.billReceiptVO;
 
+import blService.checkblService.ReceiptblService;
+import javafx.scene.Node;
 import po.receiptPO.ChargeBillReceiptPO;
+import po.receiptPO.PaymentBillReceiptPO;
 import util.ReceiptState;
 import vo.receiptVO.ReceiptVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,8 +32,23 @@ public class ChargeBillReceiptVO extends ReceiptVO{
         this.sum = sum;
     }
 
+    @Override
+    protected String getCodeName() {
+        return null;
+    }
+
     public ChargeBillReceiptPO toPO(){
         return new ChargeBillReceiptPO();
+    }
+
+    @Override
+    public ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException {
+        return null;
+    }
+
+    @Override
+    public Node getDetailPane() {
+        return null;
     }
 
     public int getClientID() {

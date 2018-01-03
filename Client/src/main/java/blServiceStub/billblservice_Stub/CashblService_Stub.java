@@ -17,9 +17,6 @@ import java.util.List;
 
 public class CashblService_Stub implements CashBillReceiptblService{
 
-    public int getDayId() throws RemoteException{
-        return 0;
-    }
 
     @Override
     public CashBillReceiptVO getNew() throws RemoteException {
