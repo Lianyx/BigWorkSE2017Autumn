@@ -5,14 +5,15 @@ import util.ResultMessage;
 import vo.inventoryVO.GoodsClassificationVO;
 
 import java.util.List;
+import java.util.Set;
 
-public interface GoodsClasssficationblService {
+public interface GoodsClassificationblService {
     /**
      * 显示所有商品分类
      *
      * @return
      */
-    public List<GoodsClassificationVO> show();
+    public Set<GoodsClassificationVO> show();
 
     /**
      * 创建商品分类时调用，根据上层分类编号生成编号

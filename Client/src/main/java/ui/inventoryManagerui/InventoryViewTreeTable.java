@@ -177,7 +177,7 @@ public class InventoryViewTreeTable extends JFXTreeTableView<InventoryViewItemVO
         setCurrentItemsCount(rowsPerPage);
         this.setShowRoot(false);
 
-        this.getColumns().addAll(goodName,goodsId,stockInNum,stockInMoney,stockOutNum,stockOutMoney,saleNum,saleMoney,stockPurNum,stockPurMoney);
+        this.getColumns().addAll(image,goodName,goodsId,stockInNum,stockInMoney,stockOutNum,stockOutMoney,saleNum,saleMoney,stockPurNum,stockPurMoney);
 
 
 

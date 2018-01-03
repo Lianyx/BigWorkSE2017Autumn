@@ -1,17 +1,18 @@
 package businesslogic.goodsClassificationbl;
 
-import blService.goodsClassificationblService.GoodsClasssficationblService;
+import blService.goodsClassificationblService.GoodsClassificationblService;
 import exception.ExistException;
 import util.ResultMessage;
 import vo.inventoryVO.GoodsClassificationVO;
 
 import java.util.List;
+import java.util.Set;
 
-public class GoodsClassificationController implements GoodsClasssficationblService {
+public class GoodsClassificationController implements GoodsClassificationblService {
     GoodsClassification goodsClassification = new GoodsClassification();
     @Override
-    public List<GoodsClassificationVO> show() {
-        return goodsClassification.show();
+    public Set<GoodsClassificationVO> show() {
+        return null;//goodsClassification.show();
     }
 
     @Override

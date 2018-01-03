@@ -18,9 +18,7 @@ public class InventoryblService_Stub {
     /**
      * 盘点的是当天的库存快照
      */
-    public InventoryCheckVO checkInventory(){
-        return new InventoryCheckVO(new HashSet<InventoryCheckItemVO>(),"1","1");
-    }
+
 
     /**
      * 建立库存报警单、报损单、报溢单、赠送单之前需要调用,得到ID

@@ -32,11 +32,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.CheckBoxTreeItem;
-import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TreeItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -46,6 +42,8 @@ import org.controlsfx.control.CheckModel;
 import org.controlsfx.control.IndexedCheckModel;
 import org.controlsfx.control.CheckTreeView;
 import org.controlsfx.samples.Utils;
+
+import java.util.Iterator;
 
 public class HelloCheckTreeView extends ControlsFXSample {
     
@@ -58,6 +56,7 @@ public class HelloCheckTreeView extends ControlsFXSample {
     private CheckBoxTreeItem<String> treeItem_Eugene = new CheckBoxTreeItem<>("Eugene");
     private CheckBoxTreeItem<String> treeItem_Henry = new CheckBoxTreeItem<>("Henry");
     private CheckBoxTreeItem<String> treeItem_Samir = new CheckBoxTreeItem<>("Samir");
+    private CheckBoxTreeItem<String> treeItem_Sam = new CheckBoxTreeItem<>("Sam");
 
     @Override public String getSampleName() {
         return "CheckTreeView";
@@ -84,23 +83,52 @@ public class HelloCheckTreeView extends ControlsFXSample {
                 treeItem_Eugene,
                 treeItem_Henry,
                 treeItem_Samir);
+
+        treeItem_Samir.getChildren().add(treeItem_Sam);
         
-        // lets check Eugene to make sure that it shows up in the tree
+        // lets check Eugene to make sure that it shows up in the tree,可以提前设置每个节点是否被选中
         treeItem_Eugene.setSelected(true);
+        treeItem_Sam.setSelected(true);
+
+        //这个button 用来 获取 勾选的item，结果在控制台打印
+        Button btn=new Button("show selected");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //此处使用getSelectionModel().getSelectedItems()会取得 点选的条目，而不是勾选的条目
+                //System.out.println(tree.getSelectionModel().getSelectedItems().get(0));
+
+                //此处使用rootItem.getChildren().iterator() 后 得到的TreeItem强制转为CheckBoxTreeItem，利用CheckBoxTreeItem的isSelected()
+                //将会取得勾选的条目 点选的不会取得
+                for(Iterator<TreeItem<String>> iterator = root.getChildren().iterator(); iterator.hasNext();){
+                    CheckBoxTreeItem<String> item=(CheckBoxTreeItem<String>) iterator.next();
+                    if(item.isSelected()){
+                        //获得勾选的item
+                        System.out.println(item);
+                    }
+                }
+            }
+        });
+
         
         // CheckListView
         checkTreeView = new CheckTreeView<>(root);
+        //对选中的返回SelectionMode，主要用于处理事件，MULTIPLE提供了多选监听
         checkTreeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        //获取选中的item并监听
         checkTreeView.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<TreeItem<String>>() {
             @Override public void onChanged(ListChangeListener.Change<? extends TreeItem<String>> c) {
                 updateText(selectedItemsLabel, c.getList());
+                //当选中整个子节点的时候可以得到
+                System.out.println("hehehe1");
             }
         });
         
         checkTreeView.getCheckModel().getCheckedItems().addListener(new ListChangeListener<TreeItem<String>>() {
             @Override public void onChanged(ListChangeListener.Change<? extends TreeItem<String>> change) {
                 updateText(checkedItemsLabel, change.getList());
-                
+                //当选中框的时候可以得到
+                System.out.println("hehehe2");
                 while (change.next()) {
                     System.out.println("============================================");
                     System.out.println("Change: " + change);
@@ -118,7 +146,8 @@ public class HelloCheckTreeView extends ControlsFXSample {
         stackPane.setPadding(new Insets(30));
         return stackPane;
     }
-    
+
+    //右边的控制模块
     @Override public Node getControlPanel() {
         GridPane grid = new GridPane();
         grid.setVgap(10);
@@ -126,19 +155,22 @@ public class HelloCheckTreeView extends ControlsFXSample {
         grid.setPadding(new Insets(30, 30, 0, 30));
         
         int row = 0;
-        
+
+        //勾选中的项目
         Label label1 = new Label("Checked items: ");
         label1.getStyleClass().add("property");
         grid.add(label1, 0, row);
         grid.add(checkedItemsLabel, 1, row++);
         updateText(checkedItemsLabel, checkTreeView.getCheckModel().getCheckedItems());
-        
+
+        //选中的项目
         Label label2 = new Label("Selected items: ");
         label2.getStyleClass().add("property");
         grid.add(label2, 0, row);
         grid.add(selectedItemsLabel, 1, row++);
         updateText(selectedItemsLabel, checkTreeView.getSelectionModel().getSelectedItems());
-        
+
+        //
         Label checkItem2Label = new Label("Check 'Jonathan': ");
         checkItem2Label.getStyleClass().add("property");
         grid.add(checkItem2Label, 0, row);

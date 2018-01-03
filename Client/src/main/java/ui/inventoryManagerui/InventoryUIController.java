@@ -1,10 +1,14 @@
 package ui.inventoryManagerui;
 
+import blService.goodsClassificationblService.GoodsClassificationblService;
 import blService.goodsblService.GoodsblService;
 import blService.inventoryblService.InventoryShowblService;
+import blService.inventoryblService.InventoryblService;
+import blServiceStub.goodsClassificationblService_Stub.GoodsClassificationblService_Stub;
 import blServiceStub.goodsblService_Stub.GoodsblService_Stub;
-import blServiceStub.inventoryblService_Stub.InventoryblService_Stub;
 import blServiceStub.inventoryblService_Stub.InventoryblService_Stub2;
+import blServiceStub.inventoryblService_Stub.InventoryblService_Stub3;
+import blServiceStub.inventoryblService_Stub.InventoryblService_Stub4;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXListView;
 import javafx.application.Platform;
@@ -14,6 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import ui.inventoryManagerui.inventoryGiftReceiptui.InventoryGiftDetailPane;
+import ui.inventoryManagerui.inventoryGiftReceiptui.InventoryGiftPane;
 import ui.userui.usermanagerui.BoardController;
 import ui.util.HistoricalRecord;
 import ui.util.PaneSwitchAnimation;
@@ -47,6 +53,8 @@ public class InventoryUIController implements Initializable{
 
     GoodsblService goodsblService_stub;
     InventoryShowblService showblService;
+    InventoryblService inventoryblService;
+    GoodsClassificationblService goodsClassificationblService;
 
 
     @Override
@@ -101,5 +109,53 @@ public class InventoryUIController implements Initializable{
         JFXDialog dialog = new JFXDialog(mainpane,chooseTimePane,JFXDialog.DialogTransition.CENTER);
         chooseTimePane.setDialog(dialog);
         dialog.show();
+    }
+
+    @FXML
+    public void inventoryCheckPane(){
+        showblService = new InventoryblService_Stub3();
+        try {
+            boardController.switchTo(new InventoryCheckPane(showblService,boardController,mainpane));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    public void giftReceiptPane(){
+        bar.setBoardController(boardController);
+
+        inventoryblService = new InventoryblService_Stub4();
+
+        //board.getChildren().setAll(new InventoryGiftDetailPane(boardController,mainpane));
+
+        try {
+            boardController.switchTo(new InventoryGiftPane(inventoryblService,boardController,mainpane));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    public void damageReceiptPane(){
+        goodsClassificationblService = new GoodsClassificationblService_Stub();
+        try {
+            boardController.switchTo(new GoodsClassificationPane(goodsClassificationblService,boardController,mainpane));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    public void overflowReceiptPane(){
+
+    }
+
+    @FXML
+    public void warningReceiptPane(){
+
     }
 }
