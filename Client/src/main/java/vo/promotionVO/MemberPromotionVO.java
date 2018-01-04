@@ -2,22 +2,23 @@ package vo.promotionVO;
 
 import blService.promotionblService.PromotionblService;
 import businesslogic.promotionbl.PromotionFactory;
-import javafx.scene.layout.Pane;
 import po.promotionPO.MemberPromotionPO;
 import po.promotionPO.PromotionGoodsItemPO;
-import ui.managerui.promotion.MemberPromotionDetailPane;
-import ui.managerui.promotion.PromotionDetailPane;
+import ui.managerui.promotionui.MemberPromotionDetailPane;
+import ui.managerui.promotionui.PromotionDetailPane;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
 
-public class MemberPromotionVO extends PromotionVO{
+public class MemberPromotionVO extends PromotionVO {
     private int requiredLevel;
     private double discountFraction;
     private double tokenAmount;
@@ -28,8 +29,6 @@ public class MemberPromotionVO extends PromotionVO{
 
     public MemberPromotionVO (MemberPromotionPO promotionPO) {
         super(promotionPO);
-        id = formatId("HYCX", promotionPO);
-
         requiredLevel = promotionPO.getRequiredLevel();
         discountFraction = promotionPO.getDiscountFraction();
         tokenAmount = promotionPO.getTokenAmount();
@@ -37,17 +36,18 @@ public class MemberPromotionVO extends PromotionVO{
     }
 
     @Override
+    protected String getCodeName() {
+        return "HYCX";
+    }
+
+    @Override
     public MemberPromotionPO toPO() {
-        return new MemberPromotionPO(idToDayId(),
-                createTime,
-                lastModifiedTime,
-                beginTime,
-                endTime,
-                comment,
-                requiredLevel,
-                discountFraction,
-                tokenAmount,
-                gifts.stream().map(PromotionGoodsItemVO::toPO).toArray(PromotionGoodsItemPO[]::new));
+        MemberPromotionPO result = toPromotionPO(MemberPromotionPO.class);
+        result.setRequiredLevel(requiredLevel);
+        result.setDiscountFraction(discountFraction);
+        result.setTokenAmount(tokenAmount);
+        result.setGifts(gifts.stream().map(PromotionGoodsItemVO::toPO).toArray(PromotionGoodsItemPO[]::new));
+        return result;
     }
 
     @Override

@@ -1,6 +1,8 @@
 package po.promotionPO;
 
 
+import util.PromotionState;
+
 import java.time.LocalDateTime;
 
 public class TotalPromotionPO extends PromotionPO {
@@ -11,8 +13,8 @@ public class TotalPromotionPO extends PromotionPO {
     public TotalPromotionPO() {
     }
 
-    public TotalPromotionPO(int dayId, LocalDateTime createTime, LocalDateTime lastModifiedTime, LocalDateTime beginTime, LocalDateTime endTime, String comment, double requiredTotal, double tokenAmount, PromotionGoodsItemPO[] gifts) {
-        super(dayId, createTime, lastModifiedTime, beginTime, endTime, comment);
+    public TotalPromotionPO(int dayId, LocalDateTime createTime, LocalDateTime lastModifiedTime, LocalDateTime beginTime, LocalDateTime endTime, String comment, PromotionState promotionState, double requiredTotal, double tokenAmount, PromotionGoodsItemPO[] gifts) {
+        super(dayId, createTime, lastModifiedTime, beginTime, endTime, comment, promotionState);
         this.requiredTotal = requiredTotal;
         this.tokenAmount = tokenAmount;
         this.gifts = gifts;

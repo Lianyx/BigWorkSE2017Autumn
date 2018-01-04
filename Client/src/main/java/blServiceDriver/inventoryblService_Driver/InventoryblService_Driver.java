@@ -19,11 +19,6 @@ public class InventoryblService_Driver {
         else
             System.out.println("failed");
 
-        test2 = inventoryBLService_Stub.checkInventory();
-        if(test2!=null)
-            System.out.println("success");
-        else
-            System.out.println("failed");
 
         test3 = inventoryBLService_Stub.getGiftID();
         if(test3!=null)

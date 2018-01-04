@@ -1,6 +1,7 @@
 package po.promotionPO;
 
 import po.promotionPO.PromotionPO;
+import util.PromotionState;
 
 import java.time.LocalDateTime;
 
@@ -14,8 +15,8 @@ public class MemberPromotionPO extends PromotionPO {
     public MemberPromotionPO() {
     }
 
-    public MemberPromotionPO(int dayId, LocalDateTime createTime, LocalDateTime lastModifiedTime, LocalDateTime beginTime, LocalDateTime endTime, String comment, int requiredLevel, double discountFraction, double tokenAmount, PromotionGoodsItemPO[] gifts) {
-        super(dayId, createTime, lastModifiedTime, beginTime, endTime, comment);
+    public MemberPromotionPO(int dayId, LocalDateTime createTime, LocalDateTime lastModifiedTime, LocalDateTime beginTime, LocalDateTime endTime, String comment, PromotionState promotionState, int requiredLevel, double discountFraction, double tokenAmount, PromotionGoodsItemPO[] gifts) {
+        super(dayId, createTime, lastModifiedTime, beginTime, endTime, comment, promotionState);
         this.requiredLevel = requiredLevel;
         this.discountFraction = discountFraction;
         this.tokenAmount = tokenAmount;

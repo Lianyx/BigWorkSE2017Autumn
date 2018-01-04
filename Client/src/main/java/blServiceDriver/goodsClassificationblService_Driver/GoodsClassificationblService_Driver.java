@@ -1,3 +1,4 @@
+/*
 package blServiceDriver.goodsClassificationblService_Driver;
 
 import blServiceStub.goodsClassificationblService_Stub.GoodsClassificationblService_Stub;
@@ -48,3 +49,4 @@ public class GoodsClassificationblService_Driver {
 
     }
 }
+*/

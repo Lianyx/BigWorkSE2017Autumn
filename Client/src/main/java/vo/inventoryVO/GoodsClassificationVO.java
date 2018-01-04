@@ -2,8 +2,8 @@ package vo.inventoryVO;
 
 import java.util.List;
 
-public class GoodsClassificationVO {
-    private String ID;
+public class GoodsClassificationVO implements Comparable<GoodsClassificationVO>{
+    private String ID = "1";
 
     private String name;
 
@@ -14,6 +14,12 @@ public class GoodsClassificationVO {
     private List<String> goodsID;
 
     public GoodsClassificationVO() {
+    }
+
+    public GoodsClassificationVO(String ID, String name, String fatherID) {
+        this.ID = ID;
+        this.name = name;
+        this.fatherID = fatherID;
     }
 
     public GoodsClassificationVO(String ID, String name, String fatherID, List<String> goodsID, List<String> childrenId) {
@@ -62,5 +68,10 @@ public class GoodsClassificationVO {
 
     public void setChildrenId(List<String> childrenId) {
         this.childrenId = childrenId;
+    }
+
+    @Override
+    public int compareTo(GoodsClassificationVO o) {
+        return ID.compareTo(o.ID);
     }
 }

@@ -3,7 +3,7 @@ package vo.abstractVO;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleBooleanProperty;
 
-public abstract class SelectableVO<T extends SelectableVO<T>> extends RecursiveTreeObject<T> {
+public abstract class SelectableVO<T> extends RecursiveTreeObject<T> {
     private SimpleBooleanProperty selected = new SimpleBooleanProperty(false);
 
     public boolean isSelected() {

@@ -12,12 +12,12 @@ import java.util.List;
 
 public class InventoryShowblController implements InventoryShowblService{
     @Override
-    public InventoryViewVO InventoryView(String beginDate, String endDate) {
+    public InventoryViewVO inventoryView(String beginDate, String endDate) {
         return null;
     }
 
     @Override
-    public InventoryCheckVO InventoryCheck() {
+    public InventoryCheckVO inventoryCheck() {
         return null;
     }
 

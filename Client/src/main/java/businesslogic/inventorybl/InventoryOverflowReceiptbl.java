@@ -8,6 +8,7 @@ import po.receiptPO.InventoryReceiptPO;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
 import util.ResultMessage;
+import vo.inventoryVO.uiReceipt.InventoryGiftuiVO;
 import vo.receiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;
@@ -15,13 +16,14 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class InventoryOverflowReceiptbl extends Inventorybl {
     GoodsUpdateInfo info;
 
     public InventoryOverflowReceiptbl(Class<? extends ReceiptVO> receiptVOClass, Class<? extends ReceiptPO> receiptPOClass,
                                       String className) throws RemoteException, NotBoundException, MalformedURLException {
-        super(receiptVOClass, receiptPOClass, className);
+        super();
         info = new GoodsUpdate();
     }
 
@@ -43,5 +45,10 @@ public class InventoryOverflowReceiptbl extends Inventorybl {
         info.goodsUpdate(poList);
 
         return ResultMessage.SUCCESS;
+    }
+
+    @Override
+    public Set<InventoryGiftuiVO> getAll() {
+        return null;
     }
 }

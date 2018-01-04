@@ -1,19 +1,56 @@
 package blServiceStub.goodsClassificationblService_Stub;
 
+import blService.goodsClassificationblService.GoodsClassificationblService;
+import exception.ExistException;
 import util.ResultMessage;
 import vo.inventoryVO.GoodsClassificationVO;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
-public class GoodsClassificationblService_Stub {
+public class GoodsClassificationblService_Stub implements GoodsClassificationblService{
+    Set<GoodsClassificationVO> set = new TreeSet<>();
+
+
+    public GoodsClassificationblService_Stub() {
+        set.add(new GoodsClassificationVO("123","345","212"));
+        set.add(new GoodsClassificationVO("124","345","212"));
+        set.add(new GoodsClassificationVO("125","345","212"));
+        set.add(new GoodsClassificationVO("126","345","212"));
+        set.add(new GoodsClassificationVO("127","345","212"));
+    }
+
     /**
    	 * 显示所有商品分类
 	 * @return
              */
     public Set<GoodsClassificationVO> show(){
         System.out.println("show success");
-        return new HashSet<GoodsClassificationVO>();
+        return set;
+    }
+
+
+
+    @Override
+    public String getID(String fatherId, int order) {
+        return null;
+    }
+
+    @Override
+    public ResultMessage addGoodsClassification(GoodsClassificationVO vo) throws ExistException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage deleteGoodsClassification(GoodsClassificationVO vo) {
+        return null;
+    }
+
+    @Override
+    public ResultMessage updateGoodsClassification(GoodsClassificationVO vo) {
+        return null;
     }
 
     /**

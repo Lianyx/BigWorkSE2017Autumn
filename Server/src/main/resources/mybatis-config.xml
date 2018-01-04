@@ -12,6 +12,7 @@
         <typeHandler handler="MyJsonHandler"/>
         <typeHandler handler="MyDateTypeHandler"/>
         <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="util.ReceiptState"/>
+        <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="util.PromotionState"/>
     </typeHandlers>
     <environments default='development'>
         <environment id='development'>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import com.jfoenix.controls.JFXRippler?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import ui.inventoryManagerui.DamageListItemTreeTable?>
+<fx:root fx:id="giftDetailPane" prefHeight="568.0" prefWidth="640.0" stylesheets="@../css/receipt.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane fx:id="pane" layoutX="124.0" layoutY="56.0" prefHeight="287.0" prefWidth="385.0">
+            <children>
+                <Label layoutX="21.0" layoutY="16.0" text="赠送单">
+                    <font>
+                        <Font name="Microsoft YaHei" size="24.0" />
+                    </font>
+                </Label>
+                <Label layoutX="22.0" layoutY="48.0" text="赠送单的基本信息" textFill="#a1adbc">
+                    <font>
+                        <Font size="12.0" />
+                    </font></Label>
+                <JFXButton fx:id="modify" layoutX="246.0" layoutY="18.0" text="">
+                    <graphic>
+                        <StackPane style="-fx-padding: 1;">
+                            <MaterialDesignIconView fx:id="pen" glyphName="PENCIL" size="1.5em" styleClass="icon" />
+                        </StackPane>
+                    </graphic>
+                </JFXButton>
+                <JFXButton fx:id="user" layoutX="104.0" layoutY="153.0" text="">
+                    <graphic>
+                        <StackPane>
+                            <MaterialDesignIconView glyphName="ACCOUNT" size="1.5em" styleClass="icon" />
+                        </StackPane>
+                    </graphic>
+                </JFXButton>
+                <JFXButton fx:id="delete" layoutX="297.0" layoutY="18.0" mnemonicParsing="false" prefHeight="28.0" text="Delete">
+                    <graphic>
+                        <HBox>
+                            <children>
+                                <JFXRippler position="BACK" styleClass="icons-rippler">
+                                    <StackPane>
+                                        <MaterialDesignIconView fill="white" glyphName="DELETE" size="1em" styleClass="icon" />
+                                    </StackPane>
+                                </JFXRippler>
+                            </children>
+                        </HBox>
+                    </graphic>
+                </JFXButton>
+                <Label layoutX="19.0" layoutY="97.0" text="JHX-">
+                    <font>
+                        <Font size="12.0" />
+                    </font>
+                </Label>
+                <Label layoutX="136.0" layoutY="98.0" text="-">
+                    <font>
+                        <Font size="12.0" />
+                    </font>
+                </Label>
+                <JFXDatePicker layoutX="51.0" layoutY="92.0" prefHeight="4.0" prefWidth="92.0" />
+                <JFXTextField layoutX="144.0" layoutY="92.0" prefHeight="26.0" prefWidth="64.0" />
+
+                <Label layoutX="242.0" layoutY="73.0" text="上次修改时间" textFill="#a1adbc">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <JFXDatePicker layoutX="242.0" layoutY="93.0" prefHeight="4.0" prefWidth="92.0" />
+
+                <Label layoutX="22.0" layoutY="73.0" text="ID" textFill="#a1adbc">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Label layoutX="19.0" layoutY="131.0" text="操作员" textFill="#a1adbc">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <TextField layoutX="17.0" layoutY="157.0" prefWidth="92.0" />
+                <Label layoutX="159.0" layoutY="131.0" text="单据状态" textFill="#a1adbc">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <TextField layoutX="160.0" layoutY="157.0" prefWidth="92.0" />
+
+                <Label layoutX="21.0" layoutY="194.0" text="Comment" textFill="#a1adbc">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <TextArea layoutX="17.0" layoutY="213.0" prefHeight="53.0" prefWidth="361.0" wrapText="true" />
+
+
+
+            </children>
+
+        </AnchorPane>
+        <Label layoutX="124.0" layoutY="350.0" text="ListItem">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <JFXRippler fx:id="add" layoutX="500" layoutY="350" maskType="CIRCLE" onMouseClicked="#add" position="BACK" ripplerFill="#03A9F4" styleClass="icons-rippler">
+            <StackPane style="-fx-padding: 8;">
+                <MaterialDesignIconView glyphName="PLUS" size="1.5em" styleClass="icon" />
+            </StackPane>
+        </JFXRippler>
+        <!--
+        <DamageListItemTreeTable fx:id="damageListItemTreeTable" layoutX="84.0" layoutY="380" prefHeight="170" prefWidth="499.0" />
+        -->
+        <Label layoutX="24.0" layoutY="12.0" text="库存赠送单">
+            <font>
+                <Font name="Microsoft YaHei Bold" size="24.0" />
+            </font>
+        </Label>
+        <Separator layoutX="24.0" layoutY="44.0" prefHeight="4.0" prefWidth="593.0" />
+        <JFXButton fx:id="save" layoutX="564.0" layoutY="17.0" mnemonicParsing="false" text="Save">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </JFXButton>
+    </children>
+</fx:root>
