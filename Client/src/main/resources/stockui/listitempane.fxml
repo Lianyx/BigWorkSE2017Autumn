@@ -1,16 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRippler?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
-<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx"
-         xmlns:fx="http://javafx.com/fxml"
-         prefHeight="250" prefWidth="250">
-    <children>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-    </children>
+<fx:root prefHeight="357.0" prefWidth="300.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXButton fx:id="delete" layoutX="160.0" layoutY="320.0" onMouseClicked="#delete" text="delete" textFill="WHITE"/>
+      <Label layoutX="89.0" layoutY="61.0" text="GoodID" textFill="#a1adbc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="goodId" layoutX="170.0" layoutY="61.0" text="Label" />
+      <Label layoutX="63.0" layoutY="89.0" text="GoodsName" textFill="#a1adbc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="goodName" layoutX="170.0" layoutY="89.0" text="Label" />
+      <Label layoutX="104.0" layoutY="119.0" text="Type" textFill="#a1adbc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="goodType" layoutX="170.0" layoutY="119.0" text="Label" />
+      <Label layoutX="104.0" layoutY="148.0" text="Num" textFill="#a1adbc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <JFXTextField fx:id="num" layoutX="173.0" layoutY="144.0" prefHeight="23.0" prefWidth="100.0" />
+      <Label layoutX="106.0" layoutY="192.0" text="Sum" textFill="#a1adbc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="sum" layoutX="170.0" layoutY="192.0" text="Label" />
+      <Label layoutX="47.0" layoutY="218.0" text="Comment" textFill="#a1adbc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <JFXTextArea fx:id="comment" layoutX="47.0" layoutY="244.0" prefHeight="53.0" prefWidth="207.0" />
+      <Label layoutX="113.0" layoutY="15.0" text="ItemInfo">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="save" layoutX="92.0" layoutY="320.0" onMouseClicked="#save" style="-fx-background-color: #03A9F4;" text="Save" textFill="WHITE" />
+   </children>
 </fx:root>

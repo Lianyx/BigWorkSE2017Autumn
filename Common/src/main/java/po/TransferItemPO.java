@@ -4,13 +4,13 @@ public class TransferItemPO {
 
     private int accountID;
     private double sum;
-    private String commnet;
+    private String comment;
 
 
-    public TransferItemPO(int accountID, double sum, String commnet) {
+    public TransferItemPO(int accountID, double sum, String coment) {
         this.accountID = accountID;
         this.sum = sum;
-        this.commnet = commnet;
+        this.comment = comment;
     }
 
 
@@ -30,12 +30,12 @@ public class TransferItemPO {
         this.sum = sum;
     }
 
-    public String getCommnet() {
-        return commnet;
+    public String getComment() {
+        return comment;
     }
 
-    public void setCommnet(String commnet) {
-        this.commnet = commnet;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
 

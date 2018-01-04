@@ -1,10 +1,7 @@
 package vo;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 import java.io.Serializable;
 
@@ -12,18 +9,18 @@ public class ListGoodsItemVO extends RecursiveTreeObject<ListGoodsItemVO> implem
     private StringProperty goodsName;
     private IntegerProperty goodsId;
     private StringProperty type;
-    private IntegerProperty price;
+    private DoubleProperty price;
      private IntegerProperty goodsNum;
-     private IntegerProperty sum;
+     private DoubleProperty sum;
      private StringProperty comment;
 
     public ListGoodsItemVO(String goodsName, int goodsId, String type, int price,int goodsNum, String comment) {
         this.goodsName = new SimpleStringProperty(goodsName);
         this.goodsId =  new SimpleIntegerProperty(goodsId);
         this.type =  new SimpleStringProperty(type);
-        this.price = new SimpleIntegerProperty(price);
+        this.price = new SimpleDoubleProperty(price);
         this.goodsNum = new SimpleIntegerProperty(goodsNum);
-        this.sum = new SimpleIntegerProperty();
+        this.sum = new SimpleDoubleProperty();
         this.comment = new SimpleStringProperty(comment);
         this.sum.bind(this.goodsNum.multiply(price));
     }
@@ -64,18 +61,6 @@ public class ListGoodsItemVO extends RecursiveTreeObject<ListGoodsItemVO> implem
         this.type.set(type);
     }
 
-    public int getPrice() {
-        return price.get();
-    }
-
-    public IntegerProperty priceProperty() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price.set(price);
-    }
-
     public int getGoodsNum() {
         return goodsNum.get();
     }
@@ -88,17 +73,6 @@ public class ListGoodsItemVO extends RecursiveTreeObject<ListGoodsItemVO> implem
         this.goodsNum.set(goodsNum);
     }
 
-    public int getSum() {
-        return sum.get();
-    }
-
-    public IntegerProperty sumProperty() {
-        return sum;
-    }
-
-    public void setSum(int sum) {
-        this.sum.set(sum);
-    }
 
     public String getComment() {
         return comment.get();
@@ -110,5 +84,29 @@ public class ListGoodsItemVO extends RecursiveTreeObject<ListGoodsItemVO> implem
 
     public void setComment(String comment) {
         this.comment.set(comment);
+    }
+
+    public double getPrice() {
+        return price.get();
+    }
+
+    public DoubleProperty priceProperty() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price.set(price);
+    }
+
+    public double getSum() {
+        return sum.get();
+    }
+
+    public DoubleProperty sumProperty() {
+        return sum;
+    }
+
+    public void setSum(double sum) {
+        this.sum.set(sum);
     }
 }

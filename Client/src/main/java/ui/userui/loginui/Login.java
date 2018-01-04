@@ -1,14 +1,10 @@
 package ui.userui.loginui;
 
-import blService.userblService.LoginService;
+import blService.userblService.LoginblService;
 import blServiceStub.loginblService_Stub.LoginblService_Stub;
 import com.jfoenix.controls.*;
 import java.io.*;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,32 +12,22 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Paint;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import ui.userui.usermanagerui.Loading;
+import ui.util.*;
 import util.ResultMessage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static java.lang.Math.random;
 import static ui.util.SetDraggable.setDraggable;
 
 public class Login implements Initializable{
-    @FXML
-    StackPane mainpane;
     @FXML
     AnchorPane pane;
     @FXML
@@ -58,7 +44,7 @@ public class Login implements Initializable{
     @FXML
     JFXCheckBox keep;
 
-    LoginService ls =new LoginblService_Stub();
+    LoginblService ls =new LoginblService_Stub();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -118,7 +104,7 @@ public class Login implements Initializable{
                         }
 
 
-                        changeToUserManger();
+                        changeToSales();
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -145,46 +131,38 @@ public class Login implements Initializable{
     public void changeToLogin() throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/userui/login.fxml"));
         Stage stage = (Stage) pane.getScene().getWindow();
-        Scene scene = new Scene(root);
+        StackPane stackPane = PaneFactory.getLoginPane();
+        stackPane.getChildren().add(root);
+        Scene scene = new Scene(stackPane);
         stage.setScene(scene);
         setDraggable(scene,stage);
-        JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
-        jfxDialogLayout.setHeading(new Label("Wrong"));
-        jfxDialogLayout.setBody(new Label("Wrong account or password..."));
-        JFXButton button = new JFXButton("Accept");
-        JFXDialog dialog = new JFXDialog((StackPane) root,jfxDialogLayout,JFXDialog.DialogTransition.CENTER);
-        button.setOnAction(e->{
+        OneButtonDialog dialog = new OneButtonDialog(stackPane,"Wrong","Wrong account or password...","Accept");
+        dialog.getButtonOne().setOnAction(e->{
             dialog.close();
         });
-        jfxDialogLayout.setActions(button);
         dialog.show();
     }
 
 
-    public void changeToUserManger() throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/userui/usermanager.fxml"));
+    public void changeTo(String url) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource(url));
         Stage stage = (Stage) pane.getScene().getWindow();
-        Scene scene = new Scene(root);
-
-        Timeline timeline = new Timeline();
-        timeline.getKeyFrames().add(
-                new KeyFrame(Duration.ZERO,
-                        new KeyValue(stage.opacityProperty(), 0)
-                )
-        );
-
-        for (int i = 1; i <= 10; i++) {
-            timeline.getKeyFrames().add(
-                    new KeyFrame(new Duration(i * 150),
-                            new KeyValue(stage.opacityProperty(), i / 10.0)
-                    )
-            );
-        }
-        timeline.play();
+        StackPane stackPane = PaneFactory.getMainPane();
+        stackPane.getChildren().add(root);
+        Scene scene = new Scene(stackPane);
+        NodeHolder nodeHolder = new NodeHolder(stage,Duration.millis(1000), NodeAnimation.FADE);
+        nodeHolder.apply();
         stage.setScene(scene);
         setDraggable(scene,stage);
     }
 
+    public void changeToUserManger() throws Exception{
+        changeTo("/userui/usermanager.fxml");
+    }
+
+    public void changeToSales() throws Exception{
+        changeTo("/salesui/sales.fxml");
+    }
 
     public String deleteEven(String str){
         String s="";
