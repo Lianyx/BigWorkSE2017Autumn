@@ -15,15 +15,6 @@ public enum ContainerAnimations {
     FADE((c) ->
             new ArrayList<>(Arrays.asList(new KeyFrame(Duration.ZERO, new KeyValue(c.getPlaceholder().opacityProperty(), 1.0, Interpolator.EASE_BOTH)),
                     new KeyFrame(c.getDuration(), new KeyValue(c.getPlaceholder().opacityProperty(), 0.0, Interpolator.EASE_BOTH))))),
-
-    ZOOM_IN((c) ->
-            new ArrayList<>(Arrays.asList(new KeyFrame(Duration.ZERO, new KeyValue(c.getPlaceholder().scaleXProperty(), 1, Interpolator.EASE_BOTH), new KeyValue(c.getPlaceholder().scaleYProperty(), 1, Interpolator.EASE_BOTH), new KeyValue(c.getPlaceholder().opacityProperty(), 1.0, Interpolator.EASE_BOTH)),
-                    new KeyFrame(c.getDuration(), new KeyValue(c.getPlaceholder().scaleXProperty(), 4, Interpolator.EASE_BOTH), new KeyValue(c.getPlaceholder().scaleYProperty(), 4, Interpolator.EASE_BOTH), new KeyValue(c.getPlaceholder().opacityProperty(), 0, Interpolator.EASE_BOTH))))),
-
-    ZOOM_OUT((c) ->
-            new ArrayList<>(Arrays.asList(new KeyFrame(Duration.ZERO, new KeyValue(c.getPlaceholder().scaleXProperty(), 1, Interpolator.EASE_BOTH), new KeyValue(c.getPlaceholder().scaleYProperty(), 1, Interpolator.EASE_BOTH), new KeyValue(c.getPlaceholder().opacityProperty(), 1.0, Interpolator.EASE_BOTH)),
-                    new KeyFrame(c.getDuration(), new KeyValue(c.getPlaceholder().scaleXProperty(), 0, Interpolator.EASE_BOTH), new KeyValue(c.getPlaceholder().scaleYProperty(), 0, Interpolator.EASE_BOTH), new KeyValue(c.getPlaceholder().opacityProperty(), 0, Interpolator.EASE_BOTH))))),
-
     SWIPE_LEFT((c) ->
             new ArrayList<>(Arrays.asList(new KeyFrame(Duration.ZERO, new KeyValue(c.getView().translateXProperty(), c.getView().getWidth(), Interpolator.EASE_BOTH), new KeyValue(c.getPlaceholder().translateXProperty(), -c.getView().getWidth(), Interpolator.EASE_BOTH)),
                     new KeyFrame(c.getDuration(), new KeyValue(c.getView().translateXProperty(), 0, Interpolator.EASE_BOTH), new KeyValue(c.getPlaceholder().translateXProperty(), -c.getView().getWidth(), Interpolator.EASE_BOTH))))),

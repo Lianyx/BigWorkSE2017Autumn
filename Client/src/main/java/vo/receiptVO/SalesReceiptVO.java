@@ -1,39 +1,59 @@
 package vo.receiptVO;
 
+import blService.checkblService.ReceiptblService;
+import javafx.beans.property.*;
+import javafx.scene.Node;
 import po.ReceiptGoodsItemPO;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
+import vo.ListGoodsItemVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
-public abstract class SalesReceiptVO extends ReceiptVO {
-    private int clientId;
-    private String clerkName; // 业务员
+public class SalesReceiptVO extends ReceiptVO {
+    private int memberId;
+    private String memberName;
+    private String clerkName;
     private String stockName;
-    private ReceiptGoodsItemPO[] goodsList;
+    private ArrayList<ListGoodsItemVO> items = new ArrayList<>();
+    private String comment;
     private double discountAmount;
     private double tokenAmount;
     private double originSum;
-    private String comment;
+    private boolean isSell;
 
-    public SalesReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientId, String clerkName, String stockName, ReceiptGoodsItemPO[] goodsList, double discountAmount, double tokenAmount, double originSum, String comment) {
+    public SalesReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberId, String memberName, String clerkName, String stockName, ArrayList<ListGoodsItemVO> items, String comment, double discountAmount, double tokenAmount, double originSum, boolean isSell) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
-        this.clientId = clientId;
+        this.memberId = memberId;
+        this.memberName = memberName;
         this.clerkName = clerkName;
         this.stockName = stockName;
-        this.goodsList = goodsList;
+        this.items = items;
+        this.comment = comment;
         this.discountAmount = discountAmount;
         this.tokenAmount = tokenAmount;
         this.originSum = originSum;
-        this.comment = comment;
+        this.isSell = isSell;
     }
 
-    public int getClientId() {
-        return clientId;
+    public int getMemberId() {
+        return memberId;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
+    }
+
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
     }
 
     public String getClerkName() {
@@ -52,12 +72,20 @@ public abstract class SalesReceiptVO extends ReceiptVO {
         this.stockName = stockName;
     }
 
-    public ReceiptGoodsItemPO[] getGoodsList() {
-        return goodsList;
+    public ArrayList<ListGoodsItemVO> getItems() {
+        return items;
     }
 
-    public void setGoodsList(ReceiptGoodsItemPO[] goodsList) {
-        this.goodsList = goodsList;
+    public void setItems(ArrayList<ListGoodsItemVO> items) {
+        this.items = items;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public double getDiscountAmount() {
@@ -84,11 +112,26 @@ public abstract class SalesReceiptVO extends ReceiptVO {
         this.originSum = originSum;
     }
 
-    public String getComment() {
-        return comment;
+    public boolean isSell() {
+        return isSell;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setSell(boolean sell) {
+        isSell = sell;
+    }
+
+    @Override
+    public <T extends ReceiptPO> T toPO() {
+        return null;
+    }
+
+    @Override
+    public ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException {
+        return null;
+    }
+
+    @Override
+    public Node getDetailPane() {
+        return null;
     }
 }

@@ -7,6 +7,6 @@ public class UserInfomation {
     public static String username;
     public static UserCategory usertype;
     public static Image userimage;
-
+    public static int userid;
 
 }

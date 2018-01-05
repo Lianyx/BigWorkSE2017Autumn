@@ -9,13 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.controlsfx.control.PopOver;
-import ui.userui.usermanagerui.BoardController;
 import ui.messageui.MessageListView;
 
 import java.io.IOException;
@@ -53,16 +51,17 @@ public class TopBar extends HBox {
     @FXML
     JFXRippler refresh;
 
-
-
     BoardController boardController;
+
     public TopBar(){
         super();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/userui/topbar.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/util/topbar.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try {
             fxmlLoader.load();
+
+
             user.setImage(UserInfomation.userimage);
             username.setText(UserInfomation.username);
 

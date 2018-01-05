@@ -6,11 +6,12 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;
 import sun.java2d.pipe.SpanShapeRenderer;
 import util.UserCategory;
+import vo.abstractVO.SelectableVO;
 
 import java.io.Serializable;
 import java.util.Comparator;
 
-public class UserListVO extends RecursiveTreeObject<UserListVO> implements Serializable,Comparable<UserListVO> {
+public class UserListVO extends SelectableVO<UserListVO> {
 
     private int userid;
     private Image image;
@@ -126,15 +127,6 @@ public class UserListVO extends RecursiveTreeObject<UserListVO> implements Seria
 
     public void setMultiple(boolean multiple) {
         this.multiple = multiple;
-    }
-
-    @Override
-    public int compareTo(UserListVO o) {
-        if(userid>o.getUserid())
-            return 1;
-        else if(userid<o.getUserid())
-            return -1;
-        return 0;
     }
 
     @Override
