@@ -1,6 +1,6 @@
-package ui.inventoryManagerui;
+package ui.inventoryManagerui.inventoryGiftReceiptui;
 
-import blService.inventoryblService.InventoryShowblService;
+import blService.inventoryblService.InventoryblService;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -14,79 +14,116 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import ui.userui.usermanagerui.UserListPane;
+import ui.userui.usermanagerui.FilterPane;
 import ui.util.BoardController;
 import ui.util.HistoricalRecord;
 import ui.util.Refreshable;
-import vo.inventoryVO.InventoryViewItemVO;
-import vo.inventoryVO.InventoryViewVO;
+import vo.inventoryVO.uiReceipt.InventoryGiftuiVO;
 
 import java.io.IOException;
 import java.util.Set;
 
-public class InventoryViewPane extends Refreshable {
+public class InventoryGiftPane extends Refreshable {
 
-    InventoryViewTreeTable viewTreeTable;
+    InventoryGiftTreeTable inventoryGiftTreeTable;
 
     @FXML
     BorderPane borderpane;
 
-    Set<InventoryViewItemVO> set;
+    Set<InventoryGiftuiVO> set;
 
     BoardController boardController;
 
-    InventoryShowblService showblService;
+    InventoryblService inventoryblService;
 
     Pagination pagination;
 
     StackPane mainpane;
 
-    public boolean historyAdd  = false;
+    FilterPane filterPane;
 
+    public boolean historyAdd = false;
 
+    @FXML
+    JFXButton filter;
 
-    public InventoryViewPane(InventoryShowblService showblService ,BoardController boardController,StackPane mainPane) throws IOException {
+    public InventoryGiftPane(InventoryblService inventoryblService, BoardController boardController, StackPane mainpane) throws IOException {
         super();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/inventoryui/inventoryViewPane.fxml"));
+        this.boardController = boardController;
+        this.inventoryblService = inventoryblService;
+        this.mainpane = mainpane;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/inventoryui/inventoryGiftPane.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         fxmlLoader.load();
+        inventoryGiftTreeTable = new InventoryGiftTreeTable(inventoryblService, boardController, mainpane);
+        /*
+        PopOver filterPopOver = new PopOver();
+        filterPopOver.setDetachable(false);
+        filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
+        filterPane=new FilterPane();
+        filterPane.setUserSearchVO(this.userSearchVO);
+        filterPane.setUlp(this);
+        filterPopOver.setContentNode(filterPane);
 
-        this.mainpane = mainPane;
-        this.boardController = boardController;
-        this.showblService = showblService;
-        viewTreeTable = new InventoryViewTreeTable(showblService,boardController,mainpane);
+        filter.setOnMouseClicked(e -> filterPopOver.show(filter));
+         */
     }
 
-    public void setShowblService(InventoryShowblService showblService){this.showblService = showblService;}
+    public void setInventoryblService(InventoryblService inventoryblService) {
+        this.inventoryblService = inventoryblService;
+    }
 
-    public void switchPane(boolean toSwtich){
-        if(toSwtich==true){
+    @FXML
+    public void deleteList() {
+
+    }
+
+    public void refreshUlv() {
+        int current = pagination.getCurrentPageIndex();
+        int max = inventoryGiftTreeTable.getObservableList().size() / inventoryGiftTreeTable.getRowsPerPage() + 1;
+        pagination = new Pagination((inventoryGiftTreeTable.getObservableList().size() / inventoryGiftTreeTable.getRowsPerPage() + 1), 0);
+        System.out.println((inventoryGiftTreeTable.getObservableList().size() / inventoryGiftTreeTable.getRowsPerPage() + 1));
+        pagination.setPageFactory(inventoryGiftTreeTable::createPage);
+        pagination.setPrefWidth(600);
+        borderpane.setCenter(pagination);
+        if (current - 1 >= 0 && current - 1 <= max)
+            pagination.setCurrentPageIndex(current - 1);
+        else
+            pagination.setCurrentPageIndex(0);
+    }
+
+    @FXML
+    public void add() {
+
+    }
+
+    public void switchPane(boolean toSwtich) {
+        if (toSwtich == true) {
             System.out.println("??/**/");
             boardController.switchTo(this);
-        }else{
-            if(historyAdd){
+        } else {
+            if (historyAdd) {
                 HistoricalRecord.addPane(this);
-                historyAdd=false;
+                historyAdd = false;
             }
             boardController.setAll(this);
         }
     }
 
-
     @Override
     public void refresh(boolean toSwitch) {
         boardController.Loading();
         try {
-            InventoryViewPane.LoadingTask task = new InventoryViewPane.LoadingTask();
+            LoadingTask task = new LoadingTask();
             task.valueProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                     if (task.getIntegerProperty() == 1) {
                         try {
-                            viewTreeTable.setInventoryView(set);
-                            pagination = new Pagination((viewTreeTable.getObservableList().size() /viewTreeTable.getRowsPerPage()+1 ), 0);
-                            pagination.setPageFactory(viewTreeTable::createPage);
+                            inventoryGiftTreeTable.setGiftReceipts(set);
+                            pagination = new Pagination((inventoryGiftTreeTable.getObservableList().size() / inventoryGiftTreeTable.getRowsPerPage() + 1), 0);
+                            pagination.setPageFactory(inventoryGiftTreeTable::createPage);
                             pagination.setPrefWidth(600);
                             borderpane.setCenter(pagination);
                             switchPane(toSwitch);
@@ -120,17 +157,16 @@ public class InventoryViewPane extends Refreshable {
             });
 
             new Thread(task).start();
-        }catch (Exception e) {
-
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
+
     class LoadingTask extends Task<Boolean> {
 
         private SimpleIntegerProperty integerProperty = new SimpleIntegerProperty(-1);
-
 
 
         public int getIntegerProperty() {
@@ -142,23 +178,19 @@ public class InventoryViewPane extends Refreshable {
         }
 
         @Override
-        protected Boolean call() throws Exception{
-            InventoryViewVO inventoryViewVO = showblService.inventoryView("","");
-            set = inventoryViewVO.getViewList();
-            if(set!=null){
+        protected Boolean call() throws Exception {
+            set = inventoryblService.getAll();
+            if (set != null) {
                 Thread.sleep(2000);
                 integerProperty.setValue(1);
                 return true;
-            }else {
+            } else {
                 Thread.sleep(2000);
                 integerProperty.set(0);
                 return false;
             }
         }
     }
-
-
-
 
 
 }

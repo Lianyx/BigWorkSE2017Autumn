@@ -20,9 +20,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+
+import ui.userui.usermanagerui.UserDetailPane;
 import ui.util.BoardController;
 import ui.util.Loading;
-import ui.userui.usermanagerui.UserDetailPane;
 import ui.util.Refreshable;
 import vo.AccountListVO;
 import vo.UserVO;
@@ -77,7 +78,6 @@ public class AccountDetailPane extends Refreshable{
         id.disableProperty().bind(modifyState.not());
         balance.disableProperty().bind(modifyState.not());
 
-
     }
 
 
@@ -112,6 +112,9 @@ public class AccountDetailPane extends Refreshable{
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                     if(task.getIntegerProperty()==1){
                         try{
+                            //userVO=task.getUserVO();
+                            //username.setText(userVO.getUsername());
+                            //usertype.getSelectionModel().select(userVO.getUsertype().ordinal());
                             id.setText(String.valueOf(accountListVO.getID()));
                             name.setText(accountListVO.getName());
                             balance.setText(String.valueOf(accountListVO.getBalance()));

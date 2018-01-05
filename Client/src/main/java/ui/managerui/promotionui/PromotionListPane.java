@@ -12,8 +12,8 @@ import javafx.scene.control.Pagination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
-import ui.userui.usermanagerui.BoardController;
 import ui.userui.usermanagerui.FilterPane;
+import ui.util.BoardController;
 import ui.util.Refreshable;
 import vo.PromotionSearchVO;
 
@@ -56,7 +56,7 @@ public class PromotionListPane extends Refreshable { // TODO Refreshable改成�
         try {
             promotionListblService = PromotionFactory.getPromotionListblService();
             promotionTreeTable = new PromotionTreeTable(promotionListblService.initPromotion(), boardController, mainpane);
-            promotionTreeTable.setKeyWordProperty(keyWordProperty);
+         //   promotionTreeTable.setKeyWordProperty(keyWordProperty);
         } catch (RemoteException | NotBoundException | MalformedURLException e) {
             // TODO 而且上面要加线程?
             e.printStackTrace();
@@ -87,7 +87,7 @@ public class PromotionListPane extends Refreshable { // TODO Refreshable改成�
 
     @FXML
     public void delete() {
-        promotionTreeTable.delete();
+        //promotionTreeTable.delete();
     }
 
     @FXML

@@ -1,6 +1,5 @@
 package ui.inventoryManagerui;
 
-import businesslogic.goodsbl.Goods;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -24,9 +23,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Paint;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import ui.userui.usermanagerui.BoardController;
-import ui.userui.usermanagerui.IconButton;
-import ui.userui.usermanagerui.TokenLabel;
+import ui.util.BoardController;
+import ui.util.IconButton;
+import ui.util.TokenLabel;
 import ui.util.CircleImageView;
 import vo.inventoryVO.GoodsVO;
 

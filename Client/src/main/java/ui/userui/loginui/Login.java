@@ -1,7 +1,7 @@
 package ui.userui.loginui;
 
 import blService.userblService.LoginblService;
-import blServiceStub.loginblService_Stub.LoginblService_Stub;
+import blServiceStub.loginblservice_Stub.LoginblService_Stub;
 import com.jfoenix.controls.*;
 import java.io.*;
 
@@ -15,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -137,9 +136,7 @@ public class Login implements Initializable{
         stage.setScene(scene);
         setDraggable(scene,stage);
         OneButtonDialog dialog = new OneButtonDialog(stackPane,"Wrong","Wrong account or password...","Accept");
-        dialog.getButtonOne().setOnAction(e->{
-            dialog.close();
-        });
+        dialog.setButtonOne(()->{});
         dialog.show();
     }
 

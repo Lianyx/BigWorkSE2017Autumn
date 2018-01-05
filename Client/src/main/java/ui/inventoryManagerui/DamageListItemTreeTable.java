@@ -14,7 +14,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import ui.util.ListPopup;
 import vo.inventoryVO.uiReceipt.DamageuiGoodsItemVO;
 

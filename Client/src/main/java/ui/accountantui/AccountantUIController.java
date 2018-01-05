@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import ui.util.PaneSwitchAnimation;
 import ui.util.TopBar;
 
@@ -80,25 +80,37 @@ public class AccountantUIController implements Initializable{
                                 if (newVal.getText().equals("账户管理")) {
                                     System.out.println("账户管理");
                                     AccountListPane accountListPane = new AccountListPane(accountblService,boardController,mainpane);
+                                    //board.getChildren().setAll(accountListPane);
+                                    //HistoricalRecord.addPane(accountListPane);
+                                    //boardController.switchTo(accountListPane);
                                     accountListPane.refresh(true);
                                 }
                                 else if (newVal.getText().equals("付款单")) {
                                     System.out.println("付款单");
                                     BillReceiptListPane billReceiptListPane = new BillReceiptListPane(paymentBillReceiptblService,boardController);
                                     billReceiptListPane.setMainpane(mainpane);
-                                    billReceiptListPane.refresh(true);
+                                    //board.getChildren().setAll(billReceiptListPane);
+                                    //HistoricalRecord.addPane(billReceiptListPane);
+                                    boardController.switchTo(billReceiptListPane);
                                 }
                                 else if (newVal.getText().equals("收款单")) {
                                     System.out.println("收款单");
                                     BillReceiptListPane billReceiptListPane = new BillReceiptListPane(chargeBillReceiptblService,boardController);
                                     billReceiptListPane.setMainpane(mainpane);
-                                    billReceiptListPane.refresh(true);
+                                    //board.getChildren().setAll(billReceiptListPane);
+                                    //HistoricalRecord.addPane(billReceiptListPane);
+                                    boardController.switchTo(billReceiptListPane);
+                                    //StockblService stockblService= new Stock_Stub();
+                                    //StockReceiptPane stockReceiptPane = new StockReceiptPane(boardController,mainpane);
+                                    //stockReceiptPane.refresh(true);
                                 }
                                 else if (newVal.getText().equals("现金费用单")) {
                                     System.out.println("现金费用单");
                                     BillReceiptListPane billReceiptListPane = new BillReceiptListPane(cashBillReceiptblService,boardController);
                                     billReceiptListPane.setMainpane(mainpane);
-                                    billReceiptListPane.refresh(true);
+                                    //board.getChildren().setAll(billReceiptListPane);
+                                    //HistoricalRecord.addPane(billReceiptListPane);
+                                    boardController.switchTo(billReceiptListPane);
                                 }
                                 else if (newVal.getText().equals("销售明细")) {
                                     System.out.println("销售明细");

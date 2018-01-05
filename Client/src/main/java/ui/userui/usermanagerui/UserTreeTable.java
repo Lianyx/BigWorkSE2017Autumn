@@ -1,170 +1,102 @@
 package ui.userui.usermanagerui;
 
+import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.userblService.UserManagerblService;
 import com.jfoenix.controls.*;
-import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Paint;
 import javafx.util.Callback;
 
 import javafx.util.Duration;
-import ui.util.CircleImageView;
-import ui.util.ListPopup;
+import ui.util.*;
+import util.UserCategory;
 import vo.UserListVO;
 import vo.UserSearchVO;
 
 import java.util.Set;
-import java.util.function.Predicate;
 
 
-public class UserTreeTable extends JFXTreeTableView<UserListVO> {
-    private ObservableList<UserListVO> observableList = FXCollections.observableArrayList();
-    private ObservableList<UserListVO> observableListfilter = observableList;
-    private ObservableList<UserListVO> observableListtemp;
-    private int rowsPerPage = 7;
-    private BoardController boardController;
+public class UserTreeTable extends ReceiptTreeTable<UserListVO> {
     private UserManagerblService userManagerblService;
-    private StackPane mainpane;
     private UserSearchVO userSearchVO;
 
-    public ObservableList<UserListVO> getObservableList() {
-        return observableListfilter;
-    }
 
-    public int getRowsPerPage() {
-        return rowsPerPage;
-    }
-
-
-    public UserTreeTable(UserManagerblService userManagerblService,BoardController boardController,StackPane mainpane) {
+    public UserTreeTable() {
         super();
-        this.userManagerblService=userManagerblService;
-        this.boardController=boardController;
-        this.mainpane=mainpane;
-
+        rowsPerPage = 7;
+        userManagerblService = ServiceFactory_Stub.getService(UserManagerblService.class.getName());
 
         JFXTreeTableColumn<UserListVO,Boolean> choose = new JFXTreeTableColumn("  ");
         choose.setPrefWidth(40);
-        Callback<TreeTableColumn<UserListVO,Boolean>, TreeTableCell<UserListVO,Boolean>> chooseCellFactory = (TreeTableColumn<UserListVO,Boolean> p) -> new ChooseBoxCell();
-        choose.setCellValueFactory((TreeTableColumn.CellDataFeatures<UserListVO, Boolean> param) -> {
-            if (choose.validateValue(param)) {
-                return param.getValue().getValue().selectedProperty();
-            } else {
-                return choose.getComputedValue(param);
-            }
-        });
-        choose.setCellFactory(chooseCellFactory);
+        columnDecorator.setupCellValueFactory(choose, s -> s.selectedProperty().asObject());
+        choose.setCellFactory(t->new ChooseCell<UserListVO>(chosenItem));
 
 
         JFXTreeTableColumn image = new JFXTreeTableColumn("  ");
         image.setPrefWidth(50);
-        Callback<TreeTableColumn, TreeTableCell> imageCellFactory = (TreeTableColumn p) -> new ImageCell();
         image.setCellValueFactory(new TreeItemPropertyValueFactory<>("image"));
-        image.setCellFactory(imageCellFactory);
+        image.setCellFactory(p->new ImageCell());
 
 
 
         JFXTreeTableColumn<UserListVO, String> username = new JFXTreeTableColumn("Username");
-        username.setPrefWidth(80);
-        username.setCellValueFactory((TreeTableColumn.CellDataFeatures<UserListVO, String> param) -> {
-            if (username.validateValue(param)) {
-                return new ReadOnlyObjectWrapper(param.getValue().getValue().getUsername());
-            } else {
-                return username.getComputedValue(param);
-            }
-        });
+        username.setPrefWidth(60);
+        columnDecorator.setupCellValueFactory(username,s->new ReadOnlyObjectWrapper<>(s.getUsername()));
+        username.setCellFactory(t->new SearchableStringCell<>(keyword));
 
 
 
-
-        JFXTreeTableColumn<UserListVO, Long> userid = new JFXTreeTableColumn("Userid");
+        JFXTreeTableColumn<UserListVO, Integer> userid = new JFXTreeTableColumn("Userid");
         userid.setPrefWidth(120);
-        userid.setCellValueFactory((TreeTableColumn.CellDataFeatures<UserListVO, Long> param) -> {
-            if (userid.validateValue(param)) {
-                return new ReadOnlyObjectWrapper(param.getValue().getValue().getUserid());
-            } else {
-                return userid.getComputedValue(param);
-            }
-        });
+        columnDecorator.setupCellValueFactory(userid,s->new ReadOnlyObjectWrapper<>(s.getUserid()));
 
         JFXTreeTableColumn<UserListVO, String> usertype = new JFXTreeTableColumn("Usertype");
         usertype.setPrefWidth(125);
-        usertype.setCellValueFactory((TreeTableColumn.CellDataFeatures<UserListVO, String> param) -> {
-            if (usertype.validateValue(param)) {
-                return new ReadOnlyObjectWrapper(param.getValue().getValue().getUserCategory().name());
-            } else {
-                return usertype.getComputedValue(param);
+        columnDecorator.setupCellValueFactory(usertype,s->new ReadOnlyObjectWrapper(s.getUserCategory().name()));
+        usertype.setCellFactory(new Callback<TreeTableColumn<UserListVO, String>, TreeTableCell<UserListVO, String>>() {
+            @Override
+            public TreeTableCell<UserListVO, String> call(TreeTableColumn<UserListVO, String> param) {
+                return new ButtonCell() {
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if(item!=null){
+                            setButtonStyle(UserCategory.color.get(item));
+                        }
+                    }
+                };
             }
         });
-        Callback<TreeTableColumn<UserListVO, String>, TreeTableCell<UserListVO, String>> typeCellFactory = (TreeTableColumn<UserListVO, String> p) -> new ButtonCell();
-        usertype.setCellFactory(typeCellFactory);
 
 
         JFXTreeTableColumn<UserListVO, String> phone = new JFXTreeTableColumn("Phone");
         phone.setPrefWidth(150);
-        phone.setCellValueFactory((TreeTableColumn.CellDataFeatures<UserListVO, String> param) -> {
-            if (phone.validateValue(param)) {
-                return new ReadOnlyObjectWrapper(param.getValue().getValue().getPhone());
-            } else {
-                return phone.getComputedValue(param);
-            }
-        });
-        Callback<TreeTableColumn<UserListVO, String>, TreeTableCell<UserListVO, String>> tokenCellFactory = (TreeTableColumn<UserListVO, String> p) -> new TokenCell();
-        phone.setCellFactory(tokenCellFactory);
+        columnDecorator.setupCellValueFactory(phone,s->new ReadOnlyObjectWrapper<>(s.getPhone()));
+        phone.setCellFactory(s->new SearchableStringCell<>(keyword));
 
 
         JFXTreeTableColumn<UserListVO, Boolean> more = new JFXTreeTableColumn("");
         more.setPrefWidth(20);
-        Callback<TreeTableColumn<UserListVO, Boolean>, TreeTableCell<UserListVO, Boolean>> moreCellFactory = (TreeTableColumn<UserListVO, Boolean> p) -> new MoreCell();
-        more.setCellValueFactory((TreeTableColumn.CellDataFeatures<UserListVO, Boolean> param) -> {
-            if (more.validateValue(param)) {
-                return new ReadOnlyObjectWrapper(param.getValue().getValue().isMultiple());
-            } else {
-                return more.getComputedValue(param);
+        columnDecorator.setupCellValueFactory(more, s -> new ReadOnlyObjectWrapper(s.isMultiple()));
+        more.setCellFactory(new Callback<TreeTableColumn<UserListVO, Boolean>, TreeTableCell<UserListVO, Boolean>>() {
+            @Override
+            public TreeTableCell<UserListVO, Boolean> call(TreeTableColumn<UserListVO, Boolean> param) {
+                MultiCell multiCell = new MultiCell();
+                multiCell.setRunnable1(()->{UserDetailPane userDetailPane = new UserDetailPane(((UserListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getUserid()); userDetailPane.refresh(true);});
+                multiCell.setRunnable2(()->{userManagerblService.delete(((UserListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getUserid()); BoardController.getBoardController().refresh();});
+                return multiCell;
             }
         });
-        more.setCellFactory(moreCellFactory);
 
 
 
 
-        this.setRowFactory(tableView->{
-            JFXTreeTableRow row=new JFXTreeTableRow();
-            row.setPrefHeight(55);
-            row.setStyle("-fx-border-color: rgb(233,237,239); -fx-border-width: 0.3;");
-            row.setOnMouseClicked((MouseEvent event) -> {
-                if(event.getClickCount()==2){
-                     UserDetailPane userDetailPane = new UserDetailPane(((UserListVO)row.getTreeItem().getValue()).getUserid(),userManagerblService,boardController,mainpane);
-                     userDetailPane.refresh(true);
-                }
-
-            });
-            row.selectedProperty().addListener(e->{
-                if(row.isSelected()){
-                    row.toFront();
-                }else{
-                    row.setEffect(null);
-                }
-            });
+        this.setRowFactory(tableView-> {
+            JFXTreeTableRow<UserListVO> row = new JFXTreeTableRow();
+            RowSetter(row,()->{UserDetailPane userDetailPane = new UserDetailPane(row.getTreeItem().getValue().getUserid());userDetailPane.refresh(true);});
             return row;
         });
-        setCurrentItemsCount(rowsPerPage);
-        this.setShowRoot(false);
 
 
         this.getColumns().addAll(choose,image, username,  userid,usertype,phone,more);
@@ -187,158 +119,15 @@ public class UserTreeTable extends JFXTreeTableView<UserListVO> {
         this.userSearchVO = userSearchVO;
     }
 
-    public Node createPage(int pageIndex) {
-
-
-        if(userSearchVO.getUserCategory()!=null)
-        observableListfilter=observableList.filtered(t->{
-            return userSearchVO.getUserCategory()==t.getUserCategory();
-        });
-        else
-            observableListfilter=observableList;
-        int fromIndex = pageIndex * rowsPerPage;
-        int toIndex = Math.min(fromIndex + rowsPerPage, observableListfilter.size());
-        observableListtemp = FXCollections.observableList(observableListfilter.subList(fromIndex, toIndex));
-        final TreeItem<UserListVO> root = new RecursiveTreeItem<>(observableListtemp, RecursiveTreeObject::getChildren);
-        this.setRoot(root);
-        this.setStyle("-fx-border-color: transparent; -fx-padding: 0; -fx-background-color: transparent");
-
-
-        Timeline timeline = new Timeline();
-        timeline.getKeyFrames().add(
-                new KeyFrame(Duration.ZERO,
-                        new KeyValue(this.opacityProperty(), 0)
-                )
-        );
-
-        for (int i = 1; i <= 10; i++) {
-            timeline.getKeyFrames().add(
-                    new KeyFrame(new Duration(i * 80),
-                            new KeyValue(this.opacityProperty(), i / 10.0)
-                    )
-            );
-        }
-
-        return new BorderPane(this);
+    @Override
+    public void delete(Pagination p) {
+        chosenItem.getSet().forEach(s -> {observableList.remove(s); userManagerblService.delete(s.getUserid());});
+        p.setPageCount(observableList.size() / getRowsPerPage() + 1);
+        createPage(p.getCurrentPageIndex());
+        p.setCurrentPageIndex(p.getCurrentPageIndex());
+        chosenItem.getSet().clear();
     }
 
-
-
-
-
-
-    private class ChooseBoxCell extends JFXTreeTableCell<UserListVO,Boolean> {
-        private JFXCheckBox cb = new JFXCheckBox("");
-
-        public ChooseBoxCell(){
-            cb.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    if(getTreeTableRow()!=null&&getTreeTableRow().getItem()!=null){
-                        UserListVO userListVO=getTreeTableRow().getItem();
-                        System.out.println(userListVO);
-                        userListVO.setSelected(!userListVO.isSelected());
-                        if(userListVO.isSelected()){
-                            ChosenItem.addItem(userListVO);
-                        }else{
-                            ChosenItem.removeItem(userListVO);
-                        }
-                    }
-                }
-            });
-
-
-        }
-
-
-        @Override
-        public void updateItem(Boolean item,boolean empty){
-            super.updateItem(item,empty);
-
-            if(empty){
-                setGraphic(null);
-            }else{
-                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                cb.setSelected(item);
-                setGraphic(cb);
-            }
-
-
-        }
-
-
-
-    }
-
-    private class ImageCell extends JFXTreeTableCell {
-        private CircleImageView civ = new CircleImageView();
-
-        @Override
-        public void updateItem(Object item,boolean empty){
-            super.updateItem(item,empty);
-            if(empty){
-                setGraphic(null);
-            }else{
-                civ.setImage((Image)item);
-                civ.setRadius(17);
-                civ.setTranslateY(-8);
-                setGraphic(civ);
-
-            }
-
-
-        }
-
-
-
-    }
-    private class ButtonCell extends JFXTreeTableCell<UserListVO,String> {
-        private JFXButton civ = new JFXButton("");
-
-        @Override
-        public void updateItem(String item,boolean empty){
-            super.updateItem(item,empty);
-            if(empty){
-                setGraphic(null);
-            }else{
-                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                civ.setText(item);
-                setGraphic(civ);
-            }
-        }
-    }
-
-
-    private class TokenCell extends JFXTreeTableCell<UserListVO,String> {
-        private TokenLabel tl = new TokenLabel("");
-
-        @Override
-        public void updateItem(String item,boolean empty){
-            super.updateItem(item,empty);
-            if(empty){
-                setGraphic(null);
-            }else{
-                tl.setColor(Paint.valueOf("#AA11F2"));
-                tl.setText(item);
-                setGraphic(tl);
-            }
-        }
-    }
-    private class MoreCell extends JFXTreeTableCell<UserListVO, Boolean> {
-        private IconButton iconButton = new IconButton(MaterialDesignIcon.DOTS_HORIZONTAL);
-
-        @Override
-        public void updateItem(Boolean item,boolean empty){
-            super.updateItem(item,empty);
-            if(item!=null){
-                ListPopup list = new ListPopup();
-                iconButton.setTranslateY(-8);
-                JFXPopup popup = new JFXPopup(list);
-                iconButton.setOnMouseClicked(e -> popup.show(iconButton, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT));
-                setGraphic(iconButton);
-            }
-            }
-        }
 
 }
 

@@ -2,7 +2,7 @@ package ui.managerui.promotionui;
 
 import javafx.scene.layout.StackPane;
 import ui.managerui.common.Save;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import ui.util.Refreshable;
 
 public abstract class PromotionDetailPane extends Refreshable {

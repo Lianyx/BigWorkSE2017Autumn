@@ -17,6 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
 import ui.userui.usermanagerui.*;
+import ui.util.BoardController;
 import ui.util.HistoricalRecord;
 import ui.util.Refreshable;
 import vo.AccountListVO;
@@ -64,7 +65,6 @@ public class AccountListPane extends Refreshable{
         PopOver filterPopOver = new PopOver();
         filterPopOver.setDetachable(false);
         filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
-        filterPopOver.setContentNode(new FilterPane());
         filter.setOnMouseClicked(e -> filterPopOver.show(filter));
 
 

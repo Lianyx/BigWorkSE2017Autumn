@@ -1,24 +1,13 @@
 package ui.salesui;
 
-import blService.blServiceFactory.ServiceFactory;
-import blService.blServiceFactory.ServiceFactory_Stub;
-import blService.stockblService.StockblService;
-import blService.userblService.UserManagerblService;
-import blServiceStub.usermanagerblService_Stub.Usermanagerblservice_Stub;
 import com.jfoenix.controls.JFXListView;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import ui.stockui.StockListPane;
-import ui.userui.usermanagerui.UserListPane;
 import ui.util.BoardController;
-import ui.util.PaneFactory;
 import ui.util.PaneSwitchAnimation;
 import ui.util.TopBar;
 import vo.UserListVO;
@@ -42,7 +31,6 @@ public class SalesUIController implements Initializable{
     @FXML
     BoardController boardController;
 
-    Set<UserListVO> set;
 
 
     @Override

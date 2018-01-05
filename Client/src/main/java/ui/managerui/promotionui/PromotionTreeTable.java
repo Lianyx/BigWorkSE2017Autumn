@@ -6,16 +6,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import ui.managerui.common.ChooseBoxTTCell;
-import ui.managerui.common.SearchableStringCell;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import vo.promotionVO.PromotionVO;
 
 import java.util.*;
@@ -29,7 +26,6 @@ public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
     private Pagination pagination;
     private int rowsPerPage = 7;
     private Set<PromotionVO> chosenItems;
-    private StringProperty keyWordProperty = new SimpleStringProperty("1");
 
     public PromotionTreeTable(List<PromotionVO> list, BoardController boardController, StackPane mainpane) {
         this.observableList = FXCollections.observableArrayList(list);
@@ -45,7 +41,6 @@ public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
         JFXTreeTableColumn<PromotionVO, String> idColumn = new JFXTreeTableColumn<>("编号");
         idColumn.setPrefWidth(200);
         idColumn.setCellValueFactory((TreeTableColumn.CellDataFeatures<PromotionVO, String> param) -> new ReadOnlyStringWrapper(param.getValue().getValue().getId()));
-        idColumn.setCellFactory(p -> new SearchableStringCell<>(keyWordProperty));
 
         JFXTreeTableColumn<PromotionVO, String> beginTimeColumn = new JFXTreeTableColumn<>("开始时间");
         beginTimeColumn.setPrefWidth(100);
@@ -102,7 +97,7 @@ public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
     void createPage(int pageIndex) {
         int fromIndex = pageIndex * rowsPerPage;
         int toIndex = Math.min(fromIndex + rowsPerPage, observableList.size());
-        tempList = FXCollections.observableArrayList(observableList.subList(fromIndex, toIndex));
+        tempList = (FXCollections.observableArrayList(observableList.subList(fromIndex, toIndex)));
         TreeItem<PromotionVO> root = new RecursiveTreeItem<>(tempList, RecursiveTreeObject::getChildren);
         this.setRoot(root);
 
@@ -161,16 +156,6 @@ public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
 //        }
 //    }
 
-    void delete() {
-        if (chosenItems.isEmpty()) {
-            return;
-        }
-
-        observableList.removeAll(chosenItems);
-        chosenItems.clear();
-        refresh(observableList);
-    }
-
     void refresh(List<PromotionVO> list) {
         this.observableList = FXCollections.observableArrayList(list);
 
@@ -192,9 +177,7 @@ public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
         }
     }
 
-    public void setKeyWordProperty(StringProperty keyWordProperty) { // TODO 这样的传值很有喜欢…
-        this.keyWordProperty = keyWordProperty;
-    }
+
 
     public void setPagination(Pagination pagination) {
         this.pagination = pagination;

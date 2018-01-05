@@ -9,29 +9,28 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
+<?import ui.util.ModifyButton?>
 <fx:root fx:id="userdetail" prefHeight="560.0" prefWidth="640.0" stylesheets="@../css/userdetail.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
       <AnchorPane fx:id="pane" layoutX="70.0" layoutY="55.0" prefHeight="470.0" prefWidth="500.0">
          <children>
-                <ImageView fx:id="imageview" fitHeight="100.0" fitWidth="100.0" layoutX="35.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="imageview" fitHeight="100.0" fitWidth="100.0" layoutX="35.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Common/src/main/resources/default/timg.jpg" />
+               </image></ImageView>
               <JFXTextField fx:id="username" layoutX="157.0" layoutY="80.0" prefWidth="132.0" text="Username">
                   <font>
                       <Font name="Arial" size="24.0" />
                   </font>
               </JFXTextField>
-              <JFXButton fx:id="modify" layoutX="365.0" layoutY="12.0" onMouseClicked="#modify" text="">
-                  <graphic>
-                      <StackPane style="-fx-padding: 1;">
-                          <MaterialDesignIconView fx:id="pen" glyphName="PENCIL" size="1.5em" styleClass="icon" />
-                      </StackPane>
-                  </graphic>
-              </JFXButton>
+              <ModifyButton fx:id="modify" layoutX="365.0" layoutY="12.0" text=""/>
             <Separator layoutX="157.0" layoutY="114.0" prefHeight="4.0" prefWidth="320.0" />
             <Label fx:id="safe" layoutX="25.0" layoutY="372.0" text="Safe Info">
                <font>
@@ -157,7 +156,7 @@
          </font>
       </Label>
       <Separator layoutX="24.0" layoutY="44.0" prefHeight="4.0" prefWidth="593.0" />
-      <JFXButton fx:id="save" layoutX="564.0" layoutY="17.0" onMouseClicked="#save" mnemonicParsing="false" text="Save">
+      <JFXButton fx:id="save" layoutX="564.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#save" text="Save">
          <font>
             <Font size="12.0" />
          </font>

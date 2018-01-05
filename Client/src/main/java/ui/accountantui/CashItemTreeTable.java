@@ -5,9 +5,7 @@ import blService.billblService.ChargeBillReceiptblService;
 import blService.billblService.PaymentBillReceiptblService;
 import blService.stockblService.StockblService;
 import com.jfoenix.controls.*;
-import com.jfoenix.controls.cells.editors.DoubleTextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.IntegerTextFieldEditorBuilder;
-import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.value.ObservableValue;
@@ -20,14 +18,12 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import ui.stockui.StockListItemPane;
-
 import ui.util.BoardController;
 import ui.util.ListPopup;
 import vo.ListGoodsItemVO;
 import vo.billReceiptVO.CashItemVO;
 import vo.billReceiptVO.TransferItemVO;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
@@ -46,47 +42,38 @@ public class CashItemTreeTable extends JFXTreeTableView<CashItemVO>{
     public CashItemTreeTable(){
         super();
 
+        //private int accountID;
+        //private double sum;
+        //private String commnet;
+
         JFXTreeTableColumn<CashItemVO,String> name = new JFXTreeTableColumn<>("Name");
-        name.setPrefWidth(120);
+        name.setPrefWidth(97);
         setupCellValueFactory(name,CashItemVO::nameProperty);
-        name.setCellFactory((TreeTableColumn<CashItemVO,String> param) -> {
-            return new GenericEditableTreeTableCell<>(
-                    new TextFieldEditorBuilder());
-        });
-        name.setOnEditCommit((TreeTableColumn.CellEditEvent<CashItemVO, String> t) -> {
-            t.getTreeTableView()
-                    .getTreeItem(t.getTreeTablePosition()
-                            .getRow())
-                    .getValue().nameProperty().set(t.getNewValue());
-        });
 
         JFXTreeTableColumn<CashItemVO, Double> price = new JFXTreeTableColumn<>("Price");
-        price.setPrefWidth(120);
+        price.setPrefWidth(97);
         setupCellValueFactory(price,l->l.priceProperty().asObject());
-        price.setCellFactory((TreeTableColumn<CashItemVO,Double> param) -> {
+
+
+        /*JFXTreeTableColumn<ListGoodsItemVO, Integer> goodsNum = new JFXTreeTableColumn<>("Num");
+        goodsNum.setPrefWidth(97);
+        setupCellValueFactory(goodsNum,l->l.goodsNumProperty().asObject());
+        //setupCellValueFactory(goodsName,1->1.goodsNumProperty().asObject());
+        goodsNum.setCellFactory((TreeTableColumn<ListGoodsItemVO, Integer> param) -> {
             return new GenericEditableTreeTableCell<>(
-                    new DoubleTextFieldEditorBuilder());
+                    new IntegerTextFieldEditorBuilder());
         });
-        price.setOnEditCommit((TreeTableColumn.CellEditEvent<CashItemVO, Double> t) -> {
+        goodsNum.setOnEditCommit((TreeTableColumn.CellEditEvent<ListGoodsItemVO, Integer> t) -> {
             t.getTreeTableView()
                     .getTreeItem(t.getTreeTablePosition()
                             .getRow())
-                    .getValue().priceProperty().set(t.getNewValue());
-        });
+                    .getValue().goodsNumProperty().set(t.getNewValue());
+        });*/
+
 
         JFXTreeTableColumn<CashItemVO, String> comment = new JFXTreeTableColumn<>("Comment");
-        comment.setPrefWidth(120);
+        comment.setPrefWidth(96);
         setupCellValueFactory(comment,CashItemVO::commentProperty);
-        comment.setCellFactory((TreeTableColumn<CashItemVO,String> param) -> {
-            return new GenericEditableTreeTableCell<>(
-                    new TextFieldEditorBuilder());
-        });
-        comment.setOnEditCommit((TreeTableColumn.CellEditEvent<CashItemVO, String> t) -> {
-            t.getTreeTableView()
-                    .getTreeItem(t.getTreeTablePosition()
-                            .getRow())
-                    .getValue().commentProperty().set(t.getNewValue());
-        });
 
 
         this.setRowFactory(tableView->{
@@ -150,12 +137,8 @@ public class CashItemTreeTable extends JFXTreeTableView<CashItemVO>{
         observableList.remove(cashItemVO);
     }
 
-    public void add(CashItemVO cashItemVO){
+    public void addGood(CashItemVO cashItemVO){
         observableList.add(cashItemVO);
-    }
-
-    public ArrayList<CashItemVO> getList(){
-        return new ArrayList<>(observableList);
     }
 
     private <T> void setupCellValueFactory(JFXTreeTableColumn<CashItemVO, T> column, Function<CashItemVO, ObservableValue<T>> mapper) {

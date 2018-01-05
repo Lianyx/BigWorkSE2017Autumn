@@ -9,7 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 
 import java.io.IOException;
 
