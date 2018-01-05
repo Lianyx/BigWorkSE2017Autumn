@@ -25,7 +25,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import ui.util.CircleImageView;
 import vo.AccountListVO;
 import vo.billReceiptVO.CashBillReceiptVO;
@@ -125,15 +125,18 @@ public class BillReceiptTreeTable extends JFXTreeTableView<ReceiptVO> implements
                             System.out.print("pay");
                             //boardController.switchTo(new PaymentBillReceiptDetailPane((PaymentBillReceiptVO)row.getTreeItem().getValue(),boardController));
                             //boardController.switchTo(new PaymentDetailPane(boardController,mainpane));
-                            boardController.switchTo(new PaymentDetailPane((PaymentBillReceiptVO) row.getTreeItem().getValue(),boardController,mainpane));
+                            PaymentDetailPane paymentDetailPane = new PaymentDetailPane((PaymentBillReceiptVO) row.getTreeItem().getValue(),boardController,mainpane);
+                            paymentDetailPane.refresh(true);
                         }
                         else if(receiptblService instanceof ChargeblService_Stub){
                             System.out.print("charge");
-                            boardController.switchTo(new ChargeDetailPane((ChargeBillReceiptVO) row.getTreeItem().getValue(),boardController,mainpane));
+                            ChargeDetailPane chargeDetailPane = new ChargeDetailPane((ChargeBillReceiptVO) row.getTreeItem().getValue(),boardController,mainpane);
+                            chargeDetailPane.refresh(true);
                         }
                         else if(receiptblService instanceof CashblService_Stub){
                             System.out.print("Cash");
-                            boardController.switchTo(new CashDetailPane((CashBillReceiptVO) row.getTreeItem().getValue(),boardController,mainpane));
+                            CashDetailPane cashDetailPane = new CashDetailPane((CashBillReceiptVO) row.getTreeItem().getValue(),boardController,mainpane);
+                            cashDetailPane.refresh(true);
                         }
                         //boardController.switchTo(new UserDetailPane((UserListVO) row.getTreeItem().getValue(),boardController));
                     }catch (Exception e){

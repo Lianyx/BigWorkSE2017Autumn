@@ -53,8 +53,8 @@ public class Account {
         return VOList;
     }
 
-    public ResultMessage add(AccountVO accountVO)throws RemoteException{
-        accountPO = new AccountPO(null,accountVO.getName(),accountVO.getBalance());
+    public ResultMessage add(AccountListVO accountListVO)throws RemoteException{
+        accountPO = new AccountPO(null,accountListVO.getName(),accountListVO.getBalance());
         return accountDataService.insert(accountPO);
     }
 

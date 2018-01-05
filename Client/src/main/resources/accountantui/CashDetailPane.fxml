@@ -117,14 +117,14 @@
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Label>
-                <TextField fx:id="createtime" layoutX="24.0" layoutY="216.0" prefHeight="26.0" prefWidth="64.0" />
+                <TextField fx:id="createtime" layoutX="24.0" layoutY="216.0" prefHeight="26.0" prefWidth="150.0" />
 
-                <Label layoutX="144.0" layoutY="190.0" text="LastModifiedTime" textFill="#a1adbc">
+                <Label layoutX="194.0" layoutY="190.0" text="LastModifiedTime" textFill="#a1adbc">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Label>
-                <TextField fx:id="lastmodifiedtime" layoutX="144.0" layoutY="216.0" prefHeight="26.0" prefWidth="64.0" />
+                <TextField fx:id="lastmodifiedtime" layoutX="194.0" layoutY="216.0" prefHeight="26.0" prefWidth="150.0" />
 
                 <!--<Label layoutX="21.0" layoutY="194.0" text="Comment" textFill="#a1adbc">
                     <font>

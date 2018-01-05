@@ -37,9 +37,9 @@ public class AccountController implements AccountblService{
     }
 
     @Override
-    public ResultMessage add(AccountVO accountVO){
+    public ResultMessage add(AccountListVO accountListVO){
         try{
-            return account.add(accountVO);
+            return account.add(accountListVO);
         }catch (RemoteException e){
             e.printStackTrace();
             return null;

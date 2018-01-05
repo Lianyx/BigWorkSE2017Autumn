@@ -3,7 +3,9 @@ package ui.accountantui;
 import blService.billblService.PaymentBillReceiptblService;
 import blService.stockblService.StockblService;
 import com.jfoenix.controls.*;
+import com.jfoenix.controls.cells.editors.DoubleTextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.IntegerTextFieldEditorBuilder;
+import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.value.ObservableValue;
@@ -16,11 +18,12 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import ui.stockui.StockListItemPane;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import ui.util.ListPopup;
 import vo.ListGoodsItemVO;
 import vo.billReceiptVO.TransferItemVO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
@@ -28,6 +31,7 @@ import java.util.function.Function;
 public class PaymentItemTreeTable extends JFXTreeTableView<TransferItemVO>{
 
     private ObservableList<TransferItemVO> observableList = FXCollections.observableArrayList();
+
 
     //StockblService stockblService;
     PaymentBillReceiptblService paymentBillReceiptblService;
@@ -42,33 +46,46 @@ public class PaymentItemTreeTable extends JFXTreeTableView<TransferItemVO>{
         //private String commnet;
 
         JFXTreeTableColumn<TransferItemVO,Integer> accountID = new JFXTreeTableColumn<>("accountID");
-        accountID.setPrefWidth(97);
+        accountID.setPrefWidth(120);
         setupCellValueFactory(accountID,l->l.accountIDProperty().asObject());
-
-        JFXTreeTableColumn<TransferItemVO, Double> price = new JFXTreeTableColumn<>("Price");
-        price.setPrefWidth(97);
-        setupCellValueFactory(price,l->l.sumProperty().asObject());
-
-
-        /*JFXTreeTableColumn<ListGoodsItemVO, Integer> goodsNum = new JFXTreeTableColumn<>("Num");
-        goodsNum.setPrefWidth(97);
-        setupCellValueFactory(goodsNum,l->l.goodsNumProperty().asObject());
-        //setupCellValueFactory(goodsName,1->1.goodsNumProperty().asObject());
-        goodsNum.setCellFactory((TreeTableColumn<ListGoodsItemVO, Integer> param) -> {
+        accountID.setCellFactory((TreeTableColumn<TransferItemVO, Integer> param) -> {
             return new GenericEditableTreeTableCell<>(
                     new IntegerTextFieldEditorBuilder());
         });
-        goodsNum.setOnEditCommit((TreeTableColumn.CellEditEvent<ListGoodsItemVO, Integer> t) -> {
+        accountID.setOnEditCommit((TreeTableColumn.CellEditEvent<TransferItemVO, Integer> t) -> {
             t.getTreeTableView()
                     .getTreeItem(t.getTreeTablePosition()
                             .getRow())
-                    .getValue().goodsNumProperty().set(t.getNewValue());
-        });*/
+                    .getValue().accountIDProperty().set(t.getNewValue());
+        });
 
+        JFXTreeTableColumn<TransferItemVO, Double> price = new JFXTreeTableColumn<>("Price");
+        price.setPrefWidth(120);
+        setupCellValueFactory(price,l->l.sumProperty().asObject());
+        price.setCellFactory((TreeTableColumn<TransferItemVO,Double> param) -> {
+            return new GenericEditableTreeTableCell<>(
+                    new DoubleTextFieldEditorBuilder());
+        });
+        price.setOnEditCommit((TreeTableColumn.CellEditEvent<TransferItemVO, Double> t) -> {
+            t.getTreeTableView()
+                    .getTreeItem(t.getTreeTablePosition()
+                            .getRow())
+                    .getValue().sumProperty().set(t.getNewValue());
+        });
 
         JFXTreeTableColumn<TransferItemVO, String> comment = new JFXTreeTableColumn<>("Comment");
-        comment.setPrefWidth(96);
+        comment.setPrefWidth(120);
         setupCellValueFactory(comment,TransferItemVO::commentProperty);
+        comment.setCellFactory((TreeTableColumn<TransferItemVO, String> param) -> {
+            return new GenericEditableTreeTableCell<>(
+                    new TextFieldEditorBuilder());
+        });
+        comment.setOnEditCommit((TreeTableColumn.CellEditEvent<TransferItemVO, String> t) -> {
+            t.getTreeTableView()
+                    .getTreeItem(t.getTreeTablePosition()
+                            .getRow())
+                    .getValue().commentProperty().set(t.getNewValue());
+        });
 
 
         this.setRowFactory(tableView->{
@@ -132,7 +149,12 @@ public class PaymentItemTreeTable extends JFXTreeTableView<TransferItemVO>{
         observableList.remove(transferItemVO);
     }
 
-    public void addGood(TransferItemVO transferItemVO){
+    public ArrayList<TransferItemVO> getList(){
+        return new ArrayList<>(observableList);
+    }
+
+
+    public void add(TransferItemVO transferItemVO){
         observableList.add(transferItemVO);
     }
 

@@ -10,8 +10,8 @@ import java.util.List;
 
 public class AccountblService_Stub implements AccountblService{
 
-    public List<AccountListVO> showAllAccounts(){
-        List<AccountListVO> list = new ArrayList<>();
+    List<AccountListVO> list = new ArrayList<>();
+    public AccountblService_Stub(){
         list.add(new AccountListVO(1000,"sb",1000));
         list.add(new AccountListVO(2000,"sb",2000));
         list.add(new AccountListVO(3000,"sb",3000));
@@ -22,6 +22,10 @@ public class AccountblService_Stub implements AccountblService{
         list.add(new AccountListVO(8000,"sb",8000));
         list.add(new AccountListVO(9000,"sb",9000));
         list.add(new AccountListVO(1001,"sb",1001));
+    }
+
+
+    public List<AccountListVO> showAllAccounts(){
         return list;
     }
 
@@ -29,11 +33,22 @@ public class AccountblService_Stub implements AccountblService{
         return null;
     }
 
-    public ResultMessage add(AccountVO vo){
+    public ResultMessage add(AccountListVO accountListVO){
+        list.add(accountListVO);
         return ResultMessage.SUCCESS;
     }
 
-    public ResultMessage delete(int ID){return ResultMessage.SUCCESS;}
+    public ResultMessage delete(int ID){
+        AccountListVO temp = new AccountListVO();
+        for(AccountListVO accountListVO:list){
+            if(accountListVO.getID()==ID){
+                temp=accountListVO;
+                break;
+            }
+        }
+        list.remove(temp);
+        return ResultMessage.SUCCESS;
+    }
 
     public ResultMessage update(AccountVO accountVO){return  ResultMessage.SUCCESS;}
 }

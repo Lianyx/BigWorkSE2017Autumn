@@ -12,6 +12,15 @@ public class AccountListVO extends RecursiveTreeObject<AccountListVO> implements
     private double balance;
     private SimpleBooleanProperty selected=new SimpleBooleanProperty(false);
 
+    public AccountListVO(){
+
+    }
+
+    public AccountListVO(String name, double balance) {
+        this.name = name;
+        this.balance = balance;
+    }
+
     public AccountListVO(int ID, String name, double balance, SimpleBooleanProperty selected) {
         this.ID = ID;
         this.name = name;

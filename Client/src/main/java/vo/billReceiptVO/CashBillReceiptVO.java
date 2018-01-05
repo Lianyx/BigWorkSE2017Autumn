@@ -1,9 +1,7 @@
 package vo.billReceiptVO;
 
 import blService.checkblService.ReceiptblService;
-import businesslogic.billreceiptbl.CashBillReceipt;
 import javafx.scene.Node;
-import po.CashItemPO;
 import po.receiptPO.CashBillReceiptPO;
 import util.ReceiptState;
 import vo.receiptVO.ReceiptVO;

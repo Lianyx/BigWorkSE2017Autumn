@@ -44,6 +44,8 @@ public class AccountListPane extends Refreshable{
 
     List<AccountListVO> list;
 
+
+
     @FXML
     JFXButton filter;
 
@@ -99,8 +101,9 @@ public class AccountListPane extends Refreshable{
 
     @FXML
     public void add(){
-//        JFXDialog dialog = new JFXDialog(mainpane,new AddPane(),JFXDialog.DialogTransition.CENTER);
-//        dialog.show();
+        AccountAddPane accountAddPane = new AccountAddPane(accountblService);
+        JFXDialog dialog = new JFXDialog(mainpane,accountAddPane,JFXDialog.DialogTransition.CENTER);
+        dialog.show();
     }
 
 

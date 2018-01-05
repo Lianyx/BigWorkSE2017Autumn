@@ -16,7 +16,30 @@ import java.util.List;
 
 public class PaymentblService_Stub implements PaymentBillReceiptblService{
 
+    ArrayList<PaymentBillReceiptVO> list = new ArrayList<>();
+    LocalDateTime time = LocalDateTime.now();
+    List<TransferItemVO> list1 = new ArrayList<>();
 
+    public PaymentblService_Stub(){
+        list1.add(new TransferItemVO(1,1,"1"));
+        list1.add(new TransferItemVO(2,2,"2"));
+        list1.add(new TransferItemVO(2,2,"2"));
+        list1.add(new TransferItemVO(2,2,"2"));
+        list1.add(new TransferItemVO(2,2,"2"));
+        list1.add(new TransferItemVO(2,2,"2"));
+
+        list.add(new PaymentBillReceiptVO("1111",111,time,time, ReceiptState.APPROVED,111,list1,1111));
+        list.add(new PaymentBillReceiptVO("1112",111,time,time, ReceiptState.APPROVED,111,list1,1111));
+        list.add(new PaymentBillReceiptVO("1113",111,time,time, ReceiptState.APPROVED,111,list1,1111));
+        list.add(new PaymentBillReceiptVO("1114",111,time,time, ReceiptState.APPROVED,111,list1,1111));
+        list.add(new PaymentBillReceiptVO("1115",111,time,time, ReceiptState.APPROVED,111,list1,1111));
+        list.add(new PaymentBillReceiptVO("1116",111,time,time, ReceiptState.APPROVED,111,list1,1111));
+        list.add(new PaymentBillReceiptVO("1117",111,time,time, ReceiptState.APPROVED,111,list1,1111));
+        list.add(new PaymentBillReceiptVO("1118",111,time,time, ReceiptState.APPROVED,111,list1,1111));
+        list.add(new PaymentBillReceiptVO("1119",111,time,time, ReceiptState.APPROVED,111,list1,1111));
+        list.add(new PaymentBillReceiptVO("1120",111,time,time, ReceiptState.APPROVED,111,list1,1111));
+        list.add(new PaymentBillReceiptVO("1121",111,time,time, ReceiptState.APPROVED,111,list1,1111));
+    }
 
     @Override
     public PaymentBillReceiptVO getNew() throws RemoteException {
@@ -24,6 +47,7 @@ public class PaymentblService_Stub implements PaymentBillReceiptblService{
     }
 
     public ResultMessage insert(PaymentBillReceiptVO receiptVO) throws RemoteException{
+        list.add(receiptVO);
         return ResultMessage.SUCCESS;
     }
 
@@ -36,27 +60,7 @@ public class PaymentblService_Stub implements PaymentBillReceiptblService{
     }
 
     public ArrayList<PaymentBillReceiptVO> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException{
-        ArrayList<PaymentBillReceiptVO> list = new ArrayList<>();
-        LocalDateTime time = LocalDateTime.now();
-        List<TransferItemVO> list1 = new ArrayList<>();
-        list1.add(new TransferItemVO(1,1,"1"));
-        list1.add(new TransferItemVO(2,2,"2"));
-        list1.add(new TransferItemVO(2,2,"2"));
-        list1.add(new TransferItemVO(2,2,"2"));
-        list1.add(new TransferItemVO(2,2,"2"));
-        list1.add(new TransferItemVO(2,2,"2"));
-        //String dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState,int clientID, TransferItemVO[] transferList, double sum
-        list.add(new PaymentBillReceiptVO("1111",111,time,time, ReceiptState.APPROVED,111,list1,1111));
-        list.add(new PaymentBillReceiptVO("1112",111,time,time, ReceiptState.APPROVED,111,list1,1111));
-        list.add(new PaymentBillReceiptVO("1113",111,time,time, ReceiptState.APPROVED,111,list1,1111));
-        list.add(new PaymentBillReceiptVO("1114",111,time,time, ReceiptState.APPROVED,111,list1,1111));
-        list.add(new PaymentBillReceiptVO("1115",111,time,time, ReceiptState.APPROVED,111,list1,1111));
-        list.add(new PaymentBillReceiptVO("1116",111,time,time, ReceiptState.APPROVED,111,list1,1111));
-        list.add(new PaymentBillReceiptVO("1117",111,time,time, ReceiptState.APPROVED,111,list1,1111));
-        list.add(new PaymentBillReceiptVO("1118",111,time,time, ReceiptState.APPROVED,111,list1,1111));
-        list.add(new PaymentBillReceiptVO("1119",111,time,time, ReceiptState.APPROVED,111,list1,1111));
-        list.add(new PaymentBillReceiptVO("1120",111,time,time, ReceiptState.APPROVED,111,list1,1111));
-        list.add(new PaymentBillReceiptVO("1121",111,time,time, ReceiptState.APPROVED,111,list1,1111));
+
         return list;
     }
 

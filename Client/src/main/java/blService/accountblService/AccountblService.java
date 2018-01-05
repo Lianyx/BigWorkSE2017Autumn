@@ -12,7 +12,7 @@ public interface AccountblService {
 
     public List<AccountListVO> search(String keyword);
 
-    public ResultMessage add(AccountVO vo);
+    public ResultMessage add(AccountListVO vo);
 
     public ResultMessage delete(int ID);
 
