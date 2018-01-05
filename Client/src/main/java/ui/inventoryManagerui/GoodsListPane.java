@@ -54,7 +54,6 @@ public class GoodsListPane extends Refreshable{
             PopOver filterPopOver = new PopOver();
             filterPopOver.setDetachable(false);
             filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
-            filterPopOver.setContentNode(new FilterPane(filterPopOver));
             filter.setOnMouseClicked(e -> filterPopOver.show(filter));
 
 

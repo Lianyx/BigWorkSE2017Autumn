@@ -41,7 +41,7 @@ public class UserTreeTable extends ReceiptTreeTable<UserListVO> {
 
 
         JFXTreeTableColumn<UserListVO, String> username = new JFXTreeTableColumn("Username");
-        username.setPrefWidth(80);
+        username.setPrefWidth(60);
         columnDecorator.setupCellValueFactory(username,s->new ReadOnlyObjectWrapper<>(s.getUsername()));
         username.setCellFactory(t->new SearchableStringCell<>(keyword));
 

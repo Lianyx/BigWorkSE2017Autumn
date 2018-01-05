@@ -1,21 +1,15 @@
 package ui.userui.usermanagerui;
 
-import blService.userblService.UserManagerblService;
-import blServiceStub.usermanagerblService_Stub.UserManagerblService_Stub;
 import com.jfoenix.controls.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import ui.util.*;
-import vo.UserListVO;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 
 public class UserManagerUIController implements Initializable{
@@ -26,7 +20,7 @@ public class UserManagerUIController implements Initializable{
     TopBar bar;
 
     @FXML
-    JFXListView<HBox> navigation;
+    JFXListView<Label> navigation;
 
     @FXML
     Label userlist;

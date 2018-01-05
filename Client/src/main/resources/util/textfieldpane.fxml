@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
 
+<fx:root prefHeight="112.0" prefWidth="203.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXTextField fx:id="textfield" layoutX="28.0" layoutY="33.0" />
+      <JFXButton fx:id="save" layoutX="39.0" layoutY="75.0" style="-fx-background-color: #03A9F4;" text="Save" textFill="WHITE" />
+      <JFXButton fx:id="cancel" layoutX="108.0" layoutY="75.0" text="Cancel" />
+   </children>
 </fx:root>

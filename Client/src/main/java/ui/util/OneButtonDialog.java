@@ -22,8 +22,8 @@ public class OneButtonDialog extends JFXDialog {
 
     public void setButtonOne(Runnable runnable){
         buttonOne.setOnMouseClicked(t->{
-            Platform.runLater(runnable);
             this.close();
+            Platform.runLater(runnable);
         });
     }
 

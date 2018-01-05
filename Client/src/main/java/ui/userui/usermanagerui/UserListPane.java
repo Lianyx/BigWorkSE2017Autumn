@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
+import ui.salesui.SalesReceiptPane;
 import ui.util.*;
 import util.UserCategory;
 import vo.UserListVO;
@@ -83,8 +84,9 @@ public class UserListPane extends ReceiptListPane<UserListVO>{
             switchPane(false);
         }
     }
+    @Override
     public void add(){
-
+        UserDetailPane userDetailPane = new UserDetailPane(true);
     }
 
     @Override
@@ -117,100 +119,7 @@ public class UserListPane extends ReceiptListPane<UserListVO>{
             e.printStackTrace();
 
         }
-       /*  try {
-
-
-            LoadingTask task = new LoadingTask();
-            task.valueProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    if (task.getIntegerProperty() == 1) {
-                        try {
-                            ulv.setUser(set);
-                            pagination = new Pagination((ulv.getObservableList().size() /ulv.getRowsPerPage()+1 ), 0);
-                            pagination.setPrefWidth(600);
-                            borderpane.setCenter(pagination);
-                            switchPane(toSwitch);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else if (task.getIntegerProperty() == 0) {
-                        try {
-                            JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
-                            jfxDialogLayout.setHeading(new Label("Wrong"));
-                            jfxDialogLayout.setBody(new Label("sabi"));
-                            JFXButton button = new JFXButton("Last");
-                            JFXButton re = new JFXButton("Re");
-                            JFXDialog dialog = new JFXDialog(mainpane, jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
-                            button.setOnAction(e -> {
-                                dialog.close();
-                                boardController.Ret();
-                            });
-                            re.setOnAction(e -> {
-                                dialog.close();
-                                refresh(false);
-                            });
-                            jfxDialogLayout.setActions(button, re);
-                            dialog.show();
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
-
-            new Thread(task).start();
-        }catch (Exception e){
-
-            e.printStackTrace();
-            /*  JFXDialogLayout scare = new JFXDialogLayout();
-            scare.setHeading(new Label("Wrong"));
-            scare.setBody(new Label("Runtimerro"));
-            JFXDialog d = new JFXDialog(mainpane,scare, JFXDialog.DialogTransition.CENTER);
-            d.show();
-            new Thread(() -> {
-                Platform.runLater(() -> {
-                    try {
-                        Thread.sleep(1000);
-
-                    }catch (Exception e1){
-                        e1.printStackTrace();
-                    }
-                });}).start();*/
 
     }
-
-/*
-    class LoadingTask extends Task<Boolean> {
-
-        private SimpleIntegerProperty integerProperty = new SimpleIntegerProperty(-1);
-
-
-
-        public int getIntegerProperty() {
-            return integerProperty.get();
-        }
-
-        public SimpleIntegerProperty integerPropertyProperty() {
-            return integerProperty;
-        }
-
-        @Override
-        protected Boolean call() throws Exception{
-            set = userManagerblService.getAll();
-            if(set!=null){
-                Thread.sleep(2000);
-                integerProperty.setValue(1);
-                return true;
-            }else {
-                Thread.sleep(2000);
-                integerProperty.set(0);
-                return false;
-            }
-        }
-    }*/
-
-
 
 }

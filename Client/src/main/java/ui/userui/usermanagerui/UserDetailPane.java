@@ -80,13 +80,13 @@ public class UserDetailPane extends ReceiptDetailPane<UserVO> {
     Label password;
 
     public UserDetailPane(int id) {
-        this();
+        this(false);
         this.userId = id;
         delete.setVisible(true);
         save.setText("Save");
     }
 
-    public UserDetailPane(){
+    public UserDetailPane(boolean isAdd){
         super("/userui/userdetail.fxml");
         userManagerblService = ServiceFactory_Stub.getService(UserManagerblService.class.getName());
         usertype.getItems().add(new Label(UserCategory.InventoryManager.name()));
@@ -112,6 +112,10 @@ public class UserDetailPane extends ReceiptDetailPane<UserVO> {
         RequireValid(username);
         RequireValid(email);
         RequireValid(phone);
+
+        if(isAdd){
+            switchPane(true);
+        }
     }
 
 
@@ -148,7 +152,14 @@ public class UserDetailPane extends ReceiptDetailPane<UserVO> {
 
     @Override
     public void delete() {
-
+        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane,"Delete","sabi","Yes","No");
+        doubleButtonDialog.setButtonOne(()->{});
+        doubleButtonDialog.setButtonTwo(()->{
+            boardController.setRightAnimation();
+            boardController.historicalSwitchTo((Refreshable) HistoricalRecord.pop());
+            boardController.refresh();
+        });
+        doubleButtonDialog.show();
     }
 
 
@@ -182,66 +193,29 @@ public class UserDetailPane extends ReceiptDetailPane<UserVO> {
             e.printStackTrace();
         }
 
-
-   /*     boardController.Loading();
-        try{
-            SwitchTask task = new SwitchTask(userId);
-            task.valueProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    if(task.getIntegerProperty()==1){
-                        try{
-                            userVO=task.getUserVO();
-                            username.setText(userVO.getUsername());
-                            usertype.getSelectionModel().select(userVO.getUsertype().ordinal());
-                            email.setText(userVO.getEmail());
-                            phone.setText(userVO.getPhone());
-                            comment.setText(userVO.getComment());
-                            password.setText(userVO.getPassword());
-                            imageview.setImage(userVO.getImage());
-                            switchPane(toSwitch);
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-                    }else if(task.getIntegerProperty()==0) {
-                        try {
-
-                            JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
-                            jfxDialogLayout.setHeading(new Label("Wrong"));
-                            jfxDialogLayout.setBody(new Label("sabi"));
-                            JFXButton button = new JFXButton("Accept");
-                            JFXButton re = new JFXButton("Re");
-                            JFXDialog dialog = new JFXDialog(mainpane,jfxDialogLayout,JFXDialog.DialogTransition.CENTER);
-                            button.setOnAction(e->{
-                                dialog.close();
-                                boardController.Ret();
-                            });
-                            re.setOnAction(e->{
-                                dialog.close();
-                                refresh(false);
-                            });
-                            jfxDialogLayout.setActions(button,re);
-                            dialog.show();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
-            new Thread(task).start();
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
     }
 
     @Override
     public void save(){
         if(valid()){
+            modify.modifyProperty().set(false);
             if(userId==-1){
                 userId = userManagerblService.getId();
                 userManagerblService.add(new UserVO(
-                        userManagerblService.getId(),
+                        userId,
+                        imageview.getImage(),
+                        username.getText(),
+                        UserCategory.map.get(usertype.getSelectionModel().getSelectedItem().getText()),
+                        f,g,t,
+                        email.getText(),
+                        phone.getText(),
+                        comment.getText(),
+                        date.getText(),
+                        password.getText()
+                ));
+            }else{
+                userManagerblService.update(new UserVO(
+                        userId,
                         imageview.getImage(),
                         username.getText(),
                         UserCategory.map.get(usertype.getSelectionModel().getSelectedItem().getText()),
@@ -253,7 +227,7 @@ public class UserDetailPane extends ReceiptDetailPane<UserVO> {
                         password.getText()
                 ));
             }
-
+            BoardController.getBoardController().refresh();
         }else{
             OneButtonDialog oneButtonDialog = new OneButtonDialog(mainpane,"???","Stupid!","Accept");
             oneButtonDialog.setButtonOne(()->{});
