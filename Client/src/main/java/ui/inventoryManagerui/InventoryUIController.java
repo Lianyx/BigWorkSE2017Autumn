@@ -20,7 +20,7 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import ui.inventoryManagerui.inventoryGiftReceiptui.InventoryGiftDetailPane;
 import ui.inventoryManagerui.inventoryGiftReceiptui.InventoryGiftPane;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import ui.util.HistoricalRecord;
 import ui.util.PaneSwitchAnimation;
 import ui.util.TopBar;

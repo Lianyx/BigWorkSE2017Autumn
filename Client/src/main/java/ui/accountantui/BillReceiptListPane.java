@@ -10,9 +10,8 @@ import javafx.scene.control.Pagination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
-import ui.userui.usermanagerui.AddPane;
-import ui.userui.usermanagerui.BoardController;
 import ui.userui.usermanagerui.FilterPane;
+import ui.util.BoardController;
 import ui.util.Refreshable;
 import util.ReceiptSearchCondition;
 import vo.receiptVO.ReceiptVO;
@@ -55,7 +54,7 @@ public class BillReceiptListPane extends Refreshable{
         PopOver filterPopOver = new PopOver();
         filterPopOver.setDetachable(false);
         filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
-        filterPopOver.setContentNode(new FilterPane());
+        filterPopOver.setContentNode(new FilterPane(filterPopOver));
         filter.setOnMouseClicked(e -> filterPopOver.show(filter));
 
 

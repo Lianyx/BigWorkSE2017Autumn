@@ -17,7 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import ui.inventoryManagerui.inventoryGiftReceiptui.InventoryGiftPane;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import ui.util.HistoricalRecord;
 import ui.util.Refreshable;
 import vo.inventoryVO.GoodsClassificationVO;

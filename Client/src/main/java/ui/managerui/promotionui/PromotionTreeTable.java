@@ -12,7 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import ui.managerui.common.ChooseBoxTTCell;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import vo.promotionVO.PromotionVO;
 
 import java.util.*;

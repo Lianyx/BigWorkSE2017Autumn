@@ -14,7 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import ui.util.HistoricalRecord;
 import ui.util.Refreshable;
 import vo.inventoryVO.InventoryCheckItemVO;

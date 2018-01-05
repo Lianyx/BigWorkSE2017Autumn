@@ -9,8 +9,8 @@ import javafx.scene.control.Pagination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
-import ui.userui.usermanagerui.BoardController;
 import ui.userui.usermanagerui.FilterPane;
+import ui.util.BoardController;
 import ui.util.Refreshable;
 import vo.PromotionSearchVO;
 

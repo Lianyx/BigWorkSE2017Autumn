@@ -121,17 +121,22 @@ public class SalesReceiptVO extends ReceiptVO {
     }
 
     @Override
-    public <T extends ReceiptPO> T toPO() {
-        return null;
-    }
-
-    @Override
     public ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException {
         return null;
     }
 
     @Override
     public Node getDetailPane() {
+        return null;
+    }
+
+    @Override
+    protected String getCodeName() {
+        return null;
+    }
+
+    @Override
+    public <TF> TF toPO() {
         return null;
     }
 }

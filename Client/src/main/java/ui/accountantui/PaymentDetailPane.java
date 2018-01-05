@@ -9,7 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import ui.stockui.StockListItemTreeTable;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import ui.util.Refreshable;
 import vo.ListGoodsItemVO;
 import vo.billReceiptVO.PaymentBillReceiptVO;

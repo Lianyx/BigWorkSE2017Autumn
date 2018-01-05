@@ -12,7 +12,7 @@ import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.CheckTreeView;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import vo.inventoryVO.GoodsClassificationVO;
 
 import java.util.Iterator;

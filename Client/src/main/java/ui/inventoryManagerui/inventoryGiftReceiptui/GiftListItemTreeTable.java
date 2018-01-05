@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.StackPane;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import vo.inventoryVO.uiReceipt.GiftuiGoodsItemVO;
 
 import java.util.Set;

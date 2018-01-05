@@ -3,11 +3,14 @@ package vo;
 import javafx.scene.image.Image;
 import util.UserCategory;
 
+import java.time.LocalDate;
+
 public class UserVO {
     private int id;
     private Image image;
     private String username;
     private UserCategory usertype;
+    private LocalDate createTime;
     private String facebook;
     private String github;
     private String twitter;
@@ -30,6 +33,29 @@ public class UserVO {
         this.comment = comment;
         this.date = date;
         this.password = password;
+    }
+
+    public UserVO(int id, String username, UserCategory usertype, String facebook, String github, String twitter, String email, String phone, String comment, String date, String password) {
+        this.id=id;
+        this.image = new Image("/default/timg.jpg");
+        this.username = username;
+        this.usertype = usertype;
+        this.facebook = facebook;
+        this.github = github;
+        this.twitter = twitter;
+        this.email = email;
+        this.phone = phone;
+        this.comment = comment;
+        this.date = date;
+        this.password = password;
+    }
+
+    public LocalDate getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDate createTime) {
+        this.createTime = createTime;
     }
 
     public int getId() {

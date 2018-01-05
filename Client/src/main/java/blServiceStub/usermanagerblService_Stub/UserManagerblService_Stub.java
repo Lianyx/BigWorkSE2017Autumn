@@ -10,16 +10,19 @@ import vo.UserListVO;
 import vo.UserSearchVO;
 import vo.UserVO;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Usermanagerblservice_Stub implements UserManagerblService{
+public class UserManagerblService_Stub implements UserManagerblService{
 
-    TreeSet<UserListVO> set=new TreeSet<>();
+    HashSet<UserListVO> set=new HashSet<>();
 
+    int i=11;
 
-    public Usermanagerblservice_Stub(){
+    public UserManagerblService_Stub(){
         set.add(new UserListVO(10000,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
         set.add(new UserListVO(10001,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
         set.add(new UserListVO(10002,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
@@ -31,91 +34,64 @@ public class Usermanagerblservice_Stub implements UserManagerblService{
         set.add(new UserListVO(10008,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
         set.add(new UserListVO(10009,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
         set.add(new UserListVO(10010,"LimKruscal", UserCategory.SalesManager,"gzyz12306@163.com","11111111110"));
+
     }
 
 
     @Override
     public ResultMessage add(UserVO UserVO) {
-
+        set.add(new UserListVO(UserVO.getId(),UserVO.getImage(),UserVO.getUsername(),UserVO.getUsertype(),UserVO.getEmail(),UserVO.getPhone()));
         return ResultMessage.SUCCESS;
     }
-
-    public ResultMessage add(UserListVO userListVO) {
-        if (userListVO.getUserid()==0){
-            userListVO.setUserid(set.last().getUserid()+1);
-        }
-        set.add(userListVO);
-        return ResultMessage.SUCCESS;
-    }
-
-
 
     @Override
     public ResultMessage delete(int id) {
-
-        for(UserListVO u:set){
-            if(u.getUserid()==id){
-                set.remove(u);
+        UserListVO s = null;
+        for(UserListVO stockReceiptListVO:set){
+            if(stockReceiptListVO.getUserid()==id){
+                s = stockReceiptListVO;
             }
         }
-        return ResultMessage.SUCCESS;
-    }
-
-
-    public void delete(UserListVO userListVO) {
-         set.remove(userListVO);
-    }
-    @Override
-    public ResultMessage delete(ArrayList<UserListVO> list){
-        for(UserListVO u:list){
-            set.remove(u);
+        if(s!=null){
+            set.remove(s);
         }
         return ResultMessage.SUCCESS;
     }
 
     @Override
-    public ResultMessage update(UserVO userVO) {
-        for(UserListVO u:set){
-            if(u.getUserid()==userVO.getId()){
-                set.remove(u);
-            }
-        }
-        set.add(new UserListVO(userVO.getId(),userVO.getUsername(),userVO.getUsertype(),userVO.getEmail(),userVO.getPhone()));
-        return ResultMessage.SUCCESS;
-
+    public ResultMessage update(UserVO UserVO) {
+        delete(UserVO.getId());
+        add(UserVO);
+        return null;
     }
 
     @Override
     public Set<UserListVO> search(UserSearchVO userSearchVO) {
-        TreeSet<UserListVO> temp = new TreeSet<>();
-        for(UserListVO userListVO:set){
-            if(userListVO.getUserCategory()==userSearchVO.getUserCategory()){
-                temp.add(userListVO);
-            }
+        HashSet<UserListVO> temp = new HashSet<>();
+        for(UserListVO s:set){
+                for(UserCategory receiptState:userSearchVO.getUserCategories()){
+                    if(s.getUserCategory()==receiptState)
+                        temp.add(s);
+                }
+
         }
         return temp;
     }
-
-    @Override
-    public Set<UserListVO> search(String keyword) {
-        TreeSet<UserListVO> temp = new TreeSet<>();
-        for(UserListVO userListVO:set){
-            if(userListVO.getUsername().contains(keyword)||userListVO.getPhone().contains(keyword)||userListVO.getEmail().contains(keyword)||userListVO.getUserCategory().name().contains(keyword)){
-                temp.add(userListVO);
-            }
-        }
-        return temp;
-    }
-
-
 
     @Override
     public UserVO showDetail(int id) {
-        return new UserVO(id,new Image("/default/timg.jpg"),"LimKruscal", UserCategory.SalesManager,"","","","gzyz12306@163.com","11111111110","He ie stupid","2017-1-1","admin");
+        return new UserVO(id,new Image("/default/timg.jpg"),"123123123", UserCategory.SalesManager,"","","","gzyz12306@163.com","11111111110","He ie stupid","2017-1-1","admin");
     }
 
     @Override
     public Set<UserListVO> getAll() {
         return set;
     }
+
+    @Override
+    public int getId() {
+        i++;
+        return i;
+    }
+
 }

@@ -7,7 +7,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import ui.util.Refreshable;
 import vo.billReceiptVO.PaymentBillReceiptVO;
 import javafx.scene.control.TextField;

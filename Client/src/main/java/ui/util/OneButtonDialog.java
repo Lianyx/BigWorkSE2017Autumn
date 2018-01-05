@@ -3,6 +3,7 @@ package ui.util;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
@@ -19,8 +20,11 @@ public class OneButtonDialog extends JFXDialog {
         this.setTransitionType(DialogTransition.CENTER);
     }
 
-    public JFXButton getButtonOne() {
-        return buttonOne;
+    public void setButtonOne(Runnable runnable){
+        buttonOne.setOnMouseClicked(t->{
+            Platform.runLater(runnable);
+            this.close();
+        });
     }
 
 }

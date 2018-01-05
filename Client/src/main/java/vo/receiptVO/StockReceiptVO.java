@@ -4,6 +4,7 @@ import blService.checkblService.ReceiptblService;
 import javafx.beans.property.*;
 import javafx.scene.Node;
 import po.receiptPO.ReceiptPO;
+import po.receiptPO.StockReceiptPO;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;
 
@@ -93,10 +94,6 @@ public class StockReceiptVO extends ReceiptVO {
         isPur = pur;
     }
 
-    @Override
-    public <T extends ReceiptPO> T toPO() {
-        return null;
-    }
 
     @Override
     public ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException {
@@ -109,6 +106,14 @@ public class StockReceiptVO extends ReceiptVO {
     }
 
 
+    @Override
+    protected String getCodeName() {
+        return null;
+    }
 
-
+    @Override
+    public StockReceiptPO toPO() {
+        StockReceiptPO result = toReceiptPO(StockReceiptPO.class);
+        return null;
+    }
 }

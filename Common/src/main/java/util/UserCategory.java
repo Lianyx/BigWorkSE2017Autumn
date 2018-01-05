@@ -15,17 +15,17 @@ public enum UserCategory {
           }
           for(UserCategory userCategory:values()){
                if(userCategory==UserCategory.SalesManager){
-                    color.put(userCategory.name(),"red");
+                    color.put(userCategory.name(),"-fx-text-fill: white;-fx-background-radius: 10; -fx-background-color:red");
                }else if(userCategory==UserCategory.GeneralManager){
-                    color.put(userCategory.name(),"green");
+                    color.put(userCategory.name(),"-fx-text-fill: white;-fx-background-radius: 10; -fx-background-color:green");
                }else if(userCategory==UserCategory.InventoryManager){
-                    color.put(userCategory.name(),"yellow");
+                    color.put(userCategory.name(),"-fx-text-fill: white;-fx-background-radius: 10; -fx-background-color:yellow");
                }else if(userCategory==UserCategory.Accountant){
-                    color.put(userCategory.name(),"blue");
+                    color.put(userCategory.name(),"-fx-text-fill: white;-fx-background-radius: 10; -fx-background-color:blue");
                }else if(userCategory==UserCategory.Salesman){
-                    color.put(userCategory.name(),"orange");
+                    color.put(userCategory.name(),"-fx-text-fill: white;-fx-background-radius: 10; -fx-background-color:orange");
                }else if(userCategory==UserCategory.UserManager){
-                    color.put(userCategory.name(),"purple");
+                    color.put(userCategory.name(),"-fx-text-fill: white;-fx-background-radius: 10; -fx-background-color:purple");
                }
           }
      }
