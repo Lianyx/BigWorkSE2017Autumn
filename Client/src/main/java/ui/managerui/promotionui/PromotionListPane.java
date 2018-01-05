@@ -3,6 +3,9 @@ package ui.managerui.promotionui;
 import blService.promotionblService.PromotionListblService;
 import businesslogic.promotionbl.PromotionFactory;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Pagination;
@@ -27,6 +30,9 @@ public class PromotionListPane extends Refreshable { // TODO Refreshable改成�
     private JFXButton filter;
     @FXML
     private BorderPane borderPane;
+    @FXML
+    private JFXTextField keyWordField;
+    private StringProperty keyWordProperty = new SimpleStringProperty("");
 
     private PromotionTreeTable promotionTreeTable;
     private BoardController boardController;
@@ -50,6 +56,7 @@ public class PromotionListPane extends Refreshable { // TODO Refreshable改成�
         try {
             promotionListblService = PromotionFactory.getPromotionListblService();
             promotionTreeTable = new PromotionTreeTable(promotionListblService.initPromotion(), boardController, mainpane);
+            promotionTreeTable.setKeyWordProperty(keyWordProperty);
         } catch (RemoteException | NotBoundException | MalformedURLException e) {
             // TODO 而且上面要加线程?
             e.printStackTrace();
@@ -68,14 +75,19 @@ public class PromotionListPane extends Refreshable { // TODO Refreshable改成�
         }));
         borderPane.setBottom(pagination);
 
-        promotionTreeTable.setPagination(pagination); // 之后应该可以不再管pagination
+        promotionTreeTable.setPagination(pagination); // 之后这个类应该可以不再管pagination
         promotionTreeTable.setPrefSize(600, 450);
         borderPane.setCenter(promotionTreeTable);
     }
 
     @FXML
-    public void delete() {
+    private void SearchKeyWord() {
+        keyWordProperty.set(keyWordField.getText());
+    }
 
+    @FXML
+    public void delete() {
+        promotionTreeTable.delete();
     }
 
     @FXML
