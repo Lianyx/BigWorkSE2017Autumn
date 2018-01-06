@@ -25,13 +25,12 @@
         </font>
     </Label>
 
-    <Label text="开始" layoutX="20" layoutY="127" />
+    <Label text="开始" layoutX="20" layoutY="127"/>
     <JFXDatePicker fx:id="beginTime" layoutX="56" layoutY="120" prefWidth="150"/>
-    <Label text="结束" layoutX="20" layoutY="167" />
+    <Label text="结束" layoutX="20" layoutY="167"/>
     <JFXDatePicker fx:id="endTime" layoutX="56" layoutY="160" prefWidth="150"/>
 
 
     <JFXButton fx:id="select" text="选择" layoutX="90" layoutY="210"
-               style="-fx-background-color: #03A9F4" textFill="white"
-               onMouseClicked="#selectByCondition"/>
+               style="-fx-background-color: #03A9F4" textFill="white"/>
 </fx:root>

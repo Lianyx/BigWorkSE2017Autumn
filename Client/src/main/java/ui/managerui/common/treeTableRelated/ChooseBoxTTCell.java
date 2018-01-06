@@ -1,4 +1,4 @@
-package ui.managerui.common;
+package ui.managerui.common.treeTableRelated;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;

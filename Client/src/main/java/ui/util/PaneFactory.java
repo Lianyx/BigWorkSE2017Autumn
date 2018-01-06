@@ -23,4 +23,7 @@ public class PaneFactory {
         return mainPane;
     }
 
+    public synchronized static void setMainPane(StackPane mainpane) {
+        PaneFactory.mainPane = mainpane;
+    }
 }

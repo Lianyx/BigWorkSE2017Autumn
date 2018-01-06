@@ -33,6 +33,14 @@ public class PromotionData<T extends PromotionPO> extends ReceipishData<T> imple
     }
 
     @Override
+    protected void setInitialValue(T receipishPO) {
+        super.setInitialValue(receipishPO);
+        receipishPO.setPromotionState(PromotionState.DRAFT);
+        receipishPO.setBeginTime(LocalDateTime.now());
+        receipishPO.setEndTime(LocalDateTime.now());
+    }
+
+    @Override
     protected Class<? extends ReceipishPOMapper<T>> getMapperClass() {
         return mapperClass;
     }

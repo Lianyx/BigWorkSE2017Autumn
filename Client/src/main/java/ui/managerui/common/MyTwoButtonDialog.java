@@ -4,17 +4,18 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import javafx.scene.control.Label;
+import ui.util.PaneFactory;
 
-public class MyConfirmDialog extends JFXDialog {
-    public MyConfirmDialog(String content, Runnable confirmAction) {
+public class MyTwoButtonDialog extends JFXDialog {
+    public MyTwoButtonDialog(String content, Runnable confirmAction) {
         this(content, confirmAction, ()->{});
     }
 
-    public MyConfirmDialog(String content, Runnable confirmAction, Runnable cancelAction) {
+    public MyTwoButtonDialog(String content, Runnable confirmAction, Runnable cancelAction) {
         JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
         jfxDialogLayout.setBody(new Label(content));
 
-        setDialogContainer(Save.mainpane);
+        setDialogContainer(PaneFactory.getMainPane());
         setContent(jfxDialogLayout);
 
         JFXButton button = new JFXButton("确认");

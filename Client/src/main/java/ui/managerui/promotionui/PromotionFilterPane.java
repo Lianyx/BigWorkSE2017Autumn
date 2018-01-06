@@ -1,5 +1,6 @@
 package ui.managerui.promotionui;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
 import javafx.fxml.FXML;
@@ -14,11 +15,10 @@ public class PromotionFilterPane extends AnchorPane {
     private JFXCheckBox memberBox, combineBox, totalBox;
     @FXML
     private JFXDatePicker beginTime, endTime;
-    private PromotionListPane promotionListPane;
-//    private PromotionSearchVO promotionSearchVO;
+    @FXML
+    private JFXButton select;
 
     public PromotionFilterPane(PromotionListPane promotionListPane, PromotionSearchVO promotionSearchVO) {
-//        this.promotionSearchVO = promotionSearchVO;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/managerui/promotionFilterPane.fxml"));
             fxmlLoader.setRoot(this);
@@ -27,15 +27,12 @@ public class PromotionFilterPane extends AnchorPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        beginTime.valueProperty().bind(promotionSearchVO.endFloorPropertyProperty());
-        endTime.valueProperty().bind(promotionSearchVO.beginCeilPropertyProperty());
-        memberBox.selectedProperty().bind(promotionSearchVO.containMemberPropertyProperty());
-        combineBox.selectedProperty().bind(promotionSearchVO.containCombinePropertyProperty());
-        combineBox.selectedProperty().bind(promotionSearchVO.containTotalPropertyProperty());
-    }
+        beginTime.valueProperty().bindBidirectional(promotionSearchVO.endFloorPropertyProperty());
+        endTime.valueProperty().bindBidirectional(promotionSearchVO.beginCeilPropertyProperty());
+        memberBox.selectedProperty().bindBidirectional(promotionSearchVO.containMemberPropertyProperty());
+        combineBox.selectedProperty().bindBidirectional(promotionSearchVO.containCombinePropertyProperty());
+        totalBox.selectedProperty().bindBidirectional(promotionSearchVO.containTotalPropertyProperty());
 
-    @FXML
-    private void selectByCondition() {
-        promotionListPane.refresh(false);
+        select.setOnAction(event -> promotionListPane.refresh(false));
     }
 }

@@ -10,9 +10,9 @@ import javafx.scene.layout.*;
 public class BoardController {
 
     @FXML
-    StackPane board;
+    public StackPane board;
 
-    PaneSwitchAnimation paneSwitchAnimation;
+    protected PaneSwitchAnimation paneSwitchAnimation;
 
     AnchorPane anchorPane;
 

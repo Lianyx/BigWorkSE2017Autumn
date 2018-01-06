@@ -2,21 +2,14 @@ package vo.promotionVO;
 
 import blService.promotionblService.PromotionblService;
 import businesslogic.promotionbl.PromotionFactory;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import po.promotionPO.PromotionGoodsItemPO;
 import po.promotionPO.TotalPromotionPO;
-import ui.managerui.promotionui.PromotionDetailPane;
-import ui.managerui.promotionui.TotalPromotionDetailPane;
+import ui.managerui.promotionui.promotionDetailPane.PromotionDetailPane;
+import ui.managerui.promotionui.promotionDetailPane.TotalPromotionDetailPane;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -34,9 +27,8 @@ public class TotalPromotionVO extends PromotionVO {
         super(promotionPO);
         requiredTotal = promotionPO.getRequiredTotal();
         tokenAmount = promotionPO.getTokenAmount();
-        gifts = Arrays.stream(promotionPO.getGifts())
-                .map(PromotionGoodsItemVO::new)
-                .collect(Collectors.toCollection(ArrayList::new));
+        gifts = promotionPO.getGifts() == null ? null
+                : Arrays.stream(promotionPO.getGifts()).map(PromotionGoodsItemVO::new).collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Override
@@ -49,7 +41,7 @@ public class TotalPromotionVO extends PromotionVO {
         TotalPromotionPO result = toPromotionPO(TotalPromotionPO.class);
         result.setRequiredTotal(requiredTotal);
         result.setTokenAmount(tokenAmount);
-        result.setGifts(gifts.stream().map(PromotionGoodsItemVO::toPO).toArray(PromotionGoodsItemPO[]::new));
+        result.setGifts(gifts == null ? null : gifts.stream().map(PromotionGoodsItemVO::toPO).toArray(PromotionGoodsItemPO[]::new));
         return result;
     }
 

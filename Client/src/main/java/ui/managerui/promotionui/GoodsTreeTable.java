@@ -14,11 +14,13 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import vo.promotionVO.PromotionGoodsItemVO;
 
-public class GiftsTreeTable extends JFXTreeTableView<PromotionGoodsItemVO> {
+import java.util.Collection;
+
+public class GoodsTreeTable extends JFXTreeTableView<PromotionGoodsItemVO> {
 
     private ObservableList<PromotionGoodsItemVO> gifts = FXCollections.observableArrayList();;
 
-    public GiftsTreeTable() {
+    public GoodsTreeTable() {
         TreeItem<PromotionGoodsItemVO> root = new RecursiveTreeItem<>(gifts, RecursiveTreeObject::getChildren);
 
         JFXTreeTableColumn<PromotionGoodsItemVO, String> idColumn = new JFXTreeTableColumn<>("商品编号");
@@ -47,6 +49,10 @@ public class GiftsTreeTable extends JFXTreeTableView<PromotionGoodsItemVO> {
 
     public void add(PromotionGoodsItemVO promotionGoodsItemVO) {
         gifts.add(promotionGoodsItemVO);
+    }
+
+    public void setAll(Collection<PromotionGoodsItemVO> newGifts) {
+        gifts = FXCollections.observableArrayList(newGifts);
     }
     public ObservableList<PromotionGoodsItemVO> getGifts() {
         return gifts;

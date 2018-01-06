@@ -22,6 +22,11 @@ public abstract class ReceipishData<T extends ReceipishPO> extends CrudData<T> {
     protected ReceipishData() throws RemoteException {
     }
 
+    // 因为防崩溃所以没有abstract。但是最好abstract，强制implement
+    protected void setInitialValue(T receipishPO) {
+
+    }
+
     public T getNew() throws RemoteException {
         LocalDateTime today = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
 
@@ -42,6 +47,8 @@ public abstract class ReceipishData<T extends ReceipishPO> extends CrudData<T> {
         try {
             result = getPOClass().newInstance();
             result.setDayId(resultID);
+
+            setInitialValue(result);
 
             insert(result);
         } catch (InstantiationException|IllegalAccessException e) {

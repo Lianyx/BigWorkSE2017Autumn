@@ -3,47 +3,47 @@ package ui.managerui.promotionui;
 import blService.promotionblService.PromotionListblService;
 import businesslogic.promotionbl.PromotionFactory;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Pagination;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import org.controlsfx.control.PopOver;
-import ui.userui.usermanagerui.FilterPane;
-import ui.util.BoardController;
-import ui.util.Refreshable;
+import ui.managerui.common.MyBoardController;
+import ui.managerui.common.MyTwoButtonDialog;
+import ui.managerui.promotionui.addPopUpRelated.CombineLabel;
+import ui.managerui.promotionui.addPopUpRelated.MemberLabel;
+import ui.managerui.promotionui.addPopUpRelated.TotalLabel;
+import ui.util.*;
 import vo.PromotionSearchVO;
+import vo.promotionVO.PromotionVO;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PromotionListPane extends Refreshable { // TODO Refreshable改成接口吧？
-    private StackPane mainpane;
-    private Pagination pagination;
-    private PopOver filterPopOver;
     @FXML
-    private JFXButton filter;
+    private JFXButton filter, add;
     @FXML
     private BorderPane borderPane;
     @FXML
-    private JFXTextField keyWordField;
-    private StringProperty keyWordProperty = new SimpleStringProperty("");
+    private JFXTextField keywordField;
+    private StringProperty keywordProperty = new SimpleStringProperty("");
 
     private PromotionTreeTable promotionTreeTable;
-    private BoardController boardController;
 
     private PromotionListblService promotionListblService;
+    private Set<PromotionVO> chosenItems = new HashSet<>();
     private PromotionSearchVO promotionSearchVO = new PromotionSearchVO();
 
-    public PromotionListPane(StackPane mainpane, BoardController boardController) {
-        this.mainpane = mainpane;
-        this.boardController = boardController;
+    private ArrayList<PromotionVO> keywordFilterList = new ArrayList<>();
 
+    public PromotionListPane() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/managerui/promotionListPane.fxml"));
             fxmlLoader.setRoot(this);
@@ -53,60 +53,113 @@ public class PromotionListPane extends Refreshable { // TODO Refreshable改成�
             e.printStackTrace();
         }
 
-        try {
-            promotionListblService = PromotionFactory.getPromotionListblService();
-            promotionTreeTable = new PromotionTreeTable(promotionListblService.initPromotion(), boardController, mainpane);
-         //   promotionTreeTable.setKeyWordProperty(keyWordProperty);
-        } catch (RemoteException | NotBoundException | MalformedURLException e) {
-            // TODO 而且上面要加线程?
-            e.printStackTrace();
-        }
+        promotionTreeTable = new PromotionTreeTable(chosenItems, keywordFilterList, keywordProperty, borderPane);
 
-        filterPopOver = new PopOver();
+        PopOver filterPopOver = new PopOver();
         filterPopOver.setDetachable(false);
         filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
         PromotionFilterPane promotionFilterPane = new PromotionFilterPane(this, promotionSearchVO);
         filterPopOver.setContentNode(promotionFilterPane);
+        filter.setOnAction(e -> filterPopOver.show(filter));
+
+        VBox addList = new VBox();
+        addList.setPrefHeight(130);
+        addList.setPrefWidth(100);
+        addList.getChildren().addAll(new TotalLabel(), new MemberLabel(), new CombineLabel());
+        JFXPopup addPopup = new JFXPopup(addList);
+        add.setOnAction(event -> addPopup.show(add));
 
 
-        pagination = new Pagination((promotionTreeTable.getListSize() / promotionTreeTable.getRowsPerPage() + 1), 0);
-        pagination.currentPageIndexProperty().addListener(((observable, oldValue, newValue) -> {
-            promotionTreeTable.createPage(newValue.intValue());
-        }));
-        borderPane.setBottom(pagination);
-
-        promotionTreeTable.setPagination(pagination); // 之后这个类应该可以不再管pagination
-        promotionTreeTable.setPrefSize(600, 450);
-        borderPane.setCenter(promotionTreeTable);
+//        keywordField.textProperty().addListener((observable, oldValue, newValue) -> {
+//            keywordFilter(newValue);
+//        });
+        keywordProperty.bind(keywordField.textProperty()); // TODO 这里要加，感觉应该listPane只需要refresh那一个接口，剩下的都让TreeTable来管
     }
 
     @FXML
-    private void SearchKeyWord() {
-        keyWordProperty.set(keyWordField.getText());
+    private void SearchKeyword() {
     }
 
     @FXML
     public void delete() {
-        //promotionTreeTable.delete();
+        new MyTwoButtonDialog("请确认删除", this::deleteTask).show();
     }
 
-    @FXML
-    public void add() {
+    private void deleteTask() {
+        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        myBoardController.Loading();
+        ArrayList<PromotionVO> tempList = new ArrayList<>();
 
+        DoubleButtonDialog buttonDialog = new DoubleButtonDialog(PaneFactory.getMainPane(), "Wrong", "连接失败", "重试", "返回");
+        buttonDialog.setButtonOne(this::delete);
+        buttonDialog.setButtonTwo(myBoardController::Ret);
+
+        GetTask getTask = new GetTask(() -> {
+            promotionTreeTable.refresh(tempList);
+            myBoardController.switchTo(this);
+
+        }, buttonDialog, woid -> {
+            try {
+                for (PromotionVO chosenItem : new ArrayList<>(chosenItems)) {
+                    chosenItem.getService().delete(chosenItem);
+                    chosenItems.remove(chosenItem);
+                }
+
+                ArrayList<PromotionVO> promotions;
+                if ((promotions = promotionListblService.search(promotionSearchVO.toSC())) == null) {
+                    return false;
+                }
+                tempList.clear();
+                tempList.addAll(promotions);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        });
+        new Thread(getTask).start();
     }
 
-    @FXML
-    private void showFilterPane() {
-        filterPopOver.show(filter);
-    }
-
+    // TODO 这样写，toSwitch已经没用了
     @Override
     public void refresh(boolean toSwitch) {
-        try {
-            promotionTreeTable.refresh(promotionListblService.initPromotion());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        myBoardController.Loading();
+        ArrayList<PromotionVO> tempList = new ArrayList<>();
 
+        DoubleButtonDialog buttonDialog = new DoubleButtonDialog(PaneFactory.getMainPane(), "Wrong", "连接失败", "重试", "返回");
+        buttonDialog.setButtonOne(() -> refresh(false));
+        buttonDialog.setButtonTwo(myBoardController::Ret);
+
+        GetTask getTask = new GetTask(() -> {
+            promotionTreeTable.refresh(tempList);
+//            keywordFilter(keywordField.getText());
+            
+            myBoardController.switchTo(this);
+        }, buttonDialog, p -> {
+            try {
+                if (promotionListblService == null) { // 说明是第一次
+                    promotionListblService = PromotionFactory.getPromotionListblService();
+                }
+
+                ArrayList<PromotionVO> promotions;
+                if ((promotions = promotionListblService.search(promotionSearchVO.toSC())) == null) {
+                    return false;
+                }
+                tempList.clear();
+                tempList.addAll(promotions);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        });
+        new Thread(getTask).start();
     }
+
+//    private void keywordFilter(String newValue) {
+//        keywordFilterList.clear();
+//        keywordProperty.set(newValue);
+//        promotionTreeTable.refresh(keywordFilterList);
+//    }
 }
