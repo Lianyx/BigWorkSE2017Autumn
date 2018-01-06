@@ -109,6 +109,7 @@ public class GoodsClassification {
         return goodsClassificationData.getById(id);
     }
 
+    //经过初步处理的商品分类树，每一层的商品分类是在一起的，root后面跟着他的所有孩子leve1，level后面跟着他们的孩子level2
     private List<GoodsClassificationVO> getTree(List<GoodsClassificationPO> POList){
         List<GoodsClassificationVO> VOList = new ArrayList<>(POList.size());
 
@@ -128,10 +129,12 @@ public class GoodsClassification {
             if(childrenId.size() == 0)
                 continue;
 
+            //顺着整个商品分类找
             for (int i = 1; i < POList.size(); i++) {
                 GoodsClassificationPO po = POList.get(i);
                 String tmpId = po.getId();
 
+                //如果该商品分类是其子分类，就把该商品分类放到其后面
                 if(childrenId.indexOf(tmpId) != -1){
                     GoodsClassificationVO tmpVO = changer.oneToVO(po);
                     VOList.add(tmpVO);

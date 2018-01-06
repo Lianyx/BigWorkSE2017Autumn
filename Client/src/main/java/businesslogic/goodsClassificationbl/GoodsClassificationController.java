@@ -11,7 +11,7 @@ import java.util.Set;
 public class GoodsClassificationController implements GoodsClassificationblService {
     GoodsClassification goodsClassification = new GoodsClassification();
     @Override
-    public Set<GoodsClassificationVO> show() {
+    public List<GoodsClassificationVO> show() {
         return null;//goodsClassification.show();
     }
 

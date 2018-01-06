@@ -1,6 +1,5 @@
-package ui.inventoryManagerui;
+package ui.inventoryManagerui.goodsui;
 
-import businesslogic.goodsbl.Goods;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -24,6 +23,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Paint;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import ui.inventoryManagerui.goodsui.GoodDetailPane;
+import ui.inventoryManagerui.goodsui.GoodsChosenItem;
 import ui.userui.usermanagerui.BoardController;
 import ui.userui.usermanagerui.IconButton;
 import ui.userui.usermanagerui.TokenLabel;

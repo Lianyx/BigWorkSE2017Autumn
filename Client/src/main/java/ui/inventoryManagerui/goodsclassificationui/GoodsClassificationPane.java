@@ -1,4 +1,4 @@
-package ui.inventoryManagerui;
+package ui.inventoryManagerui.goodsclassificationui;
 
 import blService.goodsClassificationblService.GoodsClassificationblService;
 import com.jfoenix.controls.JFXButton;
@@ -10,26 +10,24 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.Pagination;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import ui.inventoryManagerui.inventoryGiftReceiptui.InventoryGiftPane;
 import ui.userui.usermanagerui.BoardController;
 import ui.util.HistoricalRecord;
 import ui.util.Refreshable;
 import vo.inventoryVO.GoodsClassificationVO;
 
 import java.io.IOException;
-import java.util.Set;
+import java.util.List;
 
 public class GoodsClassificationPane extends Refreshable{
     @FXML
+    BorderPane borderpane;
+
     GoodsClassificationTreeView treeView;
 
-    Set<GoodsClassificationVO> set;
+    List<GoodsClassificationVO> list;
 
     BoardController boardController;
 
@@ -43,7 +41,7 @@ public class GoodsClassificationPane extends Refreshable{
     public GoodsClassificationPane() {
         super();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/inventoryui/goodsClassificationPane.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/inventoryui/goodui/goodsClassificationPane.fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();
@@ -55,7 +53,7 @@ public class GoodsClassificationPane extends Refreshable{
 
 
 
-    public GoodsClassificationPane(GoodsClassificationblService goodsClassficationblService,BoardController boardController,StackPane mainpane) throws IOException {
+    public GoodsClassificationPane(GoodsClassificationblService goodsClassficationblService, BoardController boardController, StackPane mainpane) throws IOException {
         this();
         this.goodsClassficationblService = goodsClassficationblService;
         this.boardController = boardController;
@@ -65,7 +63,10 @@ public class GoodsClassificationPane extends Refreshable{
         treeView.setBoardController(boardController);
         treeView.setMainpane(mainpane);
         treeView.setGoodsClassificationblService(goodsClassficationblService);
-        //treeView.add();
+        treeView.setGoodsClassificationVO(goodsClassficationblService.show());
+
+        BorderPane pane = (BorderPane) treeView.getPane();
+        borderpane.setCenter(pane);
     }
 
     public void setGoodsClassficationblService(GoodsClassificationblService goodsClassficationblService) {
@@ -87,13 +88,14 @@ public class GoodsClassificationPane extends Refreshable{
             }
             boardController.setAll(this);
         }
+
     }
 
     /**
      * 要将fxml所有的命名空间表示出来
      */
     @FXML
-    public void deleteList(){
+    public void delete(){
 
     }
 
@@ -104,8 +106,7 @@ public class GoodsClassificationPane extends Refreshable{
 
     @Override
     public void refresh(boolean toSwitch) {
-
-        /*boardController.Loading();
+        boardController.Loading();
         try {
             LoadingTask task = new LoadingTask();
             task.valueProperty().addListener(new ChangeListener<Boolean>() {
@@ -114,8 +115,7 @@ public class GoodsClassificationPane extends Refreshable{
                     if (task.getIntegerProperty() == 1) {
                         try {
                             treeView.setGoodsClassificationVO(goodsClassficationblService.show());
-                            borderPane.setCenter(treeView.creatTree());
-                            //borderPane.setCenter(treeView);
+                            borderpane.setCenter((BorderPane)treeView.getPane());
                             switchPane(toSwitch);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -151,7 +151,6 @@ public class GoodsClassificationPane extends Refreshable{
             e.printStackTrace();
         }
 
-*/
     }
 
 
@@ -170,8 +169,8 @@ public class GoodsClassificationPane extends Refreshable{
 
         @Override
         protected Boolean call() throws Exception {
-            set = goodsClassficationblService.show();
-            if (set != null) {
+            list = goodsClassficationblService.show();
+            if (list != null) {
                 Thread.sleep(2000);
                 integerProperty.setValue(1);
                 return true;

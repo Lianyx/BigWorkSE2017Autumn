@@ -13,6 +13,7 @@
 
 <?import ui.util.TopBar?>
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <StackPane fx:id="mainpane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/List.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.inventoryManagerui.InventoryUIController">
 
     <children>
@@ -25,138 +26,50 @@
             <fx:include  fx:id="board" source="/userui/board.fxml" layoutX="160" layoutY="40"/>
 
             <JFXListView fx:id="navigation" layoutY="40.0" prefHeight="560.0" prefWidth="160.0">
-
-                <Label fx:id="goodslist" text="商品分类" textFill="#106186">
-                    <padding><Insets bottom="8" left="10" top="8" /></padding>
+                <Label fx:id="goodsClassification" text="商品分类" style="-fx-padding: 8 0 8 10;">
                     <graphic>
-
-                        <JFXRippler position="BACK" styleClass="icons-rippler">
-                            <StackPane>
-                                <padding><Insets right="10" /></padding>
-                                <MaterialDesignIconView fx:id="goodslisticon" glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)" styleClass="icon" />
-                            </StackPane>
-                        </JFXRippler>
+                        <StackPane style="-fx-padding: 0 10 0 0;">
+                            <FontAwesomeIconView fx:id="goodsClassificationIcon" size="1em"/>
+                        </StackPane>
                     </graphic>
-                  <font>
-                     <Font name="Microsoft YaHei Bold" size="15.0" />
-                  </font>
                 </Label>
-
-                <JFXButton fx:id="inventoryView" text="库存查看" textFill="#106186" onMouseClicked="#chooseTimePane">
-                    <padding><Insets bottom="8" left="10" top="8" /></padding>
+                <Label fx:id="goods" text="商品" style="-fx-padding: 8 0 8 10;">
                     <graphic>
-
-                        <JFXRippler position="BACK" styleClass="icons-rippler">
-                            <StackPane>
-                                <padding><Insets right="10" /></padding>
-                                <MaterialDesignIconView fx:id="inventoryViewicon" glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)" styleClass="icon" />
-                            </StackPane>
-                        </JFXRippler>
+                        <StackPane style="-fx-padding: 0 10 0 0;">
+                            <FontAwesomeIconView fx:id="goodsIcon" size="1em"/>
+                        </StackPane>
                     </graphic>
-                    <font>
-                        <Font name="Microsoft YaHei Bold" size="15.0" />
-                    </font>
-                </JFXButton>
-
-
-                <JFXButton fx:id="inventoryCheck" text="库存盘点" textFill="#106186" onMouseClicked="#inventoryCheckPane">
-                    <padding><Insets bottom="8" left="10" top="8" /></padding>
-                    <graphic>
-
-                        <JFXRippler position="BACK" styleClass="icons-rippler">
-                            <StackPane>
-                                <padding><Insets right="10" /></padding>
-                                <MaterialDesignIconView fx:id="inventoryCheckicon" glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)" styleClass="icon" />
-                            </StackPane>
-                        </JFXRippler>
-                    </graphic>
-                    <font>
-                        <Font name="Microsoft YaHei Bold" size="15.0" />
-                    </font>
-                </JFXButton>
-
-                <JFXButton fx:id="inventoryGiftReceipt" text="库存赠送单" textFill="#106186" onMouseClicked="#giftReceiptPane">
-                    <padding><Insets bottom="8" left="10" top="8" /></padding>
-                    <graphic>
-
-                        <JFXRippler position="BACK" styleClass="icons-rippler">
-                            <StackPane>
-                                <padding><Insets right="10" /></padding>
-                                <MaterialDesignIconView fx:id="inventoryGiftReceipticon" glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)" styleClass="icon" />
-                            </StackPane>
-                        </JFXRippler>
-                    </graphic>
-                    <font>
-                        <Font name="Microsoft YaHei Bold" size="15.0" />
-                    </font>
-                </JFXButton>
-
-                <JFXButton fx:id="inventoryDamageReceipt" text="库存报损单" textFill="#106186" onMouseClicked="#damageReceiptPane">
-                    <padding><Insets bottom="8" left="10" top="8" /></padding>
-                    <graphic>
-
-                        <JFXRippler position="BACK" styleClass="icons-rippler">
-                            <StackPane>
-                                <padding><Insets right="10" /></padding>
-                                <MaterialDesignIconView fx:id="inventoryDamageReceipticon" glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)" styleClass="icon" />
-                            </StackPane>
-                        </JFXRippler>
-                    </graphic>
-                    <font>
-                        <Font name="Microsoft YaHei Bold" size="15.0" />
-                    </font>
-                </JFXButton>
-
-
-                <JFXButton fx:id="inventoryOverflowReceipt" text="库存报溢单" textFill="#106186" onMouseClicked="#overflowReceiptPane">
-                    <padding><Insets bottom="8" left="10" top="8" /></padding>
-                    <graphic>
-
-                        <JFXRippler position="BACK" styleClass="icons-rippler">
-                            <StackPane>
-                                <padding><Insets right="10" /></padding>
-                                <MaterialDesignIconView fx:id="inventoryOverflowReceipticon" glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)" styleClass="icon" />
-                            </StackPane>
-                        </JFXRippler>
-                    </graphic>
-                    <font>
-                        <Font name="Microsoft YaHei Bold" size="15.0" />
-                    </font>
-                </JFXButton>
-
-
-                <JFXButton fx:id="inventoryWarningReceipt" text="库存警戒单" textFill="#106186" onMouseClicked="#warningReceiptPane">
-                    <padding><Insets bottom="8" left="10" top="8" /></padding>
-                    <graphic>
-
-                        <JFXRippler position="BACK" styleClass="icons-rippler">
-                            <StackPane>
-                                <padding><Insets right="10" /></padding>
-                                <MaterialDesignIconView fx:id="inventoryWarningReceipticon" glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)" styleClass="icon" />
-                            </StackPane>
-                        </JFXRippler>
-                    </graphic>
-                    <font>
-                        <Font name="Microsoft YaHei Bold" size="15.0" />
-                    </font>
-                </JFXButton>
-                <!--
-                <Label fx:id="inventoryCheck" text="库存查看" textFill="#106186" onMouseClicked="#chooseTimePane">
-                    <padding><Insets bottom="8" left="10" top="8" /></padding>
-                    <graphic>
-
-                        <JFXRippler position="BACK" styleClass="icons-rippler">
-                            <StackPane>
-                                <padding><Insets right="10" /></padding>
-                                <MaterialDesignIconView fx:id="inventoryCheckicon" glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)" styleClass="icon" />
-                            </StackPane>
-                        </JFXRippler>
-                    </graphic>
-                    <font>
-                        <Font name="Microsoft YaHei Bold" size="15.0" />
-                    </font>
                 </Label>
-                -->
+                <Label fx:id="inventoryReceiptList" text="单据" style="-fx-padding: 8 0 8 10;">
+                    <graphic>
+                        <StackPane style="-fx-padding: 0 10 0 0;">
+                            <FontAwesomeIconView fx:id="billReceiptListIcon" size="1em"/>
+                        </StackPane>
+                    </graphic>
+                </Label>
+                <Label fx:id="inventoryGiftReceipt" text="库存赠送单"  style="-fx-padding: 0 0 0 50;">
+                </Label>
+                <Label fx:id="inventoryDamageReceipt" text="库存报损单"  style="-fx-padding: 0 0 0 50;">
+                </Label>
+                <Label fx:id="inventoryOverflowReceipt" text="库存报溢单"  style="-fx-padding: 0 0 0 50;">
+                </Label>
+                <Label fx:id="inventoryWarningReceipt" text="库存报警单"  style="-fx-padding: 0 0 0 50;">
+                </Label>
+            <Label fx:id="inventoryView" text="库存查看" style="-fx-padding: 8 0 8 10;">
+                <graphic>
+                    <StackPane style="-fx-padding: 0 10 0 0;">
+                        <FontAwesomeIconView fx:id="inventoryViewIcon" size="1em"/>
+                    </StackPane>
+                </graphic>
+            </Label>
+            <Label fx:id="inventoryCheck" text="库存盘点" style="-fx-padding: 8 0 8 10;">
+                <graphic>
+                    <StackPane style="-fx-padding: 0 10 0 0;">
+                        <FontAwesomeIconView fx:id="inventoryCheckIcon" size="1em"/>
+                    </StackPane>
+                </graphic>
+            </Label>
+
 
             </JFXListView>
 

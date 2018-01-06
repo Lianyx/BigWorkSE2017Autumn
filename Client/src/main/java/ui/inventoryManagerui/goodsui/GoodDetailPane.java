@@ -1,4 +1,4 @@
-package ui.inventoryManagerui;
+package ui.inventoryManagerui.goodsui;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -59,7 +59,7 @@ public class GoodDetailPane extends Refreshable {
     public GoodDetailPane(GoodsVO goodsVO,BoardController boardController){
         super();
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/inventoryui/goodsdetail.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/inventoryui/goodui/goodsdetail.fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();

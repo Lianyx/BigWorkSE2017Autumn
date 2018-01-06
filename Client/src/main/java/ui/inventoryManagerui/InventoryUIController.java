@@ -18,8 +18,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import ui.inventoryManagerui.inventoryGiftReceiptui.InventoryGiftDetailPane;
+import po.GoodsClassificationPO;
+import ui.inventoryManagerui.goodsui.GoodsListPane;
 import ui.inventoryManagerui.inventoryGiftReceiptui.InventoryGiftPane;
+import ui.inventoryManagerui.goodsclassificationui.GoodsClassificationPane;
 import ui.userui.usermanagerui.BoardController;
 import ui.util.HistoricalRecord;
 import ui.util.PaneSwitchAnimation;
@@ -59,12 +61,17 @@ public class InventoryUIController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        showblService = new InventoryblService_Stub2();
+        goodsClassificationblService = new GoodsClassificationblService_Stub();
+        showblService = new InventoryblService_Stub3();
+        inventoryblService = new InventoryblService_Stub4();
+
         bar.setBoardController(boardController);
         goodsblService_stub = new GoodsblService_Stub();
 
         try {
             boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150),  board));
-            GoodsListPane goodsListPane = new GoodsListPane(goodsblService_stub,boardController);
+            GoodsListPane goodsListPane = new GoodsListPane(goodsblService_stub,boardController,mainpane);
             goodsListPane.setMainpane(mainpane);
             board.getChildren().setAll(goodsListPane);
             HistoricalRecord.addPane(goodsListPane);
@@ -77,15 +84,33 @@ public class InventoryUIController implements Initializable{
                     Platform.runLater(() -> {
                         try {
                             if (newVal != null) {
-                              /*  if (newVal.getId().equals("usermodify")) {
-                                    boardController.switchTo(new UserModifyPane());
-                                } else*/ if (newVal.getId().equals("商品分类")) {
-                                    GoodsListPane listPane = new GoodsListPane(goodsblService_stub,boardController);
-                                    goodsListPane.setMainpane(mainpane);
-                                    boardController.switchTo(listPane);
+                                if (newVal.getText().equals("商品分类")) {
+                                    System.out.println("商品分类");
+                                    GoodsClassificationPane goodsClassificationPane = new GoodsClassificationPane(goodsClassificationblService,boardController,mainpane);
+                                    goodsClassificationPane.refresh(true);
+                                }else if(newVal.getText().equals("商品管理")){
+                                    GoodsListPane goodsListPane1 = new GoodsListPane(goodsblService_stub,boardController,mainpane);
+                                    goodsListPane.refresh(true);
+                                }else if(newVal.getText().equals("库存查看")){
+                                    ChooseTimePane chooseTimePane = new ChooseTimePane(showblService,boardController,mainpane);
+                                    JFXDialog dialog = new JFXDialog(mainpane,chooseTimePane,JFXDialog.DialogTransition.CENTER);
+                                    chooseTimePane.setDialog(dialog);
+                                    dialog.show();
+                                }else if(newVal.getText().equals("库存盘点")){
+                                    System.out.println("库存盘点");
+                                    InventoryCheckPane inventoryCheckPane = new InventoryCheckPane(showblService,boardController,mainpane);
+                                    inventoryCheckPane.refresh(true);
+                                }else if(newVal.getText().equals("库存赠送单")){
+                                    System.out.println("库存赠送单");
+                                    InventoryGiftPane inventoryGiftPane = new InventoryGiftPane(inventoryblService,boardController,mainpane);
+                                    inventoryGiftPane.refresh(true);
+                                }else if(newVal.getText().equals("库存报损单")){
+
+                                }else if(newVal.getText().equals("库存报溢单")){
+
+                                }else if(newVal.getText().equals("库存报警单")){
+
                                 }
-
-
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -101,6 +126,8 @@ public class InventoryUIController implements Initializable{
 
         }
     }
+
+  /*
 
     @FXML
     public void chooseTimePane(){
@@ -140,13 +167,6 @@ public class InventoryUIController implements Initializable{
 
     @FXML
     public void damageReceiptPane(){
-        goodsClassificationblService = new GoodsClassificationblService_Stub();
-        try {
-            boardController.switchTo(new GoodsClassificationPane(goodsClassificationblService,boardController,mainpane));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     @FXML
@@ -157,5 +177,5 @@ public class InventoryUIController implements Initializable{
     @FXML
     public void warningReceiptPane(){
 
-    }
+    }*/
 }

@@ -5,30 +5,35 @@ import exception.ExistException;
 import util.ResultMessage;
 import vo.inventoryVO.GoodsClassificationVO;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class GoodsClassificationblService_Stub implements GoodsClassificationblService{
-    Set<GoodsClassificationVO> set = new TreeSet<>();
+  //  Set<GoodsClassificationVO> set = new TreeSet<>();
+    List<GoodsClassificationVO> list = new ArrayList<>();
 
 
     public GoodsClassificationblService_Stub() {
-        set.add(new GoodsClassificationVO("123","345","212"));
-        set.add(new GoodsClassificationVO("124","345","212"));
-        set.add(new GoodsClassificationVO("125","345","212"));
-        set.add(new GoodsClassificationVO("126","345","212"));
-        set.add(new GoodsClassificationVO("127","345","212"));
+        list.add(new GoodsClassificationVO("root",null,null));
+        list.add(new GoodsClassificationVO("123","345","root"));
+        list.add(new GoodsClassificationVO("124","346","root"));
+        list.add(new GoodsClassificationVO("125","347","root"));
+        list.add(new GoodsClassificationVO("126","348","root"));
+        list.add(new GoodsClassificationVO("127","349","root"));
+        list.add(new GoodsClassificationVO("131","light","123"));
+        list.add(new GoodsClassificationVO("132","light","123"));
+        list.add(new GoodsClassificationVO("133","light","123"));
+        list.add(new GoodsClassificationVO("134","light","124"));
+        list.add(new GoodsClassificationVO("141","light","131"));
+
     }
 
     /**
    	 * 显示所有商品分类
 	 * @return
              */
-    public Set<GoodsClassificationVO> show(){
+    public List<GoodsClassificationVO> show(){
         System.out.println("show success");
-        return set;
+        return list;
     }
 
 
