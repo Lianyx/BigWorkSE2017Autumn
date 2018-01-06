@@ -1,4 +1,4 @@
-package ui.inventoryManagerui;
+package ui.inventoryManagerui.goodsui;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
@@ -23,10 +23,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Paint;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import ui.inventoryManagerui.goodsui.GoodDetailPane;
+import ui.inventoryManagerui.goodsui.GoodsChosenItem;
 import ui.util.BoardController;
+import ui.util.CircleImageView;
 import ui.util.IconButton;
 import ui.util.TokenLabel;
-import ui.util.CircleImageView;
 import vo.inventoryVO.GoodsVO;
 
 import java.util.Set;

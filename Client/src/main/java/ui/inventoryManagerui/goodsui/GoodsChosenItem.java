@@ -1,4 +1,4 @@
-package ui.inventoryManagerui;
+package ui.inventoryManagerui.goodsui;
 
 import vo.inventoryVO.GoodsVO;
 

@@ -25,17 +25,19 @@ public class GoodsblService_Stub implements GoodsblService{
     }
 
     @Override
-    public List<GoodsVO> show() {
-        return new ArrayList<GoodsVO>(set);
+    public Set<GoodsVO> show() {
+        return set;
     }
 
     @Override
     public ResultMessage addGoods(GoodsVO goodsVO) {
+        System.out.println("add finish");
         return null;
     }
 
     @Override
     public ResultMessage deleteGoods(GoodsVO goodsVO) {
+        System.out.println("delete finish");
         set.remove(goodsVO);
 
         return null;

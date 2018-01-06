@@ -6,13 +6,16 @@ import util.ResultMessage;
 import vo.inventoryVO.GoodsVO;
 
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class GoodsController implements GoodsblService {
     Goods goods = new Goods();
 
     @Override
-    public List<GoodsVO> show() {
-        List<GoodsVO> goodsList = goods.show();
+    public Set<GoodsVO> show() {
+        //List<GoodsVO> goodsList = goods.show();
+        Set<GoodsVO> goodsList = new TreeSet<>(goods.show());
         return goodsList;
     }
 

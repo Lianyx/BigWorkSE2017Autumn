@@ -4,6 +4,7 @@ import businesslogic.goodsbl.GoodsController;
 import businesslogic.goodsbl.goodsSearch.GoodsSearchStrategy;
 import vo.inventoryVO.GoodsVO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public class GoodsNoStrategy implements GoodsSearchStrategy {
 
     @Override
     public List<GoodsVO> getGoods() {
-        List<GoodsVO> goodsList = controller.show();
+        List<GoodsVO> goodsList = new ArrayList<>(controller.show());
         return goodsList;
     }
 }
