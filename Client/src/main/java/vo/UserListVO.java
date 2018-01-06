@@ -6,11 +6,12 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;
 import sun.java2d.pipe.SpanShapeRenderer;
 import util.UserCategory;
+import vo.abstractVO.SelectableVO;
 
 import java.io.Serializable;
 import java.util.Comparator;
 
-public class UserListVO extends RecursiveTreeObject<UserListVO> implements Serializable,Comparable<UserListVO> {
+public class UserListVO extends SelectableVO<UserListVO> {
 
     private int userid;
     private Image image;
@@ -18,7 +19,6 @@ public class UserListVO extends RecursiveTreeObject<UserListVO> implements Seria
     private UserCategory userCategory;
     private String email;
     private String phone;
-    private SimpleBooleanProperty selected=new SimpleBooleanProperty(false);
     private boolean multiple = true;
 
 
@@ -29,7 +29,6 @@ public class UserListVO extends RecursiveTreeObject<UserListVO> implements Seria
         this.userCategory = userCategory;
         this.email = email;
         this.phone = phone;
-        this.selected.setValue(false);
     }
 
     public UserListVO(int userid, Image image, String username, UserCategory userCategory, String email, String phone) {
@@ -59,18 +58,6 @@ public class UserListVO extends RecursiveTreeObject<UserListVO> implements Seria
     }
 
 
-
-    public boolean isSelected() {
-        return selected.get();
-    }
-
-    public SimpleBooleanProperty selectedProperty() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected.set(selected);
-    }
 
     public int getUserid() {
         return userid;
@@ -126,22 +113,5 @@ public class UserListVO extends RecursiveTreeObject<UserListVO> implements Seria
 
     public void setMultiple(boolean multiple) {
         this.multiple = multiple;
-    }
-
-    @Override
-    public int compareTo(UserListVO o) {
-        if(userid>o.getUserid())
-            return 1;
-        else if(userid<o.getUserid())
-            return -1;
-        return 0;
-    }
-
-    @Override
-    public String toString() {
-        return "UserListVO{" +
-                "userid=" + userid +
-                ", selected=" + selected +
-                '}';
     }
 }

@@ -17,7 +17,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import ui.stockui.StockListItemPane;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import ui.util.ListPopup;
 import vo.ListGoodsItemVO;
 import vo.billReceiptVO.TransferItemVO;

@@ -21,7 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import util.ReceiptState;
 import vo.inventoryVO.uiReceipt.InventoryGiftChosenItem;
 import vo.inventoryVO.uiReceipt.InventoryGiftuiVO;

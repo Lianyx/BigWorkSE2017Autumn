@@ -2,7 +2,6 @@ package ui.inventoryManagerui;
 
 import blService.goodsblService.GoodsblService;
 import blServiceStub.goodsblService_Stub.GoodsblService_Stub;
-import businesslogic.goodsbl.Goods;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import javafx.fxml.FXML;
@@ -11,10 +10,9 @@ import javafx.scene.control.Pagination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import ui.userui.usermanagerui.FilterPane;
 import ui.util.Refreshable;
-import util.GoodsList;
 import vo.inventoryVO.GoodsVO;
 
 import java.io.IOException;
@@ -56,7 +54,6 @@ public class GoodsListPane extends Refreshable{
             PopOver filterPopOver = new PopOver();
             filterPopOver.setDetachable(false);
             filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
-            filterPopOver.setContentNode(new FilterPane());
             filter.setOnMouseClicked(e -> filterPopOver.show(filter));
 
 

@@ -28,7 +28,7 @@
 
         <TopBar fx:id="bar" layoutX="160"/>
 
-        <fx:include source="/userui/board.fxml" fx:id="board" layoutX="160" layoutY="40"/> <!--为什么报错？-->
+        <fx:include source="/util/board.fxml" fx:id="board" layoutX="160" layoutY="40"/> <!--为什么报错？-->
 
         <JFXListView fx:id="navigation" layoutY="40" prefHeight="560" prefWidth="160">
             <Label fx:id="checkList" text="审批单据" style="-fx-padding: 8 0 8 10;">

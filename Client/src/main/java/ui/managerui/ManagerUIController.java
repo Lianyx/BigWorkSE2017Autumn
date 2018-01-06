@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import ui.managerui.promotionui.PromotionListPane;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import ui.util.HistoricalRecord;
 import ui.util.PaneSwitchAnimation;
 import ui.util.TopBar;

@@ -5,7 +5,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.StackPane;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import ui.util.Refreshable;
 import vo.inventoryVO.uiReceipt.GiftuiGoodsItemVO;
 import vo.inventoryVO.uiReceipt.InventoryGiftuiVO;

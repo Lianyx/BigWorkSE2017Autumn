@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Control;
 import javafx.util.Callback;
-import ui.messageui.MessageCell;
 
 public class MessageListView extends JFXListView {
 
@@ -17,7 +16,7 @@ public class MessageListView extends JFXListView {
     public MessageListView(){
         super();
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/userui/message.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/messageui/message.fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();

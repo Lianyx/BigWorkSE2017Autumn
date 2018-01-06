@@ -10,7 +10,7 @@ public class MessageHBox extends HBox{
 
     public MessageHBox(){
          super();
-         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/userui/messagehbox.fxml"));
+         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/messageui/messagehbox.fxml"));
          fxmlLoader.setRoot(this);
          fxmlLoader.setController(this);
          try {

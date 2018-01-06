@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import ui.userui.usermanagerui.BoardController;
+import ui.util.BoardController;
 import ui.util.Refreshable;
 import vo.billReceiptVO.CashBillReceiptVO;
 import vo.billReceiptVO.ChargeBillReceiptVO;

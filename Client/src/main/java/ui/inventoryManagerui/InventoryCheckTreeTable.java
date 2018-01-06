@@ -26,9 +26,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import ui.userui.usermanagerui.BoardController;
-import ui.userui.usermanagerui.TokenLabel;
+import ui.util.BoardController;
 import ui.util.CircleImageView;
+import ui.util.TokenLabel;
 import vo.inventoryVO.InventoryCheckItemVO;
 
 import java.util.Set;

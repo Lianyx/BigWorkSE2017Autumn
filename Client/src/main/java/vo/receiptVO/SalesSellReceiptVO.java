@@ -16,6 +16,16 @@ public class SalesSellReceiptVO extends ReceiptVO {
     }
 
     @Override
+    public ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException {
+        return null;
+    }
+
+    @Override
+    public Node getDetailPane() {
+        return null;
+    }
+
+    @Override
     protected String getCodeName() {
         return null;
     }
@@ -25,13 +35,7 @@ public class SalesSellReceiptVO extends ReceiptVO {
         return null;
     }
 
-    @Override
-    public ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException {
-        return null;
-    }
 
-    @Override
-    public Node getDetailPane() {
-        return null;
-    }
+
+
 }

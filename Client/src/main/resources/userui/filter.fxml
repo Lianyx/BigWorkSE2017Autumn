@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root prefHeight="250.0" prefWidth="230.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="211.0" prefWidth="161.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
 <children>
-      <JFXButton fx:id="save" onMouseClicked="#save" style="-fx-background-color: #03A9F4" layoutX="88.0" layoutY="207.0" text="Save" textFill="WHITE" />
-      <JFXComboBox fx:id="usertype" layoutX="47.0" layoutY="51.0" prefHeight="33.0" prefWidth="137.0" promptText="UserType" />
+      <JFXButton fx:id="save" layoutX="59.0" layoutY="177.0" onMouseClicked="#save" style="-fx-background-color: #03A9F4" text="Save" textFill="WHITE" />
+      <JFXCheckBox fx:id="UserManager" layoutX="24.0" layoutY="10.0" text="UserManager" />
+      <JFXCheckBox fx:id="Salesman" layoutX="24.0" layoutY="35.0" text="SalesMan" />
+      <JFXCheckBox fx:id="SalesManager" layoutX="24.0" layoutY="60.0" text="SalesManager" />
+      <JFXCheckBox fx:id="GeneralManager" layoutX="24.0" layoutY="85.0" text="GeneralManager" />
+      <JFXCheckBox fx:id="InventoryManager" layoutX="24.0" layoutY="110.0" text="InventoryManager" />
+      <JFXCheckBox fx:id="Accountant" layoutX="24.0" layoutY="135.0" text="Accountant" />
 
 </children>
 </fx:root>

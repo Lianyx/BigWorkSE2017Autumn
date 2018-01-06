@@ -3,20 +3,18 @@ package vo;
 import ui.userui.usermanagerui.UserListPane;
 import util.UserCategory;
 
+import java.util.HashSet;
+
 public class UserSearchVO {
-    UserCategory userCategory;
+    HashSet<UserCategory> userCategories;
 
-    public UserSearchVO(){}
+    public UserSearchVO(){ this.userCategories = new HashSet<>();}
 
-    public UserSearchVO(UserCategory userCategory) {
-        this.userCategory = userCategory;
+    public HashSet<UserCategory> getUserCategories() {
+        return userCategories;
     }
 
-    public UserCategory getUserCategory() {
-        return userCategory;
-    }
-
-    public void setUserCategory(UserCategory userCategory) {
-        this.userCategory = userCategory;
+    public void setUserCategories(HashSet<UserCategory> userCategories) {
+        this.userCategories = userCategories;
     }
 }

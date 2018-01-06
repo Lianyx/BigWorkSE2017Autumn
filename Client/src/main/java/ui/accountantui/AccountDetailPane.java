@@ -20,9 +20,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import ui.userui.usermanagerui.BoardController;
-import ui.userui.usermanagerui.Loading;
+
 import ui.userui.usermanagerui.UserDetailPane;
+import ui.util.BoardController;
+import ui.util.Loading;
 import ui.util.Refreshable;
 import vo.AccountListVO;
 import vo.UserVO;
