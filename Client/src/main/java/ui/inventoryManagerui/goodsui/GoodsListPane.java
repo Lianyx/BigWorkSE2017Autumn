@@ -16,8 +16,9 @@ import javafx.scene.control.Pagination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
-import ui.userui.usermanagerui.BoardController;
+
 import ui.userui.usermanagerui.FilterPane;
+import ui.util.BoardController;
 import ui.util.HistoricalRecord;
 import ui.util.Refreshable;
 import vo.inventoryVO.GoodsVO;
@@ -51,7 +52,7 @@ public class GoodsListPane extends Refreshable{
     @FXML
     JFXButton filter;
 
-    public GoodsListPane(GoodsblService goodsblService,BoardController boardController,StackPane mainpane) throws IOException {
+    public GoodsListPane(GoodsblService goodsblService, BoardController boardController, StackPane mainpane) throws IOException {
         super();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/inventoryui/goodui/goodsListPane.fxml"));
         fxmlLoader.setRoot(this);
@@ -66,11 +67,11 @@ public class GoodsListPane extends Refreshable{
 
 
         //这是点击filter按钮后弹出的筛选小窗口，弹出小窗口均可这样做，借鉴！
-        PopOver filterPopOver = new PopOver();
+       /* PopOver filterPopOver = new PopOver();
         filterPopOver.setDetachable(false);
         filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
         filterPopOver.setContentNode(new FilterPane());
-        filter.setOnMouseClicked(e -> filterPopOver.show(filter));
+        filter.setOnMouseClicked(e -> filterPopOver.show(filter));*/
 
         pagination = new Pagination((glv.getObservableList().size() /glv.getRowsPerPage()+1 ), 0);
         pagination.setPageFactory(glv::createPage);

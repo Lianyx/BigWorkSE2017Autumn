@@ -23,7 +23,7 @@
 
 
             <TopBar fx:id="bar" layoutX="160"/>
-            <fx:include  fx:id="board" source="/userui/board.fxml" layoutX="160" layoutY="40"/>
+            <fx:include  fx:id="board" source="/util/board.fxml" layoutX="160" layoutY="40"/>
 
             <JFXListView fx:id="navigation" layoutY="40.0" prefHeight="560.0" prefWidth="160.0">
                 <Label fx:id="goodsClassification" text="商品分类" style="-fx-padding: 8 0 8 10;">

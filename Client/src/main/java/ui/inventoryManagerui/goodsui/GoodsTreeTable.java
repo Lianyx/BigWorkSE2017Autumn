@@ -25,10 +25,10 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 import ui.inventoryManagerui.goodsui.GoodDetailPane;
 import ui.inventoryManagerui.goodsui.GoodsChosenItem;
-import ui.userui.usermanagerui.BoardController;
-import ui.userui.usermanagerui.IconButton;
-import ui.userui.usermanagerui.TokenLabel;
+import ui.util.BoardController;
 import ui.util.CircleImageView;
+import ui.util.IconButton;
+import ui.util.TokenLabel;
 import vo.inventoryVO.GoodsVO;
 
 import java.util.Set;

@@ -22,7 +22,8 @@ import po.GoodsClassificationPO;
 import ui.inventoryManagerui.goodsui.GoodsListPane;
 import ui.inventoryManagerui.inventoryGiftReceiptui.InventoryGiftPane;
 import ui.inventoryManagerui.goodsclassificationui.GoodsClassificationPane;
-import ui.userui.usermanagerui.BoardController;
+
+import ui.util.BoardController;
 import ui.util.HistoricalRecord;
 import ui.util.PaneSwitchAnimation;
 import ui.util.TopBar;
