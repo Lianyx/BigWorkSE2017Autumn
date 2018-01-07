@@ -38,7 +38,7 @@ public abstract class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> exte
 
         String poName = receiptPOClass.getName();
         String receiptDataName = poName.substring(poName.lastIndexOf(".") + 1, poName.length() - 2) + "Data";
-        System.out.println(receiptDataName);
+//        System.out.println(receiptDataName);
         receiptDataService = (ReceiptDataService<TP>) Naming.lookup(registrationpre + "/" + receiptDataName);
 
     }

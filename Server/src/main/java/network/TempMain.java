@@ -39,7 +39,7 @@ public class TempMain {
                 try {
                     Remote toBeRegistered = (Remote) c.newInstance();
                     String classFullName = c.getName();
-//                    System.out.println(classFullName.substring(classFullName.lastIndexOf(".") + 1));
+                    System.out.println("bind " + classFullName.substring(classFullName.lastIndexOf(".") + 1));
                     Naming.rebind(registrationpre + "/" + classFullName.substring(classFullName.lastIndexOf(".") + 1)
                             , toBeRegistered);
                 } catch (Exception e) {
@@ -47,7 +47,7 @@ public class TempMain {
                 }
             });
 
-
+            System.out.println();
             System.out.println("server starts");
         } catch (Exception e) {
             e.printStackTrace();

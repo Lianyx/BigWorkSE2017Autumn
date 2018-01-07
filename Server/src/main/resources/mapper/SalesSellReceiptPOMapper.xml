@@ -27,6 +27,9 @@
     <select id="selectByState" resultMap="resultMap">
         select * from SalesSellReceipt where receiptState=#{receiptState}
     </select>
+    <select id="selectByMold" resultMap="resultMap">
+        select * from SalesSellReceipt where dayId=#{dayId} and createTime=#{createTime}
+    </select>
     <select id="searchForBusiness" resultMap="resultMap">
         select * from SalesSellReceipt
         <where>

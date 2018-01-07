@@ -89,18 +89,18 @@ public class TestPromotionData {
     static void testC() throws RemoteException{
         PromotionData<CombinePromotionPO> cdao = new CombinePromotionData();
 
-        CombinePromotionPO cpo1 = cdao.getNew();
-        cpo1.setBeginTime(LocalDateTime.of(2017, 11, 1, 0, 0));
-        cpo1.setEndTime(LocalDateTime.of(2017, 12, 30, 0, 0));
-        cpo1.setDiscountAmount(40);
-        cpo1.setGoodsCombination(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO("0", 10), new PromotionGoodsItemPO("1", 2)});
-        cpo1.setComment("皮包买三送一啦" + "后来Combine");
-        cpo1.setPromotionState(PromotionState.DRAFT);
-
-        cdao.update(cpo1);
+//        CombinePromotionPO cpo1 = cdao.getNew();
+//        cpo1.setBeginTime(LocalDateTime.of(2017, 11, 1, 0, 0));
+//        cpo1.setEndTime(LocalDateTime.of(2017, 12, 30, 0, 0));
+//        cpo1.setDiscountAmount(40);
+//        cpo1.setGoodsCombination(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO("0", 10), new PromotionGoodsItemPO("1", 2)});
+//        cpo1.setComment("皮包买三送一啦" + "后来Combine");
+//        cpo1.setPromotionState(PromotionState.DRAFT);
+//
+//        cdao.update(cpo1);
 
         PromotionSearchCondition psc = new PromotionSearchCondition();
-        psc.setLastModifiedFloor(LocalDateTime.now().minusDays(30));
+//        psc.setLastModifiedFloor(LocalDateTime.now().minusDays(30));
         ArrayList<CombinePromotionPO> cs =  cdao.search(psc);
         cs.forEach(c-> System.out.println(c.getDayId()));
         CombinePromotionPO c = new CombinePromotionPO();
@@ -110,9 +110,9 @@ public class TestPromotionData {
     }
 
     public static void main(String[] args) throws RemoteException{
-//        testM();
-//        testT();
-//        testC();
+        testM();
+        testT();
+        testC();
 
         System.out.println("end Main");
     }

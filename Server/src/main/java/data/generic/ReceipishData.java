@@ -102,7 +102,7 @@ public abstract class ReceipishData<T extends ReceipishPO> extends CrudData<T> {
     }
 
     public T selectByMold(T receipishPO) {
-        T result;
+        T result = null;
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             ReceipishPOMapper<T> mapper = session.getMapper(getMapperClass());
             result = mapper.selectByMold(receipishPO);
