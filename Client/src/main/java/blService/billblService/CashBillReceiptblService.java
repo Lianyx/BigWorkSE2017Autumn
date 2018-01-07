@@ -1,10 +1,20 @@
 package blService.billblService;
 
-import blService.checkblService.ReceiptblService;
-import vo.billReceiptVO.CashBillReceiptVO;
+import util.ResultMessage;
+import vo.billReceiptVO.BillReceiptSearchVO;
+import vo.billReceiptVO.CashReceiptListVO;
+import vo.billReceiptVO.CashReceiptVO;
 
-import java.util.List;
+import java.util.Set;
 
-public interface CashBillReceiptblService extends ReceiptblService<CashBillReceiptVO>{
+public interface CashBillReceiptblService {
+
+    public int getDayId();
+    public ResultMessage add(CashReceiptVO cashReceiptVO);
+    public ResultMessage delete(String id);
+    public ResultMessage update(CashReceiptVO cashReceiptVO);
+    public Set<CashReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO, boolean isPur);
+    public CashReceiptVO showDetail(String id);
+    public Set<CashReceiptListVO> getALL(boolean isPur);
 
 }

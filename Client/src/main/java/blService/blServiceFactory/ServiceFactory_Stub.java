@@ -14,6 +14,7 @@ public class ServiceFactory_Stub {
             return (TF) serviceMap.get(serviceName);
         }
         String searchName="blServiceStub."+className.toLowerCase()+"_Stub."+className+"_Stub";
+        System.out.println(searchName);
         try {
             Class<?> implClass = Class.forName(searchName);
             Object result = implClass.newInstance();

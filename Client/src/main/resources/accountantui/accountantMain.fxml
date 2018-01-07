@@ -14,7 +14,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 
 
-
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <StackPane fx:id="mainpane" prefHeight="600.0" prefWidth="800.0" fx:controller="ui.accountantui.AccountantUIController" stylesheets="@../css/List.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
 
@@ -26,46 +26,59 @@
 
 
                 <JFXListView fx:id="navigation" layoutY="40" prefHeight="560" prefWidth="160">
-                    <Label fx:id="accountList" text="账户管理" style="-fx-padding: 8 0 8 10;">
-                        <graphic>
-                            <StackPane style="-fx-padding: 0 10 0 0;">
-                                <FontAwesomeIconView fx:id="accountListIcon" size="1em"/>
-                            </StackPane>
-                        </graphic>
-                    </Label>
-                    <Label fx:id="billReceiptList" text="制定单据" style="-fx-padding: 8 0 8 10;">
-                        <graphic>
-                            <StackPane style="-fx-padding: 0 10 0 0;">
-                                <FontAwesomeIconView fx:id="billReceiptListIcon" size="1em"/>
-                            </StackPane>
-                        </graphic>
-                    </Label>
-                    <Label fx:id="paymentBillList" text="付款单" style="-fx-padding: 0 0 0 50;">
-                    </Label>
-                    <Label fx:id="chargeBillList" text="收款单" style="-fx-padding: 0 0 0 50;">
-                    </Label>
-                    <Label fx:id="cashBillList" text="现金费用单" style="-fx-padding: 0 0 0 50;">
-                    </Label>
-                    <Label fx:id="businessList" text="查看账单" style="-fx-padding: 8 0 8 10;">
-                        <graphic>
-                            <StackPane style="-fx-padding: 0 10 0 0;">
-                                <FontAwesomeIconView fx:id="businessListIcon" size="1em"/>
-                            </StackPane>
-                        </graphic>
-                    </Label>
-                    <Label fx:id="salesDetail" text="销售明细" style="-fx-padding: 0 0 0 50;">
-                    </Label>
-                    <Label fx:id="businessProgress" text="经营历程" style="-fx-padding: 0 0 0 50;">
-                    </Label>
-                    <Label fx:id="businessCondition" text="经营情况" style="-fx-padding: 0 0 0 50;">
-                    </Label>
-                    <Label fx:id="initialList" text="期初建账" style="-fx-padding: 8 0 8 10;">
-                        <graphic>
-                            <StackPane style="-fx-padding: 0 10 0 0;">
-                                <FontAwesomeIconView fx:id="initialListIcon" size="1em"/>
-                            </StackPane>
-                        </graphic>
-                    </Label>
+                    <HBox fx:id="accountList">
+                        <Label>
+                            <padding><Insets bottom="8" left="5" top="8" /></padding>
+                            Account
+                            <graphic>
+                                <StackPane styleClass="custom-jfx-list-view-icon-container">
+                                    <MaterialDesignIconView glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)"/>
+                                </StackPane>
+                            </graphic>
+                        </Label>
+                    </HBox>
+                    <HBox fx:id="billReceiptList">
+                        <Label>
+                            <padding><Insets bottom="8" left="5" top="8" /></padding>
+                            Receipt
+                            <graphic>
+                                <StackPane styleClass="custom-jfx-list-view-icon-container">
+                                    <MaterialDesignIconView glyphName="RECEIPT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)"/>
+                                </StackPane>
+                            </graphic>
+                        </Label>
+                    </HBox>
+                    <HBox fx:id="paymentBillList"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>PaymentReceipt</Label></HBox>
+                    <HBox fx:id="chargeBillList"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>ChargeReceipt</Label></HBox>
+                    <HBox fx:id="cashBillList"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>CashReceipt</Label></HBox>
+
+                    <HBox fx:id="businessList">
+                        <Label>
+                            <padding><Insets bottom="8" left="5" top="8" /></padding>
+                            Business
+                            <graphic>
+                                <StackPane styleClass="custom-jfx-list-view-icon-container">
+                                    <MaterialDesignIconView glyphName="RECEIPT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)"/>
+                                </StackPane>
+                            </graphic>
+                        </Label>
+                    </HBox>
+                    <HBox fx:id="salesDetail"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>SalesDetail</Label></HBox>
+                    <HBox fx:id="businessProgress"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>BusinessProgress</Label></HBox>
+                    <HBox fx:id="businessCondition"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>BusinessCondition</Label></HBox>
+
+                    <HBox fx:id="initialList">
+                        <Label>
+                            <padding><Insets bottom="8" left="5" top="8" /></padding>
+                            Initial Account
+                            <graphic>
+                                <StackPane styleClass="custom-jfx-list-view-icon-container">
+                                    <MaterialDesignIconView glyphName="RECEIPT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)"/>
+                                </StackPane>
+                            </graphic>
+                        </Label>
+                    </HBox>
+
                 </JFXListView>
 
                 <AnchorPane fx:id="logopane"  prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: white">

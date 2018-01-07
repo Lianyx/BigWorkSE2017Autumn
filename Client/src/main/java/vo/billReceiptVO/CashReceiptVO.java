@@ -12,23 +12,25 @@ import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class CashBillReceiptVO extends ReceiptVO{
+public class CashReceiptVO extends ReceiptVO{
 
     private int accountID;
     private double total;
     private List<CashItemVO> cashList;
+    boolean isSell;
 
-    public CashBillReceiptVO(){
+    public CashReceiptVO(){
 
     }
 
 
 
-    public CashBillReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int accountID, double total, List<CashItemVO> cashList) {
+    public CashReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int accountID, double total, List<CashItemVO> cashList,boolean isSell) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
         this.accountID = accountID;
         this.total = total;
         this.cashList = cashList;
+        this.isSell = isSell;
     }
 
     @Override
@@ -72,5 +74,13 @@ public class CashBillReceiptVO extends ReceiptVO{
 
     public void setCashList(List<CashItemVO> cashList) {
         this.cashList = cashList;
+    }
+
+    public boolean isSell() {
+        return isSell;
+    }
+
+    public void setSell(boolean sell) {
+        isSell = sell;
     }
 }

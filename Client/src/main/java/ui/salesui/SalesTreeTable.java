@@ -83,6 +83,8 @@ public class SalesTreeTable extends ReceiptTreeTable<SalesReceiptListVO> {
             RowSetter(row,()->{ SalesReceiptPane salesReceiptPane = new SalesReceiptPane(row.getTreeItem().getValue().getId()); salesReceiptPane.refresh(true);});
             return row;
         });
+
+
         this.getColumns().addAll(choose, time, member,sum, state, more);
 
     }

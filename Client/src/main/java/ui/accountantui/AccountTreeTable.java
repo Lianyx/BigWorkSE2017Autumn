@@ -66,7 +66,7 @@ public class AccountTreeTable extends JFXTreeTableView<AccountListVO>{
         choose.setCellFactory(chooseCellFactory);
 
         JFXTreeTableColumn<AccountListVO, Integer> id = new JFXTreeTableColumn("ID");
-        id.setPrefWidth(100);
+        id.setPrefWidth(180);
         id.setCellValueFactory((TreeTableColumn.CellDataFeatures<AccountListVO, Integer> param) -> {
             if (id.validateValue(param)) {
                 return new ReadOnlyObjectWrapper(param.getValue().getValue().getID());
@@ -77,7 +77,7 @@ public class AccountTreeTable extends JFXTreeTableView<AccountListVO>{
 
 
         JFXTreeTableColumn<AccountListVO, String> username = new JFXTreeTableColumn("Name");
-        username.setPrefWidth(100);
+        username.setPrefWidth(180);
         username.setCellValueFactory((TreeTableColumn.CellDataFeatures<AccountListVO, String> param) -> {
             if (username.validateValue(param)) {
                 return new ReadOnlyObjectWrapper(param.getValue().getValue().getName());
@@ -87,7 +87,7 @@ public class AccountTreeTable extends JFXTreeTableView<AccountListVO>{
         });
 
         JFXTreeTableColumn<AccountListVO, Double> balance = new JFXTreeTableColumn("Balance");
-        balance.setPrefWidth(100);
+        balance.setPrefWidth(180);
         balance.setCellValueFactory((TreeTableColumn.CellDataFeatures<AccountListVO, Double> param) -> {
             if (balance.validateValue(param)) {
                 return new ReadOnlyObjectWrapper(param.getValue().getValue().getBalance());

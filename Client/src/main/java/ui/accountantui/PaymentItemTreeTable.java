@@ -8,6 +8,7 @@ import com.jfoenix.controls.cells.editors.IntegerTextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,11 +18,13 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import ui.salesui.SalesReceiptPane;
 import ui.stockui.StockListItemPane;
 import ui.util.BoardController;
 import ui.util.ListPopup;
 import vo.ListGoodsItemVO;
 import vo.billReceiptVO.TransferItemVO;
+import vo.receiptVO.SalesReceiptListVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +35,7 @@ public class PaymentItemTreeTable extends JFXTreeTableView<TransferItemVO>{
 
     private ObservableList<TransferItemVO> observableList = FXCollections.observableArrayList();
 
-
+    private SimpleDoubleProperty sum = new SimpleDoubleProperty(0);
     //StockblService stockblService;
     PaymentBillReceiptblService paymentBillReceiptblService;
     BoardController boardController;
@@ -168,4 +171,15 @@ public class PaymentItemTreeTable extends JFXTreeTableView<TransferItemVO>{
         });
     }
 
+    public double getSum() {
+        return sum.get();
+    }
+
+    public SimpleDoubleProperty sumProperty() {
+        return sum;
+    }
+
+    public void setSum(double sum) {
+        this.sum.set(sum);
+    }
 }

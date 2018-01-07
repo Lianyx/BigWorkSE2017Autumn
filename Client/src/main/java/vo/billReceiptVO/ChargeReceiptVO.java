@@ -2,9 +2,9 @@ package vo.billReceiptVO;
 
 import blService.checkblService.ReceiptblService;
 import javafx.scene.Node;
+import po.receiptPO.ChargeBillReceiptPO;
 import po.receiptPO.PaymentBillReceiptPO;
 import util.ReceiptState;
-
 import vo.receiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;
@@ -13,22 +13,25 @@ import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class PaymentBillReceiptVO extends ReceiptVO {
+public class ChargeReceiptVO extends ReceiptVO{
 
 
     private int clientID;
     private List<TransferItemVO> transferList;
     private double sum;
+    private boolean isSell;
 
-    public PaymentBillReceiptVO(){
+    public ChargeReceiptVO(){
 
     }
 
-    public PaymentBillReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState,int clientID, List<TransferItemVO> transferList, double sum) {
+    public ChargeReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientID, List<TransferItemVO> transferList, double sum,boolean isSell) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
-        this.clientID = clientID;
+
+        this.clientID =clientID;
         this.transferList = transferList;
         this.sum = sum;
+        this.isSell = isSell;
     }
 
     @Override
@@ -36,8 +39,8 @@ public class PaymentBillReceiptVO extends ReceiptVO {
         return null;
     }
 
-    public PaymentBillReceiptPO toPO(){
-        return new PaymentBillReceiptPO();
+    public ChargeBillReceiptPO toPO(){
+        return new ChargeBillReceiptPO();
     }
 
     @Override
@@ -50,11 +53,11 @@ public class PaymentBillReceiptVO extends ReceiptVO {
         return null;
     }
 
-    public int getclientID() {
+    public int getClientID() {
         return clientID;
     }
 
-    public void setclientID(int clientID) {
+    public void setClientID(int clientID) {
         this.clientID = clientID;
     }
 
@@ -74,6 +77,11 @@ public class PaymentBillReceiptVO extends ReceiptVO {
         this.sum = sum;
     }
 
+    public boolean isSell() {
+        return isSell;
+    }
+
+    public void setSell(boolean sell) {
+        isSell = sell;
+    }
 }
-
-
