@@ -74,17 +74,17 @@ public class GoodsTreeTable extends ReceiptTreeTable<GoodsVO> {
         inventoryNum.setPrefWidth(120);
         columnDecorator.setupCellValueFactory(inventoryNum,s->new ReadOnlyObjectWrapper<>(s.getInventoryNum()));
 
-   /*   *//*  JFXTreeTableColumn<GoodsVO, Boolean> more = new JFXTreeTableColumn("");
+       /* JFXTreeTableColumn<GoodsVO, Boolean> more = new JFXTreeTableColumn("");
         more.setPrefWidth(30);
         columnDecorator.setupCellValueFactory(more, s -> new ReadOnlyObjectWrapper(s.isMultiple()));
-        more.setCellFactory(new Callback<TreeTableColumn<GoodsVO, Boolean>, TreeTableCell<GoodsVO, Boolean>>() {*//*
-           *//* @Override
+        more.setCellFactory(new Callback<TreeTableColumn<GoodsVO, Boolean>, TreeTableCell<GoodsVO, Boolean>>() {
+            @Override
             public TreeTableCell<GoodsVO, Boolean> call(TreeTableColumn<GoodsVO, Boolean> param) {
                 MultiCell multiCell = new MultiCell();
                 multiCell.setRunnable1(()->{UserDetailPane userDetailPane = new UserDetailPane(((GoodsVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getUserid()); userDetailPane.refresh(true);});
                 multiCell.setRunnable2(()->{userManagerblService.delete(((GoodsVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getUserid()); BoardController.getBoardController().refresh();});
                 return multiCell;
-            }*//*
+            }
         });*/
     }
 

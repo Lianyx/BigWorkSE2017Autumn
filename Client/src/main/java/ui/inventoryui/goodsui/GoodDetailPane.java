@@ -65,7 +65,7 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
             }
         });
 
-       // goodName.disableProperty.
+       goodName.disableProperty().bind(modifyState.not());
     }
 
     public GoodDetailPane(boolean isAdd) {
