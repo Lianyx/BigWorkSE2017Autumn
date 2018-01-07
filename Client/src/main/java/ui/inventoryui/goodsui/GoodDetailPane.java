@@ -1,9 +1,13 @@
 package ui.inventoryui.goodsui;
 
+import blService.blServiceFactory.ServiceFactory_Stub;
+import blService.goodsblService.GoodsblService;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -11,121 +15,96 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import ui.util.BoardController;
+import ui.util.ReceiptDetailPane;
 import ui.util.Refreshable;
 import vo.inventoryVO.GoodsVO;
 
 
 import java.io.File;
+import java.time.LocalDate;
 
-public class GoodDetailPane extends Refreshable {
+import static ui.util.ValidatorDecorator.RequireValid;
 
-    GoodsVO goodsVO;
+public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
 
-    final FileChooser fileChooser = new FileChooser();
+    String goodId = "-1";
 
-    BoardController boardController;
+    GoodsblService goodsblService;
+
+    private static String g = "";
+    private static String f = "";
+    private static String tw = "";
 
     @FXML
-    TextField goodName;
+    JFXTextField goodName;
+
     @FXML
-    TextField goodType;
+    JFXButton reset;
+
     @FXML
-    TextField goodId;
-    @FXML
-    TextField classifyId;
-    @FXML
-    TextField inventoryNum;
-    @FXML
-    TextField purPrice;
+    Label date;
+
     @FXML
     TextField salePrice;
-    @FXML
-    TextField recentPurPrice;
-    @FXML
-    TextField recentSalePrice;
-    @FXML
-    TextField alarmNum;
-    @FXML
-    ImageView imageview;
-    @FXML
-    JFXButton sure;
-    @FXML
-    JFXButton modify;
 
+    public GoodDetailPane(String id) {
+        this(false);
+        this.goodId = id;
 
-    SimpleBooleanProperty modifyState = new SimpleBooleanProperty(false);
+        delete.setVisible(true);
+        modify.setVisible(true);
+        save.setText("Save");
+        this.modifyState.bind(modify.modifyProperty());
+        this.modifyState.addListener((b, o, n) -> {
+            if (!n) {
+                if (valid()) {
+                    modify.modifyProperty().set(false);
+                } else {
+                    modify.modifyProperty().set(true);
+                }
+            }
+        });
 
+       // goodName.disableProperty.
+    }
 
-    public GoodDetailPane(GoodsVO goodsVO,BoardController boardController){
-        super();
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/inventoryui/goodui/goodsdetail.fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-        }catch (Exception e){
-            e.printStackTrace();
+    public GoodDetailPane(boolean isAdd) {
+        super("inventoryui/goodui/goodsdetail.fxml");
+        goodsblService = ServiceFactory_Stub.getService(GoodsblService.class.getName());
+
+        delete.setVisible(false);
+        date.setText(LocalDate.now().toString());
+
+        RequireValid(goodName);
+
+        updateState.set(false);
+        if (isAdd) {
+            updateState.set(true);
+            switchPane(true);
         }
 
-        this.boardController = boardController;
-        this.goodsVO = goodsVO;
-
-        goodName.setText(goodsVO.getGoodName());
-        goodId.setText(goodsVO.getId());
-        goodType.setText(goodsVO.getGoodType());
-        inventoryNum.setText(Integer.toString(goodsVO.getInventoryNum()));
-        classifyId.setText(goodsVO.getClassifyId());
-        purPrice.setText(Double.toString(goodsVO.getPurPrice()));
-        salePrice.setText(Double.toString(goodsVO.getSalePrice()));
-        recentPurPrice.setText(Double.toString(goodsVO.getRecentPurPrice()));
-        recentSalePrice.setText(Double.toString(goodsVO.getRecentSalePrice()));
-        alarmNum.setText(Integer.toString(goodsVO.getAlarmNumber()));
-
-        //imageview.setImage(userListVO.getImage());
-    }
-
-    @FXML
-    public void choosefile(){
-        configureFileChooser(fileChooser);
-        File file = fileChooser.showOpenDialog(this.getScene().getWindow());
-        //  Image image;
-        System.out.println(file.getPath());
-  /*      if(image.getWidth()!=image.getHeight()){
-            JFXDialog dialog=new JFXDialog();
-            dialog.setTransitionType(JFXDialog.DialogTransition.CENTER);
-            StackPane stackPane=new StackPane();
-            stackPane.getChildren().add(new Label("you are stupid."));
-            dialog.show(stackPane);
-        }*/
 
     }
 
-    private static void configureFileChooser(
-            final FileChooser fileChooser) {
-        fileChooser.setTitle("Pictures Choose");
-        fileChooser.setInitialDirectory(
-                new File(System.getProperty("user.home"))
-        );
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Images", "*.*"),
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png")
-        );
+    @Override
+    public void delete() {
 
     }
 
-    //现在才知道fxml的方法也可以直接@FXML
-    @FXML
-    public void modify(){
-        modifyState.setValue(!modifyState.getValue());
-        if(modifyState.getValue()==true){
-            modify.setBackground(new Background(new BackgroundFill(javafx.scene.paint.Color.valueOf("#DA4CEE"), modify.getBackground() == null ? null : modify.getBackground().getFills().get(0).getRadii(), null)));
-        }else{
-            modify.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, modify.getBackground().getFills().get(0).getRadii(), null)));
+    @Override
+    public void savePendingReceipt() {
 
-        }
     }
 
+    @Override
+    public void saveDraftReceipt() {
+
+    }
+
+    @Override
+    public boolean valid() {
+        return false;
+    }
 
     @Override
     public void refresh(boolean toSwitch) {

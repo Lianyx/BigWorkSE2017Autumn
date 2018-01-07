@@ -52,7 +52,7 @@ public class GoodsTreeTable extends ReceiptTreeTable<GoodsVO> {
         goodId.setPrefWidth(120);
         columnDecorator.setupCellValueFactory(goodId,s->new ReadOnlyObjectWrapper<>(s.getId()));
 
-     /*   JFXTreeTableColumn<GoodsVO, String> goodType = new JFXTreeTableColumn("GoodType");
+        JFXTreeTableColumn<GoodsVO, String> goodType = new JFXTreeTableColumn("GoodType");
         goodType.setPrefWidth(125);
         columnDecorator.setupCellValueFactory(goodType,s->new ReadOnlyObjectWrapper(s.getGoodType()));
         goodType.setCellFactory(new Callback<TreeTableColumn<GoodsVO, String>, TreeTableCell<GoodsVO, String>>() {
@@ -63,11 +63,28 @@ public class GoodsTreeTable extends ReceiptTreeTable<GoodsVO> {
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
                         if(item!=null){
-                            setButtonStyle(UserCategory.color.get(item));
+                            setButtonStyle("-fx-text-fill: white;-fx-background-radius: 10; -fx-background-color:red");
                         }
                     }
                 };
             }
+        });
+
+        JFXTreeTableColumn<GoodsVO, Integer> inventoryNum = new JFXTreeTableColumn("Num");
+        inventoryNum.setPrefWidth(120);
+        columnDecorator.setupCellValueFactory(inventoryNum,s->new ReadOnlyObjectWrapper<>(s.getInventoryNum()));
+
+   /*   *//*  JFXTreeTableColumn<GoodsVO, Boolean> more = new JFXTreeTableColumn("");
+        more.setPrefWidth(30);
+        columnDecorator.setupCellValueFactory(more, s -> new ReadOnlyObjectWrapper(s.isMultiple()));
+        more.setCellFactory(new Callback<TreeTableColumn<GoodsVO, Boolean>, TreeTableCell<GoodsVO, Boolean>>() {*//*
+           *//* @Override
+            public TreeTableCell<GoodsVO, Boolean> call(TreeTableColumn<GoodsVO, Boolean> param) {
+                MultiCell multiCell = new MultiCell();
+                multiCell.setRunnable1(()->{UserDetailPane userDetailPane = new UserDetailPane(((GoodsVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getUserid()); userDetailPane.refresh(true);});
+                multiCell.setRunnable2(()->{userManagerblService.delete(((GoodsVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getUserid()); BoardController.getBoardController().refresh();});
+                return multiCell;
+            }*//*
         });*/
     }
 

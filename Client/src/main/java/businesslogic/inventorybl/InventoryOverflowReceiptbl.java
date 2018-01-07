@@ -28,8 +28,7 @@ import java.util.Set;
 public class InventoryOverflowReceiptbl extends Receiptbl<InventoryOverflowReceiptVO,InventoryOverflowReceiptPO> {
     GoodsUpdateInfo info;
 
-    public InventoryOverflowReceiptbl(Class<? extends ReceiptVO> receiptVOClass, Class<? extends ReceiptPO> receiptPOClass,
-                                      String className) throws RemoteException, NotBoundException, MalformedURLException {
+    public InventoryOverflowReceiptbl() throws RemoteException, NotBoundException, MalformedURLException {
         super(InventoryOverflowReceiptVO.class,InventoryOverflowReceiptPO.class);
         info = new GoodsUpdate();
     }

@@ -26,8 +26,7 @@ import java.util.Set;
 public class InventoryWarningReceiptbl extends Receiptbl<InventoryWarningReceiptVO,InventoryWarningReceiptPO> {
     GoodsUpdateInfo info;
 
-    public InventoryWarningReceiptbl(Class<? extends ReceiptVO> receiptVOClass, Class<? extends ReceiptPO> receiptPOClass,
-                                     String className) throws RemoteException, NotBoundException, MalformedURLException {
+    public InventoryWarningReceiptbl() throws RemoteException, NotBoundException, MalformedURLException {
         super(InventoryWarningReceiptVO.class,InventoryWarningReceiptPO.class);
         info = new GoodsUpdate();
     }
