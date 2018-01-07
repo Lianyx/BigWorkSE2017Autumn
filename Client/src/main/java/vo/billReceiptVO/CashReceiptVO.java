@@ -1,8 +1,14 @@
 package vo.billReceiptVO;
 
+import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
 import javafx.scene.Node;
+import po.CashItemPO;
+import po.TransferItemPO;
 import po.receiptPO.CashBillReceiptPO;
+import po.receiptPO.PaymentBillReceiptPO;
+import ui.accountantui.CashDetailPane;
+import ui.accountantui.PaymentDetailPane;
 import util.ReceiptState;
 import vo.receiptVO.ReceiptVO;
 
@@ -34,22 +40,30 @@ public class CashReceiptVO extends ReceiptVO{
     }
 
     @Override
-    protected String getCodeName() {
-        return "";
-    }
-
-    public CashBillReceiptPO toPO(){
-        return new CashBillReceiptPO();
+    public String getCodeName() {
+        return "XJFYD";
     }
 
     @Override
-    public ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException {
+    public CashBillReceiptPO toPO(){
+        CashBillReceiptPO result = toReceiptPO(CashBillReceiptPO.class);
+        result.setAccountID(accountID);
+        CashItemPO temp[] = new CashItemPO[cashList.size()];
+        for(int i=0;i<cashList.size();i++){
+            temp[i] = cashList.get(i).toPO();
+        }
+        result.setItemList(temp);
+        return result;
+    }
+
+    @Override
+    public CheckInfo<CashReceiptVO> getService() throws RemoteException, NotBoundException, MalformedURLException {
         return null;
     }
 
     @Override
     public Node getDetailPane() {
-        return null;
+        return new CashDetailPane(true);
     }
 
     public int getAccountID() {

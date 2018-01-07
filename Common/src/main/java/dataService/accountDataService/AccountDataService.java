@@ -5,9 +5,10 @@ import util.ResultMessage;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
-public interface AccountDataService extends Remote {
+public interface AccountDataService extends Remote{
 
     public int getID (String name)throws RemoteException;
 
@@ -19,7 +20,7 @@ public interface AccountDataService extends Remote {
 
     public ResultMessage update(AccountPO accountPO)throws RemoteException;
 
-    public List<AccountPO> selectInEffect(String keyword)throws RemoteException;
+    public ArrayList<AccountPO> selectInEffect(String keyword)throws RemoteException;
 
-    public List<AccountPO> getAll()throws RemoteException;
+    public ArrayList<AccountPO> getAll()throws RemoteException;
 }

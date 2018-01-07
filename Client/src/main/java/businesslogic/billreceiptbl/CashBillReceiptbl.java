@@ -10,16 +10,15 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-/*public class CashBillReceiptbl extends Receiptbl<CashReceiptVO,CashBillReceiptPO> implements CashBillReceiptblService{
+public class CashBillReceiptbl extends Receiptbl<CashReceiptVO,CashBillReceiptPO>{
 
     public CashBillReceiptbl() throws RemoteException, NotBoundException, MalformedURLException {
         super(CashReceiptVO.class, CashBillReceiptPO.class);
     }
 
     @Override
-    public ResultMessage approve(CashBillReceiptPO receiptPO) throws RemoteException {
+    public ResultMessage approve(CashReceiptVO receiptVO) throws RemoteException {
         return null;
     }
 
 }
-*/

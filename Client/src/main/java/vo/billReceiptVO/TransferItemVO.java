@@ -2,6 +2,7 @@ package vo.billReceiptVO;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.*;
+import po.TransferItemPO;
 
 import java.io.Serializable;
 
@@ -52,4 +53,13 @@ public class TransferItemVO extends RecursiveTreeObject<TransferItemVO> implemen
     public void setComment(String comment) {
         this.comment.set(comment);
     }
+
+    public TransferItemPO toPO(){
+        int a = Integer.parseInt(accountID.toString());
+        double b=  Double.parseDouble(sum.toString());
+        String c = comment.toString();
+        TransferItemPO result = new TransferItemPO(a,b,c);
+        return result;
+    }
+
 }

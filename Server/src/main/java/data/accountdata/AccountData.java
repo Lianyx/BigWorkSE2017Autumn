@@ -1,6 +1,7 @@
 package data.accountdata;
 
 
+import annotations.RMIRemote;
 import dataService.accountDataService.AccountDataService;
 import mapper.AccountPOMapper;
 import mybatis.MyBatisUtil;
@@ -8,19 +9,21 @@ import org.apache.ibatis.session.SqlSession;
 import po.AccountPO;
 import util.ResultMessage;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.List;
 
-public class AccountData implements AccountDataService{
+@RMIRemote
+public class AccountData extends UnicastRemoteObject implements AccountDataService{
 
-    /*private AccountPOMapper mapperClass = null;
+    public AccountData()throws RemoteException{
 
-
-    public AccountData(AccountPOMapper mapperClass){
-        this.mapperClass = mapperClass;
-    }*/
+    }
 
     @Override
-    public int getID(String name){
+    public int getID(String name)throws RemoteException{
         int result=0;
 
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
@@ -31,7 +34,7 @@ public class AccountData implements AccountDataService{
     }
 
     @Override
-    public AccountPO getAccountByName(String name){
+    public AccountPO getAccountByName(String name)throws RemoteException{
         AccountPO accountPO;
         try(SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession()){
             AccountPOMapper mapper = sqlSession.getMapper(AccountPOMapper.class);
@@ -41,7 +44,7 @@ public class AccountData implements AccountDataService{
     }
 
     @Override
-    public ResultMessage insert(AccountPO accountPO) {
+    public ResultMessage insert(AccountPO accountPO) throws RemoteException{
 
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             AccountPOMapper mapper = session.getMapper(AccountPOMapper.class);
@@ -52,7 +55,7 @@ public class AccountData implements AccountDataService{
     }
 
     @Override
-    public ResultMessage update(AccountPO accountPO) {
+    public ResultMessage update(AccountPO accountPO) throws RemoteException{
 
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             AccountPOMapper mapper = session.getMapper(AccountPOMapper.class);
@@ -63,7 +66,7 @@ public class AccountData implements AccountDataService{
     }
 
     @Override
-    public ResultMessage delete(int ID) {
+    public ResultMessage delete(int ID) throws RemoteException{
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             AccountPOMapper mapper = session.getMapper(AccountPOMapper.class);
             mapper.delete(ID);
@@ -73,9 +76,9 @@ public class AccountData implements AccountDataService{
     }
 
     @Override
-    public List<AccountPO> selectInEffect(String keyword) {
+    public ArrayList<AccountPO> selectInEffect(String keyword) throws RemoteException{
 
-        List<AccountPO> resultList;
+        ArrayList<AccountPO> resultList;
 
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             AccountPOMapper mapper = session.getMapper(AccountPOMapper.class);
@@ -86,9 +89,9 @@ public class AccountData implements AccountDataService{
     }
 
     @Override
-    public List<AccountPO> getAll(){
+    public ArrayList<AccountPO> getAll()throws RemoteException{
 
-        List<AccountPO> resultList;
+        ArrayList<AccountPO> resultList;
 
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             AccountPOMapper mapper = session.getMapper(AccountPOMapper.class);

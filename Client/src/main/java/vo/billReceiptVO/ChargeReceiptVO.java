@@ -1,9 +1,13 @@
 package vo.billReceiptVO;
 
+import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
 import javafx.scene.Node;
+import po.TransferItemPO;
 import po.receiptPO.ChargeBillReceiptPO;
 import po.receiptPO.PaymentBillReceiptPO;
+import ui.accountantui.ChargeDetailPane;
+import ui.accountantui.PaymentDetailPane;
 import util.ReceiptState;
 import vo.receiptVO.ReceiptVO;
 
@@ -35,22 +39,30 @@ public class ChargeReceiptVO extends ReceiptVO{
     }
 
     @Override
-    protected String getCodeName() {
-        return null;
-    }
-
-    public ChargeBillReceiptPO toPO(){
-        return new ChargeBillReceiptPO();
+    public String getCodeName() {
+        return "SKD";
     }
 
     @Override
-    public ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException {
+    public ChargeBillReceiptPO toPO(){
+        ChargeBillReceiptPO result = toReceiptPO(ChargeBillReceiptPO.class);
+        result.setClientID(clientID);
+        TransferItemPO temp[] = new TransferItemPO[transferList.size()];
+        for(int i=0;i<transferList.size();i++){
+            temp[i] = transferList.get(i).toPO();
+        }
+        result.setTransferList(temp);
+        return result;
+    }
+
+    @Override
+    public CheckInfo<ChargeReceiptVO> getService() throws RemoteException, NotBoundException, MalformedURLException {
         return null;
     }
 
     @Override
     public Node getDetailPane() {
-        return null;
+        return new ChargeDetailPane(true);
     }
 
     public int getClientID() {

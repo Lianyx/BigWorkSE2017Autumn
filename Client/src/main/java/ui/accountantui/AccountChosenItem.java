@@ -1,6 +1,5 @@
 package ui.accountantui;
 
-import businesslogic.accountbl.Account;
 import vo.AccountListVO;
 
 import java.util.ArrayList;

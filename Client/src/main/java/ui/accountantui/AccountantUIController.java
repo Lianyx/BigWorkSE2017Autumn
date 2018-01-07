@@ -8,6 +8,7 @@ import blServiceStub.accountblservice_Stub.AccountblService_Stub;
 import blServiceStub.cashbillreceiptblservice_Stub.CashBillReceiptblService_Stub;
 import blServiceStub.chargebillreceiptblservice_Stub.ChargeBillReceiptblService_Stub;
 import blServiceStub.paymentbillreceiptblservice_Stub.PaymentBillReceiptblService_Stub;
+import businesslogic.accountbl.Accountbl;
 import com.jfoenix.controls.JFXListView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -56,21 +57,19 @@ public class AccountantUIController implements Initializable{
 
         bar.setBoardController(boardController);
         BoardController.setBoardController(boardController);
-        accountblService = new AccountblService_Stub();
+
         paymentBillReceiptblService = new PaymentBillReceiptblService_Stub();
         chargeBillReceiptblService = new ChargeBillReceiptblService_Stub();
         cashBillReceiptblService = new CashBillReceiptblService_Stub();
         try {
+
+            accountblService = new Accountbl();
 
             boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150),  board));
 
             AccountListPane tempaccountListPane = new AccountListPane(accountblService,boardController,mainpane);
             tempaccountListPane.historyAdd = true;
             tempaccountListPane.refresh(false);
-
-            //board.getChildren().setAll(tempaccountListPane);
-            //HistoricalRecord.addPane(tempaccountListPane);
-            //boardController.switchTo(tempaccountListPane);
 
             navigation.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
                         try {

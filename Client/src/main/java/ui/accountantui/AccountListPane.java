@@ -5,7 +5,9 @@ import blServiceStub.accountblservice_Stub.AccountblService_Stub;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
@@ -21,8 +23,12 @@ import ui.util.BoardController;
 import ui.util.HistoricalRecord;
 import ui.util.Refreshable;
 import vo.AccountListVO;
+import vo.billReceiptVO.CashReceiptListVO;
 
+import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class AccountListPane extends Refreshable{
 
@@ -31,6 +37,8 @@ public class AccountListPane extends Refreshable{
     @FXML
     BorderPane borderpane;
 
+    @FXML
+    JFXTextField searchField;
 
     BoardController boardController;
 
@@ -45,7 +53,7 @@ public class AccountListPane extends Refreshable{
 
     List<AccountListVO> list;
 
-
+    SimpleStringProperty match = new SimpleStringProperty("");
 
     @FXML
     JFXButton filter;
@@ -82,21 +90,25 @@ public class AccountListPane extends Refreshable{
 
     @FXML
     public void deleteList(){
-
-        for(AccountListVO accountListVO: AccountChosenItem.getList()) {
-            ulv.removeAccount(accountListVO);
-            ((AccountblService_Stub)accountblService).delete(accountListVO.getID());
+        try{
+            for(AccountListVO accountListVO: AccountChosenItem.getList()) {
+                ulv.removeAccount(accountListVO);
+                accountblService.delete(accountListVO.getID());
+            }
+            int current=pagination.getCurrentPageIndex();
+            pagination = new Pagination((ulv.getObservableList().size() /ulv.getRowsPerPage()+1 ), 0);
+            pagination.setPageFactory(ulv::createPage);
+            pagination.setPrefSize(600,450);
+            borderpane.setCenter(pagination);
+            if(current-1>=0)
+                pagination.setCurrentPageIndex(current-1);
+            else
+                pagination.setCurrentPageIndex(0);
+            AccountChosenItem.getList().clear();
+        }catch (RemoteException e){
+            e.printStackTrace();
         }
-        int current=pagination.getCurrentPageIndex();
-        pagination = new Pagination((ulv.getObservableList().size() /ulv.getRowsPerPage()+1 ), 0);
-        pagination.setPageFactory(ulv::createPage);
-        pagination.setPrefSize(600,450);
-        borderpane.setCenter(pagination);
-        if(current-1>=0)
-            pagination.setCurrentPageIndex(current-1);
-        else
-            pagination.setCurrentPageIndex(0);
-        AccountChosenItem.getList().clear();
+
     }
 
     @FXML
@@ -104,6 +116,23 @@ public class AccountListPane extends Refreshable{
         AccountAddPane accountAddPane = new AccountAddPane(accountblService);
         JFXDialog dialog = new JFXDialog(mainpane,accountAddPane,JFXDialog.DialogTransition.CENTER);
         dialog.show();
+    }
+
+    @FXML
+    public void search(){
+        if (searchField.getText() != ""&&searchField.getText() != null) {
+            match.setValue(searchField.getText().toLowerCase());
+            Set<CashReceiptListVO> hashSet;
+            List<AccountListVO> temp;
+            temp = list.stream().filter(
+                    s -> s.getName().toLowerCase().contains(match.get())
+            ).collect(Collectors.toList());
+            ulv.setAccount(temp);
+            pagination.setPageCount(ulv.getObservableList().size() / ulv.getRowsPerPage() + 1);
+            ulv.createPage(0);
+            borderpane.setBottom(pagination);
+            switchPane(false);
+        }
     }
 
 

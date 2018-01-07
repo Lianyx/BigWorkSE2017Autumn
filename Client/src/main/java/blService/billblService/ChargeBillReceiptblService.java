@@ -15,4 +15,17 @@ public interface ChargeBillReceiptblService {
     public Set<ChargeReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO, boolean isPur);
     public ChargeReceiptVO showDetail(String id);
     public Set<ChargeReceiptListVO> getALL(boolean isPur);
+
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -17,6 +17,8 @@ import vo.AccountListVO;
 import vo.UserListVO;
 import vo.UserVO;
 
+import java.rmi.RemoteException;
+
 public class AccountAddPane extends AnchorPane {
 
     @FXML
@@ -62,8 +64,12 @@ public class AccountAddPane extends AnchorPane {
     }
     @FXML
     public void save(){
-        accountListVO = new AccountListVO(name.getText(),Double.parseDouble(balance.getText()));
-        ((AccountblService_Stub)accountblService).add(accountListVO);
+        try{
+            accountListVO = new AccountListVO(name.getText(),Double.parseDouble(balance.getText()));
+            accountblService.add(accountListVO);
+        }catch (RemoteException e){
+            e.printStackTrace();
+        }
     }
 
     public AccountListVO getAccountListVO() {

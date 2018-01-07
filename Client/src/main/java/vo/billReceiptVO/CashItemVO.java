@@ -5,6 +5,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import po.CashItemPO;
 
 import java.io.Serializable;
 
@@ -56,4 +57,10 @@ public class CashItemVO extends RecursiveTreeObject<CashItemVO> implements Seria
     public void setComment(String comment) {
         this.comment.set(comment);
     }
+
+    public CashItemPO toPO(){
+        return new CashItemPO(name.toString(),Double.parseDouble(price.toString()),comment.toString());
+
+    }
+
 }

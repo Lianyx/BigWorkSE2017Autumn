@@ -8,9 +8,10 @@
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <fx:root type="AnchorPane" id="accountListPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
          prefHeight="560.0" prefWidth="640.0">
-    <JFXTextField layoutX="27.0" layoutY="28.0" prefHeight="30.0" prefWidth="150.0"/>
 
-    <JFXRippler fx:id="search" layoutX="177" layoutY="22" maskType="CIRCLE" position="BACK">
+    <JFXTextField fx:id="searchField" layoutX="27.0" layoutY="28.0" prefHeight="30.0" prefWidth="150.0"/>
+
+    <JFXRippler fx:id="search" onMouseClicked="#search" layoutX="177" layoutY="22" maskType="CIRCLE" position="BACK">
         <StackPane style="-fx-padding: 8;" translateY="5">
             <FontAwesomeIconView glyphName="SEARCH" size="1.5em" styleClass="icon"/>
         </StackPane>
