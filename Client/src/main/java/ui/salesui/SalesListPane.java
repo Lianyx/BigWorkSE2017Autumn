@@ -25,8 +25,6 @@ import java.util.stream.Collectors;
 
 public class SalesListPane extends ReceiptListPane<SalesReceiptListVO> {
 
-    static Set<SalesReceiptListVO> set = new HashSet<>();
-
     SalesblService salesblService;
 
     SimpleBooleanProperty isSell = new SimpleBooleanProperty();
@@ -65,14 +63,14 @@ public class SalesListPane extends ReceiptListPane<SalesReceiptListVO> {
 
     @Override
     public void search() {
-        if (searchField.getText() != ""&&searchField.getText() != null) {
+        if (!searchField.getText().equals("")) {
             match.setValue(searchField.getText().toLowerCase());
             Set<SalesReceiptListVO> hashSet;
             hashSet = set.stream().filter(
-                    s -> s.getReceiptState().name().toLowerCase().contains(match.get()) ||
-                            s.getId().toLowerCase().contains(match.get())||
-                            s.getMemberName().toLowerCase().contains(match.get())||
-                            s.getStockName().toLowerCase().contains(match.get())
+                    s -> s.getReceiptState().name().contains(match.get()) ||
+                            s.getId().contains(match.get())||
+                            s.getMemberName().contains(match.get())||
+                            s.getStockName().contains(match.get())
             ).collect(Collectors.toSet());
             receiptTreeTable.setReceipts(hashSet);
             pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
@@ -102,8 +100,8 @@ public class SalesListPane extends ReceiptListPane<SalesReceiptListVO> {
                 }
                 return false;
             };
-            GetTask<HashSet<SalesReceiptListVO>, SalesblService> getTask =
-                    new GetTask<>(() -> {
+            GetTask getTask =
+                    new GetTask(() -> {
                         receiptTreeTable.setReceipts(set);
                         pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
                         receiptTreeTable.createPage(0);

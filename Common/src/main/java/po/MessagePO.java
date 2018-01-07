@@ -1,5 +1,6 @@
 package po;
 
+import sun.plugin2.message.Message;
 import util.EventCategory;
 import util.UserCategory;
 
@@ -7,23 +8,49 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class MessagePO {
-    private int ID;
+    private int messageID;
     private LocalDateTime createTime;
     private EventCategory eventCategory;
-    private UserCategory userCategory;
-    private String userName;
+    private UserCategory from;
+    private UserCategory to;
+    private String userNameFrom;
+    private String userNameto;
     private String comment;
+    private boolean hasRead = false;
 
-    public MessagePO(int ID, LocalDateTime createTime, EventCategory eventCategory, UserCategory userCategory, String userName, String comment) {
-        this.ID = ID;
+
+    public MessagePO() {
+    }
+
+    public MessagePO(LocalDateTime createTime, EventCategory eventCategory, UserCategory from, UserCategory to, String userNameFrom, String userNameto, String comment) {
         this.createTime = createTime;
         this.eventCategory = eventCategory;
-        this.userCategory = userCategory;
-        this.userName = userName;
+        this.from = from;
+        this.to = to;
+        this.userNameFrom = userNameFrom;
+        this.userNameto = userNameto;
         this.comment = comment;
     }
 
-    public MessagePO(){}
+    public MessagePO(int messageID, LocalDateTime createTime, EventCategory eventCategory, UserCategory from, UserCategory to, String userNameFrom, String userNameto, String comment) {
+        this.messageID = messageID;
+        this.createTime = createTime;
+        this.eventCategory = eventCategory;
+        this.from = from;
+        this.to = to;
+        this.userNameFrom = userNameFrom;
+        this.userNameto = userNameto;
+        this.comment = comment;
+    }
+
+
+    public int getMessageID() {
+        return messageID;
+    }
+
+    public void setMessageID(int messageID) {
+        this.messageID = messageID;
+    }
 
     public LocalDateTime getCreateTime() {
         return createTime;
@@ -33,15 +60,6 @@ public class MessagePO {
         this.createTime = createTime;
     }
 
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-
     public EventCategory getEventCategory() {
         return eventCategory;
     }
@@ -50,20 +68,36 @@ public class MessagePO {
         this.eventCategory = eventCategory;
     }
 
-    public UserCategory getUserCategory() {
-        return userCategory;
+    public UserCategory getFrom() {
+        return from;
     }
 
-    public void setUserCategory(UserCategory userCategory) {
-        this.userCategory = userCategory;
+    public void setFrom(UserCategory from) {
+        this.from = from;
     }
 
-    public String getUserName() {
-        return userName;
+    public UserCategory getTo() {
+        return to;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setTo(UserCategory to) {
+        this.to = to;
+    }
+
+    public String getUserNameFrom() {
+        return userNameFrom;
+    }
+
+    public void setUserNameFrom(String userNameFrom) {
+        this.userNameFrom = userNameFrom;
+    }
+
+    public String getUserNameto() {
+        return userNameto;
+    }
+
+    public void setUserNameto(String userNameto) {
+        this.userNameto = userNameto;
     }
 
     public String getComment() {
@@ -72,5 +106,13 @@ public class MessagePO {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public boolean isHasRead() {
+        return hasRead;
+    }
+
+    public void setHasRead(boolean hasRead) {
+        this.hasRead = hasRead;
     }
 }

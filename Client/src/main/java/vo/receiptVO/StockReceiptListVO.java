@@ -8,7 +8,7 @@ import vo.abstractVO.SelectableVO;
 
 import java.io.Serializable;
 
-public class StockReceiptListVO extends SelectableVO<StockReceiptListVO> implements Serializable {
+public class StockReceiptListVO extends SelectableVO<StockReceiptListVO>{
 
     private String id;
     private ReceiptState receiptState;

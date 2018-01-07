@@ -105,18 +105,24 @@ public abstract class ReceiptDetailPane<T> extends Refreshable {
 
     @FXML
     public void save(){
+        modify.modifyProperty().set(false);
         if(valid()){
-            modify.modifyProperty().set(false);
             savePendingReceipt();
-            BoardController.getBoardController().refresh();
         }else{
-            modify.modifyProperty().set(false);
             saveDraftReceipt();
-            BoardController.getBoardController().refresh();
         }
+
     }
     public abstract void savePendingReceipt();
     public abstract void saveDraftReceipt();
 
     public abstract boolean valid();
+
+    public void setBack(){
+        boardController.setRightAnimation();
+        boardController.historicalSwitchTo((Refreshable) HistoricalRecord.pop());
+        boardController.refresh();
+        HistoricalRecord.removeAndPop();
+    }
+
 }

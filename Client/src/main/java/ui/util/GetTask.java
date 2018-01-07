@@ -12,7 +12,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class GetTask<T, S> extends Task<Boolean> {
+public class GetTask extends Task<Boolean> {
 
     private SimpleIntegerProperty integerProperty = new SimpleIntegerProperty(-1);
 
@@ -24,6 +24,12 @@ public class GetTask<T, S> extends Task<Boolean> {
         return integerProperty.get();
     }
 
+    /**
+     * @Author: Lin Yuchao
+     * @Attention
+     * @Param: runnable 具体的业务；  dialog 用来调show和close ；predicate传入方法
+     * @Return:
+    **/
     public GetTask(Runnable runnable, JFXDialog dialog,Predicate<Integer> p) {
         this.business = business;
         this.p = p;

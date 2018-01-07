@@ -4,8 +4,9 @@ import util.MemberCategory;
 import util.ReceiptCategory;
 
 public class MemberPO {
-    private int id;
+    private int memberId;
     private MemberCategory memberCatogory; // 分为进货商和销售商
+    private byte[] image;
     private int VIPgrade; // 1~5
     private String memberName;
     private String phoneNumber;
@@ -18,9 +19,14 @@ public class MemberPO {
     private int defaultOperatorID; // 默认业务员id
     private boolean isDelete=false;
 
-    public MemberPO(int id, MemberCategory memberCatogory, int VIPgrade, String memberName, String phoneNumber, String address, String zipCode, String emailAddress, int debtCeiling, int debt, int credit, int defaultOperatorID) {
-        this.id=id;
+
+    public MemberPO() {
+    }
+
+    public MemberPO(int memberId, MemberCategory memberCatogory, byte[] image, int VIPgrade, String memberName, String phoneNumber, String address, String zipCode, String emailAddress, int debtCeiling, int debt, int credit, int defaultOperatorID, boolean isDelete) {
+        this.memberId = memberId;
         this.memberCatogory = memberCatogory;
+        this.image = image;
         this.VIPgrade = VIPgrade;
         this.memberName = memberName;
         this.phoneNumber = phoneNumber;
@@ -31,22 +37,15 @@ public class MemberPO {
         this.debt = debt;
         this.credit = credit;
         this.defaultOperatorID = defaultOperatorID;
+        this.isDelete = isDelete;
     }
 
-    public boolean isDelete() {
-        return isDelete;
+    public int getMemberId() {
+        return memberId;
     }
 
-    public void setDelete(boolean delete) {
-        isDelete = delete;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
     }
 
     public MemberCategory getMemberCatogory() {
@@ -55,6 +54,14 @@ public class MemberPO {
 
     public void setMemberCatogory(MemberCategory memberCatogory) {
         this.memberCatogory = memberCatogory;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public int getVIPgrade() {
@@ -135,5 +142,13 @@ public class MemberPO {
 
     public void setDefaultOperatorID(int defaultOperatorID) {
         this.defaultOperatorID = defaultOperatorID;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 }

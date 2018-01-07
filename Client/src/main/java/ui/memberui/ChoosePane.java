@@ -1,6 +1,7 @@
 package ui.memberui;
 
 import blService.memberblService.MemberInfo;
+import blServiceStub.memberblservice_Stub.MemberInfo_Stub;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.ListSelectionView;
+import vo.MemberChooseVO;
+
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.stream.Collectors;
 
 public class ChoosePane extends AnchorPane {
 
@@ -17,7 +23,7 @@ public class ChoosePane extends AnchorPane {
     MemberInfo memberInfo;
 
     @FXML
-    ListSelectionView selectView;
+    ListSelectionView<String> selectView;
 
     @FXML
     JFXButton save;
@@ -25,6 +31,7 @@ public class ChoosePane extends AnchorPane {
     @FXML
     JFXButton cancel;
 
+    ObservableList<MemberChooseVO> memberChooseVOs = FXCollections.observableArrayList();
 
     public ChoosePane(){
         try{
@@ -35,9 +42,9 @@ public class ChoosePane extends AnchorPane {
         }catch (Exception e){
             e.printStackTrace();
         }
+        memberInfo = new MemberInfo_Stub();
         selectView.setSourceItems(observableList);
-        observableList.add("aaa");
-
+        observableList.setAll(memberInfo.getAll());
 
     }
 
@@ -45,7 +52,25 @@ public class ChoosePane extends AnchorPane {
     public ChoosePane(MemberInfo memberInfo){
         this();
         this.memberInfo = memberInfo;
+    }
 
+    @FXML
+    public void save(){
+        memberChooseVOs.clear();
+        selectView.getTargetItems().stream().forEach(i->{
+            memberChooseVOs.add(new MemberChooseVO(i.split(" ")[1],Integer.parseInt(i.split(" ")[0])));
+        });
+    }
+
+    @FXML
+    public void cancel(){
+
+    }
+
+    public ArrayList<MemberChooseVO> getMemberChooseVOs() {
+        ArrayList<MemberChooseVO> list = new ArrayList<>();
+        memberChooseVOs.stream().forEach(i->list.add(i));
+        return list;
     }
 
 }

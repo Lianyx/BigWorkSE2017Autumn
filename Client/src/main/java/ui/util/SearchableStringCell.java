@@ -54,7 +54,7 @@ public class SearchableStringCell<T> extends JFXTreeTableCell<T, String> {
         // 这个不得不加，不然会有nullPointerException，虽然我不知道为什么一定要加。
         if (newValue != null && !newValue.equals("") && toBeProcessed != null) {
             int index;
-            while ((index = toBeProcessed.toLowerCase().indexOf(newValue)) != -1) {
+            while ((index = toBeProcessed.indexOf(newValue)) != -1) {
                 contentPane.getChildren().add(new OrdinaryLable(toBeProcessed.substring(0, index)));
                 contentPane.getChildren().add(new HighlightLabel(toBeProcessed.substring(index, index + newValue.length())));
 

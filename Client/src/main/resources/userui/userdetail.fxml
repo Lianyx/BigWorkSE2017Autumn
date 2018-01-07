@@ -15,8 +15,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
-
 <?import ui.util.ModifyButton?>
+
 <fx:root fx:id="userdetail" prefHeight="560.0" prefWidth="640.0" stylesheets="@../css/userdetail.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
       <AnchorPane fx:id="pane" layoutX="70.0" layoutY="55.0" prefHeight="470.0" prefWidth="500.0">
@@ -30,14 +30,14 @@
                       <Font name="Arial" size="24.0" />
                   </font>
               </JFXTextField>
-              <ModifyButton fx:id="modify" layoutX="365.0" layoutY="12.0" text=""/>
+              <ModifyButton fx:id="modify" layoutX="365.0" layoutY="12.0" text="" />
             <Separator layoutX="157.0" layoutY="114.0" prefHeight="4.0" prefWidth="320.0" />
             <Label fx:id="safe" layoutX="25.0" layoutY="372.0" text="Safe Info">
                <font>
                   <Font name="Arial" size="24.0" />
                </font>
             </Label>
-            <JFXButton fx:id="delete" layoutX="409.0" layoutY="12.0" mnemonicParsing="false" prefHeight="28.0" text="Delete">
+            <JFXButton fx:id="delete" layoutX="409.0" layoutY="12.0" mnemonicParsing="false" text="Delete">
                 <graphic>
                     <HBox>
                         <children>
@@ -61,17 +61,17 @@
                </font></Label>
              <JFXRippler fx:id="facebook" layoutX="233.0" layoutY="158.0" maskType="CIRCLE" position="BACK" ripplerFill="#03A9F4" styleClass="icons-rippler">
               <StackPane style="-fx-padding: 8;">
-                  <MaterialDesignIconView glyphName="FACEBOOK" size="1.5em" styleClass="icon" />
+                  <MaterialDesignIconView fx:id="facebookIcon" glyphName="FACEBOOK" size="1.5em" styleClass="icon" />
               </StackPane>
          </JFXRippler>
              <JFXRippler fx:id="twitter" layoutX="263.0" layoutY="158.0" maskType="CIRCLE" position="BACK" ripplerFill="#03A9F4" styleClass="icons-rippler">
                  <StackPane style="-fx-padding: 8;">
-                     <MaterialDesignIconView glyphName="TWITTER" size="1.5em" styleClass="icon" />
+                     <MaterialDesignIconView fx:id="twitterIcon" glyphName="TWITTER" size="1.5em" styleClass="icon" />
                  </StackPane>
              </JFXRippler>
              <JFXRippler fx:id="github" layoutX="293.0" layoutY="158.0" maskType="CIRCLE" position="BACK" ripplerFill="#03A9F4" styleClass="icons-rippler">
                  <StackPane style="-fx-padding: 8;">
-                     <MaterialDesignIconView glyphName="GITHUB_BOX" size="1.5em" styleClass="icon" />
+                     <MaterialDesignIconView fx:id="githubIcon" glyphName="GITHUB_BOX" size="1.5em" styleClass="icon" />
                  </StackPane>
              </JFXRippler>
             <Separator layoutX="15.0" layoutY="203.0" prefHeight="4.0" prefWidth="463.0" />
@@ -132,7 +132,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <JFXButton fx:id="choose" layoutX="55.0" layoutY="181.0" mnemonicParsing="false" text="Choose">
+            <JFXButton fx:id="choose" onMouseClicked="#choosefile" layoutX="55.0" layoutY="181.0" mnemonicParsing="false" text="Choose">
                <font>
                   <Font size="12.0" />
                </font>

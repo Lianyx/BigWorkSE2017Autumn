@@ -10,6 +10,11 @@ import ui.util.BoardController;
 import util.ReceiptState;
 import vo.StockSearchVO;
 
+/**
+ * @Author: Lin Yuchao
+ * @Description: 过滤器
+ * @ModifyBy: Lin Yuchao
+**/
 
 public class StockFilterPane extends AnchorPane {
 
@@ -27,6 +32,7 @@ public class StockFilterPane extends AnchorPane {
 
     StockListPane slp;
 
+
     public StockSearchVO getStockSearchVO() {
         return stockSearchVO;
     }
@@ -37,8 +43,18 @@ public class StockFilterPane extends AnchorPane {
 
     StockSearchVO stockSearchVO;
 
+
+
     PopOver popOver;
 
+
+
+    /**
+     * @Author: Lin Yuchao
+     * @Attention
+     * @Param: popover 用于关闭popover; stockSearVO传入用以改变listpane的过滤（在方法refresh里）方法
+     * @Return:
+    **/
     public StockFilterPane(PopOver popOver, StockSearchVO stockSearchVO) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/stockui/stockfilter.fxml"));
@@ -58,7 +74,12 @@ public class StockFilterPane extends AnchorPane {
         }
     }
 
-
+/**
+ * @Author: Lin Yuchao
+ * @Attention  根据checkbox的状态增减searchvo里的数量
+ * @Param:
+ * @Return:
+**/
     public void setVO(JFXCheckBox jfxCheckBox){
         if(jfxCheckBox.isSelected()){
             stockSearchVO.getReceiptStates().add(ReceiptState.map.get(jfxCheckBox.getId().toUpperCase()));

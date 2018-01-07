@@ -34,14 +34,14 @@ public class UserTreeTable extends ReceiptTreeTable<UserListVO> {
 
 
         JFXTreeTableColumn image = new JFXTreeTableColumn("  ");
-        image.setPrefWidth(50);
+        image.setPrefWidth(60);
         image.setCellValueFactory(new TreeItemPropertyValueFactory<>("image"));
         image.setCellFactory(p->new ImageCell());
 
 
 
         JFXTreeTableColumn<UserListVO, String> username = new JFXTreeTableColumn("Username");
-        username.setPrefWidth(60);
+        username.setPrefWidth(81);
         columnDecorator.setupCellValueFactory(username,s->new ReadOnlyObjectWrapper<>(s.getUsername()));
         username.setCellFactory(t->new SearchableStringCell<>(keyword));
 
@@ -71,13 +71,13 @@ public class UserTreeTable extends ReceiptTreeTable<UserListVO> {
 
 
         JFXTreeTableColumn<UserListVO, String> phone = new JFXTreeTableColumn("Phone");
-        phone.setPrefWidth(150);
+        phone.setPrefWidth(120);
         columnDecorator.setupCellValueFactory(phone,s->new ReadOnlyObjectWrapper<>(s.getPhone()));
         phone.setCellFactory(s->new SearchableStringCell<>(keyword));
 
 
         JFXTreeTableColumn<UserListVO, Boolean> more = new JFXTreeTableColumn("");
-        more.setPrefWidth(20);
+        more.setPrefWidth(30);
         columnDecorator.setupCellValueFactory(more, s -> new ReadOnlyObjectWrapper(s.isMultiple()));
         more.setCellFactory(new Callback<TreeTableColumn<UserListVO, Boolean>, TreeTableCell<UserListVO, Boolean>>() {
             @Override

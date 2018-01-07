@@ -26,6 +26,7 @@ public class HistoricalRecord {
 
 
     static public boolean addRecord(Refreshable pane){
+        System.out.println(pane);
         if(record.get(index).getId().equals(pane.getId())){
             if(index>0)
                 canBack.setValue(true);
@@ -75,10 +76,21 @@ public class HistoricalRecord {
     }
 
     public static void addPane(Refreshable pane){
+        System.out.println("sabi");
         record.add(pane);
     }
 
-    public static int getIndex(){
-        return index;
+    public static void removeAndPop(){
+        record.remove(record.size()-1);
+        if(index==0)
+            canBack.setValue(false);
+        else
+            canBack.setValue(true);
+        if(index==record.size()-1)
+            canForward.setValue(false);
+        else
+            canForward.setValue(true);
     }
+
+
 }

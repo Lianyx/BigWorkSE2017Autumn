@@ -15,7 +15,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <JFXButton fx:id="save" layoutX="132.0" layoutY="300.0" text="Save" />
-      <JFXButton fx:id="cancel" layoutX="218.0" layoutY="300.0" text="Cancel" />
+      <JFXButton fx:id="save" layoutX="132.0" layoutY="300.0" text="Save" onMouseClicked="#save" />
+      <JFXButton fx:id="cancel" layoutX="218.0" layoutY="300.0" text="Cancel" onMouseClicked="#cancel" />
    </children>
 </fx:root>

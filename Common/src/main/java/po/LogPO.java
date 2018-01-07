@@ -6,24 +6,19 @@ import util.UserCategory;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class LogPO{
-    private int ID;
+public class LogPO implements Serializable{
+    private int logId;
     private LocalDateTime createTime;
     private String username;
     private UserCategory userCategory;
     private EventCategory eventCategory;
     private String comment;
 
-    public LogPO(String username, UserCategory userCategory, EventCategory eventCategory, String comment) {
-        this.username = username;
-        this.userCategory = userCategory;
-        this.eventCategory = eventCategory;
-        this.comment = comment;
+    public LogPO() {
     }
 
-
-    public LogPO(int ID, LocalDateTime createTime, String username, UserCategory userCategory, EventCategory eventCategory, String comment) {
-        this.ID = ID;
+    public LogPO(int logId, LocalDateTime createTime, String username, UserCategory userCategory, EventCategory eventCategory, String comment) {
+        this.logId = logId;
         this.createTime = createTime;
         this.username = username;
         this.userCategory = userCategory;
@@ -31,7 +26,13 @@ public class LogPO{
         this.comment = comment;
     }
 
-    public LogPO(){}
+    public int getLogId() {
+        return logId;
+    }
+
+    public void setLogId(int logId) {
+        this.logId = logId;
+    }
 
     public LocalDateTime getCreateTime() {
         return createTime;
@@ -39,14 +40,6 @@ public class LogPO{
 
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
     }
 
     public String getUsername() {

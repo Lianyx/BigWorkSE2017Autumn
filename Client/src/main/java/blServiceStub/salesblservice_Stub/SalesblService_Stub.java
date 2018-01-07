@@ -1,7 +1,9 @@
 package blServiceStub.salesblservice_Stub;
 
 import blService.salesblService.SalesblService;
+import util.ReceiptSearchCondition;
 import util.ReceiptState;
+import util.RespectiveReceiptSearchCondition;
 import util.ResultMessage;
 import vo.ListGoodsItemVO;
 import vo.SalesSearchVO;
@@ -11,12 +13,13 @@ import vo.receiptVO.SalesReceiptVO;
 import vo.receiptVO.StockReceiptListVO;
 import vo.receiptVO.StockReceiptVO;
 
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SalesblService_Stub implements SalesblService{
+public class SalesblService_Stub  implements SalesblService{
 
 
     HashSet<SalesReceiptListVO> set = new HashSet<>();
@@ -66,7 +69,12 @@ public class SalesblService_Stub implements SalesblService{
     }
 
     @Override
-    public ResultMessage add(SalesReceiptVO stockReceiptVO) {
+    public SalesReceiptVO getNew() throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage insert(SalesReceiptVO stockReceiptVO) {
         set.add(new SalesReceiptListVO(stockReceiptVO.getId(),stockReceiptVO.getReceiptState(),stockReceiptVO.getMemberName(),stockReceiptVO.getStockName(),stockReceiptVO.getOriginSum()-stockReceiptVO.getDiscountAmount(),stockReceiptVO.isSell()));
         return ResultMessage.SUCCESS;
     }
@@ -88,8 +96,23 @@ public class SalesblService_Stub implements SalesblService{
     @Override
     public ResultMessage update(SalesReceiptVO stockReceiptVO) {
         delete(stockReceiptVO.getId());
-        add(stockReceiptVO);
+        insert(stockReceiptVO);
         return ResultMessage.SUCCESS;
+    }
+
+    @Override
+    public ResultMessage delete(SalesReceiptVO receiptVO) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<SalesReceiptVO> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<SalesReceiptVO> search(RespectiveReceiptSearchCondition respectiveReceiptSearchCondition) throws RemoteException {
+        return null;
     }
 
     @Override

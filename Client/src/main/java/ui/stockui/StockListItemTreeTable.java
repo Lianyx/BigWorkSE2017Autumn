@@ -33,17 +33,18 @@ import java.util.function.Function;
 public class StockListItemTreeTable extends JFXTreeTableView<ListGoodsItemVO> {
     private ObservableList<ListGoodsItemVO> observableList = FXCollections.observableArrayList();
 
-    private StockblService stockblService;
-    private BoardController boardController;
     private StackPane mainpane;
+
     private SimpleDoubleProperty sum = new SimpleDoubleProperty(0);
     public StockListItemTreeTable() {
         super();
 
 
         mainpane = PaneFactory.getMainPane();
-        stockblService = ServiceFactory_Stub.getService(StockblService.class.getName());
 
+        /**
+          decorator，这个主要就是setValuefactory方便
+        **/
         ColumnDecorator columnDecorator = new ColumnDecorator();
 
         JFXTreeTableColumn<ListGoodsItemVO, Integer> goodsID = new JFXTreeTableColumn<>("GoodsID");
@@ -61,6 +62,9 @@ public class StockListItemTreeTable extends JFXTreeTableView<ListGoodsItemVO> {
         columnDecorator.setupCellValueFactory(goodsNum, l -> l.goodsNumProperty().asObject());
         goodsNum.setCellFactory((TreeTableColumn<ListGoodsItemVO, Integer> param) -> { return new GenericEditableTreeTableCell<>(new IntegerTextFieldEditorBuilder());
         });
+        /**
+        number的textfield
+        **/
         goodsNum.setOnEditCommit((TreeTableColumn.CellEditEvent<ListGoodsItemVO, Integer> t) -> {
             t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().goodsNumProperty().set(t.getNewValue());
         });
@@ -74,15 +78,26 @@ public class StockListItemTreeTable extends JFXTreeTableView<ListGoodsItemVO> {
         this.setRowFactory(tableView -> {
             JFXTreeTableRow row = new JFXTreeTableRow();
             row.setStyle("-fx-border-color: rgb(233,237,239); -fx-border-width: 0.3;");
+
+
+
             row.setOnMouseClicked((MouseEvent event) -> {
                 ListGoodsItemVO listGoodsItemVO = (ListGoodsItemVO) row.getTreeItem().getValue();
+
+
+                /**
+                 * 右键时候，弹出popup，里面有view和delete，getListview命名不好，就是弹窗中listview里面的view，getlistdelete同样
+                 **/
                 if (event.getButton() == MouseButton.SECONDARY) {
                     ListPopup listPopup = new ListPopup();
                     JFXPopup popup = new JFXPopup(listPopup);
                     listPopup.getListview().setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
-                            StockListItemPane stockListItemPane = new StockListItemPane(listGoodsItemVO, mainpane, observableList);
+                            /**
+                            进入listpane
+                            **/
+                            StockListItemPane stockListItemPane = new StockListItemPane(listGoodsItemVO, observableList);
                             JFXDialog dialog = new JFXDialog(mainpane, stockListItemPane, JFXDialog.DialogTransition.CENTER);
                             stockListItemPane.setDialog(dialog);
                             dialog.show();
@@ -97,14 +112,21 @@ public class StockListItemTreeTable extends JFXTreeTableView<ListGoodsItemVO> {
                     });
                     popup.show(row, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT);
                 }
+
+
+
                 if(event.getClickCount() == 2){
-                    StockListItemPane stockListItemPane = new StockListItemPane(listGoodsItemVO, mainpane, observableList);
+                    StockListItemPane stockListItemPane = new StockListItemPane(listGoodsItemVO, observableList);
                     JFXDialog dialog = new JFXDialog(mainpane, stockListItemPane, JFXDialog.DialogTransition.CENTER);
                     stockListItemPane.setDialog(dialog);
                     dialog.show();
                 }
 
             });
+
+            /**
+            row阴影效果
+            **/
             row.selectedProperty().addListener(e -> {
                 if (row.isSelected()) {
                     row.toFront();
@@ -114,6 +136,7 @@ public class StockListItemTreeTable extends JFXTreeTableView<ListGoodsItemVO> {
             });
             return row;
         });
+
 
         observableList.addListener(new ListChangeListener<ListGoodsItemVO>() {
             @Override
@@ -141,14 +164,16 @@ public class StockListItemTreeTable extends JFXTreeTableView<ListGoodsItemVO> {
         observableList.setAll(goods);
     }
 
-    public void removeGood(ListGoodsItemVO good) {
-        observableList.remove(good);
-    }
-
     public void addGood(ListGoodsItemVO good) {
         observableList.add(good);
     }
 
+    /**
+     * @Author: Lin Yuchao
+     * @Attention 转成arraylist
+     * @Param:
+     * @Return:
+    **/
     public ArrayList<ListGoodsItemVO> getList(){
         ArrayList<ListGoodsItemVO> arrayList = new ArrayList<>();
         observableList.forEach(i->arrayList.add(i));

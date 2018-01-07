@@ -103,7 +103,7 @@ public class Login implements Initializable{
                         }
 
 
-                        changeToSales();
+                        changeToUserManger();
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -160,6 +160,9 @@ public class Login implements Initializable{
     public void changeToSales() throws Exception{
         changeTo("/salesui/sales.fxml");
     }
+
+
+
 
     public String deleteEven(String str){
         String s="";

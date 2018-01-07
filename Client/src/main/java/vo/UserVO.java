@@ -19,6 +19,7 @@ public class UserVO {
     private String comment;
     private String date;
     private String password;
+    private boolean isDelete = false;
 
     public UserVO(int id,Image image, String username, UserCategory usertype, String facebook, String github, String twitter, String email, String phone, String comment, String date, String password) {
         this.id=id;
@@ -152,5 +153,13 @@ public class UserVO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 }

@@ -15,7 +15,14 @@ import util.ReceiptState;
 import util.UserCategory;
 import vo.UserSearchVO;
 
+/**
+ * @Author: Lin Yuchao
+ * @Description: 过滤器，filter的子pane
+ * @ModifyBy: Lin Yuchao
+**/
 public class FilterPane extends AnchorPane{
+
+
 
 
     @FXML
@@ -38,6 +45,13 @@ public class FilterPane extends AnchorPane{
 
     PopOver popOver;
 
+
+    /**
+     * @Author: Lin Yuchao
+     * @Attention
+     * @Param: popover传入用于关闭popover,
+     * @Return:
+    **/
     public FilterPane(PopOver popOver, UserSearchVO userSearchVO) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/userui/filter.fxml"));

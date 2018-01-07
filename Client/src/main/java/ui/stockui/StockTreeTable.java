@@ -18,6 +18,9 @@ public class StockTreeTable extends ReceiptTreeTable<StockReceiptListVO> {
     //  private ObservableList<StockReceiptListVO> observableListtemp;
     private StockblService stockblService;
     private static StockSearchVO stockSearchVO;
+
+
+
     public StockTreeTable() {
         super();
         rowsPerPage = 7;
@@ -60,6 +63,12 @@ public class StockTreeTable extends ReceiptTreeTable<StockReceiptListVO> {
         sum.setPrefWidth(80);
         columnDecorator.setupCellValueFactory(sum, s -> new ReadOnlyObjectWrapper(s.getSum()));
 
+
+
+
+        /**
+        * more就是一列后面有三个点那个button
+        **/
         JFXTreeTableColumn<StockReceiptListVO, Boolean> more = new JFXTreeTableColumn("");
         more.setPrefWidth(55);
         columnDecorator.setupCellValueFactory(more, s -> new ReadOnlyObjectWrapper(s.isMultiple()));
@@ -73,6 +82,11 @@ public class StockTreeTable extends ReceiptTreeTable<StockReceiptListVO> {
             }
         });
 
+
+        /**
+         * 这里吧双击什么都做了，只要写跳转就行了
+         **/
+
         this.setRowFactory(tableView -> {
             JFXTreeTableRow<StockReceiptListVO> row = new JFXTreeTableRow();
             RowSetter(row,()->{ StockReceiptPane stockReceiptPane = new StockReceiptPane(row.getTreeItem().getValue().getId()); stockReceiptPane.refresh(true);});
@@ -81,7 +95,6 @@ public class StockTreeTable extends ReceiptTreeTable<StockReceiptListVO> {
         this.getColumns().addAll(choose, time, member,sum, state, more);
 
     }
-
 
 
     public void delete(Pagination p) {

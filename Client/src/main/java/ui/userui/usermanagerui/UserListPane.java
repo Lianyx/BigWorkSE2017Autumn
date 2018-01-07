@@ -29,8 +29,6 @@ import java.util.stream.Collectors;
 
 public class UserListPane extends ReceiptListPane<UserListVO>{
 
-    static Set<UserListVO> set = new HashSet<>();
-
     UserManagerblService userManagerblService;
 
     private static UserSearchVO userSearchVO = new UserSearchVO();
@@ -39,21 +37,21 @@ public class UserListPane extends ReceiptListPane<UserListVO>{
 
     SimpleStringProperty match = new SimpleStringProperty("");
 
-    public boolean historyAdd = false;
-
     public UserListPane() throws Exception{
         super("/userui/userlistpane.fxml");
         this.userManagerblService = ServiceFactory_Stub.getService(UserManagerblService.class.getName());
         receiptTreeTable = new UserTreeTable();
         receiptTreeTable.setPrefSize(600,435);
+        receiptTreeTable.keywordProperty().bind(match);
         borderpane.setTop(new BorderPane(receiptTreeTable));
         for (UserCategory userCategory : UserCategory.values()) {
             userSearchVO.getUserCategories().add(userCategory);
         }
-        FilterPane slp = new FilterPane(filterPopOver, userSearchVO);
+
+        filterPane = new FilterPane(filterPopOver, userSearchVO);
         filterPopOver.setDetachable(false);
         filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
-        filterPopOver.setContentNode(slp);
+        filterPopOver.setContentNode(filterPane);
         filter.setOnMouseClicked(e -> filterPopOver.show(filter));
     }
 
@@ -68,14 +66,14 @@ public class UserListPane extends ReceiptListPane<UserListVO>{
 
     @Override
     public void search() {
-        if (searchField.getText() != ""&&searchField.getText() != null) {
+        if (!searchField.getText().equals("")) {
             match.setValue(searchField.getText().toLowerCase());
             Set<UserListVO> hashSet;
             hashSet = set.stream().filter(
-                    s -> s.getUserCategory().name().toLowerCase().contains(match.get()) ||
-                            s.getUsername().toLowerCase().contains(match.get())||
-                            s.getPhone().toLowerCase().contains(match.get())||
-                            s.getEmail().toLowerCase().contains(match.get())
+                    s -> s.getUserCategory().name().contains(match.get()) ||
+                            s.getUsername().contains(match.get())||
+                            s.getPhone().contains(match.get())||
+                            s.getEmail().contains(match.get())
             ).collect(Collectors.toSet());
             receiptTreeTable.setReceipts(hashSet);
             pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
@@ -85,7 +83,9 @@ public class UserListPane extends ReceiptListPane<UserListVO>{
         }
     }
     @Override
-    public void add(){
+    public void add()
+    {
+        System.out.println("????");
         UserDetailPane userDetailPane = new UserDetailPane(true);
     }
 
@@ -104,8 +104,8 @@ public class UserListPane extends ReceiptListPane<UserListVO>{
                 }
                 return false;
             };
-            GetTask<HashSet<UserListVO>, UserManagerblService> getTask =
-                    new GetTask<>(() -> {
+            GetTask getTask =
+                    new GetTask(() -> {
                         receiptTreeTable.setReceipts(set);
                         pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
                         receiptTreeTable.createPage(0);

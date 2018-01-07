@@ -1,13 +1,16 @@
 package blServiceStub.stockblservice_Stub;
 
 import blService.stockblService.StockblService;
+import util.ReceiptSearchCondition;
 import util.ReceiptState;
+import util.RespectiveReceiptSearchCondition;
 import util.ResultMessage;
 import vo.ListGoodsItemVO;
 import vo.receiptVO.StockReceiptListVO;
 import vo.receiptVO.StockReceiptVO;
 import vo.StockSearchVO;
 
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -45,18 +48,23 @@ public class StockblService_Stub implements StockblService {
         return i;
     }
 
-    /*
-        private String id;
-        private ReceiptState receiptState;
-        private String memberName;
-        private String stockName;
-        private int sum;
-        private BooleanProperty selected;
-        private boolean multiple = true;
-        SimpleBooleanProperty isPur = new SimpleBooleanProperty();
-        */
     @Override
-    public ResultMessage add(StockReceiptVO stockReceiptVO) {
+    public StockReceiptVO getNew() throws RemoteException {
+        return null;
+    }
+
+    /*
+            private String id;
+            private ReceiptState receiptState;
+            private String memberName;
+            private String stockName;
+            private int sum;
+            private BooleanProperty selected;
+            private boolean multiple = true;
+            SimpleBooleanProperty isPur = new SimpleBooleanProperty();
+            */
+    @Override
+    public ResultMessage insert(StockReceiptVO stockReceiptVO) {
         set.add(new StockReceiptListVO(stockReceiptVO.getId(),stockReceiptVO.getReceiptState(),stockReceiptVO.getMemberName(),stockReceiptVO.getStockName(),stockReceiptVO.getSum(),stockReceiptVO.isPur()));
         return ResultMessage.SUCCESS;
     }
@@ -78,8 +86,23 @@ public class StockblService_Stub implements StockblService {
     @Override
     public ResultMessage update(StockReceiptVO stockReceiptVO) {
         delete(stockReceiptVO.getId());
-        add(stockReceiptVO);
+        insert(stockReceiptVO);
         return ResultMessage.SUCCESS;
+    }
+
+    @Override
+    public ResultMessage delete(StockReceiptVO receiptVO) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<StockReceiptVO> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<StockReceiptVO> search(RespectiveReceiptSearchCondition respectiveReceiptSearchCondition) throws RemoteException {
+        return null;
     }
 
     @Override

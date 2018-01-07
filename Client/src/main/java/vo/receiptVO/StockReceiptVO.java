@@ -1,5 +1,6 @@
 package vo.receiptVO;
 
+import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
 import javafx.beans.property.*;
 import javafx.scene.Node;
@@ -96,7 +97,7 @@ public class StockReceiptVO extends ReceiptVO {
 
 
     @Override
-    public ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException {
+    public CheckInfo<StockReceiptVO> getService() throws RemoteException, NotBoundException, MalformedURLException {
         return null;
     }
 

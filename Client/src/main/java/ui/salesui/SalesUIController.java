@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import ui.memberui.MemberListPane;
 import ui.stockui.StockListPane;
 import ui.util.BoardController;
 import ui.util.PaneSwitchAnimation;
@@ -68,7 +69,8 @@ public class SalesUIController implements Initializable{
                                     SalesListPane salesListPane = new SalesListPane(false);
                                     salesListPane.refresh(true);
                                 }else if(newVal.getId().equals("member")){
-
+                                    MemberListPane memberListPane = new MemberListPane();
+                                    memberListPane.refresh(true);
                                 }
                             }
                         } catch (Exception e) {

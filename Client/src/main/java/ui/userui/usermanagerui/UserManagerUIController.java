@@ -22,14 +22,12 @@ public class UserManagerUIController implements Initializable{
     @FXML
     JFXListView<Label> navigation;
 
-    @FXML
-    Label userlist;
 
     @FXML
     StackPane board;
 
     @FXML
-    private BoardController boardController;
+    BoardController boardController;
 
 
 
@@ -44,7 +42,7 @@ public class UserManagerUIController implements Initializable{
             boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150),  board));
             try {
                 UserListPane userListPane = new UserListPane();
-                userListPane.historyAdd=true;
+                userListPane.historyAdd = true;
                 userListPane.refresh(false);
 
 

@@ -19,7 +19,7 @@ public class TextFieldPane extends AnchorPane {
     JFXButton save;
 
     @FXML
-    JFXButton cencel;
+    JFXButton cancel;
 
     private SimpleStringProperty text = new SimpleStringProperty("");
 
@@ -30,6 +30,7 @@ public class TextFieldPane extends AnchorPane {
             fxmlLoader.setController(this);
             fxmlLoader.load();
             text.bind(textfield.textProperty());
+            textfield.setLabelFloat(true);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -43,9 +44,17 @@ public class TextFieldPane extends AnchorPane {
     }
 
     public void cencel(Runnable runnable){
-        this.cencel.setOnMouseClicked(t->{
+        this.cancel.setOnMouseClicked(t->{
             Platform.runLater(runnable);
         });
+    }
+
+    public void setPrompt(String s){
+        textfield.setPromptText(s);
+    }
+
+    public void setText(String s){
+        textfield.setText(s);
     }
 
     public String getText() {

@@ -207,13 +207,14 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
     public void refresh(boolean toSwitch) {
         boardController.Loading();
         try{
+            if(!updateState.get()){
             DoubleButtonDialog buttonDialog =
                     new DoubleButtonDialog(mainpane,"Wrong","sabi","Last","Ret");
             buttonDialog.setButtonTwo(()->boardController.Ret());
             buttonDialog.setButtonTwo(()->refresh(false));
             Predicate<Integer> p = (i)->{if((vo = salesblService.showDetail(receiptid))!=null) return true;return false;};
-            GetTask<SalesReceiptVO,SalesblService> task =
-                    new GetTask<>(()-> {
+            GetTask task =
+                    new GetTask(()-> {
                         provider.setText(vo.getMemberName());
                         operator.setText(UserInfomation.username);
                         stock.setText(vo.getStockName());
@@ -232,6 +233,9 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
                     }, buttonDialog,p);
 
             new Thread(task).start();
+            }else{
+                switchPane(toSwitch);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -239,6 +243,10 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
 
     @Override
     public void savePendingReceipt() {
+        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Pending?", "sabi", "Yes", "No");
+        doubleButtonDialog.setButtonTwo(() -> {
+        });
+        doubleButtonDialog.setButtonOne(() -> {
         this.receiptid = head.getText().replace("-","")+"-"+date.getValue().toString().replace("-","")+"-"+id.getText().replace("-","");
         this.vo = new SalesReceiptVO(receiptid,
                 UserInfomation.userid,
@@ -254,15 +262,26 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
                 Double.parseDouble(token.getText()),
                 Double.parseDouble(original.getText()),
                 isSell.get());
-        if(updateState.get())
-            salesblService.add(this.vo);
-        else
-            salesblService.update(this.vo);
+        try {
+            if (updateState.get())
+                salesblService.insert(this.vo);
+            else
+                salesblService.update(this.vo);
+            setBack();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+            });
+        doubleButtonDialog.show();
     }
 
     @Override
     public void saveDraftReceipt() {
-        if(sum.getText().equals("")||sum.getText()==null){
+        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Pending?", "sabi", "Yes", "No");
+        doubleButtonDialog.setButtonTwo(() -> {
+        });
+        doubleButtonDialog.setButtonOne(() -> {
+        if(sum.getText().equals("")){
             sum.setText("1");
         }
         if(date.getValue()==null)
@@ -282,10 +301,17 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
                 Double.parseDouble(token.getText()),
                 Double.parseDouble(original.getText()),
                 isSell.get());
-        if(updateState.get())
-            salesblService.add(this.vo);
-        else
-            salesblService.update(this.vo);
+        try {
+            if (updateState.get())
+                salesblService.insert(this.vo);
+            else
+                salesblService.update(this.vo);
+            setBack();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        });
+        doubleButtonDialog.show();
     }
 
     public boolean valid(){

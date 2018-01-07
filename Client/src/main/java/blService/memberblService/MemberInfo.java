@@ -1,6 +1,11 @@
 package blService.memberblService;
 
+import vo.MemberChooseVO;
+
+import java.util.Set;
+
 public interface MemberInfo {
 
-    public String getName(int memberId);
+    public Set<String> getAll();
+
 }

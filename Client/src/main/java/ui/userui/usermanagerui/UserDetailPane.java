@@ -46,7 +46,14 @@ public class UserDetailPane extends ReceiptDetailPane<UserVO> {
 
     private static String g = "";
     private static String f = "";
-    private static String t = "";
+    private static String tw = "";
+
+    @FXML
+    MaterialDesignIconView facebookIcon;
+    @FXML
+    MaterialDesignIconView githubIcon;
+    @FXML
+    MaterialDesignIconView twitterIcon;
 
 
     @FXML
@@ -55,7 +62,6 @@ public class UserDetailPane extends ReceiptDetailPane<UserVO> {
     JFXRippler facebook;
     @FXML
     JFXRippler twitter;
-
 
 
     @FXML
@@ -83,10 +89,30 @@ public class UserDetailPane extends ReceiptDetailPane<UserVO> {
         this(false);
         this.userId = id;
         delete.setVisible(true);
+        modify.setVisible(true);
         save.setText("Save");
+        this.modifyState.bind(modify.modifyProperty());
+        this.modifyState.addListener((b, o, n) -> {
+            if (!n) {
+                if (valid()) {
+                    modify.modifyProperty().set(false);
+                } else {
+                    modify.modifyProperty().set(true);
+                }
+            }
+        });
+        username.disableProperty().bind(modifyState.not());
+        usertype.disableProperty().bind(modifyState.not());
+        email.disableProperty().bind(modifyState.not());
+        phone.disableProperty().bind(modifyState.not());
+        comment.disableProperty().bind(modifyState.not());
+        save.visibleProperty().bind(modifyState);
+        choose.visibleProperty().bind(modifyState);
+        reset.visibleProperty().bind(modifyState);
+        save.visibleProperty().bind(modifyState);
     }
 
-    public UserDetailPane(boolean isAdd){
+    public UserDetailPane(boolean isAdd) {
         super("/userui/userdetail.fxml");
         userManagerblService = ServiceFactory_Stub.getService(UserManagerblService.class.getName());
         usertype.getItems().add(new Label(UserCategory.InventoryManager.name()));
@@ -96,43 +122,98 @@ public class UserDetailPane extends ReceiptDetailPane<UserVO> {
         usertype.getItems().add(new Label(UserCategory.GeneralManager.name()));
         usertype.getSelectionModel().select(0);
 
-        username.disableProperty().bind(modifyState.not());
-        usertype.disableProperty().bind(modifyState.not());
-        email.disableProperty().bind(modifyState.not());
-        phone.disableProperty().bind(modifyState.not());
-        comment.disableProperty().bind(modifyState.not());
-        save.visibleProperty().bind(modifyState);
-        choose.visibleProperty().bind(modifyState);
-        reset.visibleProperty().bind(modifyState);
 
         delete.setVisible(false);
-        save.setText("Add");
         date.setText(LocalDate.now().toString());
         password.setText("");
         RequireValid(username);
         RequireValid(email);
         RequireValid(phone);
 
-        if(isAdd){
+        updateState.set(false);
+        if (isAdd) {
+            updateState.set(true);
             switchPane(true);
         }
+
+        reset.setOnMouseClicked(t -> {
+            TextFieldPane textFieldPane = new TextFieldPane();
+            JFXDialog dialog = new JFXDialog(mainpane, textFieldPane, JFXDialog.DialogTransition.CENTER);
+            textFieldPane.cencel(() -> {
+                dialog.close();
+            });
+            textFieldPane.save(() -> {
+                dialog.close();
+                password.setText(textFieldPane.getText());
+            });
+            textFieldPane.setText(password.getText());
+            textFieldPane.setPrompt("Password");
+            dialog.show();
+        });
+
+        github.setOnMouseClicked(t -> {
+            TextFieldPane textFieldPane = new TextFieldPane();
+            JFXDialog dialog = new JFXDialog(mainpane, textFieldPane, JFXDialog.DialogTransition.CENTER);
+            textFieldPane.cencel(() -> {
+                dialog.close();
+            });
+            textFieldPane.save(() -> {
+                dialog.close();
+                g = textFieldPane.getText();
+                setColor(githubIcon,g);
+            });
+            textFieldPane.setPrompt("Github");
+            textFieldPane.setText(g);
+            dialog.show();
+        });
+
+        facebook.setOnMouseClicked(t -> {
+            TextFieldPane textFieldPane = new TextFieldPane();
+            JFXDialog dialog = new JFXDialog(mainpane, textFieldPane, JFXDialog.DialogTransition.CENTER);
+            textFieldPane.cencel(() -> {
+                dialog.close();
+            });
+            textFieldPane.save(() -> {
+                dialog.close();
+                f = textFieldPane.getText();
+                setColor(facebookIcon,f);
+            });
+            textFieldPane.setPrompt("Facebook");
+            textFieldPane.setText(f);
+            dialog.show();
+        });
+
+        twitter.setOnMouseClicked(t -> {
+            TextFieldPane textFieldPane = new TextFieldPane();
+            JFXDialog dialog = new JFXDialog(mainpane, textFieldPane, JFXDialog.DialogTransition.CENTER);
+            textFieldPane.cencel(() -> {
+                dialog.close();
+            });
+            textFieldPane.save(() -> {
+                dialog.close();
+                tw = textFieldPane.getText();
+                setColor(twitterIcon,tw);
+            });
+            textFieldPane.setPrompt("Twitter");
+            textFieldPane.setText(tw);
+            dialog.show();
+        });
+
+
     }
 
 
-
     @FXML
-    public void choosefile(){
+    public void choosefile() {
         configureFileChooser(fileChooser);
         File file = fileChooser.showOpenDialog(this.getScene().getWindow());
-        //  Image image;
-        System.out.println(file.getPath());
-  /*      if(image.getWidth()!=image.getHeight()){
-            JFXDialog dialog=new JFXDialog();
-            dialog.setTransitionType(JFXDialog.DialogTransition.CENTER);
-            StackPane stackPane=new StackPane();
-            stackPane.getChildren().add(new Label("you are stupid."));
-            dialog.show(stackPane);
-        }*/
+        Image image = null;
+        try {
+            image = new Image(file.toURL().toString(),100,100,true,true,true);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        this.imageview.setImage(image);
 
     }
 
@@ -152,12 +233,11 @@ public class UserDetailPane extends ReceiptDetailPane<UserVO> {
 
     @Override
     public void delete() {
-        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane,"Delete","sabi","Yes","No");
-        doubleButtonDialog.setButtonOne(()->{});
-        doubleButtonDialog.setButtonTwo(()->{
-            boardController.setRightAnimation();
-            boardController.historicalSwitchTo((Refreshable) HistoricalRecord.pop());
-            boardController.refresh();
+        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Delete", "sabi", "Yes", "No");
+        doubleButtonDialog.setButtonOne(() -> {
+        });
+        doubleButtonDialog.setButtonTwo(() -> {
+            setBack();
         });
         doubleButtonDialog.show();
     }
@@ -166,71 +246,90 @@ public class UserDetailPane extends ReceiptDetailPane<UserVO> {
     @Override
     public void refresh(boolean toSwitch) {
         boardController.Loading();
-        try{
-            DoubleButtonDialog buttonDialog =
-                    new DoubleButtonDialog(mainpane,"Wrong","sabi","Last","Ret");
-            buttonDialog.setButtonTwo(()->boardController.Ret());
-            buttonDialog.setButtonTwo(()->refresh(false));
-            Predicate<Integer> p = (i)->{if((vo = userManagerblService.showDetail(userId))!=null) return true;return false;};
-            GetTask<UserVO,UserManagerblService> task =
-                    new GetTask<>(()-> {
-                        username.setText(vo.getUsername());
-                        usertype.getSelectionModel().select(vo.getUsertype().ordinal());
-                        email.setText(vo.getEmail());
-                        phone.setText(vo.getPhone());
-                        comment.setText(vo.getComment());
-                        password.setText(vo.getPassword());
-                        imageview.setImage(vo.getImage());
-                        date.setText(vo.getDate());
-                        g = vo.getGithub();
-                        f = vo.getFacebook();
-                        t = vo.getTwitter();
-                        switchPane(toSwitch);
-                    }, buttonDialog,p);
+        try {
+            if (!updateState.get()) {
+                DoubleButtonDialog buttonDialog =
+                        new DoubleButtonDialog(mainpane, "Wrong", "sabi", "Last", "Ret");
+                buttonDialog.setButtonTwo(() -> boardController.Ret());
+                buttonDialog.setButtonTwo(() -> refresh(false));
+                Predicate<Integer> p = (i) -> {
+                    if ((vo = userManagerblService.showDetail(userId)) != null) return true;
+                    return false;
+                };
+                GetTask task =
+                        new GetTask(() -> {
+                            username.setText(vo.getUsername());
+                            usertype.getSelectionModel().select(vo.getUsertype().ordinal());
+                            email.setText(vo.getEmail());
+                            phone.setText(vo.getPhone());
+                            comment.setText(vo.getComment());
+                            password.setText(vo.getPassword());
+                            imageview.setImage(vo.getImage());
+                            date.setText(vo.getDate());
+                            g = vo.getGithub();
+                            f = vo.getFacebook();
+                            tw = vo.getTwitter();
+                            setColor(facebookIcon,f);
+                            setColor(githubIcon,g);
+                            setColor(twitterIcon,tw);
+                            switchPane(toSwitch);
+                        }, buttonDialog, p);
 
-            new Thread(task).start();
-        }catch (Exception e){
+                new Thread(task).start();
+            } else {
+                switchPane(toSwitch);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
     @Override
-    public void save(){
-        if(valid()){
+    public void save() {
+        if (valid()) {
             modify.modifyProperty().set(false);
-            if(userId==-1){
-                userId = userManagerblService.getId();
-                userManagerblService.add(new UserVO(
-                        userId,
-                        imageview.getImage(),
-                        username.getText(),
-                        UserCategory.map.get(usertype.getSelectionModel().getSelectedItem().getText()),
-                        f,g,t,
-                        email.getText(),
-                        phone.getText(),
-                        comment.getText(),
-                        date.getText(),
-                        password.getText()
-                ));
-            }else{
-                userManagerblService.update(new UserVO(
-                        userId,
-                        imageview.getImage(),
-                        username.getText(),
-                        UserCategory.map.get(usertype.getSelectionModel().getSelectedItem().getText()),
-                        f,g,t,
-                        email.getText(),
-                        phone.getText(),
-                        comment.getText(),
-                        date.getText(),
-                        password.getText()
-                ));
-            }
-            BoardController.getBoardController().refresh();
-        }else{
-            OneButtonDialog oneButtonDialog = new OneButtonDialog(mainpane,"???","Stupid!","Accept");
-            oneButtonDialog.setButtonOne(()->{});
+            DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Pending?", "sabi", "Yes", "No");
+            doubleButtonDialog.setButtonTwo(() -> {
+            });
+            doubleButtonDialog.setButtonOne(() -> {
+                if (userId == -1) {
+                    userId = userManagerblService.getId();
+                    userManagerblService.add(new UserVO(
+                            userId,
+                            imageview.getImage(),
+                            username.getText(),
+                            UserCategory.map.get(usertype.getSelectionModel().getSelectedItem().getText()),
+                            f, g, tw,
+                            email.getText(),
+                            phone.getText(),
+                            comment.getText(),
+                            date.getText(),
+                            password.getText()
+                    ));
+                } else {
+                    userManagerblService.update(new UserVO(
+                            userId,
+                            imageview.getImage(),
+                            username.getText(),
+                            UserCategory.map.get(usertype.getSelectionModel().getSelectedItem().getText()),
+                            f, g, tw,
+                            email.getText(),
+                            phone.getText(),
+                            comment.getText(),
+                            date.getText(),
+                            password.getText()
+                    ));
+                }
+                setBack();
+            });
+            doubleButtonDialog.show();
+
+        } else {
+            OneButtonDialog oneButtonDialog = new OneButtonDialog(mainpane, "???", "Stupid!", "Accept");
+            oneButtonDialog.setButtonOne(() -> {
+            });
+            oneButtonDialog.show();
         }
     }
 
@@ -244,52 +343,19 @@ public class UserDetailPane extends ReceiptDetailPane<UserVO> {
 
 
     @Override
-    public boolean valid()
-    {
-        if(!username.getText().equals("")&&!password.getText().equals(""))
+    public boolean valid() {
+        if (!username.getText().equals("") && !password.getText().equals(""))
             return true;
         return false;
     }
-/*
-    private class SwitchTask extends Task<Boolean> {
-
-        private SimpleIntegerProperty integerProperty = new SimpleIntegerProperty(-1);
-        private UserVO userVO;
-        private int userId;
 
 
-        public SwitchTask(int id){
-            this.userId=id;
+    public void setColor(MaterialDesignIconView materialDesignIconView, String s) {
+        if (s.equals("")) {
+             materialDesignIconView.setFill(Paint.valueOf("#000000"));
+        }else{
+            materialDesignIconView.setFill(Paint.valueOf("#006AF4"));
         }
+    }
 
-        public int getIntegerProperty() {
-            return integerProperty.get();
-        }
-
-        public SimpleIntegerProperty integerPropertyProperty() {
-            return integerProperty;
-        }
-
-        public UserVO getUserVO() {
-            return userVO;
-        }
-
-        public void setUserVO(UserVO userVO) {
-            this.userVO = userVO;
-        }
-
-        @Override
-        protected Boolean call() throws Exception{
-
-            if((userVO=userManagerblService.showDetail(userId))!=null){
-                Thread.sleep(2000);
-                integerProperty.setValue(1);
-                return true;
-            }else {
-                Thread.sleep(2000);
-                integerProperty.set(0);
-                return false;
-            }
-        }
-    }*/
 }
