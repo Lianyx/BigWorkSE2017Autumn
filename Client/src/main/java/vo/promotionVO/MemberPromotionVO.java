@@ -4,14 +4,12 @@ import blService.promotionblService.PromotionblService;
 import businesslogic.promotionbl.PromotionFactory;
 import po.promotionPO.MemberPromotionPO;
 import po.promotionPO.PromotionGoodsItemPO;
-import ui.managerui.promotionui.MemberPromotionDetailPane;
-import ui.managerui.promotionui.PromotionDetailPane;
+import ui.managerui.promotionui.promotionDetailPane.MemberPromotionDetailPane;
+import ui.managerui.promotionui.promotionDetailPane.PromotionDetailPane;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -27,12 +25,14 @@ public class MemberPromotionVO extends PromotionVO {
     public MemberPromotionVO() {
     }
 
-    public MemberPromotionVO (MemberPromotionPO promotionPO) {
+    public MemberPromotionVO(MemberPromotionPO promotionPO) {
         super(promotionPO);
         requiredLevel = promotionPO.getRequiredLevel();
         discountFraction = promotionPO.getDiscountFraction();
         tokenAmount = promotionPO.getTokenAmount();
-        gifts = Arrays.stream(promotionPO.getGifts()).map(PromotionGoodsItemVO::new).collect(Collectors.toCollection(ArrayList::new));
+        gifts = promotionPO.getGifts() == null ? null
+                : Arrays.stream(promotionPO.getGifts()).map(PromotionGoodsItemVO::new).collect(Collectors.toCollection(ArrayList::new));
+
     }
 
     @Override
@@ -46,7 +46,7 @@ public class MemberPromotionVO extends PromotionVO {
         result.setRequiredLevel(requiredLevel);
         result.setDiscountFraction(discountFraction);
         result.setTokenAmount(tokenAmount);
-        result.setGifts(gifts.stream().map(PromotionGoodsItemVO::toPO).toArray(PromotionGoodsItemPO[]::new));
+        result.setGifts(gifts == null ? null : gifts.stream().map(PromotionGoodsItemVO::toPO).toArray(PromotionGoodsItemPO[]::new));
         return result;
     }
 

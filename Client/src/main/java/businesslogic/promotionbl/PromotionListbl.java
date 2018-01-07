@@ -3,6 +3,7 @@ package businesslogic.promotionbl;
 import blService.promotionblService.PromotionListblService;
 import blService.promotionblService.PromotionblService;
 import util.PromotionSearchCondition;
+import util.PromotionType;
 import util.ResultMessage;
 import vo.promotionVO.CombinePromotionVO;
 import vo.promotionVO.MemberPromotionVO;
@@ -23,31 +24,27 @@ public class PromotionListbl implements PromotionListblService {
 
     // 和直接从工厂里拿没有区别。
     public PromotionListbl() throws RemoteException, NotBoundException, MalformedURLException {
-        this.combinePromotionblService = PromotionFactory.getCombinePromotionblSerivce();
+        this.combinePromotionblService = PromotionFactory.getCombinePromotionblService();
         this.memberPromotionblService = PromotionFactory.getMemberPromotionblService();
         this.totalPromotionblService = PromotionFactory.getTotalPromotionblService();
-    }
-
-    @Override
-    public ArrayList<PromotionVO> initPromotion() throws RemoteException {
-        PromotionSearchCondition promotionSearchCondition = new PromotionSearchCondition();
-        promotionSearchCondition.setLastModifiedFloor(LocalDateTime.now().minusDays(30));
-
-        return search(promotionSearchCondition);
     }
 
     @Override
     public ArrayList<PromotionVO> search(PromotionSearchCondition promotionSearchCondition) throws RemoteException {
         ArrayList<PromotionVO> resultList = new ArrayList<>();
 
-        ArrayList<CombinePromotionVO> cps = combinePromotionblService.search(promotionSearchCondition);
-        resultList.addAll(cps);
-
-        ArrayList<MemberPromotionVO> mps = memberPromotionblService.search(promotionSearchCondition);
-        resultList.addAll(mps);
-
-        ArrayList<TotalPromotionVO> tps = totalPromotionblService.search(promotionSearchCondition);
-        resultList.addAll(tps);
+        if (promotionSearchCondition.getPromotionTypes().contains(PromotionType.COMBINE)) {
+            ArrayList<CombinePromotionVO> cps = combinePromotionblService.search(promotionSearchCondition);
+            resultList.addAll(cps);
+        }
+        if (promotionSearchCondition.getPromotionTypes().contains(PromotionType.MEMBER)) {
+            ArrayList<MemberPromotionVO> mps = memberPromotionblService.search(promotionSearchCondition);
+            resultList.addAll(mps);
+        }
+        if (promotionSearchCondition.getPromotionTypes().contains(PromotionType.TOTAL)) {
+            ArrayList<TotalPromotionVO> tps = totalPromotionblService.search(promotionSearchCondition);
+            resultList.addAll(tps);
+        }
 
         return resultList;
     }

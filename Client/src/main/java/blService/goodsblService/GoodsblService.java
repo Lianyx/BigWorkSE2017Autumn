@@ -4,12 +4,13 @@ import util.ResultMessage;
 import vo.inventoryVO.GoodsVO;
 
 import java.util.List;
+import java.util.Set;
 
 public interface GoodsblService {
     /**
      * 显示所有商品
      */
-    public List<GoodsVO> show();
+    public Set<GoodsVO> show();
 
     /**
      * 增加商品

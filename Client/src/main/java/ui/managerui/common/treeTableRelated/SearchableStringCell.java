@@ -1,10 +1,13 @@
-package ui.managerui.common;
+package ui.managerui.common.treeTableRelated;
 
 import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+
+import java.util.List;
+import java.util.Set;
 
 public class SearchableStringCell<T> extends JFXTreeTableCell<T, String> {
     private class OrdinaryLable extends Label {
@@ -13,6 +16,7 @@ public class SearchableStringCell<T> extends JFXTreeTableCell<T, String> {
             this.setStyle("-fx-background-color: white;-fx-text-fill: black");
         }
     }
+
     private class HighlightLabel extends Label {
         private HighlightLabel(String text) {
             super(text);
@@ -26,10 +30,12 @@ public class SearchableStringCell<T> extends JFXTreeTableCell<T, String> {
 
     private FlowPane contentPane = new FlowPane();
     private StringProperty keyWordProperty; // 这个本来可以不持有引用的唉，再说再说
+    private List<T> keywordFilterList;
     private String item;
 
-    public SearchableStringCell(StringProperty keyWordProperty) {
+    public SearchableStringCell(StringProperty keyWordProperty, List<T> keywordFilterList) {
         this.keyWordProperty = keyWordProperty;
+        this.keywordFilterList = keywordFilterList;
         keyWordProperty.addListener((observable, oldValue, newValue) -> {
             renderText(newValue);
         });
@@ -55,16 +61,25 @@ public class SearchableStringCell<T> extends JFXTreeTableCell<T, String> {
         String toBeProcessed = item;
 
         // 这个不得不加，不然会有nullPointerException，虽然我不知道为什么一定要加。而且下面也很奇怪，为什么外面的那个toBeProcessed就不会nullpointer了
-        if (newValue != null && !newValue.equals("") && toBeProcessed != null) {
-            int index;
-            while ((index = toBeProcessed.indexOf(newValue)) != -1) {
-                contentPane.getChildren().add(new OrdinaryLable(toBeProcessed.substring(0, index)));
-                contentPane.getChildren().add(new HighlightLabel(toBeProcessed.substring(index, index + newValue.length())));
+        boolean satisfyKeywordFilter = false;
+        if (toBeProcessed != null) {
+            if (newValue != null && !newValue.equals("")) {
+                int index;
+                while ((index = toBeProcessed.indexOf(newValue)) != -1) {
+                    satisfyKeywordFilter = true;
+                    contentPane.getChildren().add(new OrdinaryLable(toBeProcessed.substring(0, index)));
+                    contentPane.getChildren().add(new HighlightLabel(toBeProcessed.substring(index, index + newValue.length())));
 
-                toBeProcessed = toBeProcessed.substring(index + newValue.length());
+                    toBeProcessed = toBeProcessed.substring(index + newValue.length());
+                }
+            } else {
+                satisfyKeywordFilter = true;
             }
+            contentPane.getChildren().add(new OrdinaryLable(toBeProcessed));
+//            System.out.println(keywordFilterList);
+//            if (satisfyKeywordFilter && keywordFilterList != null) {
+//                keywordFilterList.add(getTreeTableRow().getTreeItem().getValue());
+//            }
         }
-
-        contentPane.getChildren().add(new OrdinaryLable(toBeProcessed));
     }
 }

@@ -12,6 +12,9 @@
 <?import javafx.geometry.Insets?>
 <?import com.jfoenix.controls.JFXRippler?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import ui.managerui.common.navigation.PromotionChangePaneLabel?>
+<?import ui.managerui.common.navigation.CheckChangePaneLabel?>
+<?import ui.managerui.common.MyTopBar?>
 <StackPane fx:id="mainpane"
            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
            fx:controller="ui.managerui.ManagerUIController"
@@ -26,25 +29,25 @@
             </ImageView>
         </AnchorPane>
 
-        <TopBar fx:id="bar" layoutX="160"/>
+        <MyTopBar fx:id="bar" layoutX="160"/>
 
         <fx:include source="/util/board.fxml" fx:id="board" layoutX="160" layoutY="40"/> <!--为什么报错？-->
 
         <JFXListView fx:id="navigation" layoutY="40" prefHeight="560" prefWidth="160">
-            <Label fx:id="checkList" text="审批单据" style="-fx-padding: 8 0 8 10;">
+            <CheckChangePaneLabel fx:id="checkList" text="审批单据" style="-fx-padding: 8 0 8 10;">
                 <graphic>
                     <StackPane style="-fx-padding: 0 10 0 0;">
                         <FontAwesomeIconView fx:id="ckeckListIcon" size="1em"/>
                     </StackPane>
                 </graphic>
-            </Label>
-            <Label fx:id="promotionList" text="促销策略" style="-fx-padding: 8 0 8 10;">
+            </CheckChangePaneLabel>
+            <PromotionChangePaneLabel fx:id="promotionList" text="促销策略" style="-fx-padding: 8 0 8 10;">
                 <graphic>
                     <StackPane style="-fx-padding: 0 10 0 0;">
                         <FontAwesomeIconView fx:id="promotionListIcon" size="1em"/>
                     </StackPane>
                 </graphic>
-            </Label>
+            </PromotionChangePaneLabel>
         </JFXListView>
 
     </AnchorPane>

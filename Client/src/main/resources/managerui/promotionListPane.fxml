@@ -8,17 +8,17 @@
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <fx:root type="AnchorPane" id="promotionListPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
          prefHeight="560.0" prefWidth="640.0">
-    <JFXTextField fx:id="keyWordField" layoutX="27.0" layoutY="28.0" prefHeight="30.0" prefWidth="150.0"/>
+    <JFXTextField fx:id="keywordField" layoutX="27.0" layoutY="28.0" prefHeight="30.0" prefWidth="150.0"/>
 
     <JFXRippler fx:id="search" layoutX="177" layoutY="22" maskType="CIRCLE" position="BACK"
-                onMouseClicked="#SearchKeyWord">
+                onMouseClicked="#SearchKeyword">
         <StackPane style="-fx-padding: 8;" translateY="5">
             <FontAwesomeIconView glyphName="SEARCH" size="1.5em" styleClass="icon"/>
         </StackPane>
     </JFXRippler>
 
     <JFXButton fx:id="filter" text="筛选" layoutX="420.0" layoutY="35.0"
-               mnemonicParsing="false" onMouseClicked="#showFilterPane">
+               mnemonicParsing="false">
         <graphic>
             <JFXRippler>
                 <StackPane>
@@ -29,7 +29,7 @@
     </JFXButton>
 
     <JFXButton fx:id="add" text="新建" layoutX="494.0" layoutY="35.0"
-               mnemonicParsing="false" onMouseClicked="#add">
+               mnemonicParsing="false">
         <graphic>
             <JFXRippler>
                 <StackPane>

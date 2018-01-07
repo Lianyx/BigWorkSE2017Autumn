@@ -1,25 +1,20 @@
 package vo.promotionVO;
 
 import blService.promotionblService.PromotionblService;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import po.generic.ReceipishPO;
 import po.promotionPO.PromotionPO;
-import ui.managerui.promotionui.PromotionDetailPane;
+import ui.managerui.promotionui.promotionDetailPane.PromotionDetailPane;
+import util.PromotionState;
 import vo.abstractVO.ReceipishVO;
-import vo.abstractVO.SelectableVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public abstract class PromotionVO extends ReceipishVO<PromotionVO> {
     protected LocalDateTime beginTime, endTime;
     protected String comment;
+    protected PromotionState promotionState;
 
     public PromotionVO() {
     }
@@ -29,6 +24,7 @@ public abstract class PromotionVO extends ReceipishVO<PromotionVO> {
         this.beginTime = promotionPO.getBeginTime();
         this.endTime = promotionPO.getEndTime();
         this.comment = promotionPO.getComment();
+        this.promotionState = promotionPO.getPromotionState();
     }
 
 //    public abstract <T extends PromotionPO> T toPO(); // 这个就不用了
@@ -39,10 +35,11 @@ public abstract class PromotionVO extends ReceipishVO<PromotionVO> {
         result.setBeginTime(beginTime);
         result.setEndTime(endTime);
         result.setComment(comment);
+        result.setPromotionState(promotionState);
         return result;
     }
 
-    public abstract PromotionblService getService() throws RemoteException, NotBoundException, MalformedURLException;
+    public abstract <T extends PromotionVO> PromotionblService<T> getService() throws RemoteException, NotBoundException, MalformedURLException;
 
     public abstract PromotionDetailPane getDetailPane();
 
@@ -69,5 +66,13 @@ public abstract class PromotionVO extends ReceipishVO<PromotionVO> {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public PromotionState getPromotionState() {
+        return promotionState;
+    }
+
+    public void setPromotionState(PromotionState promotionState) {
+        this.promotionState = promotionState;
     }
 }

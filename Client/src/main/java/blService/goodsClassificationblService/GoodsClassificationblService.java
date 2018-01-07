@@ -13,7 +13,7 @@ public interface GoodsClassificationblService {
      *
      * @return
      */
-    public Set<GoodsClassificationVO> show();
+    public List<GoodsClassificationVO> show();
 
     /**
      * 创建商品分类时调用，根据上层分类编号生成编号

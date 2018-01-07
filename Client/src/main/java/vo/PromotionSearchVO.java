@@ -23,6 +23,11 @@ public class PromotionSearchVO {
     private ObjectProperty<PromotionState> promotionStateProperty = new SimpleObjectProperty<>();
 
     public PromotionSearchVO() {
+        beginCeilProperty.set(LocalDateTime.now().plusMonths(3).toLocalDate());
+        endFloorProperty.set(LocalDateTime.now().minusMonths(3).toLocalDate());
+        containMemberProperty.set(true);
+        containTotalProperty.set(true);
+        containCombineProperty.set(true);
     }
 
     public PromotionSearchVO(PromotionSearchCondition promotionSearchCondition) {
