@@ -157,8 +157,8 @@ public class CashDetailPane extends ReceiptDetailPane<CashReceiptVO> {
             buttonDialog.setButtonTwo(()->boardController.Ret());
             buttonDialog.setButtonTwo(()->refresh(false));
             Predicate<Integer> p = (i)->{if((vo = cashBillReceiptblService.showDetail(receiptid))!=null) return true;return false;};
-            GetTask<SalesReceiptVO,SalesblService> task =
-                    new GetTask<>(()-> {
+            GetTask task =
+                    new GetTask(()-> {
                         operator.setText(UserInfomation.username);
                         date.setValue(vo.getCreateTime().toLocalDate());
                         id.setText("-"+vo.getId().split("-")[2]);

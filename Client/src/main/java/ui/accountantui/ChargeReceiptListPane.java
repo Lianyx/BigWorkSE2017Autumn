@@ -100,8 +100,8 @@ public class ChargeReceiptListPane extends ReceiptListPane<ChargeReceiptListVO> 
                 }
                 return false;
             };
-            GetTask<HashSet<ChargeReceiptListVO>, ChargeBillReceiptblService> getTask =
-                    new GetTask<>(() -> {
+            GetTask getTask =
+                    new GetTask(() -> {
                         receiptTreeTable.setReceipts(set);
                         pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
                         receiptTreeTable.createPage(0);
