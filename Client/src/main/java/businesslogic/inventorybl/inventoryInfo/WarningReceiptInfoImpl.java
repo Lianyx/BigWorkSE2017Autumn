@@ -36,7 +36,7 @@ public class WarningReceiptInfoImpl implements InventoryWarningReceiptInfo{
         InventoryWarningReceiptVO receiptVO = new InventoryWarningReceiptVO(null,0,null,null,
                 ReceiptState.PENDING,list);
 
-        receiptbl.insert(receiptVO);
+      //  receiptbl.insert(receiptVO);
 
         return !list.isEmpty();
     }

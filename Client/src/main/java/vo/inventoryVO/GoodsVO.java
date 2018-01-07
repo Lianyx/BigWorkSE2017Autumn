@@ -4,9 +4,11 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleBooleanProperty;
 
 import javafx.scene.image.Image;
+import vo.abstractVO.SelectableVO;
+
 import java.io.Serializable;
 
-public class GoodsVO extends RecursiveTreeObject<GoodsVO> implements Serializable,Comparable<GoodsVO>{
+public class GoodsVO extends SelectableVO<GoodsVO> {
     /**编号*/
     private String id;
     /** 商品名称 */
@@ -28,12 +30,9 @@ public class GoodsVO extends RecursiveTreeObject<GoodsVO> implements Serializabl
     /** 商品警戒数量 */
     private int alarmNumber;
     /** 来表示是否被选中*/
-    private SimpleBooleanProperty selected=new SimpleBooleanProperty(false);
-
-    private Image image = new Image("/default/light.jpg");
+    private boolean multiple = true;
 
     public GoodsVO() {
-     //   this.image = new Image("/default/light.jpg");
     }
 
     public GoodsVO(String ID, String name, String type, String sortID, int inventoryNum, double purPrice, double salePrice, double recentPurpPrice, double recentSalePrice, int alarmNumber) {
@@ -48,16 +47,13 @@ public class GoodsVO extends RecursiveTreeObject<GoodsVO> implements Serializabl
         this.recentSalePrice = recentSalePrice;
         this.alarmNumber = alarmNumber;
     }
-    public boolean isSelected() {
-        return selected.get();
+
+    public boolean isMultiple() {
+        return multiple;
     }
 
-    public SimpleBooleanProperty selectedProperty() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected.set(selected);
+    public void setMultiple(boolean multiple) {
+        this.multiple = multiple;
     }
 
     public String getId() {
@@ -138,20 +134,5 @@ public class GoodsVO extends RecursiveTreeObject<GoodsVO> implements Serializabl
 
     public void setAlarmNumber(int alarmNumber) {
         this.alarmNumber = alarmNumber;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
-    //因为要放进treeset，必须实现compareTo的方法
-    @Override
-    public int compareTo(GoodsVO o) {
-        int result = this.getId().compareTo(o.getId());
-        return (result > 0) ? 1:-1;
     }
 }

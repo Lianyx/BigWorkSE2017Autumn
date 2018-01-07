@@ -1,3 +1,4 @@
+/*
 package blServiceDriver.inventoryblService_Driver;
 
 import blServiceStub.inventoryblService_Stub.InventoryblService_Stub;
@@ -59,3 +60,4 @@ public class InventoryblService_Driver {
 
     }
 }
+*/

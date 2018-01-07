@@ -14,81 +14,86 @@
 <?import ui.util.TopBar?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<StackPane fx:id="mainpane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/List.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.inventoryManagerui.InventoryUIController">
-
+<?import javafx.scene.layout.HBox?>
+<AnchorPane fx:id="back" prefHeight="600.0" prefWidth="800.0" fx:controller="ui.inventoryui.InventoryUIController" stylesheets="@../css/list.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
 
-    <AnchorPane fx:id="GoodsList" prefHeight="600.0" prefWidth="800.0">
-        <children>
+        <TopBar fx:id="bar" layoutX="160"/>
+        <fx:include fx:id="board" source="../util/board.fxml" layoutX="160" layoutY="40"/>
 
 
-            <TopBar fx:id="bar" layoutX="160"/>
-            <fx:include  fx:id="board" source="/util/board.fxml" layoutX="160" layoutY="40"/>
 
-            <JFXListView fx:id="navigation" layoutY="40.0" prefHeight="560.0" prefWidth="160.0">
-                <Label fx:id="goodsClassification" text="商品分类" style="-fx-padding: 8 0 8 10;">
+        <JFXListView fx:id="navigation" layoutY="40.0" prefHeight="560.0" prefWidth="160.0">
+            <HBox fx:id="goodsClassification">
+                <Label>
+                    <padding><Insets bottom="8" left="5" top="8" /></padding>
+                    GoodsClassification
                     <graphic>
-                        <StackPane style="-fx-padding: 0 10 0 0;">
-                            <FontAwesomeIconView fx:id="goodsClassificationIcon" size="1em"/>
+                        <StackPane styleClass="custom-jfx-list-view-icon-container">
+                            <MaterialDesignIconView glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)"/>
                         </StackPane>
                     </graphic>
                 </Label>
-                <Label fx:id="goods" text="商品" style="-fx-padding: 8 0 8 10;">
+            </HBox>
+            <HBox fx:id="goods">
+                <Label>
+                    <padding><Insets bottom="8" left="5" top="8" /></padding>
+                    Goods
                     <graphic>
-                        <StackPane style="-fx-padding: 0 10 0 0;">
-                            <FontAwesomeIconView fx:id="goodsIcon" size="1em"/>
+                        <StackPane styleClass="custom-jfx-list-view-icon-container">
+                            <MaterialDesignIconView glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)"/>
                         </StackPane>
                     </graphic>
                 </Label>
-                <Label fx:id="inventoryReceiptList" text="单据" style="-fx-padding: 8 0 8 10;">
+            </HBox>
+            <HBox fx:id="inventoryView">
+                <Label>
+                    <padding><Insets bottom="8" left="5" top="8" /></padding>
+                    InventoryView
                     <graphic>
-                        <StackPane style="-fx-padding: 0 10 0 0;">
-                            <FontAwesomeIconView fx:id="billReceiptListIcon" size="1em"/>
+                        <StackPane styleClass="custom-jfx-list-view-icon-container">
+                            <MaterialDesignIconView glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)"/>
                         </StackPane>
                     </graphic>
                 </Label>
-                <Label fx:id="inventoryGiftReceipt" text="库存赠送单"  style="-fx-padding: 0 0 0 50;">
+            </HBox>
+            <HBox fx:id="inventoryCheck">
+                <Label>
+                    <padding><Insets bottom="8" left="5" top="8" /></padding>
+                    InventoryCheck
+                    <graphic>
+                        <StackPane styleClass="custom-jfx-list-view-icon-container">
+                            <MaterialDesignIconView glyphName="ACCOUNT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)"/>
+                        </StackPane>
+                    </graphic>
                 </Label>
-                <Label fx:id="inventoryDamageReceipt" text="库存报损单"  style="-fx-padding: 0 0 0 50;">
+            </HBox>
+            <HBox fx:id="receipt">
+                <Label>
+                    <padding><Insets bottom="8" left="5" top="8" /></padding>
+                    Receipt
+                    <graphic>
+                        <StackPane styleClass="custom-jfx-list-view-icon-container">
+                            <MaterialDesignIconView glyphName="RECEIPT" size="1.5em" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)"/>
+                        </StackPane>
+                    </graphic>
                 </Label>
-                <Label fx:id="inventoryOverflowReceipt" text="库存报溢单"  style="-fx-padding: 0 0 0 50;">
-                </Label>
-                <Label fx:id="inventoryWarningReceipt" text="库存报警单"  style="-fx-padding: 0 0 0 50;">
-                </Label>
-            <Label fx:id="inventoryView" text="库存查看" style="-fx-padding: 8 0 8 10;">
-                <graphic>
-                    <StackPane style="-fx-padding: 0 10 0 0;">
-                        <FontAwesomeIconView fx:id="inventoryViewIcon" size="1em"/>
-                    </StackPane>
-                </graphic>
-            </Label>
-            <Label fx:id="inventoryCheck" text="库存盘点" style="-fx-padding: 8 0 8 10;">
-                <graphic>
-                    <StackPane style="-fx-padding: 0 10 0 0;">
-                        <FontAwesomeIconView fx:id="inventoryCheckIcon" size="1em"/>
-                    </StackPane>
-                </graphic>
-            </Label>
+            </HBox>
+            <HBox fx:id="inventoryGift"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>InventoryGift</Label></HBox>
+            <HBox fx:id="inventoryDamage"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>InventoryDamage</Label></HBox>
+            <HBox fx:id="inventoryOverfolw"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>InventoryOverflow</Label></HBox>
+            <HBox fx:id="invnetoryWarning"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>InventoryWarning</Label></HBox>
 
+        </JFXListView>
 
-            </JFXListView>
-
-
-
-            <AnchorPane fx:id="logopane" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: white">
-                <children>
-                    <ImageView fitHeight="52.0" fitWidth="98.0" layoutX="24.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                            <Image url="@../default/logo.jpg" />
-                        </image>
-                    </ImageView>
-                </children>
-            </AnchorPane>
-        </children>
-
-
-    </AnchorPane>
-
-
+        <AnchorPane fx:id="logopane"  prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: white">
+            <children>
+                <ImageView fitHeight="52.0" fitWidth="98.0" layoutX="24.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../default/logo.jpg" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
     </children>
-</StackPane>
+</AnchorPane>

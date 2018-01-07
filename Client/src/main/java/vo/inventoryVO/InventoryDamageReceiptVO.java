@@ -1,9 +1,11 @@
 package vo.inventoryVO;
 
+import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
 import javafx.scene.Node;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
+import vo.receiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -30,8 +32,9 @@ public class InventoryDamageReceiptVO extends InventoryReceiptVO {
         return null;
     }
 
+
     @Override
-    public ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException {
+    public <TV extends ReceiptVO> CheckInfo<TV> getService() throws RemoteException, NotBoundException, MalformedURLException {
         return null;
     }
 

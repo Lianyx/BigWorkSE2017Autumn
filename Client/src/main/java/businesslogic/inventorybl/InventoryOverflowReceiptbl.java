@@ -1,13 +1,20 @@
 package businesslogic.inventorybl;
 
+import businesslogic.checkbl.Receiptbl;
 import businesslogic.goodsbl.goodsUpdate.GoodsUpdate;
 import businesslogic.goodsbl.goodsUpdate.GoodsUpdateInfo;
 import po.GoodsPO;
+import po.receiptPO.InventoryOverflowReceiptPO;
 import po.receiptPO.InventoryReceiptGoodsItemPO;
 import po.receiptPO.InventoryReceiptPO;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
 import util.ResultMessage;
+import vo.inventoryVO.InventoryOverflowReceiptVO;
+import vo.inventoryVO.InventoryReceiptVO;
+import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptListVO;
+import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptType;
+import vo.inventoryVO.inventoryReceiptVO.InventorySearchVO;
 import vo.inventoryVO.uiReceipt.InventoryGiftuiVO;
 import vo.receiptVO.ReceiptVO;
 
@@ -18,17 +25,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class InventoryOverflowReceiptbl extends Inventorybl {
+public class InventoryOverflowReceiptbl extends Receiptbl<InventoryOverflowReceiptVO,InventoryOverflowReceiptPO> {
     GoodsUpdateInfo info;
 
     public InventoryOverflowReceiptbl(Class<? extends ReceiptVO> receiptVOClass, Class<? extends ReceiptPO> receiptPOClass,
                                       String className) throws RemoteException, NotBoundException, MalformedURLException {
-        super();
+        super(InventoryOverflowReceiptVO.class,InventoryOverflowReceiptPO.class);
         info = new GoodsUpdate();
     }
 
-    @Override
-    public ResultMessage approve(InventoryReceiptPO receiptPO) throws RemoteException {
+
+
+
+ /*   @Override
+    public ResultMessage approve(InventoryReceiptVO receiptVO) throws RemoteException {
+        InventoryReceiptPO receiptPO = receiptVO.toPO();
         receiptPO.setReceiptState(ReceiptState.APPROVED);
         receiptDataService.update(receiptPO);
 
@@ -45,10 +56,13 @@ public class InventoryOverflowReceiptbl extends Inventorybl {
         info.goodsUpdate(poList);
 
         return ResultMessage.SUCCESS;
-    }
+        return null;
+    }*/
+
+
 
     @Override
-    public Set<InventoryGiftuiVO> getAll() {
+    public ResultMessage approve(InventoryOverflowReceiptVO receiptVO) throws RemoteException {
         return null;
     }
 }

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
-<?import ui.inventoryManagerui.inventoryGiftReceiptui.GiftListItemTreeTable?>
+<?import ui.inventoryui.inventoryGiftReceiptui.GiftListItemTreeTable?>
 
 <!-- javafx的包名首字母绝对绝对绝对绝对绝对绝对绝对绝对绝对tm不能用大写，太坑了！坑了我一天 -->
 

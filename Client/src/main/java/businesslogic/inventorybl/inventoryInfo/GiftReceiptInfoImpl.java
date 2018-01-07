@@ -34,6 +34,6 @@ public class GiftReceiptInfoImpl implements InventoryGiftReceiptInfo {
         InventoryGiftReceiptVO receiptVO = new InventoryGiftReceiptVO(null,0,null,null,
                 ReceiptState.PENDING,list);
 
-        giftReceiptbl.insert(receiptVO);
+      //  giftReceiptbl.insert(receiptVO);
     }
 }

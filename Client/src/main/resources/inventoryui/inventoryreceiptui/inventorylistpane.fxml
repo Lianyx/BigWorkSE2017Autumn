@@ -6,17 +6,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXRippler?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import ui.inventoryui.goodsclassificationui.GoodsClassificationTreeView?>
-<fx:root fx:id="goodsClassificationPane" prefHeight="560.0" prefWidth="640.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<fx:root fx:id="inventorylist" prefHeight="560.0" prefWidth="640.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
 
-        <JFXTextField focusColor="#8CA2F6" layoutX="27.0" layoutY="28.0" prefHeight="30.0" prefWidth="150.0" />
+        <JFXTextField fx:id="searchField" focusColor="#8CA2F6" layoutX="27.0" layoutY="28.0" prefHeight="30.0" prefWidth="150.0" />
 
         <JFXButton fx:id="filter" layoutX="427.0" layoutY="35.0" mnemonicParsing="false" text="Filter">
             <graphic>
@@ -31,14 +30,14 @@
                 </HBox>
             </graphic>
         </JFXButton>
-        <JFXRippler fx:id="search" layoutX="177" layoutY="22" maskType="CIRCLE" position="BACK" ripplerFill="#03A9F4" styleClass="icons-rippler">
+        <JFXRippler fx:id="search" onMouseClicked="#search" layoutX="177" layoutY="22" maskType="CIRCLE" position="BACK" ripplerFill="#03A9F4" styleClass="icons-rippler">
             <StackPane style="-fx-padding: 8;" translateY="5">
                 <OctIconView glyphName="SEARCH" size="1.5em" styleClass="icon" />
             </StackPane>
         </JFXRippler>
 
 
-        <JFXButton fx:id="delete" layoutX="557.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#delete" text="Delete">
+        <JFXButton fx:id="delete" layoutX="557.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#deleteList" text="Delete">
             <graphic>
                 <HBox>
                     <children>
@@ -68,14 +67,9 @@
         </JFXButton>
 
 
+        <BorderPane fx:id="borderpane" layoutX="20.0" layoutY="80.0" prefHeight="480.0" prefWidth="600.0" />
 
-        <!--
-        <SplitPane fx:id="splitPane" layoutY="80.0" layoutX="20.0" prefWidth="600.0" prefHeight="480.0"/>
-        <GoodsClassificationTreeView fx:id="goodsClassificationTreeView" layoutX="20.0" layoutY="80.0" prefHeight="480.0" prefWidth="600.0"/>
-        -->
-        <BorderPane fx:id="borderpane" layoutX="20.0" layoutY="80.0" prefHeight="480.0" prefWidth="600.0" >
-
-        </BorderPane>
 
     </children>
 </fx:root>
+
