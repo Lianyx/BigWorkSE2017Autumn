@@ -139,7 +139,7 @@ public class PromotionListPane extends Refreshable { // TODO Refreshable改成�
         }, buttonDialog, p -> {
             try {
                 if (promotionListblService == null) { // 说明是第一次
-                    promotionListblService = PromotionFactory.getPromotionListblService();
+                    promotionListblService = PromotionFactory.getService(PromotionListblService.class);
                 }
 
                 ArrayList<PromotionVO> promotions;

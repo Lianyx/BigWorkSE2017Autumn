@@ -1,7 +1,6 @@
 package businesslogic.promotionbl;
 
-import blService.promotionblService.PromotionListblService;
-import blService.promotionblService.PromotionblService;
+import blService.promotionblService.*;
 import util.PromotionSearchCondition;
 import util.PromotionType;
 import util.ResultMessage;
@@ -24,9 +23,9 @@ public class PromotionListbl implements PromotionListblService {
 
     // 和直接从工厂里拿没有区别。
     public PromotionListbl() throws RemoteException, NotBoundException, MalformedURLException {
-        this.combinePromotionblService = PromotionFactory.getCombinePromotionblService();
-        this.memberPromotionblService = PromotionFactory.getMemberPromotionblService();
-        this.totalPromotionblService = PromotionFactory.getTotalPromotionblService();
+        this.combinePromotionblService = PromotionFactory.getService(CombinePromotionblService.class);
+        this.memberPromotionblService = PromotionFactory.getService(MemberPromotionblService.class);
+        this.totalPromotionblService = PromotionFactory.getService(TotalPromotionblService.class);
     }
 
     @Override

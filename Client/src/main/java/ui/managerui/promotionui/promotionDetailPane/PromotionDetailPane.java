@@ -153,6 +153,7 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
 
     @FXML
     protected void addGift() { // TODO
+        System.out.println("add is called");
         goodsTreeTable.add(new PromotionGoodsItemVO("id5113", "商品A", 23, new SimpleIntegerProperty(3)));
     }
 

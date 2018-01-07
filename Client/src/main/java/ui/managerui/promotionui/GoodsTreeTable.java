@@ -52,7 +52,8 @@ public class GoodsTreeTable extends JFXTreeTableView<PromotionGoodsItemVO> {
     }
 
     public void setAll(Collection<PromotionGoodsItemVO> newGifts) {
-        gifts = FXCollections.observableArrayList(newGifts);
+        gifts.clear();
+        gifts.setAll(newGifts);
     }
     public ObservableList<PromotionGoodsItemVO> getGifts() {
         return gifts;

@@ -1,5 +1,6 @@
 package vo.receiptVO;
 
+import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
 import javafx.scene.Node;
 import po.generic.ReceipishPO;
@@ -43,9 +44,7 @@ public abstract class ReceiptVO extends ReceipishVO<ReceiptVO> {
         return result;
     }
 
-//    public abstract <T extends ReceiptPO> T toPO();
-
-    public abstract ReceiptblService getService() throws RemoteException, NotBoundException, MalformedURLException;
+    public abstract <TV extends ReceiptVO> CheckInfo<TV> getService() throws RemoteException, NotBoundException, MalformedURLException;
 
     public abstract Node getDetailPane();
 

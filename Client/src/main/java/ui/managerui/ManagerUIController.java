@@ -39,7 +39,7 @@ public class ManagerUIController {
 //        boardController.switchTo(initialPane);
         initialPane.refresh(false);
 
-//        navigation.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
+        navigation.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
 //            new Thread(() -> {
 //                Platform.runLater(() -> {
 //                    if (newVal != null) {
@@ -51,8 +51,8 @@ public class ManagerUIController {
 //                    }
 //                });
 //            }).start();
-//            newVal.getPane().refresh(true); // 这里还是先按照refresh的写法吧
-//        });
+            newVal.getPane().refresh(true); // 这里还是先按照refresh的写法吧
+        });
     }
 
 }

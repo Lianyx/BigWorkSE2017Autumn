@@ -18,7 +18,7 @@ public class SalesSellbl extends Receiptbl<SalesSellReceiptVO, SalesSellReceiptP
     }
 
     @Override
-    public ResultMessage approve(SalesSellReceiptPO receiptPO) throws RemoteException {
+    public ResultMessage approve(SalesSellReceiptVO receiptVO) throws RemoteException {
         return null;
     }
 }

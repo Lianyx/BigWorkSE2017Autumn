@@ -17,6 +17,7 @@ import ui.util.NodeAnimation;
 import ui.util.NodeHolder;
 import util.PromotionState;
 import vo.promotionVO.PromotionVO;
+import ui.managerui.common.treeTableRelated.StateCell;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -25,33 +26,6 @@ import java.util.*;
 import java.util.function.Function;
 
 public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
-    class StateCell<T, S> extends JFXTreeTableCell<T, S> { // 这其实就是我之前一直不想这么写的那种…
-        private JFXButton civ = new JFXButton();
-        private Function<S, String> stateToString, stateToStyle;
-
-        public StateCell(Function<S, String> stateToString, Function<S, String> stateToStyle) {
-            this.stateToString = stateToString;
-            this.stateToStyle = stateToStyle;
-        }
-
-        @Override
-        public void updateItem(S item, boolean empty) {
-            super.updateItem(item, empty);
-            if (empty) {
-                setGraphic(null);
-            } else {
-                civ.setDisable(true);
-                civ.setTranslateY(-4);
-                civ.setStyle(stateToStyle.apply(item));
-                civ.setText(stateToString.apply(item));
-                setGraphic(civ);
-            }
-        }
-    }
-
-    /**
-     *
-     * */
     private ObservableList<PromotionVO> observableList;
     private ObservableList<PromotionVO> tempList;
     private Pagination pagination;
@@ -125,12 +99,6 @@ public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
         new NodeHolder(this, Duration.millis(1000), NodeAnimation.FADE).apply();
     }
 
-
-    // 这种做事做一办的方法不喜欢…
-    void delete() throws RemoteException, MalformedURLException, NotBoundException {
-
-    }
-
     public void refresh(List<PromotionVO> list) {
         this.observableList = FXCollections.observableArrayList(list);
 
@@ -151,5 +119,4 @@ public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
             pagination.setCurrentPageIndex(newPageIndex);
         }
     }
-
 }
