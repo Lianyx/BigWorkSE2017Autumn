@@ -29,7 +29,7 @@
     </select>
 
     <select id="searchForBusiness" resultMap="resultMap">
-        select * from SalesSellReceipt
+        select * from inventoryoverflowreceipt
         <where>
             <if test="memberId != null">
                 memberId=#{memberId}
@@ -51,7 +51,7 @@
 
 
     <select id="search" resultMap="resultMap">
-        select * from SalesSellReceipt
+        select * from inventoryoverflowreceipt
         <where>
             <if test="clientId != null">
                 clientId=#{clientId}
