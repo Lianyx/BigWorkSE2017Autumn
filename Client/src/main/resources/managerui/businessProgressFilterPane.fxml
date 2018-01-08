@@ -42,13 +42,13 @@
     <JFXDatePicker fx:id="endTime" layoutX="140" layoutY="190" prefWidth="100"/>
 
     <Label text="客户" layoutX="10" layoutY="250"/>
-    <JFXTextField layoutX="68" layoutY="243" prefWidth="145"/>
+    <JFXTextField fx:id="memberField" layoutX="68" layoutY="243" prefWidth="145"/>
 
     <Label text="业务员" layoutX="10" layoutY="280"/>
-    <JFXTextField layoutX="68" layoutY="273" prefWidth="145"/>
+    <JFXTextField fx:id="clerkField" layoutX="68" layoutY="273" prefWidth="145"/>
 
     <Label text="仓库" layoutX="10" layoutY="310"/>
-    <JFXTextField layoutX="68" layoutY="303" prefWidth="145"/>
+    <JFXTextField fx:id="stockField" layoutX="68" layoutY="303" prefWidth="145"/>
 
 
     <JFXButton fx:id="select" text="选择" layoutX="90" layoutY="380"

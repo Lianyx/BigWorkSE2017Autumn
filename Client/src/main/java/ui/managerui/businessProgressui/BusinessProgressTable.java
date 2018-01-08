@@ -1,9 +1,6 @@
-package ui.managerui.checkui;
+package ui.managerui.businessProgressui;
 
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableRow;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.StringProperty;
@@ -26,24 +23,13 @@ import vo.receiptVO.ReceiptVO;
 import java.util.List;
 import java.util.Set;
 
-public class CheckTable extends MyTreeTableBorderPane<ReceiptVO> {
-    public CheckTable(Set<ReceiptVO> chosenItems, StringProperty keywordProperty, List<ReceiptVO> keywordFilterList) {
+public class BusinessProgressTable extends MyTreeTableBorderPane<ReceiptVO> {
+
+    public BusinessProgressTable(Set<ReceiptVO> chosenItems, StringProperty keywordProperty, List<ReceiptVO> keywordFilterList) {
         JFXTreeTableColumn<ReceiptVO, Boolean> choose = new ChooseColumn<>(chosenItems);
         JFXTreeTableColumn<ReceiptVO, String> idColumn = new SearchableStringColumn<>("编号", 200, keywordProperty, keywordFilterList, ReceiptVO::getId);
-        JFXTreeTableColumn<ReceiptVO, String> lastModifiedTimeColumn = new SearchableStringColumn<>("提交时间", 100, keywordProperty, keywordFilterList, p -> p.getLastModifiedTime().toLocalDate().toString());
-
-        JFXTreeTableColumn<ReceiptVO, String> stateColumn = new JFXTreeTableColumn<>("状态");
-        stateColumn.setPrefWidth(100);
-        stateColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getValue().getReceiptState().name()));
-        stateColumn.setCellFactory(param -> new ButtonCell<ReceiptVO>() {
-            @Override
-            public void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-                if (item != null) {
-                    setButtonStyle(ReceiptState.color.get(item));
-                }
-            }
-        });
+        JFXTreeTableColumn<ReceiptVO, String> lastModifiedTimeColumn = new SearchableStringColumn<>("通过时间", 150, keywordProperty, keywordFilterList, p -> p.getLastModifiedTime().toLocalDate().toString());
+        JFXTreeTableColumn<ReceiptVO, String> operatorColumn = new SearchableStringColumn<>("操作员", 100, keywordProperty, keywordFilterList, p -> String.valueOf(p.getOperatorId()));
 
         myTreeTable.setRowFactory(tableView -> {
             JFXTreeTableRow<ReceiptVO> row = new JFXTreeTableRow<>();
@@ -65,6 +51,7 @@ public class CheckTable extends MyTreeTableBorderPane<ReceiptVO> {
             return row;
         });
 
-        myTreeTable.getColumns().addAll(choose, idColumn, lastModifiedTimeColumn, stateColumn);
+        myTreeTable.getColumns().addAll(choose, idColumn, lastModifiedTimeColumn, operatorColumn);
+
     }
 }

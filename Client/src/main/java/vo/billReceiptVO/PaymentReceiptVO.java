@@ -41,7 +41,7 @@ public class PaymentReceiptVO extends ReceiptVO {
             TransferItemVO vo = new TransferItemVO(transferItemPO.getAccountID(),transferItemPO.getSum(),transferItemPO.getComment());
             temp.add(vo);
         }
-
+        transferList = temp;
     }
 
     public PaymentReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientID, List<TransferItemVO> transferList, double sum) {

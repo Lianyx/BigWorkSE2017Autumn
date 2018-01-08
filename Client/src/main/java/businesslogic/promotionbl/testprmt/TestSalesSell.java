@@ -3,6 +3,7 @@ package businesslogic.promotionbl.testprmt;
 import blService.salesblService.SalesSellblService;
 import businesslogic.salesbl.SalesSellbl;
 import util.ReceiptState;
+import util.RespectiveReceiptSearchCondition;
 import vo.ListGoodsItemVO;
 import vo.receiptVO.SalesSellReceiptVO;
 
@@ -27,16 +28,19 @@ public class TestSalesSell {
         SalesSellReceiptVO salesSellReceiptVO5 = new SalesSellReceiptVO("JHT-20170101-11515", 12, LocalDateTime.now(), LocalDateTime.now().plusDays(1), ReceiptState.PENDING, -1, "linyuchao", "", "", list, "2", 12, 12, 1882, null, 112223);
 
         try {
-            SalesSellblService salesSellblService = new SalesSellbl();
+            SalesSellblService sbl= new SalesSellbl();
 
-            SalesSellReceiptVO ssr = salesSellblService.getNew();
+//            SalesSellReceiptVO ssr = salesSellblService.getNew();
 //            System.out.println(ssr.getId());
-            salesSellReceiptVO.setId(ssr.getId());
-            salesSellReceiptVO.setCreateTime(ssr.getCreateTime());
+//            salesSellReceiptVO.setId(ssr.getId());
+//            salesSellReceiptVO.setCreateTime(ssr.getCreateTime());
 
-            salesSellblService.insert(salesSellReceiptVO);
+//            salesSellblService.insert(salesSellReceiptVO);
 
 //            System.out.println(salesSellblService.selectByMold(ssr).getId());
+
+
+            ArrayList<SalesSellReceiptVO> sss = sbl.search(new RespectiveReceiptSearchCondition());
 
         } catch (Exception e) {
             e.printStackTrace();

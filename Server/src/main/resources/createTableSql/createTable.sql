@@ -90,6 +90,8 @@ create table PaymentBillReceipt(
     lastModifiedTime bigint,
     receiptState integer,
 
+    clientId integer,
+
     accountID integer,
     transferList varchar(1000),
     sum double

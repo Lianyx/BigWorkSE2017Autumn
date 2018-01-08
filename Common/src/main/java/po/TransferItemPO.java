@@ -1,6 +1,8 @@
 package po;
 
-public class TransferItemPO {
+import java.io.Serializable;
+
+public class TransferItemPO implements Serializable {
 
     private int accountID;
     private double sum;
