@@ -34,7 +34,7 @@ public class PaymentReceiptVO extends ReceiptVO {
 
     public PaymentReceiptVO(PaymentBillReceiptPO paymentBillReceiptPO) {
         super(paymentBillReceiptPO);
-        this.clientID = paymentBillReceiptPO.getClientID();
+        this.clientID = paymentBillReceiptPO.getClientId();
         this.sum = paymentBillReceiptPO.getSum();
         List<TransferItemVO> temp = new ArrayList<>();
         for(TransferItemPO transferItemPO:paymentBillReceiptPO.getTransferList()){
@@ -59,7 +59,7 @@ public class PaymentReceiptVO extends ReceiptVO {
     @Override
     public PaymentBillReceiptPO toPO(){
         PaymentBillReceiptPO result = toReceiptPO(PaymentBillReceiptPO.class);
-        result.setClientID(clientID);
+        result.setClientId(clientID);
         TransferItemPO temp[] = new TransferItemPO[transferList.size()];
         for(int i=0;i<transferList.size();i++){
             temp[i] = transferList.get(i).toPO();

@@ -33,7 +33,7 @@ public class CashReceiptVO extends ReceiptVO{
 
     public CashReceiptVO(CashBillReceiptPO cashBillReceiptPO) {
         super(cashBillReceiptPO);
-        this.accountID = cashBillReceiptPO.getAccountID();
+        this.accountID = cashBillReceiptPO.getAccountId();
         this.total = cashBillReceiptPO.getTotal();
         List<CashItemVO> temp = new ArrayList<>();
         for(CashItemPO cashItemPO:cashBillReceiptPO.getItemList()){
@@ -58,7 +58,7 @@ public class CashReceiptVO extends ReceiptVO{
     @Override
     public CashBillReceiptPO toPO(){
         CashBillReceiptPO result = toReceiptPO(CashBillReceiptPO.class);
-        result.setAccountID(accountID);
+        result.setAccountId(accountID);
         CashItemPO temp[] = new CashItemPO[cashList.size()];
         for(int i=0;i<cashList.size();i++){
             temp[i] = cashList.get(i).toPO();
