@@ -16,7 +16,7 @@ public class GoodsClassificationDetail extends AnchorPane {
 
     public GoodsClassificationDetail() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/inventoryui/ChooseTimePane.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/inventoryui/goodui/goodsclassificationdetail.fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();

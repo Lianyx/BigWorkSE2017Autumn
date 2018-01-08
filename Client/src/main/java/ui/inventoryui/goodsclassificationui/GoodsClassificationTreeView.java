@@ -4,6 +4,8 @@ import blService.goodsClassificationblService.GoodsClassificationblService;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTextField;
+import exception.ExistException;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -79,6 +81,7 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
                 modify.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
+                        modifyItem(change.getList());
 
                     }
                 });
@@ -128,16 +131,97 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
     protected void addItem(ObservableList<? extends TreeItem<String>> list){
         CheckBoxTreeItem<String> item = (CheckBoxTreeItem<String>) list.get(0);
 
+        JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
+        jfxDialogLayout.setPrefWidth(220.0);
+        jfxDialogLayout.setHeading(new Label("GoodsClassificationName"));
+        JFXTextField name = new JFXTextField();
+        jfxDialogLayout.setBody(name);
+        JFXButton save = new JFXButton("Save");
+        JFXDialog dialog = new JFXDialog(mainpane, jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
 
+        save.setOnAction(e -> {
+            String classifyName = name.getText();
+
+            CheckBoxTreeItem<String> son = new CheckBoxTreeItem<>(classifyName);
+            item.getChildren().add(son);
+
+            try {
+                System.out.println(classifyName+" "+item.getValue());
+                addGoodsClassificationVO(classifyName,item.getValue());
+            } catch (ExistException e1) {
+                e1.printStackTrace();
+            }
+
+            dialog.close();
+        });
+        jfxDialogLayout.setActions(save);
+        dialog.show();
 
 
     }
 
-    protected void ModifyItem(ObservableList<? extends TreeItem<String>> list){
+    /**
+     * 传入子分类名和父分类名，更新数据库
+     * @param sonName
+     * @param fatherName
+     * @throws ExistException
+     */
+    private void addGoodsClassificationVO(String sonName, String fatherName) throws ExistException {
+        System.out.println(list.toString());
+        for (GoodsClassificationVO vo:list) {
+            System.out.println(vo.getName());
+            if (vo.getName().equals(fatherName)) {
+                List<String> childernId = vo.getChildrenId();
+                childernId.add(sonName);
+
+                String classifyId = vo.getFatherID() + "/" + Integer.toString(childernId.size());
+                GoodsClassificationVO goodsClassificationVO = new GoodsClassificationVO(classifyId,sonName,vo.getFatherID());
+                goodsClassificationblService.addGoodsClassification(goodsClassificationVO);
+            }
+        }
+    }
+
+    protected void modifyItem(ObservableList<? extends TreeItem<String>> list){
         CheckBoxTreeItem<String> item = (CheckBoxTreeItem<String>) list.get(0);
 
         JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
-        JFXDialog dialog = new JFXDialog(PaneFactory.getMainPane(),new GoodsClassificationDetail(),JFXDialog.DialogTransition.CENTER);
+        jfxDialogLayout.setPrefWidth(220.0);
+        jfxDialogLayout.setHeading(new Label("GoodsClassificationName"));
+        JFXTextField name = new JFXTextField();
+        name.setText(item.getValue());
+        name.setPrefWidth(210);
+        jfxDialogLayout.setBody(name);
+        JFXButton save = new JFXButton("Save");
+        JFXDialog dialog = new JFXDialog(mainpane, jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
+
+        String oldName = item.getValue();
+
+        save.setOnAction(e -> {
+            String classifyName = name.getText();
+            item.setValue(classifyName);
+            dialog.close();
+
+            updateGoodsClassificationVO(classifyName,oldName);
+        });
+        jfxDialogLayout.setActions(save);
+        dialog.show();
+
+    }
+
+
+    /**
+     * 修改分类信息时，更新数据库
+     * @param newName
+     * @param oldName
+     */
+    private void updateGoodsClassificationVO(String newName, String oldName) {
+        for (GoodsClassificationVO vo:list) {
+            if(vo.getName().equals(oldName)){
+                vo.setName(newName);
+                //goodsClassificationblService.updateGoodsClassification(vo);
+                break;
+            }
+        }
 
     }
 

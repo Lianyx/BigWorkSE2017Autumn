@@ -11,10 +11,6 @@
         <JFXTextField fx:id="name" layoutX="6.0" layoutY="41.0">
 
         </JFXTextField>
-
-        <JFXButton fx:id="sure" layoutX="63.0" layoutY="81.0" text="sure">
-            
-        </JFXButton>
       <Label layoutX="6.0" layoutY="7.0" text="GoodsClassificationName">
          <font>
             <Font size="12.0" />

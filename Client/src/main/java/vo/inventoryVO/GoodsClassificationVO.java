@@ -74,4 +74,15 @@ public class GoodsClassificationVO implements Comparable<GoodsClassificationVO>{
     public int compareTo(GoodsClassificationVO o) {
         return ID.compareTo(o.ID);
     }
+
+    @Override
+    public String toString() {
+        return "GoodsClassificationVO{" +
+                "ID='" + ID + '\'' +
+                ", name='" + name + '\'' +
+                ", fatherID='" + fatherID + '\'' +
+                ", childrenId=" + childrenId +
+                ", goodsID=" + goodsID +
+                '}';
+    }
 }
