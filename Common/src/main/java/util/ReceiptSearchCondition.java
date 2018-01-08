@@ -1,9 +1,10 @@
 package util;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class ReceiptSearchCondition {
+public class ReceiptSearchCondition implements Serializable {
     private LocalDateTime begin, end;
     private ArrayList<BillType> billTypes;
     private String clerkName;

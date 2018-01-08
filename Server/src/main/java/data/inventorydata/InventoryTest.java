@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 
 public class InventoryTest{
     public static void main(String[] args) throws RemoteException {
-        //testGift();
-        //testDamage();
-        //testOverflow();
+        testGift();
+        testDamage();
+        testOverflow();
         testWarning();
 
     }
