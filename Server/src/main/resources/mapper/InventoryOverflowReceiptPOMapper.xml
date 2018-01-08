@@ -49,6 +49,9 @@
         </where>
     </select>
 
+    <select id="selectByMold" resultMap="resultMap">
+        select * from inventoryoverflowreceipt where dayId=#{dayId} and createTime=#{createTime}
+    </select>
 
     <select id="search" resultMap="resultMap">
         select * from inventoryoverflowreceipt
