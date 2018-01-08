@@ -62,12 +62,12 @@ public abstract class ReceiptListPane<T extends SelectableVO<T>> extends Refresh
     }
 
 
-    public void setFilter(Node filter){
-        filterPopOver.setDetachable(false);
-        filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
-        filterPopOver.setContentNode(filter);
-        filter.setOnMouseClicked(e -> filterPopOver.show(filter));
-    }
+//    public void setFilter(Node filter){
+//        filterPopOver.setDetachable(false);
+//        filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
+//        filterPopOver.setContentNode(filter);
+//        filter.setOnMouseClicked(e -> filterPopOver.show(filter));
+//    }
 
 
     @FXML

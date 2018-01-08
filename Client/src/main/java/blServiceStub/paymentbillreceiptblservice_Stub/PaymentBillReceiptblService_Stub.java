@@ -1,6 +1,6 @@
 package blServiceStub.paymentbillreceiptblservice_Stub;
 
-import blService.billblService.PaymentBillReceiptblService;
+import blService.billblservice.PaymentBillReceiptblService;
 import ui.accountantui.PaymentReceiptListPane;
 import util.ReceiptSearchCondition;
 import util.ReceiptState;
@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class PaymentBillReceiptblService_Stub implements PaymentBillReceiptblService{
+public class PaymentBillReceiptblService_Stub implements PaymentBillReceiptblService {
 
     HashSet<PaymentReceiptListVO> set = new HashSet<>();
 
@@ -91,10 +91,40 @@ public class PaymentBillReceiptblService_Stub implements PaymentBillReceiptblSer
     }
 
     @Override
+    public PaymentReceiptVO getNew() throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ResultMessage insert(PaymentReceiptVO receiptVO) throws RemoteException {
+        return null;
+    }
+
+    @Override
     public ResultMessage update(PaymentReceiptVO paymentReceiptVO) {
         delete(paymentReceiptVO.getId());
         add(paymentReceiptVO);
         return ResultMessage.SUCCESS;
+    }
+
+    @Override
+    public ResultMessage delete(PaymentReceiptVO receiptVO) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public PaymentReceiptVO selectByMold(PaymentReceiptVO receiptVO) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<PaymentReceiptVO> search(RespectiveReceiptSearchCondition respectiveReceiptSearchCondition) throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<PaymentReceiptVO> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
+        return null;
     }
 
     @Override

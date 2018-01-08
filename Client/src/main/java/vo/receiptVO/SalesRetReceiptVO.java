@@ -48,4 +48,9 @@ public class SalesRetReceiptVO extends SalesReceiptVO {
         SalesRetReceiptPO salesRetReceiptPO = toSalesReceiptPO(SalesRetReceiptPO.class);
         return salesRetReceiptPO;
     }
+
+    @Override
+    public <TL extends ReceiptListVO<TL>> TL toListVO() {
+        return null;
+    }
 }

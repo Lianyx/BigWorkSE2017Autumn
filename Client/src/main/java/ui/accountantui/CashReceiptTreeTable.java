@@ -1,7 +1,6 @@
 package ui.accountantui;
 
-import blService.billblService.CashBillReceiptblService;
-import blService.billblService.PaymentBillReceiptblService;
+import blService.billblservice.CashBillReceiptblService;
 import blService.blServiceFactory.ServiceFactory_Stub;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableRow;

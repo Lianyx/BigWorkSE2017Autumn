@@ -1,7 +1,6 @@
 package businesslogic.promotionbl.testprmt;
 
-import businesslogic.billreceiptbl.PaymentBillReceiptbl;
-import po.receiptPO.PaymentBillReceiptPO;
+import businesslogic.billbl.PaymentBillReceiptbl;
 import util.RespectiveReceiptSearchCondition;
 import vo.billReceiptVO.PaymentReceiptVO;
 
@@ -16,6 +15,8 @@ public class MyTestPayment {
             System.out.println(list.size());
             System.out.println(list.get(0).getTransferList());
             System.out.println(list.get(0).getTransferList().get(0).getComment());
+
+            paymentBillReceiptbl.delete(list.get(0));
         }catch (Exception e){
             e.printStackTrace();
         }

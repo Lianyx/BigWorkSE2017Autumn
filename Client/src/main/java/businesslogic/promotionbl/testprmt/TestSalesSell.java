@@ -28,19 +28,20 @@ public class TestSalesSell {
         SalesSellReceiptVO salesSellReceiptVO5 = new SalesSellReceiptVO("JHT-20170101-11515", 12, LocalDateTime.now(), LocalDateTime.now().plusDays(1), ReceiptState.PENDING, -1, "linyuchao", "", "", list, "2", 12, 12, 1882, null, 112223);
 
         try {
-            SalesSellblService sbl= new SalesSellbl();
+            SalesSellblService salesSellblService= new SalesSellbl();
 
-//            SalesSellReceiptVO ssr = salesSellblService.getNew();
-//            System.out.println(ssr.getId());
-//            salesSellReceiptVO.setId(ssr.getId());
-//            salesSellReceiptVO.setCreateTime(ssr.getCreateTime());
+            SalesSellReceiptVO ssr = salesSellblService.getNew();
+            System.out.println(ssr.getId());
+            salesSellReceiptVO.setId(ssr.getId());
+            salesSellReceiptVO.setCreateTime(ssr.getCreateTime());
 
-//            salesSellblService.insert(salesSellReceiptVO);
+            salesSellblService.insert(salesSellReceiptVO);
 
-//            System.out.println(salesSellblService.selectByMold(ssr).getId());
+            System.out.println(salesSellblService.selectByMold(ssr).getId());
 
 
-            ArrayList<SalesSellReceiptVO> sss = sbl.search(new RespectiveReceiptSearchCondition());
+//            ArrayList<SalesSellReceiptVO> sss = sbl.search(new RespectiveReceiptSearchCondition());
+
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -4,7 +4,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
 import util.UserCategory;
 
-public class ButtonCell<T> extends JFXTreeTableCell<T,String> {
+public class
+ButtonCell<T> extends JFXTreeTableCell<T,String> {
     private JFXButton civ = new JFXButton("");
 
     @Override

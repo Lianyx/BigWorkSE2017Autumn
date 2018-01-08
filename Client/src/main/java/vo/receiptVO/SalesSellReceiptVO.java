@@ -57,4 +57,9 @@ public class SalesSellReceiptVO extends SalesReceiptVO {
         salesSellReceiptPO.setGiveTokenAmount(giveTokenAmount);
         return salesSellReceiptPO;
     }
+
+    @Override
+    public <TL extends ReceiptListVO<TL>> TL toListVO() {
+        return null;
+    }
 }

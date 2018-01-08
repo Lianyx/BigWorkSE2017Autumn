@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.function.Function;
 
 public class SearchableStringColumn<T> extends JFXTreeTableColumn<T, String> {
-    public SearchableStringColumn(String text, double width, StringProperty keyWordProperty, List<T> keywordFilterList, Function<T, String> getter) {
+    public SearchableStringColumn(String text, double width, StringProperty keyWordProperty, Function<T, String> getter) {
         super(text);
         setPrefWidth(width);
         setCellValueFactory(param -> {
 //            System.out.println(getter.apply(param.getValue().getValue()));
             return new ReadOnlyStringWrapper(getter.apply(param.getValue().getValue()));
         });
-        setCellFactory(param -> new SearchableStringCell<>(keyWordProperty, keywordFilterList));
+        setCellFactory(param -> new SearchableStringCell<>(keyWordProperty));
     }
 }

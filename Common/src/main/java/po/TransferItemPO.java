@@ -8,6 +8,8 @@ public class TransferItemPO implements Serializable {
     private double sum;
     private String comment;
 
+    public TransferItemPO() {
+    }
 
     public TransferItemPO(int accountID, double sum, String comment) {
         this.accountID = accountID;

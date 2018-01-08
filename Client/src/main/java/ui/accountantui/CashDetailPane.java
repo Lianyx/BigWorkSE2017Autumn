@@ -1,8 +1,6 @@
 package ui.accountantui;
 
-import blService.billblService.CashBillReceiptblService;
-import blService.billblService.ChargeBillReceiptblService;
-import blService.billblService.PaymentBillReceiptblService;
+import blService.billblservice.CashBillReceiptblService;
 import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.salesblService.SalesblService;
 import com.jfoenix.controls.*;

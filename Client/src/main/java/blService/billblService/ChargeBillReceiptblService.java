@@ -1,4 +1,4 @@
-package blService.billblService;
+package blService.billblservice;
 
 import blService.checkblService.ReceiptblService;
 import util.ResultMessage;

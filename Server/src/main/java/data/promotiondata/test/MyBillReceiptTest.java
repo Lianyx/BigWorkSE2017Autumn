@@ -22,30 +22,40 @@ public class MyBillReceiptTest {
             //int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientID, TransferItemPO[] transferList, double sum
             PaymentBillReceiptData paymentBillReceiptData = new PaymentBillReceiptData();
 
-//            TransferItemPO temp[] = new TransferItemPO[3];
-//            temp[0] = new TransferItemPO(1,1,"1");
-//            temp[1] = new TransferItemPO(2,2,"3");
-//
-//            CashItemPO temp1[] = new CashItemPO[2];
-//            temp1[0] = new CashItemPO("1",1,"1");
-//            temp1[1] = new CashItemPO("1",1,"1");
-//
-//            temp[2] = new TransferItemPO(3,3,"2");
-//
-//
-//            PaymentBillReceiptPO po;
-//            po = paymentBillReceiptData.getNew();
-//
-//            System.out.println(po.getDayId());
-//            System.out.println(po.getClientId());
-//
-//            po.setTransferList(temp);
-//            paymentBillReceiptData.update(po);
+            TransferItemPO temp[] = new TransferItemPO[3];
+            temp[0] = new TransferItemPO(1,1,"1");
+            temp[1] = new TransferItemPO(2,2,"3");
+
+            CashItemPO temp1[] = new CashItemPO[2];
+            temp1[0] = new CashItemPO("1",1,"1");
+            temp1[1] = new CashItemPO("1",1,"1");
+
+            temp[2] = new TransferItemPO(3,3,"2");
 
 
-            ArrayList<PaymentBillReceiptPO> list = paymentBillReceiptData.search(new RespectiveReceiptSearchCondition());
+            PaymentBillReceiptPO po;
+            po = paymentBillReceiptData.getNew();
 
-            System.out.println(list.get(0).getTransferList()[0].getComment());
+            System.out.println(po.getDayId());
+            System.out.println(po.getClientId());
+
+
+            po.setSum(100);
+            po.setReceiptState(ReceiptState.DRAFT);
+            po.setOperatorId(111);
+            po.setTransferList(temp);
+            paymentBillReceiptData.update(po);
+
+
+            // delete
+//            PaymentBillReceiptPO ppo = paymentBillReceiptData.search(new ReceiptSearchCondition()).get(0);
+//            System.out.println(ppo);
+//            paymentBillReceiptData.delete(ppo);
+
+
+//            ArrayList<PaymentBillReceiptPO> list = paymentBillReceiptData.search(new RespectiveReceiptSearchCondition());
+
+//            System.out.println(list.get(0).getTransferList()[0].getComment());
 //            paymentBillReceiptData.insert(new PaymentBillReceiptPO(100,101,time,time, ReceiptState.DRAFT,100,temp,1000));
 
 //            ChargeBillReceiptData chargeBillReceiptData = new ChargeBillReceiptData();
@@ -59,6 +69,7 @@ public class MyBillReceiptTest {
 //            po2 = cashBillReceiptData.getNew();
 //            po2.setItemList(temp1);
 //            cashBillReceiptData.update(po2);
+
         }catch (Exception e){
             e.printStackTrace();
         }

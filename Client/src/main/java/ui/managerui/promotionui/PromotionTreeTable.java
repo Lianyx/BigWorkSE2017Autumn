@@ -38,10 +38,10 @@ public class PromotionTreeTable extends JFXTreeTableView<PromotionVO> {
         this.chosenItems = chosenItems;
 
         JFXTreeTableColumn<PromotionVO, Boolean> choose = new ChooseColumn<>(chosenItems);
-        JFXTreeTableColumn<PromotionVO, String> idColumn = new SearchableStringColumn<>("编号", 200, keywordProperty, keywordFilterList, PromotionVO::getId);
-        JFXTreeTableColumn<PromotionVO, String> beginTimeColumn = new SearchableStringColumn<>("开始时间", 100, keywordProperty, keywordFilterList, p -> p.getBeginTime().toLocalDate().toString());
-        JFXTreeTableColumn<PromotionVO, String> endTimeColumn = new SearchableStringColumn<>("结束时间", 100, keywordProperty, keywordFilterList, p -> p.getEndTime().toLocalDate().toString());
-        JFXTreeTableColumn<PromotionVO, String> commentColumn = new SearchableStringColumn<>("备注", 100, keywordProperty, keywordFilterList, PromotionVO::getComment);
+        JFXTreeTableColumn<PromotionVO, String> idColumn = new SearchableStringColumn<>("编号", 200, keywordProperty, PromotionVO::getId);
+        JFXTreeTableColumn<PromotionVO, String> beginTimeColumn = new SearchableStringColumn<>("开始时间", 100, keywordProperty, p -> p.getBeginTime().toLocalDate().toString());
+        JFXTreeTableColumn<PromotionVO, String> endTimeColumn = new SearchableStringColumn<>("结束时间", 100, keywordProperty, p -> p.getEndTime().toLocalDate().toString());
+        JFXTreeTableColumn<PromotionVO, String> commentColumn = new SearchableStringColumn<>("备注", 100, keywordProperty, PromotionVO::getComment);
 
         JFXTreeTableColumn<PromotionVO, PromotionState> stateColumn = new JFXTreeTableColumn<>("状态");
         stateColumn.setPrefWidth(100);

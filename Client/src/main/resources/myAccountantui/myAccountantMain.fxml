@@ -10,9 +10,11 @@
 <?import ui.managerui.common.MyTopBar?>
 <?import ui.managerui.common.navigation.BusinessConditionChangePaneLabel?>
 <?import ui.managerui.common.navigation.BusinessProgressChangePaneLabel?>
+<?import ui.myAccountantui.MyPaymentReceiptListPane?>
+<?import ui.myAccountantui.navigation.PaymentListPaneLabel?>
 <StackPane fx:id="mainpane"
            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-           fx:controller="ui.managerui.ManagerUIController"
+           fx:controller="ui.myAccountantui.MyAccountantUIController"
            prefHeight="600" prefWidth="800"
            stylesheets="@../css/tempInNeed.css">
     <AnchorPane fx:id="mainAnchorPane" prefHeight="600" prefWidth="800">
@@ -29,34 +31,34 @@
         <fx:include source="/util/board.fxml" fx:id="board" layoutX="160" layoutY="40"/> <!--为什么报错？-->
 
         <JFXListView fx:id="navigation" layoutY="40" prefHeight="560" prefWidth="160">
-            <CheckChangePaneLabel fx:id="checkList" text="审批单据" style="-fx-padding: 8 0 8 10;">
+            <PaymentListPaneLabel text="付款单" style="-fx-padding: 8 0 8 10;">
                 <graphic>
                     <StackPane style="-fx-padding: 0 10 0 0;">
                         <FontAwesomeIconView fx:id="ckeckListIcon" size="1em"/>
                     </StackPane>
                 </graphic>
-            </CheckChangePaneLabel>
-            <PromotionChangePaneLabel fx:id="promotionList" text="促销策略" style="-fx-padding: 8 0 8 10;">
-                <graphic>
-                    <StackPane style="-fx-padding: 0 10 0 0;">
-                        <FontAwesomeIconView fx:id="promotionListIcon" size="1em"/>
-                    </StackPane>
-                </graphic>
-            </PromotionChangePaneLabel>
-            <BusinessConditionChangePaneLabel fx:id="businessConditionList" text="经营情况表" style="-fx-padding: 8 0 8 10;">
-                <graphic>
-                    <StackPane style="-fx-padding: 0 10 0 0;">
-                        <FontAwesomeIconView fx:id="businessConditionListIcon" size="1em"/>
-                    </StackPane>
-                </graphic>
-            </BusinessConditionChangePaneLabel>
-            <BusinessProgressChangePaneLabel fx:id="businessProgressList" text="经营历程表" style="-fx-padding: 8 0 8 10;">
-                <graphic>
-                    <StackPane style="-fx-padding: 0 10 0 0;">
-                        <FontAwesomeIconView fx:id="businessProgressListIcon" size="1em"/>
-                    </StackPane>
-                </graphic>
-            </BusinessProgressChangePaneLabel>
+            </PaymentListPaneLabel>
+            <!--<PromotionChangePaneLabel fx:id="promotionList" text="促销策略" style="-fx-padding: 8 0 8 10;">-->
+                <!--<graphic>-->
+                    <!--<StackPane style="-fx-padding: 0 10 0 0;">-->
+                        <!--<FontAwesomeIconView fx:id="promotionListIcon" size="1em"/>-->
+                    <!--</StackPane>-->
+                <!--</graphic>-->
+            <!--</PromotionChangePaneLabel>-->
+            <!--<BusinessConditionChangePaneLabel fx:id="businessConditionList" text="经营情况表" style="-fx-padding: 8 0 8 10;">-->
+                <!--<graphic>-->
+                    <!--<StackPane style="-fx-padding: 0 10 0 0;">-->
+                        <!--<FontAwesomeIconView fx:id="businessConditionListIcon" size="1em"/>-->
+                    <!--</StackPane>-->
+                <!--</graphic>-->
+            <!--</BusinessConditionChangePaneLabel>-->
+            <!--<BusinessProgressChangePaneLabel fx:id="businessProgressList" text="经营历程表" style="-fx-padding: 8 0 8 10;">-->
+                <!--<graphic>-->
+                    <!--<StackPane style="-fx-padding: 0 10 0 0;">-->
+                        <!--<FontAwesomeIconView fx:id="businessProgressListIcon" size="1em"/>-->
+                    <!--</StackPane>-->
+                <!--</graphic>-->
+            <!--</BusinessProgressChangePaneLabel>-->
         </JFXListView>
 
     </AnchorPane>

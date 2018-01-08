@@ -1,6 +1,6 @@
-package businesslogic.billreceiptbl;
+package businesslogic.billbl;
 
-import blService.billblService.PaymentBillReceiptblService;
+import blService.billblservice.PaymentBillReceiptblService;
 import businesslogic.checkbl.Receiptbl;
 import po.receiptPO.PaymentBillReceiptPO;
 import util.ResultMessage;
@@ -26,10 +26,6 @@ public class PaymentBillReceiptbl extends Receiptbl<PaymentReceiptVO,PaymentBill
 
     @Override
     public ResultMessage delete(String id){
-        return ResultMessage.SUCCESS;
-    }
-
-    public ResultMessage update(PaymentReceiptVO paymentReceiptVO){
         return ResultMessage.SUCCESS;
     }
 

@@ -10,6 +10,7 @@ import po.receiptPO.PaymentBillReceiptPO;
 import ui.accountantui.ChargeDetailPane;
 import ui.accountantui.PaymentDetailPane;
 import util.ReceiptState;
+import vo.receiptVO.ReceiptListVO;
 import vo.receiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;
@@ -77,6 +78,11 @@ public class ChargeReceiptVO extends ReceiptVO{
     @Override
     public Node getDetailPane() {
         return new ChargeDetailPane();
+    }
+
+    @Override
+    public <TL extends ReceiptListVO<TL>> TL toListVO() {
+        return null;
     }
 
     public int getClientID() {

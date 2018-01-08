@@ -72,7 +72,7 @@ public class SalesTreeTable extends ReceiptTreeTable<SalesReceiptListVO> {
             @Override
             public TreeTableCell<SalesReceiptListVO, Boolean> call(TreeTableColumn<SalesReceiptListVO, Boolean> param) {
                 MultiCell multiCell = new MultiCell();
-                multiCell.setRunnable1(()->{SalesReceiptPane salesReceiptPane = new SalesReceiptPane(((SalesReceiptListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getId()); salesReceiptPane.refresh(true);});
+//                multiCell.setRunnable1(()->{SalesReceiptPane salesReceiptPane = new SalesReceiptPane(((SalesReceiptListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getId()); salesReceiptPane.refresh(true);});
                 multiCell.setRunnable2(()->{salesblService.delete(((SalesReceiptListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getId()); BoardController.getBoardController().refresh();});
                 return multiCell;
             }
@@ -80,7 +80,7 @@ public class SalesTreeTable extends ReceiptTreeTable<SalesReceiptListVO> {
 
         this.setRowFactory(tableView -> {
             JFXTreeTableRow<SalesReceiptListVO> row = new JFXTreeTableRow();
-            RowSetter(row,()->{ SalesReceiptPane salesReceiptPane = new SalesReceiptPane(row.getTreeItem().getValue().getId()); salesReceiptPane.refresh(true);});
+//            RowSetter(row,()->{ SalesReceiptPane salesReceiptPane = new SalesReceiptPane(row.getTreeItem().getValue().getId()); salesReceiptPane.refresh(true);});
             return row;
         });
 

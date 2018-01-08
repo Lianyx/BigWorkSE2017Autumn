@@ -24,7 +24,7 @@ public class MyBoardController extends BoardController {
         }
 
 
-        static private boolean addRecord(Refreshable pane) {
+        static boolean addRecord(Refreshable pane) {
             if (index == -1) {
                 record.add(pane);
                 index++;
@@ -48,14 +48,14 @@ public class MyBoardController extends BoardController {
         }
 
 
-        private static Refreshable pop() {
+        static Refreshable pop() {
             index--;
             setBackAndForwardProperty();
             return record.get(index);
         }
 
         // 这个叫push真的好吗？又不是stack
-        private static Refreshable push() {
+        static Refreshable push() {
             index++;
             setBackAndForwardProperty();
             return record.get(index);
