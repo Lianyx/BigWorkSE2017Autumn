@@ -38,7 +38,9 @@ public abstract class Receipishbl<TV extends ReceipishVO<? extends ReceipishVO>,
     protected TV convertToVO(TP receipishPO) {
         Constructor<TV> cstr;
         try {
+            System.out.println(getPOClass());
             cstr = getVOClass().getConstructor(getPOClass());
+            System.out.println(cstr);
             return cstr.newInstance(receipishPO);
         } catch (Exception e) {
             e.printStackTrace();

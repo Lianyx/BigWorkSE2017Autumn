@@ -137,8 +137,10 @@ public abstract class SalesReceiptVO extends ReceiptVO {
 
     public ArrayList<ListGoodsItemVO> toGoodsList(ReceiptGoodsItemPO[] array){
         ArrayList<ListGoodsItemVO> list = new ArrayList<>();
-        for(ReceiptGoodsItemPO receiptGoodsItemPO:array){
-            list.add(new ListGoodsItemVO(receiptGoodsItemPO));
+        if (array != null) {
+            for (ReceiptGoodsItemPO receiptGoodsItemPO : array) {
+                list.add(new ListGoodsItemVO(receiptGoodsItemPO));
+            }
         }
         return list;
     }

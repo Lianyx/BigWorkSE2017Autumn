@@ -19,16 +19,16 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class Checkbl implements CheckblService {
-    private static CheckInfo<SalesSellReceiptVO> salesSellReceiptVOCheckInfo;
+    private CheckInfo<SalesSellReceiptVO> salesSellReceiptVOCheckInfo;
 
-    private static CheckInfo<InventoryDamageReceiptVO> inventoryDamageReceiptVOCheckInfo;
-    private static CheckInfo<InventoryGiftReceiptVO> inventoryGiftReceiptVOCheckInfo;
-    private static CheckInfo<InventoryOverflowReceiptVO> inventoryOverflowReceiptVOCheckInfo;
-    private static CheckInfo<InventoryWarningReceiptVO> inventoryWarningReceiptVOCheckInfo;
+    private CheckInfo<InventoryDamageReceiptVO> inventoryDamageReceiptVOCheckInfo;
+    private CheckInfo<InventoryGiftReceiptVO> inventoryGiftReceiptVOCheckInfo;
+    private CheckInfo<InventoryOverflowReceiptVO> inventoryOverflowReceiptVOCheckInfo;
+    private CheckInfo<InventoryWarningReceiptVO> inventoryWarningReceiptVOCheckInfo;
 
-    private static CheckInfo<CashReceiptVO> cashReceiptVOCheckInfo;
-    private static CheckInfo<ChargeReceiptVO> chargeReceiptVOCheckInfo;
-    private static CheckInfo<PaymentReceiptVO> paymentReceiptVOCheckInfo;
+    private CheckInfo<CashReceiptVO> cashReceiptVOCheckInfo;
+    private CheckInfo<ChargeReceiptVO> chargeReceiptVOCheckInfo;
+    private CheckInfo<PaymentReceiptVO> paymentReceiptVOCheckInfo;
 
 
     public Checkbl() throws RemoteException, NotBoundException, MalformedURLException {
@@ -47,6 +47,7 @@ public class Checkbl implements CheckblService {
     @Override
     public ArrayList<ReceiptVO> initCheck() throws RemoteException {
         ArrayList<ReceiptVO> resultList = new ArrayList<>();
+
         resultList.addAll(salesSellReceiptVOCheckInfo.selectPending());
 
 //        resultList.addAll(inventoryDamageReceiptVOCheckInfo.selectPending());
@@ -57,6 +58,7 @@ public class Checkbl implements CheckblService {
 //        resultList.addAll(cashReceiptVOCheckInfo.selectPending());
 //        resultList.addAll(chargeReceiptVOCheckInfo.selectPending());
 //        resultList.addAll(paymentReceiptVOCheckInfo.selectPending());
+
         return resultList;
     }
 

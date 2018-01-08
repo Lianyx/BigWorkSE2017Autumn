@@ -17,6 +17,6 @@ public interface ReceiptblService<T extends ReceiptVO> {
 
     ResultMessage delete(T receiptVO) throws RemoteException;
 
-    ArrayList<T> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException;
     ArrayList<T> search(RespectiveReceiptSearchCondition respectiveReceiptSearchCondition) throws RemoteException;
+    ArrayList<T> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException;
 }
