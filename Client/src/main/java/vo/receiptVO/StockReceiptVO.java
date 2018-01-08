@@ -21,13 +21,23 @@ import java.util.stream.Collectors;
 
 public abstract class StockReceiptVO extends ReceiptVO {
 
-    private int memberId;
-    private String memberName;
-    private String stockName;
-    private double sum;
-    private ArrayList<ListGoodsItemVO> items = new ArrayList<>();
-    private String comment;
+    protected int memberId;
+    protected String memberName;
+    protected String stockName;
+    protected double sum;
+    protected ArrayList<ListGoodsItemVO> items = new ArrayList<>();
+    protected String comment;
 
+    public StockReceiptVO() {
+    }
+    public StockReceiptVO(StockReceiptPO stockReceiptPO){
+        super(stockReceiptPO);
+        this.memberId = stockReceiptPO.getMemberid();
+        this.stockName =stockReceiptPO.getStockName();
+        this.sum =stockReceiptPO.getOriginalSum();
+        this.items = toGoodsList(stockReceiptPO.getGoodsList());
+        this.comment = stockReceiptPO.getComment();
+    }
 
     public StockReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberId, String memberName, String stockName, double sum, ArrayList<ListGoodsItemVO> items, String comment) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
@@ -35,7 +45,6 @@ public abstract class StockReceiptVO extends ReceiptVO {
         this.memberName =memberName;
         this.stockName = stockName;
         this.sum = sum;
-
         this.items = items;
         this.comment = comment;
     }
@@ -88,15 +97,16 @@ public abstract class StockReceiptVO extends ReceiptVO {
         this.comment = comment;
     }
 
-    @Override
-    public StockReceiptPO toPO() {
-        StockReceiptPO result = toReceiptPO(StockReceiptPO.class);
-        return convertToPO(result);
+    public <T extends StockReceiptPO> T toStockReceiptPO(Class<T> receiptClass) {
+        T result = toReceiptPO(receiptClass);
+        result.setMemberid(memberId);
+        result.setStockName(stockName);
+        result.setOriginalSum(sum);
+        result.setGoodsList(toGoodsArray(items));
+        result.setComment(comment);
+        return result;
     }
 
-    public StockPurReceiptPO convertToPO(StockReceiptPO stockReceiptPO){
-        return new StockPurReceiptPO(stockReceiptPO.getDayId(),stockReceiptPO.getOperatorId(),stockReceiptPO.getCreateTime(),stockReceiptPO.getLastModifiedTime(),stockReceiptPO.getReceiptState(),this.getMemberId(),this.getStockName(),toGoodsArray(items),this.getSum(),this.getComment());
-    }
 
     public ReceiptGoodsItemPO[] toGoodsArray(ArrayList<ListGoodsItemVO> items){
         List<ReceiptGoodsItemPO> receiptGoodsItemPOs = items.stream().map(t->t.toPo()).collect(Collectors.toList());
@@ -104,5 +114,12 @@ public abstract class StockReceiptVO extends ReceiptVO {
         return goodsItemPOs;
     }
 
+    public ArrayList<ListGoodsItemVO> toGoodsList(ReceiptGoodsItemPO[] array){
+        ArrayList<ListGoodsItemVO> list = new ArrayList<>();
+        for(ReceiptGoodsItemPO receiptGoodsItemPO:array){
+            list.add(new ListGoodsItemVO(receiptGoodsItemPO));
+        }
+        return list;
+    }
 
 }

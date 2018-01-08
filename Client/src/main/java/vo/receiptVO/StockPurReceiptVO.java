@@ -2,6 +2,8 @@ package vo.receiptVO;
 
 import blService.checkblService.CheckInfo;
 import javafx.scene.Node;
+import po.receiptPO.StockPurReceiptPO;
+import po.receiptPO.StockReceiptPO;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;
 
@@ -17,6 +19,13 @@ public class StockPurReceiptVO extends StockReceiptVO {
         super(id, operatorId, createTime, lastModifiedTime, receiptState, memberId, memberName, stockName, sum, items, comment);
     }
 
+    public StockPurReceiptVO() {
+    }
+
+    public StockPurReceiptVO(StockPurReceiptPO stockReceiptPO) {
+        super(stockReceiptPO);
+    }
+
     @Override
     public CheckInfo<StockPurReceiptVO> getService() throws RemoteException, NotBoundException, MalformedURLException {
         return null;
@@ -29,6 +38,12 @@ public class StockPurReceiptVO extends StockReceiptVO {
 
     @Override
     protected String getCodeName() {
-        return null;
+        return "JHD";
+    }
+
+    @Override
+    public StockPurReceiptPO toPO() {
+        StockPurReceiptPO result = toStockReceiptPO(StockPurReceiptPO.class);
+        return result;
     }
 }

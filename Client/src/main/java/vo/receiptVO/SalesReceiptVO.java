@@ -19,19 +19,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class SalesReceiptVO extends ReceiptVO {
-    private int memberId;
-    private String memberName;
-    private String clerkName;
-    private String stockName;
-    private ArrayList<ListGoodsItemVO> items = new ArrayList<>();
-    private String comment;
-    private double discountAmount;
-    private double tokenAmount;
-    private double originSum;
-    private PromotionGoodsItemPO[] gifts;
-    private double giveTokenAmount;
+    protected int memberId;
+    protected String memberName;
+    protected String clerkName;
+    protected String stockName;
+    protected ArrayList<ListGoodsItemVO> items = new ArrayList<>();
+    protected String comment;
+    protected double discountAmount;
+    protected double tokenAmount;
+    protected double originSum;
 
-
+    public SalesReceiptVO() {
+    }
 
     public SalesReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberId, String memberName, String clerkName, String stockName, ArrayList<ListGoodsItemVO> items, String comment, double discountAmount, double tokenAmount, double originSum) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
@@ -46,38 +45,16 @@ public abstract class SalesReceiptVO extends ReceiptVO {
         this.originSum = originSum;
     }
 
-
-    public SalesReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberId, String memberName, String clerkName, String stockName, ArrayList<ListGoodsItemVO> items, String comment, double discountAmount, double tokenAmount, double originSum, PromotionGoodsItemPO[] gifts, double giveTokenAmount) {
-        super(id, operatorId, createTime, lastModifiedTime, receiptState);
-        this.memberId = memberId;
-        this.memberName = memberName;
-        this.clerkName = clerkName;
-        this.stockName = stockName;
-        this.items = items;
-        this.comment = comment;
-        this.discountAmount = discountAmount;
-        this.tokenAmount = tokenAmount;
-        this.originSum = originSum;
-        this.gifts = gifts;
-        this.giveTokenAmount = giveTokenAmount;
-    }
-
-
-
-    public PromotionGoodsItemPO[] getGifts() {
-        return gifts;
-    }
-
-    public void setGifts(PromotionGoodsItemPO[] gifts) {
-        this.gifts = gifts;
-    }
-
-    public double getGiveTokenAmount() {
-        return giveTokenAmount;
-    }
-
-    public void setGiveTokenAmount(double giveTokenAmount) {
-        this.giveTokenAmount = giveTokenAmount;
+    public SalesReceiptVO(SalesReceiptPO salesReceiptPO){
+        super(salesReceiptPO);
+        this.memberId = salesReceiptPO.getMemberId();
+        this.clerkName = salesReceiptPO.getClerkName();
+        this.stockName = salesReceiptPO.getStockName();
+        this.items = toGoodsList(salesReceiptPO.getGoodsList());
+        this.comment = salesReceiptPO.getComment();
+        this.discountAmount =salesReceiptPO.getDiscountAmount();
+        this.tokenAmount = salesReceiptPO.gettokenAmount();
+        this.originSum = salesReceiptPO.getOriginSum();
     }
 
     public int getMemberId() {
@@ -152,16 +129,29 @@ public abstract class SalesReceiptVO extends ReceiptVO {
         this.originSum = originSum;
     }
 
-    public SalesSellReceiptPO convertToSell(SalesReceiptPO salesReceiptPO){
-        return new SalesSellReceiptPO(salesReceiptPO.getDayId(),salesReceiptPO.getOperatorId(),salesReceiptPO.getCreateTime(),salesReceiptPO.getLastModifiedTime(),salesReceiptPO.getReceiptState(),this.getMemberId(),this.getClerkName(),this.getStockName(),toGoodsArray(items),this.getDiscountAmount(),this.getTokenAmount(),this.getOriginSum(),this.getComment(),this.getGifts(),this.getGiveTokenAmount());
-    }
-    public SalesRetReceiptPO convertToRet(SalesReceiptPO salesReceiptPO){
-        return new SalesRetReceiptPO(salesReceiptPO.getDayId(),salesReceiptPO.getOperatorId(),salesReceiptPO.getCreateTime(),salesReceiptPO.getLastModifiedTime(),salesReceiptPO.getReceiptState(),this.getMemberId(),this.getClerkName(),this.getStockName(),toGoodsArray(items),this.getDiscountAmount(),this.getTokenAmount(),this.getOriginSum(),this.getComment());
-    }
-
     public ReceiptGoodsItemPO[] toGoodsArray(ArrayList<ListGoodsItemVO> items){
         List<ReceiptGoodsItemPO> receiptGoodsItemPOs = items.stream().map(t->t.toPo()).collect(Collectors.toList());
         ReceiptGoodsItemPO[] goodsItemPOs = (ReceiptGoodsItemPO[])receiptGoodsItemPOs.toArray();
         return goodsItemPOs;
+    }
+
+    public ArrayList<ListGoodsItemVO> toGoodsList(ReceiptGoodsItemPO[] array){
+        ArrayList<ListGoodsItemVO> list = new ArrayList<>();
+        for(ReceiptGoodsItemPO receiptGoodsItemPO:array){
+            list.add(new ListGoodsItemVO(receiptGoodsItemPO));
+        }
+        return list;
+    }
+    protected <T extends SalesReceiptPO> T toSalesReceiptPO(Class<T> receiptClass) {
+        T result = toReceiptPO(receiptClass);
+        result.setMemberId(memberId);
+        result.setClerkName(clerkName);
+        result.setStockName(stockName);
+        result.setGoodsList(toGoodsArray(items));
+        result.setComment(comment);
+        result.setDiscountAmount(discountAmount);
+        result.settokenAmount(tokenAmount);
+        result.setOriginSum(originSum);
+        return result;
     }
 }
