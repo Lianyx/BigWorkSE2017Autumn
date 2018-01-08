@@ -47,7 +47,7 @@ public class PaymentDetailPane extends ReceiptDetailPane<PaymentReceiptVO>{
 
     int memberId = 0;
 
-    SimpleBooleanProperty isSell = new SimpleBooleanProperty();
+
 
     SimpleDoubleProperty textSum = new SimpleDoubleProperty(0);
 
@@ -64,12 +64,6 @@ public class PaymentDetailPane extends ReceiptDetailPane<PaymentReceiptVO>{
 
         RequireValid(operator);
 
-        if(id.split("-")[0].equals("XSD")){
-            this.isSell.set(true);
-        }else{
-            this.isSell.set(false);
-        }
-
 
         sum.setText("0");
 
@@ -80,7 +74,7 @@ public class PaymentDetailPane extends ReceiptDetailPane<PaymentReceiptVO>{
         });
     }
 
-    public PaymentDetailPane(boolean isSell){
+    public PaymentDetailPane(){
         super("/accountantui/paymentDetailPane.fxml");
         paymentBillReceiptblService = ServiceFactory_Stub.getService(PaymentBillReceiptblService.class.getName());
         client.setDisable(true);
@@ -90,12 +84,10 @@ public class PaymentDetailPane extends ReceiptDetailPane<PaymentReceiptVO>{
         date.setValue(LocalDate.now());
         RequireValid(client);
         switchPane(true);
-        this.isSell.set(isSell);
-        if(isSell){
-            head.setText("XSD-");
-        }else{
-            head.setText("XSTHD-");
-        }
+
+
+        head.setText("FKD-");
+
         //id.setText("-"+ String.format("%05d", paymentBillReceiptblService.getDayId()));
 
         sum.setText("0");

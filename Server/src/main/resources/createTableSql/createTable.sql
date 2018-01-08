@@ -90,11 +90,10 @@ create table PaymentBillReceipt(
     lastModifiedTime bigint,
     receiptState integer,
 
-    clerkName varchar(30),
-    clientId integer,
+    accountID integer,
     transferList varchar(1000),
     sum double
-);
+)character set = utf8;
 
 create table ChargeBillReceipt(
     dayId integer,
@@ -103,11 +102,10 @@ create table ChargeBillReceipt(
     lastModifiedTime bigint,
     receiptState integer,
 
-    clerkName varchar(30),
     clientId integer,
     transferList varchar(1000),
     sum double
-);
+);character set = utf8
 
 create table CashBillReceipt(
     dayId integer,
@@ -116,12 +114,11 @@ create table CashBillReceipt(
     lastModifiedTime bigint,
     receiptState integer,
 
-    clerkName varchar(30),
-    accountID INTEGER,
+
+    accountId INTEGER,
     total double,
     itemList varchar(1000)
-
-);
+);character set = utf8
 
 
 create table SalesDetail(

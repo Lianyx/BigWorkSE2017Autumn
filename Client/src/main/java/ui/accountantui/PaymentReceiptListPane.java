@@ -27,16 +27,13 @@ public class PaymentReceiptListPane extends ReceiptListPane<PaymentReceiptListVO
 
     PaymentBillReceiptblService paymentBillReceiptblService;
 
-    SimpleBooleanProperty isSell = new SimpleBooleanProperty();
-
     SimpleStringProperty match = new SimpleStringProperty("");
 
     static BillReceiptSearchVO billReceiptSearchVO = new BillReceiptSearchVO();
 
-    public PaymentReceiptListPane(boolean isSell) throws Exception {
+    public PaymentReceiptListPane() throws Exception {
         super("/accountantui/billReceiptListPane.fxml");
         this.paymentBillReceiptblService = ServiceFactory_Stub.getService(PaymentBillReceiptblService.class.getName());
-        this.isSell.set(isSell);
         receiptTreeTable = new PaymentReceiptTreeTable();
 
         receiptTreeTable.setPrefSize(600, 435);
@@ -82,7 +79,7 @@ public class PaymentReceiptListPane extends ReceiptListPane<PaymentReceiptListVO
 
     @Override
     public void add() {
-        PaymentDetailPane paymentDetailPane = new PaymentDetailPane(isSell.get());
+        PaymentDetailPane paymentDetailPane = new PaymentDetailPane();
     }
 
     @Override
@@ -94,7 +91,7 @@ public class PaymentReceiptListPane extends ReceiptListPane<PaymentReceiptListVO
             buttonDialog.setButtonTwo(() -> boardController.Ret());
             buttonDialog.setButtonTwo(() -> refresh(false));
             Predicate<Integer> p = (s) -> {
-                if ((set = paymentBillReceiptblService.search(billReceiptSearchVO, isSell.get())) != null) {
+                if ((set = paymentBillReceiptblService.search(billReceiptSearchVO)) != null) {
                     System.out.println(set.size());
                     return true;
                 }

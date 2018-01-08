@@ -23,35 +23,35 @@ public class CashBillReceiptblService_Stub implements CashBillReceiptblService {
     public CashBillReceiptblService_Stub(){
         int i=10;
 
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.PENDING,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new CashReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new CashReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new CashReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new CashReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new CashReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new CashReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new CashReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new CashReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.PENDING,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new CashReceiptListVO("XJFYD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
 
 
     }
@@ -65,7 +65,7 @@ public class CashBillReceiptblService_Stub implements CashBillReceiptblService {
 
     @Override
     public ResultMessage add(CashReceiptVO cashReceiptVO) {
-        set.add(new CashReceiptListVO(cashReceiptVO.getId(),cashReceiptVO.getReceiptState(),cashReceiptVO.getOperatorId(),cashReceiptVO.getTotal(),cashReceiptVO.isSell()));
+        set.add(new CashReceiptListVO(cashReceiptVO.getId(),cashReceiptVO.getReceiptState(),cashReceiptVO.getOperatorId(),cashReceiptVO.getTotal()));
         return ResultMessage.SUCCESS;
     }
 
@@ -91,14 +91,12 @@ public class CashBillReceiptblService_Stub implements CashBillReceiptblService {
     }
 
     @Override
-    public Set<CashReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO, boolean isPur) {
+    public Set<CashReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO) {
         HashSet<CashReceiptListVO> temp = new HashSet<>();
         for(CashReceiptListVO s:set){
-            if(s.isSell()==isPur){
-                for(ReceiptState receiptState:billReceiptSearchVO.getReceiptStates()){
-                    if(s.getReceiptState()==receiptState)
-                        temp.add(s);
-                }
+            for(ReceiptState receiptState:billReceiptSearchVO.getReceiptStates()){
+                if(s.getReceiptState()==receiptState)
+                    temp.add(s);
             }
         }
         return temp;
@@ -110,17 +108,15 @@ public class CashBillReceiptblService_Stub implements CashBillReceiptblService {
         ArrayList<CashItemVO> list = new ArrayList();
         list.add(new CashItemVO("1",1,"1"));
         list.add(new CashItemVO("2",2,"2"));
-        return new CashReceiptVO("XSD-20170101-00013",3, LocalDateTime.now(), LocalDateTime.now(),ReceiptState.REJECTED,1,3,list,true);
+        return new CashReceiptVO("XJFYD-20170101-00013",3, LocalDateTime.now(), LocalDateTime.now(),ReceiptState.REJECTED,1,3,list);
         //return new CashReceiptVO();
     }
 
     @Override
-    public Set<CashReceiptListVO> getALL(boolean isPur) {
+    public Set<CashReceiptListVO> getALL() {
         HashSet<CashReceiptListVO> temp = new HashSet<>();
         for(CashReceiptListVO p:set){
-            if(p.isSell()==isPur){
-                temp.add(p);
-            }
+            temp.add(p);
         }
         return temp;
     }

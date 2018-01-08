@@ -85,7 +85,7 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
 
 
     public SalesReceiptPane(String id) {
-        super("/salesui/salesreceipt.fxml",id,false);
+        super("/salesui/salesreceipt.fxml",id);
         salesblService = ServiceFactory_Stub.getService(SalesblService.class.getName());
         provider.setDisable(true);
         operator.setDisable(true);

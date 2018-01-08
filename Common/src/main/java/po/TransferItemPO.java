@@ -7,7 +7,7 @@ public class TransferItemPO {
     private String comment;
 
 
-    public TransferItemPO(int accountID, double sum, String coment) {
+    public TransferItemPO(int accountID, double sum, String comment) {
         this.accountID = accountID;
         this.sum = sum;
         this.comment = comment;

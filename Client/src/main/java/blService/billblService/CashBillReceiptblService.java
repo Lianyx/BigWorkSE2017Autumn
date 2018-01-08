@@ -13,8 +13,8 @@ public interface CashBillReceiptblService {
     public ResultMessage add(CashReceiptVO cashReceiptVO);
     public ResultMessage delete(String id);
     public ResultMessage update(CashReceiptVO cashReceiptVO);
-    public Set<CashReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO, boolean isPur);
+    public Set<CashReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO);
     public CashReceiptVO showDetail(String id);
-    public Set<CashReceiptListVO> getALL(boolean isPur);
+    public Set<CashReceiptListVO> getALL();
 
 }

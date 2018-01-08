@@ -10,14 +10,12 @@ public class PaymentReceiptListVO extends SelectableVO<PaymentReceiptListVO>{
     private int operator;
     private double sum;
     private boolean multiple = true;
-    boolean isSell;
 
-    public PaymentReceiptListVO(String id, ReceiptState receiptState, int operator, double sum, boolean isSell) {
+    public PaymentReceiptListVO(String id, ReceiptState receiptState, int operator, double sum) {
         this.id = id;
         this.receiptState = receiptState;
         this.operator = operator;
         this.sum = sum;
-        this.isSell = isSell;
     }
 
     public String getId() {
@@ -60,11 +58,4 @@ public class PaymentReceiptListVO extends SelectableVO<PaymentReceiptListVO>{
         this.multiple = multiple;
     }
 
-    public boolean isSell() {
-        return isSell;
-    }
-
-    public void setSell(boolean sell) {
-        isSell = sell;
-    }
 }

@@ -14,7 +14,7 @@ public interface PaymentBillReceiptblService {
     public ResultMessage add(PaymentReceiptVO paymentReceiptVO);
     public ResultMessage delete(String id);
     public ResultMessage update(PaymentReceiptVO paymentReceiptVO);
-    public Set<PaymentReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO, boolean isPur);
+    public Set<PaymentReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO);
     public PaymentReceiptVO showDetail(String id);
-    public Set<PaymentReceiptListVO> getALL(boolean isPur);
+    public Set<PaymentReceiptListVO> getALL();
 }

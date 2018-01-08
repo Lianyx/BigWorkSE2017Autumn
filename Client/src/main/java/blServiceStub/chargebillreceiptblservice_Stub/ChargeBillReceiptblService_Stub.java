@@ -23,35 +23,35 @@ public class ChargeBillReceiptblService_Stub implements ChargeBillReceiptblServi
     public ChargeBillReceiptblService_Stub(){
         int i=10;
 
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.PENDING,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new ChargeReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new ChargeReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new ChargeReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new ChargeReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new ChargeReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new ChargeReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new ChargeReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new ChargeReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.PENDING,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new ChargeReceiptListVO("SKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
 
 
     }
@@ -65,7 +65,7 @@ public class ChargeBillReceiptblService_Stub implements ChargeBillReceiptblServi
 
     @Override
     public ResultMessage add(ChargeReceiptVO chargeReceiptVO) {
-        set.add(new ChargeReceiptListVO(chargeReceiptVO.getId(),chargeReceiptVO.getReceiptState(),chargeReceiptVO.getOperatorId(),chargeReceiptVO.getSum(),chargeReceiptVO.isSell()));
+        set.add(new ChargeReceiptListVO(chargeReceiptVO.getId(),chargeReceiptVO.getReceiptState(),chargeReceiptVO.getOperatorId(),chargeReceiptVO.getSum()));
         return ResultMessage.SUCCESS;
     }
 
@@ -91,15 +91,15 @@ public class ChargeBillReceiptblService_Stub implements ChargeBillReceiptblServi
     }
 
     @Override
-    public Set<ChargeReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO, boolean isPur) {
+    public Set<ChargeReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO) {
         HashSet<ChargeReceiptListVO> temp = new HashSet<>();
         for(ChargeReceiptListVO s:set){
-            if(s.isSell()==isPur){
+            
                 for(ReceiptState receiptState:billReceiptSearchVO.getReceiptStates()){
                     if(s.getReceiptState()==receiptState)
                         temp.add(s);
                 }
-            }
+            
         }
         return temp;
     }
@@ -110,17 +110,17 @@ public class ChargeBillReceiptblService_Stub implements ChargeBillReceiptblServi
         ArrayList<TransferItemVO> list = new ArrayList();
         list.add(new TransferItemVO(1,1,"1"));
         list.add(new TransferItemVO(2,2,"2"));
-        return new ChargeReceiptVO("XSD-20170101-00013",3, LocalDateTime.now(), LocalDateTime.now(),ReceiptState.REJECTED,1,list,3,true);
+        return new ChargeReceiptVO("SKD-20170101-00013",3, LocalDateTime.now(), LocalDateTime.now(),ReceiptState.REJECTED,1,list,3);
         //return new ChargeReceiptVO();
     }
 
     @Override
-    public Set<ChargeReceiptListVO> getALL(boolean isPur) {
+    public Set<ChargeReceiptListVO> getALL() {
         HashSet<ChargeReceiptListVO> temp = new HashSet<>();
         for(ChargeReceiptListVO p:set){
-            if(p.isSell()==isPur){
-                temp.add(p);
-            }
+            
+            temp.add(p);
+            
         }
         return temp;
     }

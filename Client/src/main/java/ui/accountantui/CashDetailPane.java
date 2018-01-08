@@ -57,7 +57,7 @@ public class CashDetailPane extends ReceiptDetailPane<CashReceiptVO> {
 
     int memberId = 0;
 
-    SimpleBooleanProperty isSell = new SimpleBooleanProperty();
+
 
     SimpleDoubleProperty textSum = new SimpleDoubleProperty(0);
 
@@ -74,11 +74,7 @@ public class CashDetailPane extends ReceiptDetailPane<CashReceiptVO> {
 
         RequireValid(operator);
 
-        if(id.split("-")[0].equals("JHD")){
-            this.isSell.set(true);
-        }else{
-            this.isSell.set(false);
-        }
+
 
 
         sum.setText("0");
@@ -91,9 +87,9 @@ public class CashDetailPane extends ReceiptDetailPane<CashReceiptVO> {
         });
     }
 
-    public CashDetailPane(boolean isSell){
+    public CashDetailPane(){
         super("/accountantui/cashDetailPane.fxml");
-        cashBillReceiptblService = ServiceFactory_Stub.getService(PaymentBillReceiptblService.class.getName());
+        cashBillReceiptblService = ServiceFactory_Stub.getService(CashBillReceiptblService.class.getName());
         account.setDisable(true);
         operator.setDisable(true);
         sum.setDisable(true);
@@ -101,13 +97,8 @@ public class CashDetailPane extends ReceiptDetailPane<CashReceiptVO> {
         date.setValue(LocalDate.now());
         RequireValid(account);
         switchPane(true);
-        this.isSell.set(isSell);
-        if(isSell){
-            head.setText("XSD-");
-        }else{
-            head.setText("XSTHD-");
-        }
-        //id.setText("-"+ String.format("%05d", paymentBillReceiptblService.getDayId()));
+
+        head.setText("XJFYD-");
 
         sum.setText("0");
 
@@ -120,7 +111,8 @@ public class CashDetailPane extends ReceiptDetailPane<CashReceiptVO> {
 
     @FXML
     public void add() {
-        //salesListItemTreeTable.addGood(new ListGoodsItemVO("a", 1, "a", 1, 1, "a"));
+
+        cashItemTreeTable.add(new CashItemVO("1",1,"1"));
     }
 
 
@@ -162,11 +154,10 @@ public class CashDetailPane extends ReceiptDetailPane<CashReceiptVO> {
                         operator.setText(UserInfomation.username);
                         date.setValue(vo.getCreateTime().toLocalDate());
                         id.setText("-"+vo.getId().split("-")[2]);
-                        //memberId = vo.getMemberId();
                         head.setText(vo.getId().split("-")[0]+"-");
-                        //sum.setText((vo.getOriginSum()-vo.getTokenAmount())+"");
 
-                        //salesListItemTreeTable.setList(vo.getItems());
+
+                        cashItemTreeTable.setList(vo.getCashList());
                         switchPane(toSwitch);
                     }, buttonDialog,p);
 
