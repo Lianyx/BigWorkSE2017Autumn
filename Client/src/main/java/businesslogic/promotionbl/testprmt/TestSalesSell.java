@@ -30,13 +30,13 @@ public class TestSalesSell {
             SalesSellblService salesSellblService = new SalesSellbl();
 
             SalesSellReceiptVO ssr = salesSellblService.getNew();
-            System.out.println(ssr.getId());
+//            System.out.println(ssr.getId());
             salesSellReceiptVO.setId(ssr.getId());
             salesSellReceiptVO.setCreateTime(ssr.getCreateTime());
 
             salesSellblService.insert(salesSellReceiptVO);
 
-            System.out.println(salesSellblService.selectByMold(ssr).getId());
+//            System.out.println(salesSellblService.selectByMold(ssr).getId());
 
         } catch (Exception e) {
             e.printStackTrace();
