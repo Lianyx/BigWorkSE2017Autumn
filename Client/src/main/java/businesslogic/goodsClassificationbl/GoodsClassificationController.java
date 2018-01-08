@@ -6,10 +6,9 @@ import util.ResultMessage;
 import vo.inventoryVO.GoodsClassificationVO;
 
 import java.util.List;
-import java.util.Set;
 
 public class GoodsClassificationController implements GoodsClassificationblService {
-    GoodsClassification goodsClassification = new GoodsClassification();
+    GoodsClassificationbl goodsClassification = new GoodsClassificationbl();
     @Override
     public List<GoodsClassificationVO> show() {
         return null;//goodsClassification.show();

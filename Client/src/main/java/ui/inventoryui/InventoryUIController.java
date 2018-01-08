@@ -9,9 +9,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 import javafx.util.Duration;
+import ui.inventoryui.goodsclassificationui.GoodsClassificationPane;
 import ui.inventoryui.goodsui.GoodsListPane;
+import ui.inventoryui.inventoryCheckui.InventoryCheckPane;
 import ui.inventoryui.inventoryReceiptui.InventoryListPane;
+import ui.inventoryui.inventoryViewui.InventoryViewListPane;
 import ui.util.BoardController;
+import ui.util.PaneFactory;
 import ui.util.PaneSwitchAnimation;
 import ui.util.TopBar;
 import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptType;
@@ -32,8 +36,6 @@ public class InventoryUIController implements Initializable {
     @FXML
     BoardController boardController;
 
-    GoodsblService goodsblService = new GoodsblService_Stub();
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         BoardController.setBoardController(boardController);
@@ -50,17 +52,41 @@ public class InventoryUIController implements Initializable {
             e.printStackTrace();
         }
 
-      /*  navigation.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
-                    try {
-                        if (newVal != null) {
-                            if (newVal.getId().equals("goods")) {
-                                GoodsListPane goodsListPane = new GoodsListPane();
-                                goodsListPane.refresh(true);
-                                //stockListPane.refresh(true);
-                            }
-                        }
+        navigation.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
+            try {
+                if (newVal != null) {
+                    if (newVal.getId().equals("goods")) {
+                        GoodsListPane goodsListPane = new GoodsListPane();
+                        goodsListPane.refresh(true);
+                    }else if(newVal.getId().equals("inventoryView")){
+                        InventoryViewListPane inventoryViewListPane = new InventoryViewListPane();
+                        inventoryViewListPane.refresh(true);
+                    }else if(newVal.getId().equals("inventoryCheck")){
+                        InventoryCheckPane inventoryCheckPane = new InventoryCheckPane();
+                        inventoryCheckPane.refresh(true);
+                    }else if(newVal.getId().equals("goodsClassification")){
+                        GoodsClassificationPane goodsClassificationPane = new GoodsClassificationPane(boardController, PaneFactory.getMainPane());
+                        goodsClassificationPane.refresh(true);
+                    }else if(newVal.getId().equals("inventoryGift")){
+                        InventoryListPane inventoryListPane = new InventoryListPane(InventoryReceiptType.InventoryGift);
+                        inventoryListPane.refresh(true);
+                    }else if(newVal.getId().equals("inventoryDamage")){
+                        InventoryListPane inventoryListPane = new InventoryListPane(InventoryReceiptType.InventoryDamage);
+                        inventoryListPane.refresh(true);
+                    }else if(newVal.getId().equals("inventoryOverflow")){
+                        InventoryListPane inventoryListPane = new InventoryListPane(InventoryReceiptType.InventoryOverflow);
+                        inventoryListPane.refresh(true);
+                    }else if(newVal.getId().equals("inventoryWarning")){
+                        InventoryListPane inventoryListPane = new InventoryListPane(InventoryReceiptType.InventoryWarning);
+                        inventoryListPane.refresh(true);
                     }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
-    }*/
+
+
     }
 }

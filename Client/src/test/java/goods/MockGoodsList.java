@@ -1,3 +1,4 @@
+/*
 package goods;
 
 import java.util.HashSet;
@@ -35,3 +36,4 @@ public class MockGoodsList {
         }
     }
 }
+*/

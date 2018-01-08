@@ -3,10 +3,11 @@ package vo.inventoryVO;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;
+import vo.abstractVO.SelectableVO;
 
 import java.io.Serializable;
 
-public class InventoryViewItemVO extends RecursiveTreeObject<InventoryViewItemVO> implements Serializable,Comparable<InventoryViewItemVO>{
+public class InventoryViewItemVO extends SelectableVO<InventoryViewItemVO>{
     /*  商品名 */
     private String goodName;
     /*  商品编号 */
@@ -28,9 +29,6 @@ public class InventoryViewItemVO extends RecursiveTreeObject<InventoryViewItemVO
     /* 进货金额*/
     private double stockPurMoney;
 
-    private SimpleBooleanProperty selected=new SimpleBooleanProperty(false);
-
-    private Image image = new Image("/default/light.jpg");
 
     public InventoryViewItemVO(String goodName, String goodId, int stockInNum, double stockInMoney, int stockOutNum,
                                double stockOutMoney, int saleNum, double saleMoney, int stockPurNum, double stockPurMoney) {
@@ -44,9 +42,6 @@ public class InventoryViewItemVO extends RecursiveTreeObject<InventoryViewItemVO
         this.saleMoney = saleMoney;
         this.stockPurNum = stockPurNum;
         this.stockPurMoney = stockPurMoney;
-    }
-
-    public InventoryViewItemVO() {
     }
 
     public String getGoodId() {
@@ -129,28 +124,5 @@ public class InventoryViewItemVO extends RecursiveTreeObject<InventoryViewItemVO
         this.stockPurMoney = stockPurMoney;
     }
 
-    public boolean isSelected() {
-        return selected.get();
-    }
 
-    public SimpleBooleanProperty selectedProperty() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected.set(selected);
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
-    @Override
-    public int compareTo(InventoryViewItemVO o) {
-        return goodId.compareTo(o.goodId);
-    }
 }

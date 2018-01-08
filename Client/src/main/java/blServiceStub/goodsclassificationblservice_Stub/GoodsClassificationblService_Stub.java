@@ -1,4 +1,4 @@
-package blServiceStub.goodsClassificationblService_Stub;
+package blServiceStub.goodsclassificationblservice_Stub;
 
 import blService.goodsClassificationblService.GoodsClassificationblService;
 import exception.ExistException;

@@ -31,9 +31,9 @@ public class GiftReceiptInfoImpl implements InventoryGiftReceiptInfo {
             list.add(new InventroyGiftGoodsItemVO(po.getId(),po.getGoodName(),po.getGoodType(),po.getInventoryNum(),0));
         }
 
-        InventoryGiftReceiptVO receiptVO = new InventoryGiftReceiptVO(null,0,null,null,
+       /* InventoryGiftReceiptVO receiptVO = new InventoryGiftReceiptVO(null,0,null,null,
                 ReceiptState.PENDING,list);
-
+*/
       //  giftReceiptbl.insert(receiptVO);
     }
 }

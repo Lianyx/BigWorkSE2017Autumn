@@ -4,7 +4,7 @@ import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
 import javafx.scene.Node;
 import util.ReceiptState;
-import vo.ListGoodsItemVO;
+
 import vo.receiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;
@@ -16,15 +16,14 @@ import java.util.ArrayList;
 public class InventoryReceiptVO extends ReceiptVO {
     private int memberId;
     private String memberName;
-    private ArrayList<ListGoodsItemVO> items = new ArrayList<>();
+    private ArrayList<ReceiptGoodsItemVO> items = new ArrayList<>();
     private String comment;
     private InventoryReceiptType receiptType;
 
     public InventoryReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime,
-                              ReceiptState receiptState, int memberId, String memberName, ArrayList<ListGoodsItemVO> items,
+                              ReceiptState receiptState, String memberName, ArrayList<ReceiptGoodsItemVO> items,
                               String comment, InventoryReceiptType receiptType) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
-        this.memberId = memberId;
         this.memberName = memberName;
 
         this.items = items;
@@ -48,11 +47,11 @@ public class InventoryReceiptVO extends ReceiptVO {
         this.memberName = memberName;
     }
 
-    public ArrayList<ListGoodsItemVO> getItems() {
+    public ArrayList<ReceiptGoodsItemVO> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<ListGoodsItemVO> items) {
+    public void setItems(ArrayList<ReceiptGoodsItemVO> items) {
         this.items = items;
     }
 

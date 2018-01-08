@@ -1,3 +1,4 @@
+/*
 package goods;
 
 public class MockGoodsItem {
@@ -19,3 +20,4 @@ public class MockGoodsItem {
         return factCount;
     }
 }
+*/

@@ -1,4 +1,5 @@
-package test.goods; 
+/*
+package test.goods;
 
 import goods.MockGoods;
 import goods.MockGoodsItem;
@@ -8,20 +9,24 @@ import org.junit.Test;
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertEquals;
 
-/** 
+*/
+/**
 * MockGoodsList Tester. 
 * 
 * @author <Authors name> 
 * @since <pre>11 13, 2017</pre>
 * @version 1.0 
-*/ 
+*//*
+
 public class MockGoodsListTest { 
 
-/** 
+*/
+/**
 * 
 * Method: getTotalCount() 
 * 
-*/ 
+*//*
+
 @Test
 public void testGetTotalCount() throws Exception { 
 //TODO: TestPromotionbl goes here...
@@ -39,3 +44,4 @@ public void testGetTotalCount() throws Exception {
 
 
 } 
+*/

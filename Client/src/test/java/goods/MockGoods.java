@@ -1,13 +1,15 @@
+/*
 package goods;
 
-import businesslogic.goodsbl.Goods;
+import businesslogic.goodsbl.Goodsbl;
 
-public class MockGoods extends Goods {
+public class MockGoods extends Goodsbl {
     String id;
     String name;
     int count;
 
     public MockGoods(String id, String name, int count) {
+        super();
         this.id = id;
         this.name = name;
         this.count = count;
@@ -29,3 +31,4 @@ public class MockGoods extends Goods {
         return count;
     }
 }
+*/

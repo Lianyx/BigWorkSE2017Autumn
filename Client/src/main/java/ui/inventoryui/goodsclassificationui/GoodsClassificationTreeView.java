@@ -2,14 +2,17 @@ package ui.inventoryui.goodsclassificationui;
 
 import blService.goodsClassificationblService.GoodsClassificationblService;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.control.CheckBoxTreeItem;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TreeItem;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTreeCell;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -22,10 +25,12 @@ import java.util.*;
 public class GoodsClassificationTreeView extends CheckTreeView<String>{
     private BoardController boardController;
     private StackPane mainpane;
+    private BorderPane borderPane;
     private GoodsClassificationblService goodsClassificationblService;
     private List<GoodsClassificationVO> list;
     private CheckBoxTreeItem<String> root = new CheckBoxTreeItem<>("root");
-    private CheckBoxTreeItem<String>chosenItem;
+    private CheckBoxTreeItem<String> chosenItem;
+    private JFXButton addGood = new JFXButton("增加商品");
     private JFXButton add = new JFXButton("增加");
     private JFXButton delete = new JFXButton("删除");
     private JFXButton modify = new JFXButton("修改");
@@ -38,20 +43,17 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
     }
 
     public Node getPane(){
-      /*  for (String vo: set) {
-            root.getChildren().add(new CheckBoxTreeItem<>(vo));
-        }*/
         root = buildTree();
         root.setExpanded(true);
         this.setRoot(root);
+        this.setEditable(true);
+        /*this.setCellFactory((TreeView<String> p) ->
+                new TextFieldTreeCellImpl());*/
 
-        //StackPane stackPane = new StackPane();
-        BorderPane borderPane = new BorderPane();
+        borderPane = new BorderPane();
 
         borderPane.setCenter(this);
 
-
-       // CheckBoxTreeItem<GoodsClassificationVO> selectedItem;
         String selected1;
         this.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         this.getCheckModel().getCheckedItems().addListener(new ListChangeListener<TreeItem<String>>() {
@@ -73,7 +75,14 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
                     }
                 });
 
-            }
+                modify.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+
+                    }
+                });
+
+     }
         });
 
 
@@ -116,13 +125,19 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
     }
 
     protected void addItem(ObservableList<? extends TreeItem<String>> list){
-      /*  final String selected = list.get(0).getValue();
+        CheckBoxTreeItem<String> item = (CheckBoxTreeItem<String>) list.get(0);
 
-        CheckBoxTreeItem<String> item = getItem(list);
 
-        System.out.println(item.getValue());
 
-        item.getChildren().add(new CheckBoxTreeItem<>("shit"));*/
+
+    }
+
+    protected void ModifyItem(ObservableList<? extends TreeItem<String>> list){
+        CheckBoxTreeItem<String> item = (CheckBoxTreeItem<String>) list.get(0);
+
+        JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
+        JFXDialog dialog = new JFXDialog(mainpane,new GoodsClassificationDetail(),JFXDialog.DialogTransition.CENTER);
+
     }
 
     private CheckBoxTreeItem<String> buildTree(){
@@ -173,11 +188,67 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
         return null;
     }
 
-  /*  protected CheckBoxTreeItem<String> getCheckItem(ObservableList<? extends TreeItem<String>> list){
-        CheckBoxTreeItem<String> son = (CheckBoxTreeItem<String>) list.get(list.size()-1).getParent();
-        CheckBoxTreeItem<String> parent =(CheckBoxTreeItem<String>)  son.getParent();
-        parent.getChildren().remove(son);
-        return lastItem;
+   /* private final class TextFieldTreeCellImpl extends CheckBoxTreeCell<String> {
+
+        private TextField textField;
+
+        public TextFieldTreeCellImpl() {
+        }
+
+        @Override
+        public void startEdit() {
+            super.startEdit();
+
+            if (textField == null) {
+                createTextField();
+            }
+            setText(null);
+            setGraphic(textField);
+            textField.selectAll();
+        }
+
+        @Override
+        public void cancelEdit() {
+            super.cancelEdit();
+            setText((String) getItem());
+            setGraphic(getTreeItem().getGraphic());
+        }
+
+        @Override
+        public void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (empty) {
+                setText(null);
+                setGraphic(null);
+            } else {
+                if (isEditing()) {
+                    if (textField != null) {
+                        textField.setText(getString());
+                    }
+                    setText(null);
+                    setGraphic(textField);
+                } else {
+                    setText(getString());
+                    setGraphic(getTreeItem().getGraphic());
+                }
+            }
+        }
+
+        private void createTextField() {
+            textField = new TextField(getString());
+            textField.setOnKeyReleased((KeyEvent t) -> {
+                if (t.getCode() == KeyCode.ENTER) {
+                    commitEdit(textField.getText());
+                } else if (t.getCode() == KeyCode.ESCAPE) {
+                    cancelEdit();
+                }
+            });
+        }
+
+        private String getString() {
+            return getItem() == null ? "" : getItem().toString();
+        }
     }*/
 
 }

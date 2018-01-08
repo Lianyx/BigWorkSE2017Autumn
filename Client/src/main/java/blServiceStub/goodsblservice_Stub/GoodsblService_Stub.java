@@ -1,9 +1,12 @@
 package blServiceStub.goodsblservice_Stub;
 
 import blService.goodsblService.GoodsblService;
+import util.ReceiptState;
 import util.ResultMessage;
+import vo.ListGoodsItemVO;
 import vo.inventoryVO.GoodsVO;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class GoodsblService_Stub implements GoodsblService{
@@ -21,6 +24,7 @@ public class GoodsblService_Stub implements GoodsblService{
         set.add(new GoodsVO("10008","灯泡","中国灯","1000",100,90.0,90.0,90.0,90.0,99));
         set.add(new GoodsVO("10009","灯泡","中国灯","1000",100,90.0,90.0,90.0,90.0,99));
         set.add(new GoodsVO("10010","灯泡","中国灯","1000",100,90.0,90.0,90.0,90.0,99));
+        set.add(new GoodsVO("10010","灯泡","中国灯","1000",90,90.0,90.0,90.0,90.0,99));
     }
 
     @Override
@@ -48,7 +52,7 @@ public class GoodsblService_Stub implements GoodsblService{
     }
 
     @Override
-    public List<GoodsVO> SearchGoods(String info) {
+    public List<GoodsVO> searchGoods(String info) {
         return null;
     }
 
@@ -57,8 +61,10 @@ public class GoodsblService_Stub implements GoodsblService{
         return null;
     }
 
-    public GoodsVO showDetail(int id){
-        return new GoodsVO();
+    @Override
+    public GoodsVO showDetail(String id) {
+        return new GoodsVO(id,"123123123","","",0,0.0,0.0,0.0,0.0,0);
     }
+
 
 }

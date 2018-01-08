@@ -3,6 +3,7 @@ package vo.inventoryVO;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;
+import vo.abstractVO.SelectableVO;
 
 import java.io.Serializable;
 import java.util.Set;

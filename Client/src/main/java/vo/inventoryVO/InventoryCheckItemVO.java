@@ -3,32 +3,40 @@ package vo.inventoryVO;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;
+import vo.abstractVO.SelectableVO;
 
 import java.io.Serializable;
 
-public class InventoryCheckItemVO extends RecursiveTreeObject<InventoryCheckItemVO> implements Serializable,Comparable<InventoryCheckItemVO>{
-    /** 商品名 */
+public class InventoryCheckItemVO extends SelectableVO<InventoryCheckItemVO> {
+    /**
+     * 商品名
+     */
     private String goodName;
-    /** 类型 */
-    private String goodType;
-    /** 库存数量 */
+    /**
+     * 编号
+     */
+    private String goodId;
+    /**
+     * 库存数量
+     */
     private int inventoryNum;
-    /** 每个商品价格 */
+    /**
+     * 每个商品价格
+     */
     private double avePrice;
-    /**出场日期*/
+    /**
+     * 出场日期
+     */
     private String StockOutDate;
     /* 批次*/
     private String batch;
     /* 批号*/
     private String batchNum;
 
-    private SimpleBooleanProperty selected=new SimpleBooleanProperty(false);
 
-    private Image image = new Image("/default/light.jpg");
-
-    public InventoryCheckItemVO(String goodName, String goodType, int inventoryNum, double avePrice, String date, String batch, String batchNum) {
+    public InventoryCheckItemVO(String goodName, String id, int inventoryNum, double avePrice, String date, String batch, String batchNum) {
         this.goodName = goodName;
-        this.goodType = goodType;
+        this.goodId = id;
         this.inventoryNum = inventoryNum;
         this.avePrice = avePrice;
         this.StockOutDate = date;
@@ -44,12 +52,12 @@ public class InventoryCheckItemVO extends RecursiveTreeObject<InventoryCheckItem
         this.goodName = goodName;
     }
 
-    public String getGoodType() {
-        return goodType;
+    public String getGoodId() {
+        return goodId;
     }
 
-    public void setGoodType(String goodType) {
-        this.goodType = goodType;
+    public void setGoodId(String goodId) {
+        this.goodId = goodId;
     }
 
     public int getInventoryNum() {
@@ -92,36 +100,5 @@ public class InventoryCheckItemVO extends RecursiveTreeObject<InventoryCheckItem
         this.batchNum = batchNum;
     }
 
-    public boolean isSelected() {
-        return selected.get();
-    }
 
-    public SimpleBooleanProperty selectedProperty() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected.set(selected);
-    }
-
-    public void setBatchNum(String batchNum) {
-        this.batchNum = batchNum;
-    }
-
-    /**
-     * 报了image null 的异常是因为VO里面没有相应的set/get
-     * @return
-     */
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
-    @Override
-    public int compareTo(InventoryCheckItemVO o) {
-        return this.goodName.compareTo(o.goodName);
-    }
 }

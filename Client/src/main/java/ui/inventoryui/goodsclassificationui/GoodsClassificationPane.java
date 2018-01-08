@@ -1,5 +1,6 @@
 package ui.inventoryui.goodsclassificationui;
 
+import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.goodsClassificationblService.GoodsClassificationblService;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -53,11 +54,12 @@ public class GoodsClassificationPane extends Refreshable{
 
 
 
-    public GoodsClassificationPane(GoodsClassificationblService goodsClassficationblService, BoardController boardController, StackPane mainpane) throws IOException {
+    public GoodsClassificationPane(BoardController boardController, StackPane mainpane) throws IOException {
         this();
-        this.goodsClassficationblService = goodsClassficationblService;
         this.boardController = boardController;
         this.mainpane = mainpane;
+
+        goodsClassficationblService = ServiceFactory_Stub.getService(GoodsClassificationblService.class.getName());
 
         treeView = new GoodsClassificationTreeView();
         treeView.setBoardController(boardController);

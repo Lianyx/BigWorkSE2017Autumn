@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import ui.inventoryui.inventoryViewui.InventoryViewListPane;
 import ui.util.BoardController;
 
 import java.io.IOException;
@@ -51,8 +52,10 @@ public class ChooseTimePane extends AnchorPane {
     public void sureTime(){
         try {
             dialog.close();
-            boardController.switchTo(new InventoryViewPane(showblService,boardController,mainPane));
+            boardController.switchTo(new InventoryViewListPane());
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -6,10 +6,7 @@ import util.ReceiptState;
 import util.RespectiveReceiptSearchCondition;
 import util.ResultMessage;
 import vo.ListGoodsItemVO;
-import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptListVO;
-import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptType;
-import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptVO;
-import vo.inventoryVO.inventoryReceiptVO.InventorySearchVO;
+import vo.inventoryVO.inventoryReceiptVO.*;
 
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
@@ -33,6 +30,7 @@ public class InventoryblService_Stub implements InventoryblService {
         set.add(new InventoryReceiptListVO("ZSD-20170101-000"+(i++), ReceiptState.APPROVED,"sabe",true,InventoryReceiptType.InventoryGift));
         set.add(new InventoryReceiptListVO("ZSD-20170101-000"+(i++), ReceiptState.APPROVED,"sabe",true,InventoryReceiptType.InventoryGift));
         set.add(new InventoryReceiptListVO("ZSD-20170101-000"+(i++), ReceiptState.APPROVED,"sabe",true,InventoryReceiptType.InventoryGift));
+        set.add(new InventoryReceiptListVO("ZSD-20170101-000"+(i++), ReceiptState.PENDING,"sabe",true,InventoryReceiptType.InventoryGift));
     }
 
     @Override
@@ -53,10 +51,10 @@ public class InventoryblService_Stub implements InventoryblService {
 
     @Override
     public InventoryReceiptVO showDetail(String id) {
-        ArrayList<ListGoodsItemVO> list = new ArrayList();
-        list.add(new ListGoodsItemVO("a",1,"a",1,1,"a"));
-        list.add(new ListGoodsItemVO("a",2,"a",1,1,"a"));
-        return new InventoryReceiptVO("JHD-20170101-00013",3,LocalDateTime.of(2017,1,1,0,0),LocalDateTime.now(),ReceiptState.REJECTED,1,"wad",list,"awda",InventoryReceiptType.InventoryGift);
+        ArrayList<ReceiptGoodsItemVO> list = new ArrayList();
+        list.add(new ReceiptGoodsItemVO("a",1,70,1,1,69));
+        list.add(new ReceiptGoodsItemVO("a",2,70,1,1,69));
+        return new InventoryReceiptVO("JHD-20170101-00013",3,LocalDateTime.of(2017,1,1,0,0),LocalDateTime.now(),ReceiptState.REJECTED,"wad",list,"awda",InventoryReceiptType.InventoryGift);
 
     }
 

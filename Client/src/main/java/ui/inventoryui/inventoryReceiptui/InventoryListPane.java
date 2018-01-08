@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
 
 public class InventoryListPane extends ReceiptListPane<InventoryReceiptListVO> {
 
-    static Set<InventoryReceiptListVO> set = new HashSet<>();
-
     InventoryblService inventoryblService;
 
     InventoryReceiptType receiptType;
@@ -44,13 +42,6 @@ public class InventoryListPane extends ReceiptListPane<InventoryReceiptListVO> {
         for (ReceiptState receiptState : ReceiptState.values()) {
            inventorySearchVO.getReceiptStates().add(receiptState);
         }
-       // StockFilterPane slp = new StockFilterPane(filterPopOver, inventorySearchVO);
-        filterPopOver.setDetachable(false);
-        filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
-        //filterPopOver.setContentNode(slp);
-        filter.setOnMouseClicked(e -> filterPopOver.show(filter));
-
-
     }
 
     @Override
@@ -59,6 +50,9 @@ public class InventoryListPane extends ReceiptListPane<InventoryReceiptListVO> {
         doubleButtonDialog.setButtonOne(()->{receiptTreeTable.delete(pagination); });
         doubleButtonDialog.setButtonTwo(()->{});
         doubleButtonDialog.show();
+        /*
+        差与bl的连接
+         */
 
     }
 
@@ -84,7 +78,9 @@ public class InventoryListPane extends ReceiptListPane<InventoryReceiptListVO> {
     @Override
     public void add() {
         InventoryReceiptPane stockReceiptPane = new InventoryReceiptPane(receiptType);
-
+        /*
+        未实现
+         */
     }
 
     @Override

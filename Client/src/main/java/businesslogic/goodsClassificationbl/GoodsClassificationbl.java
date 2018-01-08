@@ -1,5 +1,6 @@
 package businesslogic.goodsClassificationbl;
 
+import blService.goodsClassificationblService.GoodsClassificationblService;
 import dataService.goodsdataService.GoodsClassificationDataService;
 import exception.ExistException;
 import po.GoodsClassificationPO;
@@ -8,14 +9,14 @@ import vo.inventoryVO.GoodsClassificationVO;
 
 import java.util.*;
 
-public class GoodsClassification {
+public class GoodsClassificationbl implements GoodsClassificationblService{
     public static final String START_NODE = "0";
 
     private GoodsClassificationDataService goodsClassificationData;
 
     private GoodsClassficatinPOVOChanger changer;
     //这里还需要修改，等rmi的添加
-    public GoodsClassification() {
+    public GoodsClassificationbl() {
     }
 
     /**
@@ -25,7 +26,7 @@ public class GoodsClassification {
     public List<GoodsClassificationVO> show() {
         List<GoodsClassificationPO> POList = goodsClassificationData.show();
 
-        GoodsClassification goodsClassification = new GoodsClassification();
+        GoodsClassificationbl goodsClassification = new GoodsClassificationbl();
 
         List<GoodsClassificationVO> VOList = goodsClassification.getTree(POList);
 
@@ -147,7 +148,7 @@ public class GoodsClassification {
     }
 
     public static void main(String[] args) {
-        GoodsClassification goodsClassification = new GoodsClassification();
+        GoodsClassificationbl goodsClassification = new GoodsClassificationbl();
         List<GoodsClassificationPO> list = new ArrayList<>(10);
         list.add(new GoodsClassificationPO("1","aaa","null"));
         list.add(new GoodsClassificationPO("2","aaa","1"));

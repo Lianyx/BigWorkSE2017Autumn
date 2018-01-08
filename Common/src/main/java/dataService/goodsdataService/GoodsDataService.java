@@ -3,36 +3,38 @@ package dataService.goodsdataService;
 import po.GoodsPO;
 import util.ResultMessage;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 
-public interface GoodsDataService {
+public interface GoodsDataService extends Remote{
 	/**
 	 * 向序列化文件中添加一个po
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage insert(GoodsPO po);
+	public ResultMessage insert (GoodsPO po) throws RemoteException;
 
 	/**
 	 * 根据ID删除
 	 * @param ID
 	 * @return 处理结果
 	 */
-	public ResultMessage delete(String ID);
+	public ResultMessage delete(String ID) throws RemoteException;
 
 	/**
 	 * 更新po
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage update(GoodsPO po);
+	public ResultMessage update(GoodsPO po) throws RemoteException;
 
 	/**
 	 * 显示全部po
 	 * @return 返回所有po的集合
 	 */
-	public ArrayList<GoodsPO> show();
+	public ArrayList<GoodsPO> show() throws RemoteException;
 
 
 	/**
@@ -40,12 +42,15 @@ public interface GoodsDataService {
 	 * @param keywords
 	 * @return 商品持久化数据
 	 */
-	public ArrayList<GoodsPO> select(String keywords);
+	public ArrayList<GoodsPO> selectInEffect(String keywords) throws RemoteException;
 
-//	/**
-//	 * @param fatherId 商品父类的ID
-//	 * @return 新建商品的ID
-//	 */
-//
-//	public String getID(String fatherId);
+	/**
+	 * 根据id查找商品
+	 * @param id
+	 * @return
+	 * @throws RemoteException
+	 */
+	public GoodsPO selectById(String id) throws RemoteException;
+
+
 }

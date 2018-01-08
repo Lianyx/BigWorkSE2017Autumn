@@ -1,11 +1,13 @@
 package po;
 
+import java.io.Serializable;
+
 /**
  * 商品持久化对象
  * @author 林鹏
  *
  */
-public class GoodsPO {
+public class GoodsPO implements Serializable{
     /**编号*/
     private String id;
     /** 商品名称 */
@@ -29,6 +31,9 @@ public class GoodsPO {
     private double recentSalePrice;
     /** 商品警戒数量 */
     private int alarmNumber;
+    /** 是否被删*/
+    private int isDelete = 0;
+
     public GoodsPO() {
     }
 
@@ -128,10 +133,18 @@ public class GoodsPO {
         this.alarmNumber = alarmNumber;
     }
 
+    public int getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
+    }
+
     @Override
     public String toString() {
         return "GoodsPO{" +
-                "Id='" + id + '\'' +
+                "id='" + id + '\'' +
                 ", goodName='" + goodName + '\'' +
                 ", goodType='" + goodType + '\'' +
                 ", classifyId='" + classifyId + '\'' +
@@ -141,6 +154,7 @@ public class GoodsPO {
                 ", recentPurPrice=" + recentPurPrice +
                 ", recentSalePrice=" + recentSalePrice +
                 ", alarmNumber=" + alarmNumber +
+                ", isDelete=" + isDelete +
                 '}';
     }
 }

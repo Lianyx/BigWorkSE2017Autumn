@@ -81,8 +81,8 @@
             </HBox>
             <HBox fx:id="inventoryGift"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>InventoryGift</Label></HBox>
             <HBox fx:id="inventoryDamage"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>InventoryDamage</Label></HBox>
-            <HBox fx:id="inventoryOverfolw"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>InventoryOverflow</Label></HBox>
-            <HBox fx:id="invnetoryWarning"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>InventoryWarning</Label></HBox>
+            <HBox fx:id="inventoryOverflow"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>InventoryOverflow</Label></HBox>
+            <HBox fx:id="inventoryWarning"><padding><Insets bottom="8" left="18" top="8" /></padding><Label>InventoryWarning</Label></HBox>
 
         </JFXListView>
 

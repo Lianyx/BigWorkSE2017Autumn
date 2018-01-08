@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import javafx.scene.text.Font?>
 <?import com.jfoenix.controls.JFXButton?>
-<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<?import com.jfoenix.controls.JFXRippler?>
 <?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXTextField?>
-
-
+<?import com.jfoenix.controls.JFXRippler?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 <?import ui.inventoryui.inventoryReceiptui.InventoryListItemTreeTable?>
 <?import ui.util.ModifyButton?>
+
 <fx:root fx:id="inventoryreceipt" prefHeight="560.0" prefWidth="640.0" stylesheets="@../css/receipt.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane fx:id="pane" layoutX="90.0" layoutY="55.0" prefHeight="287.0" prefWidth="462.0">
@@ -30,13 +29,6 @@
                         <Font size="12.0" />
                     </font></Label>
                 <ModifyButton fx:id="modify" layoutX="347.0" layoutY="20.0" text="" />
-                <JFXButton fx:id="user" layoutX="404.0" layoutY="91.0" onMouseClicked="#currentUser" text="">
-                    <graphic>
-                        <StackPane>
-                            <MaterialDesignIconView glyphName="ACCOUNT" size="1.5em" styleClass="icon" />
-                        </StackPane>
-                    </graphic>
-                </JFXButton>
                 <JFXButton fx:id="delete" layoutX="386.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#delete" text="Delete">
                     <graphic>
                         <HBox>
@@ -61,12 +53,12 @@
                     </font>
                 </Label>
                 <JFXDatePicker fx:id="date" layoutX="50.0" layoutY="93.0" prefHeight="22.0" prefWidth="123.0" />
-                <TextField fx:id="provider" layoutX="219.0" layoutY="94.0" prefHeight="26.0" prefWidth="76.0">
+                <TextField fx:id="operator" layoutX="219.0" layoutY="94.0" prefHeight="26.0" prefWidth="76.0">
                     <font>
                         <Font size="10.0" />
                     </font></TextField>
 
-                <Label layoutX="219.0" layoutY="74.0" text="Provider" textFill="#a1adbc">
+                <Label layoutX="219.0" layoutY="74.0" text="Operator" textFill="#a1adbc">
                     <font>
                         <Font name="System Bold" size="10.0" />
                     </font>
@@ -76,21 +68,21 @@
                         <Font name="System Bold" size="10.0" />
                     </font>
                 </Label>
-                <Label layoutX="332.0" layoutY="74.0" text="Operator" textFill="#a1adbc">
+                <Label layoutX="332.0" layoutY="74.0" text="OperatorId" textFill="#a1adbc">
                     <font>
                         <Font name="System Bold" size="10.0" />
                     </font>
                 </Label>
-                <TextField fx:id="operator" layoutX="332.0" layoutY="94.0" prefWidth="76.0">
+                <TextField fx:id="operatorId" layoutX="332.0" layoutY="94.0" prefWidth="76.0">
                     <font>
                         <Font size="10.0" />
                     </font></TextField>
-                <Label layoutX="18.0" layoutY="132.0" text="Stock" textFill="#a1adbc">
+                <Label layoutX="18.0" layoutY="132.0" text="ReceiptState" textFill="#a1adbc">
                     <font>
                         <Font name="System Bold" size="10.0" />
                     </font>
                 </Label>
-                <TextField fx:id="stock" layoutX="19.0" layoutY="153.0" prefWidth="98.0">
+                <TextField fx:id="receiptState" layoutX="19.0" layoutY="153.0" prefWidth="98.0">
                     <font>
                         <Font size="10.0" />
                     </font></TextField>
@@ -100,15 +92,6 @@
                     </font>
                 </Label>
                 <TextArea fx:id="comment" layoutX="22.0" layoutY="204.0" prefHeight="53.0" prefWidth="417.0" wrapText="true" />
-                <JFXButton fx:id="member" layoutX="291.0" layoutY="91.0" onMouseClicked="#selectMember" text="">
-                    <graphic>
-                        <StackPane>
-                            <children>
-                                <MaterialDesignIconView glyphName="ACCOUNT_OUTLINE" size="1.5em" styleClass="icon" />
-                            </children>
-                        </StackPane>
-                    </graphic>
-                </JFXButton>
 
             </children>
 
@@ -122,7 +105,7 @@
         <StockListItemTreeTable fx:id="stockListItemTreeTable" layoutX="90" layoutY="380" prefHeight="170" />
         -->
         <InventoryListItemTreeTable fx:id="inventoryListItemTreeTable" layoutX="90" layoutY="380" prefHeight="170" />
-        <Label layoutX="24.0" layoutY="12.0" text="StockReceipt">
+        <Label fx:id="title1" layoutX="24.0" layoutY="12.0" text="InventoryReceipt">
             <font>
                 <Font size="24.0" />
             </font>

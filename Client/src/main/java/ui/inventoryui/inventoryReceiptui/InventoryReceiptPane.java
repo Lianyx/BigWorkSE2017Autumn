@@ -10,14 +10,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import ui.util.DoubleButtonDialog;
-import ui.util.GetTask;
-import ui.util.ReceiptDetailPane;
-import ui.util.UserInfomation;
+import ui.util.*;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;
 import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptType;
 import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptVO;
+import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
@@ -37,48 +35,41 @@ public class InventoryReceiptPane extends ReceiptDetailPane<InventoryReceiptVO>{
     @FXML
     TextField operator;
     @FXML
-    TextField provider;
+    TextField operatorId;
     @FXML
-    JFXTextField sum;
-    @FXML
-    TextField stock;
+    TextField receiptState;
     @FXML
     JFXDatePicker date;
-
     @FXML
     Label head;
     @FXML
-    JFXButton member;
+    Label title1;
     @FXML
-    JFXButton user;
-
+    Label title2;
     @FXML
     Label id;
+    @FXML
+    TextArea comment;
 
     int memberId = 0;
 
 
-    @FXML
-    TextArea comment;
+
 
     InventoryReceiptType receiptType;
 
     public InventoryReceiptPane(String id) {
         super("/inventoryui/inventoryreceiptui/inventoryreceipt.fxml",id);
         inventoryblService = ServiceFactory_Stub.getService(InventoryblService.class.getName());
-        provider.setDisable(true);
         operator.setDisable(true);
+        operatorId.setDisable(true);
+        receiptState.setDisable(true);
 
-        stock.disableProperty().bind(modifyState.not());
         date.disableProperty().bind(modifyState.not());
-        member.disableProperty().bind(modifyState.not());
-        user.disableProperty().bind(modifyState.not());
+        comment.disableProperty().bind(modifyState.not());
 
         RequireValid(operator);
-        RequireValid(provider);
-        RequireValid(stock);
-
-        comment.disableProperty().bind(modifyState.not());
+        RequireValid(operatorId);
 
         if(id.split("-")[0].equals("ZSD")){
             this.receiptType = InventoryReceiptType.InventoryGift;
@@ -95,34 +86,60 @@ public class InventoryReceiptPane extends ReceiptDetailPane<InventoryReceiptVO>{
         super("inventoryui/inventoryreceiptui/inventoryreceipt.fxml");
         this.receiptType = receiptType;
 
+        title2.setVisible(false);
+
         inventoryblService = ServiceFactory_Stub.getService(InventoryblService.class.getName());
-        provider.setDisable(true);
         operator.setDisable(true);
+        operatorId.setDisable(true);
+        receiptState.setDisable(true);
+
         operator.setText(UserInfomation.username);
         date.setValue(LocalDate.now());
-        RequireValid(provider);
-        RequireValid(stock);
+
+        RequireValid(operator);
+        RequireValid(operatorId);
+
         switchPane(true);
 
-        if (receiptType.equals(InventoryReceiptType.InventoryGift))
+        if (receiptType.equals(InventoryReceiptType.InventoryGift)) {
             head.setText("ZSD");
-        else if (receiptType.equals(InventoryReceiptType.InventoryDamage))
+            title1.setText("InventoryGiftReceipt");
+        } else if (receiptType.equals(InventoryReceiptType.InventoryDamage)){
             head.setText("BSD");
-        else if (receiptType.equals(InventoryReceiptType.InventoryOverflow))
+            title1.setText("InventoryDamageReceipt");
+            title1.setVisible(false);
+            title2.setVisible(true);
+        }else if (receiptType.equals(InventoryReceiptType.InventoryOverflow)) {
             head.setText("BYD");
-        else if(receiptType.equals(InventoryReceiptType.InventoryWarning))
+            title1.setText("InventoryOverflowReceipt");
+        }else if(receiptType.equals(InventoryReceiptType.InventoryWarning)) {
             head.setText("BJD");
+            title1.setText("InventoryWarningReceipt");
+        }
+
         id.setText("-"+ String.format("%05d", inventoryblService.getDayId()));
     }
 
    @FXML
     public void add() {
+        inventoryListItemTreeTable.addGood(new ReceiptGoodsItemVO("a", 1, 50, 1, 1, 70));
 
 
     }
 
     @Override
     public void delete() {
+        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane,"Delete","sabi","Yes","No");
+        doubleButtonDialog.setButtonOne(()->{});
+        doubleButtonDialog.setButtonTwo(()->{
+            boardController.setRightAnimation();
+            boardController.historicalSwitchTo((Refreshable) HistoricalRecord.pop());
+            boardController.refresh();
+        });
+        doubleButtonDialog.show();
+        /*
+        未完成
+         */
 
     }
 
@@ -130,13 +147,9 @@ public class InventoryReceiptPane extends ReceiptDetailPane<InventoryReceiptVO>{
     @FXML
     public void currentUser() {
         operator.setText(UserInfomation.username);
+        operatorId.setText(Integer.toString(UserInfomation.userid));
     }
 
-    @FXML
-    public void selectMember() {
-        provider.setText("sabi");
-        this.memberId = 5;
-    }
 
     @Override
     public void savePendingReceipt() {
@@ -145,7 +158,7 @@ public class InventoryReceiptPane extends ReceiptDetailPane<InventoryReceiptVO>{
                 UserInfomation.userid,
                 LocalDateTime.now(),LocalDateTime.now(),
                 ReceiptState.PENDING,
-                this.memberId,provider.getText(),
+                operator.getText(),
                 inventoryListItemTreeTable.getList(),
                 comment.getText(),
                 receiptType);
@@ -173,7 +186,7 @@ public class InventoryReceiptPane extends ReceiptDetailPane<InventoryReceiptVO>{
                 UserInfomation.userid,
                 LocalDateTime.now(),LocalDateTime.now(),
                 ReceiptState.PENDING,
-                this.memberId,provider.getText(),
+                operator.getText(),
                 inventoryListItemTreeTable.getList(),
                 comment.getText(),
                 receiptType);
@@ -195,7 +208,7 @@ public class InventoryReceiptPane extends ReceiptDetailPane<InventoryReceiptVO>{
 
     @Override
     public boolean valid() {
-        if(date.getValue()!=null&&!operator.getText().equals("")&&!provider.getText().equals("")&&!stock.getText().equals("")&&!sum.getText().equals(""))
+        if(date.getValue()!=null&&!operator.getText().equals("")&&!operatorId.getText().equals("")&&!receiptState.getText().equals(""))
             return true;
         return false;
     }
@@ -212,13 +225,14 @@ public class InventoryReceiptPane extends ReceiptDetailPane<InventoryReceiptVO>{
             Predicate<Integer> p = (i)->{if((vo = inventoryblService.showDetail(receiptid))!=null) return true;return false;};
             GetTask task =
                     new GetTask(()-> {
-                        provider.setText(vo.getMemberName());
+                        operatorId.setText(Integer.toString(vo.getMemberId()));
                         operator.setText(UserInfomation.username);
                         date.setValue(vo.getCreateTime().toLocalDate());
                         comment.setText(vo.getComment());
                         id.setText("-"+vo.getId().split("-")[2]);
                         memberId = vo.getMemberId();
                         head.setText(vo.getId().split("-")[0]+"-");
+                        receiptState.setText(vo.getReceiptState().toString());
 
                         inventoryListItemTreeTable.setList(vo.getItems());
                         switchPane(toSwitch);

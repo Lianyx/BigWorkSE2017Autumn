@@ -6,7 +6,7 @@ import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptListVO;
 import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptType;
 import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.InventorySearchVO;
-import vo.inventoryVO.uiReceipt.InventoryGiftuiVO;
+
 
 import java.util.Set;
 

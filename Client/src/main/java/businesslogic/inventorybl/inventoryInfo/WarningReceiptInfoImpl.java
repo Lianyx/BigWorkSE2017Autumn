@@ -33,8 +33,8 @@ public class WarningReceiptInfoImpl implements InventoryWarningReceiptInfo{
         /*
         同样，构造参数有同样的问题需要考虑
          */
-        InventoryWarningReceiptVO receiptVO = new InventoryWarningReceiptVO(null,0,null,null,
-                ReceiptState.PENDING,list);
+      /*  InventoryWarningReceiptVO receiptVO = new InventoryWarningReceiptVO(null,0,null,null,
+                ReceiptState.PENDING,list);*/
 
       //  receiptbl.insert(receiptVO);
 

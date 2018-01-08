@@ -1,4 +1,5 @@
-package test.inventory; 
+/*
+package test.inventory;
 
 import goods.MockGoods;
 import inventory.MockGoodsList;
@@ -6,13 +7,15 @@ import inventory.MockGoodsListItem;
 import inventory.MockInventoryDamage;
 import org.junit.Test;
 
-/** 
+*/
+/**
 * MockInventoryDamage Tester. 
 * 
 * @author <Authors name> 
 * @since <pre>11, 13, 2017</pre>
 * @version 1.0 
-*/ 
+*//*
+
 public class MockInventoryDamageTest {
 
     @Test
@@ -27,3 +30,4 @@ public class MockInventoryDamageTest {
     }
 
 } 
+*/

@@ -17,5 +17,7 @@ public interface GoodsPOMapper {
     /**
      * 进行模糊查询的接口
      * */
-    public ArrayList<GoodsPO> select(String keywords);
+    public ArrayList<GoodsPO> selectInEffect(String keywords);
+
+    public GoodsPO selectById(String id);
 }

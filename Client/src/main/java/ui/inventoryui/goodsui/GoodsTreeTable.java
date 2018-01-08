@@ -26,6 +26,7 @@ import ui.util.*;
 import vo.inventoryVO.GoodSearchVO;
 import vo.inventoryVO.GoodsVO;
 
+import java.rmi.RemoteException;
 import java.util.Set;
 
 public class GoodsTreeTable extends ReceiptTreeTable<GoodsVO> {
@@ -35,7 +36,8 @@ public class GoodsTreeTable extends ReceiptTreeTable<GoodsVO> {
     public GoodsTreeTable() {
         super();
         rowsPerPage = 7;
-        goodsblService = ServiceFactory_Stub.getService(GoodsblService.class.getName());
+        //goodsblService = GoodsListPane.goodsblService;//ServiceFactory_Stub.getService(GoodsblService.class.getName());
+        this.goodsblService = ServiceFactory_Stub.getService(GoodsblService.class.getName());
 
         JFXTreeTableColumn<GoodsVO,Boolean> choose = new JFXTreeTableColumn("  ");
         choose.setPrefWidth(40);
@@ -74,22 +76,59 @@ public class GoodsTreeTable extends ReceiptTreeTable<GoodsVO> {
         inventoryNum.setPrefWidth(120);
         columnDecorator.setupCellValueFactory(inventoryNum,s->new ReadOnlyObjectWrapper<>(s.getInventoryNum()));
 
-       /* JFXTreeTableColumn<GoodsVO, Boolean> more = new JFXTreeTableColumn("");
+        JFXTreeTableColumn<GoodsVO, Boolean> more = new JFXTreeTableColumn("");
         more.setPrefWidth(30);
         columnDecorator.setupCellValueFactory(more, s -> new ReadOnlyObjectWrapper(s.isMultiple()));
         more.setCellFactory(new Callback<TreeTableColumn<GoodsVO, Boolean>, TreeTableCell<GoodsVO, Boolean>>() {
             @Override
             public TreeTableCell<GoodsVO, Boolean> call(TreeTableColumn<GoodsVO, Boolean> param) {
                 MultiCell multiCell = new MultiCell();
-                multiCell.setRunnable1(()->{UserDetailPane userDetailPane = new UserDetailPane(((GoodsVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getUserid()); userDetailPane.refresh(true);});
-                multiCell.setRunnable2(()->{userManagerblService.delete(((GoodsVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getUserid()); BoardController.getBoardController().refresh();});
+                multiCell.setRunnable1(()->{GoodDetailPane goodDetailPane = new GoodDetailPane(((GoodsVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getId()); goodDetailPane.refresh(true);});
+                multiCell.setRunnable2(()->{
+                    try {
+                        goodsblService.deleteGoods(((GoodsVO)multiCell.getTreeTableRow().getTreeItem().getValue()));
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                    BoardController.getBoardController().refresh();});
                 return multiCell;
             }
-        });*/
+        });
+
+        this.setRowFactory(tableView-> {
+            JFXTreeTableRow<GoodsVO> row = new JFXTreeTableRow();
+            RowSetter(row,()->{
+                GoodDetailPane goodDetailPane = new GoodDetailPane(row.getTreeItem().getValue().getId());
+                    ;goodDetailPane.refresh(true);});
+            return row;
+        });
+
+        this.getColumns().addAll(choose,goodName,goodId,goodType,inventoryNum,more);
+    }
+
+    public void setGood(Set<GoodsVO> goods){observableList.setAll(goods);}
+
+    public void removeGood(GoodsVO goodsVO){observableList.remove(goodsVO);}
+
+    public GoodSearchVO getGoodSearchVO(){return  goodSearchVO;}
+
+    public void setGoodSearchVO(GoodSearchVO goodSearchVO) {
+        this.goodSearchVO = goodSearchVO;
     }
 
     @Override
     public void delete(Pagination p) {
+        chosenItem.getSet().forEach(s -> {observableList.remove(s);
+            try {
+                goodsblService.deleteGoods(s);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        });
+        p.setPageCount(observableList.size() / getRowsPerPage() + 1);
+        createPage(p.getCurrentPageIndex());
+        p.setCurrentPageIndex(p.getCurrentPageIndex());
+        chosenItem.getSet().clear();
 
     }
 }

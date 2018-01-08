@@ -12,7 +12,10 @@ import javafx.util.Callback;
 import ui.util.*;
 import util.ReceiptState;
 import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptListVO;
+import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.InventorySearchVO;
+
+import java.rmi.RemoteException;
 
 public class InventoryTreeTable extends ReceiptTreeTable<InventoryReceiptListVO> {
     private InventoryblService inventoryblService;
@@ -63,7 +66,13 @@ public class InventoryTreeTable extends ReceiptTreeTable<InventoryReceiptListVO>
             public TreeTableCell<InventoryReceiptListVO, Boolean> call(TreeTableColumn<InventoryReceiptListVO, Boolean> param) {
                 MultiCell multiCell = new MultiCell();
                 multiCell.setRunnable1(()->{InventoryReceiptPane inventoryReceiptPane = new InventoryReceiptPane(((InventoryReceiptListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getId()); inventoryReceiptPane.refresh(true);});
-               // multiCell.setRunnable2(()->{inventoryblService.delete(((InventoryReceiptListVO)multiCell.getTreeTableRow().getTreeItem().getValue())); BoardController.getBoardController().refresh();});
+                multiCell.setRunnable2(()->{
+                    try {
+                        inventoryblService.delete(((InventoryReceiptVO)multiCell.getTreeTableRow().getTreeItem().getValue()));
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                    BoardController.getBoardController().refresh();});
                 return multiCell;
 
             }
@@ -84,7 +93,7 @@ public class InventoryTreeTable extends ReceiptTreeTable<InventoryReceiptListVO>
             System.out.println(observableList);
 
             chosenItem.getSet().forEach(s -> {observableList.remove(s);
-            //inventoryblService.delete(s);
+            //inventoryblService.delete(s);  与bl的连接
                 });
             p.setPageCount(observableList.size() / getRowsPerPage() + 1);
             createPage(p.getCurrentPageIndex());
