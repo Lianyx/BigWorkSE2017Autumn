@@ -9,6 +9,7 @@ public class MemberPO {
     private byte[] image;
     private int VIPgrade; // 1~5
     private String memberName;
+    private String clerkName;
     private String phoneNumber;
     private String address;
     private String zipCode;
@@ -16,19 +17,17 @@ public class MemberPO {
     private int debtCeiling; // 应收额度
     private int debt;
     private int credit;
-    private int defaultOperatorID; // 默认业务员id
-    private boolean isDelete=false;
-
+    private int isDelete;
 
     public MemberPO() {
     }
 
-    public MemberPO(int memberId, MemberCategory memberCatogory, byte[] image, int VIPgrade, String memberName, String phoneNumber, String address, String zipCode, String emailAddress, int debtCeiling, int debt, int credit, int defaultOperatorID, boolean isDelete) {
+    public MemberPO(int memberId, MemberCategory memberCatogory, int VIPgrade, String memberName, String clerkName, String phoneNumber, String address, String zipCode, String emailAddress, int debtCeiling, int debt, int credit, int isDelete) {
         this.memberId = memberId;
         this.memberCatogory = memberCatogory;
-        this.image = image;
         this.VIPgrade = VIPgrade;
         this.memberName = memberName;
+        this.clerkName = clerkName;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.zipCode = zipCode;
@@ -36,7 +35,6 @@ public class MemberPO {
         this.debtCeiling = debtCeiling;
         this.debt = debt;
         this.credit = credit;
-        this.defaultOperatorID = defaultOperatorID;
         this.isDelete = isDelete;
     }
 
@@ -78,6 +76,14 @@ public class MemberPO {
 
     public void setMemberName(String memberName) {
         this.memberName = memberName;
+    }
+
+    public String getClerkName() {
+        return clerkName;
+    }
+
+    public void setClerkName(String clerkName) {
+        this.clerkName = clerkName;
     }
 
     public String getPhoneNumber() {
@@ -136,19 +142,11 @@ public class MemberPO {
         this.credit = credit;
     }
 
-    public int getDefaultOperatorID() {
-        return defaultOperatorID;
-    }
-
-    public void setDefaultOperatorID(int defaultOperatorID) {
-        this.defaultOperatorID = defaultOperatorID;
-    }
-
-    public boolean isDelete() {
+    public int getIsDelete() {
         return isDelete;
     }
 
-    public void setDelete(boolean delete) {
-        isDelete = delete;
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
     }
 }
