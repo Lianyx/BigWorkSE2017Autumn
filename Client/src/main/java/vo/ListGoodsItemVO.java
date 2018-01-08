@@ -26,6 +26,14 @@ public class ListGoodsItemVO extends RecursiveTreeObject<ListGoodsItemVO> implem
         this.sum.bind(this.goodsNum.multiply(price));
     }
 
+
+    public ListGoodsItemVO(ReceiptGoodsItemPO receiptGoodsItemPO){
+        this.goodsId.set(receiptGoodsItemPO.getId());
+        this.price.set(receiptGoodsItemPO.getPrice());
+        this.goodsNum.set(receiptGoodsItemPO.getNum());
+        this.comment.set(receiptGoodsItemPO.getComment());
+    }
+
     public String getGoodsName() {
         return goodsName.get();
     }
