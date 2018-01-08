@@ -36,6 +36,8 @@ public class TestSalesSell {
 
             salesSellblService.insert(salesSellReceiptVO);
 
+            System.out.println(salesSellblService.selectByMold(ssr).getId());
+
         } catch (Exception e) {
             e.printStackTrace();
         }

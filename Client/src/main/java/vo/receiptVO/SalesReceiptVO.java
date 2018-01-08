@@ -138,6 +138,7 @@ public abstract class SalesReceiptVO extends ReceiptVO {
         ArrayList<ListGoodsItemVO> list = new ArrayList<>();
         if (array != null) {
             for (ReceiptGoodsItemPO receiptGoodsItemPO : array) {
+                System.out.println(receiptGoodsItemPO.getId());
                 list.add(new ListGoodsItemVO(receiptGoodsItemPO));
             }
         }

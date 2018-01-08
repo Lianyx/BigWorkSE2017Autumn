@@ -98,6 +98,11 @@ public class StockblService_Stub implements StockblService {
     }
 
     @Override
+    public StockReceiptVO selectByMold(StockReceiptVO receiptVO) throws RemoteException {
+        return null;
+    }
+
+    @Override
     public ArrayList<StockReceiptVO> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
         return null;
     }

@@ -2,10 +2,11 @@ package vo.abstractVO;
 
 import po.generic.ReceipishPO;
 import po.promotionPO.PromotionPO;
+import vo.receiptVO.ReceiptVO;
 
 import java.time.LocalDateTime;
 
-public abstract class ReceipishVO<TR> extends SelectableVO<TR> {
+public abstract class ReceipishVO<TR extends ReceipishVO<TR>> extends SelectableVO<TR> {
     protected String id;
     protected LocalDateTime createTime,lastModifiedTime;
 

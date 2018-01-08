@@ -12,6 +12,7 @@ public interface PromotionblService<T extends PromotionVO> {
     ResultMessage insert(T promotionVO) throws RemoteException;
     ResultMessage update(T promotionVO) throws RemoteException;
     ResultMessage delete(T promotionVO) throws RemoteException;
+    T selectByMold(T promotionVO) throws RemoteException;
     ArrayList<T> selectInEffect() throws RemoteException;
     ArrayList<T> search(PromotionSearchCondition promotionSearchCondition) throws RemoteException;
 }

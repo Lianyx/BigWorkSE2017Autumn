@@ -7,13 +7,13 @@ import po.ReceiptGoodsItemPO;
 import java.io.Serializable;
 
 public class ListGoodsItemVO extends RecursiveTreeObject<ListGoodsItemVO> implements Serializable {
-    private StringProperty goodsName;
-    private IntegerProperty goodsId;
-    private StringProperty type;
-    private DoubleProperty price;
-     private IntegerProperty goodsNum;
-     private DoubleProperty sum;
-     private StringProperty comment;
+    private StringProperty goodsName = new SimpleStringProperty();
+    private IntegerProperty goodsId = new SimpleIntegerProperty();
+    private StringProperty type = new SimpleStringProperty();
+    private DoubleProperty price = new SimpleDoubleProperty();
+     private IntegerProperty goodsNum = new SimpleIntegerProperty();
+     private DoubleProperty sum = new SimpleDoubleProperty();
+     private StringProperty comment = new SimpleStringProperty();
 
     public ListGoodsItemVO(String goodsName, int goodsId, String type, int price,int goodsNum, String comment) {
         this.goodsName = new SimpleStringProperty(goodsName);

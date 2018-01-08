@@ -104,6 +104,11 @@ public class SalesblService_Stub  implements SalesblService{
     }
 
     @Override
+    public SalesReceiptVO selectByMold(SalesReceiptVO receiptVO) throws RemoteException {
+        return null;
+    }
+
+    @Override
     public ArrayList<SalesReceiptVO> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
         return null;
     }
