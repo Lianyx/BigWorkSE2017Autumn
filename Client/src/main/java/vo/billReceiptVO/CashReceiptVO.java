@@ -2,6 +2,7 @@ package vo.billReceiptVO;
 
 import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
+import businesslogic.checkbl.MyServiceFactory;
 import javafx.scene.Node;
 import po.CashItemPO;
 import po.TransferItemPO;
@@ -16,6 +17,7 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CashReceiptVO extends ReceiptVO{
@@ -29,9 +31,19 @@ public class CashReceiptVO extends ReceiptVO{
 
     }
 
+    public CashReceiptVO(CashBillReceiptPO cashBillReceiptPO) {
+        super(cashBillReceiptPO);
+        this.accountID = cashBillReceiptPO.getAccountID();
+        this.total = cashBillReceiptPO.getTotal();
+        List<CashItemVO> temp = new ArrayList<>();
+        for(CashItemPO cashItemPO:cashBillReceiptPO.getItemList()){
+            CashItemVO vo = new CashItemVO(cashItemPO.getName(),cashItemPO.getSum(),cashItemPO.getComment());
+            temp.add(vo);
+        }
+        this.cashList = temp;
+    }
 
-
-    public CashReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int accountID, double total, List<CashItemVO> cashList,boolean isSell) {
+    public CashReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int accountID, double total, List<CashItemVO> cashList, boolean isSell) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
         this.accountID = accountID;
         this.total = total;
@@ -58,7 +70,7 @@ public class CashReceiptVO extends ReceiptVO{
 
     @Override
     public CheckInfo<CashReceiptVO> getService() throws RemoteException, NotBoundException, MalformedURLException {
-        return null;
+        return MyServiceFactory.getCashReceiptVOCheckInfo();
     }
 
     @Override

@@ -39,7 +39,7 @@ public class BoardController {
                         board.getChildren().setAll(pane);
                     }
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         });

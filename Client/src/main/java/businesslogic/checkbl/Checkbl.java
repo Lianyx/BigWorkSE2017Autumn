@@ -2,10 +2,14 @@ package businesslogic.checkbl;
 
 import blService.checkblService.CheckInfo;
 import blService.checkblService.CheckblService;
-import businesslogic.salesbl.SalesSellbl;
-import po.receiptPO.ReceiptPO;
-import po.receiptPO.SalesSellReceiptPO;
 import util.ResultMessage;
+import vo.billReceiptVO.CashReceiptVO;
+import vo.billReceiptVO.ChargeReceiptVO;
+import vo.billReceiptVO.PaymentReceiptVO;
+import vo.inventoryVO.InventoryDamageReceiptVO;
+import vo.inventoryVO.InventoryGiftReceiptVO;
+import vo.inventoryVO.InventoryOverflowReceiptVO;
+import vo.inventoryVO.InventoryWarningReceiptVO;
 import vo.receiptVO.ReceiptVO;
 import vo.receiptVO.SalesSellReceiptVO;
 
@@ -15,18 +19,45 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class Checkbl implements CheckblService {
-    CheckInfo<SalesSellReceiptVO> salesSellReceiptCheck;
+    private static CheckInfo<SalesSellReceiptVO> salesSellReceiptVOCheckInfo;
+
+    private static CheckInfo<InventoryDamageReceiptVO> inventoryDamageReceiptVOCheckInfo;
+    private static CheckInfo<InventoryGiftReceiptVO> inventoryGiftReceiptVOCheckInfo;
+    private static CheckInfo<InventoryOverflowReceiptVO> inventoryOverflowReceiptVOCheckInfo;
+    private static CheckInfo<InventoryWarningReceiptVO> inventoryWarningReceiptVOCheckInfo;
+
+    private static CheckInfo<CashReceiptVO> cashReceiptVOCheckInfo;
+    private static CheckInfo<ChargeReceiptVO> chargeReceiptVOCheckInfo;
+    private static CheckInfo<PaymentReceiptVO> paymentReceiptVOCheckInfo;
+
 
     public Checkbl() throws RemoteException, NotBoundException, MalformedURLException {
-        // TODO factory?
-        salesSellReceiptCheck = new SalesSellbl();
+        salesSellReceiptVOCheckInfo = MyServiceFactory.getSalesSellReceiptVOCheckInfo();
+
+        inventoryDamageReceiptVOCheckInfo = MyServiceFactory.getInventoryDamageReceiptVOCheckInfo();
+        inventoryGiftReceiptVOCheckInfo = MyServiceFactory.getInventoryGiftReceiptVOCheckInfo();
+        inventoryOverflowReceiptVOCheckInfo = MyServiceFactory.getInventoryOverflowReceiptVOCheckInfo();
+        inventoryWarningReceiptVOCheckInfo = MyServiceFactory.getInventoryWarningReceiptVOCheckInfo();
+
+        cashReceiptVOCheckInfo = MyServiceFactory.getCashReceiptVOCheckInfo();
+        chargeReceiptVOCheckInfo = MyServiceFactory.getChargeReceiptVOCheckInfo();
+        paymentReceiptVOCheckInfo = MyServiceFactory.getPaymentReceiptVOCheckInfo();
     }
 
     @Override
     public ArrayList<ReceiptVO> initCheck() throws RemoteException {
-        ArrayList<ReceiptPO> resultList = new ArrayList<>();
-//        resultList.addAll(salesSellReceiptCheck.selectPending());
-        return null;
+        ArrayList<ReceiptVO> resultList = new ArrayList<>();
+        resultList.addAll(salesSellReceiptVOCheckInfo.selectPending());
+
+//        resultList.addAll(inventoryDamageReceiptVOCheckInfo.selectPending());
+//        resultList.addAll(inventoryGiftReceiptVOCheckInfo.selectPending());
+//        resultList.addAll(inventoryOverflowReceiptVOCheckInfo.selectPending());
+//        resultList.addAll(inventoryWarningReceiptVOCheckInfo.selectPending());
+//
+//        resultList.addAll(cashReceiptVOCheckInfo.selectPending());
+//        resultList.addAll(chargeReceiptVOCheckInfo.selectPending());
+//        resultList.addAll(paymentReceiptVOCheckInfo.selectPending());
+        return resultList;
     }
 
     @Override
@@ -44,9 +75,8 @@ public class Checkbl implements CheckblService {
         return receiptVO.getService().update(receiptVO);
     }
 
-    public static void main(String[] args) throws Exception{
-        Checkbl checkbl = new Checkbl();
-        checkbl.initCheck();
-
-    }
+//    public static void main(String[] args) throws Exception{
+//        Checkbl checkbl = new Checkbl();
+//        System.out.println(checkbl.initCheck());
+//    }
 }

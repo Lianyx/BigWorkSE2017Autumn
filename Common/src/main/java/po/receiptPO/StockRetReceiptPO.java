@@ -9,7 +9,7 @@ public class StockRetReceiptPO extends StockReceiptPO {
     public StockRetReceiptPO() {
     }
 
-    public StockRetReceiptPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberid, String stockName, ReceiptGoodsItemPO[] goodsList, String comment, int sum) {
-        super(dayId, operatorId, createTime, lastModifiedTime, receiptState, memberid, stockName, goodsList, comment, sum);
+    public StockRetReceiptPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberid, String stockName, ReceiptGoodsItemPO[] goodsList,double sum, String comment) {
+        super(dayId, operatorId, createTime, lastModifiedTime, receiptState, memberid, stockName, goodsList, sum, comment);
     }
 }

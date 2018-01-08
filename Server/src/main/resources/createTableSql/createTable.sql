@@ -61,9 +61,6 @@ create table SalesSellReceipt(
   createTime bigint,
   lastModifiedTime bigint,
   receiptState integer,
-
-  comment varchar(150),
-
   memberId integer,
   clerkName varchar(30),
   stockName varchar(30),
@@ -73,7 +70,9 @@ create table SalesSellReceipt(
   originSum double,
 
   gifts varchar(1000),
-  giveTokenAmount double
+  giveTokenAmount double,
+  comment varchar(150)
+
 ) character set = utf8;
 
 
@@ -140,6 +139,77 @@ create table SalesDetail(
 
 
 create table BusinessCondition(
-    income double,
-    expense double
+    date bigint,
+    salesIncome double,
+    overFlowIncome double,
+    purPriceAdjustIncome double,
+    priceDiffIncome double,
+    tokenIncome double,
+
+    discount double,
+
+    purCost double,
+    damageCost double,
+    giftCost double
 );
+
+create table StockPurReceipt(
+dayId integer,
+createTime bigint,
+lastModifiedTime bigint,
+operatorId integer,
+receiptState integer,
+memberid integer,
+stockName varchar(100),
+goodsList varchar(1000),
+originalSum integer,
+comment varchar(150)
+)character set = utf8;
+
+
+create table StockRetReceipt(
+dayId integer,
+createTime bigint,
+lastModifiedTime bigint,
+operatorId integer,
+receiptState integer,
+memberid integer,
+stockName varchar(100),
+goodsList varchar(1000),
+originalSum integer,
+comment varchar(150)
+)character set = utf8;
+
+create table SalesRetReceipt(
+  dayId integer,
+  operatorId integer,
+  createTime bigint,
+  lastModifiedTime bigint,
+  receiptState integer,
+
+
+
+  memberId integer,
+  clerkName varchar(30),
+  stockName varchar(30),
+  goodsList varchar(1000),
+  discountAmount double,
+  tokenAmount double,
+  originSum double,
+comment varchar(150)
+) character set = utf8;
+
+create table User(
+  userId integer,
+  username varchar(30),
+  usertype integer,
+  createTime bigint,
+  facebook varchar(50),
+  github varchar(100),
+  twitter varchar(100),
+  email varchar(100),
+  phone varchar(100),
+  comment varchar(100),
+  date varchar(100),
+  password varchar(100)
+); character set = utf8;

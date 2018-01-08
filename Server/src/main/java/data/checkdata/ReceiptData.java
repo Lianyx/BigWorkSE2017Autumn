@@ -26,6 +26,7 @@ public class ReceiptData<T extends ReceiptPO> extends ReceipishData<T> implement
 
     public ReceiptData(Class<? extends ReceiptPOMapper<T>> mapperClass, Class<T> receiptClass) throws RemoteException{
         this.mapperClass = mapperClass;
+        this.receiptClass = receiptClass;
     }
 
     @Override

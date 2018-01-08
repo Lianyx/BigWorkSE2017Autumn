@@ -2,6 +2,7 @@ package vo.billReceiptVO;
 
 import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
+import businesslogic.checkbl.MyServiceFactory;
 import javafx.scene.Node;
 import po.TransferItemPO;
 import po.receiptPO.ChargeBillReceiptPO;
@@ -15,6 +16,7 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChargeReceiptVO extends ReceiptVO{
@@ -28,6 +30,19 @@ public class ChargeReceiptVO extends ReceiptVO{
     public ChargeReceiptVO(){
 
     }
+
+    public ChargeReceiptVO(ChargeBillReceiptPO chargeBillReceiptPO){
+        super(chargeBillReceiptPO);
+        this.clientID = chargeBillReceiptPO.getClientID();
+        this.sum = chargeBillReceiptPO.getSum();
+        List<TransferItemVO> temp = new ArrayList<>();
+        for(TransferItemPO transferItemPO:chargeBillReceiptPO.getTransferList()){
+            TransferItemVO vo = new TransferItemVO(transferItemPO.getAccountID(),transferItemPO.getSum(),transferItemPO.getComment());
+            temp.add(vo);
+        }
+        this.transferList = temp;
+    }
+
 
     public ChargeReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientID, List<TransferItemVO> transferList, double sum,boolean isSell) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
@@ -57,7 +72,7 @@ public class ChargeReceiptVO extends ReceiptVO{
 
     @Override
     public CheckInfo<ChargeReceiptVO> getService() throws RemoteException, NotBoundException, MalformedURLException {
-        return null;
+        return MyServiceFactory.getChargeReceiptVOCheckInfo();
     }
 
     @Override

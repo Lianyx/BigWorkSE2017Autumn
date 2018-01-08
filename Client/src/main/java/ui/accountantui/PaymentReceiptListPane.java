@@ -25,8 +25,6 @@ import java.util.stream.Collectors;
 
 public class PaymentReceiptListPane extends ReceiptListPane<PaymentReceiptListVO> {
 
-    static Set<PaymentReceiptListVO> set = new HashSet<>();
-
     PaymentBillReceiptblService paymentBillReceiptblService;
 
     SimpleBooleanProperty isSell = new SimpleBooleanProperty();
@@ -85,7 +83,6 @@ public class PaymentReceiptListPane extends ReceiptListPane<PaymentReceiptListVO
     @Override
     public void add() {
         PaymentDetailPane paymentDetailPane = new PaymentDetailPane(isSell.get());
-        //SalesReceiptPane salesReceiptPane = new SalesReceiptPane(isSell.get());
     }
 
     @Override

@@ -19,7 +19,9 @@ public class StockReceiptListVO extends SelectableVO<StockReceiptListVO>{
     boolean isPur;
 
 
-    public StockReceiptListVO(String id, ReceiptState receiptState, String memberName, String stockName, double sum,boolean isPur) {
+
+
+    public StockReceiptListVO(String id, ReceiptState receiptState, String memberName, String stockName, double sum, boolean isPur) {
         this.id = id;
         this.receiptState = receiptState;
         this.memberName = memberName;

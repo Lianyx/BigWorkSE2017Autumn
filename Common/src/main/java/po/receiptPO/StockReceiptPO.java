@@ -11,12 +11,13 @@ public class StockReceiptPO extends ReceiptPO{
     private int memberid;
     private String stockName;
     private ReceiptGoodsItemPO[] goodsList;
+    private double originalSum;
     private String comment;
-    private int originalSum;
+
 
     public StockReceiptPO(){}
 
-    public StockReceiptPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberid, String stockName, ReceiptGoodsItemPO[] goodsList, String comment, int originalSum) {
+    public StockReceiptPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberid, String stockName, ReceiptGoodsItemPO[] goodsList, double originalSum,String comment) {
         super(dayId, operatorId, createTime, lastModifiedTime, receiptState);
         this.memberid = memberid;
         this.stockName = stockName;
@@ -33,11 +34,11 @@ public class StockReceiptPO extends ReceiptPO{
         this.goodsList = goodsList;
     }
 
-    public int getOriginalSum() {
+    public double getOriginalSum() {
         return originalSum;
     }
 
-    public void setOriginalSum(int originalSum) {
+    public void setOriginalSum(double originalSum) {
         this.originalSum = originalSum;
     }
 

@@ -1,8 +1,9 @@
 package po;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class BusinessConditionPO {
+public class BusinessConditionPO implements Serializable{
 
     private LocalDateTime date;
 
@@ -40,6 +41,38 @@ public class BusinessConditionPO {
         this.damageCost = damageCost;
         this.giftCost = giftCost;
     }
+
+    /**
+     * 一些计算的方法
+     * */
+    public BusinessConditionPO add(BusinessConditionPO that) {
+        this.salesIncome += that.salesIncome;
+        this.overFlowIncome += that.overFlowIncome;
+        this.purPriceAdjustIncome += that.purPriceAdjustIncome;
+        this.priceDiffIncome += that.priceDiffIncome;
+        this.tokenIncome += that.tokenIncome;
+        this.discount += that.discount;
+        this.purCost += that.purCost;
+        this.damageCost += that.damageCost;
+        this.giftCost += that.giftCost;
+        return this;
+    }
+
+    public double getTotalProfit() {
+        return getTotalIncome() - getTotalCost();
+    }
+
+    public double getTotalIncome() {
+        return salesIncome + overFlowIncome + purPriceAdjustIncome + priceDiffIncome + tokenIncome;
+    }
+
+    public double getTotalCost() {
+        return purCost + damageCost + giftCost;
+    }
+
+    /**
+     * 自动生成的getter和setter
+     * */
 
     public LocalDateTime getDate() {
         return date;

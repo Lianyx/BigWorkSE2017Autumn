@@ -5,7 +5,8 @@ import blService.checkblService.ReceiptblService;
 import javafx.beans.property.*;
 import javafx.scene.Node;
 import po.ReceiptGoodsItemPO;
-import po.receiptPO.ReceiptPO;
+import po.promotionPO.PromotionGoodsItemPO;
+import po.receiptPO.*;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;
 
@@ -14,20 +15,24 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class SalesReceiptVO extends ReceiptVO {
-    private int memberId;
-    private String memberName;
-    private String clerkName;
-    private String stockName;
-    private ArrayList<ListGoodsItemVO> items = new ArrayList<>();
-    private String comment;
-    private double discountAmount;
-    private double tokenAmount;
-    private double originSum;
-    private boolean isSell;
+public abstract class SalesReceiptVO extends ReceiptVO {
+    protected int memberId;
+    protected String memberName;
+    protected String clerkName;
+    protected String stockName;
+    protected ArrayList<ListGoodsItemVO> items = new ArrayList<>();
+    protected String comment;
+    protected double discountAmount;
+    protected double tokenAmount;
+    protected double originSum;
 
-    public SalesReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberId, String memberName, String clerkName, String stockName, ArrayList<ListGoodsItemVO> items, String comment, double discountAmount, double tokenAmount, double originSum, boolean isSell) {
+    public SalesReceiptVO() {
+    }
+
+    public SalesReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberId, String memberName, String clerkName, String stockName, ArrayList<ListGoodsItemVO> items, String comment, double discountAmount, double tokenAmount, double originSum) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
         this.memberId = memberId;
         this.memberName = memberName;
@@ -38,7 +43,18 @@ public class SalesReceiptVO extends ReceiptVO {
         this.discountAmount = discountAmount;
         this.tokenAmount = tokenAmount;
         this.originSum = originSum;
-        this.isSell = isSell;
+    }
+
+    public SalesReceiptVO(SalesReceiptPO salesReceiptPO){
+        super(salesReceiptPO);
+        this.memberId = salesReceiptPO.getMemberId();
+        this.clerkName = salesReceiptPO.getClerkName();
+        this.stockName = salesReceiptPO.getStockName();
+        this.items = toGoodsList(salesReceiptPO.getGoodsList());
+        this.comment = salesReceiptPO.getComment();
+        this.discountAmount =salesReceiptPO.getDiscountAmount();
+        this.tokenAmount = salesReceiptPO.gettokenAmount();
+        this.originSum = salesReceiptPO.getOriginSum();
     }
 
     public int getMemberId() {
@@ -113,31 +129,29 @@ public class SalesReceiptVO extends ReceiptVO {
         this.originSum = originSum;
     }
 
-    public boolean isSell() {
-        return isSell;
+    public ReceiptGoodsItemPO[] toGoodsArray(ArrayList<ListGoodsItemVO> items){
+        List<ReceiptGoodsItemPO> receiptGoodsItemPOs = items.stream().map(t->t.toPo()).collect(Collectors.toList());
+        ReceiptGoodsItemPO[] goodsItemPOs = (ReceiptGoodsItemPO[])receiptGoodsItemPOs.toArray();
+        return goodsItemPOs;
     }
 
-    public void setSell(boolean sell) {
-        isSell = sell;
+    public ArrayList<ListGoodsItemVO> toGoodsList(ReceiptGoodsItemPO[] array){
+        ArrayList<ListGoodsItemVO> list = new ArrayList<>();
+        for(ReceiptGoodsItemPO receiptGoodsItemPO:array){
+            list.add(new ListGoodsItemVO(receiptGoodsItemPO));
+        }
+        return list;
     }
-
-    @Override
-    public CheckInfo<SalesReceiptVO> getService() throws RemoteException, NotBoundException, MalformedURLException {
-        return null;
-    }
-
-    @Override
-    public Node getDetailPane() {
-        return null;
-    }
-
-    @Override
-    protected String getCodeName() {
-        return null;
-    }
-
-    @Override
-    public <TF> TF toPO() {
-        return null;
+    protected <T extends SalesReceiptPO> T toSalesReceiptPO(Class<T> receiptClass) {
+        T result = toReceiptPO(receiptClass);
+        result.setMemberId(memberId);
+        result.setClerkName(clerkName);
+        result.setStockName(stockName);
+        result.setGoodsList(toGoodsArray(items));
+        result.setComment(comment);
+        result.setDiscountAmount(discountAmount);
+        result.settokenAmount(tokenAmount);
+        result.setOriginSum(originSum);
+        return result;
     }
 }

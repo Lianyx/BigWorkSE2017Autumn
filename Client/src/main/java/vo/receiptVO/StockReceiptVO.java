@@ -4,7 +4,9 @@ import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
 import javafx.beans.property.*;
 import javafx.scene.Node;
+import po.ReceiptGoodsItemPO;
 import po.receiptPO.ReceiptPO;
+import po.receiptPO.StockPurReceiptPO;
 import po.receiptPO.StockReceiptPO;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;
@@ -15,28 +17,36 @@ import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class StockReceiptVO extends ReceiptVO {
+public abstract class StockReceiptVO extends ReceiptVO {
 
-    private int memberId;
-    private String memberName;
-    private String stockName;
-    private double sum;
-    private ArrayList<ListGoodsItemVO> items = new ArrayList<>();
-    private String comment;
-    private boolean isPur;
+    protected int memberId;
+    protected String memberName;
+    protected String stockName;
+    protected double sum;
+    protected ArrayList<ListGoodsItemVO> items = new ArrayList<>();
+    protected String comment;
 
+    public StockReceiptVO() {
+    }
+    public StockReceiptVO(StockReceiptPO stockReceiptPO){
+        super(stockReceiptPO);
+        this.memberId = stockReceiptPO.getMemberid();
+        this.stockName =stockReceiptPO.getStockName();
+        this.sum =stockReceiptPO.getOriginalSum();
+        this.items = toGoodsList(stockReceiptPO.getGoodsList());
+        this.comment = stockReceiptPO.getComment();
+    }
 
-    public StockReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberId, String memberName, String stockName, double sum, ArrayList<ListGoodsItemVO> items, String comment, boolean isPur) {
+    public StockReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberId, String memberName, String stockName, double sum, ArrayList<ListGoodsItemVO> items, String comment) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
         this.memberId = memberId;
         this.memberName =memberName;
         this.stockName = stockName;
         this.sum = sum;
-
         this.items = items;
         this.comment = comment;
-        this.isPur = isPur;
     }
 
     public int getMemberId() {
@@ -87,34 +97,29 @@ public class StockReceiptVO extends ReceiptVO {
         this.comment = comment;
     }
 
-    public boolean isPur() {
-        return isPur;
-    }
-
-    public void setPur(boolean pur) {
-        isPur = pur;
-    }
-
-
-    @Override
-    public CheckInfo<StockReceiptVO> getService() throws RemoteException, NotBoundException, MalformedURLException {
-        return null;
-    }
-
-    @Override
-    public Node getDetailPane() {
-        return null;
+    public <T extends StockReceiptPO> T toStockReceiptPO(Class<T> receiptClass) {
+        T result = toReceiptPO(receiptClass);
+        result.setMemberid(memberId);
+        result.setStockName(stockName);
+        result.setOriginalSum(sum);
+        result.setGoodsList(toGoodsArray(items));
+        result.setComment(comment);
+        return result;
     }
 
 
-    @Override
-    protected String getCodeName() {
-        return null;
+    public ReceiptGoodsItemPO[] toGoodsArray(ArrayList<ListGoodsItemVO> items){
+        List<ReceiptGoodsItemPO> receiptGoodsItemPOs = items.stream().map(t->t.toPo()).collect(Collectors.toList());
+        ReceiptGoodsItemPO[] goodsItemPOs = (ReceiptGoodsItemPO[])receiptGoodsItemPOs.toArray();
+        return goodsItemPOs;
     }
 
-    @Override
-    public StockReceiptPO toPO() {
-        StockReceiptPO result = toReceiptPO(StockReceiptPO.class);
-        return null;
+    public ArrayList<ListGoodsItemVO> toGoodsList(ReceiptGoodsItemPO[] array){
+        ArrayList<ListGoodsItemVO> list = new ArrayList<>();
+        for(ReceiptGoodsItemPO receiptGoodsItemPO:array){
+            list.add(new ListGoodsItemVO(receiptGoodsItemPO));
+        }
+        return list;
     }
+
 }

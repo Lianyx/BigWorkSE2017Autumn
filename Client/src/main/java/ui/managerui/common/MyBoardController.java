@@ -30,6 +30,7 @@ public class MyBoardController extends BoardController {
                 index++;
                 return false; // 返回值只是为了是否有动画，因此false符合反回值原意
             }
+//            System.out.println(index);
             if (record.get(index).getId().equals(pane.getId())) {
 //            setBackAndForwardProperty(); // 这里什么都没干，应该不用更新吧。
                 return false;
@@ -63,24 +64,25 @@ public class MyBoardController extends BoardController {
 
     /**
      * From here
-     * */
+     */
     private static MyBoardController myBoardController;
 
     private AnchorPane savePane;
+
     private MyBoardController(BoardController boardController) {
         this.board = boardController.board;
 //        System.out.println(board);
 
-        setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(250),  board));
+        setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(250), board));
         paneSwitchAnimation.setAnimation(ContainerAnimations.FADE);
         // TODO 这里应该有默认的才对吧，而且我继承过来应该是正确的啊
     }
 
 
     public void switchTo(Refreshable pane) {
+        System.out.println(pane);
         Platform.runLater(() -> {
             if (HistoryRecord.addRecord(pane)) {
-//                System.out.println(pane);
                 paneSwitchAnimation.setAnimation(ContainerAnimations.SWIPE_LEFT);
                 paneSwitchAnimation.setNode(pane);
             } else {
@@ -92,7 +94,7 @@ public class MyBoardController extends BoardController {
     // 这两个还好暂时不override，refresh也还行，现在只是为了不要忘了所以放这。
     // 但是可以封装吗？
     public void Loading() {
-        if (!board.getChildren().isEmpty()) {
+        if (!board.getChildren().isEmpty() && !(board.getChildren().get(0) instanceof Loading)) {
             savePane = (AnchorPane) board.getChildren().get(0);
         }
         Loading loading = new Loading();
@@ -103,6 +105,7 @@ public class MyBoardController extends BoardController {
     public void Ret() {
         if (savePane != null) {
             board.getChildren().setAll(savePane);
+//            System.out.println("ret to " + savePane);
         }
     }
 
@@ -149,7 +152,7 @@ public class MyBoardController extends BoardController {
         refresh();
     }
 
-    public void goForward(){
+    public void goForward() {
         paneSwitchAnimation.setAnimation(ContainerAnimations.SWIPE_LEFT);
         paneSwitchAnimation.setNode(HistoryRecord.push());
         refresh();
@@ -164,7 +167,6 @@ public class MyBoardController extends BoardController {
     public BooleanProperty canForwardProperty() {
         return HistoryRecord.canForward;
     }
-
 
 
     public static MyBoardController getMyBoardController() {

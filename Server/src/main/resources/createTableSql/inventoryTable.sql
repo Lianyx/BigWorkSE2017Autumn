@@ -1,4 +1,7 @@
-
+drop table inventoryGiftRecipt;
+drop table inventoryDamageRecipt;
+drop table inventoryOverflowRecipt;
+drop table inventoryWarningRecipt;
 
 create table goods(
      id varchar(30),
@@ -21,7 +24,7 @@ create table goodsclassification(
      goodsId varchar(1000)
 )character set = utf8;
 
-create table inventoryGiftRecipt(
+create table inventoryGiftReceipt(
      dayId integer,
      operatorId integer,
      createTime bigint,
@@ -33,7 +36,7 @@ create table inventoryGiftRecipt(
      comment varchar(150)
 )character set = utf8;
 
-create table inventoryDamageRecipt(
+create table inventoryDamageReceipt(
      dayId integer,
      operatorId integer,
      createTime bigint,
@@ -45,7 +48,7 @@ create table inventoryDamageRecipt(
      comment varchar(150)
 )character set = utf8;
 
-create table inventoryOverflowRecipt(
+create table inventoryOverflowReceipt(
      dayId integer,
      operatorId integer,
      createTime bigint,
@@ -57,7 +60,7 @@ create table inventoryOverflowRecipt(
      comment varchar(150)
 )character set = utf8;
 
-create table inventoryWarningRecipt(
+create table inventoryWarningReceipt(
      dayId integer,
      operatorId integer,
      createTime bigint,

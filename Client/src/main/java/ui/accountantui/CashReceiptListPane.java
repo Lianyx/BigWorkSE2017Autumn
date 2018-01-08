@@ -98,8 +98,8 @@ public class CashReceiptListPane extends ReceiptListPane<CashReceiptListVO> {
                 }
                 return false;
             };
-            GetTask<HashSet<CashReceiptListVO>, CashBillReceiptblService> getTask =
-                    new GetTask<>(() -> {
+            GetTask getTask =
+                    new GetTask(() -> {
                         receiptTreeTable.setReceipts(set);
                         pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
                         receiptTreeTable.createPage(0);

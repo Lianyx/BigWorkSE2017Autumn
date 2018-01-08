@@ -15,10 +15,9 @@
 
 
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<StackPane fx:id="mainpane" prefHeight="600.0" prefWidth="800.0" fx:controller="ui.accountantui.AccountantUIController" stylesheets="@../css/List.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
 
-        <AnchorPane fx:id="mainAnchorPane"  prefHeight="600.0" prefWidth="800.0" >
+
+        <AnchorPane fx:id="mainAnchorPane"  prefHeight="600.0" prefWidth="800.0" fx:controller="ui.accountantui.AccountantUIController"  stylesheets="@../css/list.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
             <children>
 
                 <TopBar fx:id="bar" layoutX="160"/>
@@ -92,8 +91,7 @@
                 </AnchorPane>
             </children>
         </AnchorPane>
-    </children>
-</StackPane>
+
 
 
 

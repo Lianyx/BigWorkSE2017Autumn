@@ -1,17 +1,15 @@
 package blServiceStub.salesblservice_Stub;
 
 import blService.salesblService.SalesblService;
+import po.receiptPO.SalesSellReceiptPO;
 import util.ReceiptSearchCondition;
 import util.ReceiptState;
 import util.RespectiveReceiptSearchCondition;
 import util.ResultMessage;
 import vo.ListGoodsItemVO;
 import vo.SalesSearchVO;
-import vo.receiptVO.SalesReceiptListVO;
+import vo.receiptVO.*;
 import vo.StockSearchVO;
-import vo.receiptVO.SalesReceiptVO;
-import vo.receiptVO.StockReceiptListVO;
-import vo.receiptVO.StockReceiptVO;
 
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
@@ -75,7 +73,7 @@ public class SalesblService_Stub  implements SalesblService{
 
     @Override
     public ResultMessage insert(SalesReceiptVO stockReceiptVO) {
-        set.add(new SalesReceiptListVO(stockReceiptVO.getId(),stockReceiptVO.getReceiptState(),stockReceiptVO.getMemberName(),stockReceiptVO.getStockName(),stockReceiptVO.getOriginSum()-stockReceiptVO.getDiscountAmount(),stockReceiptVO.isSell()));
+        set.add(new SalesReceiptListVO(stockReceiptVO.getId(),stockReceiptVO.getReceiptState(),stockReceiptVO.getMemberName(),stockReceiptVO.getStockName(),stockReceiptVO.getOriginSum()-stockReceiptVO.getDiscountAmount(),stockReceiptVO instanceof SalesSellReceiptVO));
         return ResultMessage.SUCCESS;
     }
 
@@ -133,9 +131,9 @@ public class SalesblService_Stub  implements SalesblService{
         ArrayList<ListGoodsItemVO> list = new ArrayList();
         list.add(new ListGoodsItemVO("a",1,"a",1,1,"a"));
         list.add(new ListGoodsItemVO("a",2,"a",1,1,"a"));
-        return new SalesReceiptVO("XSD-20170101-00013",3, LocalDateTime.of(2017,1,1,0,0), LocalDateTime.now(),ReceiptState.REJECTED,
+        return new SalesRetReceiptVO("XSD-20170101-00013",3, LocalDateTime.of(2017,1,1,0,0), LocalDateTime.now(),ReceiptState.REJECTED,
                 1, "wad","laji","stock",list,
-                "haha",13,13,25,true);
+                "haha",13,13,25);
     }
 
     @Override

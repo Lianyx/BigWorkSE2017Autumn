@@ -28,7 +28,7 @@ public class TestSalesSellData {
         ssrp.setComment("如果建表的时候不明确说明utf8，之后能用吗");
         ssrp.setGifts(new PromotionGoodsItemPO[]{new PromotionGoodsItemPO("0", 10), new PromotionGoodsItemPO("1", 2)});
 
-        rdao.insert(ssrp);
+        rdao.update(ssrp);
 
         System.out.println("insert: ");
         System.out.println(ssrp);
@@ -54,7 +54,7 @@ public class TestSalesSellData {
 
 //        SalesSellReceiptPO ssrpC = rdao.search(new ReceiptSearchCondition(null, LocalDateTime.now(), null, "Wang Er Xiao", null, null)).get(0);
         SalesSellReceiptPO ssrpC = rdao.search(new RespectiveReceiptSearchCondition()).get(0);
-        System.out.println(ssrpC.getCreateTime());
+        System.out.println(ssrpC.getLastModifiedTime());
 
         System.out.println("get and delete: ");
         System.out.println(ssrpC);
@@ -68,8 +68,6 @@ public class TestSalesSellData {
 
 
     public static void main(String[] args) throws RemoteException{
-
-        // TODO 为什么这个test跑完以后好像还是没有停？
         test();
         System.out.println("the end");
     }

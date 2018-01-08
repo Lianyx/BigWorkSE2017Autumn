@@ -2,6 +2,7 @@ package vo;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.*;
+import po.ReceiptGoodsItemPO;
 
 import java.io.Serializable;
 
@@ -23,6 +24,14 @@ public class ListGoodsItemVO extends RecursiveTreeObject<ListGoodsItemVO> implem
         this.sum = new SimpleDoubleProperty();
         this.comment = new SimpleStringProperty(comment);
         this.sum.bind(this.goodsNum.multiply(price));
+    }
+
+
+    public ListGoodsItemVO(ReceiptGoodsItemPO receiptGoodsItemPO){
+        this.goodsId.set(receiptGoodsItemPO.getId());
+        this.price.set(receiptGoodsItemPO.getPrice());
+        this.goodsNum.set(receiptGoodsItemPO.getNum());
+        this.comment.set(receiptGoodsItemPO.getComment());
     }
 
     public String getGoodsName() {
@@ -109,4 +118,9 @@ public class ListGoodsItemVO extends RecursiveTreeObject<ListGoodsItemVO> implem
     public void setSum(double sum) {
         this.sum.set(sum);
     }
+
+    public ReceiptGoodsItemPO toPo(){
+        return new ReceiptGoodsItemPO(this.goodsId.get(),this.goodsNum.get(),this.price.get(),this.comment.get());
+    }
+
 }
