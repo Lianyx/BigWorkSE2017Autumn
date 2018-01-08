@@ -3,7 +3,7 @@
 drop table MemberPromotion;
 drop table TotalPromotion;
 drop table CombinePromotion;
-DROP  TABLE  User;
+
 create table MemberPromotion(
   dayId integer,
 
@@ -61,8 +61,6 @@ create table SalesSellReceipt(
   createTime bigint,
   lastModifiedTime bigint,
   receiptState integer,
-
-
   memberId integer,
   clerkName varchar(30),
   stockName varchar(30),
@@ -141,24 +139,19 @@ create table SalesDetail(
 
 
 create table BusinessCondition(
-    income double,
-    expense double
-);
+    date bigint,
+    salesIncome double,
+    overFlowIncome double,
+    purPriceAdjustIncome double,
+    priceDiffIncome double,
+    tokenIncome double,
 
-create table User(
-  userId integer,
-  username varchar(30),
-  usertype integer,
-  createTime bigint,
-  facebook varchar(50),
-  github varchar(100),
-  twitter varchar(100),
-  email varchar(100),
-  phone varchar(100),
-  comment varchar(100),
-  date varchar(100),
-  password varchar(100)
-); character set = utf8;
+    discount double,
+
+    purCost double,
+    damageCost double,
+    giftCost double
+);
 
 create table StockPurReceipt(
 dayId integer,
@@ -205,3 +198,18 @@ create table SalesRetReceipt(
   originSum double,
 comment varchar(150)
 ) character set = utf8;
+
+create table User(
+  userId integer,
+  username varchar(30),
+  usertype integer,
+  createTime bigint,
+  facebook varchar(50),
+  github varchar(100),
+  twitter varchar(100),
+  email varchar(100),
+  phone varchar(100),
+  comment varchar(100),
+  date varchar(100),
+  password varchar(100)
+); character set = utf8;

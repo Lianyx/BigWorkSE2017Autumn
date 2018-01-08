@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import ui.util.*;
 import vo.billReceiptVO.PaymentReceiptVO;
+import vo.billReceiptVO.TransferItemVO;
 import vo.receiptVO.SalesReceiptVO;
 
 import java.time.LocalDate;
@@ -63,7 +64,7 @@ public class PaymentDetailPane extends ReceiptDetailPane<PaymentReceiptVO>{
 
         RequireValid(operator);
 
-        if(id.split("-")[0].equals("JHD")){
+        if(id.split("-")[0].equals("XSD")){
             this.isSell.set(true);
         }else{
             this.isSell.set(false);
@@ -109,6 +110,7 @@ public class PaymentDetailPane extends ReceiptDetailPane<PaymentReceiptVO>{
     @FXML
     public void add() {
         //salesListItemTreeTable.addGood(new ListGoodsItemVO("a", 1, "a", 1, 1, "a"));
+        paymentItemTreeTable.add(new TransferItemVO(1,1,"1"));
     }
 
 
@@ -150,11 +152,9 @@ public class PaymentDetailPane extends ReceiptDetailPane<PaymentReceiptVO>{
                         operator.setText(UserInfomation.username);
                         date.setValue(vo.getCreateTime().toLocalDate());
                         id.setText("-"+vo.getId().split("-")[2]);
-                        //memberId = vo.getMemberId();
                         head.setText(vo.getId().split("-")[0]+"-");
-                        //sum.setText((vo.getOriginSum()-vo.getTokenAmount())+"");
 
-                        //salesListItemTreeTable.setList(vo.getItems());
+                        paymentItemTreeTable.setList(vo.getTransferList());
                         switchPane(toSwitch);
                     }, buttonDialog,p);
 

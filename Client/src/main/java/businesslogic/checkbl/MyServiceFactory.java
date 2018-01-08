@@ -1,9 +1,11 @@
 package businesslogic.checkbl;
 
+import blService.businessblservice.BusinessConditionblService;
 import blService.checkblService.CheckInfo;
 import businesslogic.billreceiptbl.CashBillReceiptbl;
 import businesslogic.billreceiptbl.ChargeBillReceiptbl;
 import businesslogic.billreceiptbl.PaymentBillReceiptbl;
+import businesslogic.businessbl.BusinessConditionbl;
 import businesslogic.inventorybl.InventoryDamageReceiptbl;
 import businesslogic.inventorybl.InventoryGiftReceiptbl;
 import businesslogic.inventorybl.InventoryOverflowReceiptbl;
@@ -22,7 +24,7 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-public class CheckInfoFactory {
+public class MyServiceFactory {
     private static CheckInfo<SalesSellReceiptVO> salesSellReceiptVOCheckInfo;
 
     private static CheckInfo<InventoryDamageReceiptVO> inventoryDamageReceiptVOCheckInfo;
@@ -33,6 +35,9 @@ public class CheckInfoFactory {
     private static CheckInfo<CashReceiptVO> cashReceiptVOCheckInfo;
     private static CheckInfo<ChargeReceiptVO> chargeReceiptVOCheckInfo;
     private static CheckInfo<PaymentReceiptVO> paymentReceiptVOCheckInfo;
+
+
+    private static BusinessConditionblService businessConditionblService;
 
     public static CheckInfo<SalesSellReceiptVO> getSalesSellReceiptVOCheckInfo() throws RemoteException, NotBoundException, MalformedURLException {
         if (salesSellReceiptVOCheckInfo == null) {
@@ -88,5 +93,12 @@ public class CheckInfoFactory {
             return paymentReceiptVOCheckInfo = new PaymentBillReceiptbl();
         }
         return paymentReceiptVOCheckInfo;
+    }
+
+    public static BusinessConditionblService getBusinessConditionblService() throws RemoteException, NotBoundException, MalformedURLException {
+        if (businessConditionblService == null) {
+            return businessConditionblService = new BusinessConditionbl();
+        }
+        return businessConditionblService;
     }
 }

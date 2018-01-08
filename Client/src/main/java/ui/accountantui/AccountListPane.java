@@ -2,6 +2,7 @@ package ui.accountantui;
 
 import blService.accountblService.AccountblService;
 import blServiceStub.accountblservice_Stub.AccountblService_Stub;
+import businesslogic.accountbl.Accountbl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -19,215 +20,113 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
 import ui.userui.usermanagerui.*;
-import ui.util.BoardController;
-import ui.util.HistoricalRecord;
-import ui.util.Refreshable;
+import ui.util.*;
 import vo.AccountListVO;
+import vo.MemberListVO;
 import vo.billReceiptVO.CashReceiptListVO;
+import vo.billReceiptVO.PaymentReceiptListVO;
 
 import java.rmi.RemoteException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class AccountListPane extends Refreshable{
+public class AccountListPane extends ReceiptListPane<AccountListVO>{
 
-    AccountTreeTable ulv;
-
-    @FXML
-    BorderPane borderpane;
-
-    @FXML
-    JFXTextField searchField;
-
-    BoardController boardController;
 
 
     AccountblService accountblService;
 
-    Pagination pagination;
-
-    StackPane mainpane;
-
-    public boolean historyAdd = false;
+    SimpleStringProperty match = new SimpleStringProperty("");
 
     List<AccountListVO> list;
 
-    SimpleStringProperty match = new SimpleStringProperty("");
+    public AccountListPane() throws Exception{
+        super("/accountantui/accountListPane.fxml");
 
-    @FXML
-    JFXButton filter;
+        this.accountblService = new Accountbl();
+        receiptTreeTable = new AccountTreeTable();
+        receiptTreeTable.setPrefSize(600,435);
+        receiptTreeTable.keywordProperty().bind(match);
+        borderpane.setTop(new BorderPane(receiptTreeTable));
 
-    public AccountListPane(AccountblService accountblService,BoardController boardController,StackPane mainpane) throws Exception{
-        super();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/accountantui/accountListPane.fxml"));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
-        fxmlLoader.load();
-        this.accountblService = accountblService;
-        this.boardController = boardController;
-        this.mainpane = mainpane;
-        ulv = new AccountTreeTable(accountblService,boardController,mainpane);
-
-
-        PopOver filterPopOver = new PopOver();
+        /*PopOver filterPopOver = new PopOver();
         filterPopOver.setDetachable(false);
         filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
-        filter.setOnMouseClicked(e -> filterPopOver.show(filter));
-
-
+        filter.setOnMouseClicked(e -> filterPopOver.show(filter));*/
 
     }
 
-    public void setAccountblService(AccountblService accountblService){
-        this.accountblService = accountblService;
-    }
-
-    public void setMainpane(StackPane mainpane) {
-        this.mainpane = mainpane;
-    }
-
-
-    @FXML
+    @Override
     public void deleteList(){
-        try{
-            for(AccountListVO accountListVO: AccountChosenItem.getList()) {
-                ulv.removeAccount(accountListVO);
-                accountblService.delete(accountListVO.getID());
-            }
-            int current=pagination.getCurrentPageIndex();
-            pagination = new Pagination((ulv.getObservableList().size() /ulv.getRowsPerPage()+1 ), 0);
-            pagination.setPageFactory(ulv::createPage);
-            pagination.setPrefSize(600,450);
-            borderpane.setCenter(pagination);
-            if(current-1>=0)
-                pagination.setCurrentPageIndex(current-1);
-            else
-                pagination.setCurrentPageIndex(0);
-            AccountChosenItem.getList().clear();
-        }catch (RemoteException e){
-            e.printStackTrace();
-        }
-
+        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane,"Delete","sabi","Yes","No");
+        doubleButtonDialog.setButtonOne(()->{receiptTreeTable.delete(pagination); });
+        doubleButtonDialog.setButtonTwo(()->{});
+        doubleButtonDialog.show();
     }
 
-    @FXML
-    public void add(){
-        AccountAddPane accountAddPane = new AccountAddPane(accountblService);
-        JFXDialog dialog = new JFXDialog(mainpane,accountAddPane,JFXDialog.DialogTransition.CENTER);
-        dialog.show();
-    }
 
-    @FXML
+
+
+    @Override
     public void search(){
         if (searchField.getText() != ""&&searchField.getText() != null) {
             match.setValue(searchField.getText().toLowerCase());
-            Set<CashReceiptListVO> hashSet;
-            List<AccountListVO> temp;
-            temp = list.stream().filter(
-                    s -> s.getName().toLowerCase().contains(match.get())
-            ).collect(Collectors.toList());
-            ulv.setAccount(temp);
-            pagination.setPageCount(ulv.getObservableList().size() / ulv.getRowsPerPage() + 1);
-            ulv.createPage(0);
+            Set<AccountListVO> hashSet;
+            hashSet = set.stream().filter(
+                    s -> s.getName().contains(match.get())
+            ).collect(Collectors.toSet());
+            receiptTreeTable.setReceipts(hashSet);
+            pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
+            receiptTreeTable.createPage(0);
             borderpane.setBottom(pagination);
             switchPane(false);
         }
     }
 
-
-    public void switchPane(boolean toSwtich){
-        if(toSwtich==true){
-            System.out.println("??/**/");
-            boardController.switchTo(this);
-        }else{
-            if(historyAdd){
-                HistoricalRecord.addPane(this);
-                historyAdd=false;
-            }
-            boardController.setAll(this);
-        }
+    @Override
+    public void add(){
+        AccountDetailPane accountDetailPane =new AccountDetailPane(true);
     }
+
 
     @Override
-    public void refresh(boolean toSwitch){
+    public void refresh(boolean toSwitch) {
         boardController.Loading();
         try {
-            AccountListPane.LoadingTask task = new AccountListPane.LoadingTask();
-            task.valueProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    if (task.getIntegerProperty() == 1) {
-                        try {
-                            ulv.setAccount(list);
-                            pagination = new Pagination((ulv.getObservableList().size() /ulv.getRowsPerPage()+1 ), 0);
-                            pagination.setPageFactory(ulv::createPage);
-                            pagination.setPrefWidth(600);
-                            borderpane.setCenter(pagination);
-                            switchPane(toSwitch);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else if (task.getIntegerProperty() == 0) {
-                        try {
-                            JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
-                            jfxDialogLayout.setHeading(new Label("Wrong"));
-                            jfxDialogLayout.setBody(new Label("sabi"));
-                            JFXButton button = new JFXButton("Last");
-                            JFXButton re = new JFXButton("Re");
-                            JFXDialog dialog = new JFXDialog(mainpane, jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
-                            button.setOnAction(e -> {
-                                dialog.close();
-                                boardController.Ret();
-                            });
-                            re.setOnAction(e -> {
-                                dialog.close();
-                                refresh(false);
-                            });
-                            jfxDialogLayout.setActions(button, re);
-                            dialog.show();
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+            DoubleButtonDialog buttonDialog =
+                    new DoubleButtonDialog(mainpane, "Wrong", "sabi", "Last", "Ret");
+            buttonDialog.setButtonTwo(() -> boardController.Ret());
+            buttonDialog.setButtonTwo(() -> refresh(false));
+            Predicate<Integer> p = (s) -> {
+                try{
+                    if((set=accountblService.getAll())!=null) {
+                        System.out.print(set.size());
+                        return true;
                     }
+                }catch (RemoteException e){
+                    e.printStackTrace();
                 }
-            });
-
-            new Thread(task).start();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-
-    class LoadingTask extends Task<Boolean> {
-
-        private SimpleIntegerProperty integerProperty = new SimpleIntegerProperty(-1);
-
-
-
-        public int getIntegerProperty() {
-            return integerProperty.get();
-        }
-
-        public SimpleIntegerProperty integerPropertyProperty() {
-            return integerProperty;
-        }
-
-        @Override
-        protected Boolean call() throws Exception{
-            list = accountblService.showAllAccounts();
-            if(list!=null){
-                Thread.sleep(2000);
-                integerProperty.setValue(1);
-                return true;
-            }else {
-                Thread.sleep(2000);
-                integerProperty.set(0);
                 return false;
-            }
+            };
+            GetTask getTask =
+                    new GetTask(() -> {
+                        receiptTreeTable.setReceipts(set);
+                        pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
+                        receiptTreeTable.createPage(0);
+                        borderpane.setBottom(pagination);
+                        switchPane(toSwitch);
+                    }, buttonDialog, p);
+
+            new Thread(getTask).start();
+        } catch (Exception e) {
+            System.exit(1);
+            e.printStackTrace();
+
         }
+
     }
 
 }

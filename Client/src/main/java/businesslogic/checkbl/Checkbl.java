@@ -2,10 +2,6 @@ package businesslogic.checkbl;
 
 import blService.checkblService.CheckInfo;
 import blService.checkblService.CheckblService;
-import businesslogic.promotionbl.PromotionFactory;
-import businesslogic.salesbl.SalesSellbl;
-import po.receiptPO.ReceiptPO;
-import po.receiptPO.SalesSellReceiptPO;
 import util.ResultMessage;
 import vo.billReceiptVO.CashReceiptVO;
 import vo.billReceiptVO.ChargeReceiptVO;
@@ -36,16 +32,16 @@ public class Checkbl implements CheckblService {
 
 
     public Checkbl() throws RemoteException, NotBoundException, MalformedURLException {
-        salesSellReceiptVOCheckInfo = CheckInfoFactory.getSalesSellReceiptVOCheckInfo();
+        salesSellReceiptVOCheckInfo = MyServiceFactory.getSalesSellReceiptVOCheckInfo();
 
-        inventoryDamageReceiptVOCheckInfo = CheckInfoFactory.getInventoryDamageReceiptVOCheckInfo();
-        inventoryGiftReceiptVOCheckInfo = CheckInfoFactory.getInventoryGiftReceiptVOCheckInfo();
-        inventoryOverflowReceiptVOCheckInfo = CheckInfoFactory.getInventoryOverflowReceiptVOCheckInfo();
-        inventoryWarningReceiptVOCheckInfo = CheckInfoFactory.getInventoryWarningReceiptVOCheckInfo();
+        inventoryDamageReceiptVOCheckInfo = MyServiceFactory.getInventoryDamageReceiptVOCheckInfo();
+        inventoryGiftReceiptVOCheckInfo = MyServiceFactory.getInventoryGiftReceiptVOCheckInfo();
+        inventoryOverflowReceiptVOCheckInfo = MyServiceFactory.getInventoryOverflowReceiptVOCheckInfo();
+        inventoryWarningReceiptVOCheckInfo = MyServiceFactory.getInventoryWarningReceiptVOCheckInfo();
 
-        cashReceiptVOCheckInfo = CheckInfoFactory.getCashReceiptVOCheckInfo();
-        chargeReceiptVOCheckInfo = CheckInfoFactory.getChargeReceiptVOCheckInfo();
-        paymentReceiptVOCheckInfo = CheckInfoFactory.getPaymentReceiptVOCheckInfo();
+        cashReceiptVOCheckInfo = MyServiceFactory.getCashReceiptVOCheckInfo();
+        chargeReceiptVOCheckInfo = MyServiceFactory.getChargeReceiptVOCheckInfo();
+        paymentReceiptVOCheckInfo = MyServiceFactory.getPaymentReceiptVOCheckInfo();
     }
 
     @Override
@@ -53,14 +49,14 @@ public class Checkbl implements CheckblService {
         ArrayList<ReceiptVO> resultList = new ArrayList<>();
         resultList.addAll(salesSellReceiptVOCheckInfo.selectPending());
 
-        resultList.addAll(inventoryDamageReceiptVOCheckInfo.selectPending());
-        resultList.addAll(inventoryGiftReceiptVOCheckInfo.selectPending());
-        resultList.addAll(inventoryOverflowReceiptVOCheckInfo.selectPending());
-        resultList.addAll(inventoryWarningReceiptVOCheckInfo.selectPending());
-
-        resultList.addAll(cashReceiptVOCheckInfo.selectPending());
-        resultList.addAll(chargeReceiptVOCheckInfo.selectPending());
-        resultList.addAll(paymentReceiptVOCheckInfo.selectPending());
+//        resultList.addAll(inventoryDamageReceiptVOCheckInfo.selectPending());
+//        resultList.addAll(inventoryGiftReceiptVOCheckInfo.selectPending());
+//        resultList.addAll(inventoryOverflowReceiptVOCheckInfo.selectPending());
+//        resultList.addAll(inventoryWarningReceiptVOCheckInfo.selectPending());
+//
+//        resultList.addAll(cashReceiptVOCheckInfo.selectPending());
+//        resultList.addAll(chargeReceiptVOCheckInfo.selectPending());
+//        resultList.addAll(paymentReceiptVOCheckInfo.selectPending());
         return resultList;
     }
 

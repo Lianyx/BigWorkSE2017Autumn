@@ -12,6 +12,8 @@ public class AccountListVO extends SelectableVO<AccountListVO> implements Serial
     private String name;
     private double balance;
 
+    boolean multiple = true;
+
 
     public AccountListVO(){
 
@@ -57,4 +59,11 @@ public class AccountListVO extends SelectableVO<AccountListVO> implements Serial
         return "AccountListVO{"+ID+" "+name+" "+balance+" }";
     }
 
+    public boolean isMultiple() {
+        return multiple;
+    }
+
+    public void setMultiple(boolean multiple) {
+        this.multiple = multiple;
+    }
 }
