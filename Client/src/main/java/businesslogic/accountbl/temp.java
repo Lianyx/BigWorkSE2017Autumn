@@ -4,16 +4,18 @@ import vo.AccountListVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class temp {
 
     public static void main(String[] args){
         try{
             Accountbl accountbl = new Accountbl();
-            ArrayList<AccountListVO> list = accountbl.showAllAccounts();
-            for(int i=0;i<list.size();i++){
-                System.out.println(list.get(i));
+            Set<AccountListVO> list = accountbl.getAll();
+            for(AccountListVO vo:list){
+                System.out.println(vo);
             }
         }catch (Exception e){
             e.printStackTrace();

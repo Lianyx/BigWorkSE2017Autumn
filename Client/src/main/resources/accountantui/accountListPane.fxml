@@ -6,7 +6,7 @@
 <?import com.jfoenix.controls.JFXRippler?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<fx:root type="AnchorPane" id="accountListPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<fx:root type="AnchorPane" fx:id="accountListPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
          prefHeight="560.0" prefWidth="640.0">
 
     <JFXTextField fx:id="searchField" layoutX="27.0" layoutY="28.0" prefHeight="30.0" prefWidth="150.0"/>

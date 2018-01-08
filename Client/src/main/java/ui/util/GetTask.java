@@ -1,6 +1,7 @@
 package ui.util;
 
 import com.jfoenix.controls.JFXDialog;
+import com.sun.org.apache.xpath.internal.SourceTree;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.concurrent.Task;
@@ -47,6 +48,7 @@ public class GetTask extends Task<Boolean> {
         if(p.test(0)){
             Thread.sleep(1000);
             integerProperty.setValue(1);
+            System.out.println("hahaha");
             return true;
         } else {
             Thread.sleep(1000);

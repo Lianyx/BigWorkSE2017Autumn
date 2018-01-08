@@ -85,6 +85,7 @@ public abstract class ReceiptListPane<T extends SelectableVO<T>> extends Refresh
             boardController.switchTo(this);
         }else{
             if(historyAdd){
+                System.out.println("nishidasabi");
                 HistoricalRecord.addPane(this);
                 historyAdd=false;
             }

@@ -25,13 +25,8 @@ import java.util.ResourceBundle;
 
 public class AccountantUIController implements Initializable{
 
-    @FXML
-    StackPane mainpane;
 
-    @FXML
-    AnchorPane mainAnchorPane;
-
-    @FXML
+  @FXML
     JFXListView<HBox> navigation;
 
     @FXML
@@ -67,7 +62,7 @@ public class AccountantUIController implements Initializable{
 
             boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150),  board));
 
-            AccountListPane tempaccountListPane = new AccountListPane(accountblService,boardController,mainpane);
+            AccountListPane tempaccountListPane = new AccountListPane();
             tempaccountListPane.historyAdd = true;
             tempaccountListPane.refresh(false);
 
@@ -76,7 +71,7 @@ public class AccountantUIController implements Initializable{
                             if (newVal != null) {
                                 if (newVal.getId().equals("accountList")) {
                                     System.out.println("账户管理");
-                                    AccountListPane accountListPane = new AccountListPane(accountblService,boardController,mainpane);
+                                    AccountListPane accountListPane = new AccountListPane();
                                     accountListPane.refresh(true);
                                 }
                                 else if (newVal.getId().equals("paymentBillList")) {

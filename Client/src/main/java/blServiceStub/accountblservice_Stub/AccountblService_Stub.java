@@ -8,7 +8,7 @@ import vo.AccountVO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountblService_Stub implements AccountblService{
+public class AccountblService_Stub /*implements AccountblService*/{
 
     List<AccountListVO> list = new ArrayList<>();
     public AccountblService_Stub(){

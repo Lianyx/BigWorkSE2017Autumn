@@ -3,6 +3,7 @@ package vo.billReceiptVO;
 import blService.blServiceFactory.ServiceFactory;
 import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
+import businesslogic.checkbl.MyServiceFactory;
 import javafx.scene.Node;
 import po.TransferItemPO;
 import po.receiptPO.PaymentBillReceiptPO;
@@ -16,6 +17,7 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentReceiptVO extends ReceiptVO {
@@ -31,7 +33,19 @@ public class PaymentReceiptVO extends ReceiptVO {
 
     }
 
-    public PaymentReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientID, List<TransferItemVO> transferList, double sum,boolean isSell) {
+    public PaymentReceiptVO(PaymentBillReceiptPO paymentBillReceiptPO) {
+        super(paymentBillReceiptPO);
+        this.clientID = paymentBillReceiptPO.getClientID();
+        this.sum = paymentBillReceiptPO.getSum();
+        List<TransferItemVO> temp = new ArrayList<>();
+        for(TransferItemPO transferItemPO:paymentBillReceiptPO.getTransferList()){
+            TransferItemVO vo = new TransferItemVO(transferItemPO.getAccountID(),transferItemPO.getSum(),transferItemPO.getComment());
+            temp.add(vo);
+        }
+
+    }
+
+    public PaymentReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientID, List<TransferItemVO> transferList, double sum, boolean isSell) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
         this.clientID = clientID;
         this.transferList = transferList;
@@ -58,7 +72,7 @@ public class PaymentReceiptVO extends ReceiptVO {
 
     @Override
     public CheckInfo<PaymentReceiptVO> getService() throws RemoteException, NotBoundException, MalformedURLException {
-        return null;
+        return MyServiceFactory.getPaymentReceiptVOCheckInfo();
     }
 
     @Override
