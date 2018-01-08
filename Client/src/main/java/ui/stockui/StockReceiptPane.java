@@ -20,7 +20,9 @@ import javafx.scene.layout.StackPane;
 import ui.util.*;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;
+import vo.receiptVO.StockPurReceiptVO;
 import vo.receiptVO.StockReceiptVO;
+import vo.receiptVO.StockRetReceiptVO;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -90,7 +92,7 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
     **/
 
     public StockReceiptPane(String id) {
-        super("/stockui/stockreceipt.fxml",id);
+        super("/stockui/stockreceipt.fxml",id,true);
         stockblService = ServiceFactory_Stub.getService(StockblService.class.getName());
         provider.setDisable(true);
         operator.setDisable(true);
@@ -143,6 +145,9 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
         }
         id.setText("-"+ String.format("%05d", stockblService.getDayId()));
     }
+
+
+
 
     //接口未完成
     @FXML
@@ -245,7 +250,8 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
 
 
         this.receiptid = head.getText().replace("-","")+"-"+date.getValue().toString().replace("-","")+"-"+id.getText().replace("-","");
-        this.vo = new StockReceiptVO(receiptid,
+        if(isPur.get())
+        this.vo = new StockPurReceiptVO(receiptid,
                 UserInfomation.userid,
                 LocalDateTime.now(),LocalDateTime.now(),
                 ReceiptState.PENDING,
@@ -253,8 +259,17 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
                 stock.getText(),
                 Double.parseDouble(sum.getText()),
                 stockListItemTreeTable.getList(),
-                comment.getText(),
-                isPur.get());
+                comment.getText());
+        else
+            this.vo = new StockRetReceiptVO(receiptid,
+                    UserInfomation.userid,
+                    LocalDateTime.now(),LocalDateTime.now(),
+                    ReceiptState.PENDING,
+                    this.memberId,provider.getText(),
+                    stock.getText(),
+                    Double.parseDouble(sum.getText()),
+                    stockListItemTreeTable.getList(),
+                    comment.getText());
         try {
 
             /**
@@ -284,7 +299,8 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
             if (date.getValue() == null)
                 date.setValue(LocalDate.now());
             this.receiptid = head.getText().replace("-", "") + "-" + date.getValue().toString().replace("-", "") + "-" + id.getText().replace("-", "");
-            this.vo = new StockReceiptVO(receiptid,
+            if(isPur.get())
+            this.vo = new StockPurReceiptVO(receiptid,
                     UserInfomation.userid,
                     LocalDateTime.now(),
                     LocalDateTime.now(),
@@ -294,8 +310,19 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
                     stock.getText(),
                     Double.parseDouble(sum.getText()),
                     stockListItemTreeTable.getList(),
-                    comment.getText(),
-                    isPur.get());
+                    comment.getText());
+            else
+                this.vo = new StockRetReceiptVO(receiptid,
+                        UserInfomation.userid,
+                        LocalDateTime.now(),
+                        LocalDateTime.now(),
+                        ReceiptState.DRAFT,
+                        this.memberId,
+                        provider.getText(),
+                        stock.getText(),
+                        Double.parseDouble(sum.getText()),
+                        stockListItemTreeTable.getList(),
+                        comment.getText());
             try {
                 if (updateState.get())
                     stockblService.insert(this.vo);

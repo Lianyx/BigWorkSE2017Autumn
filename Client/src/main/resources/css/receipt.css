@@ -71,7 +71,7 @@
     -fx-background-color: white;
     -fx-effect: dropshadow(gaussian, gainsboro, 10, 0.1, 0, 0);
 }
-#delete{
+#delete,#reject{
     -fx-text-fill: white;
     -fx-background-color: red;
 }

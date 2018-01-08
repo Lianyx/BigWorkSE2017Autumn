@@ -21,6 +21,8 @@ import ui.util.*;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;
 import vo.receiptVO.SalesReceiptVO;
+import vo.receiptVO.SalesRetReceiptVO;
+import vo.receiptVO.SalesSellReceiptVO;
 import vo.receiptVO.StockReceiptVO;
 
 import java.time.LocalDate;
@@ -83,7 +85,7 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
 
 
     public SalesReceiptPane(String id) {
-        super("/salesui/salesreceipt.fxml",id);
+        super("/salesui/salesreceipt.fxml",id,false);
         salesblService = ServiceFactory_Stub.getService(SalesblService.class.getName());
         provider.setDisable(true);
         operator.setDisable(true);
@@ -248,7 +250,8 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
         });
         doubleButtonDialog.setButtonOne(() -> {
         this.receiptid = head.getText().replace("-","")+"-"+date.getValue().toString().replace("-","")+"-"+id.getText().replace("-","");
-        this.vo = new SalesReceiptVO(receiptid,
+        if(isSell.get())
+        this.vo = new SalesSellReceiptVO(receiptid,
                 UserInfomation.userid,
                 LocalDateTime.now(),LocalDateTime.now(),
                 ReceiptState.PENDING,
@@ -261,7 +264,21 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
                 Double.parseDouble(discount.getText()),
                 Double.parseDouble(token.getText()),
                 Double.parseDouble(original.getText()),
-                isSell.get());
+                null,0);
+        else
+            this.vo = new SalesRetReceiptVO(receiptid,
+                    UserInfomation.userid,
+                    LocalDateTime.now(),LocalDateTime.now(),
+                    ReceiptState.PENDING,
+                    this.memberId,
+                    provider.getText(),
+                    clerk.getText(),
+                    stock.getText(),
+                    salesListItemTreeTable.getList(),
+                    comment.getText(),
+                    Double.parseDouble(discount.getText()),
+                    Double.parseDouble(token.getText()),
+                    Double.parseDouble(original.getText()));
         try {
             if (updateState.get())
                 salesblService.insert(this.vo);
@@ -287,20 +304,35 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
         if(date.getValue()==null)
             date.setValue(LocalDate.now());
         this.receiptid = head.getText().replace("-","")+"-"+date.getValue().toString().replace("-","")+"-"+id.getText().replace("-","");
-        this.vo = new SalesReceiptVO(receiptid,
-                UserInfomation.userid,
-                LocalDateTime.now(),LocalDateTime.now(),
-                ReceiptState.PENDING,
-                this.memberId,
-                provider.getText(),
-                clerk.getText(),
-                stock.getText(),
-                salesListItemTreeTable.getList(),
-                comment.getText(),
-                Double.parseDouble(discount.getText()),
-                Double.parseDouble(token.getText()),
-                Double.parseDouble(original.getText()),
-                isSell.get());
+            if(isSell.get())
+                this.vo = new SalesSellReceiptVO(receiptid,
+                        UserInfomation.userid,
+                        LocalDateTime.now(),LocalDateTime.now(),
+                        ReceiptState.PENDING,
+                        this.memberId,
+                        provider.getText(),
+                        clerk.getText(),
+                        stock.getText(),
+                        salesListItemTreeTable.getList(),
+                        comment.getText(),
+                        Double.parseDouble(discount.getText()),
+                        Double.parseDouble(token.getText()),
+                        Double.parseDouble(original.getText()),
+                        null,0);
+            else
+                this.vo = new SalesRetReceiptVO(receiptid,
+                        UserInfomation.userid,
+                        LocalDateTime.now(),LocalDateTime.now(),
+                        ReceiptState.PENDING,
+                        this.memberId,
+                        provider.getText(),
+                        clerk.getText(),
+                        stock.getText(),
+                        salesListItemTreeTable.getList(),
+                        comment.getText(),
+                        Double.parseDouble(discount.getText()),
+                        Double.parseDouble(token.getText()),
+                        Double.parseDouble(original.getText()));
         try {
             if (updateState.get())
                 salesblService.insert(this.vo);

@@ -4,7 +4,9 @@ import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
 import javafx.beans.property.*;
 import javafx.scene.Node;
+import po.ReceiptGoodsItemPO;
 import po.receiptPO.ReceiptPO;
+import po.receiptPO.StockPurReceiptPO;
 import po.receiptPO.StockReceiptPO;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;
@@ -15,8 +17,9 @@ import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class StockReceiptVO extends ReceiptVO {
+public abstract class StockReceiptVO extends ReceiptVO {
 
     private int memberId;
     private String memberName;
@@ -24,10 +27,9 @@ public class StockReceiptVO extends ReceiptVO {
     private double sum;
     private ArrayList<ListGoodsItemVO> items = new ArrayList<>();
     private String comment;
-    private boolean isPur;
 
 
-    public StockReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberId, String memberName, String stockName, double sum, ArrayList<ListGoodsItemVO> items, String comment, boolean isPur) {
+    public StockReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberId, String memberName, String stockName, double sum, ArrayList<ListGoodsItemVO> items, String comment) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
         this.memberId = memberId;
         this.memberName =memberName;
@@ -36,7 +38,6 @@ public class StockReceiptVO extends ReceiptVO {
 
         this.items = items;
         this.comment = comment;
-        this.isPur = isPur;
     }
 
     public int getMemberId() {
@@ -87,34 +88,21 @@ public class StockReceiptVO extends ReceiptVO {
         this.comment = comment;
     }
 
-    public boolean isPur() {
-        return isPur;
-    }
-
-    public void setPur(boolean pur) {
-        isPur = pur;
-    }
-
-
-    @Override
-    public CheckInfo<StockReceiptVO> getService() throws RemoteException, NotBoundException, MalformedURLException {
-        return null;
-    }
-
-    @Override
-    public Node getDetailPane() {
-        return null;
-    }
-
-
-    @Override
-    protected String getCodeName() {
-        return null;
-    }
-
     @Override
     public StockReceiptPO toPO() {
         StockReceiptPO result = toReceiptPO(StockReceiptPO.class);
-        return null;
+        return convertToPO(result);
     }
+
+    public StockPurReceiptPO convertToPO(StockReceiptPO stockReceiptPO){
+        return new StockPurReceiptPO(stockReceiptPO.getDayId(),stockReceiptPO.getOperatorId(),stockReceiptPO.getCreateTime(),stockReceiptPO.getLastModifiedTime(),stockReceiptPO.getReceiptState(),this.getMemberId(),this.getStockName(),toGoodsArray(items),this.getSum(),this.getComment());
+    }
+
+    public ReceiptGoodsItemPO[] toGoodsArray(ArrayList<ListGoodsItemVO> items){
+        List<ReceiptGoodsItemPO> receiptGoodsItemPOs = items.stream().map(t->t.toPo()).collect(Collectors.toList());
+        ReceiptGoodsItemPO[] goodsItemPOs = (ReceiptGoodsItemPO[])receiptGoodsItemPOs.toArray();
+        return goodsItemPOs;
+    }
+
+
 }

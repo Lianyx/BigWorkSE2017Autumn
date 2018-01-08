@@ -55,7 +55,8 @@
     -fx-effect: dropshadow(gaussian, #dfe1ff, 10, 0.1, 0, 0);
 }
 .list-cell:selected{
-    -fx-background-color: #3983D7;
+    -fx-background-color: #4e9fd7;
+    -fx-text-fill: white;
 }
 
 .list-cell:empty {
@@ -67,5 +68,5 @@
 .icons-badge .label {
     -fx-font-weight: BOLD;
     -fx-font-size: 10.0px;
-    -fx-text-fill: BLACK;
+    -fx-text-fill: rgba(0, 0, 0, 0.6);
 }

@@ -1,9 +1,12 @@
 package network;
 
 
-import dataService.test.TestdataService1;
+import dataService.test.TestData;
 import dataService.test.TestdataService2;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -26,6 +29,9 @@ public class ClientImpl extends UnicastRemoteObject implements Client{
     }
 
 
+
+
+
     public Object dataInteration(String klassname,String method,Object object) throws Exception{
         return server.dataInteration(klassname,method,object);
     }
@@ -39,15 +45,18 @@ public class ClientImpl extends UnicastRemoteObject implements Client{
             String registry = "localhost";
             int port=1099;
             String registration = "rmi://" + registry + ":" + port + "/Server";
-
             Remote remoteService = Naming.lookup ( registration );
             server = (Server) remoteService;
 
             Client client = new ClientImpl();
             server.addClient(client);
             server.notify("hahaha");
-            TestdataService1 testdataService1 = (TestdataService1) Naming.lookup("rmi://" + registry + ":" + port + "/TestdataService1");
-            String test1 = testdataService1.test();
+
+            TestData testData = (TestData) Naming.lookup("rmi://" + registry + ":" + port + "/TestData");
+            BufferedImage image = ImageIO.read(ClientImpl.class.getResource("/default/timg.jpg"));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(image, "png", baos);
+            String test1 = testData.test(baos.toByteArray());
             System.out.println(test1);
             TestdataService2 testdataService2 = (TestdataService2) Naming.lookup("rmi://" + registry + ":" + port + "/TestdataService2");
             String test2 = testdataService2.test();

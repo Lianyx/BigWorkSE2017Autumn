@@ -1,11 +1,13 @@
 package blServiceStub.stockblservice_Stub;
 
 import blService.stockblService.StockblService;
+import po.receiptPO.StockPurReceiptPO;
 import util.ReceiptSearchCondition;
 import util.ReceiptState;
 import util.RespectiveReceiptSearchCondition;
 import util.ResultMessage;
 import vo.ListGoodsItemVO;
+import vo.receiptVO.StockPurReceiptVO;
 import vo.receiptVO.StockReceiptListVO;
 import vo.receiptVO.StockReceiptVO;
 import vo.StockSearchVO;
@@ -65,7 +67,7 @@ public class StockblService_Stub implements StockblService {
             */
     @Override
     public ResultMessage insert(StockReceiptVO stockReceiptVO) {
-        set.add(new StockReceiptListVO(stockReceiptVO.getId(),stockReceiptVO.getReceiptState(),stockReceiptVO.getMemberName(),stockReceiptVO.getStockName(),stockReceiptVO.getSum(),stockReceiptVO.isPur()));
+        set.add(new StockReceiptListVO(stockReceiptVO.getId(),stockReceiptVO.getReceiptState(),stockReceiptVO.getMemberName(),stockReceiptVO.getStockName(),stockReceiptVO.getSum(),stockReceiptVO instanceof StockPurReceiptVO));
         return ResultMessage.SUCCESS;
     }
 
@@ -135,7 +137,7 @@ public class StockblService_Stub implements StockblService {
         ArrayList<ListGoodsItemVO> list = new ArrayList();
         list.add(new ListGoodsItemVO("a",1,"a",1,1,"a"));
         list.add(new ListGoodsItemVO("a",2,"a",1,1,"a"));
-        return new StockReceiptVO("JHD-20170101-00013",3,LocalDateTime.of(2017,1,1,0,0),LocalDateTime.now(),ReceiptState.REJECTED,1,"wad","awda",1,list,"haha",true);
+        return new StockPurReceiptVO("JHD-20170101-00013",3,LocalDateTime.of(2017,1,1,0,0),LocalDateTime.now(),ReceiptState.REJECTED,1,"wad","awda",1,list,"haha");
     }
 
     @Override
