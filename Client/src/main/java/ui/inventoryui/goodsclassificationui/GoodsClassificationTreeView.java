@@ -18,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.CheckTreeView;
 import ui.util.BoardController;
+import ui.util.PaneFactory;
 import vo.inventoryVO.GoodsClassificationVO;
 
 import java.util.*;
@@ -136,7 +137,7 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
         CheckBoxTreeItem<String> item = (CheckBoxTreeItem<String>) list.get(0);
 
         JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
-        JFXDialog dialog = new JFXDialog(mainpane,new GoodsClassificationDetail(),JFXDialog.DialogTransition.CENTER);
+        JFXDialog dialog = new JFXDialog(PaneFactory.getMainPane(),new GoodsClassificationDetail(),JFXDialog.DialogTransition.CENTER);
 
     }
 

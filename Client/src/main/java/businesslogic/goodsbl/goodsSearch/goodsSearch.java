@@ -1,13 +1,12 @@
 package businesslogic.goodsbl.goodsSearch;
 
+import blService.goodsblService.goodsSearchInfo;
 import businesslogic.goodsbl.Goodsbl;
-import po.GoodsPO;
 import vo.inventoryVO.GoodsVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class goodsSearch implements goodsSearchInfo {

@@ -1,8 +1,8 @@
 package businesslogic.goodsbl.goodsUpdate;
 
+import blService.goodsblService.GoodsUpdateInfo;
 import businesslogic.goodsbl.Goodsbl;
 import po.GoodsPO;
-import vo.inventoryVO.GoodsVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;

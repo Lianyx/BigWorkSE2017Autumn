@@ -1,4 +1,4 @@
-package businesslogic.goodsbl.goodsUpdate;
+package blService.goodsblService;
 
 import po.GoodsPO;
 

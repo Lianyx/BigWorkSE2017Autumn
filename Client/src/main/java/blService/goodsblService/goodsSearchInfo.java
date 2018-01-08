@@ -1,4 +1,4 @@
-package businesslogic.goodsbl.goodsSearch;
+package blService.goodsblService;
 
 import po.GoodsPO;
 import vo.inventoryVO.GoodsVO;

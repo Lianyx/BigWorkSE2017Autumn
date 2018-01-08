@@ -1,4 +1,4 @@
-package businesslogic.goodsbl;
+package blService.goodsblService;
 
 public interface GoodsClassification_Goods {
 

@@ -1,6 +1,6 @@
 package businesslogic.goodsClassificationbl;
 
-import businesslogic.goodsbl.GoodsClassification_Goods;
+import blService.goodsblService.GoodsClassification_Goods;
 import dataService.goodsdataService.GoodsClassificationDataService;
 import po.GoodsClassificationPO;
 
