@@ -1,10 +1,11 @@
 package po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GoodsClassificationPO {
+public class GoodsClassificationPO implements Serializable{
     private String id;
 
     private String _name;

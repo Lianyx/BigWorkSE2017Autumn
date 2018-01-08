@@ -23,6 +23,7 @@ import ui.util.BoardController;
 import ui.util.PaneFactory;
 import vo.inventoryVO.GoodsClassificationVO;
 
+import java.rmi.RemoteException;
 import java.util.*;
 
 public class GoodsClassificationTreeView extends CheckTreeView<String>{
@@ -150,6 +151,8 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
                 addGoodsClassificationVO(classifyName,item.getValue());
             } catch (ExistException e1) {
                 e1.printStackTrace();
+            } catch (RemoteException e1) {
+                e1.printStackTrace();
             }
 
             dialog.close();
@@ -166,7 +169,7 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
      * @param fatherName
      * @throws ExistException
      */
-    private void addGoodsClassificationVO(String sonName, String fatherName) throws ExistException {
+    private void addGoodsClassificationVO(String sonName, String fatherName) throws ExistException, RemoteException {
         System.out.println(list.toString());
         for (GoodsClassificationVO vo:list) {
             System.out.println(vo.getName());

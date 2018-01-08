@@ -1,5 +1,6 @@
 package data.goodsdata;
 
+import annotations.RMIRemote;
 import dataService.goodsdataService.GoodsClassificationDataService;
 import mapper.GoodsClassificationPOMapper;
 import mybatis.MyBatisUtil;
@@ -9,7 +10,7 @@ import util.ResultMessage;
 
 
 import java.util.ArrayList;
-
+@RMIRemote
 public class GoodsClassificationData implements GoodsClassificationDataService {
     @Override
     public ResultMessage insert(GoodsClassificationPO po) {
