@@ -100,7 +100,6 @@ public class BusinessConditionPane extends Refreshable {
         incomePieChart.getData().setAll(incomePieChartData);
         costPieChart.getData().setAll(costPieChartData);
 
-        // TODO 然后set一个label的text。比如
         salesIncomeLabel.setText("销售收入：" + businessConditionPO.getSalesIncome());
         overflowIncomeLabel.setText("商品报溢收入：" + businessConditionPO.getOverFlowIncome());
         purPriceAdjustIncomeLabel.setText("成本调价收入：" + businessConditionPO.getPurPriceAdjustIncome());

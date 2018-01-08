@@ -7,12 +7,15 @@ import org.controlsfx.control.PopOver;
 import ui.managerui.common.MyBoardController;
 import ui.managerui.promotionui.PromotionFilterPane;
 import ui.util.Refreshable;
+import util.ReceiptSearchCondition;
 
 import java.io.IOException;
 
 public class BusinessProgressPane extends Refreshable {
     @FXML
     private JFXButton filter;
+
+    private ReceiptSearchCondition searchCondition;
 
     public BusinessProgressPane() {
         try {
@@ -23,11 +26,12 @@ public class BusinessProgressPane extends Refreshable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        searchCondition = new ReceiptSearchCondition();
 
         PopOver filterPopOver = new PopOver();
         filterPopOver.setDetachable(false);
         filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
-        BusinessProgressFilterPane businessProgressFilterPane = new BusinessProgressFilterPane(this);
+        BusinessProgressFilterPane businessProgressFilterPane = new BusinessProgressFilterPane(this, searchCondition);
         filterPopOver.setContentNode(businessProgressFilterPane);
         filter.setOnAction(e -> filterPopOver.show(filter));
     }

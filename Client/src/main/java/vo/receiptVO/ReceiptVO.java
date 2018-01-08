@@ -15,7 +15,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 
-public abstract class ReceiptVO extends ReceipishVO<ReceiptVO> {
+public abstract class ReceiptVO<T> extends ReceipishVO<T> {
     private int operatorId; // 很可能会改成名字之类
 
     private ReceiptState receiptState;

@@ -105,7 +105,7 @@ create table ChargeBillReceipt(
     clientId integer,
     transferList varchar(1000),
     sum double
-);character set = utf8
+)character set = utf8;
 
 create table CashBillReceipt(
     dayId integer,
@@ -118,7 +118,7 @@ create table CashBillReceipt(
     accountId INTEGER,
     total double,
     itemList varchar(1000)
-);character set = utf8
+)character set = utf8;
 
 
 create table SalesDetail(
