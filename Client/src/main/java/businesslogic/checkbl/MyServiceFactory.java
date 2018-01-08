@@ -4,10 +4,12 @@ import blService.businessblservice.BusinessConditionInfo;
 import blService.businessblservice.BusinessConditionblService;
 import blService.businessblservice.BusinessSearchInfo;
 import blService.checkblService.CheckInfo;
+import blService.goodsblService.goodsSearchInfo;
 import businesslogic.billreceiptbl.CashBillReceiptbl;
 import businesslogic.billreceiptbl.ChargeBillReceiptbl;
 import businesslogic.billreceiptbl.PaymentBillReceiptbl;
 import businesslogic.businessbl.BusinessConditionbl;
+import businesslogic.goodsbl.goodsSearch.goodsSearch;
 import businesslogic.inventorybl.InventoryDamageReceiptbl;
 import businesslogic.inventorybl.InventoryGiftReceiptbl;
 import businesslogic.inventorybl.InventoryOverflowReceiptbl;
@@ -40,6 +42,9 @@ public class MyServiceFactory {
 
 
     private static BusinessConditionbl businessConditionbl;
+
+    private static goodsSearchInfo goodsSearch;
+
 
     /**
      * CheckInfo
@@ -170,5 +175,16 @@ public class MyServiceFactory {
             return businessConditionbl = new BusinessConditionbl();
         }
         return businessConditionbl;
+    }
+
+    /**
+     * Goods
+     * */
+
+    public static goodsSearchInfo getGoodsSearchInfo() throws RemoteException, NotBoundException, MalformedURLException {
+        if (goodsSearch == null) {
+            return goodsSearch = new goodsSearch();
+        }
+        return goodsSearch;
     }
 }

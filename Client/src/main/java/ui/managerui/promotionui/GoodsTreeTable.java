@@ -31,7 +31,7 @@ public class GoodsTreeTable extends JFXTreeTableView<PromotionGoodsItemVO> {
         nameColumn.setPrefWidth(94);
         nameColumn.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getValue().getName()));
 
-        JFXTreeTableColumn<PromotionGoodsItemVO, Integer> unitPriceColumn = new JFXTreeTableColumn<>("单价");
+        JFXTreeTableColumn<PromotionGoodsItemVO, Double> unitPriceColumn = new JFXTreeTableColumn<>("单价");
         unitPriceColumn.setPrefWidth(93);
         unitPriceColumn.setCellValueFactory((p) -> new ReadOnlyObjectWrapper<>(p.getValue().getValue().getUnitPrice()));
 

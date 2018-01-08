@@ -17,6 +17,7 @@
 <?import ui.managerui.common.MyTopBar?>
 <?import ui.managerui.businessConditionui.BusinessConditionPane?>
 <?import ui.managerui.common.navigation.BusinessConditionChangePaneLabel?>
+<?import ui.managerui.common.navigation.BusinessProgressChangePaneLabel?>
 <StackPane fx:id="mainpane"
            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
            fx:controller="ui.managerui.ManagerUIController"
@@ -57,6 +58,13 @@
                     </StackPane>
                 </graphic>
             </BusinessConditionChangePaneLabel>
+            <BusinessProgressChangePaneLabel fx:id="businessProgressList" text="经营历程表" style="-fx-padding: 8 0 8 10;">
+                <graphic>
+                    <StackPane style="-fx-padding: 0 10 0 0;">
+                        <FontAwesomeIconView fx:id="businessProgressListIcon" size="1em"/>
+                    </StackPane>
+                </graphic>
+            </BusinessProgressChangePaneLabel>
         </JFXListView>
 
     </AnchorPane>

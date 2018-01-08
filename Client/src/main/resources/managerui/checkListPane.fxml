@@ -17,17 +17,6 @@
         </StackPane>
     </JFXRippler>
 
-    <!--<JFXButton fx:id="filter" text="筛选" layoutX="420.0" layoutY="35.0"-->
-               <!--mnemonicParsing="false">-->
-        <!--<graphic>-->
-            <!--<JFXRippler>-->
-                <!--<StackPane>-->
-                    <!--<FontAwesomeIconView fill="white" glyphName="NAVICON" size="1em"/>-->
-                <!--</StackPane>-->
-            <!--</JFXRippler>-->
-        <!--</graphic>-->
-    <!--</JFXButton>-->
-
     <JFXButton fx:id="approve" text="通过" layoutX="494.0" layoutY="35.0"
                mnemonicParsing="false" onMouseClicked="#approve">
         <graphic>
