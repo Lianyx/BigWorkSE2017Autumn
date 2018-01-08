@@ -25,7 +25,7 @@ public class ChargeReceiptVO extends ReceiptVO{
     private int clientID;
     private List<TransferItemVO> transferList;
     private double sum;
-    private boolean isSell;
+
 
     public ChargeReceiptVO(){
 
@@ -44,13 +44,12 @@ public class ChargeReceiptVO extends ReceiptVO{
     }
 
 
-    public ChargeReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientID, List<TransferItemVO> transferList, double sum,boolean isSell) {
+    public ChargeReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientID, List<TransferItemVO> transferList, double sum) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
 
         this.clientID =clientID;
         this.transferList = transferList;
         this.sum = sum;
-        this.isSell = isSell;
     }
 
     @Override
@@ -77,7 +76,7 @@ public class ChargeReceiptVO extends ReceiptVO{
 
     @Override
     public Node getDetailPane() {
-        return new ChargeDetailPane(true);
+        return new ChargeDetailPane();
     }
 
     public int getClientID() {
@@ -104,11 +103,5 @@ public class ChargeReceiptVO extends ReceiptVO{
         this.sum = sum;
     }
 
-    public boolean isSell() {
-        return isSell;
-    }
 
-    public void setSell(boolean sell) {
-        isSell = sell;
-    }
 }

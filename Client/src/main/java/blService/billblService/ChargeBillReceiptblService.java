@@ -12,9 +12,9 @@ public interface ChargeBillReceiptblService {
     public ResultMessage add(ChargeReceiptVO chargeReceiptVO);
     public ResultMessage delete(String id);
     public ResultMessage update(ChargeReceiptVO chargeReceiptVO);
-    public Set<ChargeReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO, boolean isPur);
+    public Set<ChargeReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO);
     public ChargeReceiptVO showDetail(String id);
-    public Set<ChargeReceiptListVO> getALL(boolean isPur);
+    public Set<ChargeReceiptListVO> getALL();
 
 }
 

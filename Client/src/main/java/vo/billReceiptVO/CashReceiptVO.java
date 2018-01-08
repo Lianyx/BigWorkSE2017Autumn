@@ -25,7 +25,7 @@ public class CashReceiptVO extends ReceiptVO{
     private int accountID;
     private double total;
     private List<CashItemVO> cashList;
-    boolean isSell;
+
 
     public CashReceiptVO(){
 
@@ -43,12 +43,11 @@ public class CashReceiptVO extends ReceiptVO{
         this.cashList = temp;
     }
 
-    public CashReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int accountID, double total, List<CashItemVO> cashList, boolean isSell) {
+    public CashReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int accountID, double total, List<CashItemVO> cashList) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
         this.accountID = accountID;
         this.total = total;
         this.cashList = cashList;
-        this.isSell = isSell;
     }
 
     @Override
@@ -75,7 +74,7 @@ public class CashReceiptVO extends ReceiptVO{
 
     @Override
     public Node getDetailPane() {
-        return new CashDetailPane(true);
+        return new CashDetailPane();
     }
 
     public int getAccountID() {
@@ -102,11 +101,5 @@ public class CashReceiptVO extends ReceiptVO{
         this.cashList = cashList;
     }
 
-    public boolean isSell() {
-        return isSell;
-    }
 
-    public void setSell(boolean sell) {
-        isSell = sell;
-    }
 }

@@ -30,35 +30,35 @@ public class PaymentBillReceiptblService_Stub implements PaymentBillReceiptblSer
     public PaymentBillReceiptblService_Stub(){
         int i=10;
 
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.PENDING,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,true));
-        set.add(new PaymentReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new PaymentReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new PaymentReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new PaymentReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new PaymentReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new PaymentReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new PaymentReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
-        set.add(new PaymentReceiptListVO("XSTHD-20170101-000"+(i++), ReceiptState.APPROVED,11,11,false));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.PENDING,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
+        set.add(new PaymentReceiptListVO("FKD-20170101-000"+(i++), ReceiptState.APPROVED,11,11));
 
 
     }
@@ -72,7 +72,7 @@ public class PaymentBillReceiptblService_Stub implements PaymentBillReceiptblSer
 
     @Override
     public ResultMessage add(PaymentReceiptVO paymentReceiptVO) {
-        set.add(new PaymentReceiptListVO(paymentReceiptVO.getId(),paymentReceiptVO.getReceiptState(),paymentReceiptVO.getOperatorId(),paymentReceiptVO.getSum(),paymentReceiptVO.isSell()));
+        set.add(new PaymentReceiptListVO(paymentReceiptVO.getId(),paymentReceiptVO.getReceiptState(),paymentReceiptVO.getOperatorId(),paymentReceiptVO.getSum()));
         return ResultMessage.SUCCESS;
     }
 
@@ -98,15 +98,14 @@ public class PaymentBillReceiptblService_Stub implements PaymentBillReceiptblSer
     }
 
     @Override
-    public Set<PaymentReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO, boolean isPur) {
+    public Set<PaymentReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO) {
         HashSet<PaymentReceiptListVO> temp = new HashSet<>();
         for(PaymentReceiptListVO s:set){
-            if(s.isSell()==isPur){
                 for(ReceiptState receiptState:billReceiptSearchVO.getReceiptStates()){
                     if(s.getReceiptState()==receiptState)
                         temp.add(s);
                 }
-            }
+
         }
         return temp;
     }
@@ -117,17 +116,15 @@ public class PaymentBillReceiptblService_Stub implements PaymentBillReceiptblSer
         ArrayList<TransferItemVO> list = new ArrayList();
         list.add(new TransferItemVO(1,1,"1"));
         list.add(new TransferItemVO(2,2,"2"));
-        return new PaymentReceiptVO("XSD-20170101-00013",3, LocalDateTime.now(), LocalDateTime.now(),ReceiptState.REJECTED,1,list,3,true);
+        return new PaymentReceiptVO("FKD-20170101-00013",3, LocalDateTime.now(), LocalDateTime.now(),ReceiptState.REJECTED,1,list,3);
         //return new PaymentReceiptVO();
     }
 
     @Override
-    public Set<PaymentReceiptListVO> getALL(boolean isPur) {
+    public Set<PaymentReceiptListVO> getALL() {
         HashSet<PaymentReceiptListVO> temp = new HashSet<>();
         for(PaymentReceiptListVO p:set){
-            if(p.isSell()==isPur){
                 temp.add(p);
-            }
         }
         return temp;
     }

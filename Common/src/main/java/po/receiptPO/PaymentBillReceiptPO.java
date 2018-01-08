@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class PaymentBillReceiptPO extends ReceiptPO {
 
-    private int clientID;
+    private int clientId;
     private TransferItemPO[] transferList;
     private double sum;
 
@@ -18,20 +18,20 @@ public class PaymentBillReceiptPO extends ReceiptPO {
 
     }
 
-    public PaymentBillReceiptPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientID, TransferItemPO[] transferList, double sum) {
+    public PaymentBillReceiptPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientId, TransferItemPO[] transferList, double sum) {
         super(dayId, operatorId, createTime, lastModifiedTime, receiptState);
-        this.clientID = clientID;
+        this.clientId = clientId;
         this.transferList = transferList;
         this.sum = sum;
     }
 
 
-    public int getClientID() {
-        return clientID;
+    public int getClientId() {
+        return clientId;
     }
 
-    public void setClientID(int clientID) {
-        this.clientID = clientID;
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 
     public TransferItemPO[] getTransferList() {

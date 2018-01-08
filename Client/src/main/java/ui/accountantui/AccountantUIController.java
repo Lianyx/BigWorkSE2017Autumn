@@ -76,17 +76,17 @@ public class AccountantUIController implements Initializable{
                                 }
                                 else if (newVal.getId().equals("paymentBillList")) {
                                     System.out.println("付款单");
-                                    PaymentReceiptListPane paymentReceiptListPane = new PaymentReceiptListPane(true);
+                                    PaymentReceiptListPane paymentReceiptListPane = new PaymentReceiptListPane();
                                     paymentReceiptListPane.refresh(true);
                                 }
                                 else if (newVal.getId().equals("chargeBillList")) {
                                     System.out.println("收款单");
-                                    ChargeReceiptListPane chargeReceiptListPane = new ChargeReceiptListPane(true);
+                                    ChargeReceiptListPane chargeReceiptListPane = new ChargeReceiptListPane();
                                     chargeReceiptListPane.refresh(true);
                                 }
                                 else if (newVal.getId().equals("cashBillList")) {
                                     System.out.println("现金费用单");
-                                    CashReceiptListPane cashReceiptListPane = new CashReceiptListPane(true);
+                                    CashReceiptListPane cashReceiptListPane = new CashReceiptListPane();
                                     cashReceiptListPane.refresh(true);
                                 }
                                 else if (newVal.getId().equals("销售明细")) {

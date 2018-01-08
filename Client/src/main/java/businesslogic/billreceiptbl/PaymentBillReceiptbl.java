@@ -40,13 +40,13 @@ public class PaymentBillReceiptbl extends Receiptbl<PaymentReceiptVO,PaymentBill
         return ResultMessage.SUCCESS;
     }
 
-    public Set<PaymentReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO, boolean isPur){
+    public Set<PaymentReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO){
         return null;
     }
     public PaymentReceiptVO showDetail(String id){
         return null;
     }
-    public Set<PaymentReceiptListVO> getALL(boolean isPur){
+    public Set<PaymentReceiptListVO> getALL(){
         return null;
     }
 }

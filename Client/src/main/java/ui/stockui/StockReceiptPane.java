@@ -92,7 +92,7 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
     **/
 
     public StockReceiptPane(String id) {
-        super("/stockui/stockreceipt.fxml",id,true);
+        super("/stockui/stockreceipt.fxml",id);
         stockblService = ServiceFactory_Stub.getService(StockblService.class.getName());
         provider.setDisable(true);
         operator.setDisable(true);

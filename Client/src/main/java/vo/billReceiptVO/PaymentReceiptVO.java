@@ -26,7 +26,6 @@ public class PaymentReceiptVO extends ReceiptVO {
     private int clientID;
     private List<TransferItemVO> transferList;
     private double sum;
-    private boolean isSell;
 
 
     public PaymentReceiptVO(){
@@ -45,17 +44,16 @@ public class PaymentReceiptVO extends ReceiptVO {
 
     }
 
-    public PaymentReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientID, List<TransferItemVO> transferList, double sum, boolean isSell) {
+    public PaymentReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientID, List<TransferItemVO> transferList, double sum) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
         this.clientID = clientID;
         this.transferList = transferList;
         this.sum = sum;
-        this.isSell = isSell;
     }
 
     @Override
     public String getCodeName() {
-        return "SKD";
+        return "FKD";
     }
 
     @Override
@@ -77,7 +75,7 @@ public class PaymentReceiptVO extends ReceiptVO {
 
     @Override
     public Node getDetailPane() {
-        return new PaymentDetailPane(true);
+        return new PaymentDetailPane();
     }
 
     public int getclientID() {
@@ -105,13 +103,7 @@ public class PaymentReceiptVO extends ReceiptVO {
         this.sum = sum;
     }
 
-    public boolean isSell() {
-        return isSell;
-    }
 
-    public void setSell(boolean sell) {
-        isSell = sell;
-    }
 }
 
 
