@@ -1,8 +1,9 @@
 package util;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class RespectiveReceiptSearchCondition {
+public class RespectiveReceiptSearchCondition implements Serializable{
     private LocalDateTime createTimeFloor, createTimeCeil;
     private LocalDateTime lastModifiedTimeFloor, lastModifiedTimeCeil;
     private ReceiptState receiptState;
