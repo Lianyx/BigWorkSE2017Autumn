@@ -1,7 +1,7 @@
 package data.goodsdata;
 
 import dataService.goodsdataService.GoodsClassificationDataService;
-import mapper.GoodsClassficationPOMapper;
+import mapper.GoodsClassificationPOMapper;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import po.GoodsClassificationPO;
@@ -16,7 +16,7 @@ public class GoodsClassificationData implements GoodsClassificationDataService {
         SqlSession session = null;
         try {
             session = MyBatisUtil.getSqlSessionFactory().openSession();
-            GoodsClassficationPOMapper mapper = session.getMapper(GoodsClassficationPOMapper.class);
+            GoodsClassificationPOMapper mapper = session.getMapper(GoodsClassificationPOMapper.class);
             mapper.insert(po);
         }finally {
             if(session != null)
@@ -31,7 +31,7 @@ public class GoodsClassificationData implements GoodsClassificationDataService {
         SqlSession session = null;
         try {
             session = MyBatisUtil.getSqlSessionFactory().openSession();
-            GoodsClassficationPOMapper mapper = session.getMapper(GoodsClassficationPOMapper.class);
+            GoodsClassificationPOMapper mapper = session.getMapper(GoodsClassificationPOMapper.class);
             mapper.delete(id);
         }finally {
             if(session != null)
@@ -46,7 +46,7 @@ public class GoodsClassificationData implements GoodsClassificationDataService {
         SqlSession session = null;
         try {
             session = MyBatisUtil.getSqlSessionFactory().openSession();
-            GoodsClassficationPOMapper mapper = session.getMapper(GoodsClassficationPOMapper.class);
+            GoodsClassificationPOMapper mapper = session.getMapper(GoodsClassificationPOMapper.class);
             mapper.update(po);
         }finally {
             if(session != null)
@@ -62,7 +62,7 @@ public class GoodsClassificationData implements GoodsClassificationDataService {
         ArrayList<GoodsClassificationPO> list;
         try {
             session = MyBatisUtil.getSqlSessionFactory().openSession();
-            GoodsClassficationPOMapper mapper = session.getMapper(GoodsClassficationPOMapper.class);
+            GoodsClassificationPOMapper mapper = session.getMapper(GoodsClassificationPOMapper.class);
             list =  mapper.show();
         }finally {
             if(session != null)
@@ -78,7 +78,7 @@ public class GoodsClassificationData implements GoodsClassificationDataService {
         GoodsClassificationPO po;
         try {
             session = MyBatisUtil.getSqlSessionFactory().openSession();
-            GoodsClassficationPOMapper mapper = session.getMapper(GoodsClassficationPOMapper.class);
+            GoodsClassificationPOMapper mapper = session.getMapper(GoodsClassificationPOMapper.class);
             po = mapper.getById(id);
         }finally {
             if(session != null)

@@ -5,7 +5,7 @@ import po.GoodsClassificationPO;
 import java.util.ArrayList;
 
 
-public interface GoodsClassficationPOMapper {
+public interface GoodsClassificationPOMapper {
     public void insert(GoodsClassificationPO po);
 
     public void delete(String ID);
