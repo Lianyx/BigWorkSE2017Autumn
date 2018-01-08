@@ -1,26 +1,39 @@
 package vo.promotionVO;
 
+import businesslogic.checkbl.MyServiceFactory;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import po.promotionPO.PromotionGoodsItemPO;
+import vo.inventoryVO.GoodsVO;
+
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.server.ExportException;
 
 public class PromotionGoodsItemVO extends RecursiveTreeObject<PromotionGoodsItemVO> {
     private String id;
     private String name;
-    private int unitPrice;
+    private double unitPrice;
     private IntegerProperty num;
 
-    public PromotionGoodsItemVO(){
+    public PromotionGoodsItemVO() {
     }
 
     public PromotionGoodsItemVO(PromotionGoodsItemPO promotionGoodsItemPO) {
         id = promotionGoodsItemPO.getId();
-        // TODO 需要使用service
-        name = String.valueOf(promotionGoodsItemPO.getId());
-        unitPrice = 50;
-
         num = new SimpleIntegerProperty(promotionGoodsItemPO.getNum());
+        try {
+            GoodsVO goodsVO = MyServiceFactory.getGoodsSearchInfo().getGoodById(id);
+            name = goodsVO.getGoodName();
+            unitPrice = goodsVO.getSalePrice();
+        } catch (NotBoundException | MalformedURLException | RemoteException e) {
+            // 不管了，就这么写了…
+            e.printStackTrace();
+            name = "连接错误";
+            unitPrice = -99999;
+        }
     }
 
     public PromotionGoodsItemVO(String id, String name, int unitPrice, IntegerProperty num) {
@@ -50,11 +63,11 @@ public class PromotionGoodsItemVO extends RecursiveTreeObject<PromotionGoodsItem
         this.name = name;
     }
 
-    public int getUnitPrice() {
+    public double getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(int unitPrice) {
+    public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
     }
 

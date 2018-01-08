@@ -31,9 +31,9 @@ public abstract class ReceipishPO implements Serializable {
     }
 
     public void setCreateTime(LocalDateTime createTime) { // TODO dayId也要这么干
-        if (this.createTime == null) {
+//        if (this.createTime == null) {
             this.createTime = createTime;
-        }
+//        }
     }
 
     public LocalDateTime getLastModifiedTime() {
