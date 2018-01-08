@@ -1,6 +1,8 @@
 package businesslogic.checkbl;
 
+import blService.businessblservice.BusinessConditionInfo;
 import blService.businessblservice.BusinessConditionblService;
+import blService.businessblservice.BusinessSearchInfo;
 import blService.checkblService.CheckInfo;
 import businesslogic.billreceiptbl.CashBillReceiptbl;
 import businesslogic.billreceiptbl.ChargeBillReceiptbl;
@@ -25,80 +27,148 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 public class MyServiceFactory {
-    private static CheckInfo<SalesSellReceiptVO> salesSellReceiptVOCheckInfo;
+    private static CheckInfo<SalesSellReceiptVO> salesSellReceiptbl;
 
-    private static CheckInfo<InventoryDamageReceiptVO> inventoryDamageReceiptVOCheckInfo;
-    private static CheckInfo<InventoryGiftReceiptVO> inventoryGiftReceiptVOCheckInfo;
-    private static CheckInfo<InventoryOverflowReceiptVO> inventoryOverflowReceiptVOCheckInfo;
-    private static CheckInfo<InventoryWarningReceiptVO> inventoryWarningReceiptVOCheckInfo;
+    private static InventoryDamageReceiptbl inventoryDamageReceiptbl;
+    private static InventoryGiftReceiptbl inventoryGiftReceiptbl;
+    private static InventoryOverflowReceiptbl inventoryOverflowReceiptbl;
+    private static InventoryWarningReceiptbl inventoryWarningReceiptbl;
 
-    private static CheckInfo<CashReceiptVO> cashReceiptVOCheckInfo;
-    private static CheckInfo<ChargeReceiptVO> chargeReceiptVOCheckInfo;
-    private static CheckInfo<PaymentReceiptVO> paymentReceiptVOCheckInfo;
+    private static CashBillReceiptbl cashReceiptbl;
+    private static ChargeBillReceiptbl chargeReceiptbl;
+    private static PaymentBillReceiptbl paymentReceiptbl;
 
 
-    private static BusinessConditionblService businessConditionblService;
+    private static BusinessConditionbl businessConditionbl;
+
+    /**
+     * CheckInfo
+     * */
 
     public static CheckInfo<SalesSellReceiptVO> getSalesSellReceiptVOCheckInfo() throws RemoteException, NotBoundException, MalformedURLException {
-        if (salesSellReceiptVOCheckInfo == null) {
-            return salesSellReceiptVOCheckInfo = new SalesSellbl();
+        if (salesSellReceiptbl == null) {
+            return salesSellReceiptbl = new SalesSellbl();
         }
-        return salesSellReceiptVOCheckInfo;
+        return salesSellReceiptbl;
     }
 
     public static CheckInfo<InventoryDamageReceiptVO> getInventoryDamageReceiptVOCheckInfo() throws RemoteException, NotBoundException, MalformedURLException {
-        if (inventoryDamageReceiptVOCheckInfo == null) {
-            return inventoryDamageReceiptVOCheckInfo = new InventoryDamageReceiptbl();
+        if (inventoryDamageReceiptbl == null) {
+            return inventoryDamageReceiptbl = new InventoryDamageReceiptbl();
         }
-        return inventoryDamageReceiptVOCheckInfo;
+        return inventoryDamageReceiptbl;
     }
 
     public static CheckInfo<InventoryGiftReceiptVO> getInventoryGiftReceiptVOCheckInfo() throws RemoteException, NotBoundException, MalformedURLException {
-        if (inventoryGiftReceiptVOCheckInfo == null) {
-            return inventoryGiftReceiptVOCheckInfo = new InventoryGiftReceiptbl();
+        if (inventoryGiftReceiptbl == null) {
+            return inventoryGiftReceiptbl = new InventoryGiftReceiptbl();
         }
-        return inventoryGiftReceiptVOCheckInfo;
+        return inventoryGiftReceiptbl;
     }
 
     public static CheckInfo<InventoryOverflowReceiptVO> getInventoryOverflowReceiptVOCheckInfo() throws RemoteException, NotBoundException, MalformedURLException {
-        if (inventoryOverflowReceiptVOCheckInfo == null) {
-            return inventoryOverflowReceiptVOCheckInfo = new InventoryOverflowReceiptbl();
+        if (inventoryOverflowReceiptbl == null) {
+            return inventoryOverflowReceiptbl = new InventoryOverflowReceiptbl();
         }
-        return inventoryOverflowReceiptVOCheckInfo;
+        return inventoryOverflowReceiptbl;
     }
 
     public static CheckInfo<InventoryWarningReceiptVO> getInventoryWarningReceiptVOCheckInfo() throws RemoteException, NotBoundException, MalformedURLException {
-        if (inventoryWarningReceiptVOCheckInfo == null) {
-            return inventoryWarningReceiptVOCheckInfo = new InventoryWarningReceiptbl();
+        if (inventoryWarningReceiptbl == null) {
+            return inventoryWarningReceiptbl = new InventoryWarningReceiptbl();
         }
-        return inventoryWarningReceiptVOCheckInfo;
+        return inventoryWarningReceiptbl;
     }
 
     public static CheckInfo<CashReceiptVO> getCashReceiptVOCheckInfo() throws RemoteException, NotBoundException, MalformedURLException {
-        if (cashReceiptVOCheckInfo == null) {
-            return cashReceiptVOCheckInfo = new CashBillReceiptbl();
+        if (cashReceiptbl == null) {
+            return cashReceiptbl = new CashBillReceiptbl();
         }
-        return cashReceiptVOCheckInfo;
+        return cashReceiptbl;
     }
 
     public static CheckInfo<ChargeReceiptVO> getChargeReceiptVOCheckInfo() throws RemoteException, NotBoundException, MalformedURLException {
-        if (chargeReceiptVOCheckInfo == null) {
-            return chargeReceiptVOCheckInfo = new ChargeBillReceiptbl();
+        if (chargeReceiptbl == null) {
+            return chargeReceiptbl = new ChargeBillReceiptbl();
         }
-        return chargeReceiptVOCheckInfo;
+        return chargeReceiptbl;
     }
 
     public static CheckInfo<PaymentReceiptVO> getPaymentReceiptVOCheckInfo() throws RemoteException, NotBoundException, MalformedURLException {
-        if (paymentReceiptVOCheckInfo == null) {
-            return paymentReceiptVOCheckInfo = new PaymentBillReceiptbl();
+        if (paymentReceiptbl == null) {
+            return paymentReceiptbl = new PaymentBillReceiptbl();
         }
-        return paymentReceiptVOCheckInfo;
+        return paymentReceiptbl;
     }
 
-    public static BusinessConditionblService getBusinessConditionblService() throws RemoteException, NotBoundException, MalformedURLException {
-        if (businessConditionblService == null) {
-            return businessConditionblService = new BusinessConditionbl();
+    /**
+     * BusinessSearchInfo
+     * */
+    public static BusinessSearchInfo<InventoryDamageReceiptVO> getInventoryDamageSearchInfo() throws RemoteException, NotBoundException, MalformedURLException {
+        if (inventoryDamageReceiptbl == null) {
+            return inventoryDamageReceiptbl = new InventoryDamageReceiptbl();
         }
-        return businessConditionblService;
+        return inventoryDamageReceiptbl;
+    }
+
+    public static BusinessSearchInfo<InventoryGiftReceiptVO> getInventoryGiftSearchInfo() throws RemoteException, NotBoundException, MalformedURLException {
+        if (inventoryGiftReceiptbl == null) {
+            return inventoryGiftReceiptbl = new InventoryGiftReceiptbl();
+        }
+        return inventoryGiftReceiptbl;
+    }
+
+    public static BusinessSearchInfo<InventoryOverflowReceiptVO> getInventoryOverflowSearchInfo() throws RemoteException, NotBoundException, MalformedURLException {
+        if (inventoryOverflowReceiptbl == null) {
+            return inventoryOverflowReceiptbl = new InventoryOverflowReceiptbl();
+        }
+        return inventoryOverflowReceiptbl;
+    }
+
+    public static BusinessSearchInfo<InventoryWarningReceiptVO> getInventoryWarningSearchInfo() throws RemoteException, NotBoundException, MalformedURLException {
+        if (inventoryWarningReceiptbl == null) {
+            return inventoryWarningReceiptbl = new InventoryWarningReceiptbl();
+        }
+        return inventoryWarningReceiptbl;
+    }
+
+
+    public static BusinessSearchInfo<CashReceiptVO> getCashReceiptSearchInfo() throws RemoteException, NotBoundException, MalformedURLException {
+        if (cashReceiptbl == null) {
+            return cashReceiptbl = new CashBillReceiptbl();
+        }
+        return cashReceiptbl;
+    }
+
+    public static BusinessSearchInfo<ChargeReceiptVO> getChargeReceiptSearchInfo() throws RemoteException, NotBoundException, MalformedURLException {
+        if (chargeReceiptbl == null) {
+            return chargeReceiptbl = new ChargeBillReceiptbl();
+        }
+        return chargeReceiptbl;
+    }
+
+    public static BusinessSearchInfo<PaymentReceiptVO> getPaymentReceiptSearchInfo() throws RemoteException, NotBoundException, MalformedURLException {
+        if (paymentReceiptbl == null) {
+            return paymentReceiptbl = new PaymentBillReceiptbl();
+        }
+        return paymentReceiptbl;
+    }
+
+    /**
+     * BusinessCondition
+     * */
+
+    public static BusinessConditionblService getBusinessConditionblService() throws RemoteException, NotBoundException, MalformedURLException {
+        if (businessConditionbl == null) {
+            return businessConditionbl = new BusinessConditionbl();
+        }
+        return businessConditionbl;
+    }
+
+    public static BusinessConditionInfo getBusinessConditionInfo() throws RemoteException, NotBoundException, MalformedURLException {
+        if (businessConditionbl == null) {
+            return businessConditionbl = new BusinessConditionbl();
+        }
+        return businessConditionbl;
     }
 }

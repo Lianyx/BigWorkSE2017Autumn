@@ -1,5 +1,6 @@
 package businesslogic.checkbl;
 
+import blService.businessblservice.BusinessSearchInfo;
 import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
 import businesslogic.generic.Receipishbl;
@@ -22,7 +23,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public abstract class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> extends Receipishbl<TV, TP> implements ReceiptblService<TV>, CheckInfo<TV> {
+public abstract class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> extends Receipishbl<TV, TP> implements ReceiptblService<TV>, CheckInfo<TV>, BusinessSearchInfo<TV> {
     private Class<TV> receiptVOClass;
     private Class<TP> receiptPOClass;
 

@@ -1,7 +1,7 @@
 package network;
 
 
-import dataService.test.TestData;
+//import dataService.test.TestData;
 import dataService.test.TestdataService2;
 
 import javax.imageio.ImageIO;
@@ -52,15 +52,15 @@ public class ClientImpl extends UnicastRemoteObject implements Client{
             server.addClient(client);
             server.notify("hahaha");
 
-            TestData testData = (TestData) Naming.lookup("rmi://" + registry + ":" + port + "/TestData");
-            BufferedImage image = ImageIO.read(ClientImpl.class.getResource("/default/timg.jpg"));
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(image, "png", baos);
-            String test1 = testData.test(baos.toByteArray());
-            System.out.println(test1);
-            TestdataService2 testdataService2 = (TestdataService2) Naming.lookup("rmi://" + registry + ":" + port + "/TestdataService2");
-            String test2 = testdataService2.test();
-            System.out.println(test2);
+//            TestData testData = (TestData) Naming.lookup("rmi://" + registry + ":" + port + "/TestData");
+//            BufferedImage image = ImageIO.read(ClientImpl.class.getResource("/default/timg.jpg"));
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            ImageIO.write(image, "png", baos);
+//            String test1 = testData.test(baos.toByteArray());
+//            System.out.println(test1);
+//            TestdataService2 testdataService2 = (TestdataService2) Naming.lookup("rmi://" + registry + ":" + port + "/TestdataService2");
+//            String test2 = testdataService2.test();
+//            System.out.println(test2);
 
         } catch (Exception e) {
             e.printStackTrace();

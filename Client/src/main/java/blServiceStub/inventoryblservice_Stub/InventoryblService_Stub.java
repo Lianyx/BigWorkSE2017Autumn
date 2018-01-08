@@ -84,6 +84,11 @@ public class InventoryblService_Stub implements InventoryblService {
     }
 
     @Override
+    public InventoryReceiptVO selectByMold(InventoryReceiptVO receiptVO) throws RemoteException {
+        return null;
+    }
+
+    @Override
     public ArrayList<InventoryReceiptVO> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
         return null;
     }

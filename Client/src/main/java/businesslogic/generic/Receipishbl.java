@@ -11,6 +11,7 @@ import vo.promotionVO.PromotionVO;
 import vo.promotionVO.TotalPromotionVO;
 
 import java.lang.reflect.Constructor;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 // TODO 这个generic怎么这么坑啊！！！我也不懂什么意思…
 public abstract class Receipishbl<TV extends ReceipishVO<? extends ReceipishVO>, TP extends ReceipishPO> {
@@ -33,6 +34,10 @@ public abstract class Receipishbl<TV extends ReceipishVO<? extends ReceipishVO>,
 
     public ResultMessage delete(TV promotionVO) throws RemoteException {
         return getDataService().delete(promotionVO.toPO());
+    }
+
+    public TV selectByMold(TV receipishVO) throws RemoteException {
+        return convertToVO(getDataService().selectByMold(receipishVO.toPO()));
     }
 
     protected TV convertToVO(TP receipishPO) {
