@@ -9,6 +9,7 @@ import po.promotionPO.PromotionGoodsItemPO;
 import po.receiptPO.*;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;
+import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -130,9 +131,7 @@ public abstract class SalesReceiptVO extends ReceiptVO {
     }
 
     public ReceiptGoodsItemPO[] toGoodsArray(ArrayList<ListGoodsItemVO> items){
-        List<ReceiptGoodsItemPO> receiptGoodsItemPOs = items.stream().map(t->t.toPo()).collect(Collectors.toList());
-        ReceiptGoodsItemPO[] goodsItemPOs = (ReceiptGoodsItemPO[])receiptGoodsItemPOs.toArray();
-        return goodsItemPOs;
+        return items.stream().map(ListGoodsItemVO::toPo).toArray(ReceiptGoodsItemPO[]::new);
     }
 
     public ArrayList<ListGoodsItemVO> toGoodsList(ReceiptGoodsItemPO[] array){

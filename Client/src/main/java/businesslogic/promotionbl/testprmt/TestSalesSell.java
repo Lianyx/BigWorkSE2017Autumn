@@ -29,7 +29,10 @@ public class TestSalesSell {
         try {
             SalesSellblService salesSellblService = new SalesSellbl();
 
-            salesSellReceiptVO.setId(salesSellblService.getNew().getId());
+            SalesSellReceiptVO ssr = salesSellblService.getNew();
+            System.out.println(ssr.getId());
+            salesSellReceiptVO.setId(ssr.getId());
+            salesSellReceiptVO.setCreateTime(ssr.getCreateTime());
 
             salesSellblService.insert(salesSellReceiptVO);
 
