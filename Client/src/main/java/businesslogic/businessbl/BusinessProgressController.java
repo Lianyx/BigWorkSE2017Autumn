@@ -15,7 +15,7 @@ public class BusinessProgressController implements BusinessProgressblService{
     }
 
     @Override
-    public List<ReceiptVO> select(BusinessProgressInfo businessProgressInfo){
+    public List<ReceiptVO> search(BusinessProgressInfo businessProgressInfo){
         return null;
     }
 

@@ -54,7 +54,7 @@ public class TestSalesSellData {
 
 //        SalesSellReceiptPO ssrpC = rdao.search(new ReceiptSearchCondition(null, LocalDateTime.now(), null, "Wang Er Xiao", null, null)).get(0);
         SalesSellReceiptPO ssrpC = rdao.search(new RespectiveReceiptSearchCondition()).get(0);
-        System.out.println(ssrpC.getCreateTime());
+        System.out.println(ssrpC.getLastModifiedTime());
 
         System.out.println("get and delete: ");
         System.out.println(ssrpC);

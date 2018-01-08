@@ -140,6 +140,16 @@ create table SalesDetail(
 
 
 create table BusinessCondition(
-    income double,
-    expense double
+    date bigint,
+    salesIncome double,
+    overFlowIncome double,
+    purPriceAdjustIncome double,
+    priceDiffIncome double,
+    tokenIncome double,
+
+    discount double,
+
+    purCost double,
+    damageCost double,
+    giftCost double
 );

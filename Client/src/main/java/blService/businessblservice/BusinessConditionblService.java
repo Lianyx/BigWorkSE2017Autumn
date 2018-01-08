@@ -1,10 +1,11 @@
 package blService.businessblservice;
 
-import vo.BusinessConditionVO;
+import po.BusinessConditionPO;
 
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public interface BusinessConditionblService {
-    public List<BusinessConditionVO> select(LocalDateTime begin, LocalDateTime end);
+    void insert(BusinessConditionPO businessConditionPO) throws RemoteException;
+    BusinessConditionPO search(LocalDateTime begin, LocalDateTime end) throws RemoteException;
 }

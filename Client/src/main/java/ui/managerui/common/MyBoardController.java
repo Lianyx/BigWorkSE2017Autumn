@@ -30,6 +30,7 @@ public class MyBoardController extends BoardController {
                 index++;
                 return false; // 返回值只是为了是否有动画，因此false符合反回值原意
             }
+//            System.out.println(index);
             if (record.get(index).getId().equals(pane.getId())) {
 //            setBackAndForwardProperty(); // 这里什么都没干，应该不用更新吧。
                 return false;
@@ -79,9 +80,9 @@ public class MyBoardController extends BoardController {
 
 
     public void switchTo(Refreshable pane) {
+        System.out.println(pane);
         Platform.runLater(() -> {
             if (HistoryRecord.addRecord(pane)) {
-//                System.out.println(pane);
                 paneSwitchAnimation.setAnimation(ContainerAnimations.SWIPE_LEFT);
                 paneSwitchAnimation.setNode(pane);
             } else {
