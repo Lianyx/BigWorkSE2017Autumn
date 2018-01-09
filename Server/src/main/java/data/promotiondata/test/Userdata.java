@@ -11,13 +11,15 @@ public class Userdata {
 
         try{
             UserDataService userdata = new UserData();
+
+
+//            UserPO userPO = new UserPO();
+//            userPO.setComment("comment userPO");
+//            userPO.setDate("fdsa");
+//
+//            userdata.insert(userPO);
+
             System.out.println(userdata.search(new UserSearchCondition()).get(0).getComment());
-
-            UserPO userPO = new UserPO();
-            userPO.setComment("comment userPO");
-            userPO.setDate("fdsa");
-
-            userdata.insert(userPO);
         }catch (Exception e){
             e.printStackTrace();
         }

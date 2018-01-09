@@ -31,8 +31,9 @@ public class SalesRetReceiptbl extends Receiptbl<SalesRetReceiptVO, SalesRetRece
     @Override
     public Set<SalesReceiptListVO> searchForList(RespectiveReceiptSearchCondition respectiveReceiptSearchCondition) throws RemoteException {
         ArrayList<SalesRetReceiptVO> list = search(respectiveReceiptSearchCondition);
-        HashSet<SalesReceiptListVO> set = list.stream().map(SalesRetReceiptVO::toListVO).collect(Collectors.toCollection(HashSet::new));
-        return set;
+//        HashSet<SalesReceiptListVO> set = list.stream().map(SalesRetReceiptVO::toListVO).collect(Collectors.toCollection(HashSet::new));
+//        return set;
+        return null;
     }
 
     @Override

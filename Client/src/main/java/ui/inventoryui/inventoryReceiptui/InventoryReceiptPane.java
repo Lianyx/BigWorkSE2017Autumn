@@ -59,7 +59,9 @@ public class InventoryReceiptPane extends ReceiptDetailPane<InventoryReceiptVO>{
     InventoryReceiptType receiptType;
 
     public InventoryReceiptPane(String id) {
-        super("/inventoryui/inventoryreceiptui/inventoryreceipt.fxml",id);
+//        super("/inventoryui/inventoryreceiptui/inventoryreceipt.fxml",id);
+        super("/inventoryui/inventoryreceiptui/inventoryreceipt.fxml",true);
+
         inventoryblService = ServiceFactory_Stub.getService(InventoryblService.class.getName());
         operator.setDisable(true);
         operatorId.setDisable(true);
@@ -153,56 +155,56 @@ public class InventoryReceiptPane extends ReceiptDetailPane<InventoryReceiptVO>{
 
     @Override
     public void savePendingReceipt() {
-        this.receiptid = head.getText().replace("-","")+"-"+date.getValue().toString().replace("-","")+"-"+id.getText().replace("-","");
-        this.vo = new InventoryReceiptVO(receiptid,
-                UserInfomation.userid,
-                LocalDateTime.now(),LocalDateTime.now(),
-                ReceiptState.PENDING,
-                operator.getText(),
-                inventoryListItemTreeTable.getList(),
-                comment.getText(),
-                receiptType);
-        if(updateState.get()) {
-            try {
-                inventoryblService.insert(this.vo);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        }else {
-            try {
-                inventoryblService.update(this.vo);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        }
+//        this.receiptid = head.getText().replace("-","")+"-"+date.getValue().toString().replace("-","")+"-"+id.getText().replace("-","");
+//        this.vo = new InventoryReceiptVO(receiptid,
+//                UserInfomation.userid,
+//                LocalDateTime.now(),LocalDateTime.now(),
+//                ReceiptState.PENDING,
+//                operator.getText(),
+//                inventoryListItemTreeTable.getList(),
+//                comment.getText(),
+//                receiptType);
+//        if(updateState.get()) {
+//            try {
+//                inventoryblService.insert(this.vo);
+//            } catch (RemoteException e) {
+//                e.printStackTrace();
+//            }
+//        }else {
+//            try {
+//                inventoryblService.update(this.vo);
+//            } catch (RemoteException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     @Override
     public void saveDraftReceipt() {
-        if(date.getValue()==null)
-            date.setValue(LocalDate.now());
-        this.receiptid = head.getText().replace("-","")+"-"+date.getValue().toString().replace("-","")+"-"+id.getText().replace("-","");
-        this.vo = new InventoryReceiptVO(receiptid,
-                UserInfomation.userid,
-                LocalDateTime.now(),LocalDateTime.now(),
-                ReceiptState.PENDING,
-                operator.getText(),
-                inventoryListItemTreeTable.getList(),
-                comment.getText(),
-                receiptType);
-        if(updateState.get()) {
-            try {
-                inventoryblService.insert(this.vo);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        }else {
-            try {
-                inventoryblService.update(this.vo);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        }
+//        if(date.getValue()==null)
+//            date.setValue(LocalDate.now());
+//        this.receiptid = head.getText().replace("-","")+"-"+date.getValue().toString().replace("-","")+"-"+id.getText().replace("-","");
+//        this.vo = new InventoryReceiptVO(receiptid,
+//                UserInfomation.userid,
+//                LocalDateTime.now(),LocalDateTime.now(),
+//                ReceiptState.PENDING,
+//                operator.getText(),
+//                inventoryListItemTreeTable.getList(),
+//                comment.getText(),
+//                receiptType);
+//        if(updateState.get()) {
+//            try {
+//                inventoryblService.insert(this.vo);
+//            } catch (RemoteException e) {
+//                e.printStackTrace();
+//            }
+//        }else {
+//            try {
+//                inventoryblService.update(this.vo);
+//            } catch (RemoteException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
     }
 
@@ -217,28 +219,28 @@ public class InventoryReceiptPane extends ReceiptDetailPane<InventoryReceiptVO>{
     public void refresh(boolean toSwitch) {
         boardController.Loading();
         try{
-
-            DoubleButtonDialog buttonDialog =
-                    new DoubleButtonDialog(mainpane,"Wrong","sabi","Last","Ret");
-            buttonDialog.setButtonTwo(()->boardController.Ret());
-            buttonDialog.setButtonTwo(()->refresh(false));
-            Predicate<Integer> p = (i)->{if((vo = inventoryblService.showDetail(receiptid))!=null) return true;return false;};
-            GetTask task =
-                    new GetTask(()-> {
-                        operatorId.setText(Integer.toString(vo.getMemberId()));
-                        operator.setText(UserInfomation.username);
-                        date.setValue(vo.getCreateTime().toLocalDate());
-                        comment.setText(vo.getComment());
-                        id.setText("-"+vo.getId().split("-")[2]);
-                        memberId = vo.getMemberId();
-                        head.setText(vo.getId().split("-")[0]+"-");
-                        receiptState.setText(vo.getReceiptState().toString());
-
-                        inventoryListItemTreeTable.setList(vo.getItems());
-                        switchPane(toSwitch);
-                    }, buttonDialog,p);
-
-            new Thread(task).start();
+//
+//            DoubleButtonDialog buttonDialog =
+//                    new DoubleButtonDialog(mainpane,"Wrong","sabi","Last","Ret");
+//            buttonDialog.setButtonTwo(()->boardController.Ret());
+//            buttonDialog.setButtonTwo(()->refresh(false));
+//            Predicate<Integer> p = (i)->{if((vo = inventoryblService.showDetail(receiptid))!=null) return true;return false;};
+//            GetTask task =
+//                    new GetTask(()-> {
+//                        operatorId.setText(Integer.toString(vo.getMemberId()));
+//                        operator.setText(UserInfomation.username);
+//                        date.setValue(vo.getCreateTime().toLocalDate());
+//                        comment.setText(vo.getComment());
+//                        id.setText("-"+vo.getId().split("-")[2]);
+//                        memberId = vo.getMemberId();
+//                        head.setText(vo.getId().split("-")[0]+"-");
+//                        receiptState.setText(vo.getReceiptState().toString());
+//
+//                        inventoryListItemTreeTable.setList(vo.getItems());
+//                        switchPane(toSwitch);
+//                    }, buttonDialog,p);
+//
+//            new Thread(task).start();
         }catch (Exception e){
             e.printStackTrace();
         }

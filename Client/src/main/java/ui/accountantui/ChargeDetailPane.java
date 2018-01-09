@@ -59,7 +59,9 @@ public class ChargeDetailPane extends ReceiptDetailPane<ChargeReceiptVO>{
 
 
     public ChargeDetailPane(String id) {
-        super("/accountantui/ChargeDetailPane.fxml",id);
+//        super("/accountantui/ChargeDetailPane.fxml",id);
+        super("/accountantui/ChargeDetailPane.fxml",true);
+
         chargeBillReceiptblService = ServiceFactory_Stub.getService(ChargeBillReceiptblService.class.getName());
         operator.setDisable(true);
         sum.setDisable(true);
@@ -137,28 +139,28 @@ public class ChargeDetailPane extends ReceiptDetailPane<ChargeReceiptVO>{
     @Override
     public void refresh(boolean toSwitch) {
         boardController.Loading();
-        try{
-            DoubleButtonDialog buttonDialog =
-                    new DoubleButtonDialog(mainpane,"Wrong","sabi","Last","Ret");
-            buttonDialog.setButtonTwo(()->boardController.Ret());
-            buttonDialog.setButtonTwo(()->refresh(false));
-            Predicate<Integer> p = (i)->{if((vo = chargeBillReceiptblService.showDetail(receiptid))!=null) return true;return false;};
-            GetTask task =
-                    new GetTask(()-> {
-                        operator.setText(UserInfomation.username);
-                        date.setValue(vo.getCreateTime().toLocalDate());
-                        id.setText("-"+vo.getId().split("-")[2]);
-                        head.setText(vo.getId().split("-")[0]+"-");
-
-
-                        chargeItemTreeTable.setList(vo.getTransferList());
-                        switchPane(toSwitch);
-                    }, buttonDialog,p);
-
-            new Thread(task).start();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+//        try{
+//            DoubleButtonDialog buttonDialog =
+//                    new DoubleButtonDialog(mainpane,"Wrong","sabi","Last","Ret");
+//            buttonDialog.setButtonTwo(()->boardController.Ret());
+//            buttonDialog.setButtonTwo(()->refresh(false));
+//            Predicate<Integer> p = (i)->{if((vo = chargeBillReceiptblService.showDetail(receiptid))!=null) return true;return false;};
+//            GetTask task =
+//                    new GetTask(()-> {
+//                        operator.setText(UserInfomation.username);
+//                        date.setValue(vo.getCreateTime().toLocalDate());
+//                        id.setText("-"+vo.getId().split("-")[2]);
+//                        head.setText(vo.getId().split("-")[0]+"-");
+//
+//
+//                        chargeItemTreeTable.setList(vo.getTransferList());
+//                        switchPane(toSwitch);
+//                    }, buttonDialog,p);
+//
+//            new Thread(task).start();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
     }
 
     @Override

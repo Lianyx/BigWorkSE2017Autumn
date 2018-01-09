@@ -32,10 +32,11 @@ public class StockPurReceiptbl extends Receiptbl<StockPurReceiptVO, StockPurRece
 
     @Override
     public Set<StockReceiptListVO> searchForList(RespectiveReceiptSearchCondition respectiveReceiptSearchCondition) throws RemoteException {
-        ArrayList<StockPurReceiptVO> list = search(respectiveReceiptSearchCondition);
-        HashSet<StockReceiptListVO> set = list.stream().map(StockPurReceiptVO::toListVO).collect(Collectors.toCollection(HashSet::new));
-
-        return set;
+//        ArrayList<StockPurReceiptVO> list = search(respectiveReceiptSearchCondition);
+//        HashSet<StockReceiptListVO> set = list.stream().map(StockPurReceiptVO::toListVO).collect(Collectors.toCollection(HashSet::new));
+//
+//        return set;
+        return null;
     }
 
     @Override

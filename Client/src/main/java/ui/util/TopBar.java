@@ -95,22 +95,22 @@ public class TopBar extends HBox {
         }
 
 
-        PopOver messagePopOver = new PopOver();
-        MessageListView messageListView = new MessageListView();
-        BorderPane anchorPane = new BorderPane();
-
-        anchorPane.setCenter(messageListView);
-
-        anchorPane.setPadding(new Insets(10,10,10,10));
-        messagePopOver.setContentNode(anchorPane);
-        messagePopOver.setDetachable(false);
-        messagePopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
-        message.setText(messageListView.checkProperty().get()+"");
-        message.setOnMouseClicked(e -> messagePopOver.show(message));
-
-        messageListView.checkProperty().addListener((b,o,n)->{
-            message.setText(n.toString());
-        });
+//        PopOver messagePopOver = new PopOver();
+//        MessageListView messageListView = new MessageListView();
+//        BorderPane anchorPane = new BorderPane();
+//
+//        anchorPane.setCenter(messageListView);
+//
+//        anchorPane.setPadding(new Insets(10,10,10,10));
+//        messagePopOver.setContentNode(anchorPane);
+//        messagePopOver.setDetachable(false);
+//        messagePopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
+//        message.setText(messageListView.checkProperty().get()+"");
+//        message.setOnMouseClicked(e -> messagePopOver.show(message));
+//
+//        messageListView.checkProperty().addListener((b,o,n)->{
+//            message.setText(n.toString());
+//        });
 
     }
 

@@ -37,6 +37,11 @@ public class StockPurReceiptVO extends StockReceiptVO {
     }
 
     @Override
+    public <TL extends ReceiptListVO<TL>> TL toListVO() {
+        return null;
+    }
+
+    @Override
     protected String getCodeName() {
         return "JHD";
     }

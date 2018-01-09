@@ -7,7 +7,6 @@ import util.ReceiptState;
 import util.RespectiveReceiptSearchCondition;
 import util.ResultMessage;
 import vo.ListGoodsItemVO;
-import vo.SalesSearchVO;
 import vo.billReceiptVO.BillReceiptSearchVO;
 import vo.billReceiptVO.PaymentReceiptListVO;
 import vo.billReceiptVO.PaymentReceiptVO;

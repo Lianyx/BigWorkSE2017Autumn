@@ -124,15 +124,15 @@ public abstract class StockReceiptVO extends ReceiptVO {
         return list;
     }
 
-    public StockReceiptListVO toListVO(){
-        StockReceiptListVO stockReceiptListVO = new StockReceiptListVO();
-        stockReceiptListVO.setId(getId());
-        stockReceiptListVO.setMemberName(getMemberName());
-        stockReceiptListVO.setReceiptState(getReceiptState());
-        stockReceiptListVO.setPur(id.contains("JHD"));
-        stockReceiptListVO.setSum(getSum());
-        stockReceiptListVO.setCreateTime(getCreateTime());
-        return stockReceiptListVO;
-    }
+//    public StockReceiptListVO toListVO(){
+//        StockReceiptListVO stockReceiptListVO = new StockReceiptListVO();
+//        stockReceiptListVO.setId(getId());
+//        stockReceiptListVO.setMemberName(getMemberName());
+//        stockReceiptListVO.setReceiptState(getReceiptState());
+//        stockReceiptListVO.setPur(id.contains("JHD"));
+//        stockReceiptListVO.setSum(getSum());
+//        stockReceiptListVO.setCreateTime(getCreateTime());
+//        return stockReceiptListVO;
+//    }
 
 }

@@ -53,7 +53,9 @@ public class PaymentDetailPane extends ReceiptDetailPane<PaymentReceiptVO>{
 
 
     public PaymentDetailPane(String id) {
-        super("/accountantui/paymentDetailPane.fxml",id);
+//        super("/accountantui/paymentDetailPane.fxml",id);
+        super("/accountantui/paymentDetailPane.fxml",true);
+
         paymentBillReceiptblService = ServiceFactory_Stub.getService(PaymentBillReceiptblService.class.getName());
         operator.setDisable(true);
         sum.setDisable(true);
@@ -134,23 +136,23 @@ public class PaymentDetailPane extends ReceiptDetailPane<PaymentReceiptVO>{
     public void refresh(boolean toSwitch) {
         boardController.Loading();
         try{
-            DoubleButtonDialog buttonDialog =
-                    new DoubleButtonDialog(mainpane,"Wrong","sabi","Last","Ret");
-            buttonDialog.setButtonTwo(()->boardController.Ret());
-            buttonDialog.setButtonTwo(()->refresh(false));
-            Predicate<Integer> p = (i)->{if((vo = paymentBillReceiptblService.showDetail(receiptid))!=null) return true;return false;};
-            GetTask task =
-                    new GetTask(()-> {
-                        operator.setText(UserInfomation.username);
-                        date.setValue(vo.getCreateTime().toLocalDate());
-                        id.setText("-"+vo.getId().split("-")[2]);
-                        head.setText(vo.getId().split("-")[0]+"-");
-
-                        paymentItemTreeTable.setList(vo.getTransferList());
-                        switchPane(toSwitch);
-                    }, buttonDialog,p);
-
-            new Thread(task).start();
+//            DoubleButtonDialog buttonDialog =
+//                    new DoubleButtonDialog(mainpane,"Wrong","sabi","Last","Ret");
+//            buttonDialog.setButtonTwo(()->boardController.Ret());
+//            buttonDialog.setButtonTwo(()->refresh(false));
+//            Predicate<Integer> p = (i)->{if((vo = paymentBillReceiptblService.showDetail(receiptid))!=null) return true;return false;};
+//            GetTask task =
+//                    new GetTask(()-> {
+//                        operator.setText(UserInfomation.username);
+//                        date.setValue(vo.getCreateTime().toLocalDate());
+//                        id.setText("-"+vo.getId().split("-")[2]);
+//                        head.setText(vo.getId().split("-")[0]+"-");
+//
+//                        paymentItemTreeTable.setList(vo.getTransferList());
+//                        switchPane(toSwitch);
+//                    }, buttonDialog,p);
+//
+//            new Thread(task).start();
         }catch (Exception e){
             e.printStackTrace();
         }

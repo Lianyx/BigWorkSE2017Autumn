@@ -7,7 +7,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.BorderPane;
 import org.controlsfx.control.PopOver;
-import ui.salesui.SalesFilterPane;
 import ui.salesui.SalesReceiptPane;
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;

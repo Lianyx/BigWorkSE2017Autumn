@@ -4,11 +4,13 @@ import blService.userblService.UserManagerblService;
 import javafx.scene.image.Image;
 import util.ResultMessage;
 import util.UserCategory;
+import util.UserSearchCondition;
 import vo.UserListVO;
 import vo.UserSearchVO;
 import vo.UserVO;
 
 import java.lang.annotation.Target;
+import java.rmi.RemoteException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,10 +36,15 @@ public class UserManagerblService_Stub implements UserManagerblService{
     }
 
 
+//    @Override
+//    public ResultMessage add(UserVO UserVO) {
+//        set.add(new UserListVO(UserVO.getId(),UserVO.getImage(),UserVO.getUsername(),UserVO.getUsertype(),UserVO.getEmail(),UserVO.getPhone()));
+//        return ResultMessage.SUCCESS;
+//    }
+
     @Override
-    public ResultMessage add(UserVO UserVO) {
-        set.add(new UserListVO(UserVO.getId(),UserVO.getImage(),UserVO.getUsername(),UserVO.getUsertype(),UserVO.getEmail(),UserVO.getPhone()));
-        return ResultMessage.SUCCESS;
+    public ResultMessage insert(UserVO UserVO) throws RemoteException {
+        return null;
     }
 
     @Override
@@ -57,37 +64,45 @@ public class UserManagerblService_Stub implements UserManagerblService{
     @Override
     public ResultMessage update(UserVO UserVO) {
         delete(UserVO.getId());
-        add(UserVO);
+//        add(UserVO);
         return null;
     }
 
     @Override
-    public Set<UserListVO> search(UserSearchVO userSearchVO) {
-        HashSet<UserListVO> temp = new HashSet<>();
-        for(UserListVO s:set){
-                for(UserCategory receiptState:userSearchVO.getUserCategories()){
-                    if(s.getUserCategory()==receiptState)
-                        temp.add(s);
-                }
-
-        }
-        return temp;
+    public Set<UserListVO> search(UserSearchCondition userSearchCondition) throws RemoteException {
+        return null;
     }
+
+//    @Override
+//    public Set<UserListVO> search(UserSearchVO userSearchVO) {
+//        HashSet<UserListVO> temp = new HashSet<>();
+//        for(UserListVO s:set){
+//                for(UserCategory receiptState:userSearchVO.getUserCategories()){
+//                    if(s.getUserCategory()==receiptState)
+//                        temp.add(s);
+//                }
+//
+//        }
+//        return temp;
+//    }
 
     @Override
     public UserVO showDetail(int id) {
-        return new UserVO(id,new Image("/default/timg.jpg"),"123123123", UserCategory.SalesManager,"","","","gzyz12306@163.com","11111111110","He ie stupid","2017-1-1","admin");
+//        return new UserVO(id,new Image("/default/timg.jpg"),"123123123", UserCategory.SalesManager,"","","","gzyz12306@163.com","11111111110","He ie stupid","2017-1-1","admin");
+        return null;
     }
 
-    @Override
-    public Set<UserListVO> getAll() {
-        return set;
-    }
+//    @Override
+//    public Set<UserListVO> getAll() {
+//        return set;
+//    }
 
     @Override
     public int getId() {
         i++;
         return i;
     }
+
+
 
 }

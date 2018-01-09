@@ -61,7 +61,8 @@ public class CashDetailPane extends ReceiptDetailPane<CashReceiptVO> {
 
 
     public CashDetailPane(String id) {
-        super("/accountantui/CashDetailPane.fxml",id);
+//        super("/accountantui/CashDetailPane.fxml",id);
+        super("/accountantui/CashDetailPane.fxml",true);
         cashBillReceiptblService = ServiceFactory_Stub.getService(CashBillReceiptblService.class.getName());
         operator.setDisable(true);
         sum.setDisable(true);
@@ -142,24 +143,24 @@ public class CashDetailPane extends ReceiptDetailPane<CashReceiptVO> {
     public void refresh(boolean toSwitch) {
         boardController.Loading();
         try{
-            DoubleButtonDialog buttonDialog =
-                    new DoubleButtonDialog(mainpane,"Wrong","sabi","Last","Ret");
-            buttonDialog.setButtonTwo(()->boardController.Ret());
-            buttonDialog.setButtonTwo(()->refresh(false));
-            Predicate<Integer> p = (i)->{if((vo = cashBillReceiptblService.showDetail(receiptid))!=null) return true;return false;};
-            GetTask task =
-                    new GetTask(()-> {
-                        operator.setText(UserInfomation.username);
-                        date.setValue(vo.getCreateTime().toLocalDate());
-                        id.setText("-"+vo.getId().split("-")[2]);
-                        head.setText(vo.getId().split("-")[0]+"-");
-
-
-                        cashItemTreeTable.setList(vo.getCashList());
-                        switchPane(toSwitch);
-                    }, buttonDialog,p);
-
-            new Thread(task).start();
+//            DoubleButtonDialog buttonDialog =
+//                    new DoubleButtonDialog(mainpane,"Wrong","sabi","Last","Ret");
+//            buttonDialog.setButtonTwo(()->boardController.Ret());
+//            buttonDialog.setButtonTwo(()->refresh(false));
+//            Predicate<Integer> p = (i)->{if((vo = cashBillReceiptblService.showDetail(receiptid))!=null) return true;return false;};
+//            GetTask task =
+//                    new GetTask(()-> {
+//                        operator.setText(UserInfomation.username);
+//                        date.setValue(vo.getCreateTime().toLocalDate());
+//                        id.setText("-"+vo.getId().split("-")[2]);
+//                        head.setText(vo.getId().split("-")[0]+"-");
+//
+//
+//                        cashItemTreeTable.setList(vo.getCashList());
+//                        switchPane(toSwitch);
+//                    }, buttonDialog,p);
+//
+//            new Thread(task).start();
         }catch (Exception e){
             e.printStackTrace();
         }
