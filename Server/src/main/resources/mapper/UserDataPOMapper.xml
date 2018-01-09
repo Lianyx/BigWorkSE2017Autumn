@@ -18,7 +18,7 @@
 
     <update id="update">
         update User set username=#{username},usertype=#{usertype},createTime=#{createTime},facebook=#{facebook},github=#{github},twitter=#{twitter},email=#{email},phone=#{phone},comment=#{comment},date=#{date},password=#{password},isDeleted=#{isDeleted}
-        where userId=#{userId}
+        where userId = #{userId}
     </update>
 
     <delete id="delete">
@@ -32,10 +32,10 @@
         select * from User
         <where>
             <if test="userCategory != null">
-                userCategory=#{userCategory}
+                userCategory = #{userCategory}
             </if>
             <if test="createTimeFloor != null">
-                AND createTime >= #{createTimeFloor}
+                AND createTime &gt;= #{createTimeFloor}
             </if>
             <if test="createTimeCeil != null">
                 AND createTime &lt;= #{createTimeCeil}
