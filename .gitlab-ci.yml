@@ -1,16 +1,22 @@
+image: maven:4.0.0-jdk-8
 stages:
   - build
-  - test
-  - deploy
-
-
-maven_build:
-  stage: test
- 
- 
-  tags:
-    - maven
-
-
+build_job:
+  stage: build
+  only:
+    - master
   script:
-    - mvn verify
+    - mvn --batch-mode compile -Dmaven.test.skip=true
+  tags:
+    - docker
+build_merge_job:
+  stage: build
+  except:
+    - master
+    - tags
+  script:
+    - git merge origin master
+    - mvn --batch-mode compile -Dmaven.test.skip=true
+  tags:
+    - docker
+
