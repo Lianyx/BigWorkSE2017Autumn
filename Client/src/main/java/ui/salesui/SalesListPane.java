@@ -2,24 +2,18 @@ package ui.salesui;
 
 import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.salesblService.SalesblService;
-import blService.stockblService.StockblService;
+import businesslogic.salesbl.SalesRetReceiptbl;
+import businesslogic.salesbl.SalesSellReceiptbl;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
 import ui.util.*;
-import util.ReceiptState;
-import vo.SalesSearchVO;
+import util.RespectiveReceiptSearchCondition;
 import vo.receiptVO.SalesReceiptListVO;
-import vo.receiptVO.StockReceiptListVO;
-import vo.StockSearchVO;
-import vo.receiptVO.StockReceiptVO;
 
-import java.util.HashSet;
+import java.rmi.RemoteException;
 import java.util.Set;
-import java.util.function.BiPredicate;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -31,21 +25,24 @@ public class SalesListPane extends ReceiptListPane<SalesReceiptListVO> {
 
     SimpleStringProperty match = new SimpleStringProperty("");
 
-    static SalesSearchVO salesSearchVO = new SalesSearchVO();
+    static RespectiveReceiptSearchCondition respectiveReceiptSearchCondition = new RespectiveReceiptSearchCondition();
 
     public SalesListPane(boolean isSell) throws Exception {
         super("/stockui/stocklistpane.fxml");
-        this.salesblService = ServiceFactory_Stub.getService(SalesblService.class.getName());
-        this.isSell.set(isSell);
         receiptTreeTable = new SalesTreeTable();
+
+        if(isSell){
+            salesblService = new SalesSellReceiptbl();
+        }else{
+            salesblService = new SalesRetReceiptbl();
+
+        }
+
 
         receiptTreeTable.setPrefSize(600, 435);
         receiptTreeTable.keywordProperty().bind(match);
         borderpane.setTop(new BorderPane(receiptTreeTable));
-        for (ReceiptState receiptState : ReceiptState.values()) {
-            salesSearchVO.getReceiptStates().add(receiptState);
-        }
-        SalesFilterPane slp = new SalesFilterPane(filterPopOver, salesSearchVO);
+        FilterPane slp = new FilterPane(filterPopOver, respectiveReceiptSearchCondition);
         filterPopOver.setDetachable(false);
         filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
         filterPopOver.setContentNode(slp);
@@ -94,11 +91,17 @@ public class SalesListPane extends ReceiptListPane<SalesReceiptListVO> {
             buttonDialog.setButtonTwo(() -> boardController.Ret());
             buttonDialog.setButtonTwo(() -> refresh(false));
             Predicate<Integer> p = (s) -> {
-                if ((set = salesblService.search(salesSearchVO, isSell.get())) != null) {
-                    System.out.println(set.size());
-                    return true;
+                try {
+                    if(isSell.get())
+                    if ((set = (salesblService.searchForList(respectiveReceiptSearchCondition))) != null) {
+                        System.out.println(set.size());
+                        return true;
+                    }
+                }catch (RemoteException e){
+                    e.printStackTrace();
                 }
-                return false;
+                    return false;
+
             };
             GetTask getTask =
                     new GetTask(() -> {

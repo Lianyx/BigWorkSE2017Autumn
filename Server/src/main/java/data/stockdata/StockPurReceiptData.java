@@ -1,13 +1,14 @@
 package data.stockdata;
 
+import annotations.RMIRemote;
 import data.checkdata.ReceiptData;
 import mapper.StockPurReceiptPOMapper;
 import po.receiptPO.StockPurReceiptPO;
 
 import java.rmi.RemoteException;
-
-public class StockPurData extends ReceiptData<StockPurReceiptPO> {
-    public StockPurData() throws RemoteException{
+@RMIRemote
+public class StockPurReceiptData extends ReceiptData<StockPurReceiptPO> {
+    public StockPurReceiptData() throws RemoteException{
         super(StockPurReceiptPOMapper.class, StockPurReceiptPO.class);
     }
 }

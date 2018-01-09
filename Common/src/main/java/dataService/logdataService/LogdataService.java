@@ -8,12 +8,8 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public interface LogdataService {
+    public int getId();
     public ResultMessage insert(LogPO log);
-    public ArrayList<LogPO> show();
-    public ArrayList<LogPO> select(String keyword);
-    public ResultMessage delete(int id);
-    public ResultMessage delete(ArrayList<Integer> list);
-
-
+    public ArrayList<LogPO> getAll();
 
 }

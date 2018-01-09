@@ -13,6 +13,8 @@
         <typeHandler handler="MyDateTypeHandler"/>
         <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="util.ReceiptState"/>
         <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="util.PromotionState"/>
+        <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="util.UserCategory"/>
+        <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="util.MemberCategory"/>
     </typeHandlers>
     <environments default='development'>
         <environment id='development'>

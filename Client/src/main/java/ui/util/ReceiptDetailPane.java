@@ -39,15 +39,17 @@ public abstract class ReceiptDetailPane<T> extends Refreshable {
     protected JFXButton save;
 
     @FXML
+    protected JFXButton reject;
+
+    @FXML
     protected JFXButton delete;
 
-    protected String receiptid;
-
+    private boolean check;
     protected SimpleBooleanProperty updateState = new SimpleBooleanProperty();
 
-    public ReceiptDetailPane(String url,String id) {
+    public ReceiptDetailPane(String url,boolean check) {
         super();
-        this.receiptid = id;
+        this.check = check;
         boardController = BoardController.getBoardController();
         mainpane = PaneFactory.getMainPane();
         try {
@@ -68,9 +70,14 @@ public abstract class ReceiptDetailPane<T> extends Refreshable {
                     }
                 }
             });
-
-        save.visibleProperty().bind(modifyState);
-
+        if(!check) {
+            save.visibleProperty().bind(modifyState);
+        }else{
+            save.setText("Accept");
+            save.setStyle("-fx-background-color: rgb(56,174,103)");
+            reject.setVisible(true);
+            delete.setVisible(false);
+        }
     }
 
     public ReceiptDetailPane(String url){
@@ -91,6 +98,11 @@ public abstract class ReceiptDetailPane<T> extends Refreshable {
         delete.setVisible(false);
     }
 
+
+
+
+
+
     @FXML
     public abstract void delete();
 
@@ -105,14 +117,25 @@ public abstract class ReceiptDetailPane<T> extends Refreshable {
 
     @FXML
     public void save(){
+        if(!check){
+            saveReceipt();
+        }else{
+            accept();
+        }
+    }
+    public void accept(){
+
+    }
+
+    public void saveReceipt(){
         modify.modifyProperty().set(false);
         if(valid()){
             savePendingReceipt();
         }else{
             saveDraftReceipt();
         }
-
     }
+
     public abstract void savePendingReceipt();
     public abstract void saveDraftReceipt();
 

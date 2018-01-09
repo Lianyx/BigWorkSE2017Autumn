@@ -3,6 +3,8 @@ package ui.salesui;
 import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.salesblService.SalesblService;
 import blService.stockblService.StockblService;
+import businesslogic.salesbl.SalesRetReceiptbl;
+import businesslogic.salesbl.SalesSellReceiptbl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
@@ -20,10 +22,7 @@ import ui.stockui.StockListItemTreeTable;
 import ui.util.*;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;
-import vo.receiptVO.SalesReceiptVO;
-import vo.receiptVO.SalesRetReceiptVO;
-import vo.receiptVO.SalesSellReceiptVO;
-import vo.receiptVO.StockReceiptVO;
+import vo.receiptVO.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -37,7 +36,7 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
     @FXML
     SalesListItemTreeTable salesListItemTreeTable;
 
-    SalesblService salesblService;
+    SalesblService<? extends SalesReceiptVO> salesblService;
 
     @FXML
     TextField operator;
@@ -60,7 +59,7 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
     @FXML
     Label id;
 
-    int memberId = 0;
+    SalesReceiptListVO salesReceiptListVO;
 
     @FXML
     JFXTextField original;
@@ -74,7 +73,7 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
     @FXML
     TextField clerk;
 
-
+    private int memberId = -1;
 
     @FXML
     TextArea comment;
@@ -84,9 +83,8 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
     SimpleDoubleProperty textSum = new SimpleDoubleProperty(0);
 
 
-    public SalesReceiptPane(String id) {
-        super("/salesui/salesreceipt.fxml",id);
-        salesblService = ServiceFactory_Stub.getService(SalesblService.class.getName());
+    public SalesReceiptPane(SalesReceiptListVO salesReceiptListVO) {
+        super("/salesui/salesreceipt.fxml",false);
         provider.setDisable(true);
         operator.setDisable(true);
         original.setDisable(true);
@@ -99,7 +97,7 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
         comment.disableProperty().bind(modifyState.not());
         token.disableProperty().bind(modifyState.not());
         discount.disableProperty().bind(modifyState.not());
-
+        this.salesReceiptListVO = salesReceiptListVO;
         RequireValid(operator);
         RequireValid(provider);
         RequireValid(stock);
@@ -107,10 +105,20 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
         DoubleValid(token);
         DoubleValid(discount);
 
-        if(id.split("-")[0].equals("JHD")){
+        if(salesReceiptListVO.getId().split("-")[0].equals("JHD")){
             this.isSell.set(true);
+            try {
+                salesblService = new SalesSellReceiptbl();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }else{
             this.isSell.set(false);
+            try {
+                salesblService = new SalesRetReceiptbl();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
         original.setText("0");
@@ -150,12 +158,31 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
         RequireValid(stock);
         switchPane(true);
         this.isSell.set(isSell);
+
         if(isSell){
             head.setText("XSD-");
+            try {
+                salesblService = new SalesSellReceiptbl();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }else{
             head.setText("XSTHD-");
+            try {
+                salesblService = new SalesRetReceiptbl();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
-        id.setText("-"+ String.format("%05d", salesblService.getDayId()));
+
+        try{
+           this.vo = salesblService.getNew();
+        }catch(Exception e){
+           e.printStackTrace();
+        }
+
+
+       id.setText("-"+ String.format("%05d", vo.getId().split("-")[0]));
         original.setText("0");
         sum.setText("0");
         token.setText("0");
@@ -214,7 +241,16 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
                     new DoubleButtonDialog(mainpane,"Wrong","sabi","Last","Ret");
             buttonDialog.setButtonTwo(()->boardController.Ret());
             buttonDialog.setButtonTwo(()->refresh(false));
-            Predicate<Integer> p = (i)->{if((vo = salesblService.showDetail(receiptid))!=null) return true;return false;};
+            Predicate<Integer> p = (i)->{
+                try {
+                    vo = salesblService.search(vo.getId(), vo.getCreateTime());
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                if(vo!=null)
+                    return true;
+                return false;
+            };
             GetTask task =
                     new GetTask(()-> {
                         provider.setText(vo.getMemberName());
@@ -249,26 +285,25 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
         doubleButtonDialog.setButtonTwo(() -> {
         });
         doubleButtonDialog.setButtonOne(() -> {
-        this.receiptid = head.getText().replace("-","")+"-"+date.getValue().toString().replace("-","")+"-"+id.getText().replace("-","");
-        if(isSell.get())
-        this.vo = new SalesSellReceiptVO(receiptid,
-                UserInfomation.userid,
-                LocalDateTime.now(),LocalDateTime.now(),
-                ReceiptState.PENDING,
-                this.memberId,
-                provider.getText(),
-                clerk.getText(),
-                stock.getText(),
-                salesListItemTreeTable.getList(),
-                comment.getText(),
-                Double.parseDouble(discount.getText()),
-                Double.parseDouble(token.getText()),
-                Double.parseDouble(original.getText()),
-                null,0);
-        else
-            this.vo = new SalesRetReceiptVO(receiptid,
+        if(isSell.get()) {
+            this.vo = new SalesSellReceiptVO(vo.getId(),
                     UserInfomation.userid,
-                    LocalDateTime.now(),LocalDateTime.now(),
+                    vo.getCreateTime(), LocalDateTime.now(),
+                    ReceiptState.PENDING,
+                    this.memberId,
+                    provider.getText(),
+                    clerk.getText(),
+                    stock.getText(),
+                    salesListItemTreeTable.getList(),
+                    comment.getText(),
+                    Double.parseDouble(discount.getText()),
+                    Double.parseDouble(token.getText()),
+                    Double.parseDouble(original.getText()),
+                    null, 0);
+        }else {
+            this.vo = new SalesRetReceiptVO(vo.getId(),
+                    UserInfomation.userid,
+                    vo.getCreateTime(), LocalDateTime.now(),
                     ReceiptState.PENDING,
                     this.memberId,
                     provider.getText(),
@@ -279,11 +314,14 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
                     Double.parseDouble(discount.getText()),
                     Double.parseDouble(token.getText()),
                     Double.parseDouble(original.getText()));
+        }
         try {
-            if (updateState.get())
-                salesblService.insert(this.vo);
-            else
-                salesblService.update(this.vo);
+            if (updateState.get()) {
+                if(isSell.get())
+                salesblService.insert(kengdie(vo));
+            }else{
+                salesblService.update(kengdie(vo));
+            }
             setBack();
         }catch (Exception e){
             e.printStackTrace();
@@ -291,6 +329,8 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
             });
         doubleButtonDialog.show();
     }
+
+
 
     @Override
     public void saveDraftReceipt() {
@@ -303,11 +343,10 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
         }
         if(date.getValue()==null)
             date.setValue(LocalDate.now());
-        this.receiptid = head.getText().replace("-","")+"-"+date.getValue().toString().replace("-","")+"-"+id.getText().replace("-","");
             if(isSell.get())
-                this.vo = new SalesSellReceiptVO(receiptid,
+                this.vo = new SalesSellReceiptVO(vo.getId(),
                         UserInfomation.userid,
-                        LocalDateTime.now(),LocalDateTime.now(),
+                        vo.getCreateTime(),LocalDateTime.now(),
                         ReceiptState.PENDING,
                         this.memberId,
                         provider.getText(),
@@ -320,9 +359,9 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
                         Double.parseDouble(original.getText()),
                         null,0);
             else
-                this.vo = new SalesRetReceiptVO(receiptid,
+                this.vo = new SalesRetReceiptVO(vo.getId(),
                         UserInfomation.userid,
-                        LocalDateTime.now(),LocalDateTime.now(),
+                        vo.getCreateTime(),LocalDateTime.now(),
                         ReceiptState.PENDING,
                         this.memberId,
                         provider.getText(),
@@ -335,9 +374,9 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
                         Double.parseDouble(original.getText()));
         try {
             if (updateState.get())
-                salesblService.insert(this.vo);
+                salesblService.insert(kengdie(vo));
             else
-                salesblService.update(this.vo);
+                salesblService.update(kengdie(vo));
             setBack();
         }catch (Exception e){
             e.printStackTrace();
@@ -351,5 +390,12 @@ public class SalesReceiptPane extends ReceiptDetailPane<SalesReceiptVO> {
             return true;
         return false;
     }
-
+    private <TF extends SalesReceiptVO> TF kengdie(SalesReceiptVO salesReceiptVO) {
+        try {
+            return (TF) salesReceiptVO;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

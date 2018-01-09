@@ -2,6 +2,7 @@ package ui.userui.usermanagerui;
 
 import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.userblService.UserManagerblService;
+import businesslogic.userbl.Userbl;
 import com.jfoenix.controls.*;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.*;
@@ -25,8 +26,11 @@ public class UserTreeTable extends ReceiptTreeTable<UserListVO> {
     public UserTreeTable() {
         super();
         rowsPerPage = 7;
-        userManagerblService = ServiceFactory_Stub.getService(UserManagerblService.class.getName());
-
+        try {
+            userManagerblService = new Userbl();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         JFXTreeTableColumn<UserListVO,Boolean> choose = new JFXTreeTableColumn("  ");
         choose.setPrefWidth(40);
         columnDecorator.setupCellValueFactory(choose, s -> s.selectedProperty().asObject());
@@ -84,7 +88,13 @@ public class UserTreeTable extends ReceiptTreeTable<UserListVO> {
             public TreeTableCell<UserListVO, Boolean> call(TreeTableColumn<UserListVO, Boolean> param) {
                 MultiCell multiCell = new MultiCell();
                 multiCell.setRunnable1(()->{UserDetailPane userDetailPane = new UserDetailPane(((UserListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getUserid()); userDetailPane.refresh(true);});
-                multiCell.setRunnable2(()->{userManagerblService.delete(((UserListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getUserid()); BoardController.getBoardController().refresh();});
+                multiCell.setRunnable2(()->{
+                    try {
+                        userManagerblService.delete(((UserListVO) multiCell.getTreeTableRow().getTreeItem().getValue()).getUserid());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    BoardController.getBoardController().refresh();});
                 return multiCell;
             }
         });
@@ -121,7 +131,13 @@ public class UserTreeTable extends ReceiptTreeTable<UserListVO> {
 
     @Override
     public void delete(Pagination p) {
-        chosenItem.getSet().forEach(s -> {observableList.remove(s); userManagerblService.delete(s.getUserid());});
+        chosenItem.getSet().forEach(s -> {observableList.remove(s);
+        try {
+            userManagerblService.delete(s.getUserid());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        });
         p.setPageCount(observableList.size() / getRowsPerPage() + 1);
         createPage(p.getCurrentPageIndex());
         p.setCurrentPageIndex(p.getCurrentPageIndex());

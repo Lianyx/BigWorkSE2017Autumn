@@ -93,15 +93,8 @@ public class TopBar extends HBox {
         catch (IOException e) {
             e.printStackTrace();
         }
-        /*
-        PopOver managerPopOver = new PopOver();
-        managerPopOver.setContentNode(new Manager());
-        managerPopOver.setDetachable(false);
-        managerPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
 
-        managerpopup.setOnMouseClicked(e -> managerPopOver.show(managerpopup));
 
-*/
         PopOver messagePopOver = new PopOver();
         MessageListView messageListView = new MessageListView();
         BorderPane anchorPane = new BorderPane();
@@ -112,12 +105,12 @@ public class TopBar extends HBox {
         messagePopOver.setContentNode(anchorPane);
         messagePopOver.setDetachable(false);
         messagePopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
-
+        message.setText(messageListView.checkProperty().get()+"");
         message.setOnMouseClicked(e -> messagePopOver.show(message));
 
-
-
-
+        messageListView.checkProperty().addListener((b,o,n)->{
+            message.setText(n.toString());
+        });
 
     }
 

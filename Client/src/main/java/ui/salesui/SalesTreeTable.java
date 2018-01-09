@@ -2,7 +2,6 @@ package ui.salesui;
 
 import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.salesblService.SalesblService;
-import blService.stockblService.StockblService;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableRow;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -10,11 +9,10 @@ import javafx.scene.control.Pagination;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.util.Callback;
-import ui.stockui.StockReceiptPane;
 import ui.util.*;
 import util.ReceiptState;
-import vo.StockSearchVO;
 import vo.receiptVO.SalesReceiptListVO;
+import vo.receiptVO.SalesReceiptVO;
 
 
 public class SalesTreeTable extends ReceiptTreeTable<SalesReceiptListVO> {
@@ -22,7 +20,6 @@ public class SalesTreeTable extends ReceiptTreeTable<SalesReceiptListVO> {
     //   private ObservableList<SalesReceiptListVO> observableListfilter = observableList;
     //  private ObservableList<SalesReceiptListVO> observableListtemp;
     private SalesblService salesblService;
-    private static StockSearchVO stockSearchVO;
     public SalesTreeTable() {
         super();
         rowsPerPage = 7;
@@ -72,15 +69,24 @@ public class SalesTreeTable extends ReceiptTreeTable<SalesReceiptListVO> {
             @Override
             public TreeTableCell<SalesReceiptListVO, Boolean> call(TreeTableColumn<SalesReceiptListVO, Boolean> param) {
                 MultiCell multiCell = new MultiCell();
-                multiCell.setRunnable1(()->{SalesReceiptPane salesReceiptPane = new SalesReceiptPane(((SalesReceiptListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getId()); salesReceiptPane.refresh(true);});
-                multiCell.setRunnable2(()->{salesblService.delete(((SalesReceiptListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getId()); BoardController.getBoardController().refresh();});
+                multiCell.setRunnable1(()->{SalesReceiptPane salesReceiptPane = new SalesReceiptPane(
+                        ((SalesReceiptListVO)multiCell.getTreeTableRow().getTreeItem().getValue()));
+                salesReceiptPane.refresh(true);});
+                multiCell.setRunnable2(()->{
+                    try {
+                        salesblService.delete(((SalesReceiptListVO) multiCell.getTreeTableRow().getTreeItem().getValue()).getId(),((SalesReceiptListVO) multiCell.getTreeTableRow().getTreeItem().getValue()).getCreateTime());
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    BoardController.getBoardController().refresh();});
                 return multiCell;
             }
         });
 
         this.setRowFactory(tableView -> {
             JFXTreeTableRow<SalesReceiptListVO> row = new JFXTreeTableRow();
-            RowSetter(row,()->{ SalesReceiptPane salesReceiptPane = new SalesReceiptPane(row.getTreeItem().getValue().getId()); salesReceiptPane.refresh(true);});
+            RowSetter(row,()->{ SalesReceiptPane salesReceiptPane = new SalesReceiptPane(row.getTreeItem().getValue()); salesReceiptPane.refresh(true);});
             return row;
         });
 
@@ -95,11 +101,25 @@ public class SalesTreeTable extends ReceiptTreeTable<SalesReceiptListVO> {
         System.out.println(chosenItem);
         System.out.println(observableList);
 
-        chosenItem.getSet().forEach(s -> {observableList.remove(s); salesblService.delete(s.getId());});
+        chosenItem.getSet().forEach(s -> {
+            try {
+                observableList.remove(s);
+                salesblService.delete(s.getId(),s.getCreateTime());
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         p.setPageCount(observableList.size() / getRowsPerPage() + 1);
         createPage(p.getCurrentPageIndex());
         p.setCurrentPageIndex(p.getCurrentPageIndex());
         chosenItem.getSet().clear();
     }
-
+    private <TF extends SalesReceiptVO> TF kengdie(SalesReceiptVO salesReceiptVO) {
+        try {
+            return (TF) salesReceiptVO;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

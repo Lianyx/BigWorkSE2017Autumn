@@ -155,4 +155,17 @@ public abstract class SalesReceiptVO extends ReceiptVO {
         result.setOriginSum(originSum);
         return result;
     }
+
+    public SalesReceiptListVO toListVO(){
+        SalesReceiptListVO salesReceiptListVO = new SalesReceiptListVO();
+        salesReceiptListVO.setId(getId());
+        salesReceiptListVO.setCreateTime(getCreateTime());
+        salesReceiptListVO.setMemberName(getMemberName());
+        salesReceiptListVO.setReceiptState(getReceiptState());
+        salesReceiptListVO.setSell(id.contains("XSD"));
+        salesReceiptListVO.setSum(getOriginSum());
+        return salesReceiptListVO;
+    }
+
+
 }

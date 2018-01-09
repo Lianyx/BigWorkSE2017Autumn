@@ -3,8 +3,11 @@ package vo.receiptVO;
 import util.ReceiptState;
 import vo.abstractVO.SelectableVO;
 
+import java.time.LocalDateTime;
+
 public class SalesReceiptListVO extends SelectableVO<SalesReceiptListVO>{
     private String id;
+    private LocalDateTime createTime;
     private ReceiptState receiptState;
     private String memberName;
     private String stockName;
@@ -12,8 +15,12 @@ public class SalesReceiptListVO extends SelectableVO<SalesReceiptListVO>{
     private boolean multiple = true;
     boolean isSell;
 
-    public SalesReceiptListVO(String id, ReceiptState receiptState, String memberName, String stockName, double sum, boolean isSell) {
+    public SalesReceiptListVO() {
+    }
+
+    public SalesReceiptListVO(String id, LocalDateTime createTime, ReceiptState receiptState, String memberName, String stockName, double sum, boolean isSell) {
         this.id = id;
+        this.createTime = createTime;
         this.receiptState = receiptState;
         this.memberName = memberName;
         this.stockName = stockName;
@@ -21,6 +28,13 @@ public class SalesReceiptListVO extends SelectableVO<SalesReceiptListVO>{
         this.isSell = isSell;
     }
 
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
 
     public String getId() {
         return id;

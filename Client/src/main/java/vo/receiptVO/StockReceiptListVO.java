@@ -7,10 +7,13 @@ import util.ReceiptState;
 import vo.abstractVO.SelectableVO;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class StockReceiptListVO extends SelectableVO<StockReceiptListVO>{
 
     private String id;
+    private LocalDateTime createTime;
     private ReceiptState receiptState;
     private String memberName;
     private String stockName;
@@ -18,18 +21,26 @@ public class StockReceiptListVO extends SelectableVO<StockReceiptListVO>{
     private boolean multiple = true;
     boolean isPur;
 
+    public StockReceiptListVO() {
+    }
 
-
-
-    public StockReceiptListVO(String id, ReceiptState receiptState, String memberName, String stockName, double sum, boolean isPur) {
+    public StockReceiptListVO(String id, LocalDateTime createTime, ReceiptState receiptState, String memberName, String stockName, double sum, boolean isPur) {
         this.id = id;
+        this.createTime = createTime;
         this.receiptState = receiptState;
         this.memberName = memberName;
         this.stockName = stockName;
         this.sum = sum;
-        this.isPur=isPur;
+        this.isPur = isPur;
     }
 
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
 
     public boolean isMultiple() {
         return multiple;
@@ -86,4 +97,6 @@ public class StockReceiptListVO extends SelectableVO<StockReceiptListVO>{
     public void setPur(boolean pur) {
         isPur = pur;
     }
+
+
 }

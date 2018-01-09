@@ -11,38 +11,28 @@ public class MessagePO {
     private int messageID;
     private LocalDateTime createTime;
     private EventCategory eventCategory;
-    private UserCategory from;
-    private UserCategory to;
+    private UserCategory userFrom;
+    private UserCategory userTo;
     private String userNameFrom;
     private String userNameto;
     private String comment;
-    private boolean hasRead = false;
+    private int hasRead = 0;
 
 
     public MessagePO() {
     }
 
-    public MessagePO(LocalDateTime createTime, EventCategory eventCategory, UserCategory from, UserCategory to, String userNameFrom, String userNameto, String comment) {
-        this.createTime = createTime;
-        this.eventCategory = eventCategory;
-        this.from = from;
-        this.to = to;
-        this.userNameFrom = userNameFrom;
-        this.userNameto = userNameto;
-        this.comment = comment;
-    }
-
-    public MessagePO(int messageID, LocalDateTime createTime, EventCategory eventCategory, UserCategory from, UserCategory to, String userNameFrom, String userNameto, String comment) {
+    public MessagePO(int messageID, LocalDateTime createTime, EventCategory eventCategory, UserCategory userFrom, UserCategory userTo, String userNameFrom, String userNameto, String comment, int hasRead) {
         this.messageID = messageID;
         this.createTime = createTime;
         this.eventCategory = eventCategory;
-        this.from = from;
-        this.to = to;
+        this.userFrom = userFrom;
+        this.userTo = userTo;
         this.userNameFrom = userNameFrom;
         this.userNameto = userNameto;
         this.comment = comment;
+        this.hasRead = hasRead;
     }
-
 
     public int getMessageID() {
         return messageID;
@@ -68,20 +58,20 @@ public class MessagePO {
         this.eventCategory = eventCategory;
     }
 
-    public UserCategory getFrom() {
-        return from;
+    public UserCategory getUserFrom() {
+        return userFrom;
     }
 
-    public void setFrom(UserCategory from) {
-        this.from = from;
+    public void setUserFrom(UserCategory userFrom) {
+        this.userFrom = userFrom;
     }
 
-    public UserCategory getTo() {
-        return to;
+    public UserCategory getUserTo() {
+        return userTo;
     }
 
-    public void setTo(UserCategory to) {
-        this.to = to;
+    public void setUserTo(UserCategory userTo) {
+        this.userTo = userTo;
     }
 
     public String getUserNameFrom() {
@@ -108,11 +98,11 @@ public class MessagePO {
         this.comment = comment;
     }
 
-    public boolean isHasRead() {
+    public int getHasRead() {
         return hasRead;
     }
 
-    public void setHasRead(boolean hasRead) {
+    public void setHasRead(int hasRead) {
         this.hasRead = hasRead;
     }
 }

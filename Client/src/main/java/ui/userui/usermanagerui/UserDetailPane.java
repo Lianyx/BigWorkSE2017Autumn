@@ -32,6 +32,7 @@ import vo.UserVO;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
 import static ui.util.ValidatorDecorator.RequireValid;
@@ -253,7 +254,11 @@ public class UserDetailPane extends ReceiptDetailPane<UserVO> {
                 buttonDialog.setButtonTwo(() -> boardController.Ret());
                 buttonDialog.setButtonTwo(() -> refresh(false));
                 Predicate<Integer> p = (i) -> {
-                    if ((vo = userManagerblService.showDetail(userId)) != null) return true;
+                    try {
+                        if ((vo = userManagerblService.showDetail(userId)) != null) return true;
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                     return false;
                 };
                 GetTask task =
@@ -293,33 +298,40 @@ public class UserDetailPane extends ReceiptDetailPane<UserVO> {
             doubleButtonDialog.setButtonTwo(() -> {
             });
             doubleButtonDialog.setButtonOne(() -> {
+                try {
                 if (userId == -1) {
-                    userId = userManagerblService.getId();
-                    userManagerblService.add(new UserVO(
-                            userId,
-                            imageview.getImage(),
-                            username.getText(),
-                            UserCategory.map.get(usertype.getSelectionModel().getSelectedItem().getText()),
-                            f, g, tw,
-                            email.getText(),
-                            phone.getText(),
-                            comment.getText(),
-                            date.getText(),
-                            password.getText()
-                    ));
-                } else {
-                    userManagerblService.update(new UserVO(
-                            userId,
-                            imageview.getImage(),
-                            username.getText(),
-                            UserCategory.map.get(usertype.getSelectionModel().getSelectedItem().getText()),
-                            f, g, tw,
-                            email.getText(),
-                            phone.getText(),
-                            comment.getText(),
-                            date.getText(),
-                            password.getText()
-                    ));
+
+                        userId = userManagerblService.getId();
+                        userManagerblService.insert(new UserVO(
+                                userId,
+                                imageview.getImage(),
+                                username.getText(),
+                                UserCategory.map.get(usertype.getSelectionModel().getSelectedItem().getText()),
+                                LocalDateTime.now(),
+                                f, g, tw,
+                                email.getText(),
+                                phone.getText(),
+                                comment.getText(),
+                                date.getText(),
+                                password.getText()
+                        ));
+                    } else{
+                        userManagerblService.update(new UserVO(
+                                userId,
+                                imageview.getImage(),
+                                username.getText(),
+                                UserCategory.map.get(usertype.getSelectionModel().getSelectedItem().getText()),
+                                vo.getCreateTime(),
+                                f, g, tw,
+                                email.getText(),
+                                phone.getText(),
+                                comment.getText(),
+                                date.getText(),
+                                password.getText()
+                        ));
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
                 setBack();
             });

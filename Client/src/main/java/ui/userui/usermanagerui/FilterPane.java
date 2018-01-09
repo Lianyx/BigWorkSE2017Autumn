@@ -3,6 +3,7 @@ package ui.userui.usermanagerui;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import ui.salesui.SalesListPane;
 import ui.util.BoardController;
 import util.ReceiptState;
 import util.UserCategory;
+import util.UserSearchCondition;
 import vo.UserSearchVO;
 
 /**
@@ -22,26 +24,16 @@ import vo.UserSearchVO;
 **/
 public class FilterPane extends AnchorPane{
 
-
-
-
     @FXML
-    JFXCheckBox UserManager;
-    @FXML
-    JFXCheckBox InventoryManager;
-    @FXML
-    JFXCheckBox GeneralManager;
-    @FXML
-    JFXCheckBox Salesman;
-    @FXML
-    JFXCheckBox SalesManager;
-    @FXML
-    JFXCheckBox Accountant;
+    JFXComboBox<Label> state;
 
     @FXML
-    JFXButton save;
+    JFXDatePicker from;
 
-    UserSearchVO userSearchVO;
+    @FXML
+    JFXDatePicker to;
+
+    UserSearchCondition userSearchCondition;
 
     PopOver popOver;
 
@@ -52,20 +44,15 @@ public class FilterPane extends AnchorPane{
      * @Param: popover传入用于关闭popover,
      * @Return:
     **/
-    public FilterPane(PopOver popOver, UserSearchVO userSearchVO) {
+    public FilterPane(PopOver popOver, UserSearchCondition userSearchCondition) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/userui/filter.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/userui/userfilter.fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();
             this.popOver = popOver;
-            this.userSearchVO = userSearchVO;
-            UserManager.setSelected(true);
-            InventoryManager.setSelected(true);
-            Accountant.setSelected(true);
-            Salesman.setSelected(true);
-            SalesManager.setSelected(true);
-            GeneralManager.setSelected(true);
+            this.userSearchCondition = userSearchCondition;
+
 
 
         } catch (Exception e) {
@@ -73,27 +60,20 @@ public class FilterPane extends AnchorPane{
         }
     }
 
-    public void setVO(JFXCheckBox jfxCheckBox){
-        if(jfxCheckBox.isSelected()){
-            userSearchVO.getUserCategories().add(UserCategory.map.get(jfxCheckBox.getId()));
-        }else{
-            if(userSearchVO.getUserCategories().contains(UserCategory.map.get(jfxCheckBox.getId()))){
-                userSearchVO.getUserCategories().remove(UserCategory.map.get(jfxCheckBox.getId()));
-            }
-        }
-    }
 
 
     @FXML
     public void save() {
-        setVO(UserManager);
-        setVO(Salesman);
-        setVO(SalesManager);
-        setVO(InventoryManager);
-        setVO(GeneralManager);
-        setVO(Accountant);
+        userSearchCondition.setCreateTimeFloor(from.getValue().atStartOfDay());
+        userSearchCondition.setCreateTimeCeil(to.getValue().atStartOfDay());
+        userSearchCondition.setUserCategory(UserCategory.map.get(state.getValue().getText()));
         popOver.hide();
         BoardController.getBoardController().refresh();
-
     }
+
+    @FXML
+    public void cancel(){
+        popOver.hide();
+    }
+
 }

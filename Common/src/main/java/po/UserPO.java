@@ -6,6 +6,7 @@ import util.UserCategory;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class UserPO implements Serializable{
 
@@ -13,7 +14,7 @@ public class UserPO implements Serializable{
     private byte[] image;
     private String username;
     private UserCategory usertype;
-    private LocalDate createTime;
+    private LocalDateTime createTime;
     private String facebook;
     private String github;
     private String twitter;
@@ -22,11 +23,27 @@ public class UserPO implements Serializable{
     private String comment;
     private String date;
     private String password;
-
+    private int isDeleted = 0;
     public UserPO() {
     }
 
-    public UserPO(int userId, byte[] image, String username, UserCategory usertype, LocalDate createTime, String facebook, String github, String twitter, String email, String phone, String comment, String date, String password) {
+    public UserPO(int userId, String username, UserCategory usertype, LocalDateTime createTime, String facebook, String github, String twitter, String email, String phone, String comment, String date, String password) {
+        this.userId = userId;
+        this.username = username;
+        this.usertype = usertype;
+        this.createTime = createTime;
+        this.facebook = facebook;
+        this.github = github;
+        this.twitter = twitter;
+        this.email = email;
+        this.phone = phone;
+        this.comment = comment;
+        this.date = date;
+        this.password = password;
+    }
+
+
+    public UserPO(int userId, byte[] image, String username, UserCategory usertype, LocalDateTime createTime, String facebook, String github, String twitter, String email, String phone, String comment, String date, String password,int isDeleted) {
         this.userId = userId;
         this.image = image;
         this.username = username;
@@ -40,21 +57,7 @@ public class UserPO implements Serializable{
         this.comment = comment;
         this.date = date;
         this.password = password;
-    }
-
-    public UserPO(int userId, String username, UserCategory usertype, LocalDate createTime, String facebook, String github, String twitter, String email, String phone, String comment, String date, String password) {
-        this.userId = userId;
-        this.username = username;
-        this.usertype = usertype;
-        this.createTime = createTime;
-        this.facebook = facebook;
-        this.github = github;
-        this.twitter = twitter;
-        this.email = email;
-        this.phone = phone;
-        this.comment = comment;
-        this.date = date;
-        this.password = password;
+        this.isDeleted = isDeleted;
     }
 
     public int getUserId() {
@@ -89,11 +92,11 @@ public class UserPO implements Serializable{
         this.usertype = usertype;
     }
 
-    public LocalDate getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDate createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
@@ -159,5 +162,13 @@ public class UserPO implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

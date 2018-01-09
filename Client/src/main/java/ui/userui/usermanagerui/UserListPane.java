@@ -2,27 +2,17 @@ package ui.userui.usermanagerui;
 
 import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.userblService.UserManagerblService;
-import com.jfoenix.controls.*;
-import javafx.beans.property.SimpleIntegerProperty;
+import businesslogic.userbl.Userbl;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.control.Pagination;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
-import ui.salesui.SalesReceiptPane;
 import ui.util.*;
 import util.UserCategory;
+import util.UserSearchCondition;
 import vo.UserListVO;
 import vo.UserSearchVO;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -31,7 +21,7 @@ public class UserListPane extends ReceiptListPane<UserListVO>{
 
     UserManagerblService userManagerblService;
 
-    private static UserSearchVO userSearchVO = new UserSearchVO();
+    private static UserSearchCondition userSearchVO = new UserSearchCondition();
 
     private static FilterPane filterPane ;
 
@@ -39,14 +29,11 @@ public class UserListPane extends ReceiptListPane<UserListVO>{
 
     public UserListPane() throws Exception{
         super("/userui/userlistpane.fxml");
-        this.userManagerblService = ServiceFactory_Stub.getService(UserManagerblService.class.getName());
+        this.userManagerblService = new Userbl();
         receiptTreeTable = new UserTreeTable();
         receiptTreeTable.setPrefSize(600,435);
         receiptTreeTable.keywordProperty().bind(match);
         borderpane.setTop(new BorderPane(receiptTreeTable));
-        for (UserCategory userCategory : UserCategory.values()) {
-            userSearchVO.getUserCategories().add(userCategory);
-        }
 
         filterPane = new FilterPane(filterPopOver, userSearchVO);
         filterPopOver.setDetachable(false);
@@ -98,9 +85,11 @@ public class UserListPane extends ReceiptListPane<UserListVO>{
             buttonDialog.setButtonTwo(() -> boardController.Ret());
             buttonDialog.setButtonTwo(() -> refresh(false));
             Predicate<Integer> p = (s) -> {
-                if ((set = userManagerblService.search(userSearchVO)) != null) {
-                    System.out.println(set.size());
+                try{
+                if((set = userManagerblService.search(userSearchVO)) != null)
                     return true;
+                }catch (Exception e) {
+                    e.printStackTrace();
                 }
                 return false;
             };

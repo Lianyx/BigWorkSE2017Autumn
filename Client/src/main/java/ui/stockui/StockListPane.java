@@ -5,18 +5,10 @@ import blService.stockblService.StockblService;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import org.controlsfx.control.PopOver;
 import ui.util.*;
-import util.ReceiptState;
 import vo.receiptVO.StockReceiptListVO;
-import vo.StockSearchVO;
-import vo.receiptVO.StockReceiptVO;
 
-import java.util.HashSet;
 import java.util.Set;
-import java.util.function.BiPredicate;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -39,7 +31,7 @@ public class StockListPane extends ReceiptListPane<StockReceiptListVO> {
 
     SimpleStringProperty match = new SimpleStringProperty("");
 
-    static StockSearchVO stockSearchVO = new StockSearchVO();
+ //   static StockSearchVO stockSearchVO = new StockSearchVO();
 
 
 
@@ -59,7 +51,7 @@ public class StockListPane extends ReceiptListPane<StockReceiptListVO> {
         receiptTreeTable.setPrefSize(600, 435);
         receiptTreeTable.keywordProperty().bind(match);
         borderpane.setTop(new BorderPane(receiptTreeTable));
-
+/*
 
         for (ReceiptState receiptState : ReceiptState.values()) {
             stockSearchVO.getReceiptStates().add(receiptState);
@@ -68,7 +60,7 @@ public class StockListPane extends ReceiptListPane<StockReceiptListVO> {
         filterPopOver.setDetachable(false);
         filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
         filterPopOver.setContentNode(slp);
-        filter.setOnMouseClicked(e -> filterPopOver.show(filter));
+        filter.setOnMouseClicked(e -> filterPopOver.show(filter));*/
     }
 
 
@@ -130,10 +122,10 @@ public class StockListPane extends ReceiptListPane<StockReceiptListVO> {
             * 这个predicate主要是把方法传到task里面去，我想不出有什么能够传进去又能return值的函数式就用这个了
             **/
             Predicate<Integer> p = (s) -> {
-                if ((set = stockblService.search(stockSearchVO, isPur.get())) != null) {
+      /*          if ((set = stockblService.search(stockSearchVO, isPur.get())) != null) {
                     System.out.println(set.size());
                     return true;
-                }
+                }*/
                 return false;
             };
             /**

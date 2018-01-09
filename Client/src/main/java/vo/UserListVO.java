@@ -21,6 +21,10 @@ public class UserListVO extends SelectableVO<UserListVO> {
     private String phone;
     private boolean multiple = true;
 
+    public UserListVO(){
+
+    }
+
 
     public UserListVO(int userid, Image image, String username, UserCategory userCategory, String email, String phone, boolean selected) {
         this.userid = userid;

@@ -1,5 +1,6 @@
 package util;
 
+import po.MemberPO;
 import po.MessagePO;
 import po.UserPO;
 import po.generic.ReceipishPO;
@@ -30,7 +31,7 @@ public class NameCreator {
 
 
     public static void getClassString(Class clazz){
-        System.out.println("create table "+clazz.getName().split("\\.")[2]+"(");
+        System.out.println("create table "+clazz.getName().split("\\.")[1]+"(");
         for(Field field: ReceipishPO.class.getDeclaredFields())
             System.out.println(field.getName()+" "+changeName(field.getType().getName())+",");
         for(Field field: ReceiptPO.class.getDeclaredFields())
@@ -43,12 +44,17 @@ public class NameCreator {
 
     public static void getSomeString(Class clazz){
         for(Field field:clazz.getDeclaredFields()){
-            System.out.print("#{"+field.getName()+"},");
+            System.out.print(field.getName()+",");
+        }
+        System.out.println();
+        for(Field field:clazz.getDeclaredFields()){
+            System.out.print(field.getName()+"=#{"+field.getName()+"},");
         }
     }
 
 
     public static void main(String args[]){
+        getSomeString(UserPO.class);
     }
 
 }

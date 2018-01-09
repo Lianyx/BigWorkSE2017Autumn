@@ -92,7 +92,7 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
     **/
 
     public StockReceiptPane(String id) {
-        super("/stockui/stockreceipt.fxml",id);
+        super("/stockui/stockreceipt.fxml");
         stockblService = ServiceFactory_Stub.getService(StockblService.class.getName());
         provider.setDisable(true);
         operator.setDisable(true);
@@ -143,7 +143,7 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
         }else{
             head.setText("JHTHD-");
         }
-        id.setText("-"+ String.format("%05d", stockblService.getDayId()));
+      //  id.setText("-"+ String.format("%05d", stockblService.getDayId()));
     }
 
 
@@ -161,7 +161,8 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
         DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane,"Delete","sabi","Yes","No");
         doubleButtonDialog.setButtonOne(()->{});
         doubleButtonDialog.setButtonTwo(()->{
-            stockblService.delete(this.id.getText());
+
+           // stockblService.delete(this.id.getText());
 
             //这里返回上个界面
             boardController.setRightAnimation();
@@ -205,7 +206,7 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
                 buttonDialog.setButtonTwo(() -> boardController.Ret());
                 buttonDialog.setButtonTwo(() -> refresh(false));
                 Predicate<Integer> p = (i) -> {
-                    if ((vo = stockblService.showDetail(receiptid)) != null) return true;
+            //        if ((vo = stockblService.showDetail(receiptid)) != null) return true;
                     return false;
                 };
                 GetTask task =
@@ -247,7 +248,7 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
         doubleButtonDialog.setButtonTwo(() -> {
         });
         doubleButtonDialog.setButtonOne(() -> {
-
+/*
 
         this.receiptid = head.getText().replace("-","")+"-"+date.getValue().toString().replace("-","")+"-"+id.getText().replace("-","");
         if(isPur.get())
@@ -269,7 +270,7 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
                     stock.getText(),
                     Double.parseDouble(sum.getText()),
                     stockListItemTreeTable.getList(),
-                    comment.getText());
+                    comment.getText());*/
         try {
 
             /**
@@ -298,6 +299,7 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
             }
             if (date.getValue() == null)
                 date.setValue(LocalDate.now());
+            /*
             this.receiptid = head.getText().replace("-", "") + "-" + date.getValue().toString().replace("-", "") + "-" + id.getText().replace("-", "");
             if(isPur.get())
             this.vo = new StockPurReceiptVO(receiptid,
@@ -322,7 +324,7 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
                         stock.getText(),
                         Double.parseDouble(sum.getText()),
                         stockListItemTreeTable.getList(),
-                        comment.getText());
+                        comment.getText());*/
             try {
                 if (updateState.get())
                     stockblService.insert(this.vo);

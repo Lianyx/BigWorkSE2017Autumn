@@ -9,15 +9,15 @@ import javafx.util.Callback;
 
 import ui.util.*;
 import util.ReceiptState;
-import vo.*;
 import vo.receiptVO.StockReceiptListVO;
+
+import java.rmi.RemoteException;
 
 public class StockTreeTable extends ReceiptTreeTable<StockReceiptListVO> {
 
     //   private ObservableList<StockReceiptListVO> observableListfilter = observableList;
     //  private ObservableList<StockReceiptListVO> observableListtemp;
     private StockblService stockblService;
-    private static StockSearchVO stockSearchVO;
 
 
 
@@ -25,28 +25,28 @@ public class StockTreeTable extends ReceiptTreeTable<StockReceiptListVO> {
         super();
         rowsPerPage = 7;
         stockblService = ServiceFactory_Stub.getService(StockblService.class.getName());
-        JFXTreeTableColumn<StockReceiptListVO, Boolean> choose = new JFXTreeTableColumn("  ");
+        JFXTreeTableColumn<StockReceiptListVO, Boolean> choose = new JFXTreeTableColumn<StockReceiptListVO, Boolean>("  ");
         choose.setPrefWidth(50);
         columnDecorator.setupCellValueFactory(choose, s -> s.selectedProperty().asObject());
         choose.setCellFactory(t -> new ChooseCell<StockReceiptListVO>(chosenItem));
 
 
-        JFXTreeTableColumn<StockReceiptListVO, String> time = new JFXTreeTableColumn("Id");
+        JFXTreeTableColumn<StockReceiptListVO, String> time = new JFXTreeTableColumn<>("Id");
         time.setPrefWidth(180);
-        columnDecorator.setupCellValueFactory(time, s -> new ReadOnlyObjectWrapper(s.getId()));
+        columnDecorator.setupCellValueFactory(time, s -> new ReadOnlyObjectWrapper<>(s.getId()));
         time.setCellFactory(t->new SearchableStringCell<>(keyword));
 
-        JFXTreeTableColumn<StockReceiptListVO, String> member = new JFXTreeTableColumn("Member");
+        JFXTreeTableColumn<StockReceiptListVO, String> member = new JFXTreeTableColumn<>("Member");
         member.setPrefWidth(85);
-        columnDecorator.setupCellValueFactory(member, s -> new ReadOnlyObjectWrapper(s.getMemberName()));
+        columnDecorator.setupCellValueFactory(member, s -> new ReadOnlyObjectWrapper<>(s.getMemberName()));
         member.setCellFactory(t->new SearchableStringCell<>(keyword));
 
-        JFXTreeTableColumn<StockReceiptListVO, String> state = new JFXTreeTableColumn("State");
+        JFXTreeTableColumn<StockReceiptListVO, String> state = new JFXTreeTableColumn<>("State");
         state.setPrefWidth(150);
         state.setCellFactory(new Callback<TreeTableColumn<StockReceiptListVO, String>, TreeTableCell<StockReceiptListVO, String>>() {
             @Override
             public TreeTableCell<StockReceiptListVO, String> call(TreeTableColumn<StockReceiptListVO, String> param) {
-                return new ButtonCell() {
+                return new ButtonCell<StockReceiptListVO>() {
                     @Override
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
@@ -57,9 +57,9 @@ public class StockTreeTable extends ReceiptTreeTable<StockReceiptListVO> {
                 };
             }
         });
-        columnDecorator.setupCellValueFactory(state, s -> new ReadOnlyObjectWrapper(s.getReceiptState().name()));
+        columnDecorator.setupCellValueFactory(state, s -> new ReadOnlyObjectWrapper<>(s.getReceiptState().name()));
 
-        JFXTreeTableColumn<StockReceiptListVO, Integer> sum = new JFXTreeTableColumn("Sum");
+        JFXTreeTableColumn<StockReceiptListVO, Integer> sum = new JFXTreeTableColumn<>("Sum");
         sum.setPrefWidth(80);
         columnDecorator.setupCellValueFactory(sum, s -> new ReadOnlyObjectWrapper(s.getSum()));
 
@@ -69,7 +69,7 @@ public class StockTreeTable extends ReceiptTreeTable<StockReceiptListVO> {
         /**
         * more就是一列后面有三个点那个button
         **/
-        JFXTreeTableColumn<StockReceiptListVO, Boolean> more = new JFXTreeTableColumn("");
+        JFXTreeTableColumn<StockReceiptListVO, Boolean> more = new JFXTreeTableColumn<>("");
         more.setPrefWidth(55);
         columnDecorator.setupCellValueFactory(more, s -> new ReadOnlyObjectWrapper(s.isMultiple()));
         more.setCellFactory(new Callback<TreeTableColumn<StockReceiptListVO, Boolean>, TreeTableCell<StockReceiptListVO, Boolean>>() {
@@ -77,7 +77,13 @@ public class StockTreeTable extends ReceiptTreeTable<StockReceiptListVO> {
             public TreeTableCell<StockReceiptListVO, Boolean> call(TreeTableColumn<StockReceiptListVO, Boolean> param) {
                 MultiCell multiCell = new MultiCell();
                 multiCell.setRunnable1(()->{StockReceiptPane stockReceiptPane = new StockReceiptPane(((StockReceiptListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getId()); stockReceiptPane.refresh(true);});
-                multiCell.setRunnable2(()->{stockblService.delete(((StockReceiptListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getId()); BoardController.getBoardController().refresh();});
+                multiCell.setRunnable2(()->{
+                    try {
+            //            stockblService.delete(((StockReceiptListVO) multiCell.getTreeTableRow().getTreeItem().getValue()).getId());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    BoardController.getBoardController().refresh();});
                 return multiCell;
             }
         });
@@ -88,7 +94,7 @@ public class StockTreeTable extends ReceiptTreeTable<StockReceiptListVO> {
          **/
 
         this.setRowFactory(tableView -> {
-            JFXTreeTableRow<StockReceiptListVO> row = new JFXTreeTableRow();
+            JFXTreeTableRow<StockReceiptListVO> row = new JFXTreeTableRow<>();
             RowSetter(row,()->{ StockReceiptPane stockReceiptPane = new StockReceiptPane(row.getTreeItem().getValue().getId()); stockReceiptPane.refresh(true);});
             return row;
         });
@@ -101,7 +107,13 @@ public class StockTreeTable extends ReceiptTreeTable<StockReceiptListVO> {
         System.out.println(chosenItem);
         System.out.println(observableList);
 
-        chosenItem.getSet().forEach(s -> {observableList.remove(s); stockblService.delete(s.getId());});
+        chosenItem.getSet().forEach(s -> {//observableList.remove();
+        try {
+        //    stockblService.delete(s.getId());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        });
         p.setPageCount(observableList.size() / getRowsPerPage() + 1);
         createPage(p.getCurrentPageIndex());
         p.setCurrentPageIndex(p.getCurrentPageIndex());
