@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class StockReceiptListVO extends SelectableVO<StockReceiptListVO>{
+public class StockReceiptListVO extends ReceiptListVO<StockReceiptListVO>{
 
     private String id;
     private LocalDateTime createTime;
@@ -99,4 +99,8 @@ public class StockReceiptListVO extends SelectableVO<StockReceiptListVO>{
     }
 
 
+    @Override
+    public <TV extends ReceiptVO> TV toVO() {
+        return null;
+    }
 }

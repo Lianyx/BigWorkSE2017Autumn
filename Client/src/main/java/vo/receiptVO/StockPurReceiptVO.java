@@ -46,9 +46,4 @@ public class StockPurReceiptVO extends StockReceiptVO {
         StockPurReceiptPO result = toStockReceiptPO(StockPurReceiptPO.class);
         return result;
     }
-
-    @Override
-    public <TL extends ReceiptListVO<TL>> TL toListVO() {
-        return null;
-    }
 }

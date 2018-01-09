@@ -2,7 +2,6 @@ package vo.receiptVO;
 
 import blService.checkblService.CheckInfo;
 import javafx.scene.Node;
-import po.receiptPO.StockReceiptPO;
 import po.receiptPO.StockRetReceiptPO;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;
@@ -47,8 +46,5 @@ public class StockRetReceiptVO extends StockReceiptVO {
         return result;
     }
 
-    @Override
-    public <TL extends ReceiptListVO<TL>> TL toListVO() {
-        return null;
-    }
+
 }
