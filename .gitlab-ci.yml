@@ -3,20 +3,6 @@ stages:
   - build
 build_job:
   stage: build
-  only:
-    - master
   script:
-    - mvn --batch-mode compile -Dmaven.test.skip=true
-  tags:
-    - docker
-build_merge_job:
-  stage: build
-  except:
-    - master
-    - tags
-  script:
-    - git merge origin master
-    - mvn --batch-mode compile -Dmaven.test.skip=true
-  tags:
-    - docker
+    - mvn --batch-mode compile 
 
