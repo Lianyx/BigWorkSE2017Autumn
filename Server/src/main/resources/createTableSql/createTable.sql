@@ -210,5 +210,6 @@ create table User(
   phone varchar(100),
   comment varchar(100),
   date varchar(100),
-  password varchar(100)
-); character set = utf8;
+  password varchar(100),
+  isDeleted bool
+)character set = utf8;

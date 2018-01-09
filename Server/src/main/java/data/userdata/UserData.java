@@ -23,6 +23,7 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             UserPOMapper mapper = session.getMapper(UserPOMapper.class);
             int id = mapper.getId();
+            session.commit();
             return id;
         }
     }
@@ -32,6 +33,7 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             UserPOMapper mapper = session.getMapper(UserPOMapper.class);
             mapper.insert(userPO);
+            session.commit();
             return ResultMessage.SUCCESS;
         }
     }
@@ -41,6 +43,7 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             UserPOMapper mapper = session.getMapper(UserPOMapper.class);
             mapper.delete(id);
+            session.commit();
             return ResultMessage.SUCCESS;
         }
     }
@@ -50,6 +53,7 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             UserPOMapper mapper = session.getMapper(UserPOMapper.class);
             mapper.update(userPO);
+            session.commit();
             return ResultMessage.SUCCESS;
         }
     }
@@ -59,6 +63,7 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             UserPOMapper mapper = session.getMapper(UserPOMapper.class);
             UserPO userPO = mapper.showDetail(id);
+            session.commit();
             return userPO;
         }
     }
@@ -70,6 +75,7 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
             ArrayList<UserPO> userPOs = mapper.search(userSearchCondition);
             System.out.println("sabi");
             System.out.println(userPOs.size());
+            session.commit();
             return userPOs;
         }
     }
@@ -83,7 +89,6 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
                 return null;
             if(userPO.getPassword() == password)
                 return userPO;
-
 
             session.commit();
         }
