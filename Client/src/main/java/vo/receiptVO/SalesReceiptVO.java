@@ -156,6 +156,7 @@ public abstract class SalesReceiptVO extends ReceiptVO {
         return result;
     }
 
+    @Override
     public SalesReceiptListVO toListVO(){
         SalesReceiptListVO salesReceiptListVO = new SalesReceiptListVO();
         salesReceiptListVO.setId(getId());

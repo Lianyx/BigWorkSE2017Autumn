@@ -5,7 +5,7 @@ import vo.abstractVO.SelectableVO;
 
 import java.time.LocalDateTime;
 
-public class SalesReceiptListVO extends SelectableVO<SalesReceiptListVO>{
+public class SalesReceiptListVO extends ReceiptListVO<SalesReceiptListVO>{
     private String id;
     private LocalDateTime createTime;
     private ReceiptState receiptState;
@@ -90,5 +90,10 @@ public class SalesReceiptListVO extends SelectableVO<SalesReceiptListVO>{
 
     public void setSell(boolean sell) {
         isSell = sell;
+    }
+
+    @Override
+    public <TV extends ReceiptVO> TV toVO() {
+        return null;
     }
 }

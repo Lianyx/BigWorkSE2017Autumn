@@ -38,6 +38,8 @@ public class SalesRetReceiptVO extends SalesReceiptVO {
         return null;
     }
 
+
+
     @Override
     protected String getCodeName() {
         return "XSTHD";
@@ -49,8 +51,4 @@ public class SalesRetReceiptVO extends SalesReceiptVO {
         return salesRetReceiptPO;
     }
 
-    @Override
-    public <TL extends ReceiptListVO<TL>> TL toListVO() {
-        return null;
-    }
 }
