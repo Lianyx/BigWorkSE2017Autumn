@@ -1,7 +1,16 @@
 stages:
   - build
+  - test
+  - deploy
 
-job:
-  stage: build
+
+maven_build:
+  stage: test
+ 
+ 
+  tags:
+    - maven
+
+
   script:
-  - echo "Restoring NuGet Packages..."
+    - mvn verify
