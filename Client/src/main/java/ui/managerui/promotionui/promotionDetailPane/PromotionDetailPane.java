@@ -55,8 +55,13 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
     protected PromotionblService<T> promotionblService;
     protected BooleanProperty modifyState = new SimpleBooleanProperty(true);
 
-    protected abstract String getURL();
+    /**
+     * Constructors related
+     * */
 
+    protected PromotionDetailPane() {
+        initialize();
+    }
     // TODO 现在这样就是必须第一次new的时候call完这个就call refresh。虽然感觉这样不好唉
     protected PromotionDetailPane(T promotionVO) {
         initialize();
@@ -64,14 +69,10 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
 
 //        modifyState.set(false); // 这句不知道什么就会报错
 
-        saveAsDraft.setVisible(false);
-        reset.setLayoutX(saveAsDraft.getLayoutX());
-    }
-
-    protected abstract Class<? extends PromotionblService<T>> getServiceClass();
-
-    protected PromotionDetailPane() {
-        initialize();
+        if (promotionVO.getPromotionState() == PromotionState.SAVED) {
+            saveAsDraft.setVisible(false);
+            reset.setLayoutX(saveAsDraft.getLayoutX());
+        }
     }
 
     protected void initialize() {
@@ -100,6 +101,13 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
         save.visibleProperty().bind(modifyState);
         reset.visibleProperty().bind(modifyState);
     }
+
+    /**
+     * abstract
+     * */
+    protected abstract Class<? extends PromotionblService<T>> getServiceClass();
+    protected abstract String getURL();
+
 
     protected boolean validate() {
         return true;
@@ -180,7 +188,7 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
                 return true;
             } catch (ItemNotFoundException e) {
                 e.printStackTrace();
-                prompt.set("策略不存在，是否返回单据列表");
+                prompt.set("策略不存在，是否返回列表");
                 return false;
             } catch (RemoteException e) {
                 e.printStackTrace();

@@ -1,9 +1,9 @@
 package ui.accountantui;
 
 import blService.accountblService.AccountblService;
-import blService.billblService.CashBillReceiptblService;
-import blService.billblService.ChargeBillReceiptblService;
-import blService.billblService.PaymentBillReceiptblService;
+import blService.billblservice.CashBillReceiptblService;
+import blService.billblservice.ChargeBillReceiptblService;
+import blService.billblservice.PaymentBillReceiptblService;
 import blServiceStub.accountblservice_Stub.AccountblService_Stub;
 import blServiceStub.cashbillreceiptblservice_Stub.CashBillReceiptblService_Stub;
 import blServiceStub.chargebillreceiptblservice_Stub.ChargeBillReceiptblService_Stub;
@@ -54,8 +54,8 @@ public class AccountantUIController implements Initializable{
         BoardController.setBoardController(boardController);
 
         paymentBillReceiptblService = new PaymentBillReceiptblService_Stub();
-        chargeBillReceiptblService = new ChargeBillReceiptblService_Stub();
-        cashBillReceiptblService = new CashBillReceiptblService_Stub();
+//        chargeBillReceiptblService = new ChargeBillReceiptblService_Stub();
+//        cashBillReceiptblService = new CashBillReceiptblService_Stub();
         try {
 
             accountblService = new Accountbl();

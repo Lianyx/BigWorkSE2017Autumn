@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<?import ui.util.TopBar?>
 <?import com.jfoenix.controls.JFXListView?>
-<?import javafx.geometry.Insets?>
-<?import com.jfoenix.controls.JFXRippler?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import ui.managerui.common.navigation.PromotionChangePaneLabel?>
 <?import ui.managerui.common.navigation.CheckChangePaneLabel?>
 <?import ui.managerui.common.MyTopBar?>
-<?import ui.managerui.businessConditionui.BusinessConditionPane?>
 <?import ui.managerui.common.navigation.BusinessConditionChangePaneLabel?>
 <?import ui.managerui.common.navigation.BusinessProgressChangePaneLabel?>
 <StackPane fx:id="mainpane"

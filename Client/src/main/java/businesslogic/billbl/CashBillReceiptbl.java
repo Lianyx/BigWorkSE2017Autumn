@@ -1,6 +1,5 @@
-package businesslogic.billreceiptbl;
+package businesslogic.billbl;
 
-import blService.billblService.CashBillReceiptblService;
 import businesslogic.checkbl.Receiptbl;
 import po.receiptPO.CashBillReceiptPO;
 import util.ResultMessage;

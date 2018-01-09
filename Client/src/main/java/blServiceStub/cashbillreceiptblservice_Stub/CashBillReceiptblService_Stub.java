@@ -1,7 +1,6 @@
 package blServiceStub.cashbillreceiptblservice_Stub;
 
-import blService.billblService.CashBillReceiptblService;
-import blService.billblService.CashBillReceiptblService;
+import blService.billblservice.CashBillReceiptblService;
 import util.ReceiptSearchCondition;
 import util.ReceiptState;
 import util.RespectiveReceiptSearchCondition;

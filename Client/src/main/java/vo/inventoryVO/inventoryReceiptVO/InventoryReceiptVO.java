@@ -5,6 +5,7 @@ import blService.checkblService.ReceiptblService;
 import javafx.scene.Node;
 import util.ReceiptState;
 
+import vo.receiptVO.ReceiptListVO;
 import vo.receiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;
@@ -89,6 +90,11 @@ public class InventoryReceiptVO extends ReceiptVO {
 
     @Override
     public <TF> TF toPO() {
+        return null;
+    }
+
+    @Override
+    public <TL extends ReceiptListVO<TL>> TL toListVO() {
         return null;
     }
 }

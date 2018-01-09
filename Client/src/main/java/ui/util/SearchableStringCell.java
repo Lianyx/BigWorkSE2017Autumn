@@ -27,7 +27,7 @@ public class SearchableStringCell<T> extends JFXTreeTableCell<T, String> {
     public SearchableStringCell(StringProperty keyWordProperty) {
         this.keyWordProperty = keyWordProperty;
         keyWordProperty.addListener((observable, oldValue, newValue) -> {
-            System.out.println(newValue);
+//            System.out.println(newValue);
             renderText(newValue);
         });
     }
@@ -53,6 +53,7 @@ public class SearchableStringCell<T> extends JFXTreeTableCell<T, String> {
 
         // 这个不得不加，不然会有nullPointerException，虽然我不知道为什么一定要加。
         if (newValue != null && !newValue.equals("") && toBeProcessed != null) {
+
             int index;
             while ((index = toBeProcessed.indexOf(newValue)) != -1) {
                 contentPane.getChildren().add(new OrdinaryLable(toBeProcessed.substring(0, index)));
@@ -61,7 +62,6 @@ public class SearchableStringCell<T> extends JFXTreeTableCell<T, String> {
                 toBeProcessed = toBeProcessed.substring(index + newValue.length());
             }
         }
-
         contentPane.getChildren().add(new OrdinaryLable(toBeProcessed));
     }
 }

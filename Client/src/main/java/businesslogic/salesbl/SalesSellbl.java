@@ -15,6 +15,7 @@ import java.rmi.RemoteException;
 public class SalesSellbl extends Receiptbl<SalesSellReceiptVO, SalesSellReceiptPO> implements SalesSellblService {
     public SalesSellbl() throws RemoteException, NotBoundException, MalformedURLException {
         super(SalesSellReceiptVO.class, SalesSellReceiptPO.class);
+        selectByMold(new SalesSellReceiptVO());
     }
 
     @Override

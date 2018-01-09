@@ -31,16 +31,10 @@ public class MemberPromotionDetailPane extends PromotionDetailPane<MemberPromoti
     @FXML
     private JFXTextField tokenField, requiredLevelField, discountField;
 
-    @Override
-    protected String getURL() {
-        return "/managerui/memberPromotionDetailPane.fxml";
-    }
 
-    @Override
-    protected Class<MemberPromotionblService> getServiceClass() {
-        return MemberPromotionblService.class;
-    }
-
+    /**
+     * Constructor related
+     * */
     public MemberPromotionDetailPane() {
     }
 
@@ -56,6 +50,23 @@ public class MemberPromotionDetailPane extends PromotionDetailPane<MemberPromoti
         requiredLevelField.disableProperty().bind(modifyState.not());
     }
 
+    /**
+     * implement
+     * */
+    @Override
+    protected String getURL() {
+        return "/managerui/memberPromotionDetailPane.fxml";
+    }
+
+    @Override
+    protected Class<MemberPromotionblService> getServiceClass() {
+        return MemberPromotionblService.class;
+    }
+
+
+    /**
+     * Override
+     * */
     @Override
     protected boolean validate() {
         return super.validate();

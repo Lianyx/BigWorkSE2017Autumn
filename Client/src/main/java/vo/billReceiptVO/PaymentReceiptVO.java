@@ -9,8 +9,10 @@ import po.TransferItemPO;
 import po.receiptPO.PaymentBillReceiptPO;
 import po.receiptPO.ReceiptPO;
 import ui.accountantui.PaymentDetailPane;
+import ui.myAccountantui.MyPaymentDetailPane;
 import util.ReceiptState;
 
+import vo.receiptVO.ReceiptListVO;
 import vo.receiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;
@@ -28,7 +30,7 @@ public class PaymentReceiptVO extends ReceiptVO {
     private double sum;
 
 
-    public PaymentReceiptVO(){
+    public PaymentReceiptVO() {
 
     }
 
@@ -37,11 +39,13 @@ public class PaymentReceiptVO extends ReceiptVO {
         this.clientID = paymentBillReceiptPO.getClientId();
         this.sum = paymentBillReceiptPO.getSum();
         List<TransferItemVO> temp = new ArrayList<>();
-        for(TransferItemPO transferItemPO:paymentBillReceiptPO.getTransferList()){
-            TransferItemVO vo = new TransferItemVO(transferItemPO.getAccountID(),transferItemPO.getSum(),transferItemPO.getComment());
-            temp.add(vo);
+        if (paymentBillReceiptPO.getTransferList() != null) {
+            for (TransferItemPO transferItemPO : paymentBillReceiptPO.getTransferList()) {
+                TransferItemVO vo = new TransferItemVO(transferItemPO.getAccountID(), transferItemPO.getSum(), transferItemPO.getComment());
+                temp.add(vo);
+            }
         }
-
+        transferList = temp;
     }
 
     public PaymentReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientID, List<TransferItemVO> transferList, double sum) {
@@ -57,11 +61,12 @@ public class PaymentReceiptVO extends ReceiptVO {
     }
 
     @Override
-    public PaymentBillReceiptPO toPO(){
+    public PaymentBillReceiptPO toPO() {
         PaymentBillReceiptPO result = toReceiptPO(PaymentBillReceiptPO.class);
         result.setClientId(clientID);
+        result.setSum(sum);
         TransferItemPO temp[] = new TransferItemPO[transferList.size()];
-        for(int i=0;i<transferList.size();i++){
+        for (int i = 0; i < transferList.size(); i++) {
             temp[i] = transferList.get(i).toPO();
         }
         result.setTransferList(temp);
@@ -75,7 +80,12 @@ public class PaymentReceiptVO extends ReceiptVO {
 
     @Override
     public Node getDetailPane() {
-        return new PaymentDetailPane();
+        return new MyPaymentDetailPane(this);
+    }
+
+    @Override
+    public PaymentReceiptListVO toListVO() {
+        return new PaymentReceiptListVO(this);
     }
 
     public int getclientID() {
@@ -98,8 +108,7 @@ public class PaymentReceiptVO extends ReceiptVO {
         return sum;
     }
 
-    public void setSum(double sum)
-    {
+    public void setSum(double sum) {
         this.sum = sum;
     }
 

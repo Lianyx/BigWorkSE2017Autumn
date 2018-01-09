@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ReceiptSearchCondition implements Serializable {
     private LocalDateTime begin, end;
-    private ArrayList<BillType> billTypes;
+    private ArrayList<BillType> billTypes = new ArrayList<>();
     private String clerkName;
     private String stockName;
     private Integer memberId;
@@ -63,11 +63,11 @@ public class ReceiptSearchCondition implements Serializable {
         this.stockName = stockName;
     }
 
-    public Integer getClientId() {
+    public Integer getMemberId() {
         return memberId;
     }
 
-    public void setClientId(Integer clientId) {
-        this.memberId = clientId;
+    public void setMemberId(Integer memberId) {
+        this.memberId = memberId;
     }
 }

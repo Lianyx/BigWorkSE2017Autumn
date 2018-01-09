@@ -1,7 +1,4 @@
-stages:
-  - build
+image: maven:4-jdk-7
 
-job:
-  stage: build
-  script:
-  - echo "Restoring NuGet Packages..."
+build:
+  script: "mvn install -B"

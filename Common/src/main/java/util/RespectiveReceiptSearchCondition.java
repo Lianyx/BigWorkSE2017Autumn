@@ -13,7 +13,7 @@ public class RespectiveReceiptSearchCondition implements Serializable{
     public RespectiveReceiptSearchCondition() {
     }
 
-    public RespectiveReceiptSearchCondition(LocalDateTime createTimeFloor, LocalDateTime createTimeCeil, LocalDateTime lastModifiedTimeFloor, LocalDateTime lastModifiedTimeCeil, ReceiptState receiptState, int operatorId, int dayId) {
+    public RespectiveReceiptSearchCondition(LocalDateTime createTimeFloor, LocalDateTime createTimeCeil, LocalDateTime lastModifiedTimeFloor, LocalDateTime lastModifiedTimeCeil, ReceiptState receiptState, Integer operatorId, Integer dayId) {
         this.createTimeFloor = createTimeFloor;
         this.createTimeCeil = createTimeCeil;
         this.lastModifiedTimeFloor = lastModifiedTimeFloor;

@@ -48,6 +48,8 @@ public abstract class ReceiptVO extends ReceipishVO<ReceiptVO> {
 
     public abstract Node getDetailPane();
 
+    public abstract <TL extends ReceiptListVO<TL>> TL toListVO();
+
     public int getOperatorId() {
         return operatorId;
     }

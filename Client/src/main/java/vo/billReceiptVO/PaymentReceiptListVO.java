@@ -2,20 +2,36 @@ package vo.billReceiptVO;
 
 import util.ReceiptState;
 import vo.abstractVO.SelectableVO;
+import vo.receiptVO.ReceiptListVO;
+import vo.receiptVO.ReceiptVO;
 
-public class PaymentReceiptListVO extends SelectableVO<PaymentReceiptListVO>{
+public class PaymentReceiptListVO extends ReceiptListVO<PaymentReceiptListVO> {
 
     private String id;
     private ReceiptState receiptState;
     private int operator;
     private double sum;
-    private boolean multiple = true;
+    private boolean multiple = true; // 什么是multiple
+    private PaymentReceiptVO paymentReceiptVO;
+
+    public PaymentReceiptListVO(PaymentReceiptVO paymentReceiptVO) {
+        id = paymentReceiptVO.getId();
+        receiptState = paymentReceiptVO.getReceiptState();
+        operator = paymentReceiptVO.getOperatorId();
+        sum = paymentReceiptVO.getSum();
+        this.paymentReceiptVO = paymentReceiptVO;
+    }
 
     public PaymentReceiptListVO(String id, ReceiptState receiptState, int operator, double sum) {
         this.id = id;
         this.receiptState = receiptState;
         this.operator = operator;
         this.sum = sum;
+    }
+
+    @Override
+    public PaymentReceiptVO toVO() {
+        return paymentReceiptVO;
     }
 
     public String getId() {

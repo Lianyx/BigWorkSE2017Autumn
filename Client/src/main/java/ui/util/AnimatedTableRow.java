@@ -58,7 +58,7 @@ public class AnimatedTableRow extends Application {
                 );
 
         final TableView<Person> contactTable = createTable();
-        contactTable.setPlaceholder(new Label("No more contacts to select"));
+        contactTable.setPlaceholder(new Label("No more contacts to search"));
         contactTable.setItems(data);
 
         final Node contactContainer = createTableContainer("Address Book", contactTable);

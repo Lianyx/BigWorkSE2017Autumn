@@ -30,12 +30,10 @@ public class SearchableStringCell<T> extends JFXTreeTableCell<T, String> {
 
     private FlowPane contentPane = new FlowPane();
     private StringProperty keyWordProperty; // 这个本来可以不持有引用的唉，再说再说
-    private List<T> keywordFilterList;
     private String item;
 
-    public SearchableStringCell(StringProperty keyWordProperty, List<T> keywordFilterList) {
+    public SearchableStringCell(StringProperty keyWordProperty) {
         this.keyWordProperty = keyWordProperty;
-        this.keywordFilterList = keywordFilterList;
         keyWordProperty.addListener((observable, oldValue, newValue) -> {
             renderText(newValue);
         });

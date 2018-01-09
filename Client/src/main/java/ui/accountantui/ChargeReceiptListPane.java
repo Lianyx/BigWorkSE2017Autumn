@@ -1,7 +1,6 @@
 package ui.accountantui;
 
-import blService.billblService.ChargeBillReceiptblService;
-import blService.billblService.PaymentBillReceiptblService;
+import blService.billblservice.ChargeBillReceiptblService;
 import blService.blServiceFactory.ServiceFactory_Stub;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
