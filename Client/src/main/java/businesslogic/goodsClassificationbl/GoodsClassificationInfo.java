@@ -4,6 +4,7 @@ import blService.goodsblService.GoodsClassification_Goods;
 import dataService.goodsdataService.GoodsClassificationDataService;
 import po.GoodsClassificationPO;
 
+import java.rmi.RemoteException;
 import java.util.Arrays;
 
 public class GoodsClassificationInfo implements GoodsClassification_Goods {
@@ -15,7 +16,7 @@ public class GoodsClassificationInfo implements GoodsClassification_Goods {
     }
 
     @Override
-    public void addGoods(String classifyId ,String goodId) {
+    public void addGoods(String classifyId ,String goodId) throws RemoteException {
         GoodsClassificationPO po = dataService.getById(classifyId);
         String[] oldGoodsId = po.getGoodsId();
 
@@ -26,7 +27,7 @@ public class GoodsClassificationInfo implements GoodsClassification_Goods {
     }
 
     @Override
-    public void deleteGoods(String classifyId ,String goodsId) {
+    public void deleteGoods(String classifyId ,String goodsId) throws RemoteException{
         GoodsClassificationPO po = dataService.getById(classifyId);
         String[] oldGoodsId = po.getGoodsId();
 

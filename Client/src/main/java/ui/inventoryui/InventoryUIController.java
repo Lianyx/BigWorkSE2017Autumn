@@ -14,6 +14,8 @@ import ui.inventoryui.goodsui.GoodsListPane;
 import ui.inventoryui.inventoryCheckui.InventoryCheckPane;
 import ui.inventoryui.inventoryReceiptui.InventoryListPane;
 import ui.inventoryui.inventoryViewui.InventoryViewListPane;
+import ui.managerui.common.MyBoardController;
+import ui.managerui.common.MyTopBar;
 import ui.util.BoardController;
 import ui.util.PaneFactory;
 import ui.util.PaneSwitchAnimation;
@@ -25,7 +27,7 @@ import java.util.ResourceBundle;
 
 public class InventoryUIController implements Initializable {
     @FXML
-    TopBar bar;
+    MyTopBar bar;
 
     @FXML
     JFXListView<HBox> navigation;
@@ -36,13 +38,25 @@ public class InventoryUIController implements Initializable {
     @FXML
     BoardController boardController;
 
+    @FXML
+    StackPane mainpane;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        BoardController.setBoardController(boardController);
+      /*  BoardController.setBoardController(boardController);
 
         bar.setBoardController(boardController);
 
-        boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150), board));
+        boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150), board));*/
+        PaneFactory.setMainPane(mainpane);
+
+        BoardController.setBoardController(boardController);
+        boardController = MyBoardController.getMyBoardController();
+        // 这样再set回去，以后从boardController里面拿的就都是MyBoardController了，但是以后仍然需要强转
+        BoardController.setBoardController(boardController);
+
+        // 这个是不得不set，因为是同时生成的，但是这样很不好，希望可以改掉
+        bar.setBoardController(boardController);
 
         try {
             InventoryListPane inventoryListPane = new InventoryListPane(InventoryReceiptType.InventoryGift);

@@ -9,9 +9,14 @@ import po.GoodsClassificationPO;
 import util.ResultMessage;
 
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 @RMIRemote
-public class GoodsClassificationData implements GoodsClassificationDataService {
+public class GoodsClassificationData  extends UnicastRemoteObject implements GoodsClassificationDataService {
+    public GoodsClassificationData() throws RemoteException {
+    }
+
     @Override
     public ResultMessage insert(GoodsClassificationPO po) {
         SqlSession session = null;

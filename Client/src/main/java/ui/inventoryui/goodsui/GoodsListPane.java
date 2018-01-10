@@ -7,6 +7,7 @@ import businesslogic.goodsbl.Goodsbl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTreeTableRow;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -20,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 import org.controlsfx.control.PopOver;
+import po.GoodsPO;
 import ui.userui.usermanagerui.FilterPane;
 import ui.util.*;
 import vo.inventoryVO.GoodSearchVO;
@@ -44,7 +46,7 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO>{
 
     public GoodsListPane() throws Exception {
         super("/inventoryui/goodui/goodslistpane.fxml");
-        this.goodsblService = ServiceFactory_Stub.getService(GoodsblService.class.getName());// new Goodsbl();
+        this.goodsblService = new Goodsbl();//ServiceFactory_Stub.getService(GoodsblService.class.getName());// new Goodsbl();
         receiptTreeTable = new GoodsTreeTable();
         receiptTreeTable.setPrefSize(600,435);
         receiptTreeTable.keywordProperty().bind(match);
@@ -67,9 +69,12 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO>{
                     new DoubleButtonDialog(mainpane, "Wrong", "sabi", "Last", "Ret");
             buttonDialog.setButtonTwo(() -> boardController.Ret());
             buttonDialog.setButtonTwo(() -> refresh(false));
+
             Predicate<Integer> p = (s) -> {
                 try {
+                    System.out.println("goodUI1");
                     if ((set = new HashSet<>(goodsblService.show())) != null) {
+                        System.out.println("goodUI2");
                         System.out.println(set.size());
                         return true;
                     }
@@ -78,6 +83,7 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO>{
                 }
                 return false;
             };
+
             GetTask getTask =
                     new GetTask(() -> {
                         receiptTreeTable.setReceipts(set);
@@ -85,6 +91,7 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO>{
                         receiptTreeTable.createPage(0);
                         borderpane.setBottom(pagination);
                         switchPane(toSwitch);
+                        //boardController.switchTo(this);
                     }, buttonDialog, p);
 
             new Thread(getTask).start();
@@ -99,7 +106,20 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO>{
     @Override
     public void deleteList() {
         DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane,"Delete","sabi","Yes","No");
-        doubleButtonDialog.setButtonOne(()->{receiptTreeTable.delete(pagination); });
+        doubleButtonDialog.setButtonOne(()-> {
+                    receiptTreeTable.delete(pagination);
+ /*                   JFXTreeTableRow<GoodsVO> row = new JFXTreeTableRow();
+                    // RowSetter(row,()->{
+                    String goodId = row.getTreeItem().getValue().getId();
+                    System.out.println(goodId);
+         *//*   try {
+                goodsblService.deleteGoods(new GoodsVO(goodId));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }*//*
+                    // return row;*/
+            });
+
         doubleButtonDialog.setButtonTwo(()->{});
         doubleButtonDialog.show();
     }

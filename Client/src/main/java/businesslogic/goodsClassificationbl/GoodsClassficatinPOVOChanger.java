@@ -4,6 +4,7 @@ import po.GoodsClassificationPO;
 import vo.inventoryVO.GoodsClassificationVO;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,16 +20,25 @@ public class GoodsClassficatinPOVOChanger {
         return VOList;
     }
 
-    public   GoodsClassificationVO oneToVO(GoodsClassificationPO po){
+    public GoodsClassificationVO oneToVO(GoodsClassificationPO po){
         GoodsClassificationVO vo = new GoodsClassificationVO();
         vo.setID(po.getId());
         vo.setFatherID(po.getFatherID());
         vo.setName(po.getName());
 
-        List<String> childrenId = arrayToList(po.getChildrenId());
+        List<String> childrenId;
+        if(po.getChildrenId() != null)
+            childrenId = new ArrayList<>(Arrays.asList(po.getChildrenId()));
+        else
+            childrenId = new ArrayList<>();
+
         vo.setChildrenId(childrenId);
 
-        List<String> goodsId = arrayToList(po.getGoodsId());
+        List<String> goodsId;
+        if(po.getGoodsId() != null)
+            goodsId = new ArrayList<>(Arrays.asList(po.getGoodsId()));
+        else
+            goodsId = new ArrayList<>();
         vo.setGoodsID(goodsId);
 
         return vo;
@@ -40,32 +50,24 @@ public class GoodsClassficatinPOVOChanger {
         po.set_name(vo.getName());
         po.setFatherId(vo.getFatherID());
 
-        String[] childrenId = listToArray(vo.getChildrenId());
+
+        List<String> childList = vo.getChildrenId();
+
+        String[] childrenId = null;
+        if(childList != null) {
+            childrenId = new String[childList.size()];
+            childList.toArray(childrenId);
+        }
         po.setChildrenId(childrenId);
 
-        String[] goodsId = listToArray(vo.getGoodsID());
+        List<String> goodList = vo.getGoodsID();
+
+        String[] goodsId = null;
+        if(goodList != null) {
+            goodsId = new String[goodList.size()];
+            goodList.toArray(goodsId);
+        }
         po.setGoodsId(goodsId);
         return po;
-    }
-
-    public List<String> arrayToList(String[] strings){
-        List<String> list = new ArrayList<>(strings.length);
-
-        for (int i = 0; i < strings.length; i++)
-            list.add(strings[i]);
-
-        return list;
-    }
-
-    public String[] listToArray(List<String> list){
-        String[] strings = new String[list.size()];
-        Iterator<String> it = list.iterator();
-
-        int i = 0;
-        while (it.hasNext()){
-            strings[i++] = it.next();
-        }
-
-        return strings;
     }
 }

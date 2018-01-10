@@ -36,8 +36,8 @@ public class GoodsTreeTable extends ReceiptTreeTable<GoodsVO> {
     public GoodsTreeTable() {
         super();
         rowsPerPage = 7;
-        //goodsblService = GoodsListPane.goodsblService;//ServiceFactory_Stub.getService(GoodsblService.class.getName());
-        this.goodsblService = ServiceFactory_Stub.getService(GoodsblService.class.getName());
+        goodsblService = GoodsListPane.goodsblService;//ServiceFactory_Stub.getService(GoodsblService.class.getName());
+        //this.goodsblService = ServiceFactory_Stub.getService(GoodsblService.class.getName());
 
         JFXTreeTableColumn<GoodsVO,Boolean> choose = new JFXTreeTableColumn("  ");
         choose.setPrefWidth(40);
@@ -99,12 +99,14 @@ public class GoodsTreeTable extends ReceiptTreeTable<GoodsVO> {
             JFXTreeTableRow<GoodsVO> row = new JFXTreeTableRow();
             RowSetter(row,()->{
                 GoodDetailPane goodDetailPane = new GoodDetailPane(row.getTreeItem().getValue().getId());
-                    ;goodDetailPane.refresh(true);});
+                goodDetailPane.refresh(true);});
             return row;
         });
 
         this.getColumns().addAll(choose,goodName,goodId,goodType,inventoryNum,more);
     }
+
+
 
     public void setGood(Set<GoodsVO> goods){observableList.setAll(goods);}
 

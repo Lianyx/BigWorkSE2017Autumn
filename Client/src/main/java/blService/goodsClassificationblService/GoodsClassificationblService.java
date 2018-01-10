@@ -30,7 +30,7 @@ public interface GoodsClassificationblService {
      * @param vo
      * @return
      */
-    public ResultMessage addGoodsClassification(GoodsClassificationVO vo) throws ExistException,RemoteException;
+    public ResultMessage addGoodsClassification(GoodsClassificationVO vo) throws RemoteException;
 
     /**
      * 删除商品分类
