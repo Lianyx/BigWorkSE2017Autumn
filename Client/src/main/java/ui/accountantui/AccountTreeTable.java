@@ -57,11 +57,11 @@ public class AccountTreeTable extends ReceiptTreeTable<AccountListVO>{
         columnDecorator.setupCellValueFactory(choose, s -> s.selectedProperty().asObject());
         choose.setCellFactory(t->new ChooseCell<AccountListVO>(chosenItem));
 
-        JFXTreeTableColumn<AccountListVO,Integer> id = new JFXTreeTableColumn("ID");
+        JFXTreeTableColumn<AccountListVO,Integer> id = new JFXTreeTableColumn("编号");
         id.setPrefWidth(150);
         columnDecorator.setupCellValueFactory(id,s->new ReadOnlyObjectWrapper<>(s.getID()));
 
-        JFXTreeTableColumn<AccountListVO,String> name = new JFXTreeTableColumn<>("Name");
+        JFXTreeTableColumn<AccountListVO,String> name = new JFXTreeTableColumn<>("姓名");
         name.setPrefWidth(150);
         columnDecorator.setupCellValueFactory(name,s->new ReadOnlyObjectWrapper<>(s.getName()));
         name.setCellFactory(t->new SearchableStringCell<>(keyword));
@@ -83,7 +83,7 @@ public class AccountTreeTable extends ReceiptTreeTable<AccountListVO>{
                 });
                 multiCell.setRunnable2(()->{
                     try{
-                        accountblService.delete(((MemberListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getMemberId());
+                        accountblService.delete(((AccountListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getID());
                         BoardController.getBoardController().refresh();
                     }catch (RemoteException e){
                         e.printStackTrace();

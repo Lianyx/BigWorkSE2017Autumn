@@ -15,7 +15,7 @@ import vo.billReceiptVO.BillReceiptSearchVO;
 import vo.billReceiptVO.CashReceiptListVO;
 import vo.billReceiptVO.PaymentReceiptListVO;
 
-public class CashReceiptTreeTable extends ReceiptTreeTable<CashReceiptListVO>{
+/*public class CashReceiptTreeTable extends ReceiptTreeTable<CashReceiptListVO>{
 
     private CashBillReceiptblService cashBillReceiptblService;
     private static BillReceiptSearchVO billReceiptSearchVO;
@@ -91,16 +91,16 @@ public class CashReceiptTreeTable extends ReceiptTreeTable<CashReceiptListVO>{
 
 
         chosenItem.getSet().forEach(s -> {
-            observableList.remove(s);
+            observableList.remove(s);*/
             /*try {
                 cashBillReceiptblService.delete(s);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }*/
-        });
+        /*});
         p.setPageCount(observableList.size() / getRowsPerPage() + 1);
         createPage(p.getCurrentPageIndex());
         p.setCurrentPageIndex(p.getCurrentPageIndex());
         chosenItem.getSet().clear();
     }
-}
+}*/

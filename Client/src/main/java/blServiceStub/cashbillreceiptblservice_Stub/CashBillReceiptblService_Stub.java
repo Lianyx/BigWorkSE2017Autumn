@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class CashBillReceiptblService_Stub implements CashBillReceiptblService {
+/*public class CashBillReceiptblService_Stub implements CashBillReceiptblService {
 
     HashSet<CashReceiptListVO> set = new HashSet<>();
 
@@ -120,4 +120,4 @@ public class CashBillReceiptblService_Stub implements CashBillReceiptblService {
         return temp;
     }
 
-}
+}*/

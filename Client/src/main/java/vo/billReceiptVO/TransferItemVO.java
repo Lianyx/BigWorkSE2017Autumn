@@ -57,12 +57,12 @@ public class TransferItemVO extends RecursiveTreeObject<TransferItemVO> implemen
     public TransferItemPO toPO(){
         TransferItemPO result = new TransferItemPO();
         try {
-            result.setAccountID(Integer.parseInt(accountID.toString()));
+            result.setAccountID(accountID.get());
         } catch (NumberFormatException e) {
             result.setAccountID(-1);
         }
         try {
-            result.setSum(Double.parseDouble(sum.toString()));
+            result.setSum(sum.get());
         } catch (NumberFormatException e) {
             result.setSum(-1);
         }
