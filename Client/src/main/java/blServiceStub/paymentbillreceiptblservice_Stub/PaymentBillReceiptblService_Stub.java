@@ -63,19 +63,19 @@ public class PaymentBillReceiptblService_Stub implements PaymentBillReceiptblSer
     }
 
 
-    @Override
+//    @Override
     public int getDayId() {
         i++;
         return i;
     }
 
-    @Override
+//    @Override
     public ResultMessage add(PaymentReceiptVO paymentReceiptVO) {
         set.add(new PaymentReceiptListVO(paymentReceiptVO.getId(),paymentReceiptVO.getReceiptState(),paymentReceiptVO.getOperatorId(),paymentReceiptVO.getSum()));
         return ResultMessage.SUCCESS;
     }
 
-    @Override
+//    @Override
     public ResultMessage delete(String id) {
         PaymentReceiptListVO s = null;
         for(PaymentReceiptListVO paymentReceiptListVO:set){
@@ -126,7 +126,7 @@ public class PaymentBillReceiptblService_Stub implements PaymentBillReceiptblSer
         return null;
     }
 
-    @Override
+//    @Override
     public Set<PaymentReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO) {
         HashSet<PaymentReceiptListVO> temp = new HashSet<>();
         for(PaymentReceiptListVO s:set){
@@ -140,7 +140,7 @@ public class PaymentBillReceiptblService_Stub implements PaymentBillReceiptblSer
     }
 
     //String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientID, List<TransferItemVO> transferList, double sum,boolean isSell
-    @Override
+//    @Override
     public PaymentReceiptVO showDetail(String id) {
         ArrayList<TransferItemVO> list = new ArrayList();
         list.add(new TransferItemVO(1,1,"1"));
@@ -149,7 +149,7 @@ public class PaymentBillReceiptblService_Stub implements PaymentBillReceiptblSer
         //return new PaymentReceiptVO();
     }
 
-    @Override
+//    @Override
     public Set<PaymentReceiptListVO> getALL() {
         HashSet<PaymentReceiptListVO> temp = new HashSet<>();
         for(PaymentReceiptListVO p:set){

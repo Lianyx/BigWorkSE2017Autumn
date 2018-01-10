@@ -73,7 +73,7 @@ public class PaymentReceiptTreeTable extends ReceiptTreeTable<PaymentReceiptList
             public TreeTableCell<PaymentReceiptListVO, Boolean> call(TreeTableColumn<PaymentReceiptListVO, Boolean> param) {
                 MultiCell multiCell = new MultiCell();
                 multiCell.setRunnable1(()->{PaymentDetailPane paymentDetailPane = new PaymentDetailPane(((PaymentReceiptListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getId()); paymentDetailPane.refresh(true);});
-                multiCell.setRunnable2(()->{paymentBillReceiptblService.delete(((PaymentReceiptListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getId()); BoardController.getBoardController().refresh();});
+//                multiCell.setRunnable2(()->{paymentBillReceiptblService.delete(((PaymentReceiptListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getId()); BoardController.getBoardController().refresh();});
                 return multiCell;
             }
         });

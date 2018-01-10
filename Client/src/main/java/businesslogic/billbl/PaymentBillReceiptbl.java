@@ -23,26 +23,4 @@ public class PaymentBillReceiptbl extends Receiptbl<PaymentReceiptVO,PaymentBill
     public ResultMessage approve(PaymentReceiptVO receiptVO) throws RemoteException {
         return null;
     }
-
-    @Override
-    public ResultMessage delete(String id){
-        return ResultMessage.SUCCESS;
-    }
-
-    public int getDayId(){
-        return 1;
-    }
-    public ResultMessage add(PaymentReceiptVO paymentReceiptVO){
-        return ResultMessage.SUCCESS;
-    }
-
-    public Set<PaymentReceiptListVO> search(BillReceiptSearchVO billReceiptSearchVO){
-        return null;
-    }
-    public PaymentReceiptVO showDetail(String id){
-        return null;
-    }
-    public Set<PaymentReceiptListVO> getALL(){
-        return null;
-    }
 }

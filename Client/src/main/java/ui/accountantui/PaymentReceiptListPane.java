@@ -90,10 +90,10 @@ public class PaymentReceiptListPane extends ReceiptListPane<PaymentReceiptListVO
             buttonDialog.setButtonTwo(() -> boardController.Ret());
             buttonDialog.setButtonTwo(() -> refresh(false));
             Predicate<Integer> p = (s) -> {
-                if ((set = paymentBillReceiptblService.search(billReceiptSearchVO)) != null) {
-                    System.out.println(set.size());
-                    return true;
-                }
+//                if ((set = paymentBillReceiptblService.search(billReceiptSearchVO)) != null) {
+//                    System.out.println(set.size());
+//                    return true;
+//                }
                 return false;
             };
             GetTask getTask =

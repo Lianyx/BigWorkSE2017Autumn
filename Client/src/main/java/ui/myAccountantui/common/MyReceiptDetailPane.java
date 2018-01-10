@@ -199,6 +199,7 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
     @FXML
     private void approve() { // approve的时候顺便update单据
         if (validate()) {
+            System.out.println("MyReceiptDetailPane approve called");
             receiptVO.setReceiptState(ReceiptState.APPROVED); // TODO 这个其实不应该在这里set的
 
             MyBoardController myBoardController = MyBoardController.getMyBoardController();

@@ -1,6 +1,8 @@
 package po;
 
-public class CashItemPO {
+import java.io.Serializable;
+
+public class CashItemPO implements Serializable {
     private String name;
     private double sum;
     private String comment;
