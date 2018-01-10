@@ -5,9 +5,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXRippler?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<?import ui.managerui.checkui.CheckTable?>
-<fx:root type="AnchorPane" id="businessProgressPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<fx:root type="AnchorPane" id="businessSalesPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
          prefHeight="560.0" prefWidth="640.0">
     <JFXTextField fx:id="keywordField" layoutX="27.0" layoutY="28.0" prefHeight="30.0" prefWidth="150.0"/>
 

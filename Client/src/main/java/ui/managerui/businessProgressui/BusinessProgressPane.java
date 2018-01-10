@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import org.controlsfx.control.PopOver;
+import ui.common.FXMLRefreshableAnchorPane;
 import ui.managerui.checkui.CheckTable;
 import ui.managerui.common.MyBoardController;
 import ui.managerui.promotionui.PromotionFilterPane;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BusinessProgressPane extends Refreshable {
+public class BusinessProgressPane extends FXMLRefreshableAnchorPane {
     @FXML
     private JFXButton filter;
     @FXML
@@ -38,15 +39,6 @@ public class BusinessProgressPane extends Refreshable {
     private ReceiptSearchCondition searchCondition = new ReceiptSearchCondition();
 
     public BusinessProgressPane() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/managerui/businessProgressPane.fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         checkTable = new CheckTable(chosenItems, keywordField.textProperty(), new ArrayList<>());
         checkTable.setLayoutX(20);
         checkTable.setLayoutY(80);
@@ -58,6 +50,11 @@ public class BusinessProgressPane extends Refreshable {
         BusinessProgressFilterPane businessProgressFilterPane = new BusinessProgressFilterPane(this, searchCondition);
         filterPopOver.setContentNode(businessProgressFilterPane);
         filter.setOnAction(e -> filterPopOver.show(filter));
+    }
+
+    @Override
+    protected String getURL() {
+        return "/managerui/businessProgressPane.fxml";
     }
 
     @Override
@@ -74,13 +71,13 @@ public class BusinessProgressPane extends Refreshable {
             checkTable.refresh(tempList);
             myBoardController.switchTo(this);
         }, buttonDialog, woid -> {
-            System.out.println("start businessProgressPane refresh");
+//            System.out.println("start businessProgressPane refresh");
             try {
                 if (businessProgressblService == null) {
                     businessProgressblService = MyblServiceFactory.getService(BusinessProgressblService.class);
                 }
 
-                System.out.println("get businessblService");
+//                System.out.println("get businessblService");
                 ArrayList<ReceiptVO> receipts;
                 if ((receipts = businessProgressblService.search(searchCondition)) == null) {
                     return false;
@@ -88,7 +85,7 @@ public class BusinessProgressPane extends Refreshable {
                 tempList.clear();
                 tempList.addAll(receipts);
                 return true;
-            } catch (RemoteException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 return false;
             }

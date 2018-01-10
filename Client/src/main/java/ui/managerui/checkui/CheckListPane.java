@@ -132,8 +132,8 @@ public class CheckListPane extends Refreshable {
                 return true;
             } catch (RemoteException e) {
                 e.printStackTrace();
+                return false;
             }
-            return false;
         })).start();
     }
 }

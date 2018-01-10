@@ -31,6 +31,7 @@ public class MyBoardController extends BoardController {
                 return false; // 返回值只是为了是否有动画，因此false符合反回值原意
             }
 //            System.out.println(index);
+//            System.out.println(pane.getId());
             if (record.get(index).getId().equals(pane.getId())) {
 //            setBackAndForwardProperty(); // 这里什么都没干，应该不用更新吧。
                 return false;
