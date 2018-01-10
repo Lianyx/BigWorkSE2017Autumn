@@ -1,3 +1,4 @@
+/*
 package blServiceStub.inventoryblservice_Stub;
 
 import blService.inventoryblService.InventoryblService;
@@ -98,3 +99,4 @@ public class InventoryblService_Stub implements InventoryblService {
         return null;
     }
 }
+*/

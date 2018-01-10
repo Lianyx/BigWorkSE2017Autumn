@@ -1,3 +1,4 @@
+/*
 package ui.inventoryui.inventoryReceiptui;
 
 import com.jfoenix.controls.JFXButton;
@@ -80,3 +81,4 @@ public class InventoryFilterPane  extends AnchorPane {
 
     }
 }
+*/

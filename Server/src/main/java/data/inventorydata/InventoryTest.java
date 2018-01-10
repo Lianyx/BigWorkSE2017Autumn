@@ -2,16 +2,35 @@ package data.inventorydata;
 
 import po.receiptPO.*;
 import util.ReceiptState;
+import util.RespectiveReceiptSearchCondition;
 
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class InventoryTest{
     public static void main(String[] args) throws RemoteException {
-        testGift();
+      /*  testGift();
         testDamage();
         testOverflow();
-        testWarning();
+        testWarning();*/
+        InventoryReceiptGoodsItemPO[] pos = {new InventoryReceiptGoodsItemPO("121","花灯1","中国灯",12,23,12,23),
+                new InventoryReceiptGoodsItemPO("122","花灯2","中国灯",12,23,12,23),
+                new InventoryReceiptGoodsItemPO("123","花灯3","中国灯",12,23,12,23),
+                new InventoryReceiptGoodsItemPO("124","花灯4","中国灯",12,23,12,23)
+        };
+      InventoryGiftReceiptData data = new InventoryGiftReceiptData();
+      InventoryGiftReceiptPO po = data.getNew();
+      po.setOperatorId(123123);
+      po.setLastModifiedTime(LocalDateTime.now());
+      po.setReceiptState(ReceiptState.PENDING);
+      po.setClerkName("李明");
+      po.setGoodsList(pos);
+      po.setComment("无");
+      data.update(po);
+
+       // List<InventoryGiftReceiptPO> list = data.search(new RespectiveReceiptSearchCondition());
+       // System.out.println(list.toString());
 
     }
 

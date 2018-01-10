@@ -1,5 +1,6 @@
 package businesslogic.inventorybl;
 
+import blService.inventoryblService.InventoryGiftReceiptblService;
 import businesslogic.checkbl.Receiptbl;
 import businesslogic.goodsbl.goodsUpdate.GoodsUpdate;
 import blService.goodsblService.GoodsUpdateInfo;
@@ -11,7 +12,7 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-public class InventoryGiftReceiptbl extends Receiptbl<InventoryGiftReceiptVO,InventoryGiftReceiptPO> {
+public class InventoryGiftReceiptbl extends Receiptbl<InventoryGiftReceiptVO,InventoryGiftReceiptPO> implements InventoryGiftReceiptblService{
     GoodsUpdateInfo info;
 
     public InventoryGiftReceiptbl() throws RemoteException, NotBoundException, MalformedURLException {
@@ -43,7 +44,4 @@ public class InventoryGiftReceiptbl extends Receiptbl<InventoryGiftReceiptVO,Inv
         return ResultMessage.SUCCESS;*/
         return null;
     }
-
-
-    //还有转VO
 }

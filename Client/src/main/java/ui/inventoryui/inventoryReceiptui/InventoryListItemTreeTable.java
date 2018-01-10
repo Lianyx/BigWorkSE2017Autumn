@@ -41,9 +41,9 @@ public class InventoryListItemTreeTable extends JFXTreeTableView<ReceiptGoodsIte
 
         ColumnDecorator columnDecorator = new ColumnDecorator();
 
-        JFXTreeTableColumn<ReceiptGoodsItemVO, Integer> goodsID = new JFXTreeTableColumn<>("GoodsID");
+        JFXTreeTableColumn<ReceiptGoodsItemVO, String> goodsID = new JFXTreeTableColumn<>("GoodsID");
         goodsID.setPrefWidth(115.5);
-        columnDecorator.setupCellValueFactory(goodsID, l -> l.goodsIdProperty().asObject());
+        columnDecorator.setupCellValueFactory(goodsID, ReceiptGoodsItemVO::goodsIdProperty);
 
 
         JFXTreeTableColumn<ReceiptGoodsItemVO, String> goodsName = new JFXTreeTableColumn<>("GoodsName");
