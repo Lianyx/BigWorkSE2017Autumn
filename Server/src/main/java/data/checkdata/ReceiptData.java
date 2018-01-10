@@ -40,6 +40,12 @@ public class ReceiptData<T extends ReceiptPO> extends ReceipishData<T> implement
     }
 
     @Override
+    protected void setInitialValue(T receipishPO) {
+        super.setInitialValue(receipishPO);
+        receipishPO.setReceiptState(ReceiptState.DRAFT);
+    }
+
+    @Override
     public ArrayList<T> selectBetween(LocalDateTime begin, LocalDateTime end) throws RemoteException{
         ArrayList<T> resultList;
 

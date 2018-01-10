@@ -11,7 +11,7 @@ import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PromotionFactory {
+public class MyblServiceFactory {
     private static Map<Class<?>, Object> serviceMap = new HashMap<>();
 
     public synchronized static <TF> TF getService(Class<?> serviceName) {

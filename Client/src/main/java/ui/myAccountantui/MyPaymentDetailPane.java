@@ -1,15 +1,19 @@
 package ui.myAccountantui;
 
 import blService.billblservice.PaymentBillReceiptblService;
+import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
+import businesslogic.checkbl.MyServiceFactory;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import ui.managerui.common.MyBoardController;
-import ui.myAccountantui.generic.MyReceiptDetailPane;
-import ui.util.Refreshable;
+import ui.myAccountantui.common.MyReceiptDetailPane;
 import vo.billReceiptVO.PaymentReceiptVO;
+
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 
 
 public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
@@ -31,8 +35,8 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
     }
 
     @Override
-    protected void initialize() {
-        super.initialize();
+    protected void initiate() {
+        super.initiate();
         // 需要set disable property吗？
     }
 
@@ -47,6 +51,11 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
     @Override
     protected Class<? extends ReceiptblService<PaymentReceiptVO>> getServiceClass() {
         return PaymentBillReceiptblService.class;
+    }
+
+    @Override
+    protected CheckInfo<PaymentReceiptVO> getCheckInfo() throws RemoteException, NotBoundException, MalformedURLException {
+        return MyServiceFactory.getPaymentReceiptVOCheckInfo();
     }
 
     /**

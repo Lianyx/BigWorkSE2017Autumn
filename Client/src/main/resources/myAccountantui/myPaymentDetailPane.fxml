@@ -38,11 +38,24 @@
         </font>
     </JFXButton>
     <JFXButton fx:id="save" layoutX="564.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#save"
-               text="Save">
+               text="提交">
         <font>
             <Font size="12.0"/>
         </font>
     </JFXButton>
+    <JFXButton fx:id="approve" layoutX="564.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#approve"
+               text="通过">
+        <font>
+            <Font size="12.0"/>
+        </font>
+    </JFXButton>
+    <JFXButton fx:id="reject" layoutX="517" layoutY="17" mnemonicParsing="false" onMouseClicked="#reject"
+               text="驳回">
+        <font>
+            <Font size="12.0"/>
+        </font>
+    </JFXButton>
+
 
     <AnchorPane fx:id="pane" layoutX="90.0" layoutY="55.0" prefHeight="287.0" prefWidth="462.0">
         <Label layoutX="22.0" layoutY="20.0" text="Receipt">

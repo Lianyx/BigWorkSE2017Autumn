@@ -1,15 +1,18 @@
-package ui.myAccountantui.generic;
+package ui.myAccountantui.common;
 
 import blService.checkblService.ReceiptblService;
-import businesslogic.promotionbl.PromotionFactory;
+import businesslogic.promotionbl.MyblServiceFactory;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import org.controlsfx.control.PopOver;
 import ui.managerui.common.MyBoardController;
 import ui.managerui.common.MyOneButtonDialog;
 import ui.managerui.common.MyTwoButtonDialog;
 import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
+import ui.managerui.promotionui.PromotionFilterPane;
 import ui.myAccountantui.MyPaymentDetailPane;
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;
@@ -29,6 +32,8 @@ import java.util.stream.Collectors;
 public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends ReceiptVO> extends Refreshable {
     @FXML
     protected JFXRippler search;
+    @FXML
+    protected JFXButton filter;
     @FXML
     protected JFXTextField searchField;
     protected MyTreeTableBorderPane<TL> receiptListTreeTable;
@@ -60,13 +65,19 @@ public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends
         receiptListTreeTable.setLayoutX(20);
         receiptListTreeTable.setLayoutY(80);
         this.getChildren().add(receiptListTreeTable);
+
+        PopOver filterPopOver = new PopOver();
+        filterPopOver.setDetachable(false);
+        filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
+        MyFilterPane myFilterPane = new MyFilterPane(filterPopOver, this, respectiveReceiptSearchCondition);
+        filterPopOver.setContentNode(myFilterPane);
+        filter.setOnAction(e -> filterPopOver.show(filter));
     }
 
     /**
      * Abstract methods
      */
     protected abstract void initiateTreeTable();
-
     protected abstract Class<? extends ReceiptblService<TV>> getServiceClass();
 
 
@@ -76,6 +87,10 @@ public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends
 
     @FXML
     private void deleteList() {
+        if (chosenItems.isEmpty()) {
+            new MyOneButtonDialog("请选择删除单据").show();
+            return;
+        }
         for (TL chosenItem : new ArrayList<>(chosenItems)) {
             ReceiptState receiptState = chosenItem.toVO().getReceiptState();
             if (receiptState == ReceiptState.PENDING || receiptState == ReceiptState.APPROVED) {
@@ -136,6 +151,7 @@ public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends
     public void refresh(boolean toSwitch) {
         MyBoardController myBoardController = MyBoardController.getMyBoardController();
         myBoardController.Loading();
+
         ArrayList<TL> tempList = new ArrayList<>();
 
         DoubleButtonDialog buttonDialog = new DoubleButtonDialog(PaneFactory.getMainPane(), "Wrong", "连接失败", "重试", "返回");
@@ -148,7 +164,7 @@ public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends
         }, buttonDialog, woid -> {
             try {
                 if (receiptblService == null) { // 如果这里扔出exception，十有八九是因为命名不对应。
-                    receiptblService = PromotionFactory.getService(getServiceClass());
+                    receiptblService = MyblServiceFactory.getService(getServiceClass());
                 }
 
                 ArrayList<TV> receipts = null;

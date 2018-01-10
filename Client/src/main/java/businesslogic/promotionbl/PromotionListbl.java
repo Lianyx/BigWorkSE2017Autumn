@@ -12,7 +12,6 @@ import vo.promotionVO.TotalPromotionVO;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class PromotionListbl implements PromotionListblService {
@@ -23,9 +22,9 @@ public class PromotionListbl implements PromotionListblService {
 
     // 和直接从工厂里拿没有区别。
     public PromotionListbl() throws RemoteException, NotBoundException, MalformedURLException {
-        this.combinePromotionblService = PromotionFactory.getService(CombinePromotionblService.class);
-        this.memberPromotionblService = PromotionFactory.getService(MemberPromotionblService.class);
-        this.totalPromotionblService = PromotionFactory.getService(TotalPromotionblService.class);
+        this.combinePromotionblService = MyblServiceFactory.getService(CombinePromotionblService.class);
+        this.memberPromotionblService = MyblServiceFactory.getService(MemberPromotionblService.class);
+        this.totalPromotionblService = MyblServiceFactory.getService(TotalPromotionblService.class);
     }
 
     @Override

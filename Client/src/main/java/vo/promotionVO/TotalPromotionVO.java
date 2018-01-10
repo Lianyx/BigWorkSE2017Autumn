@@ -2,7 +2,7 @@ package vo.promotionVO;
 
 import blService.promotionblService.PromotionblService;
 import blService.promotionblService.TotalPromotionblService;
-import businesslogic.promotionbl.PromotionFactory;
+import businesslogic.promotionbl.MyblServiceFactory;
 import po.promotionPO.PromotionGoodsItemPO;
 import po.promotionPO.TotalPromotionPO;
 import ui.managerui.promotionui.promotionDetailPane.PromotionDetailPane;
@@ -48,7 +48,7 @@ public class TotalPromotionVO extends PromotionVO {
 
     @Override
     public PromotionblService getService() throws RemoteException, NotBoundException, MalformedURLException {
-        return PromotionFactory.getService(TotalPromotionblService.class);
+        return MyblServiceFactory.getService(TotalPromotionblService.class);
     }
 
     @Override

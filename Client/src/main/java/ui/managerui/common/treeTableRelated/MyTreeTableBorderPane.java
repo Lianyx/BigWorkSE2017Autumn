@@ -56,17 +56,9 @@ public abstract class MyTreeTableBorderPane<T extends RecursiveTreeObject<T>> ex
         myTreeTable.setShowRoot(false);
     }
 
-    protected abstract void clickTwiceAftermath(JFXTreeTableRow<T> row);
-
-    protected void createPage(int pageIndex) {
-        int fromIndex = pageIndex * rowsPerPage;
-        int toIndex = Math.min(fromIndex + rowsPerPage, observableList.size());
-        ObservableList<T> tempList = (FXCollections.observableArrayList(observableList.subList(fromIndex, toIndex)));
-        TreeItem<T> root = new RecursiveTreeItem<>(tempList, RecursiveTreeObject::getChildren);
-        myTreeTable.setRoot(root);
-
-        new NodeHolder(this, Duration.millis(1000), NodeAnimation.FADE).apply();
-    }
+    /**
+     * public
+     * */
 
     public void refresh(List<T> list) {
         this.observableList = FXCollections.observableArrayList(list);
@@ -85,4 +77,22 @@ public abstract class MyTreeTableBorderPane<T extends RecursiveTreeObject<T>> ex
             pagination.setCurrentPageIndex(newPageIndex);
         }
     }
+
+    /**
+     *
+     * */
+
+    protected abstract void clickTwiceAftermath(JFXTreeTableRow<T> row);
+
+    private void createPage(int pageIndex) {
+        int fromIndex = pageIndex * rowsPerPage;
+        int toIndex = Math.min(fromIndex + rowsPerPage, observableList.size());
+        ObservableList<T> tempList = (FXCollections.observableArrayList(observableList.subList(fromIndex, toIndex)));
+        TreeItem<T> root = new RecursiveTreeItem<>(tempList, RecursiveTreeObject::getChildren);
+        myTreeTable.setRoot(root);
+
+        new NodeHolder(this, Duration.millis(1000), NodeAnimation.FADE).apply();
+    }
+
+
 }

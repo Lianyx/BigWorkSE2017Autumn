@@ -88,7 +88,8 @@ public abstract class Receiptbl<TV extends ReceiptVO, TP extends ReceiptPO> exte
 //    }
 
     public ResultMessage reject(TV receiptVO) throws RemoteException {
-        return null;
+        receiptVO.setReceiptState(ReceiptState.REJECTED);
+        return update(receiptVO);
     }
 
     @Override

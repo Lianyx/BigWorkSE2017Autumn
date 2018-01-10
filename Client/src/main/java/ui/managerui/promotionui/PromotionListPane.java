@@ -1,7 +1,7 @@
 package ui.managerui.promotionui;
 
 import blService.promotionblService.PromotionListblService;
-import businesslogic.promotionbl.PromotionFactory;
+import businesslogic.promotionbl.MyblServiceFactory;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
@@ -139,7 +139,7 @@ public class PromotionListPane extends Refreshable { // TODO Refreshable改成�
         }, buttonDialog, p -> {
             try {
                 if (promotionListblService == null) { // 说明是第一次
-                    promotionListblService = PromotionFactory.getService(PromotionListblService.class);
+                    promotionListblService = MyblServiceFactory.getService(PromotionListblService.class);
                 }
 
                 ArrayList<PromotionVO> promotions;

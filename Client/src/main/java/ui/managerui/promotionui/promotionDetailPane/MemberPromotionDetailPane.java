@@ -1,28 +1,10 @@
 package ui.managerui.promotionui.promotionDetailPane;
 
 import blService.promotionblService.MemberPromotionblService;
-import blService.promotionblService.PromotionblService;
-import businesslogic.promotionbl.PromotionFactory;
 import com.jfoenix.controls.*;
-import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
-import javafx.beans.property.*;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import ui.managerui.common.MyBoardController;
 import vo.promotionVO.MemberPromotionVO;
-import vo.promotionVO.PromotionGoodsItemVO;
-import vo.promotionVO.PromotionVO;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class MemberPromotionDetailPane extends PromotionDetailPane<MemberPromotionVO> {

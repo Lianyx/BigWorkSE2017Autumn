@@ -1,7 +1,7 @@
 package ui.managerui.checkui;
 
 import blService.checkblService.CheckblService;
-import businesslogic.promotionbl.PromotionFactory;
+import businesslogic.promotionbl.MyblServiceFactory;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
@@ -9,12 +9,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import ui.managerui.common.ExceptionRunnable;
 import ui.managerui.common.MyBoardController;
-import ui.managerui.common.MyTwoButtonDialog;
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;
 import ui.util.PaneFactory;
 import ui.util.Refreshable;
-import vo.promotionVO.PromotionVO;
 import vo.receiptVO.ReceiptVO;
 
 import java.io.IOException;
@@ -122,7 +120,7 @@ public class CheckListPane extends Refreshable {
         }, buttonDialog, woid -> {
             try {
                 if (checkblService == null) {
-                    checkblService = PromotionFactory.getService(CheckblService.class);
+                    checkblService = MyblServiceFactory.getService(CheckblService.class);
                 }
 
                 ArrayList<ReceiptVO> receipts;

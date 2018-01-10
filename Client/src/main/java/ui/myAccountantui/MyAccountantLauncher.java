@@ -17,7 +17,7 @@ import static ui.util.SetDraggable.setDraggable;
 public class MyAccountantLauncher extends Application {
     public void start(Stage primaryStage)throws Exception{
         UserInfomation.username = "lolix";
-        UserInfomation.usertype = UserCategory.Accountant;
+        UserInfomation.usertype = UserCategory.GeneralManager;
         UserInfomation.userimage = new Image("/default/timg.jpg");
 
         // 这里没有按照最新的main pane来写，但是等登陆集成的时候再说吧

@@ -19,6 +19,7 @@ import ui.managerui.common.treeTableRelated.SearchableStringColumn;
 import ui.util.ButtonCell;
 import ui.util.NodeAnimation;
 import ui.util.NodeHolder;
+import ui.util.Refreshable;
 import util.ReceiptState;
 import vo.promotionVO.PromotionVO;
 import vo.receiptVO.ReceiptVO;
@@ -50,6 +51,6 @@ public class CheckTable extends MyTreeTableBorderPane<ReceiptVO> {
 
     @Override
     protected void clickTwiceAftermath(JFXTreeTableRow<ReceiptVO> row) {
-        row.getTreeItem().getValue().getDetailPane();
+        ((Refreshable)row.getTreeItem().getValue().getDetailPane()).refresh(false);
     }
 }

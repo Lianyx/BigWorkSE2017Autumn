@@ -2,23 +2,11 @@ package ui.managerui.promotionui.promotionDetailPane;
 
 import blService.promotionblService.PromotionblService;
 import blService.promotionblService.TotalPromotionblService;
-import businesslogic.promotionbl.PromotionFactory;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.NumberValidator;
-import exceptions.ItemNotFoundException;
-import javafx.beans.property.*;
 import javafx.fxml.FXML;
-import ui.managerui.common.MyBoardController;
-import ui.managerui.common.MyTwoButtonDialog;
-import ui.managerui.common.MyOneButtonDialog;
-import ui.util.GetTask;
-import util.PromotionState;
-import vo.promotionVO.PromotionGoodsItemVO;
 import vo.promotionVO.TotalPromotionVO;
 
-import java.rmi.RemoteException;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class TotalPromotionDetailPane extends PromotionDetailPane<TotalPromotionVO> {

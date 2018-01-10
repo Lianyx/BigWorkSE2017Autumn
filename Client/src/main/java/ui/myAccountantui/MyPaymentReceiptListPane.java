@@ -2,7 +2,7 @@ package ui.myAccountantui;
 
 import blService.billblservice.PaymentBillReceiptblService;
 import blService.checkblService.ReceiptblService;
-import ui.myAccountantui.generic.MyReceiptListPane;
+import ui.myAccountantui.common.MyReceiptListPane;
 import vo.billReceiptVO.PaymentReceiptListVO;
 import vo.billReceiptVO.PaymentReceiptVO;
 

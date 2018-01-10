@@ -1,7 +1,7 @@
 package ui.managerui.promotionui.promotionDetailPane;
 
 import blService.promotionblService.PromotionblService;
-import businesslogic.promotionbl.PromotionFactory;
+import businesslogic.promotionbl.MyblServiceFactory;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRippler;
@@ -14,15 +14,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import ui.managerui.common.MyBoardController;
 import ui.managerui.common.MyOneButtonDialog;
 import ui.managerui.common.MyTwoButtonDialog;
-import ui.managerui.common.Save;
 import ui.managerui.promotionui.GoodsTreeTable;
-import ui.util.BoardController;
 import ui.util.GetTask;
 import ui.util.Refreshable;
 import util.PromotionState;
@@ -33,7 +30,6 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 public abstract class PromotionDetailPane<T extends PromotionVO> extends Refreshable {
     @FXML
@@ -222,7 +218,7 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
         }, dialog, woid -> {
             try {
                 if (promotionblService == null) { // 这说明肯定是第一次
-                    promotionblService = PromotionFactory.getService(getServiceClass());
+                    promotionblService = MyblServiceFactory.getService(getServiceClass());
                     if (promotionVO == null) {
                         promotionVO = promotionblService.getNew();
                     }

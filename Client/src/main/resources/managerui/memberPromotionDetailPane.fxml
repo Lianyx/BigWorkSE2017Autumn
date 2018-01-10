@@ -15,7 +15,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import ui.managerui.promotionui.GoodsTreeTable?>
-<fx:root type="AnchorPane" id="memberPromotionDetailPane" stylesheets="@../css/receipt.css"
+<fx:root type="AnchorPane" fx:id="memberPromotionDetailPane" stylesheets="@../css/receipt.css"
          xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
          prefHeight="560.0" prefWidth="640.0">
     <Label text="会员促销策略" layoutX="25" layoutY="12">
