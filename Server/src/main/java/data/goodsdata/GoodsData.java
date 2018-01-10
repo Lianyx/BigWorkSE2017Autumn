@@ -88,11 +88,7 @@ public class GoodsData extends UnicastRemoteObject implements GoodsDataService {
             session.close();
         }
 
-        for (GoodsPO po:list) {
-            if(po.getIsDelete() == 1)
-                list.remove(po);
-        }
-
+        //这里的show未删除的进行暂时的改动
         return list;
     }
 

@@ -44,7 +44,7 @@ public class GoodsClassificationblService_Stub implements GoodsClassificationblS
     }
 
     @Override
-    public ResultMessage addGoodsClassification(GoodsClassificationVO vo) throws ExistException {
+    public ResultMessage addGoodsClassification(GoodsClassificationVO vo)  {
         return null;
     }
 

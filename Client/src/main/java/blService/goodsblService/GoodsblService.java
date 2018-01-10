@@ -45,7 +45,7 @@ public interface GoodsblService {
      * @param upID
      * @return
      */
-    public String getID(String upID ,int order);
+    public String getID(String upID ,int order) throws RemoteException;
 
     public GoodsVO showDetail(String id) throws RemoteException;
 }

@@ -15,8 +15,6 @@ import java.rmi.RemoteException;
 import java.util.*;
 
 public class GoodsClassificationbl implements GoodsClassificationblService{
-    public static final String START_NODE = "0";
-
     private GoodsClassificationDataService goodsClassificationData;
 
     private GoodsClassficatinPOVOChanger changer;
@@ -33,7 +31,9 @@ public class GoodsClassificationbl implements GoodsClassificationblService{
     public List<GoodsClassificationVO> show() throws RemoteException{
         List<GoodsClassificationPO> POList = goodsClassificationData.show();
 
+        //System.out.println(POList.toString());
         List<GoodsClassificationVO> VOList = getTree(POList);
+
 
         return VOList;
     }
@@ -49,19 +49,19 @@ public class GoodsClassificationbl implements GoodsClassificationblService{
     /**
      * 添加商品分类
      */
-    public ResultMessage addGoodsClassification(GoodsClassificationVO vo) throws ExistException,RemoteException {
+    public ResultMessage addGoodsClassification(GoodsClassificationVO vo) throws RemoteException {
         //如果商品分类下有商品，则不能添加分类
         String fatherId = vo.getFatherID();
-        if(!hasLeaf(fatherId)){
+       // if(!hasLeaf(fatherId)){
             GoodsClassificationPO po = changer.oneToPO(vo);
 
             goodsClassificationData.insert(po);
 
             return ResultMessage.SUCCESS;
-        }else{
+     /*   }else{
             //商品（id）已存在，添加失败
-            throw new ExistException();
-        }
+            return ResultMessage.FAIL;
+        }*/
     }
 
     /**
@@ -120,8 +120,8 @@ public class GoodsClassificationbl implements GoodsClassificationblService{
     private List<GoodsClassificationVO> getTree(List<GoodsClassificationPO> POList) throws RemoteException{
         List<GoodsClassificationVO> VOList = new ArrayList<>(POList.size());
 
+
         GoodsClassificationVO head = changer.oneToVO(POList.get(0));
-        VOList.add(head);
 
         GoodsClassificationVO vo = head;
 
@@ -144,7 +144,7 @@ public class GoodsClassificationbl implements GoodsClassificationblService{
                 //如果该商品分类是其子分类，就把该商品分类放到其后面
                 if(childrenId.indexOf(tmpId) != -1){
                     GoodsClassificationVO tmpVO = changer.oneToVO(po);
-                    VOList.add(tmpVO);
+                    //VOList.add(tmpVO);
                     que.offer(tmpVO);
                 }
             }

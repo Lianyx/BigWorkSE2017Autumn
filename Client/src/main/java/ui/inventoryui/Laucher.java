@@ -27,7 +27,7 @@ public class Laucher extends Application {
         UserInfomation.usertype = UserCategory.InventoryManager;
         UserInfomation.username = "Tedy";
         UserInfomation.userimage = new Image("/default/light.jpg");
-
+/*
         Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("/inventoryui/inventoryMain.fxml"));
@@ -40,7 +40,19 @@ public class Laucher extends Application {
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }*/
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/inventoryui/inventoryMain.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        Scene scene = new Scene(root);
+        setDraggable(scene, primaryStage);
+        primaryStage.setScene(scene);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.show();
+
 
     }
 }

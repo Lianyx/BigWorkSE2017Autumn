@@ -2,12 +2,18 @@ package ui.inventoryui.inventoryReceiptui;
 
 import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.inventoryblService.InventoryblService;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXRippler;
+import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Pagination;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
-import ui.util.DoubleButtonDialog;
-import ui.util.GetTask;
-import ui.util.ReceiptListPane;
+import ui.managerui.common.MyBoardController;
+import ui.util.*;
 import util.ReceiptState;
 import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptListVO;
 import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptType;
@@ -19,7 +25,33 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class InventoryListPane extends ReceiptListPane<InventoryReceiptListVO> {
+public class InventoryListPane extends Refreshable/*extends ReceiptListPane<InventoryReceiptListVO>*/ {
+
+    protected ReceiptTreeTable<InventoryReceiptListVO> receiptTreeTable;
+
+    @FXML
+    protected BorderPane borderpane;
+
+    protected Set<InventoryReceiptListVO> set;
+
+    protected BoardController boardController;
+
+    protected Pagination pagination;
+
+    protected StackPane mainpane;
+
+    public boolean historyAdd = false;
+
+    protected PopOver filterPopOver = new PopOver();
+
+    @FXML
+    protected JFXButton filter;
+
+    @FXML
+    protected JFXRippler search;
+
+    @FXML
+    protected JFXTextField searchField;
 
     InventoryblService inventoryblService;
 
@@ -30,7 +62,19 @@ public class InventoryListPane extends ReceiptListPane<InventoryReceiptListVO> {
     static InventorySearchVO inventorySearchVO = new InventorySearchVO();
 
     public InventoryListPane(InventoryReceiptType receiptType) throws Exception {
-        super("/inventoryui/inventoryreceiptui/inventorylistpane.fxml");
+        super();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/inventoryui/inventoryreceiptui/inventorylistpane.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        fxmlLoader.load();
+        this.boardController = MyBoardController.getMyBoardController();
+        this.mainpane = PaneFactory.getMainPane();
+        pagination = new Pagination();
+        pagination.currentPageIndexProperty().addListener((b,o,n)->{
+            receiptTreeTable.createPage(n.intValue());
+        });
+        borderpane.setBottom(pagination);
+     /*   super("/inventoryui/inventoryreceiptui/inventorylistpane.fxml");*/
         this.inventoryblService = ServiceFactory_Stub.getService(InventoryblService.class.getName());
 
         this.receiptType = receiptType;
@@ -44,7 +88,7 @@ public class InventoryListPane extends ReceiptListPane<InventoryReceiptListVO> {
         }
     }
 
-    @Override
+   // @Override
     public void deleteList() {
         DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane,"Delete","sabi","Yes","No");
         doubleButtonDialog.setButtonOne(()->{receiptTreeTable.delete(pagination); });
@@ -56,7 +100,7 @@ public class InventoryListPane extends ReceiptListPane<InventoryReceiptListVO> {
 
     }
 
-    @Override
+  //  @Override
     public void search() {
         if (searchField.getText() != ""&&searchField.getText() != null) {
             match.setValue(searchField.getText().toLowerCase());
@@ -70,12 +114,13 @@ public class InventoryListPane extends ReceiptListPane<InventoryReceiptListVO> {
             pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
             receiptTreeTable.createPage(0);
             borderpane.setBottom(pagination);
-            switchPane(false);
+            //switchPane(false);
+            boardController.switchTo(this);
         }
 
     }
 
-    @Override
+   // @Override
     public void add() {
         InventoryReceiptPane stockReceiptPane = new InventoryReceiptPane(receiptType);
         /*
@@ -104,7 +149,8 @@ public class InventoryListPane extends ReceiptListPane<InventoryReceiptListVO> {
                         pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
                         receiptTreeTable.createPage(0);
                         borderpane.setBottom(pagination);
-                        switchPane(toSwitch);
+                        //switchPane(toSwitch);
+                        boardController.switchTo(this);
                     }, buttonDialog, p);
 
             new Thread(getTask).start();

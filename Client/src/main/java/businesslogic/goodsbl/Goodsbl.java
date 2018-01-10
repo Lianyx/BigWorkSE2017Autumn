@@ -27,6 +27,8 @@ public class Goodsbl implements GoodsblService{
         changer = new GoodsPOVOChanger();
        // Remote remote = Naming.lookup("rmi://localhost:1099/GoodsData");
         dataService = (GoodsDataService) Naming.lookup("rmi://localhost:1099/GoodsData");
+
+        //System.out.println(dataService.show().toString());
     }
 
     /**
@@ -35,7 +37,10 @@ public class Goodsbl implements GoodsblService{
      */
     public Set<GoodsVO> show() throws RemoteException {
         List<GoodsPO> POList = dataService.show();
+        System.out.println(POList.toString());
         List<GoodsVO> VOList = changer.allToVO(POList);
+        System.out.println("---------");
+        System.out.println(VOList.toString());
         return new HashSet<>(VOList);
     }
 
@@ -86,7 +91,7 @@ public class Goodsbl implements GoodsblService{
      * @param order
      * @return
      */
-    public String getID(String upID, int order) {
+    public String getID(String upID, int order) throws RemoteException{
         String id = upID+order;
         return id;
     }

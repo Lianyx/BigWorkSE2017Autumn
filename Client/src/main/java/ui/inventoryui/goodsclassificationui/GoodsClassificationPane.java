@@ -2,6 +2,7 @@ package ui.inventoryui.goodsclassificationui;
 
 import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.goodsClassificationblService.GoodsClassificationblService;
+import businesslogic.goodsClassificationbl.GoodsClassificationbl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -20,6 +21,7 @@ import ui.util.Refreshable;
 import vo.inventoryVO.GoodsClassificationVO;
 
 import java.io.IOException;
+import java.rmi.NotBoundException;
 import java.util.List;
 
 public class GoodsClassificationPane extends Refreshable{
@@ -32,7 +34,7 @@ public class GoodsClassificationPane extends Refreshable{
 
     BoardController boardController;
 
-    GoodsClassificationblService goodsClassficationblService;
+    public static GoodsClassificationblService goodsClassficationblService;
 
     StackPane mainpane;
 
@@ -54,12 +56,13 @@ public class GoodsClassificationPane extends Refreshable{
 
 
 
-    public GoodsClassificationPane(BoardController boardController, StackPane mainpane) throws IOException {
+    public GoodsClassificationPane(BoardController boardController, StackPane mainpane) throws IOException, NotBoundException {
         this();
         this.boardController = boardController;
         this.mainpane = mainpane;
 
-        goodsClassficationblService = ServiceFactory_Stub.getService(GoodsClassificationblService.class.getName());
+     //  goodsClassficationblService = ServiceFactory_Stub.getService(GoodsClassificationblService.class.getName());
+        goodsClassficationblService = new GoodsClassificationbl();
 
         treeView = new GoodsClassificationTreeView();
         treeView.setBoardController(boardController);

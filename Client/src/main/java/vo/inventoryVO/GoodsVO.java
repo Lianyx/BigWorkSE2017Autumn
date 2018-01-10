@@ -35,6 +35,10 @@ public class GoodsVO extends SelectableVO<GoodsVO> {
     public GoodsVO() {
     }
 
+    public GoodsVO(String id) {
+        this.id = id;
+    }
+
     public GoodsVO(String ID, String name, String type, String sortID, int inventoryNum, double purPrice, double salePrice, double recentPurpPrice, double recentSalePrice, int alarmNumber) {
         this.id = ID;
         this.goodName = name;

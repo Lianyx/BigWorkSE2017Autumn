@@ -23,9 +23,9 @@
          报错，之后回来测试并且修改
     -->
     <update id="update">
-        update goods set id=#{id},goodName=#{goodName},goodType=#{goodType},classifyId=#{classifyId},inventoryNum = #{inventoryNum},purPrice =#{purPrice},
-        salePrice= #{salePrice},recentPurPrice = #{recentPurPrice},recentSalePrice = #{recentSalePrice},alarmNumber = #{alarmNumber},isDelete = #{isDelete}  where id=#{id}
-        <!--
+        update goods set id=#{id},<!--goodName=#{goodName},goodType=#{goodType},classifyId=#{classifyId},inventoryNum = #{inventoryNum},purPrice =#{purPrice},
+        salePrice= #{salePrice},recentPurPrice = #{recentPurPrice},recentSalePrice = #{recentSalePrice},alarmNumber = #{alarmNumber},isDelete = #{isDelete}  where id=#{id}-->
+
         <if test="goodName != null">
             goodName=#{goodName},
         </if>
@@ -51,11 +51,10 @@
             recentSalePrice = #{recentSalePrice},
         </if>
         <if test="alarmNumber != 0">
-            alarmNumber = #{alarmNumber}
+            alarmNumber = #{alarmNumber},
         </if>
             isDelete = #{isDelete}
          where id=#{id}
-         -->
     </update>
 
     <!--

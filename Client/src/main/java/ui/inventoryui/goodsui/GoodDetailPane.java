@@ -87,8 +87,8 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
 
     public GoodDetailPane(boolean isAdd) {
         super("/inventoryui/goodui/goodsdetail.fxml");
-        //goodsblService =  GoodsListPane.goodsblService;//ServiceFactory_Stub.getService(GoodsblService.class.getName());
-        this.goodsblService = ServiceFactory_Stub.getService(GoodsblService.class.getName());
+        this.goodsblService =  GoodsListPane.goodsblService;//ServiceFactory_Stub.getService(GoodsblService.class.getName());
+        //this.goodsblService = ServiceFactory_Stub.getService(GoodsblService.class.getName());
 
         delete.setVisible(false);
         date.setText(LocalDate.now().toString());
@@ -116,6 +116,10 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
             dialog.show();
         });
 
+    }
+
+    public void setGoodsblService(GoodsblService goodsblService) {
+        this.goodsblService = goodsblService;
     }
 
     @Override
@@ -154,8 +158,8 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
             });
             doubleButtonDialog.setButtonOne(() -> {
                 if (goodId.equals("-1")) {
-                    goodId = goodsblService.getID("123",4);
                     try {
+                        goodId = goodsblService.getID("123",4);
                         goodsblService.addGoods(new GoodsVO(goodId,goodName.getText(),goodType.getText(),classifyId.getText(),
                         Integer.parseInt(inventoryNum.getText()),
                                 Double.parseDouble(purPrice.getText()),
