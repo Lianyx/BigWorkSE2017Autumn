@@ -53,11 +53,6 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
         return PaymentBillReceiptblService.class;
     }
 
-    @Override
-    protected CheckInfo<PaymentReceiptVO> getCheckInfo() throws RemoteException, NotBoundException, MalformedURLException {
-        return MyServiceFactory.getPaymentReceiptVOCheckInfo();
-    }
-
     /**
      * Override method
      */

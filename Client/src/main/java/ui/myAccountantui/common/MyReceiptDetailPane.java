@@ -103,8 +103,6 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
 
     protected abstract Class<? extends ReceiptblService<TV>> getServiceClass();
 
-    protected abstract CheckInfo<TV> getCheckInfo() throws RemoteException, NotBoundException, MalformedURLException;
-
 
     /**
      * to be overriden
@@ -274,11 +272,11 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
             try {
                 if (receiptblService == null) { // 这说明肯定是第一次
                     receiptblService = MyblServiceFactory.getService(getServiceClass());
-                    if (checkInfo == null) {
-                        checkInfo = getCheckInfo();
-                    }
                     if (receiptVO == null) {
                         receiptVO = receiptblService.getNew();
+                    }
+                    if (checkInfo == null) {
+                        checkInfo = receiptVO.getService();
                     }
                 } else {
                     receiptVO = receiptblService.selectByMold(receiptVO);
