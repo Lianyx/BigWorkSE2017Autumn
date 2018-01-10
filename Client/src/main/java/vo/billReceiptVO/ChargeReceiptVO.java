@@ -37,9 +37,11 @@ public class ChargeReceiptVO extends ReceiptVO{
         this.clientID = chargeBillReceiptPO.getClientId();
         this.sum = chargeBillReceiptPO.getSum();
         List<TransferItemVO> temp = new ArrayList<>();
-        for(TransferItemPO transferItemPO:chargeBillReceiptPO.getTransferList()){
-            TransferItemVO vo = new TransferItemVO(transferItemPO.getAccountID(),transferItemPO.getSum(),transferItemPO.getComment());
-            temp.add(vo);
+        if (chargeBillReceiptPO.getTransferList() != null) {
+            for (TransferItemPO transferItemPO : chargeBillReceiptPO.getTransferList()) {
+                TransferItemVO vo = new TransferItemVO(transferItemPO.getAccountID(), transferItemPO.getSum(), transferItemPO.getComment());
+                temp.add(vo);
+            }
         }
         this.transferList = temp;
     }

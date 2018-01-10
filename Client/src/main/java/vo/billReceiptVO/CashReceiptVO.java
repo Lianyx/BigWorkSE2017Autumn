@@ -37,9 +37,11 @@ public class CashReceiptVO extends ReceiptVO{
         this.accountID = cashBillReceiptPO.getAccountId();
         this.total = cashBillReceiptPO.getTotal();
         List<CashItemVO> temp = new ArrayList<>();
-        for(CashItemPO cashItemPO:cashBillReceiptPO.getItemList()){
-            CashItemVO vo = new CashItemVO(cashItemPO.getName(),cashItemPO.getSum(),cashItemPO.getComment());
-            temp.add(vo);
+        if (cashBillReceiptPO.getItemList() != null) {
+            for (CashItemPO cashItemPO : cashBillReceiptPO.getItemList()) {
+                CashItemVO vo = new CashItemVO(cashItemPO.getName(),cashItemPO.getSum(), cashItemPO.getComment());
+                temp.add(vo);
+            }
         }
         this.cashList = temp;
     }

@@ -61,6 +61,7 @@ public class AccountDetailPane extends ReceiptDetailPane<AccountListVO>{
 
     SimpleBooleanProperty modifyState = new SimpleBooleanProperty(false);
 
+    boolean isAdd = false;
 
     public AccountDetailPane(AccountListVO accountListVO){
         this(false);
@@ -94,6 +95,7 @@ public class AccountDetailPane extends ReceiptDetailPane<AccountListVO>{
         }catch (Exception e){
             e.printStackTrace();
         }
+        this.isAdd = isAdd;
 
         id.setText("auto");
         id.setDisable(true);
@@ -165,13 +167,26 @@ public class AccountDetailPane extends ReceiptDetailPane<AccountListVO>{
             doubleButtonDialog.setButtonOne(() -> {
 
                 try {
-                    accountblService.add(new AccountListVO(
-                            0,
-                            name.getText(),
-                            Double.parseDouble(balance.getText())
-                    ));
+                    if(isAdd){
+                        accountblService.add(new AccountListVO(
+                                0,
+                                name.getText(),
+                                Double.parseDouble(balance.getText())
+                        ));
+                    }else{
+                        accountblService.update(new AccountListVO(
+                                Integer.parseInt(id.getText()),
+                                name.getText(),
+                                Double.parseDouble(balance.getText())
+                        ));
+                    }
 
-                    setBack();
+                    boardController.switchTo(this);
+                    OneButtonDialog oneButtonDialog = new OneButtonDialog(mainpane, "???", "Success", "Accept");
+                    oneButtonDialog.setButtonOne(() -> {
+                    });
+                    oneButtonDialog.show();
+                    //setBack();
                 }catch (RemoteException e){
                     e.printStackTrace();
                 }

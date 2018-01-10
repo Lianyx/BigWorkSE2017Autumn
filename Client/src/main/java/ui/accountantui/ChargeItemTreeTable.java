@@ -1,8 +1,5 @@
 package ui.accountantui;
 
-import blService.billblService.ChargeBillReceiptblService;
-import blService.billblService.PaymentBillReceiptblService;
-import blService.stockblService.StockblService;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.cells.editors.DoubleTextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.IntegerTextFieldEditorBuilder;
@@ -10,7 +7,6 @@ import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -20,18 +16,13 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import ui.stockui.StockListItemPane;
-import ui.util.BoardController;
 import ui.util.ColumnDecorator;
 import ui.util.ListPopup;
 import ui.util.PaneFactory;
-import vo.ListGoodsItemVO;
 import vo.billReceiptVO.TransferItemVO;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Function;
 
 public class ChargeItemTreeTable extends JFXTreeTableView<TransferItemVO>{
 

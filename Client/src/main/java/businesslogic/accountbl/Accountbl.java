@@ -32,6 +32,11 @@ public class Accountbl implements AccountblService{
     }
 
     public Set<AccountListVO> getAll()throws RemoteException{
+       /*ArrayList<AccountListVO> tem = new ArrayList<>();
+       tem.add(new AccountListVO(1,"1",1));
+       tem.add(new AccountListVO(2,"2",2));
+       tem.add(new AccountListVO(3,"3",3));*/
+
         ArrayList<AccountPO> POList = accountDataService.getAll();
         ArrayList<AccountListVO> VOList = new ArrayList<>();
         for(AccountPO po: POList){
@@ -39,6 +44,7 @@ public class Accountbl implements AccountblService{
             VOList.add(vo);
         }
         return new HashSet<AccountListVO>(VOList);
+        //return new HashSet<>(tem);
     }
 
     /*public ArrayList<AccountListVO> search(String keyword)throws RemoteException{
