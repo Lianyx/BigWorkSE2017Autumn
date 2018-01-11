@@ -21,6 +21,6 @@ public class MyCashReceiptListPane extends MyReceiptListPane<CashReceiptListVO, 
 
     @Override
     protected Refreshable getNewDetailPane() {
-        return null;
+        return new MyCashDetailPane();
     }
 }

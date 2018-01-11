@@ -21,6 +21,6 @@ public class MyChargeReceiptListPane extends MyReceiptListPane<ChargeReceiptList
 
     @Override
     protected Refreshable getNewDetailPane() {
-        return null;
+        return new MyChargeDetailPane();
     }
 }
