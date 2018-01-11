@@ -2,12 +2,19 @@ package ui.myAccountantui;
 
 import blService.billblservice.ChargeBillReceiptblService;
 import blService.checkblService.ReceiptblService;
+import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ui.myAccountantui.common.MyReceiptDetailPane;
+import ui.util.UserInfomation;
 import vo.billReceiptVO.ChargeReceiptVO;
+import vo.billReceiptVO.PaymentReceiptVO;
+import vo.billReceiptVO.TransferItemVO;
+
+import java.util.ArrayList;
 
 public class MyChargeDetailPane extends MyReceiptDetailPane<ChargeReceiptVO> {
     @FXML
@@ -17,11 +24,33 @@ public class MyChargeDetailPane extends MyReceiptDetailPane<ChargeReceiptVO> {
     @FXML
     private TextArea commentArea;
 
+    @FXML
+    private ChargeItemTreeTable chargeItemTreeTable;
+    @FXML
+    private TextField operator;
+    @FXML
+    private JFXRippler addTransferButton;
+
+    ChargeReceiptVO chargeReceiptVO;
+
     public MyChargeDetailPane() {
     }
 
     public MyChargeDetailPane(ChargeReceiptVO receiptVO) {
         super(receiptVO);
+
+        modifyState = new SimpleBooleanProperty(false);
+
+        operator.setDisable(true);
+        sumField.setDisable(true);
+
+        clientField.disableProperty().bind(modifyState.not());
+        addTransferButton.visibleProperty().bind(modifyState);
+
+        chargeItemTreeTable.sumProperty().addListener(t->{sumField.setText(chargeItemTreeTable.getSum()+"");});
+
+        this.chargeReceiptVO = receiptVO;
+
     }
 
     @Override
@@ -70,19 +99,23 @@ public class MyChargeDetailPane extends MyReceiptDetailPane<ChargeReceiptVO> {
         super.updateReceiptVO();
         receiptVO.setSum(Double.parseDouble(sumField.getText()));
         receiptVO.setClientID(Integer.parseInt(clientField.getText()));
+        receiptVO.setTransferList(chargeReceiptVO.getTransferList());
     }
 
     @FXML
     @Override
     protected void reset() {
         super.reset();
+        operator.setText(UserInfomation.username);
         sumField.setText(String.valueOf(receiptVO.getSum()));
+        chargeItemTreeTable.setList(receiptVO.getTransferList());
         clientField.setText(String.valueOf(receiptVO.getClientID()));
     }
 
 
     @FXML
     private void addTransfer() {
-        // TODO
+
+        chargeItemTreeTable.add(new TransferItemVO(0,0,"TODO"));
     }
 }

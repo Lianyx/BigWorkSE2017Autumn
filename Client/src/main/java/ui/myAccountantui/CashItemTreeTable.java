@@ -1,4 +1,4 @@
-package ui.accountantui;
+package ui.myAccountantui;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.cells.editors.DoubleTextFieldEditorBuilder;
@@ -15,6 +15,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import ui.accountantui.CashItemPane;
 import ui.util.ColumnDecorator;
 import ui.util.ListPopup;
 import ui.util.PaneFactory;
@@ -40,32 +41,16 @@ public class CashItemTreeTable extends JFXTreeTableView<CashItemVO>{
         ColumnDecorator columnDecorator = new ColumnDecorator();
 
         JFXTreeTableColumn<CashItemVO, String> name = new JFXTreeTableColumn<>("Name");
-        name.setPrefWidth(120);
+        name.setPrefWidth(140);
         columnDecorator.setupCellValueFactory(name,CashItemVO::nameProperty);
-        name.setCellFactory((TreeTableColumn<CashItemVO, String> param) -> { return new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder());
-        });
-        name.setOnEditCommit((TreeTableColumn.CellEditEvent<CashItemVO, String> t) -> {
-            t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().nameProperty().set(t.getNewValue());
-        });
 
         JFXTreeTableColumn<CashItemVO, Double> price = new JFXTreeTableColumn<>("Price");
-        price.setPrefWidth(115.5);
+        price.setPrefWidth(140);
         columnDecorator.setupCellValueFactory(price, l -> l.priceProperty().asObject());
-        price.setCellFactory((TreeTableColumn<CashItemVO, Double> param) -> { return new GenericEditableTreeTableCell<>(new DoubleTextFieldEditorBuilder());
-        });
-        price.setOnEditCommit((TreeTableColumn.CellEditEvent<CashItemVO, Double> t) -> {
-            t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().priceProperty().set(t.getNewValue());
-        });
 
         JFXTreeTableColumn<CashItemVO, String> comment = new JFXTreeTableColumn<>("Comment");
-        comment.setPrefWidth(120);
+        comment.setPrefWidth(140);
         columnDecorator.setupCellValueFactory(comment,CashItemVO::commentProperty);
-        comment.setCellFactory((TreeTableColumn<CashItemVO, String> param) -> { return new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder());
-        });
-        comment.setOnEditCommit((TreeTableColumn.CellEditEvent<CashItemVO, String> t) -> {
-            t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().commentProperty().set(t.getNewValue());
-        });
-
 
         this.setRowFactory(tableView -> {
             JFXTreeTableRow row = new JFXTreeTableRow();

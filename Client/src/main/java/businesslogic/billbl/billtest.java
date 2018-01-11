@@ -24,8 +24,8 @@ public class billtest {
             p.update(vo);
         }*/
 
-        /*ChargeBillReceiptbl p = new ChargeBillReceiptbl();
-        for(int i=0;i<10;i++){
+        ChargeBillReceiptbl p = new ChargeBillReceiptbl();
+        /*for(int i=0;i<10;i++){
             ChargeReceiptVO vo= p.getNew();
             ArrayList<TransferItemVO> temp = new ArrayList<>();
             temp.add(new TransferItemVO(1,1,"1"));
@@ -34,17 +34,13 @@ public class billtest {
             vo.setReceiptState(ReceiptState.PENDING);
             p.update(vo);
         }*/
+        ArrayList<ChargeReceiptVO> list = p.search(new RespectiveReceiptSearchCondition());
+        System.out.println(list.size());
+        System.out.println(list.get(0).getClientID());
 
-        CashBillReceiptbl p = new CashBillReceiptbl();
-        for(int i=0;i<10;i++){
-            CashReceiptVO vo= p.getNew();
-            ArrayList<CashItemVO> temp = new ArrayList<>();
-            temp.add(new CashItemVO("1",1,"1"));
-            temp.add(new CashItemVO("2",2,"2"));
-            vo.setCashList(temp);
-            vo.setReceiptState(ReceiptState.PENDING);
-            p.update(vo);
-        }
+
+
+
 
     }
 }
