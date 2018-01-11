@@ -88,6 +88,7 @@ public abstract class MyTreeTableBorderPane<T extends RecursiveTreeObject<T>> ex
         int fromIndex = pageIndex * rowsPerPage;
         int toIndex = Math.min(fromIndex + rowsPerPage, observableList.size());
         ObservableList<T> tempList = (FXCollections.observableArrayList(observableList.subList(fromIndex, toIndex)));
+        System.out.println(tempList);
         TreeItem<T> root = new RecursiveTreeItem<>(tempList, RecursiveTreeObject::getChildren);
         myTreeTable.setRoot(root);
 

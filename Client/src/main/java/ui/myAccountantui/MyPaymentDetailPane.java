@@ -1,19 +1,19 @@
 package ui.myAccountantui;
 
 import blService.billblservice.PaymentBillReceiptblService;
-import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
-import businesslogic.checkbl.MyServiceFactory;
+import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ui.myAccountantui.common.MyReceiptDetailPane;
+import ui.util.UserInfomation;
 import vo.billReceiptVO.PaymentReceiptVO;
+import vo.billReceiptVO.TransferItemVO;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 
 public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
@@ -24,6 +24,15 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
     @FXML
     private TextArea commentArea;
 
+    @FXML
+    private PaymentItemTreeTable paymentItemTreeTable;
+    @FXML
+    private TextField operator;
+    @FXML
+    private JFXRippler addTransferButton;
+
+    PaymentReceiptVO paymentReceiptVO;
+
     /**
      * Constructor related
      */
@@ -32,6 +41,18 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
 
     public MyPaymentDetailPane(PaymentReceiptVO receiptVO) {
         super(receiptVO);
+
+        modifyState = new SimpleBooleanProperty(false);
+
+        operator.setDisable(true);
+        sumField.setDisable(true);
+
+        clientField.disableProperty().bind(modifyState.not());
+        addTransferButton.visibleProperty().bind(modifyState);
+
+        paymentItemTreeTable.sumProperty().addListener(t->{sumField.setText(paymentItemTreeTable.getSum()+"");});
+
+        this.paymentReceiptVO = receiptVO;
     }
 
     @Override
@@ -53,9 +74,7 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
         return PaymentBillReceiptblService.class;
     }
 
-    /**
-     * Override method
-     */
+
 
     @Override
     protected boolean validate() {
@@ -86,14 +105,17 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
         super.updateReceiptVO();
         receiptVO.setSum(Double.parseDouble(sumField.getText()));
         receiptVO.setclientID(Integer.parseInt(clientField.getText()));
-        // TODO 我没管transferList相关的（下面的reset同理）。而且这个vo里面没有comment………
+        receiptVO.setTransferList(paymentItemTreeTable.getList());
+
     }
 
     @FXML
     @Override
     protected void reset() {
         super.reset();
+        operator.setText(UserInfomation.username);
         sumField.setText(String.valueOf(receiptVO.getSum()));
+        paymentItemTreeTable.setList(receiptVO.getTransferList());
         clientField.setText(String.valueOf(receiptVO.getclientID()));
     }
 
@@ -103,6 +125,7 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
      */
     @FXML
     private void addTransfer() {
-        // TODO
+        paymentItemTreeTable.add(new TransferItemVO(0,0,"TODO"));
     }
+
 }

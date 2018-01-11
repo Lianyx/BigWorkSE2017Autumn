@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import ui.util.ModifyButton?>
-<?import ui.accountantui.CashItemTreeTable?>
+<?import ui.myAccountantui.CashItemTreeTable?>
 <fx:root type="AnchorPane" fx:id="cashreceipt" prefHeight="560.0" prefWidth="640.0" stylesheets="@../css/receipt.css"
          xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
 
@@ -161,7 +161,7 @@
     </Label>
     <CashItemTreeTable fx:id="cashItemTreeTable" layoutX="90" layoutY="380" prefHeight="170"/>
 
-    <JFXRippler fx:id="addTransferButton" layoutX="530" layoutY="346" maskType="CIRCLE" onMouseClicked="#addTransfer"
+    <JFXRippler fx:id="addCashButton" layoutX="530" layoutY="346" maskType="CIRCLE" onMouseClicked="#addTransfer"
                 position="BACK"
                 ripplerFill="#03A9F4" styleClass="icons-rippler">
         <StackPane layoutX="530.0" layoutY="347.0" style="-fx-padding: 8;">

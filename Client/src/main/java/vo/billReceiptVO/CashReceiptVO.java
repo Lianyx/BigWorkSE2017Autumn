@@ -10,6 +10,7 @@ import po.receiptPO.CashBillReceiptPO;
 import po.receiptPO.PaymentBillReceiptPO;
 import ui.accountantui.CashDetailPane;
 import ui.accountantui.PaymentDetailPane;
+import ui.myAccountantui.MyCashDetailPane;
 import util.ReceiptState;
 import vo.receiptVO.ReceiptListVO;
 import vo.receiptVO.ReceiptVO;
@@ -77,7 +78,7 @@ public class CashReceiptVO extends ReceiptVO{
 
     @Override
     public Node getDetailPane() {
-        return new CashDetailPane();
+        return new MyCashDetailPane(this);
     }
 
     public int getAccountID() {
@@ -106,7 +107,7 @@ public class CashReceiptVO extends ReceiptVO{
 
 
     @Override
-    public <TL extends ReceiptListVO<TL>> TL toListVO() {
-        return null;
+    public CashReceiptListVO toListVO() {
+        return new CashReceiptListVO(this);
     }
 }

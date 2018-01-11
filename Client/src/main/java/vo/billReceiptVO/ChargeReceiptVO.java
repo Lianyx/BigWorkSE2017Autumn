@@ -9,6 +9,7 @@ import po.receiptPO.ChargeBillReceiptPO;
 import po.receiptPO.PaymentBillReceiptPO;
 import ui.accountantui.ChargeDetailPane;
 import ui.accountantui.PaymentDetailPane;
+import ui.myAccountantui.MyChargeDetailPane;
 import util.ReceiptState;
 import vo.receiptVO.ReceiptListVO;
 import vo.receiptVO.ReceiptVO;
@@ -79,12 +80,12 @@ public class ChargeReceiptVO extends ReceiptVO{
 
     @Override
     public Node getDetailPane() {
-        return new ChargeDetailPane();
+        return new MyChargeDetailPane(this);
     }
 
     @Override
-    public <TL extends ReceiptListVO<TL>> TL toListVO() {
-        return null;
+    public ChargeReceiptListVO toListVO() {
+        return new ChargeReceiptListVO(this);
     }
 
     public int getClientID() {

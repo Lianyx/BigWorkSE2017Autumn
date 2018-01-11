@@ -2,12 +2,19 @@ package ui.myAccountantui;
 
 import blService.billblservice.CashBillReceiptblService;
 import blService.checkblService.ReceiptblService;
+import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ui.myAccountantui.common.MyReceiptDetailPane;
+import ui.util.UserInfomation;
+import vo.billReceiptVO.CashItemVO;
 import vo.billReceiptVO.CashReceiptVO;
+import vo.billReceiptVO.ChargeReceiptVO;
+
+import java.util.ArrayList;
 
 public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
     @FXML
@@ -17,11 +24,31 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
     @FXML
     private TextArea commentArea;
 
+    @FXML
+    private CashItemTreeTable cashItemTreeTable;
+    @FXML
+    private TextField operator;
+    @FXML
+    private JFXRippler addCashButton;
+
+    CashReceiptVO cashReceiptVO;
+
     public MyCashDetailPane() {
     }
 
     public MyCashDetailPane(CashReceiptVO receiptVO) {
         super(receiptVO);
+        modifyState = new SimpleBooleanProperty(false);
+
+        operator.setDisable(true);
+        sumField.setDisable(true);
+
+        accountField.disableProperty().bind(modifyState.not());
+        addCashButton.visibleProperty().bind(modifyState);
+
+        cashItemTreeTable.sumProperty().addListener(t->{sumField.setText(cashItemTreeTable.getSum()+"");});
+
+        this.cashReceiptVO = receiptVO;
     }
 
     @Override
@@ -70,19 +97,21 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
         super.updateReceiptVO();
         receiptVO.setTotal(Double.parseDouble(sumField.getText()));
         receiptVO.setAccountID(Integer.parseInt(accountField.getText()));
+        receiptVO.setCashList(cashReceiptVO.getCashList());
     }
 
     @FXML
     @Override
     protected void reset() {
         super.reset();
+        operator.setText(UserInfomation.username);
         sumField.setText(String.valueOf(receiptVO.getTotal()));
+        cashItemTreeTable.setList(cashReceiptVO.getCashList());
         accountField.setText(String.valueOf(receiptVO.getAccountID()));
     }
 
-
     @FXML
     private void addTransfer() {
-        // TODO
+        cashItemTreeTable.add(new CashItemVO("TODO",0,"TODO"));
     }
 }
