@@ -20,31 +20,31 @@ public class MyBillReceiptTest {
     public static void main(String[] args){
         try{
             //int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int clientID, TransferItemPO[] transferList, double sum
-            PaymentBillReceiptData paymentBillReceiptData = new PaymentBillReceiptData();
-
-            TransferItemPO temp[] = new TransferItemPO[3];
-            temp[0] = new TransferItemPO(1,1,"1");
-            temp[1] = new TransferItemPO(2,2,"3");
-
-            CashItemPO temp1[] = new CashItemPO[2];
-            temp1[0] = new CashItemPO("1",1,"1");
-            temp1[1] = new CashItemPO("1",1,"1");
-
-            temp[2] = new TransferItemPO(3,3,"2");
-
-
-            PaymentBillReceiptPO po;
-            po = paymentBillReceiptData.getNew();
-
-            System.out.println(po.getDayId());
-            System.out.println(po.getClientId());
-
-
-            po.setSum(100);
-            po.setReceiptState(ReceiptState.DRAFT);
-            po.setOperatorId(111);
-            po.setTransferList(temp);
-            paymentBillReceiptData.update(po);
+//            PaymentBillReceiptData paymentBillReceiptData = new PaymentBillReceiptData();
+//
+//            TransferItemPO temp[] = new TransferItemPO[3];
+//            temp[0] = new TransferItemPO(1,1,"1");
+//            temp[1] = new TransferItemPO(2,2,"3");
+//
+//            CashItemPO temp1[] = new CashItemPO[2];
+//            temp1[0] = new CashItemPO("1",1,"1");
+//            temp1[1] = new CashItemPO("1",1,"1");
+//
+//            temp[2] = new TransferItemPO(3,3,"2");
+//
+//
+//            PaymentBillReceiptPO po;
+//            po = paymentBillReceiptData.getNew();
+//
+//            System.out.println(po.getDayId());
+//            System.out.println(po.getClientId());
+//
+//
+//            po.setSum(100);
+//            po.setReceiptState(ReceiptState.DRAFT);
+//            po.setOperatorId(111);
+//            po.setTransferList(temp);
+//            paymentBillReceiptData.update(po);
 
 
             // delete
@@ -64,12 +64,13 @@ public class MyBillReceiptTest {
 //            po1.setTransferList(temp);
 //            chargeBillReceiptData.update(po1);
 
-//            CashBillReceiptData cashBillReceiptData = new CashBillReceiptData();
+            CashBillReceiptData cashBillReceiptData = new CashBillReceiptData();
 //            CashBillReceiptPO po2 = new CashBillReceiptPO();
 //            po2 = cashBillReceiptData.getNew();
 //            po2.setItemList(temp1);
 //            cashBillReceiptData.update(po2);
 
+            System.out.println(cashBillReceiptData.search(new RespectiveReceiptSearchCondition()).get(0));
         }catch (Exception e){
             e.printStackTrace();
         }
