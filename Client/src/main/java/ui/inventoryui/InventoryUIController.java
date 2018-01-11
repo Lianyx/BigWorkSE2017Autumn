@@ -9,13 +9,15 @@ import javafx.scene.layout.StackPane;
 import ui.inventoryui.goodsclassificationui.GoodsClassificationPane;
 import ui.inventoryui.goodsui.GoodsListPane;
 import ui.inventoryui.inventoryCheckui.InventoryCheckPane;
+import ui.inventoryui.inventoryReceiptui.InventoryDamageListPane;
 import ui.inventoryui.inventoryReceiptui.InventoryGiftListPane;
+import ui.inventoryui.inventoryReceiptui.InventoryOverflowListPane;
+import ui.inventoryui.inventoryReceiptui.InventoryWarningListPane;
 import ui.inventoryui.inventoryViewui.InventoryViewListPane;
 import ui.managerui.common.MyBoardController;
 import ui.managerui.common.MyTopBar;
 import ui.util.BoardController;
 import ui.util.PaneFactory;
-import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptType;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -79,17 +81,17 @@ public class InventoryUIController implements Initializable {
                         GoodsClassificationPane goodsClassificationPane = new GoodsClassificationPane(boardController, PaneFactory.getMainPane());
                         goodsClassificationPane.refresh(true);
                     }else if(newVal.getId().equals("inventoryGift")){
-                   /*     InventoryListPane inventoryListPane = new InventoryListPane(InventoryReceiptType.InventoryGift);
-                        inventoryListPane.refresh(true);*/
+                        InventoryGiftListPane inventoryGiftListPane = new InventoryGiftListPane();
+                        inventoryGiftListPane.refresh(true);
                     }else if(newVal.getId().equals("inventoryDamage")){
-                     /*   InventoryListPane inventoryListPane = new InventoryListPane(InventoryReceiptType.InventoryDamage);
-                        inventoryListPane.refresh(true);*/
+                        InventoryDamageListPane inventoryDamageListPane = new InventoryDamageListPane();
+                        inventoryDamageListPane.refresh(true);
                     }else if(newVal.getId().equals("inventoryOverflow")){
-                     /*   InventoryListPane inventoryListPane = new InventoryListPane(InventoryReceiptType.InventoryOverflow);
-                        inventoryListPane.refresh(true);*/
+                        InventoryOverflowListPane inventoryOverflowListPane = new InventoryOverflowListPane();
+                        inventoryOverflowListPane.refresh(true);
                     }else if(newVal.getId().equals("inventoryWarning")){
-                       /* InventoryListPane inventoryListPane = new InventoryListPane(InventoryReceiptType.InventoryWarning);
-                        inventoryListPane.refresh(true);*/
+                        InventoryWarningListPane inventoryWarningListPane = new InventoryWarningListPane();
+                        inventoryWarningListPane.refresh(true);
                     }
                 }
             } catch (Exception e) {

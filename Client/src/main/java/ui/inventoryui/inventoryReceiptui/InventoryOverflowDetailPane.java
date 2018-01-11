@@ -1,49 +1,45 @@
 package ui.inventoryui.inventoryReceiptui;
 
 import blService.checkblService.ReceiptblService;
-import blService.inventoryblService.InventoryGiftReceiptblService;
+import blService.inventoryblService.InventoryOverflowReceiptblService;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ui.myAccountantui.common.MyReceiptDetailPane;
-import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;
+import vo.inventoryVO.inventoryReceiptVO.InventoryOverflowReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 
 import java.util.List;
 
-public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftReceiptVO> {
+public class InventoryOverflowDetailPane extends MyReceiptDetailPane<InventoryOverflowReceiptVO> {
     @FXML
-    InventoryListItemTreeTable giftItemTreeTable;
+    InventoryOverflowDamageTreeTable overflowItemTreeTable;
 
     @FXML
     private TextArea commentArea;
     @FXML
     private TextField operator;
 
-    //InventoryGiftReceiptblService inventoryGiftReceiptblService = (Inven)getServiceClass();
-
-
-    public InventoryGiftDetailPane() {
-        giftItemTreeTable.setEditable(true);
-
+    public InventoryOverflowDetailPane() {
+        overflowItemTreeTable.setEditable(true);
     }
 
-    public InventoryGiftDetailPane(InventoryGiftReceiptVO receiptVO) {
+    public InventoryOverflowDetailPane(InventoryOverflowReceiptVO receiptVO) {
         super(receiptVO);
         operator.setText(String.valueOf(receiptVO.getOperatorId()));
         commentArea.setText("无");
-        giftItemTreeTable.setList(receiptVO.getItems());
-        giftItemTreeTable.setEditable(true);
+        overflowItemTreeTable.setList(receiptVO.getItems());
+        overflowItemTreeTable.setEditable(true);
     }
 
     @Override
     protected String getURL() {
-        return "/inventoryui/inventoryreceiptui/inventoryGiftDetailPane.fxml";
+        return "/inventoryui/inventoryreceiptui/inventoryOverflowDetailPane.fxml";
     }
 
     @Override
-    protected Class<? extends ReceiptblService<InventoryGiftReceiptVO>> getServiceClass() {
-        return InventoryGiftReceiptblService.class;
+    protected Class<? extends ReceiptblService<InventoryOverflowReceiptVO>> getServiceClass() {
+        return InventoryOverflowReceiptblService.class;
     }
 
     @Override
@@ -53,9 +49,9 @@ public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftRe
 
     @Override
     protected void updateReceiptVO() { // 这里不需要再检查了
-        List<ReceiptGoodsItemVO> goodsList = giftItemTreeTable.getList();
+        List<ReceiptGoodsItemVO> goodsList = overflowItemTreeTable.getList();
         System.out.println(operator.getText());
-      // receiptVO.setOperatorId(Integer.parseInt(operator.getText()));
+        // receiptVO.setOperatorId(Integer.parseInt(operator.getText()));
         receiptVO.setItems(goodsList);
         for (ReceiptGoodsItemVO vo:goodsList) {
             System.out.println(vo.getGoodsName()+" "+vo.getSendNum());
@@ -73,6 +69,6 @@ public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftRe
 
     @FXML
     public void addGoods(){
-        giftItemTreeTable.addGood(new ReceiptGoodsItemVO("please","please",0,0));
+        overflowItemTreeTable.addGood(new ReceiptGoodsItemVO("please","please",0,0));
     }
 }

@@ -1,17 +1,13 @@
-package vo.inventoryVO;
+package vo.inventoryVO.inventoryReceiptVO;
 
 import blService.checkblService.CheckInfo;
-import blService.checkblService.ReceiptblService;
 import businesslogic.checkbl.MyServiceFactory;
 import javafx.scene.Node;
-import po.receiptPO.InventoryGiftReceiptPO;
+import po.receiptPO.InventoryDamageReceiptPO;
+import po.receiptPO.InventoryDamageReceiptPO;
 import po.receiptPO.InventoryReceiptGoodsItemPO;
-import po.receiptPO.ReceiptPO;
-import ui.inventoryui.inventoryReceiptui.InventoryGiftDetailPane;
+import ui.inventoryui.inventoryReceiptui.InventoryDamageDetailPane;
 import util.ReceiptState;
-import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptType;
-import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptVO;
-import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 import vo.receiptVO.ReceiptListVO;
 import vo.receiptVO.ReceiptVO;
 
@@ -22,20 +18,20 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryGiftReceiptVO extends ReceiptVO {
+public class InventoryDamageReceiptVO extends ReceiptVO {
     private List<ReceiptGoodsItemVO> items;
     private String comment;
 
-    public InventoryGiftReceiptVO() {
+    public InventoryDamageReceiptVO() {
     }
 
-    public InventoryGiftReceiptVO(InventoryGiftReceiptPO inventoryGiftReceiptPO) {
-        super(inventoryGiftReceiptPO);
-        this.comment = inventoryGiftReceiptPO.getComment();
+    public InventoryDamageReceiptVO(InventoryDamageReceiptPO inventoryDamageReceiptPO) {
+        super(inventoryDamageReceiptPO);
+        this.comment = inventoryDamageReceiptPO.getComment();
 
         items = new ArrayList<>();
-        if(inventoryGiftReceiptPO.getGoodsList() != null){
-            InventoryReceiptGoodsItemPO[] goods = inventoryGiftReceiptPO.getGoodsList();
+        if(inventoryDamageReceiptPO.getGoodsList() != null){
+            InventoryReceiptGoodsItemPO[] goods = inventoryDamageReceiptPO.getGoodsList();
             for (InventoryReceiptGoodsItemPO itemPO:goods) {
                 ReceiptGoodsItemVO vo = new ReceiptGoodsItemVO();
                 vo.setGoodsId(itemPO.getId());
@@ -51,39 +47,27 @@ public class InventoryGiftReceiptVO extends ReceiptVO {
 
     }
 
-    public InventoryGiftReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, List<ReceiptGoodsItemVO> items, String comment) {
+
+    public InventoryDamageReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, List<ReceiptGoodsItemVO> items, String comment) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState);
         this.items = items;
         this.comment = comment;
     }
 
     @Override
-    public  CheckInfo<InventoryGiftReceiptVO> getService() throws RemoteException, NotBoundException, MalformedURLException {
-        return MyServiceFactory.getInventoryGiftReceiptVOCheckInfo();
-    }
-
-    @Override
-    public Node getDetailPane() {
-        return new InventoryGiftDetailPane(this);
-    }
-
-    @Override
-    public InventoryGiftListVO toListVO() {
-        return new InventoryGiftListVO(this);
-    }
-
-    @Override
     protected String getCodeName() {
-        return "ZSD";
+        return "BSD";
     }
 
     @Override
-    public InventoryGiftReceiptPO toPO() {
-        InventoryGiftReceiptPO result = toReceiptPO(InventoryGiftReceiptPO.class);
+    public InventoryDamageReceiptPO toPO() {
+        InventoryDamageReceiptPO result = toReceiptPO(InventoryDamageReceiptPO.class);
         result.setComment(comment);
+        result.setOperatorId(getOperatorId());
+
 
         // List<String> childList = vo.getChildrenId();
-      InventoryReceiptGoodsItemPO[] itemPOs = new InventoryReceiptGoodsItemPO[items.size()];
+        InventoryReceiptGoodsItemPO[] itemPOs = new InventoryReceiptGoodsItemPO[items.size()];
       /*  items.toArray(itemPOs);
         result.setGoodsList(itemPOs);*/
 
@@ -99,8 +83,25 @@ public class InventoryGiftReceiptVO extends ReceiptVO {
             itemPO.setsendNumber(item.getSendNum());
             itemPOs[i] = itemPO;
         }
+        result.setGoodsList(itemPOs);
 
         return result;
+    }
+
+
+    @Override
+    public CheckInfo<InventoryDamageReceiptVO> getService() throws RemoteException, NotBoundException, MalformedURLException {
+        return MyServiceFactory.getInventoryDamageReceiptVOCheckInfo();
+    }
+
+    @Override
+    public Node getDetailPane() {
+        return  new InventoryDamageDetailPane(this);
+    }
+
+    @Override
+    public InventoryDamageListVO toListVO() {
+        return new InventoryDamageListVO(this);
     }
 
     public List<ReceiptGoodsItemVO> getItems() {
@@ -119,3 +120,4 @@ public class InventoryGiftReceiptVO extends ReceiptVO {
         this.comment = comment;
     }
 }
+

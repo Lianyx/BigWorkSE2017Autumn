@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
-<?import ui.inventoryui.inventoryReceiptui.InventoryListItemTreeTable?>
-<?import ui.util.ModifyButton?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <?import com.jfoenix.controls.JFXRippler?>
-<fx:root fx:id="giftreceipt" prefHeight="560.0" prefWidth="640.0" stylesheets="@../css/receipt.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<?import ui.inventoryui.inventoryReceiptui.InventoryWarningTreeTable?>
+<?import javafx.scene.text.Font?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import ui.util.ModifyButton?>
+<fx:root fx:id="warningreceipt" prefHeight="560.0" prefWidth="640.0" stylesheets="@../css/receipt.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
 
     <Label layoutX="24.0" layoutY="12.0" text="InventoryGiftReceipt">
         <font>
@@ -126,10 +125,10 @@
             <Font size="20.0" />
         </font>
     </Label>
-  <!--
-    <PaymentItemTreeTable fx:id="paymentItemTreeTable" layoutX="90" layoutY="380" prefHeight="170"/>
--->
-    <InventoryListItemTreeTable fx:id="giftItemTreeTable" layoutX="90" layoutY="380" prefHeight="170" />
+    <!--
+      <PaymentItemTreeTable fx:id="paymentItemTreeTable" layoutX="90" layoutY="380" prefHeight="170"/>
+  -->
+    <InventoryWarningTreeTable fx:id="warningItemTreeTable" layoutX="90" layoutY="380" prefHeight="170" />
     <JFXRippler fx:id="addGoodsButton" layoutX="530" layoutY="346" maskType="CIRCLE" onMouseClicked="#addGoods" position="BACK" ripplerFill="#03A9F4" styleClass="icons-rippler">
         <StackPane layoutX="530.0" layoutY="347.0" style="-fx-padding: 8;">
             <MaterialDesignIconView glyphName="PLUS" size="1.5em" styleClass="icon" />

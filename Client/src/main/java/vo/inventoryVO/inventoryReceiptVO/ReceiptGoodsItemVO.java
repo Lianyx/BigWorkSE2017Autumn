@@ -38,6 +38,12 @@ public class ReceiptGoodsItemVO extends RecursiveTreeObject<ReceiptGoodsItemVO> 
         this.warningNum = new SimpleIntegerProperty(warningNum);
     }
 
+    public ReceiptGoodsItemVO(String goodsName, String goodsId, Integer inventoryNum,Integer sendNum) {
+        this.goodsName = new SimpleStringProperty(goodsName);
+        this.goodsId = new SimpleStringProperty(goodsId);
+        this.inventoryNum = new SimpleIntegerProperty(inventoryNum);
+        this.sendNum = new SimpleIntegerProperty(sendNum);
+    }
 
     public String getGoodsType() {
         return goodsType.get();

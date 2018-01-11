@@ -4,8 +4,8 @@ import blService.checkblService.ReceiptblService;
 import blService.inventoryblService.InventoryGiftReceiptblService;
 import ui.myAccountantui.common.MyReceiptListPane;
 import ui.util.Refreshable;
-import vo.inventoryVO.InventoryGiftListVO;
-import vo.inventoryVO.InventoryGiftReceiptVO;
+import vo.inventoryVO.inventoryReceiptVO.InventoryGiftListVO;
+import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;
 
 public class InventoryGiftListPane extends MyReceiptListPane<InventoryGiftListVO, InventoryGiftReceiptVO> {
     @Override

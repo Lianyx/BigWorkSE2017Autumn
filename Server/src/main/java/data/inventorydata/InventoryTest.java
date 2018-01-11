@@ -19,8 +19,8 @@ public class InventoryTest{
                 new InventoryReceiptGoodsItemPO("123","花灯3","中国灯",12,23,12,23),
                 new InventoryReceiptGoodsItemPO("124","花灯4","中国灯",12,23,12,23)
         };
-      InventoryGiftReceiptData data = new InventoryGiftReceiptData();
-      InventoryGiftReceiptPO po = data.getNew();
+      InventoryDamageReceiptData data = new InventoryDamageReceiptData();
+      InventoryDamageReceiptPO po = data.getNew();
       po.setOperatorId(123123);
       po.setLastModifiedTime(LocalDateTime.now());
       po.setReceiptState(ReceiptState.PENDING);

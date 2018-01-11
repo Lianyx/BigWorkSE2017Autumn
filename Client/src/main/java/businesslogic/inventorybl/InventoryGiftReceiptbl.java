@@ -6,7 +6,7 @@ import businesslogic.goodsbl.goodsUpdate.GoodsUpdate;
 import blService.goodsblService.GoodsUpdateInfo;
 import po.receiptPO.InventoryGiftReceiptPO;
 import util.ResultMessage;
-import vo.inventoryVO.InventoryGiftReceiptVO;
+import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;

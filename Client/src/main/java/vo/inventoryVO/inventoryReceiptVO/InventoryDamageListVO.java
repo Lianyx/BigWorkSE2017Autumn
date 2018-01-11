@@ -1,32 +1,31 @@
-package vo.inventoryVO;
+package vo.inventoryVO.inventoryReceiptVO;
 
 import util.ReceiptState;
 import vo.receiptVO.ReceiptListVO;
-import vo.receiptVO.ReceiptVO;
 
-public class InventoryGiftListVO extends ReceiptListVO<InventoryGiftListVO> {
+public class InventoryDamageListVO extends ReceiptListVO<InventoryDamageListVO> {
     private String id;
     private ReceiptState receiptState;
     private int operator;
     private boolean multiple = true; // 什么是multiple
-    private InventoryGiftReceiptVO inventoryGiftReceiptVO;
+    private InventoryDamageReceiptVO inventoryDamageReceiptVO;
 
-    public InventoryGiftListVO(InventoryGiftReceiptVO inventoryGiftReceiptVO) {
-        id = inventoryGiftReceiptVO.getId();
-        receiptState = inventoryGiftReceiptVO.getReceiptState();
-        operator = inventoryGiftReceiptVO.getOperatorId();
-        this.inventoryGiftReceiptVO = inventoryGiftReceiptVO;
+    public InventoryDamageListVO(InventoryDamageReceiptVO inventoryDamageReceiptVO) {
+        id = inventoryDamageReceiptVO.getId();
+        receiptState = inventoryDamageReceiptVO.getReceiptState();
+        operator = inventoryDamageReceiptVO.getOperatorId();
+        this.inventoryDamageReceiptVO = inventoryDamageReceiptVO;
     }
 
-    public InventoryGiftListVO(String id, ReceiptState receiptState, int operator) {
+    public InventoryDamageListVO(String id, ReceiptState receiptState, int operator) {
         this.id = id;
         this.receiptState = receiptState;
         this.operator = operator;
     }
 
     @Override
-    public InventoryGiftReceiptVO  toVO() {
-        return inventoryGiftReceiptVO;
+    public InventoryDamageReceiptVO  toVO() {
+        return inventoryDamageReceiptVO;
     }
 
     public String getId() {
@@ -61,11 +60,11 @@ public class InventoryGiftListVO extends ReceiptListVO<InventoryGiftListVO> {
         this.multiple = multiple;
     }
 
-    public InventoryGiftReceiptVO getInventoryGiftReceiptVO() {
-        return inventoryGiftReceiptVO;
+    public InventoryDamageReceiptVO getInventoryDamageReceiptVO() {
+        return inventoryDamageReceiptVO;
     }
 
-    public void setInventoryGiftReceiptVO(InventoryGiftReceiptVO inventoryGiftReceiptVO) {
-        this.inventoryGiftReceiptVO = inventoryGiftReceiptVO;
+    public void setInventoryDamageReceiptVO(InventoryDamageReceiptVO inventoryDamageReceiptVO) {
+        this.inventoryDamageReceiptVO = inventoryDamageReceiptVO;
     }
 }

@@ -19,23 +19,22 @@ import ui.util.ListPopup;
 import ui.util.PaneFactory;
 import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryListItemTreeTable extends JFXTreeTableView<ReceiptGoodsItemVO> {
+public class InventoryOverflowDamageTreeTable extends JFXTreeTableView<ReceiptGoodsItemVO> {
     private ObservableList<ReceiptGoodsItemVO> observableList = FXCollections.observableArrayList();
 
-   // private InventoryGiftReceiptblService inventoryGiftReceiptblService;
+    // private InventoryGiftReceiptblService inventoryGiftReceiptblService;
     private BoardController boardController;
     private StackPane mainpane;
 
-    public InventoryListItemTreeTable() {
+    public InventoryOverflowDamageTreeTable() {
         super();
 
 
         mainpane = PaneFactory.getMainPane();
-     //   inventoryblService = ServiceFactory_Stub.getService(InventoryblService.class.getName());
+        //   inventoryblService = ServiceFactory_Stub.getService(InventoryblService.class.getName());
 
         ColumnDecorator columnDecorator = new ColumnDecorator();
 
@@ -45,8 +44,8 @@ public class InventoryListItemTreeTable extends JFXTreeTableView<ReceiptGoodsIte
         goodsID.setPrefWidth(115.5);
         goodsID.setEditable(true);
         columnDecorator.setupCellValueFactory(goodsID, ReceiptGoodsItemVO::goodsIdProperty);
-       // goodsID.setCellFactory(TextFieldTableCell.forTableColumn());
-          goodsID.setCellFactory((TreeTableColumn<ReceiptGoodsItemVO, String> param) -> {
+        // goodsID.setCellFactory(TextFieldTableCell.forTableColumn());
+        goodsID.setCellFactory((TreeTableColumn<ReceiptGoodsItemVO, String> param) -> {
             return new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder());
         });
         goodsID.setOnEditCommit((TreeTableColumn.CellEditEvent<ReceiptGoodsItemVO, String> t) -> {
@@ -77,14 +76,14 @@ public class InventoryListItemTreeTable extends JFXTreeTableView<ReceiptGoodsIte
         });
 
 
-        JFXTreeTableColumn<ReceiptGoodsItemVO, Integer> sendNum = new JFXTreeTableColumn<>("SendNum");
-        sendNum.setPrefWidth(115.5);
-        columnDecorator.setupCellValueFactory(sendNum, l -> l.sendNumProperty().asObject());
-        sendNum.setCellFactory((TreeTableColumn<ReceiptGoodsItemVO, Integer> param) -> {
+        JFXTreeTableColumn<ReceiptGoodsItemVO, Integer> factNum = new JFXTreeTableColumn<>("FactNum");
+        factNum.setPrefWidth(115.5);
+        columnDecorator.setupCellValueFactory(factNum, l -> l.factNumProperty().asObject());
+        factNum.setCellFactory((TreeTableColumn<ReceiptGoodsItemVO, Integer> param) -> {
             return new GenericEditableTreeTableCell<>(new IntegerTextFieldEditorBuilder());
         });
-        sendNum.setOnEditCommit((TreeTableColumn.CellEditEvent<ReceiptGoodsItemVO, Integer> t) -> {
-            t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().sendNumProperty().set(t.getNewValue());
+        factNum.setOnEditCommit((TreeTableColumn.CellEditEvent<ReceiptGoodsItemVO, Integer> t) -> {
+            t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().factNumProperty().set(t.getNewValue());
         });
         //System.out.println(observableList.toString());
 
@@ -137,7 +136,7 @@ public class InventoryListItemTreeTable extends JFXTreeTableView<ReceiptGoodsIte
         this.setRoot(root);
         this.setEditable(true);
         this.setShowRoot(false);
-        this.getColumns().setAll(goodsID, goodsName, inventoryNum, sendNum);
+        this.getColumns().setAll(goodsID, goodsName, inventoryNum, factNum);
     }
 
 
@@ -158,5 +157,4 @@ public class InventoryListItemTreeTable extends JFXTreeTableView<ReceiptGoodsIte
         observableList.forEach(i->arrayList.add(i));
         return arrayList;
     }
-
 }

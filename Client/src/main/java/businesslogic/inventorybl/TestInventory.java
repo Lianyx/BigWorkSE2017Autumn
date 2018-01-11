@@ -1,10 +1,8 @@
 package businesslogic.inventorybl;
 
-import po.receiptPO.InventoryGiftReceiptPO;
-import po.receiptPO.InventoryReceiptGoodsItemPO;
 import util.ReceiptState;
 import util.RespectiveReceiptSearchCondition;
-import vo.inventoryVO.InventoryGiftReceiptVO;
+import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 
 import java.net.MalformedURLException;
@@ -16,7 +14,7 @@ import java.util.List;
 
 public class TestInventory {
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException {
-        InventoryGiftReceiptbl giftReceiptbl = new InventoryGiftReceiptbl();
+       /* InventoryGiftReceiptbl giftReceiptbl = new InventoryGiftReceiptbl();
 
 
         List<ReceiptGoodsItemVO> list = new ArrayList<>();
@@ -31,6 +29,8 @@ public class TestInventory {
         //vo.setClerkName("李明");
         vo.setItems(list);
         vo.setComment("无jfukfk");
-        giftReceiptbl.update(vo);
+        giftReceiptbl.update(vo);*/
+       InventoryDamageReceiptbl damageReceiptbl = new InventoryDamageReceiptbl();
+        System.out.println(damageReceiptbl.search(new RespectiveReceiptSearchCondition()).toString());
     }
 }
