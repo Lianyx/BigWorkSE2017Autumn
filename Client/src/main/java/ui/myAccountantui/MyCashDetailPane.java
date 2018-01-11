@@ -31,7 +31,6 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
     @FXML
     private JFXRippler addCashButton;
 
-    CashReceiptVO cashReceiptVO;
 
     public MyCashDetailPane() {
     }
@@ -48,7 +47,6 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
 
         cashItemTreeTable.sumProperty().addListener(t->{sumField.setText(cashItemTreeTable.getSum()+"");});
 
-        this.cashReceiptVO = receiptVO;
     }
 
     @Override
@@ -97,7 +95,7 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
         super.updateReceiptVO();
         receiptVO.setTotal(Double.parseDouble(sumField.getText()));
         receiptVO.setAccountID(Integer.parseInt(accountField.getText()));
-        receiptVO.setCashList(cashReceiptVO.getCashList());
+        receiptVO.setCashList(cashItemTreeTable.getList());
     }
 
     @FXML
@@ -106,7 +104,7 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
         super.reset();
         operator.setText(UserInfomation.username);
         sumField.setText(String.valueOf(receiptVO.getTotal()));
-        cashItemTreeTable.setList(cashReceiptVO.getCashList());
+        cashItemTreeTable.setList(receiptVO.getCashList());
         accountField.setText(String.valueOf(receiptVO.getAccountID()));
     }
 

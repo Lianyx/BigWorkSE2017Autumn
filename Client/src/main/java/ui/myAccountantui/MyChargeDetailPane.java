@@ -31,7 +31,6 @@ public class MyChargeDetailPane extends MyReceiptDetailPane<ChargeReceiptVO> {
     @FXML
     private JFXRippler addTransferButton;
 
-    ChargeReceiptVO chargeReceiptVO;
 
     public MyChargeDetailPane() {
     }
@@ -49,7 +48,6 @@ public class MyChargeDetailPane extends MyReceiptDetailPane<ChargeReceiptVO> {
 
         chargeItemTreeTable.sumProperty().addListener(t->{sumField.setText(chargeItemTreeTable.getSum()+"");});
 
-        this.chargeReceiptVO = receiptVO;
 
     }
 
@@ -99,7 +97,7 @@ public class MyChargeDetailPane extends MyReceiptDetailPane<ChargeReceiptVO> {
         super.updateReceiptVO();
         receiptVO.setSum(Double.parseDouble(sumField.getText()));
         receiptVO.setClientID(Integer.parseInt(clientField.getText()));
-        receiptVO.setTransferList(chargeReceiptVO.getTransferList());
+        receiptVO.setTransferList(chargeItemTreeTable.getList());
     }
 
     @FXML

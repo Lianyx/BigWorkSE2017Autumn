@@ -31,7 +31,7 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
     @FXML
     private JFXRippler addTransferButton;
 
-    PaymentReceiptVO paymentReceiptVO;
+
 
     /**
      * Constructor related
@@ -52,7 +52,6 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
 
         paymentItemTreeTable.sumProperty().addListener(t->{sumField.setText(paymentItemTreeTable.getSum()+"");});
 
-        this.paymentReceiptVO = receiptVO;
     }
 
     @Override
