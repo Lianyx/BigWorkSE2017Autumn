@@ -15,8 +15,8 @@ import java.time.LocalTime;
 public class PromotionSearchVO {
     // 搜索任何开始时间比这个晚。(a1, b1)代表促销策略时间， (a2, b2)代表搜索条件时间。
     // 需要bi > a2，且a1 < b2; 所以a2是endFloor，b2是beginCeil。且a2是UI里的前一个，b2是后一个。
-    private ObjectProperty<LocalDate> endFloorProperty = new SimpleObjectProperty<>()
-            , beginCeilProperty = new SimpleObjectProperty<>();
+    private ObjectProperty<LocalDate> endFloorProperty = new SimpleObjectProperty<>(/*LocalDate.now()*/)
+            , beginCeilProperty = new SimpleObjectProperty<>(/*LocalDate.now().plusDays(30)*/);
     private BooleanProperty containMemberProperty = new SimpleBooleanProperty()
             , containCombineProperty = new SimpleBooleanProperty()
             , containTotalProperty = new SimpleBooleanProperty();

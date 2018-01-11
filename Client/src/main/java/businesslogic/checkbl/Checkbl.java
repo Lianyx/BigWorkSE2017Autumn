@@ -6,10 +6,10 @@ import util.ResultMessage;
 import vo.billReceiptVO.CashReceiptVO;
 import vo.billReceiptVO.ChargeReceiptVO;
 import vo.billReceiptVO.PaymentReceiptVO;
-import vo.inventoryVO.InventoryDamageReceiptVO;
-import vo.inventoryVO.InventoryGiftReceiptVO;
-import vo.inventoryVO.InventoryOverflowReceiptVO;
-import vo.inventoryVO.InventoryWarningReceiptVO;
+import vo.inventoryVO.inventoryReceiptVO.InventoryDamageReceiptVO;
+import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;
+import vo.inventoryVO.inventoryReceiptVO.InventoryOverflowReceiptVO;
+import vo.inventoryVO.inventoryReceiptVO.InventoryWarningReceiptVO;
 import vo.receiptVO.ReceiptVO;
 import vo.receiptVO.SalesSellReceiptVO;
 

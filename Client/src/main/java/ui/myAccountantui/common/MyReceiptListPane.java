@@ -173,7 +173,7 @@ public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends
                 if ((receipts = receiptblService.search(respectiveReceiptSearchCondition)) == null) {
                     return false;
                 }
-                tempList.clear(); // TODO 我也不知道下面这里为什么高亮
+                tempList.clear(); // TODO 我也不知道下面这里为什么高亮，我猜可能是因为类型推断太弱了？
                 tempList.addAll(receipts.stream().map(v -> (TL) v.toListVO()).collect(Collectors.toCollection(ArrayList::new)));
                 return true;
             } catch (RemoteException e) {

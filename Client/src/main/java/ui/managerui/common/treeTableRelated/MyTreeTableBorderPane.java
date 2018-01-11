@@ -58,20 +58,23 @@ public abstract class MyTreeTableBorderPane<T extends RecursiveTreeObject<T>> ex
 
     /**
      * public
-     * */
+     */
 
     public void refresh(List<T> list) {
         this.observableList = FXCollections.observableArrayList(list);
 
         int maxPageIndex = (observableList.size() - 1) / rowsPerPage + 1;
-        pagination.setPageCount(maxPageIndex);
+        pagination.setPageCount(maxPageIndex); // 就算是0好像也不报错的
 
         int currentPageIndex = pagination.getCurrentPageIndex();
         int newPageIndex = 0;
-        if (currentPageIndex - 1 >= 0 && currentPageIndex < maxPageIndex) {
+        if (currentPageIndex - 1 >= 0 && currentPageIndex < maxPageIndex) { // 这里pageIndex在userListPane逻辑有点没看懂…就自己瞎改了
             newPageIndex = currentPageIndex;
         }
         if (newPageIndex == currentPageIndex) {
+            // 这里写的很丑。
+            // 因为：如果newPageIndex和原来一样的，只改pagination就不会触发createPage；如果不一样（只有0的情况才不一样吧），还要改pagination
+            // 要么就是继createPage又改pagination，感觉有可能会两次create。
             createPage(newPageIndex);
         } else {
             pagination.setCurrentPageIndex(newPageIndex);

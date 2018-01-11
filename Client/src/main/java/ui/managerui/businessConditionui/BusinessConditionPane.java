@@ -11,6 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import po.BusinessConditionPO;
+import ui.common.FXMLRefreshableAnchorPane;
+import ui.common.GatePane;
 import ui.managerui.common.MyBoardController;
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;
@@ -18,12 +20,14 @@ import ui.util.PaneFactory;
 import ui.util.Refreshable;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class BusinessConditionPane extends Refreshable {
+public class BusinessConditionPane extends GatePane {
     @FXML
     private JFXRippler search;
     @FXML
@@ -42,47 +46,46 @@ public class BusinessConditionPane extends Refreshable {
     private BusinessConditionPO businessConditionPO;
 
     public BusinessConditionPane() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/managerui/BusinessConditionPane.fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
         beginTimePicker.setValue(LocalDate.now().minusDays(30));
         endTimePicker.setValue(LocalDate.now().plusDays(30));
     }
 
-    @FXML
-    private void search() {
-        MyBoardController myBoardController = MyBoardController.getMyBoardController();
-        myBoardController.Loading();
+    /**
+     * implement methods
+     */
 
-        DoubleButtonDialog buttonDialog = new DoubleButtonDialog(PaneFactory.getMainPane(), "Wrong", "连接失败", "重试", "返回");
-        buttonDialog.setButtonOne(() -> refresh(false));
-        buttonDialog.setButtonTwo(myBoardController::Ret);
-
-        new Thread(new GetTask(
-                () -> {
-                    myBoardController.switchTo(this);
-                    setDataPresentation();
-                }, buttonDialog, p -> {
-            try {
-                updateBusinessConditionPO();
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
-        })).start();
+    @Override
+    protected String getURL() {
+        return "/managerui/BusinessConditionPane.fxml";
     }
 
-    private void updateBusinessConditionPO() throws RemoteException {
+    @Override
+    protected void refreshAfterMath() {
+        setDataPresentation();
+    }
+
+    @Override
+    protected void initiateService() throws RemoteException, NotBoundException, MalformedURLException {
+        businessConditionblService = MyServiceFactory.getBusinessConditionblService();
+    }
+
+    @Override
+    protected void updateDataFromBl() throws RemoteException {
         businessConditionPO = businessConditionblService.search(LocalDateTime.of(beginTimePicker.getValue(), LocalTime.MIN), LocalDateTime.of(endTimePicker.getValue(), LocalTime.MIN));
     }
+
+    /**
+     * FXML methods
+     */
+
+    @FXML
+    private void search() {
+        refresh(false);
+    }
+
+    /**
+     * private methods
+     * */
 
     private void setDataPresentation() {
         ObservableList<PieChart.Data> incomePieChartData = FXCollections.observableArrayList();
@@ -116,32 +119,4 @@ public class BusinessConditionPane extends Refreshable {
         profitLabel.setText("总利润：" + businessConditionPO.getTotalProfit());
     }
 
-    @Override
-    public void refresh(boolean toSwitch) {
-        MyBoardController myBoardController = MyBoardController.getMyBoardController();
-        myBoardController.Loading();
-
-        DoubleButtonDialog buttonDialog = new DoubleButtonDialog(PaneFactory.getMainPane(), "Wrong", "连接失败", "重试", "返回");
-        buttonDialog.setButtonOne(() -> refresh(false));
-        buttonDialog.setButtonTwo(myBoardController::Ret);
-
-        new Thread(new GetTask(
-                () -> {
-                    myBoardController.switchTo(BusinessConditionPane.this);
-                    setDataPresentation();
-                }, buttonDialog, p -> {
-            try {
-                if (businessConditionblService == null) {
-                    businessConditionblService = MyServiceFactory.getBusinessConditionblService();
-                }
-
-                updateBusinessConditionPO();
-
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
-        })).start();
-    }
 }

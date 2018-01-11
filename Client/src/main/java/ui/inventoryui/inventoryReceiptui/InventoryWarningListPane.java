@@ -1,6 +1,7 @@
 package ui.inventoryui.inventoryReceiptui;
 
 import blService.checkblService.ReceiptblService;
+import blService.inventoryblService.InventoryWarningReceiptblService;
 import businesslogic.inventorybl.InventoryWarningReceiptbl;
 import ui.myAccountantui.common.MyReceiptListPane;
 import ui.util.Refreshable;
@@ -16,7 +17,7 @@ public class InventoryWarningListPane extends MyReceiptListPane<InventoryWarning
 
     @Override
     protected Class<? extends ReceiptblService<InventoryWarningReceiptVO>> getServiceClass() {
-        return InventoryWarningReceiptbl.class;
+        return InventoryWarningReceiptblService.class;
     }
 
     @Override

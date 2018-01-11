@@ -39,17 +39,6 @@ public class ManagerUIController {
         initialPane.refresh(false);
 
         navigation.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
-//            new Thread(() -> {
-//                Platform.runLater(() -> {
-//                    if (newVal != null) {
-//                        if (newVal.getText().equals("审批单据")) {
-//                            System.out.println("审批单据");
-//                        } else if (newVal.getText().equals("促销策略")) {
-//                            System.out.println("促销微略");
-//                        }
-//                    }
-//                });
-//            }).start();
             newVal.getPane().refresh(true); // 这里还是先按照refresh的写法吧
         });
     }
