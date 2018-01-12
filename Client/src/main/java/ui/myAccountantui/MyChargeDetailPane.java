@@ -30,6 +30,10 @@ public class MyChargeDetailPane extends MyReceiptDetailPane<ChargeReceiptVO> {
     private TextField operator;
     @FXML
     private JFXRippler addTransferButton;
+    @FXML
+    private TextField createtime;
+    @FXML
+    private TextField lastmodifiedtime;
 
 
     public MyChargeDetailPane() {
@@ -42,6 +46,8 @@ public class MyChargeDetailPane extends MyReceiptDetailPane<ChargeReceiptVO> {
 
         operator.setDisable(true);
         sumField.setDisable(true);
+        createtime.setDisable(true);
+        lastmodifiedtime.setDisable(true);
 
         clientField.disableProperty().bind(modifyState.not());
         addTransferButton.visibleProperty().bind(modifyState);
@@ -108,6 +114,8 @@ public class MyChargeDetailPane extends MyReceiptDetailPane<ChargeReceiptVO> {
         sumField.setText(String.valueOf(receiptVO.getSum()));
         chargeItemTreeTable.setList(receiptVO.getTransferList());
         clientField.setText(String.valueOf(receiptVO.getClientID()));
+        createtime.setText(receiptVO.getCreateTime().toString());
+        lastmodifiedtime.setText(receiptVO.getLastModifiedTime().toString());
     }
 
 

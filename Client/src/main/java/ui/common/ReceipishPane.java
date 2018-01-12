@@ -3,6 +3,7 @@ package ui.common;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.PopOver;
+import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
 import vo.abstractVO.ReceipishVO;
 import vo.promotionVO.PromotionVO;
 
@@ -39,8 +40,13 @@ public abstract class ReceipishPane<TR extends ReceipishVO<TR>> extends Filterab
     }
 
     @Override
-    protected void initiateTreeTable() {
+    protected AnchorPane getInitialFilterPane(PopOver filterPopOver) {
+        return null;
+    }
 
+    @Override
+    protected MyTreeTableBorderPane<TR> getInitialTreeTable() {
+        return null;
     }
 
     @Override

@@ -3,15 +3,10 @@ package ui.common;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.fxml.FXML;
-import ui.managerui.common.MyBoardController;
 import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
-import ui.util.DoubleButtonDialog;
-import ui.util.GetTask;
-import ui.util.PaneFactory;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -25,7 +20,7 @@ public abstract class ListPane<TR extends RecursiveTreeObject<TR>> extends GateP
     private ArrayList<TR> tempList; // 给updateDataFromBl用的
 
     public ListPane() {
-        initiateTreeTable();
+        receiptListTreeTable = getInitialTreeTable();
         receiptListTreeTable.setLayoutX(20);
         receiptListTreeTable.setLayoutY(80);
         this.getChildren().add(receiptListTreeTable);
@@ -36,7 +31,7 @@ public abstract class ListPane<TR extends RecursiveTreeObject<TR>> extends GateP
      */
     protected abstract void initiateService() throws RemoteException, NotBoundException, MalformedURLException;
 
-    protected abstract void initiateTreeTable();
+    protected abstract MyTreeTableBorderPane<TR> getInitialTreeTable();
 
     protected abstract ArrayList<TR> getNewListData() throws RemoteException;
 

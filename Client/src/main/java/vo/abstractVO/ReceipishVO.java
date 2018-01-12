@@ -1,8 +1,6 @@
 package vo.abstractVO;
 
 import po.generic.ReceipishPO;
-import po.promotionPO.PromotionPO;
-import vo.receiptVO.ReceiptVO;
 
 import java.time.LocalDateTime;
 

@@ -1,9 +1,6 @@
 package ui.myAccountantui;
 
 import com.jfoenix.controls.*;
-import com.jfoenix.controls.cells.editors.DoubleTextFieldEditorBuilder;
-import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
-import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
@@ -11,11 +8,9 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import ui.accountantui.CashItemPane;
 import ui.util.ColumnDecorator;
 import ui.util.ListPopup;
 import ui.util.PaneFactory;
@@ -33,6 +28,8 @@ public class CashItemTreeTable extends JFXTreeTableView<CashItemVO>{
 
     StackPane mainpane;
 
+    private CashItemTreeTable cashItemTreeTable;
+
     public CashItemTreeTable(){
         super();
 
@@ -40,15 +37,15 @@ public class CashItemTreeTable extends JFXTreeTableView<CashItemVO>{
 
         ColumnDecorator columnDecorator = new ColumnDecorator();
 
-        JFXTreeTableColumn<CashItemVO, String> name = new JFXTreeTableColumn<>("Name");
+        JFXTreeTableColumn<CashItemVO, String> name = new JFXTreeTableColumn<>("条目名");
         name.setPrefWidth(140);
         columnDecorator.setupCellValueFactory(name,CashItemVO::nameProperty);
 
-        JFXTreeTableColumn<CashItemVO, Double> price = new JFXTreeTableColumn<>("Price");
+        JFXTreeTableColumn<CashItemVO, Double> price = new JFXTreeTableColumn<>("金额");
         price.setPrefWidth(140);
         columnDecorator.setupCellValueFactory(price, l -> l.priceProperty().asObject());
 
-        JFXTreeTableColumn<CashItemVO, String> comment = new JFXTreeTableColumn<>("Comment");
+        JFXTreeTableColumn<CashItemVO, String> comment = new JFXTreeTableColumn<>("备注");
         comment.setPrefWidth(140);
         columnDecorator.setupCellValueFactory(comment,CashItemVO::commentProperty);
 
@@ -66,7 +63,7 @@ public class CashItemTreeTable extends JFXTreeTableView<CashItemVO>{
                         @Override
                         public void handle(MouseEvent event) {
 
-                            CashItemPane cashItemPane = new CashItemPane(cashItemVO,observableList);
+                            CashItemPane cashItemPane = new CashItemPane(cashItemVO,observableList,cashItemTreeTable);
                             JFXDialog dialog = new JFXDialog(mainpane, cashItemPane, JFXDialog.DialogTransition.CENTER);
                             cashItemPane.setDialog(dialog);
                             dialog.show();
@@ -82,7 +79,7 @@ public class CashItemTreeTable extends JFXTreeTableView<CashItemVO>{
                     popup.show(row, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT);
                 }
                 if(event.getClickCount() == 2){
-                    CashItemPane cashItemPane = new CashItemPane(cashItemVO, observableList);
+                    CashItemPane cashItemPane = new CashItemPane(cashItemVO, observableList,cashItemTreeTable);
                     JFXDialog dialog = new JFXDialog(mainpane, cashItemPane, JFXDialog.DialogTransition.CENTER);
                     cashItemPane.setDialog(dialog);
                     dialog.show();

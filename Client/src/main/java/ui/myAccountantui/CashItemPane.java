@@ -1,4 +1,4 @@
-package ui.accountantui;
+package ui.myAccountantui;
 
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
@@ -32,7 +32,9 @@ public class CashItemPane extends AnchorPane {
 
     JFXDialog jfxDialog;
 
-    public CashItemPane(CashItemVO cashItemVO, ObservableList<CashItemVO> observableList) {
+    CashItemTreeTable cashItemTreeTable;
+
+    public CashItemPane(CashItemVO cashItemVO, ObservableList<CashItemVO> observableList,CashItemTreeTable cashItemTreeTable) {
         super();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/accountantui/CashItemPane.fxml"));
@@ -43,6 +45,8 @@ public class CashItemPane extends AnchorPane {
             e.printStackTrace();
         }
         this.cashItemVO = cashItemVO;
+        this.cashItemTreeTable = cashItemTreeTable;
+
         name.setText(cashItemVO.getName());
         price.setText(""+cashItemVO.getPrice());
         comment.setText(cashItemVO.getComment());
@@ -86,12 +90,13 @@ public class CashItemPane extends AnchorPane {
     @FXML
     public void save() {
         if(price.validate()){
-            //listGoodsItemVO.setGoodsNum(Integer.parseInt(num.getText()));
-            //sum.setText(""+listGoodsItemVO.getSum());
-            //listGoodsItemVO.setComment(comment.getText());
+
             cashItemVO.setName(name.getText());
             cashItemVO.setPrice(Double.parseDouble(price.getText()));
             cashItemVO.setComment(comment.getText());
+            CashItemVO temp  =new CashItemVO("1",1,"1");
+            cashItemTreeTable.add(temp);
+            cashItemTreeTable.remove(temp);
             jfxDialog.close();
 
         }

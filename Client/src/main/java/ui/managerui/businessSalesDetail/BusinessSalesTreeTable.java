@@ -9,8 +9,8 @@ import vo.ListGoodsItemVO;
 
 import java.util.Set;
 
-public class BusinessTreeTable extends MyTreeTableBorderPane<ListGoodsItemVO>{
-    public BusinessTreeTable(StringProperty keywordProperty) {
+public class BusinessSalesTreeTable extends MyTreeTableBorderPane<ListGoodsItemVO>{
+    public BusinessSalesTreeTable(StringProperty keywordProperty) {
         // TODO 加上时间信息
 //        JFXTreeTableColumn<ListGoodsItemVO, String> dateColumn = new SearchableStringColumn<>("时间", 100, keywordProperty, l -> l.get);
         JFXTreeTableColumn<ListGoodsItemVO, String> nameColumn = new SearchableStringColumn<>("商品名", 80, keywordProperty, ListGoodsItemVO::getGoodsName);

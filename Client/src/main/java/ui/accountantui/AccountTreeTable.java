@@ -66,7 +66,7 @@ public class AccountTreeTable extends ReceiptTreeTable<AccountListVO>{
         columnDecorator.setupCellValueFactory(name,s->new ReadOnlyObjectWrapper<>(s.getName()));
         name.setCellFactory(t->new SearchableStringCell<>(keyword));
 
-        JFXTreeTableColumn<AccountListVO,Double> balance = new JFXTreeTableColumn<>("Balance");
+        JFXTreeTableColumn<AccountListVO,Double> balance = new JFXTreeTableColumn<>("余额");
         balance.setPrefWidth(150);
         columnDecorator.setupCellValueFactory(balance,s->new ReadOnlyObjectWrapper<>(s.getBalance()));
 

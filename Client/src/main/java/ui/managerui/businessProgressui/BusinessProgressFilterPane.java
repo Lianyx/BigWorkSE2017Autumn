@@ -4,10 +4,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.skins.JFXCheckBoxOldSkin;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import ui.common.FXMLAnchorPane;
 import util.BillType;
 import util.ReceiptSearchCondition;
 
@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class BusinessProgressFilterPane extends AnchorPane {
+public class BusinessProgressFilterPane extends FXMLAnchorPane {
     @FXML
     private JFXDatePicker beginTime, endTime;
     @FXML
@@ -31,25 +31,22 @@ public class BusinessProgressFilterPane extends AnchorPane {
 
     public BusinessProgressFilterPane(BusinessProgressPane businessProgressPane, ReceiptSearchCondition receiptSearchCondition) {
         this.receiptSearchCondition = receiptSearchCondition;
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/managerui/businessProgressFilterPane.fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         beginTime.setValue(LocalDate.now());
         endTime.setValue(LocalDate.now());
 
         select.setOnAction(e -> {
-            setSearchCondition();
+            updateSearchCondition();
             businessProgressPane.refresh(false);
         });
     }
 
-    private void setSearchCondition() {
+    @Override
+    protected String getURL() {
+        return "/managerui/businessProgressFilterPane.fxml";
+    }
+
+    private void updateSearchCondition() {
         receiptSearchCondition.setBegin(LocalDateTime.of(beginTime.getValue(), LocalTime.MIN));
         receiptSearchCondition.setEnd(LocalDateTime.of(endTime.getValue(), LocalTime.MIN));
 
@@ -93,6 +90,8 @@ public class BusinessProgressFilterPane extends AnchorPane {
             receiptSearchCondition.setMemberId(null);
         }
 
-        System.out.println("Finish setSearchCondition");
+//        System.out.println("Finish updateSearchCondition");
     }
+
+
 }

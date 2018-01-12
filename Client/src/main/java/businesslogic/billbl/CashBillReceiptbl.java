@@ -18,6 +18,7 @@ public class CashBillReceiptbl extends Receiptbl<CashReceiptVO,CashBillReceiptPO
 
     @Override
     public ResultMessage approve(CashReceiptVO receiptVO) throws RemoteException {
+
         return null;
     }
 

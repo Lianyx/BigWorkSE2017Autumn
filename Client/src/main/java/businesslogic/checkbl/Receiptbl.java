@@ -7,7 +7,6 @@ import businesslogic.generic.Receipishbl;
 import businesslogic.salesbl.SalesSellbl;
 import dataService.checkdataService.ReceiptDataService;
 import dataService.generic.ReceipishDataService;
-import dataService.promotiondataService.PromotionDataService;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptSearchCondition;
 import util.ReceiptState;
@@ -15,7 +14,6 @@ import util.RespectiveReceiptSearchCondition;
 import util.ResultMessage;
 import vo.receiptVO.ReceiptVO;
 
-import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;

@@ -1,21 +1,17 @@
 package ui.common;
 
-import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import ui.common.mixer.FXMLLoadableMixer;
 
-import java.io.IOException;
-
-public abstract class FXMLAnchorPane extends AnchorPane {
+public abstract class FXMLAnchorPane extends AnchorPane implements FXMLLoadableMixer {
     public FXMLAnchorPane() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(getURL()));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        load();
     }
 
     protected abstract String getURL();
+
+    @Override
+    public String publicGetURL() {
+        return getURL();
+    }
 }

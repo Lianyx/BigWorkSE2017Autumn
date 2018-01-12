@@ -1,7 +1,6 @@
 package blService.businessblservice;
 
 import util.ReceiptSearchCondition;
-import vo.promotionVO.PromotionVO;
 import vo.receiptVO.ReceiptVO;
 
 import java.rmi.RemoteException;
