@@ -1,5 +1,8 @@
 package ui.inventoryui;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXListView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +16,7 @@ import ui.inventoryui.inventoryReceiptui.InventoryDamageListPane;
 import ui.inventoryui.inventoryReceiptui.InventoryGiftListPane;
 import ui.inventoryui.inventoryReceiptui.InventoryOverflowListPane;
 import ui.inventoryui.inventoryReceiptui.InventoryWarningListPane;
+import ui.inventoryui.inventoryViewui.ChooseTimePane;
 import ui.inventoryui.inventoryViewui.InventoryViewListPane;
 import ui.managerui.common.MyBoardController;
 import ui.managerui.common.MyTopBar;
@@ -72,8 +76,17 @@ public class InventoryUIController implements Initializable {
                         GoodsListPane goodsListPane = new GoodsListPane();
                         goodsListPane.refresh(true);
                     }else if(newVal.getId().equals("inventoryView")){
-                        InventoryViewListPane inventoryViewListPane = new InventoryViewListPane();
-                        inventoryViewListPane.refresh(true);
+                        JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
+                        jfxDialogLayout.setPrefWidth(220.0);
+                        ChooseTimePane chooseTimePane = new ChooseTimePane();
+                        jfxDialogLayout.setBody(chooseTimePane);
+//                        JFXButton save = new JFXButton("Save");
+                        JFXDialog dialog = new JFXDialog(PaneFactory.getMainPane(), jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
+                        chooseTimePane.setDialog(dialog);
+                        dialog.show();
+
+                        /*InventoryViewListPane inventoryViewListPane = new InventoryViewListPane();
+                        inventoryViewListPane.refresh(true);*/
                     }else if(newVal.getId().equals("inventoryCheck")){
                         InventoryCheckPane inventoryCheckPane = new InventoryCheckPane();
                         inventoryCheckPane.refresh(true);

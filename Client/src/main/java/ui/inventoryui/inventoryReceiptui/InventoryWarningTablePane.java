@@ -33,11 +33,6 @@ public class InventoryWarningTablePane extends MyTreeTableBorderPane<InventoryWa
             }
         });
 
-
-
-
-
-
         myTreeTable.getColumns().addAll(choose, idColumn, operatorColumn, stateColumn);
     }
 

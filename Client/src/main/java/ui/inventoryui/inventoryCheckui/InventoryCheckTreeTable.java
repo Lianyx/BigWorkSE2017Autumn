@@ -2,28 +2,9 @@ package ui.inventoryui.inventoryCheckui;
 
 import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.inventoryblService.InventoryCheckblService;
-import blService.inventoryblService.InventoryShowblService;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
-import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.TreeItemPropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Paint;
-import javafx.util.Callback;
-import javafx.util.Duration;
 import ui.util.*;
 import vo.inventoryVO.InventoryCheckItemVO;
 

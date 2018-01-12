@@ -54,13 +54,10 @@ public class InventoryWarningDetailPane extends MyReceiptDetailPane<InventoryWar
     @Override
     protected void updateReceiptVO() { // 这里不需要再检查了
         List<ReceiptGoodsItemVO> goodsList = warningItemTreeTable.getList();
-        System.out.println(operator.getText());
-        // receiptVO.setOperatorId(Integer.parseInt(operator.getText()));
+        //System.out.println("OperatorId:"+operator.getText());
+        receiptVO.setOperatorId(Integer.parseInt(operator.getText()));
+        receiptVO.setComment(commentArea.getText());
         receiptVO.setItems(goodsList);
-        for (ReceiptGoodsItemVO vo:goodsList) {
-            System.out.println(vo.getGoodsName()+" "+vo.getSendNum());
-        }
-        System.out.println(goodsList.toString());
 
         // TODO 我没管transferList相关的（下面的reset同理）。而且这个vo里面没有comment………
     }
@@ -68,11 +65,19 @@ public class InventoryWarningDetailPane extends MyReceiptDetailPane<InventoryWar
     @FXML
     @Override
     protected void reset() {
-        super.reset();
+        operator.setText("");
+        commentArea.setText("");
+       // stateField.setText("");
+        warningItemTreeTable.clear();
     }
 
     @FXML
     public void addGoods(){
-        warningItemTreeTable.addGood(new ReceiptGoodsItemVO("please","please",0,0));
+        ReceiptGoodsItemVO receiptGoodsItemVO = new ReceiptGoodsItemVO();
+        receiptGoodsItemVO.setGoodsName("please");
+        receiptGoodsItemVO.setGoodsId("please");
+        receiptGoodsItemVO.setInventoryNum(0);
+        receiptGoodsItemVO.setFactNum(0);
+        warningItemTreeTable.addGood(receiptGoodsItemVO);
     }
 }

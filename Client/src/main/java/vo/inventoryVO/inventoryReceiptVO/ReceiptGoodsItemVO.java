@@ -45,6 +45,7 @@ public class ReceiptGoodsItemVO extends RecursiveTreeObject<ReceiptGoodsItemVO> 
         this.sendNum = new SimpleIntegerProperty(sendNum);
     }
 
+
     public String getGoodsType() {
         return goodsType.get();
     }

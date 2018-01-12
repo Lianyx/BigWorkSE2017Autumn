@@ -14,6 +14,7 @@ public class InventoryDamageListVO extends ReceiptListVO<InventoryDamageListVO> 
         id = inventoryDamageReceiptVO.getId();
         receiptState = inventoryDamageReceiptVO.getReceiptState();
         operator = inventoryDamageReceiptVO.getOperatorId();
+       // System.out.println(inventoryDamageReceiptVO.getOperatorId());
         this.inventoryDamageReceiptVO = inventoryDamageReceiptVO;
     }
 

@@ -35,8 +35,6 @@ public class InventoryWarningReceiptVO extends ReceiptVO {
                 vo.setGoodsId(itemPO.getId());
                 vo.setGoodsName(itemPO.getGoodName());
                 vo.setInventoryNum(itemPO.getInventoryNum());
-                vo.setFactNum(itemPO.getFactNumber());
-                vo.setSendNum(itemPO.getsendNumber());
                 vo.setWarningNum(itemPO.getAlarmNumber());
 
                 items.add(vo);

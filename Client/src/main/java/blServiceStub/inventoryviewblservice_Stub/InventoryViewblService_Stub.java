@@ -1,11 +1,10 @@
 package blServiceStub.inventoryviewblservice_Stub;
 
-import blService.inventoryblService.InventoryShowblService;
 import blService.inventoryblService.InventoryViewblService;
-import vo.inventoryVO.InventoryCheckVO;
 import vo.inventoryVO.InventoryViewItemVO;
 import vo.inventoryVO.InventoryViewVO;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 
 public class InventoryViewblService_Stub implements InventoryViewblService {
@@ -25,9 +24,12 @@ public class InventoryViewblService_Stub implements InventoryViewblService {
         set.add(new InventoryViewItemVO("133","121",30,40.0,50,50.0,60,60.0,70,70.0));
     }
 
-    @Override
     public InventoryViewVO inventoryView(String beginDate, String endDate) {
         return new InventoryViewVO(beginDate,endDate,100,set);
     }
 
+    @Override
+    public InventoryViewVO inventoryView(LocalDate startDate, LocalDate endDate) {
+        return null;
+    }
 }

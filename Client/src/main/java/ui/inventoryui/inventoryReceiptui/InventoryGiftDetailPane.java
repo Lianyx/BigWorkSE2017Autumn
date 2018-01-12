@@ -2,12 +2,17 @@ package ui.inventoryui.inventoryReceiptui;
 
 import blService.checkblService.ReceiptblService;
 import blService.inventoryblService.InventoryGiftReceiptblService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import ui.inventoryui.GoodsChooseInfo;
+import ui.inventoryui.goodsui.GoodChoose;
 import ui.myAccountantui.common.MyReceiptDetailPane;
 import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
+import vo.receiptVO.ReceiptVO;
 
 import java.util.List;
 
@@ -15,23 +20,23 @@ public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftRe
     @FXML
     InventoryListItemTreeTable giftItemTreeTable;
 
+    ObservableList<String> observableList = FXCollections.observableArrayList();
+
     @FXML
     private TextArea commentArea;
     @FXML
     private TextField operator;
-
-    //InventoryGiftReceiptblService inventoryGiftReceiptblService = (Inven)getServiceClass();
-
+    @FXML
+    private TextField stateField;
 
     public InventoryGiftDetailPane() {
         giftItemTreeTable.setEditable(true);
-
     }
 
     public InventoryGiftDetailPane(InventoryGiftReceiptVO receiptVO) {
         super(receiptVO);
         operator.setText(String.valueOf(receiptVO.getOperatorId()));
-        commentArea.setText("无");
+        commentArea.setText(receiptVO.getComment());
         giftItemTreeTable.setList(receiptVO.getItems());
         giftItemTreeTable.setEditable(true);
     }
@@ -54,25 +59,29 @@ public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftRe
     @Override
     protected void updateReceiptVO() { // 这里不需要再检查了
         List<ReceiptGoodsItemVO> goodsList = giftItemTreeTable.getList();
-        System.out.println(operator.getText());
-      // receiptVO.setOperatorId(Integer.parseInt(operator.getText()));
+        receiptVO.setOperatorId(Integer.parseInt(operator.getText()));
+        receiptVO.setComment(commentArea.getText());
         receiptVO.setItems(goodsList);
-        for (ReceiptGoodsItemVO vo:goodsList) {
-            System.out.println(vo.getGoodsName()+" "+vo.getSendNum());
-        }
-        System.out.println(goodsList.toString());
-
         // TODO 我没管transferList相关的（下面的reset同理）。而且这个vo里面没有comment………
     }
 
     @FXML
     @Override
     protected void reset() {
-        super.reset();
+        //super.reset();
+        operator.setText("");
+        commentArea.setText("");
+        stateField.setText("");
+        giftItemTreeTable.clear();
     }
 
     @FXML
     public void addGoods(){
-        giftItemTreeTable.addGood(new ReceiptGoodsItemVO("please","please",0,0));
+        GoodsChooseInfo goodsChooseInfo = new GoodChoose();
+
+        goodsChooseInfo.choose(observableList);
+
+        System.out.println(observableList.toString());
+        //giftItemTreeTable.addGood(new ReceiptGoodsItemVO("please","please",0,0));
     }
 }
