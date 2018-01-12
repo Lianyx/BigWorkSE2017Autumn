@@ -1,9 +1,7 @@
 package vo.billReceiptVO;
 
 import util.ReceiptState;
-import vo.abstractVO.SelectableVO;
 import vo.receiptVO.ReceiptListVO;
-import vo.receiptVO.ReceiptVO;
 
 public class PaymentReceiptListVO extends ReceiptListVO<PaymentReceiptListVO> {
 

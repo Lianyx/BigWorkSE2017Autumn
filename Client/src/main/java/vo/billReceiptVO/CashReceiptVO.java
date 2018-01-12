@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CashReceiptVO extends ReceiptVO{
+public class CashReceiptVO extends ReceiptVO {
 
     private int accountID;
     private double total;
