@@ -6,6 +6,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import ui.managerui.common.MyBoardController;
+import ui.managerui.common.MyTopBar;
+import ui.managerui.common.navigation.ChangePaneLabel;
 import ui.util.*;
 
 import java.net.URL;
@@ -15,62 +18,42 @@ import java.util.ResourceBundle;
 public class UserManagerUIController implements Initializable{
 
 
-
     @FXML
-    TopBar bar;
-
+    private JFXListView<Label> navigation;
     @FXML
-    JFXListView<Label> navigation;
-
-
+    private MyTopBar bar;
     @FXML
-    StackPane board;
-
+    private StackPane board;
     @FXML
-    BoardController boardController;
+    private BoardController boardController;
 
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
         BoardController.setBoardController(boardController);
-        bar.setBoardController(boardController);
+        boardController = MyBoardController.getMyBoardController();
+        // 这样再set回去，以后从boardController里面拿的就都是MyBoardController了，但是以后仍然需要强转
+        BoardController.setBoardController(boardController);
         //set default pane
-        try {
-
-            boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150),  board));
-            try {
-                UserListPane userListPane = new UserListPane();
-                userListPane.historyAdd = true;
-                userListPane.refresh(false);
+        // 这个是不得不set，因为是同时生成的，但是这样很不好，希望可以改掉
+        bar.setBoardController(boardController);
 
 
-              //  board.getChildren().setAll(new StockReceiptPane(boardController,mainpane));
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            navigation.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
-                        try {
-                            if (newVal != null) {
-                                if (newVal.getId().equals("userlist")) {
-                                    UserListPane userListPane = new UserListPane();
-                                    userListPane.refresh(true);
-                                }
+        UserListPane initialPane = new UserListPane();
+        initialPane.refresh(false);
 
-
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-            });
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        navigation.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
+                if(newVal.getText().equals("UserList")){
+                    UserListPane userListPane = new UserListPane();
+                    userListPane.refresh(false);
+                }
+        });
 
     }
+
 }
 
 

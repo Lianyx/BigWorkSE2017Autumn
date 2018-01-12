@@ -2,6 +2,7 @@ package po;
 
 
 import javafx.scene.image.Image;
+import util.ImageConvertor;
 import util.UserCategory;
 
 import java.io.Serializable;

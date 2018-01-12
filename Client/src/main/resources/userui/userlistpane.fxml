@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root fx:id="userlist" prefHeight="560.0" prefWidth="640.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="userListPane" prefHeight="560.0" prefWidth="640.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
 
-        <JFXTextField fx:id="searchField" focusColor="#8CA2F6" layoutX="27.0" layoutY="28.0" prefHeight="30.0" prefWidth="150.0" />
+        <JFXTextField fx:id="keywordField" focusColor="#8CA2F6" layoutX="27.0" layoutY="28.0" prefHeight="30.0" prefWidth="150.0" />
 
         <JFXButton fx:id="filter" layoutX="427.0" layoutY="35.0" mnemonicParsing="false" text="Filter">
             <graphic>
@@ -29,6 +29,7 @@
                 </HBox>
             </graphic>
         </JFXButton>
+
         <JFXRippler fx:id="search" layoutX="177" layoutY="22" maskType="CIRCLE" position="BACK" onMouseClicked="#search" ripplerFill="#03A9F4" styleClass="icons-rippler">
             <StackPane style="-fx-padding: 8;" translateY="5">
                 <OctIconView glyphName="SEARCH" size="1.5em" styleClass="icon" />

@@ -19,7 +19,7 @@ public class Userdata {
 //
 //            userdata.insert(userPO);
 
-            System.out.println(userdata.search(new UserSearchCondition()).get(0).getComment());
+            System.out.println(userdata.search(new UserSearchCondition()));
         }catch (Exception e){
             e.printStackTrace();
         }

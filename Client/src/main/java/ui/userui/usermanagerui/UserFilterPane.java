@@ -22,7 +22,7 @@ import vo.UserSearchVO;
  * @Description: 过滤器，filter的子pane
  * @ModifyBy: Lin Yuchao
 **/
-public class FilterPane extends AnchorPane{
+public class UserFilterPane extends AnchorPane{
 
     @FXML
     JFXComboBox<Label> state;
@@ -44,7 +44,7 @@ public class FilterPane extends AnchorPane{
      * @Param: popover传入用于关闭popover,
      * @Return:
     **/
-    public FilterPane(PopOver popOver, UserSearchCondition userSearchCondition) {
+    public UserFilterPane(PopOver popOver, UserSearchCondition userSearchCondition) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/userui/userfilter.fxml"));
             fxmlLoader.setRoot(this);

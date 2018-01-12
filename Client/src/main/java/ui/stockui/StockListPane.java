@@ -1,16 +1,8 @@
 package ui.stockui;
 
-import blService.blServiceFactory.ServiceFactory_Stub;
-import blService.stockblService.StockblService;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.layout.BorderPane;
-import ui.util.*;
+import ui.myAccountantui.common.MyReceiptListPane;
 import vo.receiptVO.StockReceiptListVO;
-
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+import vo.receiptVO.StockReceiptVO;
 
 /**
  * @Author: Lin Yuchao
@@ -18,12 +10,12 @@ import java.util.stream.Collectors;
  * @ModifyBy: Lin Yuchao
 **/
 
-public class StockListPane extends ReceiptListPane<StockReceiptListVO> {
+public abstract class StockListPane<T extends StockReceiptListVO<T>,S extends StockReceiptVO> extends MyReceiptListPane<T,S> {
 
+}
 
-    /**
-    * 这里的变量要有searchcondition和blservice还有关键字（这个也可以提到父类）
-    **/
+/*
+    /*
 
     StockblService stockblService;
 
@@ -31,17 +23,7 @@ public class StockListPane extends ReceiptListPane<StockReceiptListVO> {
 
     SimpleStringProperty match = new SimpleStringProperty("");
 
- //   static StockSearchVO stockSearchVO = new StockSearchVO();
 
-
-
-
-    /**
-     * @Author: Lin Yuchao
-     * @Attention
-     * @Param: isPur  是否是进货单
-     * @Return:
-    **/
     public StockListPane(boolean isPur) throws Exception {
         super("/stockui/stocklistpane.fxml");
         this.stockblService = ServiceFactory_Stub.getService(StockblService.class.getName());
@@ -61,12 +43,10 @@ public class StockListPane extends ReceiptListPane<StockReceiptListVO> {
         filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
         filterPopOver.setContentNode(slp);
         filter.setOnMouseClicked(e -> filterPopOver.show(filter));*/
-    }
 
 
-    /**
-    * 将职责分配到treetable里面去删除
-    **/
+/*
+
     @Override
     public void deleteList() {
         DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane,"Delete","sabi","Yes","No");
@@ -77,9 +57,6 @@ public class StockListPane extends ReceiptListPane<StockReceiptListVO> {
 
 
 
-    /**
-    * 关键字搜索
-    **/
     @Override
     public void search() {
         if (!searchField.getText().equals("")) {
@@ -99,9 +76,7 @@ public class StockListPane extends ReceiptListPane<StockReceiptListVO> {
         }
     }
 
-    /**
-    * 新建单据
-    **/
+
     @Override
     public void add() {
         StockReceiptPane stockReceiptPane = new StockReceiptPane(isPur.get());
@@ -111,26 +86,20 @@ public class StockListPane extends ReceiptListPane<StockReceiptListVO> {
     public void refresh(boolean toSwitch) {
         boardController.Loading();
         try {
-            /**
-            * 两个button的dialog，可以传入runnable实现你想要的东西
-            **/
+
             DoubleButtonDialog buttonDialog =
                     new DoubleButtonDialog(mainpane, "Wrong", "sabi", "Last", "Ret");
             buttonDialog.setButtonTwo(() -> boardController.Ret());
             buttonDialog.setButtonTwo(() -> refresh(false));
-            /**
-            * 这个predicate主要是把方法传到task里面去，我想不出有什么能够传进去又能return值的函数式就用这个了
-            **/
+
             Predicate<Integer> p = (s) -> {
       /*          if ((set = stockblService.search(stockSearchVO, isPur.get())) != null) {
                     System.out.println(set.size());
                     return true;
-                }*/
-                return false;
+                }
+                retrn false;
             };
-            /**
-            *  详见gettask
-            **/
+
             GetTask getTask =
                     new GetTask(() -> {
                         receiptTreeTable.setReceipts(set);
@@ -147,6 +116,6 @@ public class StockListPane extends ReceiptListPane<StockReceiptListVO> {
 
         }
     }
+*/
 
-}
 

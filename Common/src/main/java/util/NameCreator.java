@@ -54,7 +54,7 @@ public class NameCreator {
 
 
     public static void main(String args[]){
-        getSomeString(UserPO.class);
+        getSomeString(MemberPO.class);
     }
 
 }

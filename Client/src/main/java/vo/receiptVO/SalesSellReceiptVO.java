@@ -44,6 +44,12 @@ public class SalesSellReceiptVO extends SalesReceiptVO {
     }
 
     @Override
+    public SalesSellListVO toListVO() {
+        SalesSellListVO salesSellListVO = new SalesSellListVO(this);
+        return salesSellListVO;
+    }
+
+    @Override
     protected String getCodeName() {
         return "XSD";
     }

@@ -1,13 +1,13 @@
 package mapper;
 
-import org.apache.ibatis.annotations.Insert;
 import po.UserPO;
 import util.ResultMessage;
 import util.UserSearchCondition;
 
 import java.util.ArrayList;
 
-public interface UserPOMapper {
+public interface UserDataPOMapper {
+
     public int getId();
     public void insert(UserPO UserPO);
     public void delete(int id);

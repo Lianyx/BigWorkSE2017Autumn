@@ -139,4 +139,6 @@ public class MemberVO {
     public void setClerkName(String clerkName) {
         this.clerkName = clerkName;
     }
+
+
 }

@@ -1,64 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXBadge?>
-<?import com.jfoenix.controls.JFXListView?>
-<?import com.jfoenix.controls.JFXRippler?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
+
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import ui.util.CircleImageView?>
-
-<?import ui.userui.usermanagerui.UserListPane?>
-<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import ui.managerui.common.navigation.PromotionChangePaneLabel?>
+<?import ui.managerui.common.navigation.CheckChangePaneLabel?>
+<?import ui.managerui.common.MyTopBar?>
+<?import ui.managerui.common.navigation.BusinessConditionChangePaneLabel?>
+<?import ui.managerui.common.navigation.BusinessProgressChangePaneLabel?>
+<?import javafx.scene.control.Label?>
+<?import com.jfoenix.controls.JFXRippler?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<AnchorPane fx:id="mainPane"
+            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.userui.usermanagerui.UserManagerUIController"
+            prefHeight="600" prefWidth="800"
+            stylesheets="@../css/list.css">
 
-<?import ui.util.TopBar?>
-<StackPane fx:id="mainpane" prefHeight="600.0" prefWidth="800.0" fx:controller="ui.userui.usermanagerui.UserManagerUIController" stylesheets="@../css/list.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-
-<AnchorPane fx:id="UserList"  prefHeight="600.0" prefWidth="800.0" >
-    <children>
-
-
-
-
-
-     <TopBar fx:id="bar" layoutX="160"/>
-     <fx:include fx:id="board" source="../util/board.fxml" layoutX="160" layoutY="40"/>
-
-
-
-       <JFXListView fx:id="navigation" layoutY="40.0" prefHeight="560.0" prefWidth="160.0">
-               <Label fx:id="userlist" textFill="#78909c">
-                   <padding><Insets bottom="8" left="10" top="8" /></padding>
-                   UserList
-                   <graphic>
-
-                   <JFXRippler position="BACK" styleClass="icons-rippler">
-                   <StackPane>
-                       <padding><Insets right="10" /></padding>
-                       <MaterialDesignIconView fx:id="userlisticon" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)" glyphName="ACCOUNT" size="1.5em" styleClass="icon" />
-                   </StackPane>
-               </JFXRippler>
-                   </graphic>
-               </Label>
-       </JFXListView>
-
-        <AnchorPane fx:id="logopane"  prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: white">
-            <children>
-                <ImageView fitHeight="52.0" fitWidth="98.0" layoutX="24.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../default/logo.jpg" />
-                    </image>
-                </ImageView>
-            </children>
+        <AnchorPane fx:id="logopane" prefHeight="40" prefWidth="160" style="-fx-background-color: white">
+            <ImageView fitHeight="52.0" fitWidth="98.0" layoutX="24.0" layoutY="2.0"
+                       pickOnBounds="true" preserveRatio="true">
+                <Image url="@../default/logo.jpg"/>
+            </ImageView>
         </AnchorPane>
-   </children>
-</AnchorPane>
-    </children>
-</StackPane>
+
+        <MyTopBar fx:id="bar" layoutX="160"/>
+
+        <fx:include source="/util/board.fxml" fx:id="board" layoutX="160" layoutY="40"/> <!--为什么报错？-->
+
+        <JFXListView fx:id="navigation" layoutY="40" prefHeight="560" prefWidth="160">
+            <Label fx:id="userlist" textFill="#78909c">
+                <padding><Insets bottom="8" left="10" top="8" /></padding>
+                用户列表
+                <graphic>
+
+                    <JFXRippler position="BACK" styleClass="icons-rippler">
+                        <StackPane>
+                            <padding><Insets right="10" /></padding>
+                            <MaterialDesignIconView fx:id="userlisticon" style="-fx-fill: linear-gradient(to bottom right, #8CA2F6,#659EFB)" glyphName="ACCOUNT" size="1.5em" styleClass="icon" />
+                        </StackPane>
+                    </JFXRippler>
+                </graphic>
+            </Label>
+        </JFXListView>
+
+    </AnchorPane>

@@ -37,8 +37,8 @@ public class StockPurReceiptVO extends StockReceiptVO {
     }
 
     @Override
-    public <TL extends ReceiptListVO<TL>> TL toListVO() {
-        return null;
+    public StockPurListVO toListVO() {
+        return new StockPurListVO(this);
     }
 
     @Override

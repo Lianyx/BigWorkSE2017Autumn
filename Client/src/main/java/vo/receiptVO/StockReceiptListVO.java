@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class StockReceiptListVO extends ReceiptListVO<StockReceiptListVO>{
+public abstract class StockReceiptListVO<T> extends ReceiptListVO<T>{
 
     private String id;
     private LocalDateTime createTime;
@@ -19,19 +19,17 @@ public class StockReceiptListVO extends ReceiptListVO<StockReceiptListVO>{
     private String stockName;
     private double sum;
     private boolean multiple = true;
-    boolean isPur;
 
-    public StockReceiptListVO() {
+    public StockReceiptListVO(){
+
     }
-
-    public StockReceiptListVO(String id, LocalDateTime createTime, ReceiptState receiptState, String memberName, String stockName, double sum, boolean isPur) {
+    public StockReceiptListVO(String id, LocalDateTime createTime, ReceiptState receiptState, String memberName, String stockName, double sum) {
         this.id = id;
         this.createTime = createTime;
         this.receiptState = receiptState;
         this.memberName = memberName;
         this.stockName = stockName;
         this.sum = sum;
-        this.isPur = isPur;
     }
 
     public LocalDateTime getCreateTime() {
@@ -90,17 +88,4 @@ public class StockReceiptListVO extends ReceiptListVO<StockReceiptListVO>{
         this.sum = sum;
     }
 
-    public boolean isPur() {
-        return isPur;
-    }
-
-    public void setPur(boolean pur) {
-        isPur = pur;
-    }
-
-
-    @Override
-    public <TV extends ReceiptVO> TV toVO() {
-        return null;
-    }
 }

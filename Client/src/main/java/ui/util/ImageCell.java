@@ -16,7 +16,6 @@ public class ImageCell extends JFXTreeTableCell {
             civ.setRadius(17);
             civ.setTranslateY(-8);
             setGraphic(civ);
-
         }
 
 
