@@ -15,7 +15,7 @@
         values(#{dayId}, #{operatorId}, #{createTime}, #{lastModifiedTime}, #{receiptState}, #{memberId}, #{clerkName}, #{stockName}, #{goodsList, typeHandler=MyJsonHandler}, #{discountAmount}, #{tokenAmount}, #{originSum}, #{comment})
     </insert>
     <update id="update">
-        update SalesRetReceipt set lastModifiedTime=#{lastModifiedTime}, receiptState=#{receiptState}, memberId=#{memberId}, clerkName=#{clerkName}, stockName=#{stockName}, goodsList=#{goodsList, typeHandler=MyJsonHandler}, discountAmount=#{discountAmount}, tokenAmount=#{tokenAmount}, originSum=#{originSum}, comment=#{comment}}
+        update SalesRetReceipt set lastModifiedTime=#{lastModifiedTime}, receiptState=#{receiptState}, memberId=#{memberId}, clerkName=#{clerkName}, stockName=#{stockName}, goodsList=#{goodsList, typeHandler=MyJsonHandler}, discountAmount=#{discountAmount}, tokenAmount=#{tokenAmount}, originSum=#{originSum}, comment=#{comment}
         where dayId=#{dayId} and createTime=#{createTime}
     </update>
     <delete id="deleted">

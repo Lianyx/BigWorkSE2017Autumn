@@ -9,10 +9,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ui.myAccountantui.common.MyReceiptDetailPane;
+import ui.util.OneButtonDialog;
+import ui.util.PaneFactory;
 import ui.util.UserInfomation;
 import vo.billReceiptVO.CashItemVO;
 import vo.billReceiptVO.CashReceiptVO;
 import vo.billReceiptVO.ChargeReceiptVO;
+import vo.billReceiptVO.TransferItemVO;
 
 import java.util.ArrayList;
 
@@ -118,6 +121,18 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
 
     @FXML
     private void addTransfer() {
-        cashItemTreeTable.add(new CashItemVO("TODO",0,"TODO"));
+        ArrayList<CashItemVO> temp = cashItemTreeTable.getList();
+        boolean flag = false;
+        for(CashItemVO vo:temp){
+            if(vo.getPrice()==0){
+                flag  =true;
+                OneButtonDialog oneButtonDialog = new OneButtonDialog(PaneFactory.getMainPane(),"","请先完成已添加的条目信息","继续");
+                oneButtonDialog.setButtonOne(()->{});
+                oneButtonDialog.show();
+            }
+            break;
+        }
+        if(!flag)
+            cashItemTreeTable.add(new CashItemVO("TODO",0,"TODO"));
     }
 }

@@ -13,7 +13,6 @@ public class StockRetListPane extends StockListPane<StockRetListVO,StockRetRecei
     @Override
     protected void initiateTreeTable() {
         receiptListTreeTable = new StockRetTablePane(chosenItems, searchField.textProperty());
-
     }
 
     @Override

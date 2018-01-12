@@ -19,11 +19,14 @@ public abstract class SalesTreeTable<T extends SalesReceiptListVO<T>> extends My
     public SalesTreeTable(Set<T> chosenItems, StringProperty keywordProperty) {
 
         JFXTreeTableColumn<T, Boolean> choose = new ChooseColumn<>(chosenItems);
-        JFXTreeTableColumn<T, String> id = new SearchableStringColumn<>("ID", 100, keywordProperty, p -> p.getId());
+        JFXTreeTableColumn<T, String> id = new SearchableStringColumn<>("ID", 200, keywordProperty, p -> p.getId());
         JFXTreeTableColumn<T, String> member = new SearchableStringColumn<>("客户", 100, keywordProperty, p -> p.getMemberName());
         JFXTreeTableColumn<T, String> stateColumn = new JFXTreeTableColumn<>("类型");
         stateColumn.setPrefWidth(100);
-        stateColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getValue().getReceiptState().name()));
+        stateColumn.setCellValueFactory(param -> {
+            System.out.println(param.getValue().getValue().getReceiptState().name());
+            return new ReadOnlyObjectWrapper<>(param.getValue().getValue().getReceiptState().name());
+        });
         stateColumn.setCellFactory(param -> new ButtonCell<T>() {
             @Override
             public void updateItem(String item, boolean empty) {

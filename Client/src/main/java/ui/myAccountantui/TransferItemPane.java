@@ -1,5 +1,6 @@
 package ui.myAccountantui;
 
+import businesslogic.accountbl.Accountbl;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.ObservableList;
@@ -8,11 +9,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import ui.util.OneButtonDialog;
 import ui.util.PaneFactory;
+import vo.AccountListVO;
 import vo.ListGoodsItemVO;
 import vo.billReceiptVO.TransferItemVO;
 
+import java.util.ArrayList;
+
 import static ui.util.ValidatorDecorator.NumberValid;
+import static ui.util.ValidatorDecorator.isDouble;
 
 public class TransferItemPane extends AnchorPane{
 
@@ -75,29 +81,47 @@ public class TransferItemPane extends AnchorPane{
 
         this.mainpane = PaneFactory.getMainPane();
         this.observableList=observableList;
-
-
-
     }
 
     public void setDialog(JFXDialog dialog) {
         this.jfxDialog = dialog;
     }
 
-
-
-
     @FXML
     public void save() {
-        if(price.validate()){
-            transferItemVO.setAccountID(Integer.parseInt(accountID.getText()));
-            transferItemVO.setSum(Double.parseDouble(price.getText()));
-            transferItemVO.setComment(comment.getText());
-            TransferItemVO temp = new TransferItemVO(1,1,"1");
-            paymentItemTreeTable.add(temp);
-            paymentItemTreeTable.remove(temp);
-            jfxDialog.close();
+        boolean flag = false;
+        ArrayList<AccountListVO> temp = new ArrayList<>();
+        try{
+            temp = new ArrayList<>(new Accountbl().getAll());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        for(AccountListVO vo:temp){
+            if(vo.getID()==Integer.parseInt(accountID.getText())){
+                flag = true;
+                break;
+            }
+        }
+        if(!flag){
+            OneButtonDialog oneButtonDialog  = new OneButtonDialog(PaneFactory.getMainPane(),"","无此账户","继续");
+            oneButtonDialog.setButtonOne(()->{});
+            oneButtonDialog.show();
+        }
+        else {
+            if (!isDouble(price.getText())||Double.parseDouble(price.getText())<0){
+                OneButtonDialog oneButtonDialog  = new OneButtonDialog(PaneFactory.getMainPane(),"","金额错误","继续");
+                oneButtonDialog.setButtonOne(()->{});
+                oneButtonDialog.show();
+            }else{
+                transferItemVO.setAccountID(Integer.parseInt(accountID.getText()));
+                transferItemVO.setSum(Double.parseDouble(price.getText()));
+                transferItemVO.setComment(comment.getText());
+                TransferItemVO vo = new TransferItemVO(1, 1, "1");
+                paymentItemTreeTable.add(vo);
+                paymentItemTreeTable.remove(vo);
+                jfxDialog.close();
 
+            }
         }
     }
 

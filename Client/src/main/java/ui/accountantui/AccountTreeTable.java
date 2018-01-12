@@ -8,7 +8,9 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -27,8 +29,18 @@ import vo.MemberListVO;
 
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Set;
 
-public class AccountTreeTable extends ReceiptTreeTable<AccountListVO>{
+public class AccountTreeTable extends  JFXTreeTableView<AccountListVO>{
+
+    ObservableList<AccountListVO> observableList = FXCollections.observableArrayList();
+
+    int rowsPerPage;
+    BoardController boardController;
+    StackPane mainpane;
+    ChosenItem<AccountListVO> chosenItem = new ChosenItem<>();
+    ColumnDecorator columnDecorator = new ColumnDecorator();
+    SimpleStringProperty keyword = new SimpleStringProperty("");
 
     private AccountblService accountblService;
 
@@ -43,6 +55,10 @@ public class AccountTreeTable extends ReceiptTreeTable<AccountListVO>{
 
     public AccountTreeTable() {
         super();
+        this.boardController = BoardController.getBoardController();
+        this.mainpane = PaneFactory.getMainPane();
+        setCurrentItemsCount(rowsPerPage);
+        this.setShowRoot(false);
 
         rowsPerPage = 7;
         try {
@@ -82,12 +98,17 @@ public class AccountTreeTable extends ReceiptTreeTable<AccountListVO>{
                     accountDetailPane.refresh(true);
                 });
                 multiCell.setRunnable2(()->{
-                    try{
-                        accountblService.delete(((AccountListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getID());
-                        BoardController.getBoardController().refresh();
-                    }catch (RemoteException e){
-                        e.printStackTrace();
-                    }
+                    DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane,"","请确认是否删除","是","否");
+                    doubleButtonDialog.setButtonOne(()->{
+                        try{
+                            accountblService.delete(((AccountListVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getID());
+                            BoardController.getBoardController().refresh();
+                        }catch (RemoteException e){
+                            e.printStackTrace();
+                        }
+                    });
+                    doubleButtonDialog.setButtonTwo(()->{});
+                    doubleButtonDialog.show();
                 });
                 return multiCell;
             }
@@ -97,7 +118,7 @@ public class AccountTreeTable extends ReceiptTreeTable<AccountListVO>{
         this.setRowFactory(tableView-> {
             JFXTreeTableRow<AccountListVO> row = new JFXTreeTableRow();
             RowSetter(row,()->{
-                AccountDetailPane accountDetailPane = new AccountDetailPane((AccountListVO) row.getItem());
+                AccountDetailPane accountDetailPane = new AccountDetailPane( row.getItem());
                 accountDetailPane.refresh(true);
             });
             return row;
@@ -114,7 +135,7 @@ public class AccountTreeTable extends ReceiptTreeTable<AccountListVO>{
         observableList.remove(accountListVO);
     }
 
-    @Override
+
     public void delete(Pagination p) {
         try{
             chosenItem.getSet().forEach(s -> {
@@ -133,6 +154,55 @@ public class AccountTreeTable extends ReceiptTreeTable<AccountListVO>{
             e.printStackTrace();
         }
 
+    }
+
+
+    public void setReceipts(Set<AccountListVO> receipts) {
+        observableList.setAll(receipts);
+    }
+
+    public void removeReceipt(AccountListVO t) {
+        observableList.remove(t);
+    }
+
+    public void createPage(int pageIndex) {
+        int fromIndex = pageIndex * rowsPerPage;
+        int toIndex = Math.min(fromIndex + rowsPerPage, observableList.size());
+        final TreeItem<AccountListVO> root = new RecursiveTreeItem<>(FXCollections.observableList(observableList.subList(fromIndex, toIndex)), RecursiveTreeObject::getChildren);
+        this.setRoot(root);
+        NodeHolder nodeHolder = new NodeHolder(this, Duration.millis(1000), NodeAnimation.FADE);
+        nodeHolder.apply();
+
+    }
+
+    public void RowSetter(JFXTreeTableRow<AccountListVO> row,Runnable click){
+        row.setPrefHeight(55);
+        row.setStyle("-fx-border-color: rgb(233,237,239); -fx-border-width: 0.3;");
+        row.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getClickCount() == 2) {
+                Platform.runLater(click);
+            }
+
+        });
+        row.selectedProperty().addListener(e -> {
+            if (row.isSelected()) {
+                row.toFront();
+            } else {
+                row.setEffect(null);
+            }
+        });
+    }
+
+    public String getKeyword() {
+        return keyword.get();
+    }
+
+    public SimpleStringProperty keywordProperty() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword.set(keyword);
     }
 
 }

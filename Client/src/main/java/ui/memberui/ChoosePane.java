@@ -1,7 +1,7 @@
 package ui.memberui;
 
 import blService.memberblService.MemberInfo;
-import blServiceStub.memberblservice_Stub.MemberInfo_Stub;
+
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,9 +42,9 @@ public class ChoosePane extends AnchorPane {
         }catch (Exception e){
             e.printStackTrace();
         }
-        memberInfo = new MemberInfo_Stub();
+        //memberInfo = new MemberInfo_Stub();
         selectView.setSourceItems(observableList);
-        observableList.setAll(memberInfo.getAll());
+        //observableList.setAll(memberInfo.getAll());
 
     }
 

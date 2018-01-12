@@ -24,6 +24,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
+import ui.managerui.common.MyBoardController;
 import ui.userui.usermanagerui.UserDetailPane;
 import ui.util.*;
 import util.MemberCategory;
@@ -37,6 +38,7 @@ import java.util.function.Predicate;
 
 import static ui.util.ValidatorDecorator.DoubleValid;
 import static ui.util.ValidatorDecorator.RequireValid;
+import static ui.util.ValidatorDecorator.isDouble;
 
 public class AccountDetailPane extends Refreshable{
 
@@ -140,14 +142,18 @@ public class AccountDetailPane extends Refreshable{
 
     }
 
-    @FXML
+
     public void delete() {
-        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Delete", "sabi", "Yes", "No");
+        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "", "请确定是否删除", "是", "否");
         doubleButtonDialog.setButtonOne(() -> {
-        });
-        doubleButtonDialog.setButtonTwo(() -> {
+            try{
+                accountblService.delete(Integer.parseInt(id.getText()));
+            }catch (RemoteException e){
+                e.printStackTrace();
+            }
             setBack();
         });
+        doubleButtonDialog.setButtonTwo(() -> {});
         doubleButtonDialog.show();
     }
 
@@ -198,40 +204,45 @@ public class AccountDetailPane extends Refreshable{
     public void save() {
         if (valid()) {
             modify.modifyProperty().set(false);
-            DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Pending?", "sabi", "Yes", "No");
-            doubleButtonDialog.setButtonTwo(() -> {
-            });
-            doubleButtonDialog.setButtonOne(() -> {
+            if(!isAdd&&name.getText().equals(accountListVO.getName())&&balance.getText().equals(String.valueOf(accountListVO.getBalance()))){
+                OneButtonDialog oneButtonDialog = new OneButtonDialog(mainpane,"","您未做修改","继续");
+                oneButtonDialog.setButtonOne(()->{});
+                oneButtonDialog.show();
+            }else {
 
-                try {
-                    if(isAdd){
-                        accountblService.add(new AccountListVO(
-                                0,
-                                name.getText(),
-                                Double.parseDouble(balance.getText())
-                        ));
-                    }else{
-                        accountblService.update(new AccountListVO(
-                                Integer.parseInt(id.getText()),
-                                name.getText(),
-                                Double.parseDouble(balance.getText())
-                        ));
+                DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "", "请确定是否保存", "是", "否");
+                doubleButtonDialog.setButtonTwo(() -> {
+                });
+                doubleButtonDialog.setButtonOne(() -> {
+                    try {
+                        if (isAdd) {
+                            accountblService.add(new AccountListVO(
+                                    0,
+                                    name.getText(),
+                                    Double.parseDouble(balance.getText())
+                            ));
+                        } else {
+                            accountblService.update(new AccountListVO(
+                                    Integer.parseInt(id.getText()),
+                                    name.getText(),
+                                    Double.parseDouble(balance.getText())
+                            ));
+                        }
+                        boardController.switchTo(this);
+                        OneButtonDialog oneButtonDialog = new OneButtonDialog(mainpane, "提示", "操作成功", "继续");
+                        oneButtonDialog.setButtonOne(() -> {
+                        });
+                        oneButtonDialog.show();
+                        setBack();
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
                     }
-
-                    boardController.switchTo(this);
-                    OneButtonDialog oneButtonDialog = new OneButtonDialog(mainpane, "???", "Success", "Accept");
-                    oneButtonDialog.setButtonOne(() -> {
-                    });
-                    oneButtonDialog.show();
-                    //setBack();
-                }catch (RemoteException e){
-                    e.printStackTrace();
-                }
-            });
-            doubleButtonDialog.show();
+                });
+                doubleButtonDialog.show();
+            }
 
         } else {
-            OneButtonDialog oneButtonDialog = new OneButtonDialog(mainpane, "???", "Stupid!", "Accept");
+            OneButtonDialog oneButtonDialog = new OneButtonDialog(mainpane, "Error！", "数据错误！", "继续");
             oneButtonDialog.setButtonOne(() -> {
             });
             oneButtonDialog.show();
@@ -240,16 +251,14 @@ public class AccountDetailPane extends Refreshable{
 
 
     public boolean valid() {
-        if (!name.getText().equals("") && !id.getText().equals("")&&!balance.getText().equals(""))
+        if (!name.getText().equals("") && !id.getText().equals("")&&!balance.getText().equals("")&&isDouble(balance.getText()))
             return true;
         return false;
     }
 
     public void setBack(){
-        boardController.setRightAnimation();
-        boardController.historicalSwitchTo((Refreshable) HistoricalRecord.pop());
-        boardController.refresh();
-        HistoricalRecord.removeAndPop();
+
+        MyBoardController.getMyBoardController().goBack();
     }
 
 }

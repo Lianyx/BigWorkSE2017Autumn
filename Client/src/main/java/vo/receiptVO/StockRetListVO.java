@@ -11,6 +11,7 @@ public class StockRetListVO extends StockReceiptListVO<StockRetListVO>{
     }
 
     public StockRetListVO(StockRetReceiptVO stockRetReceiptVO){
+        super(stockRetReceiptVO.getId(), stockRetReceiptVO.getCreateTime(), stockRetReceiptVO.getReceiptState(), stockRetReceiptVO.getMemberName(), stockRetReceiptVO.getStockName(), stockRetReceiptVO.getSum());
         this.stockRetReceiptVO = stockRetReceiptVO;
     }
 

@@ -1,7 +1,9 @@
 package ui.managerui.businessConditionui;
 
 import blService.businessblservice.BusinessConditionblService;
+import businesslogic.businessbl.BusinessConditionbl;
 import businesslogic.checkbl.MyServiceFactory;
+import businesslogic.promotionbl.MyblServiceFactory;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRippler;
 import javafx.collections.FXCollections;
@@ -75,7 +77,7 @@ public class BusinessConditionPane extends GatePane implements ExcelExportableMi
 
     @Override
     protected void initiateService() throws RemoteException, NotBoundException, MalformedURLException {
-        businessConditionblService = MyServiceFactory.getBusinessConditionblService();
+        businessConditionblService = MyblServiceFactory.getService(BusinessConditionblService.class);
     }
 
     @Override

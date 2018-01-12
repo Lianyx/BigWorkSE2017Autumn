@@ -10,6 +10,12 @@ import vo.receiptVO.SalesSellReceiptVO;
 
 public class SalesSellDetailPane extends SalesReceiptPane<SalesSellReceiptVO> {
 
+    public SalesSellDetailPane() {
+    }
+
+    public SalesSellDetailPane(SalesSellReceiptVO receiptVO) {
+        super(receiptVO);
+    }
 
     @Override
     protected Class<? extends ReceiptblService<SalesSellReceiptVO>> getServiceClass() {

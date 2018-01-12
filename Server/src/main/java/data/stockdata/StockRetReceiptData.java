@@ -7,8 +7,8 @@ import po.receiptPO.StockRetReceiptPO;
 
 import java.rmi.RemoteException;
 @RMIRemote
-public class StockRetRecepitData extends ReceiptData<StockRetReceiptPO> {
-    public StockRetRecepitData() throws RemoteException{
+public class StockRetReceiptData extends ReceiptData<StockRetReceiptPO> {
+    public StockRetReceiptData() throws RemoteException{
         super(StockRetReceiptPOMapper.class, StockRetReceiptPO.class);
 
     }

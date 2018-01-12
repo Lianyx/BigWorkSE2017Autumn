@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ui.myAccountantui.common.MyReceiptDetailPane;
+import ui.util.OneButtonDialog;
+import ui.util.PaneFactory;
 import ui.util.UserInfomation;
 import vo.billReceiptVO.PaymentReceiptVO;
 import vo.billReceiptVO.TransferItemVO;
@@ -122,7 +124,19 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
 
     @FXML
     private void addTransfer() {
-        paymentItemTreeTable.add(new TransferItemVO(0,0,"TODO"));
+        ArrayList<TransferItemVO> temp = paymentItemTreeTable.getList();
+        boolean flag = false;
+        for(TransferItemVO vo:temp){
+            if(vo.getAccountID()==-1){
+                flag  =true;
+                OneButtonDialog oneButtonDialog = new OneButtonDialog(PaneFactory.getMainPane(),"","请先完成已添加的转账信息","继续");
+                oneButtonDialog.setButtonOne(()->{});
+                oneButtonDialog.show();
+            }
+            break;
+        }
+        if(!flag)
+        paymentItemTreeTable.add(new TransferItemVO(-1,0,"TODO"));
     }
 
 }
