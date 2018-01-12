@@ -8,9 +8,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import ui.util.OneButtonDialog;
 import ui.util.PaneFactory;
 import vo.billReceiptVO.CashItemVO;
 import vo.billReceiptVO.TransferItemVO;
+
+import static ui.util.ValidatorDecorator.isDouble;
 
 
 public class CashItemPane extends AnchorPane {
@@ -76,29 +79,25 @@ public class CashItemPane extends AnchorPane {
         this.mainpane = PaneFactory.getMainPane();
         this.observableList=observableList;
 
-
-
     }
-
     public void setDialog(JFXDialog dialog) {
         this.jfxDialog = dialog;
     }
 
-
-
-
     @FXML
     public void save() {
-        if(price.validate()){
-
-            cashItemVO.setName(name.getText());
-            cashItemVO.setPrice(Double.parseDouble(price.getText()));
-            cashItemVO.setComment(comment.getText());
-            CashItemVO temp  =new CashItemVO("1",1,"1");
-            cashItemTreeTable.add(temp);
-            cashItemTreeTable.remove(temp);
-            jfxDialog.close();
-
+        if(!isDouble(price.getText())||Double.parseDouble(price.getText())<0){
+            OneButtonDialog oneButtonDialog  = new OneButtonDialog(PaneFactory.getMainPane(),"","金额错误","继续");
+            oneButtonDialog.setButtonOne(()->{});
+            oneButtonDialog.show();
+        }else{
+                cashItemVO.setName(name.getText());
+                cashItemVO.setPrice(Double.parseDouble(price.getText()));
+                cashItemVO.setComment(comment.getText());
+                CashItemVO temp  =new CashItemVO("1",1,"1");
+                cashItemTreeTable.add(temp);
+                cashItemTreeTable.remove(temp);
+                jfxDialog.close();
         }
     }
 

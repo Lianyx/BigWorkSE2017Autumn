@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 
 public class AccountListPane extends Refreshable{
 
-    ReceiptTreeTable receiptTreeTable;
+    AccountTreeTable receiptTreeTable;
 
     @FXML
     BorderPane borderPane;
@@ -86,18 +86,22 @@ public class AccountListPane extends Refreshable{
         receiptTreeTable.keywordProperty().bind(match);
         borderPane.setTop(new BorderPane(receiptTreeTable));
 
-        /*PopOver filterPopOver = new PopOver();
-        filterPopOver.setDetachable(false);
-        filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
-        filter.setOnMouseClicked(e -> filterPopOver.show(filter));*/
-
     }
     @FXML
     public void deleteList(){
-        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane,"Delete","sabi","Yes","No");
-        doubleButtonDialog.setButtonOne(()->{receiptTreeTable.delete(pagination); });
-        doubleButtonDialog.setButtonTwo(()->{});
-        doubleButtonDialog.show();
+        if(receiptTreeTable.chosenItem.getSet().size()==0){
+            OneButtonDialog oneButtonDialog = new OneButtonDialog(mainpane,"","请选择账户","继续");
+            oneButtonDialog.setButtonOne(()->{});
+            oneButtonDialog.show();
+        }else {
+            DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "", "请确定是否删除", "是", "否");
+            doubleButtonDialog.setButtonOne(() -> {
+                receiptTreeTable.delete(pagination);
+            });
+            doubleButtonDialog.setButtonTwo(() -> {
+            });
+            doubleButtonDialog.show();
+        }
     }
 
     @FXML
