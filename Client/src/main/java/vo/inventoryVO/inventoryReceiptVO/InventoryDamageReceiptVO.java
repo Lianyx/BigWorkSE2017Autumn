@@ -4,11 +4,9 @@ import blService.checkblService.CheckInfo;
 import businesslogic.checkbl.MyServiceFactory;
 import javafx.scene.Node;
 import po.receiptPO.InventoryDamageReceiptPO;
-import po.receiptPO.InventoryDamageReceiptPO;
 import po.receiptPO.InventoryReceiptGoodsItemPO;
 import ui.inventoryui.inventoryReceiptui.InventoryDamageDetailPane;
 import util.ReceiptState;
-import vo.receiptVO.ReceiptListVO;
 import vo.receiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;

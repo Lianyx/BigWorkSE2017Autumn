@@ -14,7 +14,6 @@ import businesslogic.inventorybl.InventoryDamageReceiptbl;
 import businesslogic.inventorybl.InventoryGiftReceiptbl;
 import businesslogic.inventorybl.InventoryOverflowReceiptbl;
 import businesslogic.inventorybl.InventoryWarningReceiptbl;
-import businesslogic.salesbl.SalesSellReceiptbl;
 import businesslogic.salesbl.SalesSellbl;
 import vo.billReceiptVO.CashReceiptVO;
 import vo.billReceiptVO.ChargeReceiptVO;
@@ -30,7 +29,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 public class MyServiceFactory {
-    private static SalesSellReceiptbl salesSellReceiptbl;
+    private static SalesSellbl salesSellReceiptbl;
 
     private static InventoryDamageReceiptbl inventoryDamageReceiptbl;
     private static InventoryGiftReceiptbl inventoryGiftReceiptbl;
@@ -53,7 +52,7 @@ public class MyServiceFactory {
 
     public static CheckInfo<SalesSellReceiptVO> getSalesSellReceiptVOCheckInfo() throws RemoteException, NotBoundException, MalformedURLException {
         if (salesSellReceiptbl == null) {
-            return salesSellReceiptbl = new SalesSellReceiptbl();
+            return salesSellReceiptbl = new SalesSellbl();
         }
         return salesSellReceiptbl;
     }
@@ -112,7 +111,7 @@ public class MyServiceFactory {
      * */
     public static BusinessSearchInfo<SalesSellReceiptVO> getSalesSellSearchInfo() throws RemoteException, NotBoundException, MalformedURLException {
         if (salesSellReceiptbl == null) {
-            return salesSellReceiptbl = new SalesSellReceiptbl();
+            return salesSellReceiptbl = new SalesSellbl();
         }
         return salesSellReceiptbl;
     }
