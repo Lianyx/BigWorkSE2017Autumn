@@ -1,10 +1,6 @@
 package ui.myAccountantui;
 
 import com.jfoenix.controls.*;
-import com.jfoenix.controls.cells.editors.DoubleTextFieldEditorBuilder;
-import com.jfoenix.controls.cells.editors.IntegerTextFieldEditorBuilder;
-import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
-import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
@@ -12,11 +8,9 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import ui.accountantui.TransferItemPane;
 import ui.util.ColumnDecorator;
 import ui.util.ListPopup;
 import ui.util.PaneFactory;
@@ -33,24 +27,28 @@ public class ChargeItemTreeTable extends JFXTreeTableView<TransferItemVO>{
 
     StackPane mainpane;
 
+    private ChargeItemTreeTable chargeItemTreeTable;
+
     public ChargeItemTreeTable(){
         super();
+
+        this.chargeItemTreeTable = this;
 
         mainpane = PaneFactory.getMainPane();
 
         ColumnDecorator columnDecorator = new ColumnDecorator();
 
-        JFXTreeTableColumn<TransferItemVO, Integer> accountID = new JFXTreeTableColumn<>("AccountID");
+        JFXTreeTableColumn<TransferItemVO, Integer> accountID = new JFXTreeTableColumn<>("银行账户");
         accountID.setPrefWidth(140);
         columnDecorator.setupCellValueFactory(accountID, l -> l.accountIDProperty().asObject());
 
 
-        JFXTreeTableColumn<TransferItemVO, Double> price = new JFXTreeTableColumn<>("Price");
+        JFXTreeTableColumn<TransferItemVO, Double> price = new JFXTreeTableColumn<>("转账金额");
         price.setPrefWidth(140);
         columnDecorator.setupCellValueFactory(price, l -> l.sumProperty().asObject());
 
 
-        JFXTreeTableColumn<TransferItemVO, String> comment = new JFXTreeTableColumn<>("Comment");
+        JFXTreeTableColumn<TransferItemVO, String> comment = new JFXTreeTableColumn<>("备注");
         comment.setPrefWidth(140);
         columnDecorator.setupCellValueFactory(comment,TransferItemVO::commentProperty);
 
@@ -72,7 +70,7 @@ public class ChargeItemTreeTable extends JFXTreeTableView<TransferItemVO>{
                         @Override
                         public void handle(MouseEvent event) {
 
-                            TransferItemPane transferItemPane = new TransferItemPane(transferItemVO,observableList);
+                            ChargeTransferItemPane transferItemPane = new ChargeTransferItemPane(transferItemVO,observableList,chargeItemTreeTable);
                             JFXDialog dialog = new JFXDialog(mainpane, transferItemPane, JFXDialog.DialogTransition.CENTER);
                             transferItemPane.setDialog(dialog);
                             dialog.show();
@@ -88,7 +86,7 @@ public class ChargeItemTreeTable extends JFXTreeTableView<TransferItemVO>{
                     popup.show(row, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT);
                 }
                 if(event.getClickCount() == 2){
-                    TransferItemPane transferItemPane = new TransferItemPane(transferItemVO, observableList);
+                    ChargeTransferItemPane transferItemPane = new ChargeTransferItemPane(transferItemVO, observableList,chargeItemTreeTable);
                     JFXDialog dialog = new JFXDialog(mainpane, transferItemPane, JFXDialog.DialogTransition.CENTER);
                     transferItemPane.setDialog(dialog);
                     dialog.show();

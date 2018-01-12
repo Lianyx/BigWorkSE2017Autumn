@@ -21,7 +21,7 @@
         <AnchorPane fx:id="pane" layoutX="70.0" layoutY="55.0" prefHeight="470.0" prefWidth="500.0">
             <children>
                 <ImageView fx:id="imageview" fitHeight="100.0" fitWidth="100.0" layoutX="35.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" />
-                <Label layoutX="176.0" layoutY="120.0" text="Name:" textFill="#a1adbc">
+                <Label layoutX="176.0" layoutY="120.0" text="姓名：" textFill="#a1adbc">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
@@ -41,7 +41,7 @@
                 </ModifyButton>
                 <Separator layoutX="157.0" layoutY="154.0" prefHeight="4.0" prefWidth="320.0" />
 
-                <JFXButton fx:id="delete" layoutX="409.0" layoutY="12.0" mnemonicParsing="false" prefHeight="28.0" text="Delete">
+                <JFXButton fx:id="delete" layoutX="409.0" layoutY="12.0" mnemonicParsing="false" prefHeight="28.0" text="删除">
                     <graphic>
                         <HBox>
                             <children>
@@ -54,14 +54,14 @@
                         </HBox>
                     </graphic>
                 </JFXButton>
-                <Label layoutX="176.0" layoutY="178.0" text="ID:" textFill="#a1adbc">
+                <Label layoutX="176.0" layoutY="178.0" text="编号:" textFill="#a1adbc">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Label>
 
                 <JFXTextField fx:id="id"  layoutX="240.0" layoutY="173.0"  />
-                <Label layoutX="176.0" layoutY="208.0" text="Balance:" textFill="#a1adbc">
+                <Label layoutX="176.0" layoutY="208.0" text="余额:" textFill="#a1adbc">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -71,25 +71,25 @@
                 <Separator layoutX="15.0" layoutY="243.0" prefHeight="4.0" prefWidth="463.0" />
                 <Separator layoutX="15.0" layoutY="368.0" prefHeight="4.0" prefWidth="463.0" />
 
-                <Label layoutX="29.0" layoutY="14.0" text="Basic Info">
+                <Label layoutX="29.0" layoutY="14.0" text="基础信息">
                     <font>
                         <Font size="24.0" />
                     </font>
                 </Label>
                 <!--<JFXComboBox fx:id="usertype" layoutX="325.0" layoutY="75.0" prefHeight="36.0" prefWidth="147.0" />-->
-                <Label layoutX="29.0" layoutY="46.0" text="The basic information of the user" textFill="#a1adbc">
+                <Label layoutX="29.0" layoutY="46.0" text="--------------------" textFill="#a1adbc">
                     <font>
                         <Font size="12.0" />
                     </font></Label>
             </children>
         </AnchorPane>
-        <Label layoutX="24.0" layoutY="12.0" text="Account Info">
+        <Label layoutX="24.0" layoutY="12.0" text="账户信息">
             <font>
                 <Font size="24.0" />
             </font>
         </Label>
         <Separator layoutX="24.0" layoutY="44.0" prefHeight="4.0" prefWidth="593.0" />
-        <JFXButton fx:id="save" layoutX="564.0" layoutY="17.0" onMouseClicked="#save" mnemonicParsing="false" text="Save">
+        <JFXButton fx:id="save" layoutX="564.0" layoutY="17.0" onMouseClicked="#save" mnemonicParsing="false" text="保存">
             <font>
                 <Font size="12.0" />
             </font>

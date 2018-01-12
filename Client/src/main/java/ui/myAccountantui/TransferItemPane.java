@@ -1,4 +1,4 @@
-package ui.accountantui;
+package ui.myAccountantui;
 
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
@@ -33,7 +33,9 @@ public class TransferItemPane extends AnchorPane{
 
     JFXDialog jfxDialog;
 
-    public TransferItemPane(TransferItemVO transferItemVO, ObservableList<TransferItemVO> observableList) {
+    PaymentItemTreeTable paymentItemTreeTable;
+
+    public TransferItemPane(TransferItemVO transferItemVO, ObservableList<TransferItemVO> observableList,PaymentItemTreeTable paymentItemTreeTable) {
         super();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/accountantui/TransferItemPane.fxml"));
@@ -44,6 +46,7 @@ public class TransferItemPane extends AnchorPane{
             e.printStackTrace();
         }
         this.transferItemVO = transferItemVO;
+        this.paymentItemTreeTable =paymentItemTreeTable;
         accountID.setText(""+transferItemVO.getAccountID());
         price.setText(""+transferItemVO.getSum());
         comment.setText(transferItemVO.getComment());
@@ -87,15 +90,12 @@ public class TransferItemPane extends AnchorPane{
     @FXML
     public void save() {
         if(price.validate()){
-            //listGoodsItemVO.setGoodsNum(Integer.parseInt(num.getText()));
-            //sum.setText(""+listGoodsItemVO.getSum());
-            //listGoodsItemVO.setComment(comment.getText());
             transferItemVO.setAccountID(Integer.parseInt(accountID.getText()));
             transferItemVO.setSum(Double.parseDouble(price.getText()));
             transferItemVO.setComment(comment.getText());
-            //accountID.setText(""+transferItemVO.getAccountID());
-            //price.setText(""+transferItemVO.getSum());
-            //comment.setText(transferItemVO.getComment());
+            TransferItemVO temp = new TransferItemVO(1,1,"1");
+            paymentItemTreeTable.add(temp);
+            paymentItemTreeTable.remove(temp);
             jfxDialog.close();
 
         }

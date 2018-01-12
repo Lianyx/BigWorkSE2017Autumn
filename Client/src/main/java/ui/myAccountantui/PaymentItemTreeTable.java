@@ -1,38 +1,23 @@
 package ui.myAccountantui;
 
-import blService.stockblService.StockblService;
 import com.jfoenix.controls.*;
-import com.jfoenix.controls.cells.editors.DoubleTextFieldEditorBuilder;
-import com.jfoenix.controls.cells.editors.IntegerTextFieldEditorBuilder;
-import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
-import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import ui.accountantui.TransferItemPane;
-import ui.salesui.SalesReceiptPane;
-import ui.stockui.StockListItemPane;
-import ui.util.BoardController;
 import ui.util.ColumnDecorator;
 import ui.util.ListPopup;
 import ui.util.PaneFactory;
-import vo.ListGoodsItemVO;
 import vo.billReceiptVO.TransferItemVO;
-import vo.receiptVO.SalesReceiptListVO;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Function;
 
 public class PaymentItemTreeTable extends JFXTreeTableView<TransferItemVO>{
 
@@ -42,22 +27,25 @@ public class PaymentItemTreeTable extends JFXTreeTableView<TransferItemVO>{
 
     private StackPane mainpane;
 
+    private PaymentItemTreeTable paymentItemTreeTable;
+
     public PaymentItemTreeTable(){
         super();
 
+        this.paymentItemTreeTable = this;
         mainpane = PaneFactory.getMainPane();
 
         ColumnDecorator columnDecorator = new ColumnDecorator();
 
-        JFXTreeTableColumn<TransferItemVO, Integer> accountID = new JFXTreeTableColumn<>("AccountID");
+        JFXTreeTableColumn<TransferItemVO, Integer> accountID = new JFXTreeTableColumn<>("银行账户");
         accountID.setPrefWidth(140);
         columnDecorator.setupCellValueFactory(accountID, l -> l.accountIDProperty().asObject());
 
-        JFXTreeTableColumn<TransferItemVO, Double> price = new JFXTreeTableColumn<>("Price");
+        JFXTreeTableColumn<TransferItemVO, Double> price = new JFXTreeTableColumn<>("转账金额");
         price.setPrefWidth(140);
         columnDecorator.setupCellValueFactory(price, l -> l.sumProperty().asObject());
 
-        JFXTreeTableColumn<TransferItemVO, String> comment = new JFXTreeTableColumn<>("Comment");
+        JFXTreeTableColumn<TransferItemVO, String> comment = new JFXTreeTableColumn<>("备注");
         comment.setPrefWidth(140);
         columnDecorator.setupCellValueFactory(comment,TransferItemVO::commentProperty);
 
@@ -67,21 +55,14 @@ public class PaymentItemTreeTable extends JFXTreeTableView<TransferItemVO>{
 
             row.setOnMouseClicked((MouseEvent event) -> {
                 TransferItemVO transferItemVO = (TransferItemVO)row.getTreeItem().getValue();
-                //TransferItemVO listGoodsItemVO = (ListGoodsItemVO) row.getTreeItem().getValue();
 
-                /**
-                 * 右键时候，弹出popup，里面有view和delete，getListview命名不好，就是弹窗中listview里面的view，getlistdelete同样
-                 **/
                 if (event.getButton() == MouseButton.SECONDARY) {
                     ListPopup listPopup = new ListPopup();
                     JFXPopup popup = new JFXPopup(listPopup);
                     listPopup.getListview().setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
-                            /**
-                             进入listpane
-                             **/
-                            TransferItemPane transferItemPane = new TransferItemPane(transferItemVO,observableList);
+                            TransferItemPane transferItemPane = new TransferItemPane(transferItemVO,observableList,paymentItemTreeTable);
                             JFXDialog dialog = new JFXDialog(mainpane, transferItemPane, JFXDialog.DialogTransition.CENTER);
                             transferItemPane.setDialog(dialog);
                             dialog.show();
@@ -97,7 +78,7 @@ public class PaymentItemTreeTable extends JFXTreeTableView<TransferItemVO>{
                     popup.show(row, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT);
                 }
                 if(event.getClickCount() == 2){
-                    TransferItemPane transferItemPane = new TransferItemPane(transferItemVO, observableList);
+                    TransferItemPane transferItemPane = new TransferItemPane(transferItemVO, observableList,this);
                     JFXDialog dialog = new JFXDialog(mainpane, transferItemPane, JFXDialog.DialogTransition.CENTER);
                     transferItemPane.setDialog(dialog);
                     dialog.show();

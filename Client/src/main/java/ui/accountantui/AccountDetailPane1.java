@@ -38,13 +38,9 @@ import java.util.function.Predicate;
 import static ui.util.ValidatorDecorator.DoubleValid;
 import static ui.util.ValidatorDecorator.RequireValid;
 
-public class AccountDetailPane extends Refreshable{
+public class AccountDetailPane1 extends ReceiptDetailPane<AccountListVO>{
 
-    BoardController boardController;
 
-    StackPane mainpane;
-
-    AccountListVO vo;
 
     private AccountblService accountblService;
 
@@ -59,25 +55,15 @@ public class AccountDetailPane extends Refreshable{
     @FXML
     JFXTextField balance;
 
-    @FXML
-    protected ModifyButton modify;
-    @FXML
-    protected MaterialDesignIconView pen;
-    @FXML
-    protected JFXButton save;
 
     @FXML
-    protected JFXButton reject;
-
-    @FXML
-    protected JFXButton delete;
+    MaterialDesignIconView pen;
 
     SimpleBooleanProperty modifyState = new SimpleBooleanProperty(false);
-    SimpleBooleanProperty updateState = new SimpleBooleanProperty();
 
     boolean isAdd = false;
 
-    public AccountDetailPane(AccountListVO accountListVO){
+    public AccountDetailPane1(AccountListVO accountListVO){
         this(false);
         this.accountListVO = accountListVO;
         delete.setVisible(true);
@@ -101,23 +87,8 @@ public class AccountDetailPane extends Refreshable{
     }
 
 
-    public AccountDetailPane(boolean isAdd) {
-        super();
-        boardController = BoardController.getBoardController();
-        mainpane = PaneFactory.getMainPane();
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/accountantui/accountdetail.fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        save.setText("Add");
-        updateState.set(true);
-        modify.setVisible(false);
-        delete.setVisible(false);
-
+    public AccountDetailPane1(boolean isAdd) {
+        super("/accountantui/accountdetail.fxml");
         try{
             this.accountblService = new Accountbl();
 
@@ -140,7 +111,7 @@ public class AccountDetailPane extends Refreshable{
 
     }
 
-    @FXML
+    @Override
     public void delete() {
         DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Delete", "sabi", "Yes", "No");
         doubleButtonDialog.setButtonOne(() -> {
@@ -186,15 +157,7 @@ public class AccountDetailPane extends Refreshable{
 
     }
 
-    public void switchPane(boolean toSwtich) {
-        if (toSwtich == true) {
-            boardController.switchTo(this);
-        } else {
-            boardController.setAll(this);
-        }
-    }
-
-    @FXML
+    @Override
     public void save() {
         if (valid()) {
             modify.modifyProperty().set(false);
@@ -239,17 +202,20 @@ public class AccountDetailPane extends Refreshable{
     }
 
 
+    @Override
+    public void savePendingReceipt() {
+    }
+
+    @Override
+    public void saveDraftReceipt() {
+    }
+
+
+    @Override
     public boolean valid() {
         if (!name.getText().equals("") && !id.getText().equals("")&&!balance.getText().equals(""))
             return true;
         return false;
-    }
-
-    public void setBack(){
-        boardController.setRightAnimation();
-        boardController.historicalSwitchTo((Refreshable) HistoricalRecord.pop());
-        boardController.refresh();
-        HistoricalRecord.removeAndPop();
     }
 
 }

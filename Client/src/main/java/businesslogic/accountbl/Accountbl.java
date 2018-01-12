@@ -20,22 +20,13 @@ public class Accountbl implements AccountblService{
 
     AccountDataService accountDataService;
 
-    //public ResultMessage add(AccountListVO accountListVO)throws RemoteException;
-    //public ResultMessage delete(int id);
-    //public ResultMessage update(AccountListVO accountListVO);
-    //public Set<MemberListVO> search(MemberSearchVO memberSearchVO);
-    //public MemberVO showDetail(int id);
-    //public Set<AccountListVO> getAll();
+
 
     public Accountbl()throws NotBoundException,RemoteException,MalformedURLException{
         accountDataService = (AccountDataService) Naming.lookup("rmi://localhost:1099/AccountData");
     }
 
     public Set<AccountListVO> getAll()throws RemoteException{
-       /*ArrayList<AccountListVO> tem = new ArrayList<>();
-       tem.add(new AccountListVO(1,"1",1));
-       tem.add(new AccountListVO(2,"2",2));
-       tem.add(new AccountListVO(3,"3",3));*/
 
         ArrayList<AccountPO> POList = accountDataService.getAll();
         ArrayList<AccountListVO> VOList = new ArrayList<>();
@@ -44,18 +35,9 @@ public class Accountbl implements AccountblService{
             VOList.add(vo);
         }
         return new HashSet<AccountListVO>(VOList);
-        //return new HashSet<>(tem);
+
     }
 
-    /*public ArrayList<AccountListVO> search(String keyword)throws RemoteException{
-        ArrayList<AccountPO> POList = accountDataService.selectInEffect(keyword);
-        ArrayList<AccountListVO> VOList = new ArrayList<>();
-        for(AccountPO po: POList){
-            AccountListVO vo = new AccountListVO(po.getID(),po.getName(),po.getBalance());
-            VOList.add(vo);
-        }
-        return VOList;
-    }*/
 
     public ResultMessage add(AccountListVO accountListVO)throws RemoteException{
         AccountPO accountPO = new AccountPO(null,accountListVO.getName(),accountListVO.getBalance());

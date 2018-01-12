@@ -30,6 +30,10 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
     private TextField operator;
     @FXML
     private JFXRippler addCashButton;
+    @FXML
+    private TextField createtime;
+    @FXML
+    private TextField lastmodifiedtime;
 
 
     public MyCashDetailPane() {
@@ -41,6 +45,8 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
 
         operator.setDisable(true);
         sumField.setDisable(true);
+        createtime.setDisable(true);
+        lastmodifiedtime.setDisable(true);
 
         accountField.disableProperty().bind(modifyState.not());
         addCashButton.visibleProperty().bind(modifyState);
@@ -106,6 +112,8 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
         sumField.setText(String.valueOf(receiptVO.getTotal()));
         cashItemTreeTable.setList(receiptVO.getCashList());
         accountField.setText(String.valueOf(receiptVO.getAccountID()));
+        createtime.setText(receiptVO.getCreateTime().toString());
+        lastmodifiedtime.setText(receiptVO.getLastModifiedTime().toString());
     }
 
     @FXML
