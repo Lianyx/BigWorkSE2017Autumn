@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 import ui.util.NodeAnimation;
 import ui.util.NodeHolder;
+import vo.UserListVO;
 import vo.receiptVO.ReceiptVO;
 
 import java.util.List;
@@ -62,7 +63,6 @@ public abstract class MyTreeTableBorderPane<T extends RecursiveTreeObject<T>> ex
 
     public void refresh(List<T> list) {
         this.observableList = FXCollections.observableArrayList(list);
-
         int maxPageIndex = (observableList.size() - 1) / rowsPerPage + 1;
         pagination.setPageCount(maxPageIndex); // 就算是0好像也不报错的
 

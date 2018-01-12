@@ -5,6 +5,7 @@ import blService.salesblService.SalesRetblService;
 import blService.salesblService.SalesSellblService;
 import ui.salesui.SalesListPane;
 import ui.salesui.salesRetui.SalesRetTablePane;
+import ui.util.Refreshable;
 import vo.receiptVO.SalesRetListVO;
 import vo.receiptVO.SalesRetReceiptVO;
 import vo.receiptVO.SalesSellListVO;
@@ -22,5 +23,10 @@ public class SalesSellListPane extends SalesListPane<SalesSellListVO,SalesSellRe
     @Override
     protected Class<? extends ReceiptblService<SalesSellReceiptVO>> getServiceClass() {
         return SalesSellblService.class;
+    }
+
+    @Override
+    protected Refreshable getNewDetailPane() {
+        return null;
     }
 }
