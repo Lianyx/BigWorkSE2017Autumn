@@ -24,8 +24,6 @@ public class Userdata {
 
             MemberData userdata = new MemberData();
             ArrayList<MemberPO> list = userdata.search(new MemberSearchCondition());
-            System.out.println(userdata.getNew());
-            System.out.println(userdata.showDetail(1));
 
         }catch (Exception e){
             e.printStackTrace();

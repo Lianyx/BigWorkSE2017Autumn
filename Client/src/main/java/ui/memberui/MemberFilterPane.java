@@ -49,6 +49,7 @@ public class MemberFilterPane extends AnchorPane{
 
     @FXML
     public void save() {
+        if(!degree.getText().equals(""))
         memberSearchCondition.setDegree(Integer.parseInt(degree.getText()));
         memberSearchCondition.setMemberCategory(MemberCategory.map.get(state.getValue().getText()));
         popOver.hide();

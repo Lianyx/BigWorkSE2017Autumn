@@ -8,7 +8,9 @@ import util.UserSearchCondition;
 import vo.UserListVO;
 import vo.UserVO;
 
+import java.net.MalformedURLException;
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,7 +22,7 @@ import static ui.util.UserInfomation.url;
 public class Userbl implements UserManagerblService {
     private UserDataService userDataService;
 
-    public Userbl() throws Exception{
+    public Userbl() throws RemoteException, MalformedURLException, NotBoundException {
         System.out.println(url+"UserData");
         userDataService = (UserDataService) Naming.lookup( url+"UserData");
     }
@@ -38,7 +40,9 @@ public class Userbl implements UserManagerblService {
 
     @Override
     public ArrayList<UserListVO> search(UserSearchCondition userSearchCondition) throws RemoteException{
-        return userDataService.search(userSearchCondition).stream().map(t->{return (new UserVO(t)).toListVO();}).collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<UserPO> arrayList = userDataService.search(userSearchCondition);
+        System.out.println(arrayList);
+        return arrayList.stream().map(t->{return (new UserVO(t)).toListVO();}).collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Override

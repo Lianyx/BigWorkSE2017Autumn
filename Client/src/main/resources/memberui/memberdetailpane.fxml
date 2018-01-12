@@ -18,6 +18,7 @@
 <?import org.controlsfx.control.Rating?>
 <?import ui.util.ModifyButton?>
 
+<?import javafx.collections.FXCollections?>
 <fx:root fx:id="memberdetail" prefHeight="560.0" prefWidth="640.0" stylesheets="@../css/userdetail.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane fx:id="pane" layoutX="70.0" layoutY="55.0" prefHeight="487.0" prefWidth="500.0">
@@ -85,7 +86,14 @@
                         <Font size="24.0" />
                     </font>
                 </Label>
-                <JFXComboBox fx:id="memberCategory" layoutX="307.0" layoutY="164.0" prefHeight="23.0" prefWidth="132.0" />
+                <JFXComboBox fx:id="memberCategory" layoutX="307.0" layoutY="164.0" prefHeight="23.0" prefWidth="132.0" >
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                        <Label fx:id="SELLER" text="销售商"/>
+                        <Label fx:id="SUPPLIER" text="供货商"/>
+                        </FXCollections>
+                    </items>
+                </JFXComboBox>
                 <Label layoutX="29.0" layoutY="46.0" text="The basic information of the member" textFill="#a1adbc">
                     <font>
                         <Font size="12.0" />

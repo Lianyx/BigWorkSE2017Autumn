@@ -168,7 +168,7 @@ public class MemberData extends UnicastRemoteObject implements MemberdataService
                             BufferedImage image = ImageIO.read((new File(file.getPath() + "\\" + f)));
                             userPO.setImage(ImageConvertor.getByte(image));
                         }else {
-                            BufferedImage image = ImageIO.read((new File("/default/timg.jpg")));
+                            BufferedImage image = ImageIO.read((new File(getClass().getResource("/default/timg.jpg").toURI())));
                             userPO.setImage(ImageConvertor.getByte(image));
                         }
                     }catch (Exception e){
