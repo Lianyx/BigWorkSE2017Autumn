@@ -12,18 +12,32 @@ public class LogPO implements Serializable{
     private String username;
     private UserCategory userCategory;
     private EventCategory eventCategory;
-    private String comment;
+    private String event;
 
     public LogPO() {
     }
 
-    public LogPO(int logId, LocalDateTime createTime, String username, UserCategory userCategory, EventCategory eventCategory, String comment) {
+    public LogPO(int logId, LocalDateTime createTime, String username, UserCategory userCategory,EventCategory eventCategory, String event) {
         this.logId = logId;
         this.createTime = createTime;
         this.username = username;
         this.userCategory = userCategory;
+        this.event = event;
+    }
+
+    public LogPO(LocalDateTime createTime, String username, UserCategory userCategory, String event) {
+        this.createTime = createTime;
+        this.username = username;
+        this.userCategory = userCategory;
+        this.event = event;
+    }
+
+    public EventCategory getEventCategory() {
+        return eventCategory;
+    }
+
+    public void setEventCategory(EventCategory eventCategory) {
         this.eventCategory = eventCategory;
-        this.comment = comment;
     }
 
     public int getLogId() {
@@ -58,19 +72,11 @@ public class LogPO implements Serializable{
         this.userCategory = userCategory;
     }
 
-    public EventCategory getEventCategory() {
-        return eventCategory;
+    public String getEvent() {
+        return event;
     }
 
-    public void setEventCategory(EventCategory eventCategory) {
-        this.eventCategory = eventCategory;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setEvent(String event) {
+        this.event = event;
     }
 }
