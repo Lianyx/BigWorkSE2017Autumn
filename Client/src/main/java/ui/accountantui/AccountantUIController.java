@@ -14,6 +14,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import ui.managerui.businessConditionui.BusinessConditionPane;
+import ui.managerui.businessProgressui.BusinessProgressPane;
+import ui.managerui.businessSalesDetail.BusinessSalesListPane;
 import ui.managerui.common.MyBoardController;
 import ui.managerui.common.MyTopBar;
 import ui.myAccountantui.MyCashReceiptListPane;
@@ -107,14 +110,20 @@ public class AccountantUIController implements Initializable{
                                     MyCashReceiptListPane cashReceiptListPane =new MyCashReceiptListPane();
                                     cashReceiptListPane.refresh(true);
                                 }
-                                else if (newVal.getId().equals("销售明细")) {
+                                else if (newVal.getId().equals("salesDetail")) {
                                     System.out.println("销售明细");
+                                    BusinessSalesListPane businessSalesListPane = new BusinessSalesListPane();
+                                    businessSalesListPane.refresh(true);
                                 }
-                                else if (newVal.getId().equals("经营历程")) {
+                                else if (newVal.getId().equals("businessProgress")) {
                                     System.out.println("经营历程");
+                                    BusinessProgressPane businessProgressPane = new BusinessProgressPane();
+                                    businessProgressPane.refresh(true);
                                 }
-                                else if (newVal.getId().equals("经营情况")) {
+                                else if (newVal.getId().equals("businessCondition")) {
                                     System.out.println("经营情况");
+                                    BusinessConditionPane businessConditionPane = new BusinessConditionPane();
+                                    businessConditionPane.refresh(true);
                                 }
                                 else if (newVal.getId().equals("initialList")) {
                                     System.out.println("期初建账");

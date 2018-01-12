@@ -50,7 +50,7 @@ public class SalesUIController implements Initializable{
         // 这个是不得不set，因为是同时生成的，但是这样很不好，希望可以改掉
         bar.setBoardController(boardController);
 
-        StockListPane init = new StockPurListPane();
+        MemberListPane init = new MemberListPane();
         init.refresh(true);
 
 
@@ -70,11 +70,10 @@ public class SalesUIController implements Initializable{
                         SalesListPane salesListPane = new SalesRetListPane();
                         salesListPane.refresh(true);
                     }
-
-                    /*else if(newVal.getId().equals("member")){
+                    else if(newVal.getId().equals("member")){
                         MemberListPane memberListPane = new MemberListPane();
                         memberListPane.refresh(true);
-                    }*/
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();

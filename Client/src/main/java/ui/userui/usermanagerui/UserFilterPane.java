@@ -64,9 +64,12 @@ public class UserFilterPane extends AnchorPane{
 
     @FXML
     public void save() {
+        if(from.getValue()!=null)
         userSearchCondition.setCreateTimeFloor(from.getValue().atStartOfDay());
+        if(to.getValue()!=null)
         userSearchCondition.setCreateTimeCeil(to.getValue().atStartOfDay());
         userSearchCondition.setUserCategory(UserCategory.map.get(state.getValue().getText()));
+        System.out.println(userSearchCondition.getUserCategory());
         popOver.hide();
         BoardController.getBoardController().refresh();
     }

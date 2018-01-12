@@ -6,14 +6,9 @@ import java.time.LocalDateTime;
 public class MemberSearchCondition implements Serializable{
 
     int degree;
-    private UserCategory userCategory;
+    private MemberCategory memberCategory;
 
     public MemberSearchCondition() {
-    }
-
-    public MemberSearchCondition(int degree, UserCategory userCategory) {
-        this.degree = degree;
-        this.userCategory = userCategory;
     }
 
     public int getDegree() {
@@ -24,11 +19,11 @@ public class MemberSearchCondition implements Serializable{
         this.degree = degree;
     }
 
-    public UserCategory getUserCategory() {
-        return userCategory;
+    public MemberCategory getMemberCategory() {
+        return memberCategory;
     }
 
-    public void setUserCategory(UserCategory userCategory) {
-        this.userCategory = userCategory;
+    public void setMemberCategory(MemberCategory memberCategory) {
+        this.memberCategory = memberCategory;
     }
 }

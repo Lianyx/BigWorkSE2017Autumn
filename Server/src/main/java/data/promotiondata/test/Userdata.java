@@ -1,13 +1,19 @@
 package data.promotiondata.test;
 
+import data.memberdata.MemberData;
 import data.stockdata.StockPurReceiptData;
 import data.userdata.UserData;
 import dataService.userdataService.UserDataService;
+import po.MemberPO;
 import po.UserPO;
 import po.receiptPO.StockPurReceiptPO;
+import util.MemberSearchCondition;
 import util.RespectiveReceiptSearchCondition;
+import util.UserCategory;
 import util.UserSearchCondition;
 
+import java.lang.reflect.Array;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Userdata {
@@ -15,10 +21,12 @@ public class Userdata {
     public static void main(String args[]){
 
         try{
-            StockPurReceiptData userdata = new StockPurReceiptData();
-            ArrayList<StockPurReceiptPO> arrayList = userdata.search(new RespectiveReceiptSearchCondition());
-            userdata.getNew();
-            System.out.println(arrayList.get(0).getDayId());
+
+            MemberData userdata = new MemberData();
+            ArrayList<MemberPO> list = userdata.search(new MemberSearchCondition());
+            System.out.println(userdata.getNew());
+            System.out.println(userdata.showDetail(1));
+
         }catch (Exception e){
             e.printStackTrace();
         }

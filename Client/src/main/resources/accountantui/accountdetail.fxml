@@ -41,7 +41,7 @@
                 </ModifyButton>
                 <Separator layoutX="157.0" layoutY="154.0" prefHeight="4.0" prefWidth="320.0" />
 
-                <JFXButton fx:id="delete" layoutX="409.0" layoutY="12.0" mnemonicParsing="false" prefHeight="28.0" text="删除">
+                <JFXButton fx:id="delete" onMouseClicked="#delete" layoutX="409.0" layoutY="12.0" mnemonicParsing="false" prefHeight="28.0" text="删除">
                     <graphic>
                         <HBox>
                             <children>

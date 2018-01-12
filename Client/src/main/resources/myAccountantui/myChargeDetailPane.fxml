@@ -73,6 +73,16 @@
         <ModifyButton fx:id="modify" layoutX="347.0" layoutY="20.0" onMouseClicked="#modify"/>
         <!--<JFXButton fx:id="user" layoutX="404.0" layoutY="91.0" onMouseClicked="#currentUser">-->
 
+        <JFXButton fx:id="delete" layoutX="386.0" layoutY="20.0" mnemonicParsing="false"
+                   onMouseClicked="#delete" text="删除">
+            <graphic>
+                <StackPane>
+                    <MaterialDesignIconView fill="white" glyphName="DELETE" size="1em"
+                                            styleClass="icon"/>
+                </StackPane>
+            </graphic>
+        </JFXButton>
+
         <Label layoutX="119.0" layoutY="74.0" text="编号" textFill="#a1adbc">
             <font>
                 <Font name="System Bold" size="10.0"/>

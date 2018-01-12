@@ -12,16 +12,16 @@
     </select>
 
     <insert id="insert">
-        INSERT INTO Member(memberId,memberCatogory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDeleted)
-        VALUES (#{memberId},#{memberCatogory},#{VIPgrade},#{memberName},#{clerkName},#{phoneNumber},#{address},#{zipCode},#{emailAddress},#{debtCeiling},#{debt},#{credit},#{isDeleted})
+        INSERT INTO Member(memberId,memberCategory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDeleted,comment)
+        VALUES (#{memberId},#{memberCategory},#{VIPgrade},#{memberName},#{clerkName},#{phoneNumber},#{address},#{zipCode},#{emailAddress},#{debtCeiling},#{debt},#{credit},#{isDeleted},#{comment})
     </insert>
 
     <update id="update">
-        update Member set memberId=#{memberId},memberCatogory=#{memberCatogory},VIPgrade=#{VIPgrade},memberName=#{memberName},clerkName=#{clerkName},phoneNumber=#{phoneNumber},address=#{address},zipCode=#{zipCode},emailAddress=#{emailAddress},debtCeiling=#{debtCeiling},debt=#{debt},credit=#{credit},isDeleted=#{isDeleted}
+        update Member set memberId=#{memberId},memberCategory=#{memberCategory},VIPgrade=#{VIPgrade},memberName=#{memberName},clerkName=#{clerkName},phoneNumber=#{phoneNumber},address=#{address},zipCode=#{zipCode},emailAddress=#{emailAddress},debtCeiling=#{debtCeiling},debt=#{debt},credit=#{credit},isDeleted=#{isDeleted},comment=#{comment}
         where memberId = #{memberId}
     </update>
 
-    <delete id="deleted">
+    <delete id="delete">
         DELETE FROM Member WHERE memberId = #{memberId}
     </delete>
 
@@ -31,14 +31,11 @@
     <select id="search" resultMap="resultMap">
         select * from Member
         <where>
-            <if test="MemberCategory != null">
-                MemberCategory = #{MemberCategory}
+            <if test="memberCategory != null">
+                memberCategory = #{memberCategory}
             </if>
-            <if test="createTimeFloor != null">
-                AND createTime &gt;= #{createTimeFloor}
-            </if>
-            <if test="createTimeCeil != null">
-                AND createTime &lt;= #{createTimeCeil}
+            <if test="degree != 0">
+                AND VIPgrade &gt;= #{degree}
             </if>
         </where>
     </select>

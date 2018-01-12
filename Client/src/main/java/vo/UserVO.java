@@ -29,6 +29,9 @@ public class UserVO {
 
     public UserVO(UserPO po){
         this.id=po.getUserId();
+        if(po.getImage()==null)
+            this.setImage(new Image("/default/timg.jpg"));
+        else
         this.image = ImageConvertor.getFXImage(ImageConvertor.getImage(po.getImage()));
         this.username = po.getUsername();
         this.usertype = po.getUsertype();

@@ -1,19 +1,20 @@
 package dataService.memberdataService;
 
 import po.MemberPO;
+import util.MemberSearchCondition;
 import util.ResultMessage;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 
-public interface MemberdataService {
-    public int getId();
-    public ResultMessage insert(MemberPO MemberPO);
-    public ResultMessage delete(int id);
-    public ResultMessage delete(ArrayList<Integer> list);
-    public ResultMessage update(MemberPO MemberPO);
-    public MemberPO showDetail(int id);
-    public ArrayList<MemberPO> getAll();
+public interface MemberdataService  extends Remote {
+    public MemberPO getNew() throws RemoteException;
+    public ResultMessage delete(int id) throws RemoteException;
+    public ResultMessage update(MemberPO memberPO) throws RemoteException;
+    public MemberPO showDetail(int id) throws RemoteException;
+    public ArrayList<MemberPO> search(MemberSearchCondition memberSearchCondition) throws RemoteException;
 
 
 

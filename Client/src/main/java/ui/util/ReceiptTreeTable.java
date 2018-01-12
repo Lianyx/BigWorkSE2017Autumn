@@ -55,19 +55,10 @@ public abstract class ReceiptTreeTable<T extends SelectableVO<T>> extends JFXTre
     }
 
     public void createPage(int pageIndex) {
-
-
-/*        if(stockSearchVO.getReceiptState()!=null)
-            observableListfilter=observableList.filtered(t->{
-                return stockSearchVO.getReceiptState()==t.getReceiptState();
-            });
-        else*/
-        //   observableListfilter=observableList;
         int fromIndex = pageIndex * rowsPerPage;
         int toIndex = Math.min(fromIndex + rowsPerPage, observableList.size());
         final TreeItem<T> root = new RecursiveTreeItem<>(FXCollections.observableList(observableList.subList(fromIndex, toIndex)), RecursiveTreeObject::getChildren);
         this.setRoot(root);
-        //    this.setStyle("-fx-border-color: transparent; -fx-padding: 0; -fx-background-color: transparent");
         NodeHolder nodeHolder = new NodeHolder(this, Duration.millis(1000), NodeAnimation.FADE);
         nodeHolder.apply();
 

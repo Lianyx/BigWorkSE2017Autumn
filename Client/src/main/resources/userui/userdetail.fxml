@@ -45,7 +45,7 @@
                </font>
             </Label>
 
-            <JFXButton fx:id="deleted" onAction="#delete" layoutX="409.0" layoutY="12.0" mnemonicParsing="false" text="Delete">
+            <JFXButton fx:id="delete" onAction="#delete" layoutX="409.0" layoutY="12.0" mnemonicParsing="false" text="Delete">
                 <graphic>
                     <HBox>
                         <children>

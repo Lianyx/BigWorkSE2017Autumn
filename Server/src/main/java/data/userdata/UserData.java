@@ -39,6 +39,13 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
             userPO.setIsDeleted(0);
             userPO.setUsertype(UserCategory.UserManager);
             insert(userPO);
+            /*
+            try {
+                userPO.setImage(ImageConvertor.getByte(ImageIO.read((new File("/default/timg.jpg").toURL()))));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            */
             session.commit();
             return userPO;
         }

@@ -1,5 +1,6 @@
 package businesslogic.accountbl;
 
+import blService.accountblService.AccountInfo;
 import blService.accountblService.AccountblService;
 import dataService.accountDataService.AccountDataService;
 import po.AccountPO;
@@ -16,7 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Accountbl implements AccountblService{
+public class Accountbl implements AccountblService,AccountInfo{
 
     AccountDataService accountDataService;
 
@@ -52,5 +53,29 @@ public class Accountbl implements AccountblService{
         AccountPO accountPO = new AccountPO(accountVO.getID(),accountVO.getName(),accountVO.getBalance());
         return accountDataService.update(accountPO);
     }
+
+    public void decBalance(int id,double total)throws RemoteException{
+        ArrayList<AccountPO> POList = accountDataService.getAll();
+        AccountPO temp = new AccountPO();
+        for(AccountPO po:POList){
+            if(po.getID()==id){
+                temp = new AccountPO(id,po.getName(),po.getBalance()-total);
+            }
+        }
+        accountDataService.update(temp);
+    }
+
+    public void incBalance(int id,double total)throws RemoteException{
+        ArrayList<AccountPO> POList = accountDataService.getAll();
+        AccountPO temp = new AccountPO();
+        for(AccountPO po:POList){
+            if(po.getID()==id){
+                temp = new AccountPO(id,po.getName(),po.getBalance()+total);
+            }
+        }
+        accountDataService.update(temp);
+    }
+
+
 
 }
