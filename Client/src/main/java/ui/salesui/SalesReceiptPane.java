@@ -52,10 +52,17 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
     @FXML
     TextArea comment;
 
-    SimpleDoubleProperty textSum = new SimpleDoubleProperty(0);
+    SimpleDoubleProperty textSum;
 
     @FXML
     ItemTreeTable itemTreeTable;
+
+    public SalesReceiptPane() {
+    }
+
+    public SalesReceiptPane(T receiptVO) {
+        super(receiptVO);
+    }
 
     @Override
     protected String getURL() {
@@ -72,7 +79,7 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
 
         stock.disableProperty().bind(modifyState.not());
         member.disableProperty().bind(modifyState.not());
-        user.disableProperty().bind(modifyState.not());
+//        user.disableProperty().bind(modifyState.not());
         clerk.disableProperty().bind(modifyState.not());
         comment.disableProperty().bind(modifyState.not());
         token.disableProperty().bind(modifyState.not());
@@ -91,6 +98,7 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
         discount.setText("0");
 
 
+        textSum = new SimpleDoubleProperty(0);
         textSum.addListener((b,o,n)->{
             sum.setText(""+n);
         });
@@ -151,6 +159,11 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
     @FXML
     public void addTransfer(){
         itemTreeTable.add((new ListGoodsItemVO("a", 1, "a", 1, 1, "a")));
+    }
+
+    @FXML
+    private void selectMember() {
+
     }
 
     /*

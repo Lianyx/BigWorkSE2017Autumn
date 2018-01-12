@@ -1,7 +1,6 @@
 package vo.receiptVO;
 
 import util.ReceiptState;
-import vo.abstractVO.SelectableVO;
 
 import java.time.LocalDateTime;
 
@@ -16,6 +15,8 @@ public abstract class SalesReceiptListVO<T> extends ReceiptListVO<T>{
 
     public SalesReceiptListVO() {
     }
+
+
 
     public SalesReceiptListVO(String id, LocalDateTime createTime, ReceiptState receiptState, String memberName, String stockName, double sum) {
         this.id = id;

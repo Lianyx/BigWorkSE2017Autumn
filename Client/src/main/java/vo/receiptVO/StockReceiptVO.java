@@ -7,6 +7,7 @@ import vo.ListGoodsItemVO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +27,8 @@ public abstract class StockReceiptVO extends ReceiptVO {
         this.memberId = stockReceiptPO.getMemberId();
         this.stockName =stockReceiptPO.getStockName();
         this.sum =stockReceiptPO.getOriginSum();
-        this.items = toGoodsList(stockReceiptPO.getGoodsList());
+        this.items = stockReceiptPO.getGoodsList() == null ? new ArrayList<>()
+                : Arrays.stream(stockReceiptPO.getGoodsList()).map(ListGoodsItemVO::new).collect(Collectors.toCollection(ArrayList::new));
         this.comment = stockReceiptPO.getComment();
     }
 
@@ -93,27 +95,8 @@ public abstract class StockReceiptVO extends ReceiptVO {
         result.setMemberId(memberId);
         result.setStockName(stockName);
         result.setOriginSum(sum);
-        result.setGoodsList(toGoodsArray(items));
+        result.setGoodsList(items == null ? null : items.stream().map(ListGoodsItemVO::toPo).toArray(ReceiptGoodsItemPO[]::new));
         result.setComment(comment);
         return result;
     }
-
-
-    public ReceiptGoodsItemPO[] toGoodsArray(ArrayList<ListGoodsItemVO> items){
-        List<ReceiptGoodsItemPO> receiptGoodsItemPOs = items.stream().map(t->t.toPo()).collect(Collectors.toList());
-        ReceiptGoodsItemPO[] goodsItemPOs = (ReceiptGoodsItemPO[])receiptGoodsItemPOs.toArray();
-        return goodsItemPOs;
-    }
-
-    public ArrayList<ListGoodsItemVO> toGoodsList(ReceiptGoodsItemPO[] array){
-        ArrayList<ListGoodsItemVO> list = new ArrayList<>();
-        if (array != null) {
-            for (ReceiptGoodsItemPO receiptGoodsItemPO : array) {
-                list.add(new ListGoodsItemVO(receiptGoodsItemPO));
-            }
-        }
-        return list;
-    }
-
-
 }

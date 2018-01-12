@@ -1,23 +1,12 @@
 package vo.receiptVO;
 
-import blService.checkblService.CheckInfo;
-import blService.checkblService.ReceiptblService;
-import javafx.beans.property.*;
-import javafx.scene.Node;
 import po.ReceiptGoodsItemPO;
-import po.promotionPO.PromotionGoodsItemPO;
 import po.receiptPO.*;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;
-import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class SalesReceiptVO extends ReceiptVO {
     protected int memberId;
@@ -130,8 +119,8 @@ public abstract class SalesReceiptVO extends ReceiptVO {
         this.originSum = originSum;
     }
 
-    public ReceiptGoodsItemPO[] toGoodsArray(ArrayList<ListGoodsItemVO> items){
-        return items.stream().map(ListGoodsItemVO::toPo).toArray(ReceiptGoodsItemPO[]::new);
+    private ReceiptGoodsItemPO[] toGoodsArray(ArrayList<ListGoodsItemVO> items){
+        return items == null ? null : items.stream().map(ListGoodsItemVO::toPo).toArray(ReceiptGoodsItemPO[]::new);
     }
 
     public ArrayList<ListGoodsItemVO> toGoodsList(ReceiptGoodsItemPO[] array){

@@ -2,7 +2,6 @@ package ui.myAccountantui.common;
 
 import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
-import businesslogic.checkbl.MyServiceFactory;
 import businesslogic.promotionbl.MyblServiceFactory;
 import com.jfoenix.controls.JFXButton;
 import exceptions.ItemNotFoundException;
@@ -13,7 +12,6 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import ui.managerui.common.ExceptionRunnable;
 import ui.managerui.common.MyBoardController;
 import ui.managerui.common.MyOneButtonDialog;
 import ui.managerui.common.MyTwoButtonDialog;
@@ -25,8 +23,6 @@ import util.UserCategory;
 import vo.receiptVO.ReceiptVO;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refreshable {
