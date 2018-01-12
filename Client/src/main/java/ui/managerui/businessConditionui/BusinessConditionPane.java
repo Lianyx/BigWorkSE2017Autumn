@@ -10,15 +10,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.stage.FileChooser;
+import jxl.Workbook;
+import jxl.write.Number;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
 import po.BusinessConditionPO;
 import ui.common.FXMLRefreshableAnchorPane;
 import ui.common.GatePane;
+import ui.common.mixer.ExcelExportableMixer;
+import ui.managerui.TempManagerLauncher;
 import ui.managerui.common.MyBoardController;
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;
 import ui.util.PaneFactory;
 import ui.util.Refreshable;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -27,7 +36,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class BusinessConditionPane extends GatePane {
+public class BusinessConditionPane extends GatePane implements ExcelExportableMixer {
     @FXML
     private JFXRippler search;
     @FXML
@@ -51,7 +60,7 @@ public class BusinessConditionPane extends GatePane {
     }
 
     /**
-     * implement methods
+     * implement GatePane abstract Methods
      */
 
     @Override
@@ -75,6 +84,56 @@ public class BusinessConditionPane extends GatePane {
     }
 
     /**
+     * implement ExcelExportableMixer methods
+     * */
+
+    @Override
+    public String getExcelName() {
+        return "经营情况表";
+    }
+
+    @Override
+    public void writeSheet() throws WriteException {
+        // add something into the Excel sheet
+        int i = 0;
+        myAddCell(0, i++, "收入类");
+        myAddCell(0, i++, "销售收入");
+        myAddCell(0, i++, "商口报溢收入");
+        myAddCell(0, i++, "成本调价收入");
+        myAddCell(0, i++, "进货退货差价");
+        myAddCell(0, i++, "代金券与实际收款差额");
+
+
+        i = 0;
+        myAddCell(1, i++, "金额（元）");
+        myAddCell(1, i++, businessConditionPO.getSalesIncome());
+        myAddCell(1, i++, businessConditionPO.getOverFlowIncome());
+        myAddCell(1, i++, businessConditionPO.getPurPriceAdjustIncome());
+        myAddCell(1, i++, businessConditionPO.getPriceDiffIncome());
+        myAddCell(1, i++, businessConditionPO.getTokenIncome());
+
+        i = 0;
+        myAddCell(2, i++, "支出类");
+        myAddCell(2, i++, "销售成本");
+        myAddCell(2, i++, "商品报损支出");
+        myAddCell(2, i++, "商吕赠出支出");
+
+        i = 0;
+        myAddCell(3, i++, "金额（元）");
+        myAddCell(3, i++, businessConditionPO.getPurCost());
+        myAddCell(3, i++, businessConditionPO.getDamageCost());
+        myAddCell(3, i++, businessConditionPO.getGiftCost());
+
+        i = 0;
+        myAddCell(4, i++, "总结");
+        myAddCell(4, i++, "总折让");
+
+        i = 0;
+        myAddCell(5, i++, "金额（元）");
+        myAddCell(5, i++, businessConditionPO.getDiscount());
+    }
+
+    /**
      * FXML methods
      */
 
@@ -83,9 +142,15 @@ public class BusinessConditionPane extends GatePane {
         refresh(false);
     }
 
+    @FXML
+    private void exportExcel() { // 目前只能这样唉
+        exportExcelMixer();
+    }
+
+
     /**
      * private methods
-     * */
+     */
 
     private void setDataPresentation() {
         ObservableList<PieChart.Data> incomePieChartData = FXCollections.observableArrayList();
@@ -118,5 +183,4 @@ public class BusinessConditionPane extends GatePane {
         costLabel.setText("总支出：" + businessConditionPO.getTotalCost());
         profitLabel.setText("总利润：" + businessConditionPO.getTotalProfit());
     }
-
 }

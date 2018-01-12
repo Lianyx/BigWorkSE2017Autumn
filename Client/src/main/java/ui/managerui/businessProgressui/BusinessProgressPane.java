@@ -1,55 +1,56 @@
 package ui.managerui.businessProgressui;
 
 import blService.businessblservice.BusinessProgressblService;
-import blService.checkblService.CheckblService;
 import businesslogic.promotionbl.MyblServiceFactory;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
+import jxl.write.WriteException;
 import org.controlsfx.control.PopOver;
-import ui.common.FXMLRefreshableAnchorPane;
+import ui.common.FilterableListPane;
+import ui.common.mixer.ExcelExportableMixer;
 import ui.managerui.checkui.CheckTable;
-import ui.managerui.common.MyBoardController;
-import ui.managerui.promotionui.PromotionFilterPane;
-import ui.util.DoubleButtonDialog;
-import ui.util.GetTask;
-import ui.util.PaneFactory;
-import ui.util.Refreshable;
+import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
 import util.ReceiptSearchCondition;
 import vo.receiptVO.ReceiptVO;
 
-import java.io.IOException;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BusinessProgressPane extends FXMLRefreshableAnchorPane {
-    @FXML
-    private JFXButton filter;
-    @FXML
-    private JFXTextField keywordField;
-
-    private CheckTable checkTable;
-
-    private Set<ReceiptVO> chosenItems = new HashSet<>();
+public class BusinessProgressPane extends FilterableListPane<ReceiptVO> implements ExcelExportableMixer {
+    private Set<ReceiptVO> chosenItems = new HashSet<>(); // chosenItems这个都是自己的?
     private BusinessProgressblService businessProgressblService;
 
     private ReceiptSearchCondition searchCondition = new ReceiptSearchCondition();
 
     public BusinessProgressPane() {
-        checkTable = new CheckTable(chosenItems, keywordField.textProperty(), new ArrayList<>());
-        checkTable.setLayoutX(20);
-        checkTable.setLayoutY(80);
-        this.getChildren().add(checkTable);
+    }
 
-        PopOver filterPopOver = new PopOver();
-        filterPopOver.setDetachable(false);
-        filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
-        BusinessProgressFilterPane businessProgressFilterPane = new BusinessProgressFilterPane(this, searchCondition);
-        filterPopOver.setContentNode(businessProgressFilterPane);
-        filter.setOnAction(e -> filterPopOver.show(filter));
+    /**
+     * implement FilterableListPane
+     */
+
+    @Override
+    protected void initiateService() throws RemoteException, NotBoundException, MalformedURLException {
+        businessProgressblService = MyblServiceFactory.getService(BusinessProgressblService.class);
+    }
+
+    @Override
+    protected MyTreeTableBorderPane<ReceiptVO> getInitialTreeTable() {
+        return new CheckTable(chosenItems, keywordField.textProperty(), new ArrayList<>());
+    }
+
+    @Override
+    protected ArrayList<ReceiptVO> getNewListData() throws RemoteException {
+        return businessProgressblService.search(searchCondition);
+    }
+
+    @Override
+    protected AnchorPane getInitialFilterPane(PopOver filterPopOver) {
+        return new BusinessProgressFilterPane(this, searchCondition);
     }
 
     @Override
@@ -57,39 +58,28 @@ public class BusinessProgressPane extends FXMLRefreshableAnchorPane {
         return "/managerui/businessProgressPane.fxml";
     }
 
+    /**
+     * implement ExcelExportableMixer
+     * */
+
     @Override
-    public void refresh(boolean toSwitch) {
-        MyBoardController myBoardController = MyBoardController.getMyBoardController();
-        myBoardController.Loading();
-        ArrayList<ReceiptVO> tempList = new ArrayList<>();
+    public String getExcelName() {
+        return "经营历程表";
+    }
 
-        DoubleButtonDialog buttonDialog = new DoubleButtonDialog(PaneFactory.getMainPane(), "Wrong", "连接失败", "重试", "返回");
-        buttonDialog.setButtonOne(() -> refresh(false));
-        buttonDialog.setButtonTwo(myBoardController::Ret);
+    @Override
+    public void writeSheet() throws WriteException {
+        myAddCell(0, 0, "单据编号");
+        myAddCell(1, 0, "通过时间");
+        myAddCell(2, 0, "操作员");
+        myAddCell(3, 0, "信息");
 
-        new Thread(new GetTask(() -> {
-            checkTable.refresh(tempList);
-            myBoardController.switchTo(this);
-        }, buttonDialog, woid -> {
-//            System.out.println("start businessProgressPane refresh");
-            try {
-                if (businessProgressblService == null) {
-                    businessProgressblService = MyblServiceFactory.getService(BusinessProgressblService.class);
-                }
+        // TODO 对于tempList遍历。最后一栏信息就让自己定义吧。
+    }
 
-//                System.out.println("get businessblService");
-                ArrayList<ReceiptVO> receipts;
-                if ((receipts = businessProgressblService.search(searchCondition)) == null) {
-                    return false;
-                }
-                tempList.clear();
-                tempList.addAll(receipts);
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
-
-        })).start();
+    // TODO
+    @FXML
+    private void exportExcel() { // 目前只能这样唉
+        exportExcelMixer();
     }
 }

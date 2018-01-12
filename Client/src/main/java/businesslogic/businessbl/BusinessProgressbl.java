@@ -4,6 +4,7 @@ import blService.businessblservice.BusinessProgressblService;
 import blService.businessblservice.BusinessSearchInfo;
 import businesslogic.checkbl.MyServiceFactory;
 import util.ReceiptSearchCondition;
+import util.ReceiptState;
 import vo.billReceiptVO.CashReceiptVO;
 import vo.billReceiptVO.ChargeReceiptVO;
 import vo.billReceiptVO.PaymentReceiptVO;
@@ -17,6 +18,7 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class BusinessProgressbl implements BusinessProgressblService {
     private BusinessSearchInfo<InventoryDamageReceiptVO> inventoryDamageReceiptVOBusinessSearchInfo;
@@ -42,17 +44,25 @@ public class BusinessProgressbl implements BusinessProgressblService {
 
     @Override
     public ArrayList<ReceiptVO> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
+        // TODO 这个要根据是否contain，来决定是否需要调这个SearchInfo
         ArrayList<ReceiptVO> resultList = new ArrayList<>();
 
-        resultList.addAll(inventoryDamageReceiptVOBusinessSearchInfo.search(receiptSearchCondition));
-        resultList.addAll(inventoryGiftReceiptVOBusinessSearchInfo.search(receiptSearchCondition));
-        resultList.addAll(inventoryOverflowReceiptVOBusinessSearchInfo.search(receiptSearchCondition));
-        resultList.addAll(inventoryWarningReceiptVOBusinessSearchInfo.search(receiptSearchCondition));
+        resultList.addAll(getApprovedReceipt(inventoryDamageReceiptVOBusinessSearchInfo, receiptSearchCondition));
+        resultList.addAll(getApprovedReceipt(inventoryGiftReceiptVOBusinessSearchInfo, receiptSearchCondition));
+        resultList.addAll(getApprovedReceipt(inventoryOverflowReceiptVOBusinessSearchInfo, receiptSearchCondition));
+        resultList.addAll(getApprovedReceipt(inventoryWarningReceiptVOBusinessSearchInfo,receiptSearchCondition));
 
-        resultList.addAll(cashReceiptVOBusinessSearchInfo.search(receiptSearchCondition));
-        resultList.addAll(chargeReceiptVOBusinessSearchInfo.search(receiptSearchCondition));
-        resultList.addAll(paymentReceiptVOBusinessSearchInfo.search(receiptSearchCondition));
+        resultList.addAll(getApprovedReceipt(cashReceiptVOBusinessSearchInfo, receiptSearchCondition));
+        resultList.addAll(getApprovedReceipt(chargeReceiptVOBusinessSearchInfo, receiptSearchCondition));
+        resultList.addAll(getApprovedReceipt(paymentReceiptVOBusinessSearchInfo, receiptSearchCondition));
 
         return resultList;
+    }
+
+    /**
+     * private search, in order to filter only saved receipt.
+     * */
+    private <T extends ReceiptVO> ArrayList<T> getApprovedReceipt(BusinessSearchInfo<T> businessSearchInfo, ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
+        return businessSearchInfo.search(receiptSearchCondition).stream().filter(r -> r.getReceiptState() == ReceiptState.APPROVED).collect(Collectors.toCollection(ArrayList::new));
     }
 }

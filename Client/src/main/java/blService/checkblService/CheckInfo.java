@@ -1,6 +1,5 @@
 package blService.checkblService;
 
-import po.receiptPO.ReceiptPO;
 import util.ResultMessage;
 import vo.receiptVO.ReceiptVO;
 

@@ -2,26 +2,14 @@ package ui.managerui.checkui;
 
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableRow;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.TreeItem;
-import javafx.scene.layout.BorderPane;
-import javafx.util.Duration;
 import ui.managerui.common.treeTableRelated.ChooseColumn;
 import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
 import ui.managerui.common.treeTableRelated.SearchableStringColumn;
 import ui.util.ButtonCell;
-import ui.util.NodeAnimation;
-import ui.util.NodeHolder;
 import ui.util.Refreshable;
 import util.ReceiptState;
-import vo.promotionVO.PromotionVO;
 import vo.receiptVO.ReceiptVO;
 
 import java.util.List;

@@ -13,6 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.chart.PieChart?>
 <?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXButton?>
 <fx:root type="Refreshable" id="BusinessConditionPane4" xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
          prefHeight="560.0" prefWidth="640.0">
@@ -31,12 +32,14 @@
     </Label>
     <JFXDatePicker fx:id="endTimePicker" layoutX="360" layoutY="22" prefHeight="4.0" prefWidth="120"/>
 
-    <JFXRippler fx:id="search" layoutX="575" layoutY="14" maskType="CIRCLE" position="BACK"
+    <JFXRippler fx:id="search" layoutX="500" layoutY="14" maskType="CIRCLE" position="BACK"
                 onMouseClicked="#search">
         <StackPane style="-fx-padding: 8;" translateY="5">
             <FontAwesomeIconView glyphName="SEARCH" size="1.5em"/>
         </StackPane>
     </JFXRippler>
+
+    <JFXButton fx:id="exportButton" layoutX="537" layoutY="22" text="导出为excel" onMouseClicked="#exportExcel"/>
 
     <PieChart fx:id="incomePieChart" title="收入类" layoutX="20" layoutY="70" prefWidth="200" prefHeight="350"/>
     <PieChart fx:id="costPieChart" title="支出类" layoutX="220" layoutY="70" prefWidth="200" prefHeight="350"/>

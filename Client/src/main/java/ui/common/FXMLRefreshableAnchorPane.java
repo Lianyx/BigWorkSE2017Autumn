@@ -1,21 +1,17 @@
 package ui.common;
 
-import javafx.fxml.FXMLLoader;
+import ui.common.mixer.FXMLLoadableMixer;
 import ui.util.Refreshable;
 
-import java.io.IOException;
-
-public abstract class FXMLRefreshableAnchorPane extends Refreshable {
+public abstract class FXMLRefreshableAnchorPane extends Refreshable implements FXMLLoadableMixer {
     public FXMLRefreshableAnchorPane() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(getURL()));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        load();
     }
 
     protected abstract String getURL();
+
+    @Override
+    public String publicGetURL() {
+        return getURL();
+    }
 }

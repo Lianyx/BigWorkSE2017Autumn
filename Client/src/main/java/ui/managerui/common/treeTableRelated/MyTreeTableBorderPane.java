@@ -12,7 +12,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 import ui.util.NodeAnimation;
 import ui.util.NodeHolder;
-import vo.receiptVO.ReceiptVO;
 
 import java.util.List;
 

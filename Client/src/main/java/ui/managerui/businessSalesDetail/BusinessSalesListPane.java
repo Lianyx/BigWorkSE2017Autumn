@@ -1,64 +1,68 @@
 package ui.managerui.businessSalesDetail;
 
 import blService.businessblservice.SalesDetailblService;
-import businesslogic.businessbl.SalesDetailbl;
+import businesslogic.promotionbl.MyblServiceFactory;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import ui.managerui.checkui.CheckTable;
-import ui.managerui.common.MyBoardController;
-import ui.util.DoubleButtonDialog;
-import ui.util.GetTask;
-import ui.util.PaneFactory;
-import ui.util.Refreshable;
+import javafx.scene.layout.AnchorPane;
+import org.controlsfx.control.PopOver;
+import ui.common.FilterableListPane;
+import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
+import util.ReceiptSearchCondition;
+import vo.ListGoodsItemVO;
 import vo.receiptVO.ReceiptVO;
 
-import java.io.IOException;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BusinessSalesListPane extends Refreshable {
+public class BusinessSalesListPane extends FilterableListPane<ListGoodsItemVO> {
     @FXML
     private JFXButton filter;
     @FXML
     private JFXTextField keywordField;
 
-    private BusinessTreeTable salesDetailTable;
+    private BusinessSalesTreeTable salesDetailTable;
 
-    private Set<ReceiptVO> chosenItems = new HashSet<>();
+    private Set<ListGoodsItemVO> chosenItems = new HashSet<>();
     private SalesDetailblService salesDetailblService;
+    private ReceiptSearchCondition receiptSearchCondition;
     
     public BusinessSalesListPane() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/managerui/businessSalesListPane.fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        salesDetailTable.setLayoutX(20);
-        salesDetailTable.setLayoutY(80);
-        this.getChildren().add(salesDetailTable);
     }
 
     @Override
-    public void refresh(boolean toSwitch) {
-        MyBoardController myBoardController = MyBoardController.getMyBoardController();
-        myBoardController.Loading();
-        ArrayList<ReceiptVO> tempList = new ArrayList<>();
+    protected String getURL() {
+        return "/managerui/businessSalesListPane.fxml";
+    }
 
-        DoubleButtonDialog buttonDialog = new DoubleButtonDialog(PaneFactory.getMainPane(), "Wrong", "连接失败", "重试", "返回");
-        buttonDialog.setButtonOne(() -> refresh(false));
-        buttonDialog.setButtonTwo(myBoardController::Ret);
+    @Override
+    protected void initiateService() throws RemoteException, NotBoundException, MalformedURLException {
+        salesDetailblService = MyblServiceFactory.getService(SalesDetailblService.class);
+    }
 
-        new Thread(new GetTask(() -> {
+    @Override
+    protected MyTreeTableBorderPane<ListGoodsItemVO> getInitialTreeTable() {
+        return new BusinessSalesTreeTable(keywordField.textProperty());
+    }
 
-        }, buttonDialog, woid -> {
-            return true;
-        })).start();
+    @Override
+    protected void initiateFields() {
+        super.initiateFields();
+        receiptSearchCondition = new ReceiptSearchCondition();
+    }
+
+    @Override
+    protected ArrayList<ListGoodsItemVO> getNewListData() throws RemoteException {
+        return salesDetailblService.searchSalesDetail(receiptSearchCondition);
+    }
+
+    @Override
+    protected AnchorPane getInitialFilterPane(PopOver filterPopOver) {
+        return null;
     }
 }

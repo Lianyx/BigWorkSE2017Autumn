@@ -16,6 +16,7 @@ import ui.common.FilterableListPane;
 import ui.common.ListPane;
 import ui.managerui.common.MyBoardController;
 import ui.managerui.common.MyTwoButtonDialog;
+import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
 import ui.managerui.promotionui.addPopUpRelated.CombineLabel;
 import ui.managerui.promotionui.addPopUpRelated.MemberLabel;
 import ui.managerui.promotionui.addPopUpRelated.TotalLabel;
@@ -67,8 +68,8 @@ public class PromotionListPane extends FilterableListPane<PromotionVO> { // TODO
     }
 
     @Override
-    protected void initiateTreeTable() {
-        receiptListTreeTable = new PromotionTreeTableBorderPane(chosenItems, keywordField.textProperty());
+    protected MyTreeTableBorderPane<PromotionVO> getInitialTreeTable() {
+        return new PromotionTreeTableBorderPane(chosenItems, keywordField.textProperty());
     }
 
     @Override
