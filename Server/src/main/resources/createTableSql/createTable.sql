@@ -223,16 +223,17 @@ create table User(
 
 create table Member(
 memberId integer,
-memberCatogory integer,
-VIPgrade integer,
-memberName varchar(100),
-clerkName varchar(100),
-phoneNumber varchar(100),
-address varchar(100),
-zipCode varchar(100),
-emailAddress varchar(100),
-debtCeiling integer,
-debt integer,
-credit integer,
-isDeleted integer
+memberCategory integer DEFAULT 0,
+VIPgrade integer DEFAULT 0,
+memberName varchar(100) DEFAULT '',
+clerkName varchar(100) DEFAULT '',
+phoneNumber varchar(100) DEFAULT '',
+address varchar(100) DEFAULT '',
+zipCode varchar(100) DEFAULT  '',
+emailAddress varchar(100) DEFAULT '',
+debtCeiling double DEFAULT 0,
+debt double DEFAULT 0,
+credit double DEFAULT 0,
+isDeleted integer DEFAULT 0,
+comment varchar(100) DEFAULT ''
 );

@@ -25,7 +25,7 @@
         where userId = #{userId}
     </update>
 
-    <delete id="deleted">
+    <delete id="delete">
         DELETE FROM User WHERE userId = #{id}
     </delete>
 
@@ -36,7 +36,7 @@
         select * from User
         <where>
             <if test="userCategory != null">
-                userCategory = #{userCategory}
+                usertype = #{userCategory}
             </if>
             <if test="createTimeFloor != null">
                 AND createTime &gt;= #{createTimeFloor}

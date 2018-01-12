@@ -1,6 +1,8 @@
 package vo;
 
 import javafx.scene.image.Image;
+import po.MemberPO;
+import util.ImageConvertor;
 import util.MemberCategory;
 
 public class MemberVO {
@@ -18,8 +20,12 @@ public class MemberVO {
     double get;
     String clerkName;
     String comment;
+    MemberPO memberPO;
 
-    public MemberVO(int memberId, MemberCategory memberCategory,Image image, int degree, String name, String phone, String address, String email, String zipCode,double receiableAmount, double give, double get, String clerkName,String comment) {
+    public MemberVO() {
+    }
+
+    public MemberVO(int memberId, MemberCategory memberCategory, Image image, int degree, String name, String phone, String address, String email, String zipCode, double receiableAmount, double give, double get, String clerkName, String comment) {
         this.memberId = memberId;
         this.memberCategory = memberCategory;
         this.degree = degree;
@@ -34,6 +40,74 @@ public class MemberVO {
         this.get = get;
         this.clerkName = clerkName;
         this.comment = comment;
+    }
+
+    public MemberVO(int memberId, MemberCategory memberCategory, int degree, String name, String phone, String address, String email, String zipCode, double receiableAmount, double give, double get, String clerkName, String comment) {
+        this.memberId = memberId;
+        this.memberCategory = memberCategory;
+        this.degree = degree;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.email = email;
+        this.zipCode = zipCode;
+        this.receiableAmount = receiableAmount;
+        this.give = give;
+        this.get = get;
+        this.clerkName = clerkName;
+        this.comment = comment;
+    }
+
+    public MemberVO(MemberPO memberPO){
+        this.memberId = memberPO.getMemberId();
+        this.name = memberPO.getMemberName();
+        this.zipCode = memberPO.getZipCode();
+        this.comment = memberPO.getComment();
+        if(memberPO.getImage()==null)
+        this.image = new Image("/default/timg.jpg");
+        else
+            this.image= ImageConvertor.getFXImage(ImageConvertor.getImage(memberPO.getImage()));
+        this.address = memberPO.getAddress();
+        this.clerkName = memberPO.getClerkName();
+        this.degree = memberPO.getVIPgrade();
+        this.email = memberPO.getEmailAddress();
+        this.get = memberPO.getCredit();
+        this.give = memberPO.getDebt();
+        this.memberCategory = memberPO.getMemberCategory();
+        this.receiableAmount = memberPO.getDebtCeiling();
+        this.phone = memberPO.getPhoneNumber();
+    }
+
+    public MemberPO toPO(){
+        MemberPO memberPO = new MemberPO();
+        memberPO.setMemberCategory(memberCategory);
+        memberPO.setMemberId(memberId);
+        memberPO.setAddress(address);
+        memberPO.setIsDeleted(0);
+        memberPO.setClerkName(clerkName);
+        memberPO.setEmailAddress(email);
+        memberPO.setCredit(get);
+        memberPO.setDebt(give);
+        memberPO.setDebtCeiling(receiableAmount);
+        memberPO.setImage(ImageConvertor.getByte(ImageConvertor.getBuffered(image)));
+        memberPO.setVIPgrade(degree);
+        memberPO.setComment(comment);
+        memberPO.setPhoneNumber(phone);
+        memberPO.setZipCode(zipCode);
+        return memberPO;
+    }
+
+
+    public MemberListVO toListVO(){
+        MemberListVO memberListVO = new MemberListVO();
+        memberListVO.setClerkName(clerkName);
+        memberListVO.setDegree(degree);
+        memberListVO.setImage(image);
+        memberListVO.setMemberCategory(memberCategory);
+        memberListVO.setName(name);
+        memberListVO.setMemberId(memberId);
+        memberListVO.setMemberVO(this);
+        return memberListVO;
     }
 
     public String getComment() {

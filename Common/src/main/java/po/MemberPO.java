@@ -2,9 +2,11 @@ package po;
 
 import util.MemberCategory;
 
-public class MemberPO {
+import java.io.Serializable;
+
+public class MemberPO implements Serializable{
     private int memberId;
-    private MemberCategory memberCatogory; // 分为进货商和销售商
+    private MemberCategory memberCategory; // 分为进货商和销售商
     private byte[] image;
     private int VIPgrade; // 1~5
     private String memberName;
@@ -13,17 +15,34 @@ public class MemberPO {
     private String address;
     private String zipCode;
     private String emailAddress;
-    private int debtCeiling; // 应收额度
-    private int debt;
-    private int credit;
+    private double debtCeiling; // 应收额度
+    private double debt;
+    private double credit;
     private int isDeleted;
-
+    private String comment;
     public MemberPO() {
     }
 
-    public MemberPO(int memberId, MemberCategory memberCatogory, int VIPgrade, String memberName, String clerkName, String phoneNumber, String address, String zipCode, String emailAddress, int debtCeiling, int debt, int credit, int isDeleted) {
+
+    public MemberPO(int memberId, MemberCategory memberCategory, int VIPgrade, String memberName, String clerkName, String phoneNumber, String address, String zipCode, String emailAddress, double debtCeiling, double debt, double credit, String comment) {
         this.memberId = memberId;
-        this.memberCatogory = memberCatogory;
+        this.memberCategory = memberCategory;
+        this.VIPgrade = VIPgrade;
+        this.memberName = memberName;
+        this.clerkName = clerkName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.emailAddress = emailAddress;
+        this.debtCeiling = debtCeiling;
+        this.debt = debt;
+        this.credit = credit;
+        this.comment = comment;
+    }
+
+    public MemberPO(int memberId, MemberCategory memberCategory, int VIPgrade, String memberName, String clerkName, String phoneNumber, String address, String zipCode, String emailAddress, double debtCeiling, double debt, double credit, int isDeleted, String comment) {
+        this.memberId = memberId;
+        this.memberCategory = memberCategory;
         this.VIPgrade = VIPgrade;
         this.memberName = memberName;
         this.clerkName = clerkName;
@@ -35,6 +54,7 @@ public class MemberPO {
         this.debt = debt;
         this.credit = credit;
         this.isDeleted = isDeleted;
+        this.comment = comment;
     }
 
     public int getMemberId() {
@@ -45,12 +65,12 @@ public class MemberPO {
         this.memberId = memberId;
     }
 
-    public MemberCategory getMemberCatogory() {
-        return memberCatogory;
+    public MemberCategory getMemberCategory() {
+        return memberCategory;
     }
 
-    public void setMemberCatogory(MemberCategory memberCatogory) {
-        this.memberCatogory = memberCatogory;
+    public void setMemberCategory(MemberCategory memberCategory) {
+        this.memberCategory = memberCategory;
     }
 
     public byte[] getImage() {
@@ -117,27 +137,27 @@ public class MemberPO {
         this.emailAddress = emailAddress;
     }
 
-    public int getDebtCeiling() {
+    public double getDebtCeiling() {
         return debtCeiling;
     }
 
-    public void setDebtCeiling(int debtCeiling) {
+    public void setDebtCeiling(double debtCeiling) {
         this.debtCeiling = debtCeiling;
     }
 
-    public int getDebt() {
+    public double getDebt() {
         return debt;
     }
 
-    public void setDebt(int debt) {
+    public void setDebt(double debt) {
         this.debt = debt;
     }
 
-    public int getCredit() {
+    public double getCredit() {
         return credit;
     }
 
-    public void setCredit(int credit) {
+    public void setCredit(double credit) {
         this.credit = credit;
     }
 
@@ -148,4 +168,12 @@ public class MemberPO {
     public void setIsDeleted(int isDeleted) {
         this.isDeleted = isDeleted;
     }
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
 }

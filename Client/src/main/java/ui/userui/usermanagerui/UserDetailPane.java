@@ -48,8 +48,7 @@ public class UserDetailPane extends Refreshable {
     @FXML
     private ModifyButton modify;
     @FXML
-    private JFXButton reset, save;
-
+    private JFXButton reset, save, delete;
 
     final FileChooser fileChooser = new FileChooser();
 
@@ -330,17 +329,11 @@ public class UserDetailPane extends Refreshable {
                     System.out.println(userVO);
                     if (userVO == null) {
                         userVO = userManagerblService.getNew();
-                        userManagerblService.update(new UserVO(
-                                userVO.getId(),
-                                imageview.getImage(),
-                                username.getText(),
-                                UserCategory.map.get(usertype.getSelectionModel().getSelectedItem().getText()),
-                                userVO.getCreateTime(),
-                                userVO.getFacebook(), userVO.getGithub(), userVO.getTwitter(),
-                                email.getText(),
-                                phone.getText(),
-                                comment.getText(),
-                                password.getText()));
+                        delete.setVisible(false);
+                        modify.setModify(true);
+                        modify.setVisible(false);
+                    }else{
+                        userVO = userManagerblService.showDetail(userVO.getId());
                     }
                 } else {
                     userVO = userManagerblService.showDetail(userVO.getId());

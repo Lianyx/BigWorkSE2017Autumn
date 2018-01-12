@@ -1,27 +1,195 @@
 package ui.memberui;
 
-import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.memberblService.MemberblService;
+import businesslogic.memberbl.Memberbl;
+import businesslogic.userbl.Userbl;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXRippler;
+import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.layout.BorderPane;
+import javafx.fxml.FXMLLoader;
 import org.controlsfx.control.PopOver;
+import ui.managerui.common.MyBoardController;
+import ui.managerui.common.MyTwoButtonDialog;
+import ui.userui.usermanagerui.UserDetailPane;
+import ui.userui.usermanagerui.UserFilterPane;
+import ui.userui.usermanagerui.UserTablePane;
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;
-import ui.util.ReceiptListPane;
-import util.MemberCategory;
+import ui.util.PaneFactory;
+import ui.util.Refreshable;
+import util.MemberSearchCondition;
 import vo.MemberListVO;
-import vo.MemberSearchVO;
+import vo.UserListVO;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class MemberListPane {
+public class MemberListPane extends Refreshable{
+    @FXML
+    private JFXRippler search;
+    @FXML
+    private JFXTextField searchField;
+    @FXML
+    private JFXButton filter;
+
+    private MemberTreeTable memberTreeTable;
+
+    private SimpleStringProperty match = new SimpleStringProperty("");
+
+    private MemberSearchCondition memberSearchCondition = new MemberSearchCondition();
+
+    private Set<MemberListVO> chosenItems = new HashSet<>();
+
+    private MemberblService memberblService;
+
+    private MemberFilterPane memberFilterPane;
+
+    private PopOver filterPopOver;
+
+    private ArrayList<MemberListVO> list;
+    /**
+     * Constructor related
+     */
+
+    public MemberListPane() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(getURL()));
+            fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // TODO 这个Treetable设位置应该让配置文件来干
+
+        initiateTreeTable();
+        setFilter();
+        memberTreeTable.setLayoutX(20);
+        memberTreeTable.setLayoutY(80);
+        this.getChildren().add(memberTreeTable);
+    }
+
+
+    private void setFilter(){
+        filterPopOver = new PopOver();
+        memberFilterPane = new MemberFilterPane(filterPopOver, memberSearchCondition);
+        filterPopOver.setDetachable(false);
+        filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
+        filterPopOver.setContentNode(memberFilterPane);
+        filter.setOnMouseClicked(e -> filterPopOver.show(filter));
+    }
+
+    private static String getURL(){
+        return "/myAccountantui/myReceiptListPane.fxml";
+    }
+
+    /**
+     * Abstract methods
+     */
+    private  void initiateTreeTable(){
+        memberTreeTable = new MemberTreeTable(chosenItems, searchField.textProperty());
+    }
+
+    /**
+     * FXML methods
+     */
+
+    @FXML
+    private void deleteList() {
+
+        new MyTwoButtonDialog("请确认删除", () -> {
+            MyBoardController myBoardController = MyBoardController.getMyBoardController();
+            myBoardController.Loading();
+            ArrayList<UserListVO> tempList = new ArrayList<>();
+
+            DoubleButtonDialog buttonDialog = new DoubleButtonDialog(PaneFactory.getMainPane(), "Wrong", "连接失败", "重试", "返回");
+            buttonDialog.setButtonOne(this::deleteList);
+            buttonDialog.setButtonTwo(myBoardController::Ret);
+
+            GetTask getTask = new GetTask(() -> {
+                memberTreeTable.refresh(list);
+                myBoardController.switchTo(this);
+
+            }, buttonDialog, woid -> {
+                try {
+                    for (MemberListVO chosenItem : new ArrayList<>(chosenItems)) {
+                        memberblService.delete(chosenItem.toVO().getMemberId());
+                        chosenItems.remove(chosenItem);
+                    }
+
+                    if ((list = memberblService.search(memberSearchCondition)) == null) {
+                        return false;
+                    }
+                    return true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            });
+            new Thread(getTask).start();
+        }).show();
+    }
+
+    @FXML
+    private void search() {
+        if (!searchField.getText().equals("")) {
+            match.setValue(searchField.getText().toLowerCase());
+            ArrayList<MemberListVO> templist = new ArrayList<>();
+            templist = templist.stream().filter(
+                    s -> s.getMemberCategory().name().contains(match.get()) ||
+                            s.getName().contains(match.get())||
+                            s.getClerkName().contains(match.get())||
+                            String.valueOf(s.getMemberId()).contains(match.get())
+            ).collect(Collectors.toCollection(ArrayList::new));
+            memberTreeTable.refresh(templist);
+        }
+    }
+
+    @FXML
+    private void add() {
+        new MemberDetailPane().refresh(true);
+    }
+
+    /**
+     * Refresh
+     */
+    @Override
+    public void refresh(boolean toSwitch) {
+        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        myBoardController.Loading();
+
+        DoubleButtonDialog buttonDialog = new DoubleButtonDialog(PaneFactory.getMainPane(), "Wrong", "连接失败", "重试", "返回");
+        buttonDialog.setButtonOne(() -> refresh(false));
+        buttonDialog.setButtonTwo(myBoardController::Ret);
+
+        new Thread(new GetTask(() -> {
+            memberTreeTable.refresh(list);
+            myBoardController.switchTo(this);
+        }, buttonDialog, woid -> {
+            try {
+                if (memberblService == null) { // 如果这里扔出exception，十有八九是因为命名不对应。
+                    memberblService = new Memberbl();
+                }
+                if ((list = memberblService.search(memberSearchCondition)) == null) {
+                    return false;
+                }
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        })).start();
+    }
 /*
     MemberblService memberblService;
 
-    private static MemberSearchVO memberSearchVO = new MemberSearchVO();
+    private static MemberSearchVO memberSearchCondition = new MemberSearchVO();
 
     private static MemberFilterPane filterPane ;
 
@@ -35,10 +203,10 @@ public class MemberListPane {
         receiptTreeTable.keywordProperty().bind(match);
         borderpane.setTop(new BorderPane(receiptTreeTable));
         for (MemberCategory memberCategory : MemberCategory.values()) {
-            memberSearchVO.getMemberCategories().add(memberCategory);
+            memberSearchCondition.getMemberCategories().add(memberCategory);
         }
 
-        filterPane = new MemberFilterPane(filterPopOver, memberSearchVO);
+        filterPane = new MemberFilterPane(filterPopOver, memberSearchCondition);
         filterPopOver.setDetachable(false);
         filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
         filterPopOver.setContentNode(filterPane);
@@ -87,7 +255,7 @@ public class MemberListPane {
             buttonDialog.setButtonTwo(() -> boardController.Ret());
             buttonDialog.setButtonTwo(() -> refresh(false));
             Predicate<Integer> p = (s) -> {
-                if ((set = memberblService.search(memberSearchVO)) != null) {
+                if ((set = memberblService.search(memberSearchCondition)) != null) {
                     System.out.println(set.size());
                     return true;
                 }

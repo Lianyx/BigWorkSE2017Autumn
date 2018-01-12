@@ -2,59 +2,55 @@ package ui.memberui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.PopOver;
 import ui.util.BoardController;
 import util.MemberCategory;
-import util.UserCategory;
+import util.MemberSearchCondition;
 import vo.MemberSearchVO;
+
+import static ui.util.ValidatorDecorator.DoubleValid;
+import static ui.util.ValidatorDecorator.NumberValid;
 
 public class MemberFilterPane extends AnchorPane{
 
     @FXML
-    JFXCheckBox seller;
-    @FXML
-    JFXCheckBox supplier;
-    @FXML
     JFXButton save;
+    @FXML
+    JFXTextField degree;
 
-    MemberSearchVO memberSearchVO;
+    @FXML
+    JFXComboBox<Label> state;
+
+    MemberSearchCondition memberSearchCondition;
 
     PopOver popOver;
 
-    public MemberFilterPane(PopOver popOver, MemberSearchVO memberSearchVO) {
+    public MemberFilterPane(PopOver popOver, MemberSearchCondition memberSearchCondition) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/memberui/memberfilterpane.fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();
+            NumberValid(degree);
             this.popOver = popOver;
-            this.memberSearchVO = memberSearchVO;
-            seller.setSelected(true);
-            supplier.setSelected(true);
-
+            this.memberSearchCondition = memberSearchCondition;
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void setVO(JFXCheckBox jfxCheckBox){
-        if(jfxCheckBox.isSelected()){
-            memberSearchVO.getMemberCategories().add(MemberCategory.map.get(jfxCheckBox.getId().toUpperCase()));
-        }else{
-            if(memberSearchVO.getMemberCategories().contains(MemberCategory.map.get(jfxCheckBox.getId().toUpperCase()))){
-                memberSearchVO.getMemberCategories().remove(MemberCategory.map.get(jfxCheckBox.getId().toUpperCase()));
-            }
-        }
-    }
 
 
     @FXML
     public void save() {
-        setVO(seller);
-        setVO(supplier);
+        memberSearchCondition.setDegree(Integer.parseInt(degree.getText()));
+        memberSearchCondition.setMemberCategory(MemberCategory.map.get(state.getValue().getText()));
         popOver.hide();
         BoardController.getBoardController().refresh();
 

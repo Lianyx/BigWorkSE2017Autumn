@@ -23,7 +23,35 @@ import vo.MemberSearchVO;
 
 import java.util.Set;
 
-public class MemberTreeTable{} /*extends MyTreeTableBorderPane<UserListVO> {
+public class MemberTreeTable extends MyTreeTableBorderPane<MemberListVO> {
+
+public MemberTreeTable(Set<MemberListVO> chosenItems, StringProperty keywordProperty){
+
+        JFXTreeTableColumn<MemberListVO, Boolean> choose = new ChooseColumn<>(chosenItems);
+        JFXTreeTableColumn image = new ImageColumn("姓名");
+        JFXTreeTableColumn<MemberListVO, String> name = new SearchableStringColumn<>(" ", 100, keywordProperty, p -> p.getName());
+        JFXTreeTableColumn<MemberListVO, String> clerk = new SearchableStringColumn<>("业务员", 100, keywordProperty, p -> p.getClerkName());
+        JFXTreeTableColumn<MemberListVO, String> stateColumn = new JFXTreeTableColumn<>("类型");
+        stateColumn.setPrefWidth(100);
+        stateColumn.setCellValueFactory(param ->param.getValue()==null? new ReadOnlyObjectWrapper<>(""):new ReadOnlyObjectWrapper<>(param.getValue().getValue().getMemberCategory().name()));
+        stateColumn.setCellFactory(param -> new ButtonCell<MemberListVO>() {
+@Override
+public void updateItem(String item, boolean empty) {
+        super.updateItem(item, empty);
+        if (item != null) {
+        setButtonStyle(UserCategory.color.get(item));
+        }
+        }
+        });
+
+        myTreeTable.getColumns().addAll(choose,image,name, stateColumn);
+        }
+@Override
+protected void clickTwiceAftermath(JFXTreeTableRow<MemberListVO> row) {
+        MemberDetailPane userDetailPane = new MemberDetailPane(row.getTreeItem().getValue().toVO());
+        userDetailPane.refresh(false);
+        }
+        }/*extends MyTreeTableBorderPane<UserListVO> {
 
     public MemberTreeTable(Set<UserListVO> chosenItems, StringProperty keywordProperty){
 
@@ -55,7 +83,7 @@ public class MemberTreeTable{} /*extends MyTreeTableBorderPane<UserListVO> {
 
 
     private MemberblService memberblService;
-    private MemberSearchVO memberSearchVO;
+    private MemberSearchVO memberSearchCondition;
 
 
     public MemberTreeTable() {
@@ -153,11 +181,11 @@ public class MemberTreeTable{} /*extends MyTreeTableBorderPane<UserListVO> {
     }
 
     public MemberSearchVO getMemberSearchVO() {
-        return memberSearchVO;
+        return memberSearchCondition;
     }
 
-    public void setMemberSearchVO(MemberSearchVO memberSearchVO) {
-        this.memberSearchVO = memberSearchVO;
+    public void setMemberSearchVO(MemberSearchVO memberSearchCondition) {
+        this.memberSearchCondition = memberSearchCondition;
     }
 
     @Override

@@ -12,8 +12,13 @@ public class MemberListVO extends SelectableVO<MemberListVO>{
     MemberCategory memberCategory;
     String clerkName;
     boolean multiple = true;
+    MemberVO memberVO;
 
-    public MemberListVO(int degree, String name, Image image,int memberId, MemberCategory memberCategory,String clerk) {
+    public MemberListVO() {
+    }
+
+
+    public MemberListVO(int degree, String name, Image image, int memberId, MemberCategory memberCategory, String clerk) {
         this.degree = degree;
         this.name = name;
         this.image = image;
@@ -29,6 +34,21 @@ public class MemberListVO extends SelectableVO<MemberListVO>{
         this.memberId = memberId;
         this.memberCategory = memberCategory;
         this.clerkName = clerkName;
+    }
+
+    public MemberVO toVO(){
+        return this.memberVO;
+    }
+    public MemberListVO(MemberVO memberVO) {
+        this.memberVO = memberVO;
+    }
+
+    public MemberVO getMemberVO() {
+        return memberVO;
+    }
+
+    public void setMemberVO(MemberVO memberVO) {
+        this.memberVO = memberVO;
     }
 
     public Image getImage() {
