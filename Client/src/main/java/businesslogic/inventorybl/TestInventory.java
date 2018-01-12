@@ -14,10 +14,10 @@ import java.util.List;
 
 public class TestInventory {
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException {
-       /* InventoryGiftReceiptbl giftReceiptbl = new InventoryGiftReceiptbl();
+        InventoryGiftReceiptbl giftReceiptbl = new InventoryGiftReceiptbl();
 
 
-        List<ReceiptGoodsItemVO> list = new ArrayList<>();
+       /* List<ReceiptGoodsItemVO> list = new ArrayList<>();
         list.add(new ReceiptGoodsItemVO("121","花灯1","中国灯",12,23,12,23));
         list.add(new ReceiptGoodsItemVO("122","花灯2","中国灯",12,23,12,23));
         list.add(new ReceiptGoodsItemVO("123","花灯3","中国灯",12,23,12,23));
@@ -30,7 +30,7 @@ public class TestInventory {
         vo.setItems(list);
         vo.setComment("无jfukfk");
         giftReceiptbl.update(vo);*/
-       InventoryDamageReceiptbl damageReceiptbl = new InventoryDamageReceiptbl();
-        System.out.println(damageReceiptbl.search(new RespectiveReceiptSearchCondition()).toString());
+       //InventoryDamageReceiptbl damageReceiptbl = new InventoryDamageReceiptbl();
+       // System.out.println(damageReceiptbl.search(new RespectiveReceiptSearchCondition()).toString());
     }
 }

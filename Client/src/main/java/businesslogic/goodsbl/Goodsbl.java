@@ -27,8 +27,6 @@ public class Goodsbl implements GoodsblService{
         changer = new GoodsPOVOChanger();
        // Remote remote = Naming.lookup("rmi://localhost:1099/GoodsData");
         dataService = (GoodsDataService) Naming.lookup("rmi://localhost:1099/GoodsData");
-
-        //System.out.println(dataService.show().toString());
     }
 
     /**
@@ -54,15 +52,19 @@ public class Goodsbl implements GoodsblService{
 
         dataService.insert(po);
 
-        info.addGoods(po.getClassifyId(),po.getId());
-
         return ResultMessage.SUCCESS;
     }
 
     public ResultMessage deleteGoods(GoodsVO goodsVO) throws RemoteException {
         dataService.delete(goodsVO.getId());
 
-       // info.deleteGoods(goodsVO.getClassifyId(),goodsVO.getId());
+        info.deleteGoods(goodsVO.getClassifyId(),goodsVO.getId());
+
+        return ResultMessage.SUCCESS;
+    }
+
+    public ResultMessage deleteGoods(String goodId) throws RemoteException{
+        dataService.delete(goodId);
 
         return ResultMessage.SUCCESS;
     }

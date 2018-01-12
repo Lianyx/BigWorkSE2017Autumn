@@ -88,11 +88,8 @@ public class InventoryOverflowReceiptVO extends ReceiptVO {
             ReceiptGoodsItemVO item = items.get(i);
             itemPO.setId(items.get(i).getGoodsId());
             itemPO.setGoodName(items.get(i).getGoodsName());
-            itemPO.setGoodType(item.getGoodsType());
             itemPO.setInventoryNum(item.getInventoryNum());
             itemPO.setFactNumber(item.getInventoryNum());
-            itemPO.setAlarmNumber(item.getWarningNum());
-            itemPO.setsendNumber(item.getSendNum());
             itemPOs[i] = itemPO;
         }
         result.setGoodsList(itemPOs);

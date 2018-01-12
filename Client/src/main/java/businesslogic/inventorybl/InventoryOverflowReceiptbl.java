@@ -2,8 +2,8 @@ package businesslogic.inventorybl;
 
 import blService.inventoryblService.InventoryOverflowReceiptblService;
 import businesslogic.checkbl.Receiptbl;
-import businesslogic.goodsbl.goodsUpdate.GoodsUpdate;
-import blService.goodsblService.GoodsUpdateInfo;
+import businesslogic.goodsbl.goodsUpdate.GoodsSalesUpdate;
+import blService.goodsblService.GoodsSalesUpdateInfo;
 import po.receiptPO.InventoryOverflowReceiptPO;
 import util.ResultMessage;
 import vo.inventoryVO.inventoryReceiptVO.InventoryOverflowReceiptVO;
@@ -13,11 +13,11 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 public class InventoryOverflowReceiptbl extends Receiptbl<InventoryOverflowReceiptVO,InventoryOverflowReceiptPO> implements InventoryOverflowReceiptblService {
-    GoodsUpdateInfo info;
+    GoodsSalesUpdateInfo info;
 
     public InventoryOverflowReceiptbl() throws RemoteException, NotBoundException, MalformedURLException {
         super(InventoryOverflowReceiptVO.class,InventoryOverflowReceiptPO.class);
-        info = new GoodsUpdate();
+        info = new GoodsSalesUpdate();
     }
 
 

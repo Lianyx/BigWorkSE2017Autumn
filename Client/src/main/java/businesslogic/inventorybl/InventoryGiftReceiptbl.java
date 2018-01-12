@@ -2,8 +2,8 @@ package businesslogic.inventorybl;
 
 import blService.inventoryblService.InventoryGiftReceiptblService;
 import businesslogic.checkbl.Receiptbl;
-import businesslogic.goodsbl.goodsUpdate.GoodsUpdate;
-import blService.goodsblService.GoodsUpdateInfo;
+import businesslogic.goodsbl.goodsUpdate.GoodsSalesUpdate;
+import blService.goodsblService.GoodsSalesUpdateInfo;
 import po.receiptPO.InventoryGiftReceiptPO;
 import util.ResultMessage;
 import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;
@@ -13,11 +13,11 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 public class InventoryGiftReceiptbl extends Receiptbl<InventoryGiftReceiptVO,InventoryGiftReceiptPO> implements InventoryGiftReceiptblService{
-    GoodsUpdateInfo info;
+    GoodsSalesUpdateInfo info;
 
     public InventoryGiftReceiptbl() throws RemoteException, NotBoundException, MalformedURLException {
         super(InventoryGiftReceiptVO.class,InventoryGiftReceiptPO.class);
-        info = new GoodsUpdate();
+        info = new GoodsSalesUpdate();
     }
 
 

@@ -139,4 +139,21 @@ public class GoodsVO extends SelectableVO<GoodsVO> {
     public void setAlarmNumber(int alarmNumber) {
         this.alarmNumber = alarmNumber;
     }
+
+    @Override
+    public String toString() {
+        return "GoodsVO{" +
+                "id='" + id + '\'' +
+                ", goodName='" + goodName + '\'' +
+                ", goodType='" + goodType + '\'' +
+                ", classifyId='" + classifyId + '\'' +
+                ", inventoryNum=" + inventoryNum +
+                ", purPrice=" + purPrice +
+                ", salePrice=" + salePrice +
+                ", recentPurPrice=" + recentPurPrice +
+                ", recentSalePrice=" + recentSalePrice +
+                ", alarmNumber=" + alarmNumber +
+                ", multiple=" + multiple +
+                '}';
+    }
 }

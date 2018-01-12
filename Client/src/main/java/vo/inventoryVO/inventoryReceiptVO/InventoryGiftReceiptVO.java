@@ -78,20 +78,14 @@ public class InventoryGiftReceiptVO extends ReceiptVO {
         result.setOperatorId(getOperatorId());
 
 
-        // List<String> childList = vo.getChildrenId();
       InventoryReceiptGoodsItemPO[] itemPOs = new InventoryReceiptGoodsItemPO[items.size()];
-      /*  items.toArray(itemPOs);
-        result.setGoodsList(itemPOs);*/
 
         for (int i = 0; i < itemPOs.length; i++) {
             InventoryReceiptGoodsItemPO itemPO = new InventoryReceiptGoodsItemPO();
             ReceiptGoodsItemVO item = items.get(i);
-            itemPO.setId(items.get(i).getGoodsId());
-            itemPO.setGoodName(items.get(i).getGoodsName());
-            itemPO.setGoodType(item.getGoodsType());
+            itemPO.setId(item.getGoodsId());
+            itemPO.setGoodName(item.getGoodsName());
             itemPO.setInventoryNum(item.getInventoryNum());
-            itemPO.setFactNumber(item.getInventoryNum());
-            itemPO.setAlarmNumber(item.getWarningNum());
             itemPO.setsendNumber(item.getSendNum());
             itemPOs[i] = itemPO;
         }

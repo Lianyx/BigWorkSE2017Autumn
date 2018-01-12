@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import ui.managerui.common.MyBoardController;
 import ui.util.BoardController;
 import ui.util.HistoricalRecord;
 import ui.util.Refreshable;
@@ -82,19 +83,19 @@ public class GoodsClassificationPane extends Refreshable{
         this.mainpane = mainpane;
     }
 
-    public void switchPane(boolean toSwtich){
-        if(toSwtich==true){
-            System.out.println("??/**/");
-            boardController.switchTo(this);
-        }else{
-            if(historyAdd){
-                HistoricalRecord.addPane(this);
-                historyAdd=false;
-            }
-            boardController.setAll(this);
-        }
-
-    }
+//    public void switchPane(boolean toSwtich){
+//        if(toSwtich==true){
+//            System.out.println("??/**/");
+//            boardController.switchTo(this);
+//        }else{
+//            if(historyAdd){
+//                HistoricalRecord.addPane(this);
+//                historyAdd=false;
+//            }
+//            boardController.setAll(this);
+//        }
+//
+//    }
 
     /**
      * 要将fxml所有的命名空间表示出来
@@ -121,7 +122,8 @@ public class GoodsClassificationPane extends Refreshable{
                         try {
                             treeView.setGoodsClassificationVO(goodsClassficationblService.show());
                             borderpane.setCenter((BorderPane)treeView.getPane());
-                            switchPane(toSwitch);
+//                            switchPane(toSwitch);
+                            MyBoardController.getMyBoardController().switchTo(GoodsClassificationPane.this);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

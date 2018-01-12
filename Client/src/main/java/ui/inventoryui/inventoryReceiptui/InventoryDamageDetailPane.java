@@ -20,6 +20,8 @@ public class InventoryDamageDetailPane extends MyReceiptDetailPane<InventoryDama
     private TextArea commentArea;
     @FXML
     private TextField operator;
+   /* @FXML
+    private TextField stateField;*/
 
 
     public InventoryDamageDetailPane() {
@@ -30,7 +32,8 @@ public class InventoryDamageDetailPane extends MyReceiptDetailPane<InventoryDama
     public InventoryDamageDetailPane(InventoryDamageReceiptVO receiptVO) {
         super(receiptVO);
         operator.setText(String.valueOf(receiptVO.getOperatorId()));
-        commentArea.setText("无");
+        commentArea.setText(receiptVO.getComment());
+     //   stateField.setText(receiptVO.getReceiptState().toString());
         damageItemTreeTable.setList(receiptVO.getItems());
         damageItemTreeTable.setEditable(true);
     }
@@ -53,13 +56,14 @@ public class InventoryDamageDetailPane extends MyReceiptDetailPane<InventoryDama
     @Override
     protected void updateReceiptVO() { // 这里不需要再检查了
         List<ReceiptGoodsItemVO> goodsList = damageItemTreeTable.getList();
-        System.out.println(operator.getText());
-        // receiptVO.setOperatorId(Integer.parseInt(operator.getText()));
+        System.out.println("OperatorId:"+operator.getText());
+        receiptVO.setOperatorId(Integer.parseInt(operator.getText()));
+        receiptVO.setComment(commentArea.getText());
         receiptVO.setItems(goodsList);
         for (ReceiptGoodsItemVO vo:goodsList) {
-            System.out.println(vo.getGoodsName()+" "+vo.getSendNum());
+            System.out.println("GoodName:"+ vo.getGoodsName()+" "+vo.getSendNum());
         }
-        System.out.println(goodsList.toString());
+        System.out.println("goodsLidt:"+goodsList.toString());
 
         // TODO 我没管transferList相关的（下面的reset同理）。而且这个vo里面没有comment………
     }
@@ -67,11 +71,19 @@ public class InventoryDamageDetailPane extends MyReceiptDetailPane<InventoryDama
     @FXML
     @Override
     protected void reset() {
-        super.reset();
+        operator.setText("");
+        commentArea.setText("");
+        //stateField.setText("");
+        damageItemTreeTable.clear();
     }
 
     @FXML
     public void addGoods() {
-        damageItemTreeTable.addGood(new ReceiptGoodsItemVO("please", "please", 0, 0));
+        ReceiptGoodsItemVO receiptGoodsItemVO = new ReceiptGoodsItemVO();
+        receiptGoodsItemVO.setGoodsName("please");
+        receiptGoodsItemVO.setGoodsId("please");
+        receiptGoodsItemVO.setInventoryNum(0);
+        receiptGoodsItemVO.setFactNum(0);
+        damageItemTreeTable.addGood(receiptGoodsItemVO);
     }
 }

@@ -27,7 +27,7 @@ public class InventoryOverflowDetailPane extends MyReceiptDetailPane<InventoryOv
     public InventoryOverflowDetailPane(InventoryOverflowReceiptVO receiptVO) {
         super(receiptVO);
         operator.setText(String.valueOf(receiptVO.getOperatorId()));
-        commentArea.setText("无");
+        commentArea.setText(receiptVO.getComment());
         overflowItemTreeTable.setList(receiptVO.getItems());
         overflowItemTreeTable.setEditable(true);
     }
@@ -50,13 +50,14 @@ public class InventoryOverflowDetailPane extends MyReceiptDetailPane<InventoryOv
     @Override
     protected void updateReceiptVO() { // 这里不需要再检查了
         List<ReceiptGoodsItemVO> goodsList = overflowItemTreeTable.getList();
-        System.out.println(operator.getText());
-        // receiptVO.setOperatorId(Integer.parseInt(operator.getText()));
+      //  System.out.println("OperatorId:"+operator.getText());
+        receiptVO.setOperatorId(Integer.parseInt(operator.getText()));
+        receiptVO.setComment(commentArea.getText());
         receiptVO.setItems(goodsList);
-        for (ReceiptGoodsItemVO vo:goodsList) {
-            System.out.println(vo.getGoodsName()+" "+vo.getSendNum());
+      /*  for (ReceiptGoodsItemVO vo:goodsList) {
+            System.out.println("GoodName:"+ vo.getGoodsName()+" "+vo.getSendNum());
         }
-        System.out.println(goodsList.toString());
+        System.out.println("goodsLidt:"+goodsList.toString());*/
 
         // TODO 我没管transferList相关的（下面的reset同理）。而且这个vo里面没有comment………
     }
@@ -64,11 +65,19 @@ public class InventoryOverflowDetailPane extends MyReceiptDetailPane<InventoryOv
     @FXML
     @Override
     protected void reset() {
-        super.reset();
+        operator.setText("");
+        commentArea.setText("");
+       // stateField.setText("");
+        overflowItemTreeTable.clear();
     }
 
     @FXML
     public void addGoods(){
-        overflowItemTreeTable.addGood(new ReceiptGoodsItemVO("please","please",0,0));
+        ReceiptGoodsItemVO receiptGoodsItemVO = new ReceiptGoodsItemVO();
+        receiptGoodsItemVO.setGoodsName("please");
+        receiptGoodsItemVO.setGoodsId("please");
+        receiptGoodsItemVO.setInventoryNum(0);
+        receiptGoodsItemVO.setFactNum(0);
+        overflowItemTreeTable.addGood(receiptGoodsItemVO);
     }
 }

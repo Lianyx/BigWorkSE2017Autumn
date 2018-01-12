@@ -1,6 +1,7 @@
 package ui.inventoryui.goodsclassificationui;
 
 import blService.goodsClassificationblService.GoodsClassificationblService;
+import businesslogic.goodsbl.Goodsbl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -19,10 +20,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.CheckTreeView;
+import ui.inventoryui.goodsui.GoodDetailPane;
 import ui.util.BoardController;
 import ui.util.PaneFactory;
 import vo.inventoryVO.GoodsClassificationVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.*;
 
@@ -32,6 +36,7 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
     private BorderPane borderPane;
     private GoodsClassificationblService goodsClassificationblService;
     private List<GoodsClassificationVO> classificationList;
+    private GoodDetailPane goodDetailPane;
     private CheckBoxTreeItem<String> root = new CheckBoxTreeItem<>("root");
     private JFXButton addGood = new JFXButton("增加商品");
     private JFXButton add = new JFXButton("增加");
@@ -98,7 +103,16 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
                 addGood.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-
+                       // goodDetailPane = new GoodDetailPane(true);
+                        try {
+                            addGoodItem(change.getList());
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        } catch (NotBoundException e) {
+                            e.printStackTrace();
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
 
@@ -200,6 +214,40 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
 
     }
 
+    protected void addGoodItem(ObservableList<? extends TreeItem<String>> list) throws RemoteException, MalformedURLException, NotBoundException {
+        CheckBoxTreeItem<String> son = (CheckBoxTreeItem<String>) list.get(0);
+
+        String classifyName = son.getValue();
+        String clssifyId = null;
+
+        for (GoodsClassificationVO vo:classificationList) {
+            if(vo.getName().equals(classifyName)){
+                goodDetailPane = new GoodDetailPane(true);
+
+                System.out.println("set first");
+
+                clssifyId = vo.getID();
+                System.out.println(clssifyId);
+                goodDetailPane.setClassifyId(clssifyId);
+
+
+                List<String> goodsId = vo.getGoodsID();
+
+                int order = goodsId.size()+1;
+                goodDetailPane.setOrder(order);
+
+                goodsId.add(new Goodsbl().getID(clssifyId,order));
+
+                vo.setGoodsID(goodsId);
+
+                goodsClassificationblService.updateGoodsClassification(vo);
+                break;
+            }
+        }
+
+
+    }
+
     /**
      * 传入子分类名和父分类名，更新数据库
      * @param sonName
@@ -208,7 +256,7 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
      */
     private void addGoodsClassificationVO(String sonName, String fatherName) throws RemoteException {
         for (GoodsClassificationVO vo:classificationList) {
-            System.out.println(vo.getName());
+          //  System.out.println(vo.getName());
             if (vo.getName().equals(fatherName)) {
                 List<String> childernId = vo.getChildrenId();
 
@@ -337,70 +385,4 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
         }
         return null;
     }
-
-
-
-   /* private final class TextFieldTreeCellImpl extends CheckBoxTreeCell<String> {
-
-        private TextField textField;
-
-        public TextFieldTreeCellImpl() {
-        }
-
-        @Override
-        public void startEdit() {
-            super.startEdit();
-
-            if (textField == null) {
-                createTextField();
-            }
-            setText(null);
-            setGraphic(textField);
-            textField.selectAll();
-        }
-
-        @Override
-        public void cancelEdit() {
-            super.cancelEdit();
-            setText((String) getItem());
-            setGraphic(getTreeItem().getGraphic());
-        }
-
-        @Override
-        public void updateItem(String item, boolean empty) {
-            super.updateItem(item, empty);
-
-            if (empty) {
-                setText(null);
-                setGraphic(null);
-            } else {
-                if (isEditing()) {
-                    if (textField != null) {
-                        textField.setText(getString());
-                    }
-                    setText(null);
-                    setGraphic(textField);
-                } else {
-                    setText(getString());
-                    setGraphic(getTreeItem().getGraphic());
-                }
-            }
-        }
-
-        private void createTextField() {
-            textField = new TextField(getString());
-            textField.setOnKeyReleased((KeyEvent t) -> {
-                if (t.getCode() == KeyCode.ENTER) {
-                    commitEdit(textField.getText());
-                } else if (t.getCode() == KeyCode.ESCAPE) {
-                    cancelEdit();
-                }
-            });
-        }
-
-        private String getString() {
-            return getItem() == null ? "" : getItem().toString();
-        }
-    }*/
-
 }
