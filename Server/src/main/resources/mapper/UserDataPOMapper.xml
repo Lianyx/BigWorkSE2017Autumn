@@ -16,16 +16,16 @@
     SELECT * from user where username like #{username}
     </select>
     <insert id="insert">
-        INSERT INTO User(userId,username,usertype,createTime,facebook,github,twitter,email,phone,comment,date,password,isDeleted)
-        VALUES (#{userId},#{username},#{usertype},#{createTime},#{facebook},#{github},#{twitter},#{email},#{phone},#{comment},#{date},#{password},#{isDeleted})
+        INSERT INTO User(userId,username,usertype,createTime,facebook,github,twitter,email,phone,comment,password,isDeleted)
+        VALUES (#{userId},#{username},#{usertype},#{createTime},#{facebook},#{github},#{twitter},#{email},#{phone},#{comment},#{password},#{isDeleted})
     </insert>
 
     <update id="update">
-        update User set username=#{username},usertype=#{usertype},createTime=#{createTime},facebook=#{facebook},github=#{github},twitter=#{twitter},email=#{email},phone=#{phone},comment=#{comment},date=#{date},password=#{password},isDeleted=#{isDeleted}
+        update User set username=#{username},usertype=#{usertype},createTime=#{createTime},facebook=#{facebook},github=#{github},twitter=#{twitter},email=#{email},phone=#{phone},comment=#{comment},password=#{password},isDeleted=#{isDeleted}
         where userId = #{userId}
     </update>
 
-    <delete id="delete">
+    <delete id="deleted">
         DELETE FROM User WHERE userId = #{id}
     </delete>
 

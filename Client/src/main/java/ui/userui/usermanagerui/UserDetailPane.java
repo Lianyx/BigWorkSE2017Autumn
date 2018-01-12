@@ -53,10 +53,6 @@ public class UserDetailPane extends Refreshable {
 
     final FileChooser fileChooser = new FileChooser();
 
-
-    private static String g = "";
-    private static String f = "";
-    private static String tw = "";
     @FXML
     JFXRippler github;
     @FXML
@@ -148,11 +144,11 @@ public class UserDetailPane extends Refreshable {
             });
             textFieldPane.save(() -> {
                 dialog.close();
-                g = textFieldPane.getText();
-                setColor(githubIcon, g);
+                userVO.setGithub(textFieldPane.getText());
+                setColor(githubIcon, textFieldPane.getText());
             });
             textFieldPane.setPrompt("Github");
-            textFieldPane.setText(g);
+            textFieldPane.setText(userVO.getGithub());
             dialog.show();
         });
 
@@ -164,11 +160,11 @@ public class UserDetailPane extends Refreshable {
             });
             textFieldPane.save(() -> {
                 dialog.close();
-                f = textFieldPane.getText();
-                setColor(facebookIcon, f);
+                userVO.setFacebook(textFieldPane.getText());
+                setColor(facebookIcon, textFieldPane.getText());
             });
             textFieldPane.setPrompt("Facebook");
-            textFieldPane.setText(f);
+            textFieldPane.setText(userVO.getFacebook());
             dialog.show();
         });
 
@@ -180,11 +176,11 @@ public class UserDetailPane extends Refreshable {
             });
             textFieldPane.save(() -> {
                 dialog.close();
-                tw = textFieldPane.getText();
-                setColor(twitterIcon, tw);
+                userVO.setTwitter(textFieldPane.getText());
+                setColor(twitterIcon, textFieldPane.getText());
             });
             textFieldPane.setPrompt("Twitter");
-            textFieldPane.setText(tw);
+            textFieldPane.setText(userVO.getTwitter());
             dialog.show();
         });
 
@@ -215,13 +211,9 @@ public class UserDetailPane extends Refreshable {
         password.setText(userVO.getPassword());
         imageview.setImage(userVO.getImage());
         System.out.println("xxxxxx");
-        date.setText(userVO.getDate());
-        g = userVO.getGithub()==null?"":userVO.getGithub();
-        f = userVO.getFacebook()==null?"":userVO.getFacebook();
-        tw = userVO.getTwitter()==null?"":userVO.getTwitter();
-        setColor(facebookIcon,f);
-        setColor(githubIcon,g);
-        setColor(twitterIcon,tw);
+        setColor(facebookIcon,userVO.getFacebook()==null?"":userVO.getFacebook());
+        setColor(githubIcon,userVO.getGithub()==null?"":userVO.getGithub());
+        setColor(twitterIcon,userVO.getTwitter()==null?"":userVO.getTwitter());
     }
 
     @FXML
@@ -240,6 +232,17 @@ public class UserDetailPane extends Refreshable {
         dialog.show();
     }
 
+    private void setVO(){
+        userVO.setComment(comment.getText());
+        userVO.setEmail(email.getText());
+        userVO.setImage(imageview.getImage());
+        userVO.setPassword(password.getText());
+        userVO.setPhone(phone.getText());
+        userVO.setUsername(username.getText());
+        userVO.setUsertype(UserCategory.map.get(usertype.getValue().getText()));
+    }
+
+
     /**
      * FXML
      */
@@ -255,7 +258,7 @@ public class UserDetailPane extends Refreshable {
         MyBoardController boardController = MyBoardController.getMyBoardController();
         boardController.Loading();
 
-        updateUserVO();
+        setVO();
 
         StringProperty prompt = new SimpleStringProperty();
         new Thread(new GetTask(() -> {
@@ -266,11 +269,11 @@ public class UserDetailPane extends Refreshable {
                 return true;
             } catch (ItemNotFoundException e) {
                 e.printStackTrace();
-                prompt.set("策略不存在，是否返回单据列表");
+                prompt.set("sabi");
                 return false;
             } catch (RemoteException e) {
                 e.printStackTrace();
-                prompt.set("连接错误");
+                prompt.set("jiushisabi");
                 return false;
             }
         })).start();
@@ -332,11 +335,10 @@ public class UserDetailPane extends Refreshable {
                                 username.getText(),
                                 UserCategory.map.get(usertype.getSelectionModel().getSelectedItem().getText()),
                                 userVO.getCreateTime(),
-                                f, g, tw,
+                                userVO.getFacebook(), userVO.getGithub(), userVO.getTwitter(),
                                 email.getText(),
                                 phone.getText(),
                                 comment.getText(),
-                                date.getText(),
                                 password.getText()));
                     }
                 } else {

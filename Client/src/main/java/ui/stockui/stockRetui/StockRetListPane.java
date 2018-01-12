@@ -23,7 +23,7 @@ public class StockRetListPane extends StockListPane<StockRetListVO,StockRetRecei
 
     @Override
     protected Refreshable getNewDetailPane() {
-        return null;
+        return new StockRetDetailPane();
     }
 
 }

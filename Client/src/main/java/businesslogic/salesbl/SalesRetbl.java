@@ -10,9 +10,9 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-public class SalesRetReceiptbl extends Receiptbl<SalesRetReceiptVO, SalesRetReceiptPO> implements SalesRetblService {
+public class SalesRetbl extends Receiptbl<SalesRetReceiptVO, SalesRetReceiptPO> implements SalesRetblService {
 
-    public SalesRetReceiptbl() throws RemoteException, NotBoundException, MalformedURLException {
+    public SalesRetbl() throws RemoteException, NotBoundException, MalformedURLException {
         super(SalesRetReceiptVO.class, SalesRetReceiptPO.class);
     }
 

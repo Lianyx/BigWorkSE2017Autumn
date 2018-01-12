@@ -44,7 +44,7 @@ public class NameCreator {
 
     public static void getSomeString(Class clazz){
         for(Field field:clazz.getDeclaredFields()){
-            System.out.print(field.getName()+",");
+            System.out.print("#"+"{"+field.getName()+"},");
         }
         System.out.println();
         for(Field field:clazz.getDeclaredFields()){

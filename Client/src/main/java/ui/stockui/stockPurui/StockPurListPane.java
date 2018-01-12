@@ -24,7 +24,7 @@ public class StockPurListPane extends StockListPane<StockPurListVO,StockPurRecei
 
     @Override
     protected Refreshable getNewDetailPane() {
-        return null;
+        return new StockPurDetailPane();
     }
 
 }

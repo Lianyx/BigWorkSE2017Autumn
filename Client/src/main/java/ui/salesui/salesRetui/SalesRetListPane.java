@@ -27,6 +27,6 @@ public class SalesRetListPane extends SalesListPane<SalesRetListVO,SalesRetRecei
 
     @Override
     protected Refreshable getNewDetailPane() {
-        return null;
+        return new SalesRetDetailPane();
     }
 }

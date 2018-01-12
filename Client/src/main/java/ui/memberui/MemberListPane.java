@@ -6,7 +6,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 import org.controlsfx.control.PopOver;
-import ui.userui.usermanagerui.FilterPane;
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;
 import ui.util.ReceiptListPane;
@@ -14,13 +13,12 @@ import util.MemberCategory;
 import vo.MemberListVO;
 import vo.MemberSearchVO;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class MemberListPane extends ReceiptListPane<MemberListVO>{
-
+public class MemberListPane {
+/*
     MemberblService memberblService;
 
     private static MemberSearchVO memberSearchVO = new MemberSearchVO();
@@ -111,5 +109,5 @@ public class MemberListPane extends ReceiptListPane<MemberListVO>{
 
         }
 
-    }
+    }*/
 }

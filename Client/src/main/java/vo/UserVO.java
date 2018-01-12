@@ -5,10 +5,7 @@ import po.UserPO;
 import util.ImageConvertor;
 import util.UserCategory;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import static util.ImageConvertor.getFXImage;
 
 public class UserVO {
     private int id;
@@ -22,9 +19,8 @@ public class UserVO {
     private String email;
     private String phone;
     private String comment;
-    private String date;
     private String password;
-    private boolean isDelete = false;
+    private boolean isDeleted = false;
 
 
     public UserVO(){
@@ -42,12 +38,11 @@ public class UserVO {
         this.email = po.getEmail();
         this.phone = po.getPhone();
         this.comment = po.getComment();
-        this.date = po.getDate();
         this.password = po.getPassword();
 
     }
 
-    public UserVO(int id, String username, UserCategory usertype, LocalDateTime createTime, String facebook, String github, String twitter, String email, String phone, String comment, String date, String password, boolean isDelete) {
+    public UserVO(int id, String username, UserCategory usertype, LocalDateTime createTime, String facebook, String github, String twitter, String email, String phone, String comment, String password, boolean isDeleted) {
         this.id = id;
         this.username = username;
         this.usertype = usertype;
@@ -58,13 +53,12 @@ public class UserVO {
         this.email = email;
         this.phone = phone;
         this.comment = comment;
-        this.date = date;
         this.password = password;
-        this.isDelete = isDelete;
+        this.isDeleted = isDeleted;
     }
 
 
-    public UserVO(int id, Image image, String username, UserCategory usertype, LocalDateTime createTime, String facebook, String github, String twitter, String email, String phone, String comment, String date, String password) {
+    public UserVO(int id, Image image, String username, UserCategory usertype, LocalDateTime createTime, String facebook, String github, String twitter, String email, String phone, String comment, String password) {
         this.id = id;
         this.image = image;
         this.username = username;
@@ -76,7 +70,6 @@ public class UserVO {
         this.email = email;
         this.phone = phone;
         this.comment = comment;
-        this.date = date;
         this.password = password;
     }
 
@@ -168,14 +161,6 @@ public class UserVO {
         this.comment = comment;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -184,19 +169,18 @@ public class UserVO {
         this.password = password;
     }
 
-    public boolean isDelete() {
-        return isDelete;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setDelete(boolean delete) {
-        isDelete = delete;
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     public UserPO toPO(){
         UserPO userPO = new UserPO();
         userPO.setComment(comment);
         userPO.setCreateTime(createTime);
-        userPO.setDate(date);
         userPO.setEmail(email);
         userPO.setFacebook(facebook);
         userPO.setGithub(github);
@@ -207,7 +191,7 @@ public class UserVO {
         userPO.setUserId(id);
         userPO.setUsername(username);
         userPO.setUsertype(usertype);
-        userPO.setIsDeleted(isDelete?1:0);
+        userPO.setIsDeleted(isDeleted ?1:0);
         return userPO;
     }
 

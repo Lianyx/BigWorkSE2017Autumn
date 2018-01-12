@@ -37,7 +37,7 @@
         </JFXRippler>
 
 
-        <JFXButton fx:id="delete" layoutX="557.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#deleteList" text="Delete">
+        <JFXButton fx:id="deleted" layoutX="557.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#deleteList" text="Delete">
             <graphic>
                 <HBox>
                     <children>

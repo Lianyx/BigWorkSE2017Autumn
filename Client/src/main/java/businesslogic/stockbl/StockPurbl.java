@@ -10,8 +10,8 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-public class StockPurReceiptbl extends Receiptbl<StockPurReceiptVO, StockPurReceiptPO> implements StockPurblService {
-    public StockPurReceiptbl() throws RemoteException, NotBoundException, MalformedURLException {
+public class StockPurbl extends Receiptbl<StockPurReceiptVO, StockPurReceiptPO> implements StockPurblService {
+    public StockPurbl() throws RemoteException, NotBoundException, MalformedURLException {
         super(StockPurReceiptVO.class, StockPurReceiptPO.class);
     }
 

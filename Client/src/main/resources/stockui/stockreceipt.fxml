@@ -14,6 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import ui.util.ModifyButton?>
 
+<?import ui.myAccountantui.common.ItemTreeTable?>
 <fx:root fx:id="stockreceipt" prefHeight="560.0" prefWidth="640.0" stylesheets="@../css/receipt.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane fx:id="pane" layoutX="90.0" layoutY="55.0" prefHeight="287.0" prefWidth="462.0">
@@ -28,13 +29,6 @@
                     <Font size="12.0" />
                 </font></Label>
                 <ModifyButton fx:id="modify" layoutX="347.0" layoutY="20.0" text="" />
-                <JFXButton fx:id="user" layoutX="404.0" layoutY="91.0" onMouseClicked="#currentUser" text="">
-                    <graphic>
-                        <StackPane>
-                            <MaterialDesignIconView glyphName="ACCOUNT" size="1.5em" styleClass="icon" />
-                        </StackPane>
-                    </graphic>
-                </JFXButton>
                 <JFXButton fx:id="delete" layoutX="386.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#delete" text="Delete">
                     <graphic>
                         <HBox>
@@ -143,20 +137,22 @@
                 <Font size="12.0" />
             </font>
         </JFXButton>
-        <JFXRippler layoutX="530" layoutY="346" maskType="CIRCLE" onMouseClicked="#add" position="BACK" ripplerFill="#03A9F4" styleClass="icons-rippler">
+        <JFXRippler layoutX="530" layoutY="346" maskType="CIRCLE" onMouseClicked="#addTransfer" position="BACK" ripplerFill="#03A9F4" styleClass="icons-rippler">
         <StackPane layoutX="530.0" layoutY="347.0" style="-fx-padding: 8;">
              <MaterialDesignIconView glyphName="PLUS" size="1.5em" styleClass="icon" />
          </StackPane>
         </JFXRippler>
-      <JFXButton fx:id="approve" layoutX="392.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#reset" text="重置">
+      <JFXButton fx:id="approve" layoutX="392.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#approve" text="通过">
          <font>
             <Font size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="saveAsDraft" layoutX="331.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#reset" text="重置">
+      <JFXButton fx:id="saveAsDraft" layoutX="331.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#saveAsDraft" text="草稿">
          <font>
             <Font size="12.0" />
          </font>
       </JFXButton>
-</children>
+        <ItemTreeTable fx:id="itemTreeTable" layoutX="95" layoutY="380" prefHeight="170" />
+
+    </children>
 </fx:root>

@@ -18,8 +18,8 @@
         update StockRetReceipt set lastModifiedTime=#{lastModifiedTime}, receiptState=#{receiptState}, memberId=#{memberId}, stockName=#{stockName}, goodsList=#{goodsList, typeHandler=MyJsonHandler}, discountAmount=#{discountAmount}, tokenAmount=#{tokenAmount}, originSum=#{originSum}, comment=#{comment}}
         where dayId=#{dayId} and createTime=#{createTime}
     </update>
-    <delete id="delete">
-        delete from StockRetReceipt where dayId=#{dayId} and createTime=#{createTime}
+    <delete id="deleted">
+        deleted from StockRetReceipt where dayId=#{dayId} and createTime=#{createTime}
     </delete>
     <select id="selectBetween" resultMap="resultMap">
         select * from StockRetReceipt where createTime &gt;= #{begin} and createTime &lt;= #{end}

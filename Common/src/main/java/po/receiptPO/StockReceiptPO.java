@@ -1,29 +1,27 @@
 package po.receiptPO;
 
 import po.ReceiptGoodsItemPO;
-import util.GoodsList;
-import util.ReceiptCategory;
 import util.ReceiptState;
 
 import java.time.LocalDateTime;
 
 public class StockReceiptPO extends ReceiptPO{
-    private int memberid;
+    private int memberId;
     private String stockName;
     private ReceiptGoodsItemPO[] goodsList;
-    private double originalSum;
+    private double originSum;
     private String comment;
 
 
     public StockReceiptPO(){}
 
-    public StockReceiptPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberid, String stockName, ReceiptGoodsItemPO[] goodsList, double originalSum,String comment) {
+    public StockReceiptPO(int dayId, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberId, String stockName, ReceiptGoodsItemPO[] goodsList, double originSum, String comment) {
         super(dayId, operatorId, createTime, lastModifiedTime, receiptState);
-        this.memberid = memberid;
+        this.memberId = memberId;
         this.stockName = stockName;
         this.goodsList = goodsList;
         this.comment = comment;
-        this.originalSum = originalSum;
+        this.originSum = originSum;
     }
 
     public ReceiptGoodsItemPO[] getGoodsList() {
@@ -34,20 +32,20 @@ public class StockReceiptPO extends ReceiptPO{
         this.goodsList = goodsList;
     }
 
-    public double getOriginalSum() {
-        return originalSum;
+    public double getOriginSum() {
+        return originSum;
     }
 
-    public void setOriginalSum(double originalSum) {
-        this.originalSum = originalSum;
+    public void setOriginSum(double originSum) {
+        this.originSum = originSum;
     }
 
-    public int getMemberid() {
-        return memberid;
+    public int getMemberId() {
+        return memberId;
     }
 
-    public void setMemberid(int memberid) {
-        this.memberid = memberid;
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
     }
 
     public String getStockName() {

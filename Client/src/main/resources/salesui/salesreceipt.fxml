@@ -29,13 +29,6 @@
                         <Font size="12.0" />
                     </font></Label>
              <ModifyButton fx:id="modify" layoutX="347.0" layoutY="20.0" text="" />
-                <JFXButton fx:id="user" layoutX="404.0" layoutY="91.0" onMouseClicked="#currentUser" text="">
-                    <graphic>
-                        <StackPane>
-                            <MaterialDesignIconView glyphName="ACCOUNT" size="1.5em" styleClass="icon" />
-                        </StackPane>
-                    </graphic>
-                </JFXButton>
                 <JFXButton fx:id="delete" layoutX="386.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#delete" text="Delete">
                     <graphic>
                         <HBox>
@@ -185,18 +178,18 @@
          </font>
       </JFXButton>
 
-        <JFXRippler layoutX="530" layoutY="346" maskType="CIRCLE" onMouseClicked="#add" position="BACK" ripplerFill="#03A9F4" styleClass="icons-rippler">
-            <StackPane layoutX="530.0" layoutY="347.0" onMouseClicked="#addTransfer" style="-fx-padding: 8;">
+        <JFXRippler layoutX="530" layoutY="346" maskType="CIRCLE" onMouseClicked="#addTransfer" position="BACK" ripplerFill="#03A9F4" styleClass="icons-rippler">
+            <StackPane layoutX="530.0" layoutY="347.0" style="-fx-padding: 8;">
                 <MaterialDesignIconView glyphName="PLUS" size="1.5em" styleClass="icon" />
             </StackPane>
         </JFXRippler>
         <ItemTreeTable fx:id="itemTreeTable" layoutX="95" layoutY="380" prefHeight="170" />
-      <JFXButton fx:id="approve" layoutX="400.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#reset" text="重置">
+      <JFXButton fx:id="approve" layoutX="400.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#approve" text="重置">
          <font>
             <Font size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="saveAsDraft" layoutX="349.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#reset" text="重置">
+      <JFXButton fx:id="saveAsDraft" layoutX="349.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#saveAsDraft" text="重置">
          <font>
             <Font size="12.0" />
          </font>

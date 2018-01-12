@@ -26,8 +26,8 @@ import java.util.function.Predicate;
 import static ui.util.ValidatorDecorator.DoubleValid;
 import static ui.util.ValidatorDecorator.RequireValid;
 
-public class MemberDetailPane extends ReceiptDetailPane<MemberVO>{
-
+public class MemberDetailPane {
+/*
     int id = -1;
 
     final FileChooser fileChooser = new FileChooser();
@@ -223,7 +223,7 @@ public class MemberDetailPane extends ReceiptDetailPane<MemberVO>{
      double get;
      String clerkName;
      String comment;
-     */
+
 
 
     @Override
@@ -297,5 +297,5 @@ public class MemberDetailPane extends ReceiptDetailPane<MemberVO>{
             return true;
         return false;
     }
-
+*/
 }

@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import ui.myAccountantui.common.ItemTreeTable;
 import ui.myAccountantui.common.MyReceiptDetailPane;
 import ui.util.*;
+import vo.ListGoodsItemVO;
 import vo.receiptVO.StockReceiptVO;
 
 import java.time.*;
@@ -27,8 +28,6 @@ public abstract class StockReceiptPane<T extends StockReceiptVO> extends MyRecei
 
     @FXML
     JFXButton member;
-    @FXML
-    JFXButton user;
 
     @FXML
     TextArea comment;
@@ -44,7 +43,6 @@ public abstract class StockReceiptPane<T extends StockReceiptVO> extends MyRecei
         sum.setDisable(true);
         stock.disableProperty().bind(modifyState.not());
         member.disableProperty().bind(modifyState.not());
-        user.disableProperty().bind(modifyState.not());
 
         RequireValid(operator);
         RequireValid(provider);
@@ -95,8 +93,16 @@ public abstract class StockReceiptPane<T extends StockReceiptVO> extends MyRecei
         }
         return false;
     }
+    @FXML
+    public void addTransfer() {
+        itemTreeTable.add(new ListGoodsItemVO("a", 1, "a", 1, 1, "a"));
+    }
 
-/*
+    @FXML
+    public void selectMember(){
+
+    }
+   /*
 
     @FXML
     StockListItemTreeTable stockListItemTreeTable;

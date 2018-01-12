@@ -158,10 +158,10 @@ createTime bigint,
 lastModifiedTime bigint,
 operatorId integer,
 receiptState integer,
-memberid integer,
+memberId integer,
 stockName varchar(100),
 goodsList varchar(1000),
-originalSum integer,
+originSum integer,
 comment varchar(150)
 )character set = utf8;
 
@@ -172,10 +172,10 @@ createTime bigint,
 lastModifiedTime bigint,
 operatorId integer,
 receiptState integer,
-memberid integer,
+memberId integer,
 stockName varchar(100),
 goodsList varchar(1000),
-originalSum integer,
+originSum integer,
 comment varchar(150)
 )character set = utf8;
 
@@ -201,7 +201,7 @@ comment varchar(150)
 create table User(
   userId integer,
   username varchar(30),
-  usertype integer,
+  usertype integer DEFAULT 0,
   createTime bigint,
   facebook varchar(50),
   github varchar(100),
@@ -209,12 +209,22 @@ create table User(
   email varchar(100),
   phone varchar(100),
   comment varchar(100),
-  date varchar(100),
   password varchar(100),
-  isDeleted bool
+  isDeleted integer DEFAULT 0
 )character set = utf8;
 
-create TABLE Member{
-
-
-}
+create table Member(
+memberId integer,
+memberCatogory integer,
+VIPgrade integer,
+memberName varchar(100),
+clerkName varchar(100),
+phoneNumber varchar(100),
+address varchar(100),
+zipCode varchar(100),
+emailAddress varchar(100),
+debtCeiling integer,
+debt integer,
+credit integer,
+isDeleted integer
+);

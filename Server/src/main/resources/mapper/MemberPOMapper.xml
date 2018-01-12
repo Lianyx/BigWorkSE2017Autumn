@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.MemberPOMapper">
+    <resultMap id="resultMap" type="po.MemberPO">
+        <result column="memberId" property="memberId"/>
+    </resultMap>
+
+    <select id="getId" resultType="int">
+        select max(memberId)+1 from Member
+    </select>
+
+    <insert id="insert">
+        INSERT INTO Member(memberId,memberCatogory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDeleted)
+        VALUES (#{memberId},#{memberCatogory},#{VIPgrade},#{memberName},#{clerkName},#{phoneNumber},#{address},#{zipCode},#{emailAddress},#{debtCeiling},#{debt},#{credit},#{isDeleted})
+    </insert>
+
+    <update id="update">
+        update Member set memberId=#{memberId},memberCatogory=#{memberCatogory},VIPgrade=#{VIPgrade},memberName=#{memberName},clerkName=#{clerkName},phoneNumber=#{phoneNumber},address=#{address},zipCode=#{zipCode},emailAddress=#{emailAddress},debtCeiling=#{debtCeiling},debt=#{debt},credit=#{credit},isDeleted=#{isDeleted}
+        where memberId = #{memberId}
+    </update>
+
+    <delete id="deleted">
+        DELETE FROM Member WHERE memberId = #{memberId}
+    </delete>
+
+    <select id="showDetail" resultType="po.MemberPO">
+        SELECT * FROM Member WHERE memberId = #{memberId}
+    </select>
+    <select id="search" resultMap="resultMap">
+        select * from Member
+        <where>
+            <if test="MemberCategory != null">
+                MemberCategory = #{MemberCategory}
+            </if>
+            <if test="createTimeFloor != null">
+                AND createTime &gt;= #{createTimeFloor}
+            </if>
+            <if test="createTimeCeil != null">
+                AND createTime &lt;= #{createTimeCeil}
+            </if>
+        </where>
+    </select>
+
+</mapper>

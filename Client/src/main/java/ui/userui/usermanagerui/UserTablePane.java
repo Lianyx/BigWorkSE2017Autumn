@@ -25,7 +25,7 @@ public class UserTablePane extends MyTreeTableBorderPane<UserListVO> {
         JFXTreeTableColumn<UserListVO, String> phone = new SearchableStringColumn<>("电话", 100, keywordProperty, p -> p.getPhone());
         JFXTreeTableColumn<UserListVO, String> stateColumn = new JFXTreeTableColumn<>("类型");
         stateColumn.setPrefWidth(100);
-        stateColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getValue().getUserCategory().name()));
+        stateColumn.setCellValueFactory(param ->param.getValue()==null? new ReadOnlyObjectWrapper<>(""):new ReadOnlyObjectWrapper<>(param.getValue().getValue().getUserCategory().name()));
         stateColumn.setCellFactory(param -> new ButtonCell<UserListVO>() {
             @Override
             public void updateItem(String item, boolean empty) {

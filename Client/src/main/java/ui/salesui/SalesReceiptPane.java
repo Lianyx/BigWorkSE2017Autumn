@@ -180,14 +180,14 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
         if(salesReceiptListVO.getId().split("-")[0].equals("JHD")){
             this.isSell.set(true);
             try {
-                salesblService = new SalesSellReceiptbl();
+                salesblService = new SalesSellbl();
             }catch (Exception e){
                 e.printStackTrace();
             }
         }else{
             this.isSell.set(false);
             try {
-                salesblService = new SalesRetReceiptbl();
+                salesblService = new SalesRetbl();
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -234,14 +234,14 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
         if(isSell){
             head.setText("XSD-");
             try {
-                salesblService = new SalesSellReceiptbl();
+                salesblService = new SalesSellbl();
             }catch (Exception e){
                 e.printStackTrace();
             }
         }else{
             head.setText("XSTHD-");
             try {
-                salesblService = new SalesRetReceiptbl();
+                salesblService = new SalesRetbl();
             }catch (Exception e){
                 e.printStackTrace();
             }

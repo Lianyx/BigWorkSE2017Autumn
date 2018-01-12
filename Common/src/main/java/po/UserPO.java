@@ -22,13 +22,12 @@ public class UserPO implements Serializable{
     private String email;
     private String phone;
     private String comment;
-    private String date;
     private String password;
     private int isDeleted;
     public UserPO() {
     }
 
-    public UserPO(int userId, String username, UserCategory usertype, LocalDateTime createTime, String facebook, String github, String twitter, String email, String phone, String comment, String date, String password,int isDelete) {
+    public UserPO(int userId, String username, UserCategory usertype, LocalDateTime createTime, String facebook, String github, String twitter, String email, String phone, String comment, String password,int isDelete) {
         this.userId = userId;
         this.username = username;
         this.usertype = usertype;
@@ -39,13 +38,12 @@ public class UserPO implements Serializable{
         this.email = email;
         this.phone = phone;
         this.comment = comment;
-        this.date = date;
         this.password = password;
         this.isDeleted = 0;
     }
 
 
-    public UserPO(int userId, byte[] image, String username, UserCategory usertype, LocalDateTime createTime, String facebook, String github, String twitter, String email, String phone, String comment, String date, String password,int isDeleted) {
+    public UserPO(int userId, byte[] image, String username, UserCategory usertype, LocalDateTime createTime, String facebook, String github, String twitter, String email, String phone, String comment, String password,int isDeleted) {
         this.userId = userId;
         this.image = image;
         this.username = username;
@@ -57,7 +55,6 @@ public class UserPO implements Serializable{
         this.email = email;
         this.phone = phone;
         this.comment = comment;
-        this.date = date;
         this.password = password;
         this.isDeleted = isDeleted;
     }
@@ -148,14 +145,6 @@ public class UserPO implements Serializable{
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getPassword() {

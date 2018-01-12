@@ -1,7 +1,6 @@
 package po;
 
 import util.MemberCategory;
-import util.ReceiptCategory;
 
 public class MemberPO {
     private int memberId;
@@ -17,12 +16,12 @@ public class MemberPO {
     private int debtCeiling; // 应收额度
     private int debt;
     private int credit;
-    private int isDelete;
+    private int isDeleted;
 
     public MemberPO() {
     }
 
-    public MemberPO(int memberId, MemberCategory memberCatogory, int VIPgrade, String memberName, String clerkName, String phoneNumber, String address, String zipCode, String emailAddress, int debtCeiling, int debt, int credit, int isDelete) {
+    public MemberPO(int memberId, MemberCategory memberCatogory, int VIPgrade, String memberName, String clerkName, String phoneNumber, String address, String zipCode, String emailAddress, int debtCeiling, int debt, int credit, int isDeleted) {
         this.memberId = memberId;
         this.memberCatogory = memberCatogory;
         this.VIPgrade = VIPgrade;
@@ -35,7 +34,7 @@ public class MemberPO {
         this.debtCeiling = debtCeiling;
         this.debt = debt;
         this.credit = credit;
-        this.isDelete = isDelete;
+        this.isDeleted = isDeleted;
     }
 
     public int getMemberId() {
@@ -142,11 +141,11 @@ public class MemberPO {
         this.credit = credit;
     }
 
-    public int getIsDelete() {
-        return isDelete;
+    public int getIsDeleted() {
+        return isDeleted;
     }
 
-    public void setIsDelete(int isDelete) {
-        this.isDelete = isDelete;
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

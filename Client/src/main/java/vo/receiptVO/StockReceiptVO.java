@@ -1,19 +1,10 @@
 package vo.receiptVO;
 
-import blService.checkblService.CheckInfo;
-import blService.checkblService.ReceiptblService;
-import javafx.beans.property.*;
-import javafx.scene.Node;
 import po.ReceiptGoodsItemPO;
-import po.receiptPO.ReceiptPO;
-import po.receiptPO.StockPurReceiptPO;
 import po.receiptPO.StockReceiptPO;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +23,9 @@ public abstract class StockReceiptVO extends ReceiptVO {
     }
     public StockReceiptVO(StockReceiptPO stockReceiptPO){
         super(stockReceiptPO);
-        this.memberId = stockReceiptPO.getMemberid();
+        this.memberId = stockReceiptPO.getMemberId();
         this.stockName =stockReceiptPO.getStockName();
-        this.sum =stockReceiptPO.getOriginalSum();
+        this.sum =stockReceiptPO.getOriginSum();
         this.items = toGoodsList(stockReceiptPO.getGoodsList());
         this.comment = stockReceiptPO.getComment();
     }
@@ -99,9 +90,9 @@ public abstract class StockReceiptVO extends ReceiptVO {
 
     public <T extends StockReceiptPO> T toStockReceiptPO(Class<T> receiptClass) {
         T result = toReceiptPO(receiptClass);
-        result.setMemberid(memberId);
+        result.setMemberId(memberId);
         result.setStockName(stockName);
-        result.setOriginalSum(sum);
+        result.setOriginSum(sum);
         result.setGoodsList(toGoodsArray(items));
         result.setComment(comment);
         return result;
