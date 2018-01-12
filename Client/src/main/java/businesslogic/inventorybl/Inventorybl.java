@@ -1,11 +1,8 @@
 package businesslogic.inventorybl;
 
-import blService.inventoryblService.InventoryblService;
 import businesslogic.checkbl.Receiptbl;
-import po.receiptPO.InventoryReceiptPO;
 import po.receiptPO.ReceiptPO;
 
-import vo.inventoryVO.inventoryReceiptVO.InventoryReceiptVO;
 import vo.receiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;

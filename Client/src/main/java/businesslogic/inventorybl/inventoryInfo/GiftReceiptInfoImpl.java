@@ -2,9 +2,6 @@ package businesslogic.inventorybl.inventoryInfo;
 
 import businesslogic.inventorybl.InventoryGiftReceiptbl;
 import po.GoodsPO;
-import util.ReceiptState;
-import vo.inventoryVO.InventoryGiftReceiptVO;
-import vo.inventoryVO.InventroyGiftGoodsItemVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -20,10 +17,15 @@ public class GiftReceiptInfoImpl implements InventoryGiftReceiptInfo {
 
     }
 
+    @Override
+    public void addInventoryGiftReceipt(List<GoodsPO> goodsList) throws RemoteException {
+
+    }
+
     /*
     构造赠送单的时候那些数据还需要再考虑考虑,赠送数量的接口还需要商量
      */
-    @Override
+   /* @Override
     public void addInventoryGiftReceipt(List<GoodsPO> goodsList) throws RemoteException {
         List<InventroyGiftGoodsItemVO> list = new ArrayList<>(goodsList.size());
 
@@ -31,9 +33,9 @@ public class GiftReceiptInfoImpl implements InventoryGiftReceiptInfo {
             list.add(new InventroyGiftGoodsItemVO(po.getId(),po.getGoodName(),po.getGoodType(),po.getInventoryNum(),0));
         }
 
-       /* InventoryGiftReceiptVO receiptVO = new InventoryGiftReceiptVO(null,0,null,null,
+       *//* InventoryGiftReceiptVO receiptVO = new InventoryGiftReceiptVO(null,0,null,null,
                 ReceiptState.PENDING,list);
-*/
+*//*
       //  giftReceiptbl.insert(receiptVO);
-    }
+    }*/
 }

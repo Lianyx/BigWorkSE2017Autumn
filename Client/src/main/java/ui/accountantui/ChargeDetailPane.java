@@ -2,26 +2,17 @@ package ui.accountantui;
 
 import blService.billblservice.ChargeBillReceiptblService;
 import blService.blServiceFactory.ServiceFactory_Stub;
-import blService.salesblService.SalesblService;
 import com.jfoenix.controls.*;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
+import ui.myAccountantui.ChargeItemTreeTable;
 import ui.util.*;
 import vo.billReceiptVO.ChargeReceiptVO;
 import vo.billReceiptVO.TransferItemVO;
-import vo.receiptVO.SalesReceiptVO;
 
 import java.time.LocalDate;
-import java.util.function.Predicate;
 
 import static ui.util.ValidatorDecorator.RequireValid;
 

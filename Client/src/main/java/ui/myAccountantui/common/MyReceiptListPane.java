@@ -12,8 +12,6 @@ import ui.managerui.common.MyBoardController;
 import ui.managerui.common.MyOneButtonDialog;
 import ui.managerui.common.MyTwoButtonDialog;
 import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
-import ui.managerui.promotionui.PromotionFilterPane;
-import ui.myAccountantui.MyPaymentDetailPane;
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;
 import ui.util.PaneFactory;
@@ -24,6 +22,7 @@ import vo.receiptVO.ReceiptListVO;
 import vo.receiptVO.ReceiptVO;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -79,6 +78,7 @@ public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends
      */
     protected abstract void initiateTreeTable();
     protected abstract Class<? extends ReceiptblService<TV>> getServiceClass();
+    protected abstract Refreshable getNewDetailPane();
 
 
     /**
@@ -141,8 +141,10 @@ public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends
 
     @FXML
     private void add() {
-        new MyPaymentDetailPane().refresh(true);
+        getNewDetailPane().refresh(true);
     }
+
+
 
     /**
      * Refresh
@@ -171,10 +173,10 @@ public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends
                 if ((receipts = receiptblService.search(respectiveReceiptSearchCondition)) == null) {
                     return false;
                 }
-                tempList.clear(); // TODO 我也不知道下面这里为什么高亮
+                tempList.clear(); // TODO 我也不知道下面这里为什么高亮，我猜可能是因为类型推断太弱了？
                 tempList.addAll(receipts.stream().map(v -> (TL) v.toListVO()).collect(Collectors.toCollection(ArrayList::new)));
                 return true;
-            } catch (Exception e) {
+            } catch (RemoteException e) {
                 e.printStackTrace();
                 return false;
             }

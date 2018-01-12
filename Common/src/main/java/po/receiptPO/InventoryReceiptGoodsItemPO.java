@@ -1,6 +1,8 @@
 package po.receiptPO;
 
-public class InventoryReceiptGoodsItemPO {
+import java.io.Serializable;
+
+public class InventoryReceiptGoodsItemPO implements Serializable{
     /**编号*/
     private String id;
     /** 商品名称 */

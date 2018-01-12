@@ -56,6 +56,11 @@
     -fx-text-fill: white;
 }
 
+#initialaccount {
+    -fx-background-color: linear-gradient(to bottom right, rgba(140, 162, 246, 0.5), rgba(101, 158, 251, 0.5));
+    -fx-text-fill: white;
+}
+
 #add {
     -fx-background-color: linear-gradient(to bottom right, #8CA2F6, #659EFB);
     -fx-text-fill: white;

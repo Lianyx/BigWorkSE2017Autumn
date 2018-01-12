@@ -10,20 +10,51 @@ import java.io.Serializable;
 
 public class ReceiptGoodsItemVO extends RecursiveTreeObject<ReceiptGoodsItemVO> implements Serializable {
     private StringProperty goodsName;
-    private IntegerProperty goodsId;
+    private  StringProperty goodsId;
+    private  StringProperty goodsType;
     private IntegerProperty inventoryNum;
     private IntegerProperty factNum;
     private IntegerProperty sendNum;
     private IntegerProperty warningNum;
 
-    public ReceiptGoodsItemVO(String goodsName, int goodsId, int inventoryNum,
-                              int factNum, int sendNum, int warningNum) {
+    public ReceiptGoodsItemVO() {
+        this.goodsName = new SimpleStringProperty();
+        this.goodsId = new SimpleStringProperty();
+        this.goodsType = new SimpleStringProperty();
+        this.inventoryNum = new SimpleIntegerProperty();
+        this.factNum = new SimpleIntegerProperty();
+        this.sendNum = new SimpleIntegerProperty();
+        this.warningNum = new SimpleIntegerProperty();
+    }
+
+    public ReceiptGoodsItemVO(String goodsName, String goodsId, String goodsType,
+                              Integer inventoryNum, Integer factNum, Integer sendNum, Integer warningNum) {
         this.goodsName = new SimpleStringProperty(goodsName);
-        this.goodsId = new SimpleIntegerProperty(goodsId);
+        this.goodsId = new SimpleStringProperty(goodsId);
+        this.goodsType = new SimpleStringProperty(goodsType);
         this.inventoryNum = new SimpleIntegerProperty(inventoryNum);
         this.factNum = new SimpleIntegerProperty(factNum);
         this.sendNum = new SimpleIntegerProperty(sendNum);
         this.warningNum = new SimpleIntegerProperty(warningNum);
+    }
+
+    public ReceiptGoodsItemVO(String goodsName, String goodsId, Integer inventoryNum,Integer sendNum) {
+        this.goodsName = new SimpleStringProperty(goodsName);
+        this.goodsId = new SimpleStringProperty(goodsId);
+        this.inventoryNum = new SimpleIntegerProperty(inventoryNum);
+        this.sendNum = new SimpleIntegerProperty(sendNum);
+    }
+
+    public String getGoodsType() {
+        return goodsType.get();
+    }
+
+    public StringProperty goodsTypeProperty() {
+        return goodsType;
+    }
+
+    public void setGoodsType(String goodsType) {
+        this.goodsType.set(goodsType);
     }
 
     public String getGoodsName() {
@@ -38,15 +69,15 @@ public class ReceiptGoodsItemVO extends RecursiveTreeObject<ReceiptGoodsItemVO> 
         this.goodsName.set(goodsName);
     }
 
-    public int getGoodsId() {
+    public String getGoodsId() {
         return goodsId.get();
     }
 
-    public IntegerProperty goodsIdProperty() {
+    public StringProperty goodsIdProperty() {
         return goodsId;
     }
 
-    public void setGoodsId(int goodsId) {
+    public void setGoodsId(String goodsId) {
         this.goodsId.set(goodsId);
     }
 

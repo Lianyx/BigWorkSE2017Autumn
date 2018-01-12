@@ -59,7 +59,7 @@
     </select>
 
     <select id="search" resultMap="resultMap">
-        select * from ChargeBillReceipt
+        select * from CashBillReceipt
         <where>
             <if test="operatorId != null">
                 operatorId=#{operatorId}

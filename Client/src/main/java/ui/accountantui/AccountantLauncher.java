@@ -22,9 +22,8 @@ public class AccountantLauncher extends Application{
         UserInfomation.userimage = new Image("/default/timg.jpg");
 
         Parent root = FXMLLoader.load(getClass().getResource("/accountantui/accountantMain.fxml"));
-        StackPane mainPane = PaneFactory.getMainPane();
-        mainPane.getChildren().addAll(root);
-        Scene scene=new Scene(mainPane);
+
+        Scene scene=new Scene(root);
         setDraggable(scene,primaryStage);
         primaryStage.setScene(scene);
         primaryStage.initStyle(StageStyle.TRANSPARENT);

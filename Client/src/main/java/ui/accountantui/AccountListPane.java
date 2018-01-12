@@ -3,10 +3,7 @@ package ui.accountantui;
 import blService.accountblService.AccountblService;
 import blServiceStub.accountblservice_Stub.AccountblService_Stub;
 import businesslogic.accountbl.Accountbl;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -19,9 +16,11 @@ import javafx.scene.control.Pagination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
+import ui.managerui.common.MyBoardController;
 import ui.userui.usermanagerui.*;
 import ui.util.*;
 import vo.AccountListVO;
+import vo.AccountVO;
 import vo.MemberListVO;
 import vo.billReceiptVO.CashReceiptListVO;
 import vo.billReceiptVO.PaymentReceiptListVO;
@@ -33,9 +32,33 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class AccountListPane extends ReceiptListPane<AccountListVO>{
+public class AccountListPane extends Refreshable{
 
+    ReceiptTreeTable receiptTreeTable;
 
+    @FXML
+    BorderPane borderPane;
+
+    MyBoardController myBoardController;
+
+    Set<AccountListVO> set;
+
+    Pagination pagination;
+
+    StackPane mainpane;
+
+    public boolean historyAdd = false;
+
+    PopOver filterPopOver = new PopOver();
+
+    @FXML
+    JFXButton filter;
+
+    @FXML
+    JFXRippler search;
+
+    @FXML
+    JFXTextField searchField;
 
     AccountblService accountblService;
 
@@ -44,13 +67,24 @@ public class AccountListPane extends ReceiptListPane<AccountListVO>{
     List<AccountListVO> list;
 
     public AccountListPane() throws Exception{
-        super("/accountantui/accountListPane.fxml");
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/accountantui/accountListPane.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        fxmlLoader.load();
+        this.myBoardController = MyBoardController.getMyBoardController();
+        this.mainpane = PaneFactory.getMainPane();
+        pagination = new Pagination();
+        pagination.currentPageIndexProperty().addListener((b,o,n)->{
+            receiptTreeTable.createPage(n.intValue());
+        });
+        borderPane.setBottom(pagination);
 
         this.accountblService = new Accountbl();
         receiptTreeTable = new AccountTreeTable();
         receiptTreeTable.setPrefSize(600,435);
         receiptTreeTable.keywordProperty().bind(match);
-        borderpane.setTop(new BorderPane(receiptTreeTable));
+        borderPane.setTop(new BorderPane(receiptTreeTable));
 
         /*PopOver filterPopOver = new PopOver();
         filterPopOver.setDetachable(false);
@@ -58,8 +92,7 @@ public class AccountListPane extends ReceiptListPane<AccountListVO>{
         filter.setOnMouseClicked(e -> filterPopOver.show(filter));*/
 
     }
-
-    @Override
+    @FXML
     public void deleteList(){
         DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane,"Delete","sabi","Yes","No");
         doubleButtonDialog.setButtonOne(()->{receiptTreeTable.delete(pagination); });
@@ -67,10 +100,7 @@ public class AccountListPane extends ReceiptListPane<AccountListVO>{
         doubleButtonDialog.show();
     }
 
-
-
-
-    @Override
+    @FXML
     public void search(){
         if (searchField.getText() != ""&&searchField.getText() != null) {
             match.setValue(searchField.getText().toLowerCase());
@@ -81,24 +111,24 @@ public class AccountListPane extends ReceiptListPane<AccountListVO>{
             receiptTreeTable.setReceipts(hashSet);
             pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
             receiptTreeTable.createPage(0);
-            borderpane.setBottom(pagination);
-            switchPane(false);
+            borderPane.setBottom(pagination);
+            myBoardController.switchTo(this);
         }
     }
 
-    @Override
+    @FXML
     public void add(){
         AccountDetailPane accountDetailPane =new AccountDetailPane(true);
     }
 
 
-    @Override
+
     public void refresh(boolean toSwitch) {
-        boardController.Loading();
+        myBoardController.Loading();
         try {
             DoubleButtonDialog buttonDialog =
                     new DoubleButtonDialog(mainpane, "Wrong", "sabi", "Last", "Ret");
-            buttonDialog.setButtonTwo(() -> boardController.Ret());
+            buttonDialog.setButtonTwo(() -> myBoardController.Ret());
             buttonDialog.setButtonTwo(() -> refresh(false));
             Predicate<Integer> p = (s) -> {
                 try{
@@ -116,8 +146,8 @@ public class AccountListPane extends ReceiptListPane<AccountListVO>{
                         receiptTreeTable.setReceipts(set);
                         pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
                         receiptTreeTable.createPage(0);
-                        borderpane.setBottom(pagination);
-                        switchPane(toSwitch);
+                        borderPane.setBottom(pagination);
+                        myBoardController.switchTo(this);
                     }, buttonDialog, p);
 
             new Thread(getTask).start();

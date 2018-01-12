@@ -15,12 +15,17 @@
 
 
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import ui.managerui.common.MyTopBar?>
 
-
-        <AnchorPane fx:id="mainAnchorPane"  prefHeight="600.0" prefWidth="800.0" fx:controller="ui.accountantui.AccountantUIController"  stylesheets="@../css/list.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="mainpane"
+           xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+           fx:controller="ui.accountantui.AccountantUIController"
+           prefHeight="600" prefWidth="800"
+           stylesheets="@../css/tempInNeed.css">
+    <AnchorPane fx:id="mainAnchorPane" prefHeight="600.0" prefWidth="800.0">
             <children>
 
-                <TopBar fx:id="bar" layoutX="160"/>
+                <MyTopBar fx:id="bar" layoutX="160"/>
                 <fx:include  fx:id="board" source="accountantBoard.fxml" layoutX="160" layoutY="40"/>
 
 
@@ -90,8 +95,8 @@
                     </children>
                 </AnchorPane>
             </children>
-        </AnchorPane>
-
+    </AnchorPane>
+</StackPane>
 
 
 

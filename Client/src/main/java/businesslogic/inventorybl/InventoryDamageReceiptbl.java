@@ -1,16 +1,17 @@
 package businesslogic.inventorybl;
 
+import blService.inventoryblService.InventoryDamageReceiptblService;
 import businesslogic.checkbl.Receiptbl;
 import blService.goodsblService.GoodsUpdateInfo;
 import po.receiptPO.InventoryDamageReceiptPO;
 import util.ResultMessage;
-import vo.inventoryVO.InventoryDamageReceiptVO;
+import vo.inventoryVO.inventoryReceiptVO.InventoryDamageReceiptVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-public class InventoryDamageReceiptbl extends Receiptbl<InventoryDamageReceiptVO,InventoryDamageReceiptPO> {
+public class InventoryDamageReceiptbl extends Receiptbl<InventoryDamageReceiptVO,InventoryDamageReceiptPO> implements InventoryDamageReceiptblService{
     GoodsUpdateInfo info;
 
     public InventoryDamageReceiptbl() throws RemoteException, NotBoundException, MalformedURLException {

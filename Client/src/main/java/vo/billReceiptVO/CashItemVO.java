@@ -59,7 +59,7 @@ public class CashItemVO extends RecursiveTreeObject<CashItemVO> implements Seria
     }
 
     public CashItemPO toPO(){
-        return new CashItemPO(name.toString(),Double.parseDouble(price.toString()),comment.toString());
+        return new CashItemPO(name.get(),price.get(),comment.get());
 
     }
 

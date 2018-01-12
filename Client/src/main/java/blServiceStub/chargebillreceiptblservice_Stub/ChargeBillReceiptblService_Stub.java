@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ChargeBillReceiptblService_Stub implements ChargeBillReceiptblService {
+/*public class ChargeBillReceiptblService_Stub implements ChargeBillReceiptblService {
 
     HashSet<ChargeReceiptListVO> set = new HashSet<>();
 
@@ -124,4 +124,4 @@ public class ChargeBillReceiptblService_Stub implements ChargeBillReceiptblServi
         return temp;
     }
 
-}
+}*/

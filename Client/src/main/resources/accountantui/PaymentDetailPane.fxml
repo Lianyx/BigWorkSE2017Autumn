@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import ui.util.ModifyButton?>
-<?import ui.accountantui.PaymentItemTreeTable?>
+<?import ui.myAccountantui.PaymentItemTreeTable?>
 <fx:root fx:id="paymentreceipt" prefHeight="560.0" prefWidth="640.0" stylesheets="@../css/receipt.css" type="AnchorPane"
          xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <AnchorPane fx:id="pane" layoutX="90.0" layoutY="55.0" prefHeight="287.0" prefWidth="462.0">
@@ -135,7 +135,7 @@
             <Font size="12.0"/>
         </font>
     </JFXButton>
-    <JFXRippler layoutX="530" layoutY="346" maskType="CIRCLE" onMouseClicked="#add" position="BACK"
+    <JFXRippler fx:id="add" layoutX="530" layoutY="346" maskType="CIRCLE" onMouseClicked="#add" position="BACK"
                 ripplerFill="#03A9F4" styleClass="icons-rippler">
         <StackPane layoutX="530.0" layoutY="347.0" style="-fx-padding: 8;">
             <MaterialDesignIconView glyphName="PLUS" size="1.5em" styleClass="icon"/>

@@ -18,7 +18,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class CashReceiptListPane extends ReceiptListPane<CashReceiptListVO> {
+/*public class CashReceiptListPane extends ReceiptListPane<CashReceiptListVO> {
 
     static Set<CashReceiptListVO> set = new HashSet<>();
 
@@ -114,4 +114,4 @@ public class CashReceiptListPane extends ReceiptListPane<CashReceiptListVO> {
         }
     }
 
-}
+}*/

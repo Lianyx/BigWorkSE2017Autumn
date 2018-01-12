@@ -21,7 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class PaymentBillReceiptblService_Stub implements PaymentBillReceiptblService {
+/*public class PaymentBillReceiptblService_Stub implements PaymentBillReceiptblService {
 
     HashSet<PaymentReceiptListVO> set = new HashSet<>();
 
@@ -158,4 +158,4 @@ public class PaymentBillReceiptblService_Stub implements PaymentBillReceiptblSer
         return temp;
     }
 
-}
+}*/
