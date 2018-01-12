@@ -22,10 +22,9 @@ public class SalesDetailbl implements SalesDetailblService {
 
     @Override
     public ArrayList<ListGoodsItemVO> searchSalesDetail(ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
-        ArrayList<ListGoodsItemVO> goods = salesSellSearchInfo.search(receiptSearchCondition)
+        return salesSellSearchInfo.search(receiptSearchCondition) // TODO 这个还要filter approved，可能再加下sort按时间也不错
                 .stream().flatMap(r -> r.getItems().stream())
                 .collect(Collectors.toCollection(ArrayList::new));
-        return goods;
     }
 }
 

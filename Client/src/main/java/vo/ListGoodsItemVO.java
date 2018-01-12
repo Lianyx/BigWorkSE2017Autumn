@@ -5,20 +5,22 @@ import javafx.beans.property.*;
 import po.ReceiptGoodsItemPO;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class ListGoodsItemVO extends RecursiveTreeObject<ListGoodsItemVO> implements Serializable {
     private StringProperty goodsName = new SimpleStringProperty();
-    private IntegerProperty goodsId = new SimpleIntegerProperty();
+    private StringProperty goodsId = new SimpleStringProperty();
     private StringProperty type = new SimpleStringProperty();
     private DoubleProperty price = new SimpleDoubleProperty();
-     private IntegerProperty goodsNum = new SimpleIntegerProperty();
-     private DoubleProperty sum = new SimpleDoubleProperty();
-     private StringProperty comment = new SimpleStringProperty();
+    private IntegerProperty goodsNum = new SimpleIntegerProperty();
+    private DoubleProperty sum = new SimpleDoubleProperty();
+    private StringProperty comment = new SimpleStringProperty();
+    private LocalDate time;
 
-    public ListGoodsItemVO(String goodsName, int goodsId, String type, int price,int goodsNum, String comment) {
+    public ListGoodsItemVO(String goodsName, String goodsId, String type, int price, int goodsNum, String comment) {
         this.goodsName = new SimpleStringProperty(goodsName);
-        this.goodsId =  new SimpleIntegerProperty(goodsId);
-        this.type =  new SimpleStringProperty(type);
+        this.goodsId = new SimpleStringProperty(goodsId);
+        this.type = new SimpleStringProperty(type);
         this.price = new SimpleDoubleProperty(price);
         this.goodsNum = new SimpleIntegerProperty(goodsNum);
         this.sum = new SimpleDoubleProperty();
@@ -27,11 +29,24 @@ public class ListGoodsItemVO extends RecursiveTreeObject<ListGoodsItemVO> implem
     }
 
 
-    public ListGoodsItemVO(ReceiptGoodsItemPO receiptGoodsItemPO){
+    public ListGoodsItemVO(ReceiptGoodsItemPO receiptGoodsItemPO, LocalDate time) {
         this.goodsId.set(receiptGoodsItemPO.getId());
+        // TODO set Goods name
         this.price.set(receiptGoodsItemPO.getPrice());
         this.goodsNum.set(receiptGoodsItemPO.getNum());
         this.comment.set(receiptGoodsItemPO.getComment());
+        this.sum.bind(this.goodsNum.multiply(price));
+
+        this.time = time;
+    }
+
+
+    public LocalDate getTime() {
+        return time;
+    }
+
+    public void setTime(LocalDate time) {
+        this.time = time;
     }
 
     public String getGoodsName() {
@@ -46,15 +61,15 @@ public class ListGoodsItemVO extends RecursiveTreeObject<ListGoodsItemVO> implem
         this.goodsName.set(goodsName);
     }
 
-    public int getGoodsId() {
+    public String getGoodsId() {
         return goodsId.get();
     }
 
-    public IntegerProperty goodsIdProperty() {
+    public StringProperty goodsIdProperty() {
         return goodsId;
     }
 
-    public void setGoodsId(int goodsId) {
+    public void setGoodsId(String goodsId) {
         this.goodsId.set(goodsId);
     }
 
@@ -119,8 +134,8 @@ public class ListGoodsItemVO extends RecursiveTreeObject<ListGoodsItemVO> implem
         this.sum.set(sum);
     }
 
-    public ReceiptGoodsItemPO toPo(){
-        return new ReceiptGoodsItemPO(this.goodsId.get(),this.goodsNum.get(),this.price.get(),this.comment.get());
+    public ReceiptGoodsItemPO toPo() {
+        return new ReceiptGoodsItemPO(this.goodsId.get(), this.goodsNum.get(), this.price.get(), this.comment.get());
     }
 
 }

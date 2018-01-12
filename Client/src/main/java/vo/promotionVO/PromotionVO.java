@@ -16,6 +16,8 @@ public abstract class PromotionVO extends ReceipishVO<PromotionVO> {
     protected String comment;
     protected PromotionState promotionState;
 
+    public int count; // 为了计算达到几重这个促销策略，比如买三送一，买六送二。
+
     public PromotionVO() {
     }
 
@@ -74,5 +76,13 @@ public abstract class PromotionVO extends ReceipishVO<PromotionVO> {
 
     public void setPromotionState(PromotionState promotionState) {
         this.promotionState = promotionState;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

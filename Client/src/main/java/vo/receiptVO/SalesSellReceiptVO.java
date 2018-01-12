@@ -19,6 +19,9 @@ public class SalesSellReceiptVO extends SalesReceiptVO {
 
     private PromotionGoodsItemPO[] gifts;
     private double giveTokenAmount;
+    private int memberLevel; // TODO 这个是新加的
+
+
 
     public SalesSellReceiptVO(String id, int operatorId, LocalDateTime createTime, LocalDateTime lastModifiedTime, ReceiptState receiptState, int memberId, String memberName, String clerkName, String stockName, ArrayList<ListGoodsItemVO> items, String comment, double discountAmount, double tokenAmount, double originSum, PromotionGoodsItemPO[] gifts, double giveTokenAmount) {
         super(id, operatorId, createTime, lastModifiedTime, receiptState, memberId, memberName, clerkName, stockName, items, comment, discountAmount, tokenAmount, originSum);
@@ -33,6 +36,30 @@ public class SalesSellReceiptVO extends SalesReceiptVO {
         super(salesSellReceiptPO);
         this.gifts = salesSellReceiptPO.getGifts();
         this.giveTokenAmount =salesSellReceiptPO.getGiveTokenAmount();
+    }
+
+    public int getMemberLevel() {
+        return memberLevel;
+    }
+
+    public void setMemberLevel(int memberLevel) {
+        this.memberLevel = memberLevel;
+    }
+
+    public PromotionGoodsItemPO[] getGifts() {
+        return gifts;
+    }
+
+    public void setGifts(PromotionGoodsItemPO[] gifts) {
+        this.gifts = gifts;
+    }
+
+    public double getGiveTokenAmount() {
+        return giveTokenAmount;
+    }
+
+    public void setGiveTokenAmount(double giveTokenAmount) {
+        this.giveTokenAmount = giveTokenAmount;
     }
 
     @Override

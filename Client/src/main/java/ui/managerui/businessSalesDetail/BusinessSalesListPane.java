@@ -21,11 +21,12 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 public class BusinessSalesListPane extends FilterableListPane<ListGoodsItemVO> implements ExcelExportableMixer {
     private SalesDetailblService salesDetailblService;
     private ReceiptSearchCondition receiptSearchCondition;
-    
+
     public BusinessSalesListPane() {
     }
 
@@ -62,7 +63,7 @@ public class BusinessSalesListPane extends FilterableListPane<ListGoodsItemVO> i
 
     /**
      * implement ExcelExportableMixer
-     * */
+     */
 
     @Override
     public String getExcelName() {
@@ -73,9 +74,28 @@ public class BusinessSalesListPane extends FilterableListPane<ListGoodsItemVO> i
     public void writeSheet() throws WriteException {
         myAddCell(0, 0, "时间");
         myAddCell(1, 0, "商品名");
-        myAddCell(2, 0, "总价");
+        myAddCell(2, 0, "型号");
         myAddCell(3, 0, "数量");
         myAddCell(4, 0, "单价");
         myAddCell(5, 0, "总价");
+
+        for (int i = 0; i < tempList.size(); i++) {
+            ListGoodsItemVO lgi = tempList.get(i);
+            myAddCell(0, i + 1, lgi.getTime().toString());
+            myAddCell(1, i + 1, lgi.getGoodsName());
+            myAddCell(2, i + 1, lgi.getType());
+            myAddCell(3, i + 1, lgi.getGoodsNum());
+            myAddCell(4, i + 1, lgi.getPrice());
+            myAddCell(5, i + 1, lgi.getSum());
+        }
+    }
+
+    /**
+     * FXML
+     */
+
+    @FXML
+    public void exportExcel() {
+        exportExcelMixer();
     }
 }

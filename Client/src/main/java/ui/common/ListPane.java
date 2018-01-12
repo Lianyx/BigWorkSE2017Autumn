@@ -17,7 +17,7 @@ public abstract class ListPane<TR extends RecursiveTreeObject<TR>> extends GateP
     protected MyTreeTableBorderPane<TR> receiptListTreeTable; // 不应该叫这个名字的，但是为了向下兼容…
 
 
-    private ArrayList<TR> tempList; // 给updateDataFromBl用的
+    protected ArrayList<TR> tempList; // 给updateDataFromBl用的，这个其实已经不能叫tempList了
 
     public ListPane() {
         receiptListTreeTable = getInitialTreeTable();
