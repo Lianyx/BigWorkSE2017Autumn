@@ -10,21 +10,21 @@ import java.util.List;
 public class Test {
     public static void main(String[] args) throws RemoteException {
         GoodsData goodsData = new GoodsData();
-        System.out.println(goodsData.show().toString());
+        //goodsData.insert(new GoodsPO("155","花灯1","美国灯","12212",0,1,1,1,1,23));
       /*  GoodsPO goodsPO = new GoodsPO("121","花灯1","美国灯","12212",0,1,1,1,1,23);
 
         goodsData.update(goodsPO);*/
       // goodsData.insert(new GoodsPO("121","花灯1","中国灯","12212",12,1,1,1,1,23));
-     /*  goodsData.insert(new GoodsPO("122","花灯2","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("123","花灯3","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("124","花灯4","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("125","花灯5","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("126","花灯6","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("127","花灯7","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("128","花灯8","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("129","花灯9","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("130","花灯10","中国灯","12212",12,1,1,1,1,23));
-        //goodsData.delete("12433");*/
+       goodsData.insert(new GoodsPO("122","花灯2","小灯1","12212",122,29,12,12,54,23));
+       goodsData.insert(new GoodsPO("123","花灯3","大灯2","12212",123,29,11,14,34,23));
+       goodsData.insert(new GoodsPO("124","花灯4","中灯2","12212",142,29.0,3,13,23,23));
+       goodsData.insert(new GoodsPO("125","花灯5","中灯2","12212",12,40,45,15,24,231));
+       goodsData.insert(new GoodsPO("126","花灯6","大灯3","12212",12,23,98,164,34,213));
+       goodsData.insert(new GoodsPO("127","花灯7","小灯1","12212",12,45,43,15,12,23));
+       goodsData.insert(new GoodsPO("128","花灯8","中灯2","12212",12,65,23,45,23,23));
+       goodsData.insert(new GoodsPO("129","花灯9","中灯4","12212",12,89,12,65,32,23));
+       goodsData.insert(new GoodsPO("130","花灯10","大灯2","12212",12,23,11,34,32,23));
+        //goodsData.delete("12433");
        // goodsData.update(new GoodsPO("12433","彩灯","中国灯","12212",1,1,1,1,1,1));
 
 
