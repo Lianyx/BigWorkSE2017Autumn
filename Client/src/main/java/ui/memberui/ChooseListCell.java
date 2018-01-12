@@ -13,6 +13,7 @@ public class ChooseListCell extends JFXListCell<MemberVO> {
             chooseListCell = new ChooseListHBox();
             chooseListCell.setName(item.getName());
             chooseListCell.setImage(item.getImage());
+            chooseListCell.setId(item.getMemberId());
             setGraphic(chooseListCell);
         }else{
             setGraphic(null);

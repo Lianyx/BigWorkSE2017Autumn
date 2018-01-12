@@ -1,26 +1,25 @@
-package ui.inventoryui;
+package ui.inventoryui.inventoryViewui;
 
-import blService.inventoryblService.InventoryShowblService;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXRippler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.DatePicker;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import ui.inventoryui.inventoryViewui.InventoryViewListPane;
 import ui.util.BoardController;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class ChooseTimePane extends AnchorPane {
     @FXML
     JFXRippler close;
     @FXML
-    DatePicker startTimeField;
+    JFXDatePicker startTimeField;
     @FXML
-    DatePicker endTimeField;
+    JFXDatePicker endTimeField;
     @FXML
     JFXButton sure;
 
@@ -28,11 +27,10 @@ public class ChooseTimePane extends AnchorPane {
 
     StackPane mainPane;
 
-    InventoryShowblService showblService;
 
     JFXDialog dialog;
 
-    public ChooseTimePane(InventoryShowblService showblService,BoardController boardController,StackPane mainPane){
+    public ChooseTimePane(){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/inventoryui/ChooseTimePane.fxml"));
             fxmlLoader.setRoot(this);
@@ -42,9 +40,7 @@ public class ChooseTimePane extends AnchorPane {
             e.printStackTrace();
         }
 
-        this.boardController = boardController;
-        this.showblService = showblService;
-        this.mainPane = mainPane;
+
 
     }
 
@@ -52,7 +48,18 @@ public class ChooseTimePane extends AnchorPane {
     public void sureTime(){
         try {
             dialog.close();
-            boardController.switchTo(new InventoryViewListPane());
+
+            LocalDate startTime = startTimeField.getValue();
+            LocalDate endTime = endTimeField.getValue();
+
+            System.out.println(startTime.toString());
+            System.out.println(endTime.toString());
+
+            InventoryViewListPane inventoryViewListPane = new InventoryViewListPane();
+            inventoryViewListPane.setStartTime(startTime);
+            inventoryViewListPane.setEndTime(endTime);
+            inventoryViewListPane.refresh(true);
+            //boardController.switchTo(new InventoryViewListPane());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {

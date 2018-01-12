@@ -153,6 +153,10 @@ public class InventoryListItemTreeTable extends JFXTreeTableView<ReceiptGoodsIte
         observableList.add(good);
     }
 
+    public void clear(){
+        observableList.clear();
+    }
+
     public ArrayList<ReceiptGoodsItemVO> getList(){
         ArrayList<ReceiptGoodsItemVO> arrayList = new ArrayList<>();
         observableList.forEach(i->arrayList.add(i));

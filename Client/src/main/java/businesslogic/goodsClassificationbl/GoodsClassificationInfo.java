@@ -4,6 +4,9 @@ import blService.goodsblService.GoodsClassification_Goods;
 import dataService.goodsdataService.GoodsClassificationDataService;
 import po.GoodsClassificationPO;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Arrays;
 
@@ -11,8 +14,8 @@ public class GoodsClassificationInfo implements GoodsClassification_Goods {
     private static final String DELETE = "-1";
     private GoodsClassificationDataService dataService;
 
-    public GoodsClassificationInfo(){
-
+    public GoodsClassificationInfo() throws RemoteException, NotBoundException, MalformedURLException {
+        dataService = (GoodsClassificationDataService) Naming.lookup("rmi://localhost:1099/GoodsClassificationData");
     }
 
     @Override

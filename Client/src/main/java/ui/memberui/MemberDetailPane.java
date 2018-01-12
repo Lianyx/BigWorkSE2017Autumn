@@ -175,7 +175,7 @@ public class MemberDetailPane extends Refreshable{
         memberVO.setReceiableAmount(Double.parseDouble(receiableAmount.getText()));
         memberVO.setImage(imageview.getImage());
         if(memberCategory.getValue()!=null)
-        memberVO.setMemberCategory(MemberCategory.map.get(memberCategory.getValue().getText()));
+        memberVO.setMemberCategory(MemberCategory.map.get(memberCategory.getValue().getId()));
         memberVO.setName(memberName.getText());
 
     }

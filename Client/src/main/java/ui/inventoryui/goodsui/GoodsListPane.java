@@ -22,6 +22,7 @@ import javafx.scene.layout.StackPane;
 
 import org.controlsfx.control.PopOver;
 import po.GoodsPO;
+import ui.managerui.common.MyBoardController;
 import ui.util.*;
 import vo.inventoryVO.GoodSearchVO;
 import vo.inventoryVO.GoodsVO;
@@ -34,12 +35,12 @@ import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class GoodsListPane extends ReceiptListPane<GoodsVO>{
+public class GoodsListPane extends ReceiptListPane<GoodsVO> {
     public static GoodsblService goodsblService;
 
     private static GoodSearchVO goodSearchVO = new GoodSearchVO();
 
-    private static FilterPane filterPane ;
+    private static FilterPane filterPane;
 
     SimpleStringProperty match = new SimpleStringProperty("");
 
@@ -47,7 +48,7 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO>{
         super("/inventoryui/goodui/goodslistpane.fxml");
         this.goodsblService = new Goodsbl();//ServiceFactory_Stub.getService(GoodsblService.class.getName());// new Goodsbl();
         receiptTreeTable = new GoodsTreeTable();
-        receiptTreeTable.setPrefSize(600,435);
+        receiptTreeTable.setPrefSize(600, 435);
         receiptTreeTable.keywordProperty().bind(match);
         borderpane.setTop(new BorderPane(receiptTreeTable));
 
@@ -89,8 +90,8 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO>{
                         pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
                         receiptTreeTable.createPage(0);
                         borderpane.setBottom(pagination);
-                        switchPane(toSwitch);
-                        //boardController.switchTo(this);
+//                        switchPane(toSwitch);
+                        MyBoardController.getMyBoardController().switchTo(this);
                     }, buttonDialog, p);
 
             new Thread(getTask).start();
@@ -104,9 +105,9 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO>{
 
     @Override
     public void deleteList() {
-        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane,"Delete","sabi","Yes","No");
-        doubleButtonDialog.setButtonOne(()-> {
-                    receiptTreeTable.delete(pagination);
+        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Delete", "sabi", "Yes", "No");
+        doubleButtonDialog.setButtonOne(() -> {
+            receiptTreeTable.delete(pagination);
  /*                   JFXTreeTableRow<GoodsVO> row = new JFXTreeTableRow();
                     // RowSetter(row,()->{
                     String goodId = row.getTreeItem().getValue().getId();
@@ -117,9 +118,10 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO>{
                 e.printStackTrace();
             }*//*
                     // return row;*/
-            });
+        });
 
-        doubleButtonDialog.setButtonTwo(()->{});
+        doubleButtonDialog.setButtonTwo(() -> {
+        });
         doubleButtonDialog.show();
     }
 
@@ -129,8 +131,8 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO>{
             match.setValue(searchField.getText().toLowerCase());
             Set<GoodsVO> hashSet;
             hashSet = set.stream().filter(
-                    s -> s.getGoodName().contains(match.get())||
-                            s.getGoodType().contains(match.get())||
+                    s -> s.getGoodName().contains(match.get()) ||
+                            s.getGoodType().contains(match.get()) ||
                             s.getId().contains(match.get()) ||
                             Integer.toString(s.getInventoryNum()).contains(match.get())
             ).collect(Collectors.toSet());
@@ -138,7 +140,8 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO>{
             pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
             receiptTreeTable.createPage(0);
             borderpane.setBottom(pagination);
-            switchPane(false);
+//            switchPane(false);
+            MyBoardController.getMyBoardController().switchTo(this);
         }
 
     }

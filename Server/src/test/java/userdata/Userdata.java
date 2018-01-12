@@ -19,10 +19,10 @@ public class Userdata {
             userdata.search(new UserSearchCondition());
 
             ReceiptGoodsItemPO receiptGoodsItemPO[] = new ReceiptGoodsItemPO[4];
-            receiptGoodsItemPO[0] = new ReceiptGoodsItemPO(2,3,5.5,"sabi");
-            receiptGoodsItemPO[1] = new ReceiptGoodsItemPO(2,3,5.5,"sabi");
-            receiptGoodsItemPO[2] = new ReceiptGoodsItemPO(2,3,5.5,"sabi");
-            receiptGoodsItemPO[3] = new ReceiptGoodsItemPO(2,3,5.5,"sabi");
+        //    receiptGoodsItemPO[0] = new ReceiptGoodsItemPO(2,3,5.5,"sabi");
+          //  receiptGoodsItemPO[1] = new ReceiptGoodsItemPO(2,3,5.5,"sabi");
+           // receiptGoodsItemPO[2] = new ReceiptGoodsItemPO(2,3,5.5,"sabi");
+            //receiptGoodsItemPO[3] = new ReceiptGoodsItemPO(2,3,5.5,"sabi");
 
             new StockPurReceiptPO(1,5, LocalDateTime.now(),LocalDateTime.now().plusDays(1), ReceiptState.PENDING,1,"aaa",receiptGoodsItemPO,40.1,"sabi");
             new StockPurReceiptPO(2,5, LocalDateTime.now(),LocalDateTime.now().plusDays(1), ReceiptState.PENDING,1,"aaa",receiptGoodsItemPO,40.1,"sabi");

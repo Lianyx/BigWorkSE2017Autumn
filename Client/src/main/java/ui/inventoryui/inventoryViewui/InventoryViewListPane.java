@@ -8,11 +8,15 @@ import ui.util.GetTask;
 import ui.util.ReceiptListPane;
 import vo.inventoryVO.InventoryViewItemVO;
 
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 public class InventoryViewListPane extends ReceiptListPane<InventoryViewItemVO> {
 
     InventoryViewblService inventoryViewblService;
+
+    LocalDate startTime;
+    LocalDate endTime;
 
     public InventoryViewListPane() throws Exception {
         super("/inventoryui/inventoryviewui/inventoryviewlistpane.fxml");
@@ -47,7 +51,11 @@ public class InventoryViewListPane extends ReceiptListPane<InventoryViewItemVO> 
             buttonDialog.setButtonTwo(() -> boardController.Ret());
             buttonDialog.setButtonTwo(() -> refresh(false));
             Predicate<Integer> p = (s) -> {
-                if ((set = inventoryViewblService.inventoryView("","").getViewList()) != null) {
+
+                System.out.println("In View"+startTime.toString());
+                System.out.println(endTime.toString());
+
+                if ((set = inventoryViewblService.inventoryView(startTime,endTime).getViewList()) != null) {
                     System.out.println(set.size());
                     return true;
                 }
@@ -69,5 +77,21 @@ public class InventoryViewListPane extends ReceiptListPane<InventoryViewItemVO> 
 
         }
 
+    }
+
+    public void setStartTime(LocalDate startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(LocalDate endTime) {
+        this.endTime = endTime;
+    }
+
+    public LocalDate getStartTime() {
+        return startTime;
+    }
+
+    public LocalDate getEndTime() {
+        return endTime;
     }
 }

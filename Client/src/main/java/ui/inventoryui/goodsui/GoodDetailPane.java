@@ -15,6 +15,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import ui.managerui.common.MyBoardController;
 import ui.util.*;
 import vo.inventoryVO.GoodsVO;
 
@@ -32,6 +33,10 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
 
     GoodsblService goodsblService;
 
+    private String classifyId;
+
+    private int order;
+
     @FXML
     JFXTextField goodName;
     @FXML
@@ -41,7 +46,7 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
     @FXML
     TextField inventoryNum;
     @FXML
-    TextField classifyId;
+    TextField classifyTextId;
     @FXML
     TextField alarmNum;
     @FXML
@@ -80,25 +85,39 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
         goodName.disableProperty().bind(modifyState.not());
 
 
+        reset.visibleProperty().bind(modifyState);
+        save.visibleProperty().bind(modifyState);
+    }
 
-       reset.visibleProperty().bind(modifyState);
-       save.visibleProperty().bind(modifyState);
+    public void setGoodId(String goodId){
+        this.goodId = goodId;
+    }
+
+    public String getGoodId() {
+        return goodId;
     }
 
     public GoodDetailPane(boolean isAdd) {
         super("/inventoryui/goodui/goodsdetail.fxml");
-        this.goodsblService =  GoodsListPane.goodsblService;//ServiceFactory_Stub.getService(GoodsblService.class.getName());
+        this.goodsblService = GoodsListPane.goodsblService;//ServiceFactory_Stub.getService(GoodsblService.class.getName());
         //this.goodsblService = ServiceFactory_Stub.getService(GoodsblService.class.getName());
+
+        goodTextId.setDisable(true);
+        classifyTextId.setDisable(true);
 
         delete.setVisible(false);
         date.setText(LocalDate.now().toString());
+
+       /* goodId = goodsblService.getID()
+        goodTextId.setText();*/
 
         RequireValid(goodName);
 
         updateState.set(false);
         if (isAdd) {
             updateState.set(true);
-            switchPane(true);
+//            switchPane(true);
+            MyBoardController.getMyBoardController().switchTo(this);
         }
 
         reset.setOnMouseClicked(t -> {
@@ -106,12 +125,13 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
             JFXDialog dialog = new JFXDialog(mainpane, textFieldPane, JFXDialog.DialogTransition.CENTER);
             textFieldPane.cencel(() -> {
                 dialog.close();
+
             });
             textFieldPane.save(() -> {
                 dialog.close();
                 //password.setText(textFieldPane.getText());
             });
-          //  textFieldPane.setText(password.getText());
+            //  textFieldPane.setText(password.getText());
             textFieldPane.setPrompt("Password");
             dialog.show();
         });
@@ -159,31 +179,36 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
             doubleButtonDialog.setButtonOne(() -> {
                 if (goodId.equals("-1")) {
                     try {
-                        goodId = goodsblService.getID("123",4);
-                        goodsblService.addGoods(new GoodsVO(goodId,goodName.getText(),goodType.getText(),classifyId.getText(),
-                        Integer.parseInt(inventoryNum.getText()),
+                        System.out.println("save first");
+                        goodId = goodsblService.getID(classifyId,order);
+                        System.out.println("isNull"+goodId);
+                        goodTextId.setText(goodId);
+                        goodsblService.addGoods(new GoodsVO(goodId, goodName.getText(), goodType.getText(), classifyId,
+                                Integer.parseInt(inventoryNum.getText()),
                                 Double.parseDouble(purPrice.getText()),
                                 Double.parseDouble(salePrice.getText()),
                                 Double.parseDouble(recentPurPrice.getText()),
-                                Double.parseDouble(recentSalePrice.getText()),Integer.parseInt(alarmNum.getText())));
+                                Double.parseDouble(recentSalePrice.getText()), Integer.parseInt(alarmNum.getText())));
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
                 } else {
                     try {
-                        goodsblService.updateGoods(new GoodsVO(goodId,goodName.getText(),goodType.getText(),classifyId.getText(),
+                        goodsblService.updateGoods(new GoodsVO(goodId, goodName.getText(), goodType.getText(), classifyTextId.getText(),
                                 Integer.parseInt(inventoryNum.getText()),
                                 Double.parseDouble(purPrice.getText()),
                                 Double.parseDouble(salePrice.getText()),
                                 Double.parseDouble(recentPurPrice.getText()),
                                 Double.parseDouble(recentSalePrice.getText()),
-                        Integer.parseInt(alarmNum.getText())));
+                                Integer.parseInt(alarmNum.getText())));
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
                 }
-                setBack();
+//                setBack();
+                MyBoardController.getMyBoardController().goBack();
             });
+
             doubleButtonDialog.show();
 
         } else {
@@ -205,7 +230,8 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
                 buttonDialog.setButtonTwo(() -> refresh(false));
                 Predicate<Integer> p = (i) -> {
                     try {
-                        if ((vo = goodsblService.showDetail(goodId)) != null) return true;
+                        if ((vo = goodsblService.showDetail(goodId)) != null)
+                            return true;
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
@@ -217,16 +243,34 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
 
                             //date.setText(vo.getDate());
 
-                            switchPane(toSwitch);
+//                            switchPane(toSwitch);
+                            MyBoardController.getMyBoardController().switchTo(this);
                         }, buttonDialog, p);
 
                 new Thread(task).start();
             } else {
-                switchPane(toSwitch);
+//                switchPane(toSwitch);
+                MyBoardController.getMyBoardController().switchTo(this);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    public String getClassifyId() {
+        return classifyId;
+    }
+
+    public void setClassifyId(String classifyId) {
+        this.classifyId = classifyId;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 }
