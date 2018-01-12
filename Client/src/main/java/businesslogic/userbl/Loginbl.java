@@ -1,6 +1,7 @@
 package businesslogic.userbl;
 
 import blService.userblService.LoginblService;
+import dataService.userdataService.LoginDataService;
 import dataService.userdataService.UserDataService;
 import util.ResultMessage;
 
@@ -10,14 +11,14 @@ import static ui.util.UserInfomation.url;
 
 public class Loginbl implements LoginblService{
 
-    private UserDataService userDataService;
+    private LoginDataService loginDataService;
 
     public Loginbl() throws Exception{
-        userDataService = (UserDataService) Naming.lookup( url+"UserData");
+        loginDataService = (LoginDataService) Naming.lookup( url+"LoginData");
     }
 
     @Override
     public ResultMessage login(String id, String password) {
-        return null;
+        return login(id,password);
     }
 }
