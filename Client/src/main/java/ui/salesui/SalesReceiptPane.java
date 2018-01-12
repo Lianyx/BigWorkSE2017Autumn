@@ -158,7 +158,7 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
 
     @FXML
     public void addTransfer(){
-        itemTreeTable.add((new ListGoodsItemVO("a", 1, "a", 1, 1, "a")));
+        itemTreeTable.add((new ListGoodsItemVO("a", "54", "a", 1, 1, "a")));
     }
 
     @FXML

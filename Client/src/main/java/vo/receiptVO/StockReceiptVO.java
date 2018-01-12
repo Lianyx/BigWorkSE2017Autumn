@@ -28,7 +28,7 @@ public abstract class StockReceiptVO extends ReceiptVO {
         this.stockName =stockReceiptPO.getStockName();
         this.sum =stockReceiptPO.getOriginSum();
         this.items = stockReceiptPO.getGoodsList() == null ? new ArrayList<>()
-                : Arrays.stream(stockReceiptPO.getGoodsList()).map(ListGoodsItemVO::new).collect(Collectors.toCollection(ArrayList::new));
+                : Arrays.stream(stockReceiptPO.getGoodsList()).map(p -> new ListGoodsItemVO(p, getCreateTime().toLocalDate())).collect(Collectors.toCollection(ArrayList::new));
         this.comment = stockReceiptPO.getComment();
     }
 

@@ -1,20 +1,24 @@
 package businesslogic.promotionbl;
 
 import blService.promotionblService.*;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import util.PromotionSearchCondition;
 import util.PromotionType;
 import util.ResultMessage;
-import vo.promotionVO.CombinePromotionVO;
-import vo.promotionVO.MemberPromotionVO;
-import vo.promotionVO.PromotionVO;
-import vo.promotionVO.TotalPromotionVO;
+import vo.ListGoodsItemVO;
+import vo.promotionVO.*;
+import vo.receiptVO.SalesSellReceiptVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.function.Function;
 
-public class PromotionListbl implements PromotionListblService {
+public class PromotionListbl implements PromotionListblService, PromotionInfo {
     private PromotionblService<CombinePromotionVO> combinePromotionblService;
     private PromotionblService<MemberPromotionVO> memberPromotionblService;
     private PromotionblService<TotalPromotionVO> totalPromotionblService;
@@ -52,4 +56,44 @@ public class PromotionListbl implements PromotionListblService {
         return promotionVO.getService().delete(promotionVO);
     }
 
+    @Override
+    public ArrayList<PromotionVO> getMatch(SalesSellReceiptVO salesSellReceiptVO) throws RemoteException {
+        ArrayList<PromotionVO> resultList = new ArrayList<>();
+        ArrayList<ListGoodsItemVO> boughtGoods = salesSellReceiptVO.getItems();
+
+        combinePromotionblService.selectInEffect().stream().max((c1, c2) -> {
+            Function<CombinePromotionVO, Double> fx = c -> { // fx这个函数返回该促销策略下的优惠值，下面两个同理
+                ArrayList<ListGoodsItemVO> copy = new ArrayList<>(boughtGoods); // 好像不用copy
+
+                c.getGoodsCombination().stream().mapToInt(g -> { // 找到最多支持的重数，即最少的的那个商品对应的倍数
+                    if (copy.stream().anyMatch(lg -> lg.getGoodsId().equals(g.getId()))) {
+                        return copy.stream().filter(lg -> lg.getGoodsId().equals(g.getId())).mapToInt(ListGoodsItemVO::getGoodsNum).sum() / g.getNum();
+                    }
+                    return 0;
+                }).min().ifPresent(c::setCount);
+
+                return c.getCount() * c.getDiscountAmount();
+            };
+
+            return fx.apply(c1).compareTo(fx.apply(c2));
+        }).ifPresent(resultList::add);
+
+        memberPromotionblService.selectInEffect().stream().filter(m -> salesSellReceiptVO.getMemberLevel() >= m.getRequiredLevel()).max((m1, m2) -> {
+            Function<MemberPromotionVO, Double> fx = m -> {
+                return (1 - m.getDiscountFraction()) * salesSellReceiptVO.getOriginSum()
+                        + m.getTokenAmount()
+                        + m.getGifts().stream().mapToDouble(mg -> mg.getNum() * mg.getUnitPrice()).sum();
+            };
+            return fx.apply(m1).compareTo(fx.apply(m2));
+        }).ifPresent(resultList::add);
+
+        totalPromotionblService.selectInEffect().stream().filter(t -> salesSellReceiptVO.getOriginSum() >= t.getRequiredTotal()).max((t1, t2) -> {
+            Function<TotalPromotionVO, Double> fx = t -> {
+                return t.getTokenAmount() + t.getGifts().stream().mapToDouble(mg -> mg.getNum() * mg.getUnitPrice()).sum();
+            };
+            return fx.apply(t1).compareTo(fx.apply(t2));
+        }).ifPresent(resultList::add);
+
+        return resultList;
+    }
 }

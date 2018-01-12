@@ -103,7 +103,8 @@ public class Login implements Initializable{
                         }
 
 
-                        changeToUserManger();
+//                        changeToUserManger();
+                        changeToSales();
                     }catch (Exception e){
                         e.printStackTrace();
                     }

@@ -3,7 +3,7 @@ package po;
 import java.io.Serializable;
 
 public class ReceiptGoodsItemPO implements Serializable {
-    private int id;
+    private String id;
     private int num;
     private double price; // 金额（num * price）没必要存在数据库里吧
     private String comment;
@@ -11,18 +11,18 @@ public class ReceiptGoodsItemPO implements Serializable {
     public ReceiptGoodsItemPO() {
     }
 
-    public ReceiptGoodsItemPO(int id, int num, double price, String comment) {
+    public ReceiptGoodsItemPO(String id, int num, double price, String comment) {
         this.id = id;
         this.num = num;
         this.price = price;
         this.comment = comment;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

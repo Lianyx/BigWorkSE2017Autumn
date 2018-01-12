@@ -5,6 +5,7 @@ import blService.businessblservice.BusinessConditionblService;
 import blService.businessblservice.BusinessSearchInfo;
 import blService.checkblService.CheckInfo;
 import blService.goodsblService.goodsSearchInfo;
+import blService.promotionblService.PromotionInfo;
 import businesslogic.billbl.CashBillReceiptbl;
 import businesslogic.billbl.ChargeBillReceiptbl;
 import businesslogic.billbl.PaymentBillReceiptbl;
@@ -14,6 +15,7 @@ import businesslogic.inventorybl.InventoryDamageReceiptbl;
 import businesslogic.inventorybl.InventoryGiftReceiptbl;
 import businesslogic.inventorybl.InventoryOverflowReceiptbl;
 import businesslogic.inventorybl.InventoryWarningReceiptbl;
+import businesslogic.promotionbl.PromotionListbl;
 import businesslogic.salesbl.SalesRetbl;
 import businesslogic.salesbl.SalesSellbl;
 import businesslogic.stockbl.StockPurbl;
@@ -53,6 +55,8 @@ public class MyServiceFactory {
     private static BusinessConditionbl businessConditionbl;
 
     private static goodsSearchInfo goodsSearch;
+
+    private static PromotionListbl promotionListbl;
 
 
     /**
@@ -244,5 +248,16 @@ public class MyServiceFactory {
             return goodsSearch = new goodsSearch();
         }
         return goodsSearch;
+    }
+
+    /**
+     * Promotion
+     * */
+
+    public static PromotionInfo getPromotionInfo() throws RemoteException, NotBoundException, MalformedURLException {
+        if (promotionListbl == null) {
+            return promotionListbl = new PromotionListbl();
+        }
+        return promotionListbl;
     }
 }
