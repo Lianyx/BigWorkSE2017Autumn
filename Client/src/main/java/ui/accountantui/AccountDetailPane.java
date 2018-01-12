@@ -179,7 +179,7 @@ public class AccountDetailPane extends Refreshable{
                             id.setText(String.valueOf(vo.getID()));
                             name.setText(vo.getName());
                             balance.setText(String.valueOf(vo.getBalance()));
-                            switchPane(toSwitch);
+                            MyBoardController.getMyBoardController().switchTo(this);
                         }, buttonDialog, p);
 
                 new Thread(task).start();
