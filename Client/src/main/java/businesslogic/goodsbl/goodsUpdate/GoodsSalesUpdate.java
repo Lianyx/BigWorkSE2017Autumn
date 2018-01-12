@@ -16,9 +16,22 @@ public class GoodsSalesUpdate implements GoodsSalesUpdateInfo {
 
 
     @Override
-    public void goodsUpdate(List<ListGoodsItemVO> goodsList) throws RemoteException {
+    public void goodsUpdateSaleRet(List<ListGoodsItemVO> list) throws RemoteException {
 
     }
 
+    @Override
+    public void goodsUpdateSalesSel(List<ListGoodsItemVO> list) throws RemoteException {
 
+    }
+
+    @Override
+    public void goodsUpdateStockPur(List<ListGoodsItemVO> list) throws RemoteException {
+
+    }
+
+    @Override
+    public void goodsUpdateStorckRet(List<ListGoodsItemVO> list) throws RemoteException {
+
+    }
 }

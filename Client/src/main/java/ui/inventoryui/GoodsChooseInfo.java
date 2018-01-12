@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface GoodsChooseInfo {
 
-    public List<String> choose(ObservableList<String> list);
+    public List<String> choose(List<String> list);
 }

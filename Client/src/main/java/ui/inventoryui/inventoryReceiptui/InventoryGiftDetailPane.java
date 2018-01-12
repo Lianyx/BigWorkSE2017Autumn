@@ -14,14 +14,16 @@ import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 import vo.receiptVO.ReceiptVO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftReceiptVO> {
     @FXML
     InventoryListItemTreeTable giftItemTreeTable;
 
-    ObservableList<String> observableList = FXCollections.observableArrayList();
+  //  ObservableList<String> observableList = FXCollections.observableArrayList();
 
+    List<String> goodsId;
     @FXML
     private TextArea commentArea;
     @FXML
@@ -69,19 +71,22 @@ public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftRe
     @Override
     protected void reset() {
         //super.reset();
-        operator.setText("");
+       /* operator.setText("");
         commentArea.setText("");
-        stateField.setText("");
-        giftItemTreeTable.clear();
+        stateField.setText("");*/
+//        giftItemTreeTable.clear();
+//        System.out.println(goodsId);
+
     }
 
     @FXML
     public void addGoods(){
         GoodsChooseInfo goodsChooseInfo = new GoodChoose();
 
-        goodsChooseInfo.choose(observableList);
+        goodsId = new ArrayList<>();
+        goodsChooseInfo.choose(goodsId);
 
-        System.out.println(observableList.toString());
+        System.out.println(goodsId.toString());
         //giftItemTreeTable.addGood(new ReceiptGoodsItemVO("please","please",0,0));
     }
 }

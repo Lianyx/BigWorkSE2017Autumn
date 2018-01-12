@@ -22,7 +22,7 @@ public class GoodChoose implements GoodsChooseInfo {
     Goodsbl goodsbl;
 
     @Override
-    public List<String> choose(ObservableList<String> list) {
+    public List<String> choose(List<String> list) {
         ChoosePane choosePane = new ChoosePane();
         try {
             goodsbl = new Goodsbl();
