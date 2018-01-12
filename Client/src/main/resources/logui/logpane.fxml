@@ -2,10 +2,14 @@
 
 <?import javafx.scene.layout.AnchorPane?>
 <?import org.fxmisc.richtext.CodeArea?>
-
-<?import javafx.scene.layout.StackPane?>
-<fx:root fx:id="logPane" prefHeight="560.0" prefWidth="640.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<?import ui.util.Refreshable?>
+        <?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.Insets?>
+<fx:root fx:id="logPane" prefHeight="560.0" prefWidth="640.0" type="Refreshable" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <StackPane>
-    <CodeArea fx:id="codeArea" prefHeight="560.0" prefWidth="640.0" />
+        <padding>
+            <Insets right="10" left="10" bottom="10" top="10"/>
+        </padding>
+    <CodeArea fx:id="codeArea" prefHeight="540.0" prefWidth="620.0" style="-fx-effect: dropshadow(gaussian, silver, 10, 0.1, 0, 0)"/>
     </StackPane>
 </fx:root>

@@ -329,6 +329,7 @@ public class UserDetailPane extends Refreshable {
                     userManagerblService = new Userbl();
                     System.out.println(userVO);
                     if (userVO == null) {
+                        userVO = userManagerblService.getNew();
                         userManagerblService.update(new UserVO(
                                 userVO.getId(),
                                 imageview.getImage(),

@@ -1,12 +1,20 @@
 package ui.mainui;
 
+import businesslogic.logbl.Logbl;
 import com.jfoenix.controls.JFXDialog;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import po.LogPO;
+import ui.logui.LogPane;
 import ui.memberui.ChoosePane;
+import util.EventCategory;
+import util.UserCategory;
+
+import java.rmi.server.UnicastRemoteObject;
+import java.time.LocalDateTime;
 
 public class Test extends Application {
 
@@ -17,11 +25,18 @@ public class Test extends Application {
     @Override
     public void start(Stage primaryStage) {
         StackPane root = new StackPane();
-        Scene scene=new Scene(root,400,600);
+        root.getChildren().add(new LogPane());
+        Scene scene=new Scene(root);
 
-        JFXDialog jfxDialog =new JFXDialog(root,new ChoosePane(), JFXDialog.DialogTransition.CENTER);
+        try{
+            Logbl logbl = new Logbl();
+            logbl.insert(new LogPO(1, LocalDateTime.now(),"sabi", UserCategory.UserManager, EventCategory.CreateSalesReceipt,"sbbbb"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
         primaryStage.setScene(scene);
         primaryStage.show();
-        jfxDialog.show();
     }
 }

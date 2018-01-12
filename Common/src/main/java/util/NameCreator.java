@@ -1,5 +1,6 @@
 package util;
 
+import po.LogPO;
 import po.MemberPO;
 import po.MessagePO;
 import po.UserPO;
@@ -44,7 +45,7 @@ public class NameCreator {
 
     public static void getSomeString(Class clazz){
         for(Field field:clazz.getDeclaredFields()){
-            System.out.print("#"+"{"+field.getName()+"},");
+            System.out.print(field.getName()+",");
         }
         System.out.println();
         for(Field field:clazz.getDeclaredFields()){
@@ -54,7 +55,7 @@ public class NameCreator {
 
 
     public static void main(String args[]){
-        getSomeString(MemberPO.class);
+        getSomeString(LogPO.class);
     }
 
 }

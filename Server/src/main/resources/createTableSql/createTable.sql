@@ -21,6 +21,14 @@ create table MemberPromotion(
   gifts varchar(1000)
 ) character set = utf8;
 
+create table Log(
+logId integer,
+createTime bigint,
+username varchar(100),
+userCategory integer,
+eventCategory integer,
+event varchar(100)
+);
 
 create table TotalPromotion(
   dayId integer,
