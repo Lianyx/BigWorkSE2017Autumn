@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 import org.controlsfx.control.PopOver;
-import ui.userui.usermanagerui.FilterPane;
+
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;
 import ui.util.ReceiptListPane;
