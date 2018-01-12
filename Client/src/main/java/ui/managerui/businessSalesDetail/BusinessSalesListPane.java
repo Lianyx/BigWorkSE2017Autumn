@@ -26,7 +26,7 @@ import java.util.stream.IntStream;
 public class BusinessSalesListPane extends FilterableListPane<ListGoodsItemVO> implements ExcelExportableMixer {
     private SalesDetailblService salesDetailblService;
     private ReceiptSearchCondition receiptSearchCondition;
-    
+
     public BusinessSalesListPane() {
     }
 
@@ -63,7 +63,7 @@ public class BusinessSalesListPane extends FilterableListPane<ListGoodsItemVO> i
 
     /**
      * implement ExcelExportableMixer
-     * */
+     */
 
     @Override
     public String getExcelName() {
@@ -79,21 +79,23 @@ public class BusinessSalesListPane extends FilterableListPane<ListGoodsItemVO> i
         myAddCell(4, 0, "单价");
         myAddCell(5, 0, "总价");
 
-        for (int i = 0; i <= tempList.size(); i++) {
+        for (int i = 0; i < tempList.size(); i++) {
             ListGoodsItemVO lgi = tempList.get(i);
-            myAddCell(0, i, lgi.getTime().toString());
-            myAddCell(1, i, lgi.getGoodsName());
-            myAddCell(2, i, lgi.getType());
-            myAddCell(3, i, lgi.getGoodsNum());
-            myAddCell(4, 0, lgi.getPrice());
-            myAddCell(5, 0, lgi.getSum());
+            myAddCell(0, i + 1, lgi.getTime().toString());
+            myAddCell(1, i + 1, lgi.getGoodsName());
+            myAddCell(2, i + 1, lgi.getType());
+            myAddCell(3, i + 1, lgi.getGoodsNum());
+            myAddCell(4, i + 1, lgi.getPrice());
+            myAddCell(5, i + 1, lgi.getSum());
         }
     }
 
     /**
      * FXML
-     * */
+     */
 
-//    @FXML
-//    public
+    @FXML
+    public void exportExcel() {
+        exportExcelMixer();
+    }
 }

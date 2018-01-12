@@ -11,6 +11,7 @@ import ui.common.mixer.ExcelExportableMixer;
 import ui.managerui.checkui.CheckTable;
 import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
 import util.ReceiptSearchCondition;
+import vo.promotionVO.PromotionVO;
 import vo.receiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;
@@ -60,7 +61,7 @@ public class BusinessProgressPane extends FilterableListPane<ReceiptVO> implemen
 
     /**
      * implement ExcelExportableMixer
-     * */
+     */
 
     @Override
     public String getExcelName() {
@@ -75,6 +76,13 @@ public class BusinessProgressPane extends FilterableListPane<ReceiptVO> implemen
         myAddCell(3, 0, "信息");
 
         // TODO 对于tempList遍历。最后一栏信息就让自己定义吧。
+
+        for (int i = 0; i < tempList.size(); i++) {
+            ReceiptVO pvo = tempList.get(i);
+            myAddCell(0, i + 1, pvo.getId());
+            myAddCell(1, i + 1, pvo.getLastModifiedTime().toString());
+            myAddCell(2, i + 1, pvo.getOperatorId());
+        }
     }
 
     // TODO
