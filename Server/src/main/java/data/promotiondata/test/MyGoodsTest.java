@@ -3,6 +3,7 @@ package data.promotiondata.test;
 import data.goodsdata.GoodsClassificationData;
 import data.goodsdata.GoodsData;
 import po.GoodsClassificationPO;
+import po.GoodsPO;
 
 import java.rmi.RemoteException;
 
@@ -14,22 +15,21 @@ public class MyGoodsTest {
 
         goodsData.update(goodsPO);*/
         // goodsData.insert(new GoodsPO("121","花灯1","中国灯","12212",12,1,1,1,1,23));
-     /*  goodsData.insert(new GoodsPO("122","花灯2","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("123","花灯3","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("124","花灯4","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("125","花灯5","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("126","花灯6","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("127","花灯7","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("128","花灯8","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("129","花灯9","中国灯","12212",12,1,1,1,1,23));
-       goodsData.insert(new GoodsPO("130","花灯10","中国灯","12212",12,1,1,1,1,23));
-        //goodsData.delete("12433");*/
+        goodsData.insert(new GoodsPO("122", "花灯2", "中国灯", "12212", 12, 1, 1, 1, 1, 23));
+        goodsData.insert(new GoodsPO("123", "花灯3", "中国灯", "12212", 12, 1, 1, 1, 1, 23));
+        goodsData.insert(new GoodsPO("124", "花灯4", "中国灯", "12212", 12, 1, 1, 1, 1, 23));
+        goodsData.insert(new GoodsPO("125", "花灯5", "中国灯", "12212", 12, 1, 1, 1, 1, 23));
+        goodsData.insert(new GoodsPO("126", "花灯6", "中国灯", "12212", 12, 1, 1, 1, 1, 23));
+        goodsData.insert(new GoodsPO("127", "花灯7", "中国灯", "12212", 12, 1, 1, 1, 1, 23));
+        goodsData.insert(new GoodsPO("128", "花灯8", "中国灯", "12212", 12, 1, 1, 1, 1, 23));
+        goodsData.insert(new GoodsPO("129", "花灯9", "中国灯", "12212", 12, 1, 1, 1, 1, 23));
+        goodsData.insert(new GoodsPO("130", "花灯10", "中国灯", "12212", 12, 1, 1, 1, 1, 23));
+        //goodsData.delete("12433");
         // goodsData.update(new GoodsPO("12433","彩灯","中国灯","12212",1,1,1,1,1,1));
 
 
-
         GoodsClassificationData goodsClassificationData = new GoodsClassificationData();
-        goodsClassificationData.update(new GoodsClassificationPO("141","light","131",null,new String[]{"sss","aaa"}));
+        goodsClassificationData.update(new GoodsClassificationPO("141", "light", "131", null, new String[]{"sss", "aaa"}));
         goodsClassificationData.insert(new GoodsClassificationPO("root", null, null, new String[]{"123", "124", "125", "126", "127"}, null));
         goodsClassificationData.insert(new GoodsClassificationPO("123", "345", "root", new String[]{"131", "132", "133"}, null));
         goodsClassificationData.insert(new GoodsClassificationPO("124", "346", "root", new String[]{"134"}, null));

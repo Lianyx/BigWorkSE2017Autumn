@@ -7,6 +7,12 @@ import vo.receiptVO.StockPurReceiptVO;
 
 public class StockPurDetailPane extends StockReceiptPane<StockPurReceiptVO> {
 
+    public StockPurDetailPane() {
+    }
+
+    public StockPurDetailPane(StockPurReceiptVO stockPurReceiptVO) {
+        super(stockPurReceiptVO);
+    }
 
     @Override
     protected Class<? extends ReceiptblService<StockPurReceiptVO>> getServiceClass() {

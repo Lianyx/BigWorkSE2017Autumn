@@ -1,13 +1,7 @@
 package vo.receiptVO;
 
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import util.ReceiptState;
-import vo.abstractVO.SelectableVO;
 
-import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public abstract class StockReceiptListVO<T> extends ReceiptListVO<T>{

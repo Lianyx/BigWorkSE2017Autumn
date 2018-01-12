@@ -11,7 +11,6 @@ import ui.util.ButtonCell;
 import ui.util.Refreshable;
 import util.ReceiptState;
 import vo.billReceiptVO.PaymentReceiptListVO;
-import vo.receiptVO.ReceiptVO;
 
 import java.util.Set;
 

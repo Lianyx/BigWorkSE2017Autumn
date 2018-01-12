@@ -1,14 +1,10 @@
 package vo.receiptVO;
 
 import blService.checkblService.CheckInfo;
-import blService.checkblService.ReceiptblService;
 import javafx.scene.Node;
-import po.generic.ReceipishPO;
-import po.promotionPO.PromotionPO;
 import po.receiptPO.ReceiptPO;
 import util.ReceiptState;
 import vo.abstractVO.ReceipishVO;
-import vo.abstractVO.SelectableVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;

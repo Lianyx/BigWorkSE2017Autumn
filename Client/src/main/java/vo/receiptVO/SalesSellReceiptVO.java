@@ -1,9 +1,11 @@
 package vo.receiptVO;
 
 import blService.checkblService.CheckInfo;
+import businesslogic.checkbl.MyServiceFactory;
 import javafx.scene.Node;
 import po.promotionPO.PromotionGoodsItemPO;
 import po.receiptPO.SalesSellReceiptPO;
+import ui.salesui.salesSellui.SalesSellDetailPane;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;
 
@@ -35,12 +37,12 @@ public class SalesSellReceiptVO extends SalesReceiptVO {
 
     @Override
     public CheckInfo<SalesSellReceiptVO> getService() throws RemoteException, NotBoundException, MalformedURLException {
-        return null;
+        return MyServiceFactory.getSalesSellReceiptVOCheckInfo();
     }
 
     @Override
     public Node getDetailPane() {
-        return null;
+        return new SalesSellDetailPane(this);
     }
 
     @Override

@@ -1,8 +1,10 @@
 package vo.receiptVO;
 
 import blService.checkblService.CheckInfo;
+import businesslogic.checkbl.MyServiceFactory;
 import javafx.scene.Node;
 import po.receiptPO.StockRetReceiptPO;
+import ui.stockui.stockRetui.StockRetDetailPane;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;
 
@@ -27,12 +29,12 @@ public class StockRetReceiptVO extends StockReceiptVO {
 
     @Override
     public CheckInfo<StockRetReceiptVO> getService() throws RemoteException, NotBoundException, MalformedURLException {
-        return null;
+        return MyServiceFactory.getStockRetReceiptVOCheckInfo();
     }
 
     @Override
     public Node getDetailPane() {
-        return null;
+        return new StockRetDetailPane(this);
     }
 
     @Override

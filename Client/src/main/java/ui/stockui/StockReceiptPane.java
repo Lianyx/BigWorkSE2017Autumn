@@ -35,6 +35,13 @@ public abstract class StockReceiptPane<T extends StockReceiptVO> extends MyRecei
     @FXML
     ItemTreeTable itemTreeTable;
 
+    public StockReceiptPane() {
+    }
+
+    public StockReceiptPane(T receiptVO) {
+        super(receiptVO);
+    }
+
     @Override
     public void initiate() {
         super.initiate();
@@ -51,11 +58,11 @@ public abstract class StockReceiptPane<T extends StockReceiptVO> extends MyRecei
 
         comment.disableProperty().bind(modifyState.not());
         sum.setText("0");
-        itemTreeTable.sumProperty().addListener(t->{sum.setText(itemTreeTable.getSum()+"");});
+        itemTreeTable.sumProperty().addListener(t -> {
+            sum.setText(itemTreeTable.getSum() + "");
+        });
 
     }
-
-
 
 
     @Override
@@ -66,14 +73,14 @@ public abstract class StockReceiptPane<T extends StockReceiptVO> extends MyRecei
     @Override
     protected void updateReceiptVO() {
         super.updateReceiptVO();
-            receiptVO.setOperatorId(UserInfomation.userid);
-            receiptVO.setLastModifiedTime(LocalDateTime.now());
-            receiptVO.setMemberId(3);/////
-            receiptVO.setMemberName(provider.getText());
-            receiptVO.setStockName(stock.getText());
-            receiptVO.setSum(Double.parseDouble(sum.getText()));
-            receiptVO.setItems(itemTreeTable.getList());
-            receiptVO.setComment(comment.getText());
+        receiptVO.setOperatorId(UserInfomation.userid);
+        receiptVO.setLastModifiedTime(LocalDateTime.now());
+        receiptVO.setMemberId(3);
+        receiptVO.setMemberName(provider.getText());
+        receiptVO.setStockName(stock.getText());
+        receiptVO.setSum(Double.parseDouble(sum.getText()));
+        receiptVO.setItems(itemTreeTable.getList());
+        receiptVO.setComment(comment.getText());
     }
 
     @Override
@@ -87,19 +94,20 @@ public abstract class StockReceiptPane<T extends StockReceiptVO> extends MyRecei
     }
 
     @Override
-    public boolean validate(){
-        if(super.validate() && isDouble(sum.getText())){
+    public boolean validate() {
+        if (super.validate() && isDouble(sum.getText())) {
             return true;
         }
         return false;
     }
+
     @FXML
     public void addTransfer() {
         itemTreeTable.add(new ListGoodsItemVO("a", 1, "a", 1, 1, "a"));
     }
 
     @FXML
-    public void selectMember(){
+    public void selectMember() {
 
     }
    /*
@@ -130,7 +138,7 @@ public abstract class StockReceiptPane<T extends StockReceiptVO> extends MyRecei
     Label id;
 
 
-    //¸ù¾ÝidÈ¥Êý¾Ý¿âÕÒvo
+    //ï¿½ï¿½ï¿½ï¿½idÈ¥ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½vo
     int memberId = 0;
 
 
@@ -196,13 +204,13 @@ public abstract class StockReceiptPane<T extends StockReceiptVO> extends MyRecei
 
 
 
-    //½Ó¿ÚÎ´Íê³É
+    //ï¿½Ó¿ï¿½Î´ï¿½ï¿½ï¿½
     @FXML
     public void add() {
         stockListItemTreeTable.addGood(new ListGoodsItemVO("a", 1, "a", 1, 1, "a"));
     }
 
-    //½Ó¿ÚÎ´Íê³É
+    //ï¿½Ó¿ï¿½Î´ï¿½ï¿½ï¿½
     @Override
     public void delete() {
         DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane,"Delete","sabi","Yes","No");
@@ -211,11 +219,11 @@ public abstract class StockReceiptPane<T extends StockReceiptVO> extends MyRecei
 
            // stockblService.delete(this.id.getText());
 
-            //ÕâÀï·µ»ØÉÏ¸ö½çÃæ
+            //ï¿½ï¿½ï¿½ï·µï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½
             boardController.setRightAnimation();
             boardController.historicalSwitchTo((Refreshable) HistoricalRecord.pop());
             boardController.refresh();
-            //removeAndPopÊÇÖ¸pop³öÈ¥ºó²»ÄÜÍ¨¹ýtopbarµÄÇ°½ø¼üÇ°½ø
+            //removeAndPopï¿½ï¿½Ö¸popï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½topbarï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½
             HistoricalRecord.removeAndPop();
         });
         doubleButtonDialog.show();
