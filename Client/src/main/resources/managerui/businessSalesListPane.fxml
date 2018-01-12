@@ -25,4 +25,6 @@
             </JFXRippler>
         </graphic>
     </JFXButton>
+
+    <JFXButton fx:id="exportButton" layoutX="537" layoutY="22" text="导出为excel" onMouseClicked="#exportExcel"/>
 </fx:root>

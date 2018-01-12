@@ -127,7 +127,7 @@ public abstract class SalesReceiptVO extends ReceiptVO {
         ArrayList<ListGoodsItemVO> list = new ArrayList<>();
         if (array != null) {
             for (ReceiptGoodsItemPO receiptGoodsItemPO : array) {
-                list.add(new ListGoodsItemVO(receiptGoodsItemPO));
+                list.add(new ListGoodsItemVO(receiptGoodsItemPO, getLastModifiedTime().toLocalDate()));
             }
         }
         return list;

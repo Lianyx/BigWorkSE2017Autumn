@@ -17,8 +17,8 @@ public class TestSalesSell {
 
     public static void main(String[] args) {
         ArrayList<ListGoodsItemVO> list = new ArrayList<>();
-        list.add(new ListGoodsItemVO("sabi", 12, "SABI", 100, 2, "nishisabi"));
-        list.add(new ListGoodsItemVO("sabi", 4, "SABI", 50, 2, "nishisabi"));
+        list.add(new ListGoodsItemVO("sabi", "12", "SABI", 100, 2, "nishisabi"));
+        list.add(new ListGoodsItemVO("sabi", "4", "SABI", 50, 2, "nishisabi"));
 
         SalesSellReceiptVO salesSellReceiptVO = new SalesSellReceiptVO("JHT-20170101-00023", 12, LocalDateTime.now(), LocalDateTime.now().plusDays(1), ReceiptState.PENDING, -1, "linyuchao", "awb", "awd", list, "awd", 1200000, 12, 12, null, 123);
         SalesSellReceiptVO salesSellReceiptVO1 = new SalesSellReceiptVO("JHT-20170101-00011", 12, LocalDateTime.now(), LocalDateTime.now().minusDays(4), ReceiptState.PENDING, 1, "linyuchao", "awx", "21c", list, "x", 12, 132, 12, null, 123);
