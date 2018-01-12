@@ -51,7 +51,7 @@ public class MemberFilterPane extends AnchorPane{
     public void save() {
         if(!degree.getText().equals(""))
         memberSearchCondition.setDegree(Integer.parseInt(degree.getText()));
-        memberSearchCondition.setMemberCategory(MemberCategory.map.get(state.getValue().getText()));
+        memberSearchCondition.setMemberCategory(MemberCategory.map.get(state.getValue().getText().toUpperCase()));
         popOver.hide();
         BoardController.getBoardController().refresh();
 
