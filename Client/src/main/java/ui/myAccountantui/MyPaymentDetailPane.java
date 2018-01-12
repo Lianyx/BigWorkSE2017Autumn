@@ -30,12 +30,11 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
     private TextField operator;
     @FXML
     private JFXRippler addTransferButton;
+    @FXML
+    private TextField createtime;
+    @FXML
+    private TextField lastmodifiedtime;
 
-
-
-    /**
-     * Constructor related
-     */
     public MyPaymentDetailPane() {
     }
 
@@ -46,6 +45,8 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
 
         operator.setDisable(true);
         sumField.setDisable(true);
+        createtime.setDisable(true);
+        lastmodifiedtime.setDisable(true);
 
         clientField.disableProperty().bind(modifyState.not());
         addTransferButton.visibleProperty().bind(modifyState);
@@ -57,12 +58,10 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
     @Override
     protected void initiate() {
         super.initiate();
-        // 需要set disable property吗？
     }
 
-    /**
-     * implement methods
-     */
+
+
     @Override
     protected String getURL() {
         return "/myAccountantui/myPaymentDetailPane.fxml";
@@ -80,7 +79,7 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
         return super.validate() && isDouble(sumField.getText()) && isInteger(clientField.getText());
     }
 
-    private boolean isDouble(String doublish) { // 这两个其实用regex写出来更好看
+    private boolean isDouble(String doublish) {
         try {
             Double.parseDouble(doublish);
             return true;
@@ -100,7 +99,7 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
 
 
     @Override
-    protected void updateReceiptVO() { // 这里不需要再检查了
+    protected void updateReceiptVO() {
         super.updateReceiptVO();
         receiptVO.setSum(Double.parseDouble(sumField.getText()));
         receiptVO.setclientID(Integer.parseInt(clientField.getText()));
@@ -116,12 +115,11 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
         sumField.setText(String.valueOf(receiptVO.getSum()));
         paymentItemTreeTable.setList(receiptVO.getTransferList());
         clientField.setText(String.valueOf(receiptVO.getclientID()));
+        createtime.setText(receiptVO.getCreateTime().toString());
+        lastmodifiedtime.setText(receiptVO.getLastModifiedTime().toString());
     }
 
 
-    /**
-     * FXML methods
-     */
     @FXML
     private void addTransfer() {
         paymentItemTreeTable.add(new TransferItemVO(0,0,"TODO"));

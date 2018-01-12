@@ -22,7 +22,6 @@ import javafx.scene.layout.StackPane;
 
 import org.controlsfx.control.PopOver;
 import po.GoodsPO;
-import ui.userui.usermanagerui.FilterPane;
 import ui.util.*;
 import vo.inventoryVO.GoodSearchVO;
 import vo.inventoryVO.GoodsVO;

@@ -213,3 +213,8 @@ create table User(
   password varchar(100),
   isDeleted bool
 )character set = utf8;
+
+create TABLE Member{
+
+
+}

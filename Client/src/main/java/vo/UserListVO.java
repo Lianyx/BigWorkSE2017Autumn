@@ -13,62 +13,54 @@ import java.util.Comparator;
 
 public class UserListVO extends SelectableVO<UserListVO> {
 
-    private int userid;
+    private int userID;
     private Image image;
-    private String username;
+    private String userName;
     private UserCategory userCategory;
     private String email;
     private String phone;
-    private boolean multiple = true;
+    private boolean isDelete;
+    private boolean multiple;
+    private UserVO userVO;
 
     public UserListVO(){
-
+        this.setImage(new Image("/default/timg.jpg"));
     }
 
+    public UserListVO(String userName, UserCategory userCategory, String email, String phone) {
+        this.setImage(new Image("/default/timg.jpg"));
+        this.userName = userName;
+        this.userCategory = userCategory;
+        this.email = email;
+        this.phone = phone;
+    }
 
-    public UserListVO(int userid, Image image, String username, UserCategory userCategory, String email, String phone, boolean selected) {
-        this.userid = userid;
+    public UserListVO(int userID, Image image, String userName, UserCategory userCategory, String email, String phone, boolean isDelete) {
+        this.userID = userID;
         this.image = image;
-        this.username = username;
+        this.userName = userName;
         this.userCategory = userCategory;
         this.email = email;
         this.phone = phone;
+        this.isDelete = isDelete;
     }
 
-    public UserListVO(int userid, Image image, String username, UserCategory userCategory, String email, String phone) {
-        this.userid = userid;
-        this.image = image;
-        this.username = username;
-        this.userCategory = userCategory;
-        this.email = email;
-        this.phone = phone;
-    }
-    public UserListVO(int userid, String username, UserCategory userCategory, String email, String phone) {
-        this.userid = userid;
-        this.image = new Image("/default/timg.jpg");
-        this.username = username;
-        this.userCategory = userCategory;
-        this.email = email;
-        this.phone = phone;
+    public UserListVO(UserVO userVO) {
+        this.userVO = userVO;
+        this.setUserName(userVO.getUsername());
+        this.setUserCategory(userVO.getUsertype());
+        this.setImage(userVO.getImage());
+        this.setPhone(userVO.getPhone());
+        this.setEmail(userVO.getEmail());
+        this.setUserID(userVO.getId());
     }
 
-    public UserListVO( String username, UserCategory userCategory, String email, String phone) {
-        this.userid = 0;
-        this.image = new Image("/default/timg.jpg");
-        this.username = username;
-        this.userCategory = userCategory;
-        this.email = email;
-        this.phone = phone;
+    public int getUserID() {
+        return userID;
     }
 
-
-
-    public int getUserid() {
-        return userid;
-    }
-
-    public void setUserid(int userid) {
-        this.userid = userid;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public Image getImage() {
@@ -79,12 +71,12 @@ public class UserListVO extends SelectableVO<UserListVO> {
         this.image = image;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public UserCategory getUserCategory() {
@@ -111,11 +103,31 @@ public class UserListVO extends SelectableVO<UserListVO> {
         this.phone = phone;
     }
 
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
+    }
+
+    public UserVO getUserVO() {
+        return userVO;
+    }
+
+    public void setUserVO(UserVO userVO) {
+        this.userVO = userVO;
+    }
+
     public boolean isMultiple() {
         return multiple;
     }
 
     public void setMultiple(boolean multiple) {
         this.multiple = multiple;
+    }
+
+    public UserVO toVO(){
+        return this.userVO;
     }
 }

@@ -2,6 +2,7 @@ package po;
 
 
 import javafx.scene.image.Image;
+import util.ImageConvertor;
 import util.UserCategory;
 
 import java.io.Serializable;
@@ -23,11 +24,11 @@ public class UserPO implements Serializable{
     private String comment;
     private String date;
     private String password;
-    private int isDeleted = 0;
+    private int isDeleted;
     public UserPO() {
     }
 
-    public UserPO(int userId, String username, UserCategory usertype, LocalDateTime createTime, String facebook, String github, String twitter, String email, String phone, String comment, String date, String password) {
+    public UserPO(int userId, String username, UserCategory usertype, LocalDateTime createTime, String facebook, String github, String twitter, String email, String phone, String comment, String date, String password,int isDelete) {
         this.userId = userId;
         this.username = username;
         this.usertype = usertype;
@@ -40,6 +41,7 @@ public class UserPO implements Serializable{
         this.comment = comment;
         this.date = date;
         this.password = password;
+        this.isDeleted = 0;
     }
 
 

@@ -1,23 +1,43 @@
 package ui.salesui;
 
-import blService.blServiceFactory.ServiceFactory_Stub;
-import blService.salesblService.SalesblService;
 import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableRow;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.TreeTableCell;
-import javafx.scene.control.TreeTableColumn;
-import javafx.util.Callback;
+import javafx.beans.property.StringProperty;
+import ui.managerui.common.treeTableRelated.ChooseColumn;
+import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
+import ui.managerui.common.treeTableRelated.SearchableStringColumn;
 import ui.util.*;
 import util.ReceiptState;
 import vo.receiptVO.SalesReceiptListVO;
-import vo.receiptVO.SalesReceiptVO;
+
+import java.util.Set;
 
 
-public class SalesTreeTable extends ReceiptTreeTable<SalesReceiptListVO> {
+public abstract class SalesTreeTable<T extends SalesReceiptListVO<T>> extends MyTreeTableBorderPane<T> {
 
-    //   private ObservableList<SalesReceiptListVO> observableListfilter = observableList;
+
+    public SalesTreeTable(Set<T> chosenItems, StringProperty keywordProperty) {
+
+        JFXTreeTableColumn<T, Boolean> choose = new ChooseColumn<>(chosenItems);
+        JFXTreeTableColumn<T, String> id = new SearchableStringColumn<>("ID", 100, keywordProperty, p -> p.getId());
+        JFXTreeTableColumn<T, String> member = new SearchableStringColumn<>("客户", 100, keywordProperty, p -> p.getMemberName());
+        JFXTreeTableColumn<T, String> stateColumn = new JFXTreeTableColumn<>("类型");
+        stateColumn.setPrefWidth(100);
+        stateColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getValue().getReceiptState().name()));
+        stateColumn.setCellFactory(param -> new ButtonCell<T>() {
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item != null) {
+                    setButtonStyle(ReceiptState.color.get(item));
+                }
+            }
+        });
+
+        myTreeTable.getColumns().addAll(choose,id,member, stateColumn);
+    }
+
+   /* //   private ObservableList<SalesReceiptListVO> observableListfilter = observableList;
     //  private ObservableList<SalesReceiptListVO> observableListtemp;
     private SalesblService salesblService;
     public SalesTreeTable() {
@@ -121,5 +141,5 @@ public class SalesTreeTable extends ReceiptTreeTable<SalesReceiptListVO> {
             e.printStackTrace();
         }
         return null;
-    }
+    }*/
 }

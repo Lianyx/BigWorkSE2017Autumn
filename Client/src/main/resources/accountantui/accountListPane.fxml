@@ -17,7 +17,7 @@
         </StackPane>
     </JFXRippler>
 
-    <JFXButton fx:id="filter" text="Filter" layoutX="420.0" layoutY="35.0"
+    <!--<JFXButton fx:id="filter" text="Filter" layoutX="420.0" layoutY="35.0"
                mnemonicParsing="false" >
         <graphic>
             <HBox>
@@ -30,9 +30,9 @@
                 </children>
             </HBox>
         </graphic>
-    </JFXButton>
+    </JFXButton>-->
 
-    <JFXButton fx:id="add" text="Add" layoutX="494.0" layoutY="35.0"
+    <JFXButton fx:id="add" text="新建" layoutX="494.0" layoutY="35.0"
                mnemonicParsing="false"  onMouseClicked="#add" >
         <graphic>
             <HBox>
@@ -47,7 +47,7 @@
         </graphic>
     </JFXButton>
 
-    <JFXButton fx:id="delete" layoutX="565.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#deleteList" text="Delete">
+    <JFXButton fx:id="delete" layoutX="565.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#deleteList" text="删除">
         <graphic>
             <HBox>
                 <children>

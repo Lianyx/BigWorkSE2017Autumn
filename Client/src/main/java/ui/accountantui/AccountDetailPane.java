@@ -38,9 +38,13 @@ import java.util.function.Predicate;
 import static ui.util.ValidatorDecorator.DoubleValid;
 import static ui.util.ValidatorDecorator.RequireValid;
 
-public class AccountDetailPane extends ReceiptDetailPane<AccountListVO>{
+public class AccountDetailPane extends Refreshable{
 
+    BoardController boardController;
 
+    StackPane mainpane;
+
+    AccountListVO vo;
 
     private AccountblService accountblService;
 
@@ -55,11 +59,21 @@ public class AccountDetailPane extends ReceiptDetailPane<AccountListVO>{
     @FXML
     JFXTextField balance;
 
+    @FXML
+    protected ModifyButton modify;
+    @FXML
+    protected MaterialDesignIconView pen;
+    @FXML
+    protected JFXButton save;
 
     @FXML
-    MaterialDesignIconView pen;
+    protected JFXButton reject;
+
+    @FXML
+    protected JFXButton delete;
 
     SimpleBooleanProperty modifyState = new SimpleBooleanProperty(false);
+    SimpleBooleanProperty updateState = new SimpleBooleanProperty();
 
     boolean isAdd = false;
 
@@ -88,7 +102,22 @@ public class AccountDetailPane extends ReceiptDetailPane<AccountListVO>{
 
 
     public AccountDetailPane(boolean isAdd) {
-        super("/accountantui/accountdetail.fxml");
+        super();
+        boardController = BoardController.getBoardController();
+        mainpane = PaneFactory.getMainPane();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/accountantui/accountdetail.fxml"));
+            fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
+            fxmlLoader.load();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        save.setText("Add");
+        updateState.set(true);
+        modify.setVisible(false);
+        delete.setVisible(false);
+
         try{
             this.accountblService = new Accountbl();
 
@@ -111,7 +140,7 @@ public class AccountDetailPane extends ReceiptDetailPane<AccountListVO>{
 
     }
 
-    @Override
+    @FXML
     public void delete() {
         DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Delete", "sabi", "Yes", "No");
         doubleButtonDialog.setButtonOne(() -> {
@@ -157,7 +186,15 @@ public class AccountDetailPane extends ReceiptDetailPane<AccountListVO>{
 
     }
 
-    @Override
+    public void switchPane(boolean toSwtich) {
+        if (toSwtich == true) {
+            boardController.switchTo(this);
+        } else {
+            boardController.setAll(this);
+        }
+    }
+
+    @FXML
     public void save() {
         if (valid()) {
             modify.modifyProperty().set(false);
@@ -202,20 +239,18 @@ public class AccountDetailPane extends ReceiptDetailPane<AccountListVO>{
     }
 
 
-    @Override
-    public void savePendingReceipt() {
-    }
-
-    @Override
-    public void saveDraftReceipt() {
-    }
-
-
-    @Override
     public boolean valid() {
         if (!name.getText().equals("") && !id.getText().equals("")&&!balance.getText().equals(""))
             return true;
         return false;
     }
 
+    public void setBack(){
+        boardController.setRightAnimation();
+        boardController.historicalSwitchTo((Refreshable) HistoricalRecord.pop());
+        boardController.refresh();
+        HistoricalRecord.removeAndPop();
+    }
+
 }
+

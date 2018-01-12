@@ -2,13 +2,18 @@ package data.userdata;
 
 import annotations.RMIRemote;
 import dataService.userdataService.UserDataService;
-import mapper.UserPOMapper;
+import javafx.scene.image.Image;
+import mapper.UserDataPOMapper;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import po.UserPO;
+import util.ImageConvertor;
 import util.ResultMessage;
 import util.UserSearchCondition;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -19,29 +24,22 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
     }
 
     @Override
-    public int getId() throws RemoteException {
+    public UserPO getNew() throws RemoteException {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            UserPOMapper mapper = session.getMapper(UserPOMapper.class);
+            UserDataPOMapper mapper = session.getMapper(UserDataPOMapper.class);
             int id = mapper.getId();
+            UserPO userPO = new UserPO();
+            userPO.setUserId(id);
             session.commit();
-            return id;
+            return userPO;
         }
     }
 
-    @Override
-    public ResultMessage insert(UserPO userPO) throws RemoteException {
-        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            UserPOMapper mapper = session.getMapper(UserPOMapper.class);
-            mapper.insert(userPO);
-            session.commit();
-            return ResultMessage.SUCCESS;
-        }
-    }
 
     @Override
     public ResultMessage delete(int id) throws RemoteException {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            UserPOMapper mapper = session.getMapper(UserPOMapper.class);
+            UserDataPOMapper mapper = session.getMapper(UserDataPOMapper.class);
             mapper.delete(id);
             session.commit();
             return ResultMessage.SUCCESS;
@@ -51,8 +49,9 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
     @Override
     public ResultMessage update(UserPO userPO) throws RemoteException {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            UserPOMapper mapper = session.getMapper(UserPOMapper.class);
+            UserDataPOMapper mapper = session.getMapper(UserDataPOMapper.class);
             mapper.update(userPO);
+            System.out.println(userPO);
             session.commit();
             return ResultMessage.SUCCESS;
         }
@@ -61,9 +60,32 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
     @Override
     public UserPO showDetail(int id) throws RemoteException {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            UserPOMapper mapper = session.getMapper(UserPOMapper.class);
+            UserDataPOMapper mapper = session.getMapper(UserDataPOMapper.class);
             UserPO userPO = mapper.showDetail(id);
             session.commit();
+            File file = null;
+            String files[] = null;
+            try{
+                file = new File(getUserImageURL());
+                files = file.list();
+                System.out.println(files[0]);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            for(String f:files) {
+                    try {
+                        if (userPO.getUserId() == Integer.parseInt(f.split("\\.")[0])) {
+                            BufferedImage image = ImageIO.read((new File(file.getPath() + "\\" + f)));
+                            userPO.setImage(ImageConvertor.getByte(image));
+                        }else {
+                            BufferedImage image = ImageIO.read((new File("/default/timg.jpg")));
+                            userPO.setImage(ImageConvertor.getByte(image));
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+            }
             return userPO;
         }
     }
@@ -71,8 +93,32 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
     @Override
     public ArrayList<UserPO> search(UserSearchCondition userSearchCondition) throws RemoteException {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            UserPOMapper mapper = session.getMapper(UserPOMapper.class);
+            UserDataPOMapper mapper = session.getMapper(UserDataPOMapper.class);
             ArrayList<UserPO> userPOs = mapper.search(userSearchCondition);
+            File file = null;
+            String files[] = null;
+            try{
+                file = new File(getUserImageURL());
+                files = file.list();
+                System.out.println(files[0]);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            for(UserPO userPO:userPOs){
+                for(String f:files) {
+                    try {
+                        if (userPO.getUserId() == Integer.parseInt(f.split("\\.")[0])) {
+                            BufferedImage image = ImageIO.read((new File(file.getPath() + "\\" + f)));
+                            userPO.setImage(ImageConvertor.getByte(image));
+                        }else {
+                            BufferedImage image = ImageIO.read((new File("/default/timg.jpg")));
+                            userPO.setImage(ImageConvertor.getByte(image));
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
             System.out.println("sabi");
             System.out.println(userPOs.size());
             session.commit();
@@ -83,7 +129,7 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
     @Override
     public UserPO checkPassword(String username, String password) throws RemoteException {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            UserPOMapper mapper = session.getMapper(UserPOMapper.class);
+            UserDataPOMapper mapper = session.getMapper(UserDataPOMapper.class);
             UserPO userPO = mapper.getPassword(username);
             if(userPO == null)
                 return null;
@@ -94,4 +140,9 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
         }
         return null;
     }
+
+    private static String getUserImageURL(){
+        return "E:\\ERPnju\\Server\\src\\main\\resources\\image";
+    }
+
 }

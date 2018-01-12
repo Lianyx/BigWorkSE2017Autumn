@@ -5,7 +5,7 @@ import vo.abstractVO.SelectableVO;
 
 import java.time.LocalDateTime;
 
-public class SalesReceiptListVO extends ReceiptListVO<SalesReceiptListVO>{
+public abstract class SalesReceiptListVO<T> extends ReceiptListVO<T>{
     private String id;
     private LocalDateTime createTime;
     private ReceiptState receiptState;
@@ -13,19 +13,17 @@ public class SalesReceiptListVO extends ReceiptListVO<SalesReceiptListVO>{
     private String stockName;
     private double sum;
     private boolean multiple = true;
-    boolean isSell;
 
     public SalesReceiptListVO() {
     }
 
-    public SalesReceiptListVO(String id, LocalDateTime createTime, ReceiptState receiptState, String memberName, String stockName, double sum, boolean isSell) {
+    public SalesReceiptListVO(String id, LocalDateTime createTime, ReceiptState receiptState, String memberName, String stockName, double sum) {
         this.id = id;
         this.createTime = createTime;
         this.receiptState = receiptState;
         this.memberName = memberName;
         this.stockName = stockName;
         this.sum = sum;
-        this.isSell = isSell;
     }
 
     public LocalDateTime getCreateTime() {
@@ -84,16 +82,5 @@ public class SalesReceiptListVO extends ReceiptListVO<SalesReceiptListVO>{
         this.multiple = multiple;
     }
 
-    public boolean isSell() {
-        return isSell;
-    }
 
-    public void setSell(boolean sell) {
-        isSell = sell;
-    }
-
-    @Override
-    public <TV extends ReceiptVO> TV toVO() {
-        return null;
-    }
 }

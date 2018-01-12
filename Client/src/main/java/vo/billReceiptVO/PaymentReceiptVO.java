@@ -1,18 +1,13 @@
 package vo.billReceiptVO;
 
-import blService.blServiceFactory.ServiceFactory;
 import blService.checkblService.CheckInfo;
-import blService.checkblService.ReceiptblService;
 import businesslogic.checkbl.MyServiceFactory;
 import javafx.scene.Node;
 import po.TransferItemPO;
 import po.receiptPO.PaymentBillReceiptPO;
-import po.receiptPO.ReceiptPO;
-import ui.accountantui.PaymentDetailPane;
 import ui.myAccountantui.MyPaymentDetailPane;
 import util.ReceiptState;
 
-import vo.receiptVO.ReceiptListVO;
 import vo.receiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;

@@ -76,7 +76,7 @@
     -fx-background-color: red;
 }
 
-#save{
+#save,#reset{
     -fx-text-fill: white;
     -fx-background-color: #03A9F4;
 }

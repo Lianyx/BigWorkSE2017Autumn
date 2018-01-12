@@ -83,4 +83,23 @@ public class ValidatorDecorator {
 
     }
 
+
+    public static boolean isDouble(String doublish) { // 这两个其实用regex写出来更好看
+        try {
+            Double.parseDouble(doublish);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static boolean isInteger(String intish) {
+        try {
+            Integer.parseInt(intish);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
 }

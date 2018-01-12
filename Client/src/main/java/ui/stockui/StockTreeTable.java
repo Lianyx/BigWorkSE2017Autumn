@@ -1,20 +1,43 @@
 package ui.stockui;
 
-import blService.blServiceFactory.ServiceFactory_Stub;
-import blService.stockblService.StockblService;
 import com.jfoenix.controls.*;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.scene.control.*;
-import javafx.util.Callback;
+import javafx.beans.property.StringProperty;
 
+import ui.managerui.common.treeTableRelated.ChooseColumn;
+import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
+import ui.managerui.common.treeTableRelated.SearchableStringColumn;
 import ui.util.*;
 import util.ReceiptState;
 import vo.receiptVO.StockReceiptListVO;
 
-import java.rmi.RemoteException;
+import java.util.Set;
 
-public class StockTreeTable extends ReceiptTreeTable<StockReceiptListVO> {
+public abstract class StockTreeTable <T extends StockReceiptListVO<T>> extends MyTreeTableBorderPane<T> {
 
+
+
+    public StockTreeTable(Set<T> chosenItems, StringProperty keywordProperty) {
+
+        JFXTreeTableColumn<T, Boolean> choose = new ChooseColumn<>(chosenItems);
+        JFXTreeTableColumn<T, String> id = new SearchableStringColumn<>("ID", 100, keywordProperty, p -> p.getId());
+        JFXTreeTableColumn<T, String> member = new SearchableStringColumn<>("客户", 100, keywordProperty, p -> p.getMemberName());
+        JFXTreeTableColumn<T, String> stateColumn = new JFXTreeTableColumn<>("类型");
+        stateColumn.setPrefWidth(100);
+        stateColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getValue().getReceiptState().name()));
+        stateColumn.setCellFactory(param -> new ButtonCell<T>() {
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item != null) {
+                    setButtonStyle(ReceiptState.color.get(item));
+                }
+            }
+        });
+
+        myTreeTable.getColumns().addAll(choose,id,member, stateColumn);
+    }
+/*
     //   private ObservableList<StockReceiptListVO> observableListfilter = observableList;
     //  private ObservableList<StockReceiptListVO> observableListtemp;
     private StockblService stockblService;
@@ -66,9 +89,6 @@ public class StockTreeTable extends ReceiptTreeTable<StockReceiptListVO> {
 
 
 
-        /**
-        * more就是一列后面有三个点那个button
-        **/
         JFXTreeTableColumn<StockReceiptListVO, Boolean> more = new JFXTreeTableColumn<>("");
         more.setPrefWidth(55);
         columnDecorator.setupCellValueFactory(more, s -> new ReadOnlyObjectWrapper(s.isMultiple()));
@@ -89,9 +109,6 @@ public class StockTreeTable extends ReceiptTreeTable<StockReceiptListVO> {
         });
 
 
-        /**
-         * 这里吧双击什么都做了，只要写跳转就行了
-         **/
 
         this.setRowFactory(tableView -> {
             JFXTreeTableRow<StockReceiptListVO> row = new JFXTreeTableRow<>();
@@ -119,5 +136,5 @@ public class StockTreeTable extends ReceiptTreeTable<StockReceiptListVO> {
         p.setCurrentPageIndex(p.getCurrentPageIndex());
         chosenItem.getSet().clear();
     }
-
+*/
 }

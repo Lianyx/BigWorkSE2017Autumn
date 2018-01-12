@@ -9,13 +9,13 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.Buffer;
 
 public class ImageConvertor {
-    public static byte[] getByte(Image image){
-        BufferedImage bimg = SwingFXUtils.fromFXImage(image,null);
+    public static byte[] getByte(BufferedImage image){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try{
-            ImageIO.write(bimg, "png", baos);
+            ImageIO.write(image, "png", baos);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -29,11 +29,18 @@ public class ImageConvertor {
         }catch(Exception e){
             e.printStackTrace();
         }
+        System.out.println(image);
         return image;
+    }
+
+    public static BufferedImage getBuffered(Image image){
+        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image,null);
+        return bufferedImage;
     }
 
     public static Image getFXImage(BufferedImage bufferedImage){
         Image image = SwingFXUtils.toFXImage(bufferedImage,null);
+        System.out.println(image);
         return image;
     }
 

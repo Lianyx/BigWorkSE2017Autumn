@@ -2,6 +2,7 @@ package businesslogic.userbl;
 
 import blService.userblService.UserManagerblService;
 import dataService.userdataService.UserDataService;
+import po.UserPO;
 import util.ResultMessage;
 import util.UserSearchCondition;
 import vo.UserListVO;
@@ -9,6 +10,8 @@ import vo.UserVO;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,23 +26,19 @@ public class Userbl implements UserManagerblService {
     }
 
     @Override
-    public ResultMessage insert(UserVO UserVO) throws RemoteException{
-        return  userDataService.insert(UserVO.toPO());
-    }
-
-    @Override
     public ResultMessage delete(int id) throws RemoteException{
         return userDataService.delete(id);
     }
 
     @Override
     public ResultMessage update(UserVO UserVO) throws RemoteException{
-        return userDataService.update(UserVO.toPO());
+        UserPO userPO = UserVO.toPO();
+        return userDataService.update(userPO);
     }
 
     @Override
-    public Set<UserListVO> search(UserSearchCondition userSearchCondition) throws RemoteException{
-        return userDataService.search(userSearchCondition).stream().map(t->{return (new UserVO(t)).toListVO();}).collect(Collectors.toSet());
+    public ArrayList<UserListVO> search(UserSearchCondition userSearchCondition) throws RemoteException{
+        return userDataService.search(userSearchCondition).stream().map(t->{return (new UserVO(t)).toListVO();}).collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Override
@@ -48,7 +47,7 @@ public class Userbl implements UserManagerblService {
     }
 
     @Override
-    public int getId() throws RemoteException{
-        return userDataService.getId();
+    public UserVO getNew() throws RemoteException{
+        return new UserVO(userDataService.getNew());
     }
 }

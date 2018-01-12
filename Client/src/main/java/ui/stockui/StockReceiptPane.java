@@ -1,50 +1,102 @@
 package ui.stockui;
 
-import blService.blServiceFactory.ServiceFactory;
-import blService.blServiceFactory.ServiceFactory_Stub;
-import blService.stockblService.StockblService;
 import com.jfoenix.controls.*;
-import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
+import ui.myAccountantui.common.ItemTreeTable;
+import ui.myAccountantui.common.MyReceiptDetailPane;
 import ui.util.*;
-import util.ReceiptState;
-import vo.ListGoodsItemVO;
-import vo.receiptVO.StockPurReceiptVO;
 import vo.receiptVO.StockReceiptVO;
-import vo.receiptVO.StockRetReceiptVO;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.time.*;
-import java.util.HashSet;
-import java.util.function.Predicate;
 
-import static ui.util.ValidatorDecorator.NumberValid;
 import static ui.util.ValidatorDecorator.RequireValid;
-
-/**
- * @Author: Lin Yuchao
- * @Description: 详细介面
- * @ModifyBy: Lin Yuchao
-**/
-public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
+import static ui.util.ValidatorDecorator.isDouble;
 
 
+public abstract class StockReceiptPane<T extends StockReceiptVO> extends MyReceiptDetailPane<T> {
+    @FXML
+    TextField operator;
+    @FXML
+    TextField provider;
+    @FXML
+    JFXTextField sum;
+    @FXML
+    TextField stock;
 
-    /**
-    * 这里一定要有service和单据的除了delete和modify和save的其他组建
-    **/
+    @FXML
+    JFXButton member;
+    @FXML
+    JFXButton user;
+
+    @FXML
+    TextArea comment;
+
+    @FXML
+    ItemTreeTable itemTreeTable;
+
+    @Override
+    public void initiate() {
+        super.initiate();
+        provider.setDisable(true);
+        operator.setDisable(true);
+        sum.setDisable(true);
+        stock.disableProperty().bind(modifyState.not());
+        member.disableProperty().bind(modifyState.not());
+        user.disableProperty().bind(modifyState.not());
+
+        RequireValid(operator);
+        RequireValid(provider);
+        RequireValid(stock);
+
+
+        comment.disableProperty().bind(modifyState.not());
+        sum.setText("0");
+        itemTreeTable.sumProperty().addListener(t->{sum.setText(itemTreeTable.getSum()+"");});
+
+    }
+
+
+
+
+    @Override
+    protected String getURL() {
+        return "/stockui/stockreceipt.fxml";
+    }
+
+    @Override
+    protected void updateReceiptVO() {
+        super.updateReceiptVO();
+            receiptVO.setOperatorId(UserInfomation.userid);
+            receiptVO.setLastModifiedTime(LocalDateTime.now());
+            receiptVO.setMemberId(3);/////
+            receiptVO.setMemberName(provider.getText());
+            receiptVO.setStockName(stock.getText());
+            receiptVO.setSum(Double.parseDouble(sum.getText()));
+            receiptVO.setItems(itemTreeTable.getList());
+            receiptVO.setComment(comment.getText());
+    }
+
+    @Override
+    protected void reset() {
+        super.reset();
+        provider.setText(receiptVO.getMemberName());
+        operator.setText(UserInfomation.username);
+        stock.setText(receiptVO.getStockName());
+        comment.setText(receiptVO.getComment());
+        sum.setText(receiptVO.getSum() + "");
+    }
+
+    @Override
+    public boolean validate(){
+        if(super.validate() && isDouble(sum.getText())){
+            return true;
+        }
+        return false;
+    }
+
+/*
 
     @FXML
     StockListItemTreeTable stockListItemTreeTable;
@@ -72,7 +124,7 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
     Label id;
 
 
-    //根据id去数据库找vo
+    //����idȥ���ݿ���vo
     int memberId = 0;
 
 
@@ -84,12 +136,6 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
 
 
 
-    /**
-     * @Author: Lin Yuchao
-     * @Attention 单据查看 requrievalid就是要求textfield要有输入，numbervalid是要数字输入，doublevalid是double输入
-     * @Param:
-     * @Return:
-    **/
 
     public StockReceiptPane(String id) {
         super("/stockui/stockreceipt.fxml");
@@ -120,12 +166,7 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
     }
 
 
-    /**
-     * @Author: Lin Yuchao
-     * @Attention 单据新增界面  super的父类构造不一，父类有个updatestate的bool用来区别
-     * @Param:
-     * @Return:
-    **/
+
     public StockReceiptPane(boolean isPur){
         super("/stockui/stockreceipt.fxml");
         stockblService = ServiceFactory_Stub.getService(StockblService.class.getName());
@@ -149,13 +190,13 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
 
 
 
-    //接口未完成
+    //�ӿ�δ���
     @FXML
     public void add() {
         stockListItemTreeTable.addGood(new ListGoodsItemVO("a", 1, "a", 1, 1, "a"));
     }
 
-    //接口未完成
+    //�ӿ�δ���
     @Override
     public void delete() {
         DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane,"Delete","sabi","Yes","No");
@@ -164,28 +205,24 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
 
            // stockblService.delete(this.id.getText());
 
-            //这里返回上个界面
+            //���ﷵ���ϸ�����
             boardController.setRightAnimation();
             boardController.historicalSwitchTo((Refreshable) HistoricalRecord.pop());
             boardController.refresh();
-            //removeAndPop是指pop出去后不能通过topbar的前进键前进
+            //removeAndPop��ָpop��ȥ����ͨ��topbar��ǰ����ǰ��
             HistoricalRecord.removeAndPop();
         });
         doubleButtonDialog.show();
     }
 
-    /**
-    * 这个是生成自己的名字
-    **/
+
     @FXML
     public void currentUser() {
         operator.setText(UserInfomation.username);
     }
 
 
-    /**
-    * 这个是客户选择
-    **/
+
     @FXML
     public void selectMember() {
         provider.setText("sabi");
@@ -197,9 +234,7 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
         boardController.Loading();
         try{
 
-            /**
-            * 查看
-            **/
+
             if(!updateState.get()) {
                 DoubleButtonDialog buttonDialog =
                         new DoubleButtonDialog(mainpane, "Wrong", "sabi", "Last", "Ret");
@@ -227,9 +262,7 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
                 new Thread(task).start();
             }else {
 
-                /**
-                 * 新建的跳转
-                 **/
+
                 switchPane(toSwitch);
             }
         }catch (Exception e){
@@ -239,16 +272,13 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
 
 
 
-    /**
-     * 存储成pending的逻辑
-     **/
     @Override
     public void savePendingReceipt(){
         DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Pending?", "sabi", "Yes", "No");
         doubleButtonDialog.setButtonTwo(() -> {
         });
         doubleButtonDialog.setButtonOne(() -> {
-/*
+
 
         this.receiptid = head.getText().replace("-","")+"-"+date.getValue().toString().replace("-","")+"-"+id.getText().replace("-","");
         if(isPur.get())
@@ -270,12 +300,9 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
                     stock.getText(),
                     Double.parseDouble(sum.getText()),
                     stockListItemTreeTable.getList(),
-                    comment.getText());*/
+                    comment.getText());
         try {
 
-            /**
-             * 根据是否为更新来判断是否是添加还是更新
-             **/
             if (updateState.get())
                 stockblService.insert(this.vo);
             else
@@ -299,7 +326,7 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
             }
             if (date.getValue() == null)
                 date.setValue(LocalDate.now());
-            /*
+
             this.receiptid = head.getText().replace("-", "") + "-" + date.getValue().toString().replace("-", "") + "-" + id.getText().replace("-", "");
             if(isPur.get())
             this.vo = new StockPurReceiptVO(receiptid,
@@ -324,7 +351,7 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
                         stock.getText(),
                         Double.parseDouble(sum.getText()),
                         stockListItemTreeTable.getList(),
-                        comment.getText());*/
+                        comment.getText());
             try {
                 if (updateState.get())
                     stockblService.insert(this.vo);
@@ -342,6 +369,6 @@ public class StockReceiptPane extends ReceiptDetailPane<StockReceiptVO> {
         if(date.getValue()!=null&&!operator.getText().equals("")&&!provider.getText().equals("")&&!stock.getText().equals("")&&!sum.getText().equals(""))
             return true;
         return false;
-    }
+    }*/
 
 }

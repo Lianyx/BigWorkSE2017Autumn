@@ -135,7 +135,7 @@ public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends
     }
 
     @FXML
-    private void search() {
+    protected void search() {
 
     }
 

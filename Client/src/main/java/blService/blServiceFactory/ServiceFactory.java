@@ -1,12 +1,9 @@
 package blService.blServiceFactory;
 
 
-import blService.stockblService.StockblService;
-
 import java.lang.reflect.Field;
 
 public class ServiceFactory {
-    public static StockblService stockblService;
 
 
     public Object getClass(String clazz) throws Exception{
@@ -23,23 +20,6 @@ public class ServiceFactory {
         return obj;
     }
 
-    public StockblService getStockblService() throws Exception{
-        return (StockblService) getClass(Character.toLowerCase(StockblService.class.getName().split("\\.")[2].charAt(0))+StockblService.class.getName().split("\\.")[2].substring(1));
-    }
-
-    public static void main(String args[]){
-
-
-        ServiceFactory serviceFactory = new ServiceFactory();
-        try{
-        StockblService stockblService = serviceFactory.getStockblService();
-        System.out.println(stockblService);
-        stockblService = serviceFactory.getStockblService();
-        System.out.println(stockblService);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
 
 }

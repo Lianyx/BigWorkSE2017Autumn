@@ -38,6 +38,11 @@ public class SalesRetReceiptVO extends SalesReceiptVO {
         return null;
     }
 
+    @Override
+    public SalesRetListVO toListVO() {
+        SalesRetListVO salesRetListVO = new SalesRetListVO(this);
+        return salesRetListVO;
+    }
 
 
     @Override

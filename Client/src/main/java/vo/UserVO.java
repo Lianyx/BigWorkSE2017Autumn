@@ -200,7 +200,7 @@ public class UserVO {
         userPO.setEmail(email);
         userPO.setFacebook(facebook);
         userPO.setGithub(github);
-        userPO.setImage(ImageConvertor.getByte(image));
+        userPO.setImage(ImageConvertor.getByte(ImageConvertor.getBuffered(image)));
         userPO.setTwitter(twitter);
         userPO.setPassword(password);
         userPO.setPhone(phone);
@@ -213,12 +213,13 @@ public class UserVO {
 
     public UserListVO toListVO(){
         UserListVO userListVO = new UserListVO();
-        userListVO.setUserid(id);
+        userListVO.setUserID(id);
         userListVO.setImage(image);
         userListVO.setEmail(email);
         userListVO.setPhone(phone);
         userListVO.setUserCategory(usertype);
-        userListVO.setUsername(username);
+        userListVO.setUserName(username);
+        userListVO.setUserVO(this);
         return userListVO;
     }
 
