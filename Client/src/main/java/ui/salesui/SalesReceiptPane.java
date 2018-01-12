@@ -2,18 +2,23 @@ package ui.salesui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
+import ui.memberui.ChooseList;
 import ui.myAccountantui.common.ItemTreeTable;
 import ui.myAccountantui.common.MyReceiptDetailPane;
 import ui.util.*;
 import vo.ListGoodsItemVO;
+import vo.MemberVO;
 import vo.receiptVO.*;
 
 import java.time.LocalDateTime;
@@ -34,8 +39,7 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
     TextField stock;
     @FXML
     JFXButton member;
-    @FXML
-    JFXButton user;
+
 
     @FXML
     JFXTextField original;
@@ -163,7 +167,11 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
 
     @FXML
     private void selectMember() {
-
+        MemberVO memberVO = new MemberVO();
+        ChooseList chooseList = new ChooseList(memberVO,()->{provider.setText(memberVO.getName());});
+        JFXDialog dialog = new JFXDialog(PaneFactory.getMainPane(),chooseList, JFXDialog.DialogTransition.CENTER);
+        chooseList.setDialog(dialog);
+        dialog.show();
     }
 
     /*

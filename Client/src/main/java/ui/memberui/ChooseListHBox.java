@@ -12,6 +12,8 @@ public class ChooseListHBox extends HBox {
     private CircleImageView civ;
     @FXML
     private Label name;
+    @FXML
+    private Label id;
 
     public ChooseListHBox(){
         try{
@@ -30,6 +32,6 @@ public class ChooseListHBox extends HBox {
     public void setName(String str){
         name.setText(str);
     }
-
+    public void setId(int memberId){ id.setText(String.valueOf(memberId));}
 
 }

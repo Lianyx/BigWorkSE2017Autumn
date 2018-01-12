@@ -2,6 +2,7 @@ package businesslogic.memberbl;
 
 import blService.memberblService.MemberblService;
 import dataService.memberdataService.MemberdataService;
+import po.MemberPO;
 import util.MemberSearchCondition;
 import util.ResultMessage;
 import vo.MemberListVO;
@@ -49,4 +50,6 @@ public class Memberbl implements MemberblService{
         System.out.println(id);
         return new MemberVO (memberdataService.showDetail(id));
     }
+
+
 }

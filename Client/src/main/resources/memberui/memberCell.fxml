@@ -9,7 +9,8 @@
 <?import ui.util.CircleImageView?>
 <fx:root type="HBox" xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
-         prefHeight="40.0" prefWidth="100.0">
-<CircleImageView fx:id="civ" radius="15"/>
+         prefHeight="40.0" prefWidth="240.0" spacing="15">
+<CircleImageView fx:id="civ" translateY="4" radius="15"/>
+    <Label fx:id="id" text="13" translateY="12" />
     <Label fx:id="name" text="name"/>
 </fx:root>

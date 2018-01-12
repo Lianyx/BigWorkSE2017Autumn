@@ -4,18 +4,16 @@ import util.ResultMessage;
 import vo.MemberChooseVO;
 import vo.MemberVO;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Set;
 
-public interface MemberInfo {
+public interface MemberInfo extends Remote{
 
-    public ResultMessage updateDebt(int memberId,double debt);
-    public ResultMessage updateCredit(int memberId,double credit);
-    public ArrayList<MemberVO> getALL();
-    public double getStockPur(LocalDateTime floor,LocalDateTime ceil);
-    public double getStockRet(LocalDateTime floor,LocalDateTime ceil);
-    public double getSalesSell(LocalDateTime floor,LocalDateTime ceil);
-    public double getSalesRet(LocalDateTime floor,LocalDateTime ceil);
+    public ResultMessage updateDebt(int memberId,double debt) throws RemoteException;
+    public ResultMessage updateCredit(int memberId,double credit) throws RemoteException;
+    public ArrayList<MemberVO> getALL() throws RemoteException;
 
 }
