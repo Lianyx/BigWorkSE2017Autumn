@@ -50,6 +50,7 @@ public class InventoryViewbl implements InventoryViewblService {
         List<InventoryViewItemVO> list = new ArrayList<>();
         Set<InventoryViewItemVO> set = new HashSet<>();
 
+        //入库数量金额
         for (StockPurReceiptVO vo:stockPurReceiptVOList) {
             List<ListGoodsItemVO> goodsList = vo.getItems();
             for (int i = 0; i < goodsList.size(); i++) {
@@ -65,8 +66,10 @@ public class InventoryViewbl implements InventoryViewblService {
                 if(set.size() == size){
                     for (InventoryViewItemVO inventoryViewItemVO:set) {
                         if(inventoryViewItemVO.getGoodId().equals(itemVO.getGoodId())){
-                            inventoryViewItemVO.setStockPurMoney(itemVO.getStockPurMoney()+inventoryViewItemVO.getStockPurMoney());
-                            inventoryViewItemVO.setStockPurNum(itemVO.getStockPurNum()+inventoryViewItemVO.getStockPurNum());
+                            inventoryViewItemVO.setStockPurMoney(goodsItemVO.getPrice()+inventoryViewItemVO.getStockPurMoney());
+                            inventoryViewItemVO.setStockInMoney(goodsItemVO.getPrice()+inventoryViewItemVO.getStockInMoney());
+                            inventoryViewItemVO.setStockPurNum(goodsItemVO.getGoodsNum()+inventoryViewItemVO.getStockPurNum());
+                            inventoryViewItemVO.setStockInNum(goodsItemVO.getGoodsNum()+inventoryViewItemVO.getStockInNum());
                             set.remove(inventoryViewItemVO);
                             set.add(inventoryViewItemVO);
                         }
@@ -75,6 +78,7 @@ public class InventoryViewbl implements InventoryViewblService {
             }
         }
 
+        //出库数量金额
         for (StockRetReceiptVO stockRetReceiptVO:stockRetReceiptVOList) {
             List<ListGoodsItemVO> goodsList = stockRetReceiptVO.getItems();
             for (int i = 0; i < goodsList.size(); i++) {
@@ -90,8 +94,8 @@ public class InventoryViewbl implements InventoryViewblService {
                 if(set.size() == size){
                     for (InventoryViewItemVO inventoryViewItemVO:set) {
                         if(inventoryViewItemVO.getGoodId().equals(itemVO.getGoodId())){
-                          //  inventoryViewItemVO.setStock(itemVO.getStockPurMoney()+inventoryViewItemVO.getStockPurMoney());
-                            inventoryViewItemVO.setStockPurNum(itemVO.getStockPurNum()+inventoryViewItemVO.getStockPurNum());
+                            inventoryViewItemVO.setStockOutMoney(goodsItemVO.getPrice()+inventoryViewItemVO.getStockPurMoney());
+                            inventoryViewItemVO.setStockPurNum(goodsItemVO.getGoodsNum()+inventoryViewItemVO.getStockPurNum());
                             set.remove(inventoryViewItemVO);
                             set.add(inventoryViewItemVO);
                         }
@@ -100,7 +104,35 @@ public class InventoryViewbl implements InventoryViewblService {
             }
         }
 
+        //销售数量金额
+        for (SalesSellReceiptVO sellReceiptVO:salesSellReceiptVOList) {
+            List<ListGoodsItemVO> goodsList = sellReceiptVO.getItems();
+            for (int i = 0; i < goodsList.size(); i++) {
+                ListGoodsItemVO goodsItemVO = goodsList.get(i);
 
-        return null;
+                InventoryViewItemVO itemVO = new InventoryViewItemVO();
+
+                itemVO.setGoodId(goodsItemVO.getGoodsId());
+
+                int size = set.size();
+
+                set.add(itemVO);
+                if(set.size() == size){
+                    for (InventoryViewItemVO inventoryViewItemVO:set) {
+                        if(inventoryViewItemVO.getGoodId().equals(itemVO.getGoodId())){
+                            inventoryViewItemVO.setSaleMoney(goodsItemVO.getPrice()+inventoryViewItemVO.getSaleMoney());
+                            inventoryViewItemVO.setSaleNum(goodsItemVO.getGoodsNum()+inventoryViewItemVO.getSaleNum());
+                            set.remove(inventoryViewItemVO);
+                            set.add(inventoryViewItemVO);
+                        }
+                    }
+                }
+            }
+        }
+
+        inventoryViewVO.setViewList(set);
+
+
+        return inventoryViewVO;
     }
 }
