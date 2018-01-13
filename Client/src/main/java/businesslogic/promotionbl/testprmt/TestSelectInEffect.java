@@ -49,6 +49,7 @@ public class TestSelectInEffect {
 
             SalesSellblService salesSellblService= new SalesSellbl();
             SalesSellReceiptVO ssr = salesSellblService.getNew();
+            ssr.setMemberLevel(4);
             ssr.setItems(list);
 
             PromotionInfo promotionInfo = MyServiceFactory.getPromotionInfo();
