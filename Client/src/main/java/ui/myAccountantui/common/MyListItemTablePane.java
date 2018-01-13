@@ -2,6 +2,9 @@ package ui.myAccountantui.common;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -89,8 +92,7 @@ public abstract class MyListItemTablePane<T extends RecursiveTreeObject<T>>  ext
 
 
     public ArrayList<T> getList(){
-        ArrayList<T> arrayList = new ArrayList<>();
-        observableList.forEach(i->arrayList.add(i));
+        ArrayList<T> arrayList = new ArrayList<>(observableList);
         return arrayList;
     }
 
@@ -103,4 +105,7 @@ public abstract class MyListItemTablePane<T extends RecursiveTreeObject<T>>  ext
     }
 
     public abstract void initial(T vo);
+
+    public abstract void refresh();
+
 }
