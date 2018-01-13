@@ -125,12 +125,14 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
     @Override
     protected void setRedCredit(PaymentReceiptVO redCreditVO) {
         super.setRedCredit(redCreditVO);
+        redCreditVO.setclientID(receiptVO.getclientID());
         redCreditVO.setSum(-redCreditVO.getSum());
         List<TransferItemVO> list = redCreditVO.getTransferList();
+        List<TransferItemVO> temp = new ArrayList<>();
         for(TransferItemVO vo:list){
-            vo.setSum(-vo.getSum());
+            temp.add(new TransferItemVO(vo.getAccountID(),-vo.getSum(),vo.getComment()));
         }
-        redCreditVO.setTransferList(list);
+        redCreditVO.setTransferList(temp);
     }
 
 
