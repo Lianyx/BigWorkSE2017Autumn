@@ -18,6 +18,11 @@ public class GoodsInventoryUpdate implements GoodsInventoryUpdateInfo {
         this.goodsbl = new Goodsbl();
     }
 
+    /**
+     * 用于SalesSelReceipt审批之后自动产生赠送单（草稿状态）
+     * @param list
+     * @throws RemoteException
+     */
     @Override
     public void goodsGiftUpdate(List<ReceiptGoodsItemVO> list) throws RemoteException {
         for (ReceiptGoodsItemVO vo:list) {
