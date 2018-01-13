@@ -89,11 +89,12 @@ public class InventoryWarningDetailPane extends MyReceiptDetailPane<InventoryWar
     @FXML
     @Override
     protected void reset() {
+        super.reset();
         operator.setText(String.valueOf(receiptVO.getOperatorId()));
         commentArea.setText(receiptVO.getComment());
         stateField.setText(receiptVO.getReceiptState().toString());
 
-        warningItemTreeTable.setList(observableList);
+        warningItemTreeTable.setList(receiptVO.getItems());
     }
 
     @FXML

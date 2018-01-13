@@ -92,11 +92,12 @@ public class InventoryDamageDetailPane extends MyReceiptDetailPane<InventoryDama
     @FXML
     @Override
     protected void reset() {
+        super.reset();
         operator.setText(String.valueOf(receiptVO.getOperatorId()));
         commentArea.setText(receiptVO.getComment());
         stateField.setText(receiptVO.getReceiptState().toString());
 
-        damageItemTreeTable.setList(observableList);
+        damageItemTreeTable.setList(receiptVO.getItems());
     }
 
     @FXML
