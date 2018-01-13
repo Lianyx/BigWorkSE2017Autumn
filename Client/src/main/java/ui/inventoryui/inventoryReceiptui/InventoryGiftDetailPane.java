@@ -24,9 +24,9 @@ import java.util.List;
 
 public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftReceiptVO> {
     @FXML
-    InventoryListItemTreeTable giftItemTreeTable;
+    private InventoryListItemTreeTable giftItemTreeTable;
 
-    ObservableList<ReceiptGoodsItemVO> observableList = FXCollections.observableArrayList();
+    private ObservableList<ReceiptGoodsItemVO> observableList = FXCollections.observableArrayList();
 
     @FXML
     private TextArea commentArea;
@@ -67,6 +67,7 @@ public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftRe
         receiptVO.setOperatorId(Integer.parseInt(operator.getText()));
         receiptVO.setComment(commentArea.getText());
         receiptVO.setItems(goodsList);
+        giftItemTreeTable.setList(goodsList);
         // TODO 我没管transferList相关的（下面的reset同理）。而且这个vo里面没有comment………
     }
 
@@ -86,12 +87,12 @@ public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftRe
     @FXML
     @Override
     protected void reset() {
-        //super.reset();
+        super.reset();
         operator.setText(String.valueOf(receiptVO.getOperatorId()));
         commentArea.setText(receiptVO.getComment());
         stateField.setText(receiptVO.getReceiptState().toString());
 
-        giftItemTreeTable.setList(observableList);
+        giftItemTreeTable.setList(receiptVO.getItems());
     }
 
     @FXML

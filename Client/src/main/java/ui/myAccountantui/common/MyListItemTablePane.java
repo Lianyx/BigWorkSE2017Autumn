@@ -5,6 +5,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.scene.control.TreeItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -22,6 +23,7 @@ public abstract class MyListItemTablePane<T extends RecursiveTreeObject<T>>  ext
 
     public MyListItemTablePane() {
         super();
+
         mainpane = PaneFactory.getMainPane();
         this.setEditable(true);
         this.setShowRoot(false);
@@ -92,6 +94,13 @@ public abstract class MyListItemTablePane<T extends RecursiveTreeObject<T>>  ext
         return arrayList;
     }
 
+    public ObservableList<T> getObservableList() {
+        return observableList;
+    }
+
+    public void setObservableList(ObservableList<T> observableList) {
+        this.observableList = observableList;
+    }
 
     public abstract void initial(T vo);
 }

@@ -26,16 +26,13 @@ import java.util.List;
 public class InventoryListItemTreeTable extends JFXTreeTableView<ReceiptGoodsItemVO> {
     private ObservableList<ReceiptGoodsItemVO> observableList = FXCollections.observableArrayList();
 
-   // private InventoryGiftReceiptblService inventoryGiftReceiptblService;
     private BoardController boardController;
     private StackPane mainpane;
 
     public InventoryListItemTreeTable() {
         super();
 
-
         mainpane = PaneFactory.getMainPane();
-     //   inventoryblService = ServiceFactory_Stub.getService(InventoryblService.class.getName());
 
         ColumnDecorator columnDecorator = new ColumnDecorator();
 
@@ -45,7 +42,6 @@ public class InventoryListItemTreeTable extends JFXTreeTableView<ReceiptGoodsIte
         goodsID.setPrefWidth(115.5);
         goodsID.setEditable(true);
         columnDecorator.setupCellValueFactory(goodsID, ReceiptGoodsItemVO::goodsIdProperty);
-       // goodsID.setCellFactory(TextFieldTableCell.forTableColumn());
           goodsID.setCellFactory((TreeTableColumn<ReceiptGoodsItemVO, String> param) -> {
             return new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder());
         });
@@ -98,9 +94,10 @@ public class InventoryListItemTreeTable extends JFXTreeTableView<ReceiptGoodsIte
 
     public void setList(List<ReceiptGoodsItemVO> goods) {
         observableList.setAll(goods);
+        System.out.println("tree 双击"+observableList.toString());
     }
 
-    public void setList(ObservableList<ReceiptGoodsItemVO> list){observableList.setAll(list);}
+ //   public void setList(ObservableList<ReceiptGoodsItemVO> list){observableList.setAll(list);}
 
     public void removeGood(ReceiptGoodsItemVO good) {
         observableList.remove(good);

@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import po.LogPO;
+import ui.logui.LogPane;
 import ui.managerui.common.MyBoardController;
 import ui.managerui.common.MyTopBar;
 import ui.memberui.MemberListPane;
@@ -50,7 +52,7 @@ public class SalesUIController implements Initializable{
         // 这个是不得不set，因为是同时生成的，但是这样很不好，希望可以改掉
         bar.setBoardController(boardController);
 
-        MemberListPane init = new MemberListPane();
+        LogPane init = new LogPane();
         init.refresh(true);
 
 
