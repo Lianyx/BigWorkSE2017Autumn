@@ -83,8 +83,8 @@ public class BusinessProgressFilterPane extends FXMLAnchorPane {
             receiptSearchCondition.getBillTypes().add(BillType.InventoryGift);
         }
 
-        receiptSearchCondition.setClerkName(clerkField.getText());
-        receiptSearchCondition.setStockName(stockField.getText());
+        receiptSearchCondition.setClerkName(clerkField.getText().trim().equals("") ? null : clerkField.getText());
+        receiptSearchCondition.setStockName(stockField.getText().trim().equals("") ? null : stockField.getText());
         try {
             receiptSearchCondition.setMemberId(Integer.parseInt(memberField.getText()));
         } catch (NumberFormatException e) {
