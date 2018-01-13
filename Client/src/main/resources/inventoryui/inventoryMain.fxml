@@ -16,10 +16,10 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.layout.HBox?>
 <?import ui.managerui.common.MyTopBar?>
-<StackPane fx:id="mainpane" fx:controller="ui.inventoryui.InventoryUIController"
+<AnchorPane fx:id="mainAnchorpane" fx:controller="ui.inventoryui.InventoryUIController"
            stylesheets="@../css/list.css" xmlns="http://javafx.com/javafx/8.0.121"
            xmlns:fx="http://javafx.com/fxml/1">
-    <AnchorPane fx:id="back" prefHeight="600.0" prefWidth="800.0">
+    <!--<AnchorPane fx:id="back" prefHeight="600.0" prefWidth="800.0">-->
         <children>
 
             <MyTopBar fx:id="bar" layoutX="160"/>
@@ -135,5 +135,5 @@
                 </children>
             </AnchorPane>
         </children>
-    </AnchorPane>
-</StackPane>
+    <!--</AnchorPane>-->
+</AnchorPane>

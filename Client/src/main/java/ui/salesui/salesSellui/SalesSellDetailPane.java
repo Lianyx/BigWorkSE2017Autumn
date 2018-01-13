@@ -52,33 +52,33 @@ public class SalesSellDetailPane extends SalesReceiptPane<SalesSellReceiptVO> {
         return SalesSellblService.class;
     }
 
-    @Override
-    protected void save() {
-        if (validate()) {
-            receiptVO.setReceiptState(ReceiptState.PENDING);
-            try { // 这样的try catch不行
-                ArrayList<PromotionVO> promotions = promotionInfo.getMatch(receiptVO);
-                // 这个目前只可能是0个元素或者1个元素
-
-                if (! promotions.isEmpty()) {
-                    PromotionVO promotionVO = promotions.get(0);
-
-                    Label label = promotionVO.getInfoLabel();
-                    String content = label.getText();
-
-                    new MyOneButtonDialog(content, () -> {
-                        promotionVO.modifySalesSell(receiptVO);
-                        saveTask();
-                    }).show();
-                }
-
-                saveTask();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-            saveTask();
-        } else {
-            new MyOneButtonDialog("不合法数据").show();
-        }
-    }
+//    @Override
+//    protected void save() {
+//        if (validate()) {
+//            receiptVO.setReceiptState(ReceiptState.PENDING);
+//            try { // 这样的try catch不行
+//                ArrayList<PromotionVO> promotions = promotionInfo.getMatch(receiptVO);
+//                // 这个目前只可能是0个元素或者1个元素
+//
+//                if (! promotions.isEmpty()) {
+//                    PromotionVO promotionVO = promotions.get(0);
+//
+//                    Label label = promotionVO.getInfoLabel();
+//                    String content = label.getText();
+//
+//                    new MyOneButtonDialog(content, () -> {
+//                        promotionVO.modifySalesSell(receiptVO);
+//                        saveTask();
+//                    }).show();
+//                }
+//
+//                saveTask();
+//            } catch (RemoteException e) {
+//                e.printStackTrace();
+//            }
+//            saveTask();
+//        } else {
+//            new MyOneButtonDialog("不合法数据").show();
+//        }
+//    }
 }

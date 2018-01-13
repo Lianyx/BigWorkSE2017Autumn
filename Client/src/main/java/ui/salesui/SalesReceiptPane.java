@@ -4,7 +4,11 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -13,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import ui.inventoryui.goodsui.GoodChoose;
 import ui.memberui.ChooseList;
 import ui.myAccountantui.common.ItemTreeTable;
 import ui.myAccountantui.common.MyReceiptDetailPane;
@@ -21,6 +26,7 @@ import vo.ListGoodsItemVO;
 import vo.MemberVO;
 import vo.billReceiptVO.PaymentReceiptVO;
 import vo.billReceiptVO.TransferItemVO;
+import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 import vo.receiptVO.*;
 
 import java.time.LocalDateTime;
@@ -62,6 +68,8 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
 
     @FXML
     ItemTreeTable itemTreeTable;
+
+    protected ObservableList<ReceiptGoodsItemVO> observableList = FXCollections.observableArrayList();
 
     public SalesReceiptPane() {
     }
@@ -165,6 +173,21 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
     @FXML
     public void addTransfer(){
         itemTreeTable.add((new ListGoodsItemVO("a", "54", "a", 1, 1, "a")));
+//        IntegerProperty toBeListened = new SimpleIntegerProperty(0);
+//        try {
+//            GoodChoose goodsChoose = new GoodChoose();
+//            goodsChoose.choose(observableList, toBeListened);
+//        } catch (Exception e) { // TODO 异常先不管了，而且下面这样写现在好像是一次性的，也没有回设num，不过先不管了
+//            e.printStackTrace();
+//        }
+//
+//
+//        toBeListened.addListener((observable, oldValue, newValue) -> {
+//            if (newValue.equals(1)) {
+//                observableList.stream().map(ReceiptGoodsItemVO::toListGoodsItemVO)
+//                        .forEach(i -> itemTreeTable.add(i));
+//            }
+//        });
     }
 
     @FXML
