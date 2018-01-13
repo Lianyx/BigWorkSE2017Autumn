@@ -14,6 +14,7 @@ import vo.MemberChooseVO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ChoosePane extends AnchorPane {
@@ -67,7 +68,7 @@ public class ChoosePane extends AnchorPane {
         goodChooseVOs.clear();
     }
 
-    public void setObservableList(List<String> list) {
+    public void setObservableList(Set<String> list) {
         observableList.addAll(list);
     }
 

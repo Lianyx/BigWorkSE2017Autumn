@@ -2,10 +2,14 @@ package ui.inventoryui.inventoryReceiptui;
 
 import blService.checkblService.ReceiptblService;
 import blService.inventoryblService.InventoryOverflowReceiptblService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ui.myAccountantui.common.MyReceiptDetailPane;
+import vo.inventoryVO.inventoryReceiptVO.InventoryDamageReceiptVO;
+import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.InventoryOverflowReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 
@@ -15,10 +19,14 @@ public class InventoryOverflowDetailPane extends MyReceiptDetailPane<InventoryOv
     @FXML
     InventoryOverflowDamageTreeTable overflowItemTreeTable;
 
+    ObservableList<ReceiptGoodsItemVO> observableList = FXCollections.observableArrayList();
+
     @FXML
     private TextArea commentArea;
     @FXML
     private TextField operator;
+    @FXML
+    private TextField stateField;
 
     public InventoryOverflowDetailPane() {
         overflowItemTreeTable.setEditable(true);
@@ -26,8 +34,7 @@ public class InventoryOverflowDetailPane extends MyReceiptDetailPane<InventoryOv
 
     public InventoryOverflowDetailPane(InventoryOverflowReceiptVO receiptVO) {
         super(receiptVO);
-        operator.setText(String.valueOf(receiptVO.getOperatorId()));
-        commentArea.setText(receiptVO.getComment());
+        stateField.setDisable(true);
         overflowItemTreeTable.setList(receiptVO.getItems());
         overflowItemTreeTable.setEditable(true);
     }
@@ -54,13 +61,21 @@ public class InventoryOverflowDetailPane extends MyReceiptDetailPane<InventoryOv
         receiptVO.setOperatorId(Integer.parseInt(operator.getText()));
         receiptVO.setComment(commentArea.getText());
         receiptVO.setItems(goodsList);
-      /*  for (ReceiptGoodsItemVO vo:goodsList) {
-            System.out.println("GoodName:"+ vo.getGoodsName()+" "+vo.getSendNum());
-        }
-        System.out.println("goodsLidt:"+goodsList.toString());*/
 
-        // TODO 我没管transferList相关的（下面的reset同理）。而且这个vo里面没有comment………
     }
+
+  /*  @Override
+    protected void setRedCredit(InventoryDamageReceiptVO redCreditVO) {
+        List<ReceiptGoodsItemVO> list = redCreditVO.getItems();
+
+        int index = 0;
+        for (ReceiptGoodsItemVO vo:list) {
+            vo.setInventoryNum(vo.getInventoryNum()*(-1));
+            vo.setSendNum(vo.getSendNum()*(-1));
+            list.set(index++,vo);
+        }
+        redCreditVO.setItems(list);
+    }*/
 
     @FXML
     @Override

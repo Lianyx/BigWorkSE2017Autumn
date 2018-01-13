@@ -88,51 +88,6 @@ public class InventoryListItemTreeTable extends JFXTreeTableView<ReceiptGoodsIte
         });
         //System.out.println(observableList.toString());
 
-        this.setRowFactory(tableView -> {
-            JFXTreeTableRow row = new JFXTreeTableRow();
-            row.setStyle("-fx-border-color: rgb(233,237,239); -fx-border-width: 0.3;");
-            row.setOnMouseClicked((MouseEvent event) -> {
-                ReceiptGoodsItemVO ReceiptGoodsItemVO = (ReceiptGoodsItemVO) row.getTreeItem().getValue();
-                if (event.getButton() == MouseButton.SECONDARY) {
-                    ListPopup listPopup = new ListPopup();
-                    JFXPopup popup = new JFXPopup(listPopup);
-                    listPopup.getListview().setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-                        /*    InventoryListItemPane inventoryListItemPane = new InventoryListItemPane();
-                            // StockListItemPane stockListItemPane = new StockListItemPane(ReceiptGoodsItemVO, mainpane, observableList);
-                            JFXDialog dialog = new JFXDialog(mainpane,inventoryListItemPane , JFXDialog.DialogTransition.CENTER);
-                            stockListItemPane.setDialog(dialog);
-                            dialog.show();
-                            popup.hide();*/
-                        }
-                    });
-                    listPopup.getListdelete().setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-                            observableList.remove(ReceiptGoodsItemVO);
-                        }
-                    });
-                    popup.show(row, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT);
-                }
-                if(event.getClickCount() == 2){
-                  /*  StockListItemPane stockListItemPane = new StockListItemPane(ReceiptGoodsItemVO, mainpane, observableList);
-                    JFXDialog dialog = new JFXDialog(mainpane, stockListItemPane, JFXDialog.DialogTransition.CENTER);
-                    stockListItemPane.setDialog(dialog);
-                    dialog.show();*/
-                }
-
-            });
-            row.selectedProperty().addListener(e -> {
-                if (row.isSelected()) {
-                    row.toFront();
-                } else {
-                    row.setEffect(null);
-                }
-            });
-            return row;
-        });
-
         TreeItem<ReceiptGoodsItemVO> root = new RecursiveTreeItem<>(observableList, RecursiveTreeObject::getChildren);
         this.setRoot(root);
         this.setEditable(true);
@@ -144,6 +99,8 @@ public class InventoryListItemTreeTable extends JFXTreeTableView<ReceiptGoodsIte
     public void setList(List<ReceiptGoodsItemVO> goods) {
         observableList.setAll(goods);
     }
+
+    public void setList(ObservableList<ReceiptGoodsItemVO> list){observableList.setAll(list);}
 
     public void removeGood(ReceiptGoodsItemVO good) {
         observableList.remove(good);

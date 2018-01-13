@@ -16,7 +16,25 @@ public class InventoryCheckTreeTable extends ReceiptTreeTable<InventoryCheckItem
     public InventoryCheckTreeTable() {
         super();
         rowsPerPage = 7;
-        this.inventoryCheckblService = ServiceFactory_Stub.getService(InventoryCheckblService.class.getName());
+
+       JFXTreeTableColumn<InventoryCheckItemVO,String> idcol = new JFXTreeTableColumn<>("");
+       idcol.setPrefWidth(60);
+        idcol.setCellFactory((col) -> {
+            TreeTableCell<InventoryCheckItemVO, String> cell = new TreeTableCell<InventoryCheckItemVO, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    this.setText(null);
+                    this.setGraphic(null);
+
+                    if (!empty) {
+                        int rowIndex = this.getIndex()+1;
+                        this.setText(String.valueOf(rowIndex));
+                    }
+                }
+            };
+            return cell;
+        });
 
         JFXTreeTableColumn<InventoryCheckItemVO, String> goodName = new JFXTreeTableColumn("GoodName");
         goodName.setPrefWidth(60);
@@ -48,7 +66,7 @@ public class InventoryCheckTreeTable extends ReceiptTreeTable<InventoryCheckItem
         batchNum.setPrefWidth(120);
         columnDecorator.setupCellValueFactory(batchNum,s->new ReadOnlyObjectWrapper<>(s.getBatchNum()));
 
-        this.getColumns().addAll(goodName,goodId,inventoryNum,avePrice,stockOutDate,batch,batchNum);
+        this.getColumns().addAll(idcol,goodName,goodId,inventoryNum,avePrice,stockOutDate,batch,batchNum);
     }
 
     public void setCheckItem(Set<InventoryCheckItemVO> set){observableList.setAll(set);}
