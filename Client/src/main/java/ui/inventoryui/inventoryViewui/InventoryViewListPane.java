@@ -2,6 +2,7 @@ package ui.inventoryui.inventoryViewui;
 
 import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.inventoryblService.InventoryViewblService;
+import businesslogic.inventorybl.InventoryViewbl;
 import javafx.scene.layout.BorderPane;
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;
@@ -23,7 +24,7 @@ public class InventoryViewListPane extends ReceiptListPane<InventoryViewItemVO> 
 
     public InventoryViewListPane() throws Exception {
         super("/inventoryui/inventoryviewui/inventoryviewlistpane.fxml");
-        this.inventoryViewblService = ServiceFactory_Stub.getService(InventoryViewblService.class.getName());
+        this.inventoryViewblService = new InventoryViewbl();//ServiceFactory_Stub.getService(InventoryViewblService.class.getName());
         receiptTreeTable = new InventoryViewTreeTable();
         receiptTreeTable.setPrefSize(600,435);
       //  receiptTreeTable.keywordProperty().bind(match);

@@ -2,6 +2,7 @@ package ui.inventoryui.inventoryCheckui;
 
 import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.inventoryblService.InventoryCheckblService;
+import businesslogic.inventorybl.InventoryCheckbl;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 import jxl.write.WriteException;
@@ -25,7 +26,7 @@ public class InventoryCheckPane extends ReceiptListPane<InventoryCheckItemVO> im
 
     public InventoryCheckPane() throws Exception {
         super("/inventoryui/inventorycheckpane.fxml");
-        this.inventoryCheckblService = ServiceFactory_Stub.getService(InventoryCheckblService.class.getName());
+        this.inventoryCheckblService = new InventoryCheckbl();//ServiceFactory_Stub.getService(InventoryCheckblService.class.getName());
         inventoryCheckVO = inventoryCheckblService.inventoryCheck();
         receiptTreeTable = new InventoryCheckTreeTable();
         receiptTreeTable.setPrefSize(600,435);
@@ -88,7 +89,8 @@ public class InventoryCheckPane extends ReceiptListPane<InventoryCheckItemVO> im
 
     @FXML
     public void exportExcel(){
-        exportExcelMixer();
+
+
     }
 
     @Override
