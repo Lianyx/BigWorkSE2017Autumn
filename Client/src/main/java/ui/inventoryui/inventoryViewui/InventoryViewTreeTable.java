@@ -1,7 +1,7 @@
 package ui.inventoryui.inventoryViewui;
 
-import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.inventoryblService.InventoryViewblService;
+import businesslogic.blServiceFactory.MyblServiceFactory;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.Pagination;
@@ -17,7 +17,10 @@ public class InventoryViewTreeTable extends ReceiptTreeTable<InventoryViewItemVO
     public InventoryViewTreeTable() {
         super();
         rowsPerPage = 7;
-        inventoryViewblService = ServiceFactory_Stub.getService(InventoryViewblService.class.getName());
+        // 这里动了ServiceFactory_Stuc，改成MyblServiceFactory。by 连
+//        inventoryViewblService = ServiceFactory_Stub.getService(InventoryViewblService.class.getName());
+        inventoryViewblService = MyblServiceFactory.getService(InventoryViewblService.class);
+
 
         JFXTreeTableColumn<InventoryViewItemVO, String> goodName = new JFXTreeTableColumn("GoodName");
         goodName.setPrefWidth(60);

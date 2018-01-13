@@ -1,11 +1,7 @@
 package businesslogic.promotionbl.testprmt;
 
 import blService.goodsblService.goodsSearchInfo;
-import businesslogic.checkbl.MyServiceFactory;
-
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
+import businesslogic.blServiceFactory.MyServiceFactory;
 
 public class TestGoodsSearch {
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
 package vo.promotionVO;
 
-import businesslogic.checkbl.MyServiceFactory;
+import businesslogic.blServiceFactory.MyServiceFactory;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -10,7 +10,6 @@ import vo.inventoryVO.GoodsVO;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.server.ExportException;
 
 public class PromotionGoodsItemVO extends RecursiveTreeObject<PromotionGoodsItemVO> {
     private String id;

@@ -11,14 +11,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.util.Duration;
+import ui.common.BoardController;
 import ui.managerui.businessConditionui.BusinessConditionPane;
 import ui.managerui.businessProgressui.BusinessProgressPane;
 import ui.managerui.businessSalesDetail.BusinessSalesListPane;
-import ui.common.MyBoardController;
 import ui.common.MyTopBar;
-import ui.util.BoardController;
-import ui.util.PaneSwitchAnimation;
+//import ui.util.BoardController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,9 +51,9 @@ public class AccountantUIController implements Initializable{
 
 
 
-        BoardController.setBoardController(boardController);
-        boardController = MyBoardController.getMyBoardController();
-        BoardController.setBoardController(boardController);
+//        BoardController.setBoardController(myBoardController);
+//        myBoardController = BoardController.getBoardController();
+//        BoardController.setBoardController(myBoardController);
 
         // 这个是不得不set，因为是同时生成的，但是这样很不好，希望可以改掉
         bar.setBoardController(boardController);
@@ -68,7 +66,7 @@ public class AccountantUIController implements Initializable{
 
             accountblService = new Accountbl();
 
-            boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150),  board));
+//            myBoardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150),  board));
 
             AccountListPane tempaccountListPane = new AccountListPane();
             tempaccountListPane.historyAdd = true;

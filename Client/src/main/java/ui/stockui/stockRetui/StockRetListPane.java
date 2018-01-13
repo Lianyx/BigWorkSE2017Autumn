@@ -1,9 +1,9 @@
 package ui.stockui.stockRetui;
 
-import blService.checkblService.ReceiptblService;
+import blService.genericblService.ReceiptblService;
 import blService.stockblService.StockRetblService;
 import ui.stockui.StockListPane;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 import vo.receiptVO.StockRetListVO;
 import vo.receiptVO.StockRetReceiptVO;
 
@@ -21,7 +21,7 @@ public class StockRetListPane extends StockListPane<StockRetListVO,StockRetRecei
     }
 
     @Override
-    protected Refreshable getNewDetailPane() {
+    protected RefreshablePane getNewDetailPane() {
         return new StockRetDetailPane();
     }
 

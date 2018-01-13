@@ -1,9 +1,9 @@
-package ui.common;
+package ui.common.bigPane;
 
 import ui.common.mixer.FXMLLoadableMixer;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 
-public abstract class FXMLRefreshableAnchorPane extends Refreshable implements FXMLLoadableMixer {
+public abstract class FXMLRefreshableAnchorPane extends RefreshablePane implements FXMLLoadableMixer {
     public FXMLRefreshableAnchorPane() {
         load();
     }

@@ -5,13 +5,10 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
-import ui.common.FXMLAnchorPane;
+import ui.common.bigPane.FXMLAnchorPane;
 import util.BillType;
 import util.ReceiptSearchCondition;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;

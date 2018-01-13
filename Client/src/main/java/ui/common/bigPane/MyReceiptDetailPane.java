@@ -1,8 +1,8 @@
-package ui.common;
+package ui.common.bigPane;
 
 import blService.checkblService.CheckInfo;
-import blService.checkblService.ReceiptblService;
-import businesslogic.promotionbl.MyblServiceFactory;
+import blService.genericblService.ReceiptblService;
+import businesslogic.blServiceFactory.MyblServiceFactory;
 import com.jfoenix.controls.JFXButton;
 import exceptions.ItemNotFoundException;
 import javafx.beans.property.BooleanProperty;
@@ -12,8 +12,11 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import ui.common.BoardController;
+import ui.common.dialog.MyOneButtonDialog;
+import ui.common.dialog.MyTwoButtonDialog;
 import ui.util.GetTask;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 import ui.util.UserInfomation;
 import util.ReceiptState;
 import util.UserCategory;
@@ -22,7 +25,7 @@ import vo.receiptVO.ReceiptVO;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
-public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refreshable {
+public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends RefreshablePane {
     @FXML
     protected JFXButton modify, reset, save, saveAsDraft, delete, approve, reject, redCredit, redCreditCopy;
     @FXML
@@ -154,7 +157,7 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
     }
 
     protected void saveTask() {
-        MyBoardController boardController = MyBoardController.getMyBoardController();
+        BoardController boardController = BoardController.getBoardController();
         boardController.Loading();
 
         updateReceiptVO();
@@ -181,7 +184,7 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
     @FXML
     private void delete() {
         new MyTwoButtonDialog("请确认删除", () -> {
-            MyBoardController boardController = MyBoardController.getMyBoardController();
+            BoardController boardController = BoardController.getBoardController();
             boardController.Loading();
 
             StringProperty prompt = new SimpleStringProperty(); // 为了避免lambda的final限制。
@@ -210,7 +213,7 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
             System.out.println("MyReceiptDetailPane approve called");
             receiptVO.setReceiptState(ReceiptState.APPROVED); // TODO 这个其实不应该在这里set的
 
-            MyBoardController myBoardController = MyBoardController.getMyBoardController();
+            BoardController myBoardController = BoardController.getBoardController();
             myBoardController.Loading();
 
             updateReceiptVO();
@@ -238,7 +241,7 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
         if (validate()) {
             receiptVO.setReceiptState(ReceiptState.REJECTED);
 
-            MyBoardController myBoardController = MyBoardController.getMyBoardController();
+            BoardController myBoardController = BoardController.getBoardController();
             myBoardController.Loading();
 
             MyTwoButtonDialog dialog = new MyTwoButtonDialog("连接错误", () -> refresh(false), myBoardController::Ret);
@@ -267,7 +270,7 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
 
     @FXML
     private void clickRedCredit() {
-        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        BoardController myBoardController = BoardController.getBoardController();
         myBoardController.Loading();
 
         updateReceiptVO();
@@ -292,7 +295,7 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
 
     @FXML
     protected void clickRedCreditCopy() {
-        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        BoardController myBoardController = BoardController.getBoardController();
         myBoardController.Loading();
 
         updateReceiptVO();
@@ -321,7 +324,7 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
      */
     @Override
     public void refresh(boolean toSwitch) {
-        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        BoardController myBoardController = BoardController.getBoardController();
         myBoardController.Loading();
 
         MyTwoButtonDialog dialog = new MyTwoButtonDialog("连接错误", () -> refresh(false), myBoardController::Ret);

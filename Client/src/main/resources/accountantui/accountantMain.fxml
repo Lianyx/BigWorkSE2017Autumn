@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<?import ui.util.TopBar?>
+<?import ui.common.MyTopBar?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import javafx.geometry.Insets?>
 <?import com.jfoenix.controls.JFXRippler?>
@@ -25,7 +25,7 @@
             <children>
 
                 <MyTopBar fx:id="bar" layoutX="160"/>
-                <fx:include  fx:id="board" source="accountantBoard.fxml" layoutX="160" layoutY="40"/>
+                <fx:include  fx:id="board" source="/util/board.fxml" layoutX="160" layoutY="40"/>
 
 
                 <JFXListView fx:id="navigation" layoutY="40" prefHeight="560" prefWidth="160">

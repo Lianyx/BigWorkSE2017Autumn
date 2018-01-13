@@ -3,7 +3,7 @@ package ui.salesui.salesRetui;
 import com.jfoenix.controls.JFXTreeTableRow;
 import javafx.beans.property.StringProperty;
 import ui.salesui.SalesTreeTable;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 import vo.receiptVO.SalesRetListVO;
 
 import java.util.Set;
@@ -15,7 +15,7 @@ public class SalesRetTablePane extends SalesTreeTable<SalesRetListVO>{
 
     @Override
     protected void clickTwiceAftermath(JFXTreeTableRow<SalesRetListVO> row) {
-        ((Refreshable)row.getTreeItem().getValue().toVO().getDetailPane()).refresh(true);
+        ((RefreshablePane)row.getTreeItem().getValue().toVO().getDetailPane()).refresh(true);
 
     }
 }

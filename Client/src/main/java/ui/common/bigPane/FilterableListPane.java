@@ -1,10 +1,11 @@
-package ui.common;
+package ui.common.bigPane;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.PopOver;
+import ui.common.bigPane.ListPane;
 
 public abstract class FilterableListPane<TR extends RecursiveTreeObject<TR>> extends ListPane<TR> {
     @FXML

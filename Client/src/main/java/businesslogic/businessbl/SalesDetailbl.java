@@ -2,9 +2,8 @@ package businesslogic.businessbl;
 
 import blService.businessblservice.BusinessSearchInfo;
 import blService.businessblservice.SalesDetailblService;
-import businesslogic.checkbl.MyServiceFactory;
+import businesslogic.blServiceFactory.MyServiceFactory;
 import util.ReceiptSearchCondition;
-import util.ReceiptState;
 import vo.ListGoodsItemVO;
 import vo.receiptVO.SalesSellReceiptVO;
 

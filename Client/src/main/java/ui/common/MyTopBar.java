@@ -21,38 +21,36 @@ import java.io.IOException;
 
 public class MyTopBar extends HBox {
     @FXML
-    JFXRippler closebutton;
+    private JFXRippler closebutton;
 
     @FXML
-    JFXRippler hidebutton;
+    private JFXRippler hidebutton;
 
     @FXML
-    JFXBadge message;
+    private JFXBadge message;
 
     @FXML
-    JFXRippler back;
+    private JFXRippler back;
     @FXML
-    JFXRippler forward;
+    private JFXRippler forward;
 
     @FXML
-    FontAwesomeIconView left;
+    private FontAwesomeIconView left;
 
     @FXML
-    FontAwesomeIconView right;
+    private FontAwesomeIconView right;
 
     @FXML
-    JFXRippler managerpopup;
+    private JFXRippler managerpopup;
 
     @FXML
-    CircleImageView user;
+    private CircleImageView user;
 
     @FXML
-    Label username;
+    private Label username;
 
-    @FXML
-    JFXRippler refresh;
 
-    MyBoardController boardController;
+    private BoardController myBoardController;
 
     public MyTopBar() {
         super();
@@ -65,7 +63,6 @@ public class MyTopBar extends HBox {
 
             user.setImage(UserInfomation.userimage);
             username.setText(UserInfomation.username);
-
 
 
             back.disableProperty().addListener(new ChangeListener<Boolean>() {
@@ -92,15 +89,7 @@ public class MyTopBar extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*
-        PopOver managerPopOver = new PopOver();
-        managerPopOver.setContentNode(new Manager());
-        managerPopOver.setDetachable(false);
-        managerPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
 
-        managerpopup.setOnMouseClicked(e -> managerPopOver.show(managerpopup));
-
-*/
         PopOver messagePopOver = new PopOver();
         MessageListView messageListView = new MessageListView();
         BorderPane anchorPane = new BorderPane();
@@ -117,20 +106,11 @@ public class MyTopBar extends HBox {
 
     }
 
-    public void setBoardController(BoardController boardController) {
-        if (boardController instanceof MyBoardController) {
-            this.boardController = (MyBoardController) boardController;
+    public void setBoardController(BoardController myBoardController) {
+        this.myBoardController = myBoardController;
 
-            // TODO 这两句只能放这了。这样也不好，有点还不如写到boardController里面，不要内部类。不过可能如果一开始就用MyBoardController会好
-            back.disableProperty().bind(this.boardController.canBackProperty().not());
-            forward.disableProperty().bind(this.boardController.canForwardProperty().not());
-        } else {
-            System.err.println("not support !!!!!!!!!!!!" +
-                    "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" +
-                    "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" +
-                    "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" +
-                    "!!!!!!!!!!!");
-        }
+        back.disableProperty().bind(myBoardController.canBackProperty().not());
+        forward.disableProperty().bind(myBoardController.canForwardProperty().not());
     }
 
     @FXML
@@ -149,17 +129,17 @@ public class MyTopBar extends HBox {
 
     @FXML
     public void goback() {
-        boardController.goBack();
+        myBoardController.goBack();
     }
 
     @FXML
     public void goforward() {
-        boardController.goForward();
+        myBoardController.goForward();
     }
 
     @FXML
     public void refresh() {
-        boardController.refresh();
+        myBoardController.refresh();
     }
 }
 

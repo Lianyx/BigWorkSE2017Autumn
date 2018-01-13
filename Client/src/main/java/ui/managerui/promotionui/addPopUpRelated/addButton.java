@@ -1,7 +1,7 @@
 package ui.managerui.promotionui.addPopUpRelated;
 
 import com.jfoenix.controls.JFXButton;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 
 public abstract class addButton extends JFXButton {
     public addButton() {
@@ -11,5 +11,5 @@ public abstract class addButton extends JFXButton {
         });
     }
 
-    public abstract Refreshable getPane();
+    public abstract RefreshablePane getPane();
 }

@@ -1,6 +1,6 @@
 package blService.stockblService;
 
-import blService.checkblService.ReceiptblService;
+import blService.genericblService.ReceiptblService;
 import vo.receiptVO.StockPurReceiptVO;
 
 public interface StockPurblService extends ReceiptblService<StockPurReceiptVO> {

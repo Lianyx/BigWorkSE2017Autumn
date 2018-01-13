@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
+import ui.common.BoardController;
 import ui.inventoryui.goodsclassificationui.GoodsClassificationPane;
 import ui.inventoryui.goodsui.GoodsListPane;
 import ui.inventoryui.inventoryCheckui.InventoryCheckPane;
@@ -16,9 +17,7 @@ import ui.inventoryui.inventoryReceiptui.InventoryGiftListPane;
 import ui.inventoryui.inventoryReceiptui.InventoryOverflowListPane;
 import ui.inventoryui.inventoryReceiptui.InventoryWarningListPane;
 import ui.inventoryui.inventoryViewui.ChooseTimePane;
-import ui.common.MyBoardController;
 import ui.common.MyTopBar;
-import ui.util.BoardController;
 import ui.util.PaneFactory;
 
 import java.net.URL;
@@ -49,10 +48,10 @@ public class InventoryUIController implements Initializable {
         boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150), board));*/
 //        PaneFactory.setMainPane(mainpane);
 
-        BoardController.setBoardController(boardController);
-        boardController = MyBoardController.getMyBoardController();
+//        BoardController.setBoardController(boardController);
+//        boardController = BoardController.getBoardController();
         // 这样再set回去，以后从boardController里面拿的就都是MyBoardController了，但是以后仍然需要强转
-        BoardController.setBoardController(boardController);
+//        BoardController.setBoardController(boardController);
 
         // 这个是不得不set，因为是同时生成的，但是这样很不好，希望可以改掉
         bar.setBoardController(boardController);
@@ -73,7 +72,7 @@ public class InventoryUIController implements Initializable {
                     if (newVal.getId().equals("goods")) {
                         GoodsListPane goodsListPane = new GoodsListPane();
                         goodsListPane.refresh(true);
-                    }else if(newVal.getId().equals("inventoryView")){
+                    } else if (newVal.getId().equals("inventoryView")) {
                         JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
                         jfxDialogLayout.setPrefWidth(220.0);
                         ChooseTimePane chooseTimePane = new ChooseTimePane();
@@ -85,22 +84,22 @@ public class InventoryUIController implements Initializable {
 
                         /*InventoryViewListPane inventoryViewListPane = new InventoryViewListPane();
                         inventoryViewListPane.refresh(true);*/
-                    }else if(newVal.getId().equals("inventoryCheck")){
+                    } else if (newVal.getId().equals("inventoryCheck")) {
                         InventoryCheckPane inventoryCheckPane = new InventoryCheckPane();
                         inventoryCheckPane.refresh(true);
-                    }else if(newVal.getId().equals("goodsClassification")){
+                    } else if (newVal.getId().equals("goodsClassification")) {
                         GoodsClassificationPane goodsClassificationPane = new GoodsClassificationPane(boardController, PaneFactory.getMainPane());
                         goodsClassificationPane.refresh(true);
-                    }else if(newVal.getId().equals("inventoryGift")){
+                    } else if (newVal.getId().equals("inventoryGift")) {
                         InventoryGiftListPane inventoryGiftListPane = new InventoryGiftListPane();
                         inventoryGiftListPane.refresh(true);
-                    }else if(newVal.getId().equals("inventoryDamage")){
+                    } else if (newVal.getId().equals("inventoryDamage")) {
                         InventoryDamageListPane inventoryDamageListPane = new InventoryDamageListPane();
                         inventoryDamageListPane.refresh(true);
-                    }else if(newVal.getId().equals("inventoryOverflow")){
+                    } else if (newVal.getId().equals("inventoryOverflow")) {
                         InventoryOverflowListPane inventoryOverflowListPane = new InventoryOverflowListPane();
                         inventoryOverflowListPane.refresh(true);
-                    }else if(newVal.getId().equals("inventoryWarning")){
+                    } else if (newVal.getId().equals("inventoryWarning")) {
                         InventoryWarningListPane inventoryWarningListPane = new InventoryWarningListPane();
                         inventoryWarningListPane.refresh(true);
                     }
@@ -109,7 +108,6 @@ public class InventoryUIController implements Initializable {
                 e.printStackTrace();
             }
         });
-
 
 
     }

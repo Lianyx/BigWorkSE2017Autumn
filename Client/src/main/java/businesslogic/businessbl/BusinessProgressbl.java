@@ -2,7 +2,7 @@ package businesslogic.businessbl;
 
 import blService.businessblservice.BusinessProgressblService;
 import blService.businessblservice.BusinessSearchInfo;
-import businesslogic.checkbl.MyServiceFactory;
+import businesslogic.blServiceFactory.MyServiceFactory;
 import util.BillType;
 import util.ReceiptSearchCondition;
 import util.ReceiptState;

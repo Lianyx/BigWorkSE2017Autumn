@@ -7,8 +7,8 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<?import ui.util.Refreshable?>
-<fx:root type="Refreshable" id="myReceiptListPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<?import ui.util.RefreshablePane?>
+<fx:root type="RefreshablePane" id="myReceiptListPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
          prefHeight="560.0" prefWidth="640.0">
 
     <JFXTextField fx:id="searchField" focusColor="#8CA2F6" layoutX="27.0" layoutY="28.0" prefHeight="30.0"

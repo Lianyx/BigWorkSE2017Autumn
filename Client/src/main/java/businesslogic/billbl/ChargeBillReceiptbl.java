@@ -3,7 +3,7 @@ package businesslogic.billbl;
 import blService.billblservice.ChargeBillReceiptblService;
 import blService.memberblService.MemberInfo;
 import businesslogic.accountbl.Accountbl;
-import businesslogic.checkbl.Receiptbl;
+import businesslogic.genericbl.Receiptbl;
 import businesslogic.memberbl.MemberInfo_Impl;
 import po.receiptPO.ChargeBillReceiptPO;
 import util.ReceiptState;

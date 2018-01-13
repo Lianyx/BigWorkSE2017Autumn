@@ -4,12 +4,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.PopOver;
-import ui.common.FXMLAnchorPane;
-import ui.util.Refreshable;
+import ui.common.bigPane.FXMLAnchorPane;
+import ui.util.RefreshablePane;
 import util.ReceiptState;
 import util.RespectiveReceiptSearchCondition;
 
@@ -29,14 +27,14 @@ public class MyFilterPane extends FXMLAnchorPane {
     private RespectiveReceiptSearchCondition respectiveReceiptSearchCondition;
 
 
-    public MyFilterPane(PopOver popOver, Refreshable refreshable, RespectiveReceiptSearchCondition respectiveReceiptSearchCondition) {
+    public MyFilterPane(PopOver popOver, RefreshablePane refreshablePane, RespectiveReceiptSearchCondition respectiveReceiptSearchCondition) {
         this.respectiveReceiptSearchCondition = respectiveReceiptSearchCondition;
 
         cancel.setOnAction(e -> popOver.hide());
         save.setOnAction(e -> {
             updateSearchCondition();
             popOver.hide();
-            refreshable.refresh(false);
+            refreshablePane.refresh(false);
         });
     }
 

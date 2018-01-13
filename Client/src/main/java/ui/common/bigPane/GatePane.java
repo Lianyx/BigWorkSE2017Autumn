@@ -1,5 +1,6 @@
-package ui.common;
+package ui.common.bigPane;
 
+import ui.common.BoardController;
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;
 import ui.util.PaneFactory;
@@ -37,7 +38,7 @@ public abstract class GatePane extends FXMLRefreshableAnchorPane {
      * */
     @Override
     public void refresh(boolean toSwitch) { // toSwitch没用
-        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        BoardController myBoardController = BoardController.getBoardController();
         myBoardController.Loading();
 
         DoubleButtonDialog buttonDialog = new DoubleButtonDialog(PaneFactory.getMainPane(), "Wrong", "连接失败", "重试", "返回");

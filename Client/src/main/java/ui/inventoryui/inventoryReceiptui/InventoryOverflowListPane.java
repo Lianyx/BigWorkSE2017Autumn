@@ -1,9 +1,9 @@
 package ui.inventoryui.inventoryReceiptui;
 
-import blService.checkblService.ReceiptblService;
+import blService.genericblService.ReceiptblService;
 import blService.inventoryblService.InventoryOverflowReceiptblService;
-import ui.common.MyReceiptListPane;
-import ui.util.Refreshable;
+import ui.common.bigPane.MyReceiptListPane;
+import ui.util.RefreshablePane;
 import vo.inventoryVO.inventoryReceiptVO.InventoryOverflowListVO;
 import vo.inventoryVO.inventoryReceiptVO.InventoryOverflowReceiptVO;
 
@@ -20,7 +20,7 @@ public class InventoryOverflowListPane extends MyReceiptListPane<InventoryOverfl
     }
 
     @Override
-    protected Refreshable getNewDetailPane() {
+    protected RefreshablePane getNewDetailPane() {
         return new InventoryOverflowDetailPane();
     }
 }

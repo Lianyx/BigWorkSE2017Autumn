@@ -1,10 +1,9 @@
 package vo.receiptVO;
 
 import blService.checkblService.CheckInfo;
-import businesslogic.checkbl.MyServiceFactory;
+import businesslogic.blServiceFactory.MyServiceFactory;
 import javafx.scene.Node;
 import po.receiptPO.StockPurReceiptPO;
-import po.receiptPO.StockReceiptPO;
 import ui.stockui.stockPurui.StockPurDetailPane;
 import util.ReceiptState;
 import vo.ListGoodsItemVO;

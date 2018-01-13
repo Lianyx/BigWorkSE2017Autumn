@@ -2,10 +2,10 @@
 
 <?import javafx.scene.layout.AnchorPane?>
 <?import org.fxmisc.richtext.CodeArea?>
-<?import ui.util.Refreshable?>
+<?import ui.util.RefreshablePane?>
         <?import javafx.scene.layout.StackPane?>
 <?import javafx.geometry.Insets?>
-<fx:root fx:id="logPane" prefHeight="560.0" prefWidth="640.0" type="Refreshable" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="logPane" prefHeight="560.0" prefWidth="640.0" type="RefreshablePane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <StackPane>
         <padding>
             <Insets right="10" left="10" bottom="10" top="10"/>

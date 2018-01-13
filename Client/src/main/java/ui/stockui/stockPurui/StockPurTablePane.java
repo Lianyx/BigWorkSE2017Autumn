@@ -3,7 +3,7 @@ package ui.stockui.stockPurui;
 import com.jfoenix.controls.JFXTreeTableRow;
 import javafx.beans.property.StringProperty;
 import ui.stockui.StockTreeTable;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 import vo.receiptVO.StockPurListVO;
 
 import java.util.Set;
@@ -15,7 +15,7 @@ public class StockPurTablePane  extends StockTreeTable<StockPurListVO> {
 
     @Override
     protected void clickTwiceAftermath(JFXTreeTableRow<StockPurListVO> row) {
-        ((Refreshable)row.getTreeItem().getValue().toVO().getDetailPane()).refresh(true);
+        ((RefreshablePane)row.getTreeItem().getValue().toVO().getDetailPane()).refresh(true);
 
     }
 }

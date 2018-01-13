@@ -6,23 +6,18 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
-import exception.ExistException;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTreeCell;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.CheckTreeView;
+import ui.common.BoardController;
 import ui.inventoryui.goodsui.GoodDetailPane;
-import ui.util.BoardController;
-import ui.util.PaneFactory;
 import vo.inventoryVO.GoodsClassificationVO;
 
 import java.net.MalformedURLException;
@@ -30,8 +25,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.*;
 
-public class GoodsClassificationTreeView extends CheckTreeView<String>{
-    private BoardController boardController;
+public class GoodsClassificationTreeView extends CheckTreeView<String> {
+    private BoardController myBoardController;
     private StackPane mainpane;
     private BorderPane borderPane;
     private GoodsClassificationblService goodsClassificationblService;
@@ -50,7 +45,7 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
 
     }
 
-    public Node getPane(){
+    public Node getPane() {
         root = buildTree();
         root.setExpanded(true);
         this.setRoot(root);
@@ -65,7 +60,8 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
         String selected1;
         this.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         this.getCheckModel().getCheckedItems().addListener(new ListChangeListener<TreeItem<String>>() {
-            @Override public void onChanged(ListChangeListener.Change<? extends TreeItem<String>> change) {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends TreeItem<String>> change) {
                 //System.out.println("hehehe2");
 
 
@@ -103,7 +99,7 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
                 addGood.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                       // goodDetailPane = new GoodDetailPane(true);
+                        // goodDetailPane = new GoodDetailPane(true);
                         try {
                             addGoodItem(change.getList());
                         } catch (RemoteException e) {
@@ -116,24 +112,24 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
                     }
                 });
 
-     }
+            }
         });
 
 
         HBox buttons = new HBox();
-        buttons.getChildren().addAll(add,delete,modify,addGood);
+        buttons.getChildren().addAll(add, delete, modify, addGood);
 
         borderPane.setRight(buttons);
 
         return borderPane;
     }
 
-    public CheckBoxTreeItem<String> getTreeRoot(){
+    public CheckBoxTreeItem<String> getTreeRoot() {
         return root;
     }
 
-    public void setBoardController(BoardController boardController) {
-        this.boardController = boardController;
+    public void setBoardController(BoardController myBoardController) {
+        this.myBoardController = myBoardController;
     }
 
     public void setMainpane(StackPane mainpane) {
@@ -151,8 +147,7 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
     protected void deleteItem(ObservableList<? extends TreeItem<String>> list) throws RemoteException {
         CheckBoxTreeItem<String> son = (CheckBoxTreeItem<String>) list.get(0);
 
-        CheckBoxTreeItem<String> parent =(CheckBoxTreeItem<String>)  son.getParent();
-
+        CheckBoxTreeItem<String> parent = (CheckBoxTreeItem<String>) son.getParent();
 
 
         //连同changeList中的数据也要删掉，否则会报错
@@ -165,12 +160,12 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
         String sonName = son.getValue();
         String fatherName = parent.getValue();
 
-        for (GoodsClassificationVO vo: classificationList) {
-            if(vo.getName().equals(fatherName)){
+        for (GoodsClassificationVO vo : classificationList) {
+            if (vo.getName().equals(fatherName)) {
                 fatherVO = vo;
                 continue;
             }
-            if(vo.getName().equals(sonName)){
+            if (vo.getName().equals(sonName)) {
                 sonVO = vo;
             }
         }
@@ -184,12 +179,10 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
         //goodsClassificationblService.deleteGoodsClassification(son);
     }
 
-    protected void addItem(ObservableList<? extends TreeItem<String>> list){
+    protected void addItem(ObservableList<? extends TreeItem<String>> list) {
         CheckBoxTreeItem<String> item = (CheckBoxTreeItem<String>) list.get(0);
 
         String classifyname = item.getValue();
-
-
 
 
         JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
@@ -207,9 +200,9 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
             item.getChildren().add(son);
 
             try {
-                System.out.println(classifyName+" "+item.getValue());
-                addGoodsClassificationVO(classifyName,item.getValue());
-            }  catch (RemoteException e1) {
+                System.out.println(classifyName + " " + item.getValue());
+                addGoodsClassificationVO(classifyName, item.getValue());
+            } catch (RemoteException e1) {
                 e1.printStackTrace();
             }
 
@@ -227,8 +220,8 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
         String classifyName = son.getValue();
         String clssifyId = null;
 
-        for (GoodsClassificationVO vo:classificationList) {
-            if(vo.getName().equals(classifyName)){
+        for (GoodsClassificationVO vo : classificationList) {
+            if (vo.getName().equals(classifyName)) {
                 goodDetailPane = new GoodDetailPane(true);
 
                 System.out.println("set first");
@@ -240,10 +233,10 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
 
                 List<String> goodsId = vo.getGoodsID();
 
-                int order = goodsId.size()+1;
+                int order = goodsId.size() + 1;
                 goodDetailPane.setOrder(order);
 
-                goodsId.add(new Goodsbl().getID(clssifyId,order));
+                goodsId.add(new Goodsbl().getID(clssifyId, order));
 
                 vo.setGoodsID(goodsId);
 
@@ -257,19 +250,20 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
 
     /**
      * 传入子分类名和父分类名，更新数据库
+     *
      * @param sonName
      * @param fatherName
      * @throws ExistException
      */
     private void addGoodsClassificationVO(String sonName, String fatherName) throws RemoteException {
-        for (GoodsClassificationVO vo:classificationList) {
-          //  System.out.println(vo.getName());
+        for (GoodsClassificationVO vo : classificationList) {
+            //  System.out.println(vo.getName());
             if (vo.getName().equals(fatherName)) {
                 List<String> childernId = vo.getChildrenId();
 
                 String classifyId = vo.getFatherID() + "/" + Integer.toString(childernId.size());
-                GoodsClassificationVO goodsClassificationVO = new GoodsClassificationVO(classifyId,sonName,vo.getID());
-              //  System.out.println(goodsClassificationVO);
+                GoodsClassificationVO goodsClassificationVO = new GoodsClassificationVO(classifyId, sonName, vo.getID());
+                //  System.out.println(goodsClassificationVO);
                 goodsClassificationblService.addGoodsClassification(goodsClassificationVO);
 
                 childernId.add(classifyId);
@@ -281,7 +275,7 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
         }
     }
 
-    protected void modifyItem(ObservableList<? extends TreeItem<String>> list) throws RemoteException{
+    protected void modifyItem(ObservableList<? extends TreeItem<String>> list) throws RemoteException {
         CheckBoxTreeItem<String> item = (CheckBoxTreeItem<String>) list.get(0);
 
         JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
@@ -302,7 +296,7 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
             dialog.close();
 
             try {
-                updateGoodsClassificationVO(classifyName,oldName);
+                updateGoodsClassificationVO(classifyName, oldName);
             } catch (RemoteException e1) {
                 e1.printStackTrace();
             }
@@ -315,12 +309,13 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
 
     /**
      * 修改分类信息时，更新数据库
+     *
      * @param newName
      * @param oldName
      */
-    private void updateGoodsClassificationVO(String newName, String oldName) throws RemoteException{
-        for (GoodsClassificationVO vo:classificationList) {
-            if(vo.getName().equals(oldName)){
+    private void updateGoodsClassificationVO(String newName, String oldName) throws RemoteException {
+        for (GoodsClassificationVO vo : classificationList) {
+            if (vo.getName().equals(oldName)) {
                 vo.setName(newName);
                 goodsClassificationblService.updateGoodsClassification(vo);
                 break;
@@ -329,7 +324,7 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
 
     }
 
-    private CheckBoxTreeItem<String> buildTree(){
+    private CheckBoxTreeItem<String> buildTree() {
         Queue<GoodsClassificationVO> que = new LinkedList<>();
         que.offer(classificationList.get(0));
 
@@ -338,27 +333,27 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
 
         int index = 1;
         int size = classificationList.size();
-        while(!que.isEmpty()){
+        while (!que.isEmpty()) {
             GoodsClassificationVO father = que.poll();
             String fatherId = father.getID();
             String fatherName = father.getName();
 
-           if (index != 1) {
-               item = getCheckItem(root, fatherName);
-           }
+            if (index != 1) {
+                item = getCheckItem(root, fatherName);
+            }
 
-            for (;index < size; index++){
+            for (; index < size; index++) {
                 GoodsClassificationVO son = classificationList.get(index);
 
-                if (son.getFatherID().equals(fatherId)){
+                if (son.getFatherID().equals(fatherId)) {
                     CheckBoxTreeItem<String> sonTreeItem = new CheckBoxTreeItem<>(son.getName());
 
                     item.getChildren().add(sonTreeItem);
                     que.offer(son);
 
-                    if(son.getGoodsID() != null)
-                        sonTreeItem = buildLeaf(sonTreeItem,son);
-                }else {
+                    if (son.getGoodsID() != null)
+                        sonTreeItem = buildLeaf(sonTreeItem, son);
+                } else {
                     break;
                 }
             }
@@ -369,7 +364,7 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
 
     private CheckBoxTreeItem<String> buildLeaf(CheckBoxTreeItem<String> sonTreeItem, GoodsClassificationVO son) {
         List<String> goods = son.getGoodsID();
-        for (String name: goods) {
+        for (String name : goods) {
             CheckBoxTreeItem<String> goodTreeItem = new CheckBoxTreeItem<>(name);
             sonTreeItem.getChildren().add(goodTreeItem);
         }
@@ -377,16 +372,16 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
     }
 
     //递归调用获取fatherId对应的节点
-    private CheckBoxTreeItem<String> getCheckItem(CheckBoxTreeItem<String> currentRoot,String fatherName){
-        for(Iterator<TreeItem<String>> iterator = currentRoot.getChildren().iterator(); iterator.hasNext();){
+    private CheckBoxTreeItem<String> getCheckItem(CheckBoxTreeItem<String> currentRoot, String fatherName) {
+        for (Iterator<TreeItem<String>> iterator = currentRoot.getChildren().iterator(); iterator.hasNext(); ) {
 
             CheckBoxTreeItem tmp = (CheckBoxTreeItem<String>) iterator.next();
 
-            if(tmp.getValue().equals(fatherName))
+            if (tmp.getValue().equals(fatherName))
                 return tmp;
             else {
                 tmp = getCheckItem(tmp, fatherName);
-                if(tmp != null)
+                if (tmp != null)
                     return tmp;
             }
         }

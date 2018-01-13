@@ -9,7 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.PopOver;
-import ui.util.BoardController;
+import ui.common.BoardController;
 import util.MemberCategory;
 import util.MemberSearchCondition;
 import vo.MemberSearchVO;

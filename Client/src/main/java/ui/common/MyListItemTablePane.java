@@ -13,7 +13,7 @@ import ui.util.PaneFactory;
 
 import java.util.ArrayList;
 
-public abstract class MyListItemTablePane<T extends RecursiveTreeObject<T>>  extends JFXTreeTableView<T>{
+public abstract class MyListItemTablePane<T extends RecursiveTreeObject<T>> extends JFXTreeTableView<T> {
 
     protected MyListItemPane<T> myListItemPane;
     private StackPane mainpane;
@@ -30,7 +30,7 @@ public abstract class MyListItemTablePane<T extends RecursiveTreeObject<T>>  ext
     }
 
 
-    private void setInitial(){
+    private void setInitial() {
         this.setRowFactory(tableView -> {
             JFXTreeTableRow row = new JFXTreeTableRow();
             row.setStyle("-fx-border-color: rgb(233,237,239); -fx-border-width: 0.3;");
@@ -79,15 +79,17 @@ public abstract class MyListItemTablePane<T extends RecursiveTreeObject<T>>  ext
     public void remove(T t) {
         observableList.remove(t);
     }
+
     public void setList(ArrayList<T> t) {
         observableList.setAll(t);
     }
+
     public void add(T t) {
         observableList.add(t);
     }
 
 
-    public ArrayList<T> getList(){
+    public ArrayList<T> getList() {
         ArrayList<T> arrayList = new ArrayList<>(observableList);
         return arrayList;
     }

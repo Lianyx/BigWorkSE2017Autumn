@@ -2,7 +2,7 @@ package vo.promotionVO;
 
 import blService.promotionblService.CombinePromotionblService;
 import blService.promotionblService.PromotionblService;
-import businesslogic.promotionbl.MyblServiceFactory;
+import businesslogic.blServiceFactory.MyblServiceFactory;
 import javafx.scene.control.Label;
 import po.promotionPO.PromotionGoodsItemPO;
 import po.promotionPO.CombinePromotionPO;

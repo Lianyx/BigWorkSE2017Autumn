@@ -22,6 +22,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import ui.common.BoardController;
 import ui.memberui.MemberDetailPane;
 import ui.util.*;
 import vo.AccountListVO;

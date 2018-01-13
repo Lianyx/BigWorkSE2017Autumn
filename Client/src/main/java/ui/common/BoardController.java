@@ -5,15 +5,19 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
+import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import ui.util.*;
 
-public class MyBoardController extends BoardController {
+public class BoardController {
+    /**
+     * inner class
+     */
     private static class HistoryRecord { // 希望所有的和HistoryRecord有关的都做到BoardController里面
-        // TODO 哪里observe了…
-        private static ObservableList<Refreshable> record = FXCollections.observableArrayList();
+        // 吐糟：哪里observe了…
+        private static ObservableList<RefreshablePane> record = FXCollections.observableArrayList();
         private static int index = -1;
         private static SimpleBooleanProperty canBack = new SimpleBooleanProperty(false);
         private static SimpleBooleanProperty canForward = new SimpleBooleanProperty(false);
@@ -24,16 +28,13 @@ public class MyBoardController extends BoardController {
         }
 
 
-        static boolean addRecord(Refreshable pane) {
+        static boolean addRecord(RefreshablePane pane) {
             if (index == -1) {
                 record.add(pane);
                 index++;
                 return false; // 返回值只是为了是否有动画，因此false符合反回值原意
             }
-//            System.out.println(index);
-//            System.out.println(pane.getId());
             if (record.get(index).getId().equals(pane.getId())) {
-//            setBackAndForwardProperty(); // 这里什么都没干，应该不用更新吧。
                 return false;
             }
 
@@ -49,14 +50,14 @@ public class MyBoardController extends BoardController {
         }
 
 
-        static Refreshable pop() {
+        static RefreshablePane pop() {
             index--;
             setBackAndForwardProperty();
             return record.get(index);
         }
 
         // 这个叫push真的好吗？又不是stack
-        static Refreshable push() {
+        static RefreshablePane push() {
             index++;
             setBackAndForwardProperty();
             return record.get(index);
@@ -66,22 +67,28 @@ public class MyBoardController extends BoardController {
     /**
      * From here
      */
-    private static MyBoardController myBoardController;
+    @FXML
+    private StackPane board;
+
+    private PaneSwitchAnimation paneSwitchAnimation;
+
+    private static BoardController myBoardController;
 
     private AnchorPane savePane;
 
-    private MyBoardController(BoardController boardController) {
-        this.board = boardController.board;
+    public BoardController() {
+        BoardController.myBoardController = this;
 //        System.out.println(board);
-
-        setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(250), board));
-        paneSwitchAnimation.setAnimation(ContainerAnimations.FADE);
-        // TODO 这里应该有默认的才对吧，而且我继承过来应该是正确的啊
+//        paneSwitchAnimation = new PaneSwitchAnimation(Duration.millis(250), board);
+//        paneSwitchAnimation.setAnimation(ContainerAnimations.FADE);
     }
 
-
-    public void switchTo(Refreshable pane) {
-        System.out.println(pane);
+    public void switchTo(RefreshablePane pane) {
+        if (paneSwitchAnimation == null) { // 这样写还是很恶心，因为controller在构造方法里不能用board，怪不得宇超那样写
+            paneSwitchAnimation = new PaneSwitchAnimation(Duration.millis(250), board);
+            paneSwitchAnimation.setAnimation(ContainerAnimations.FADE);
+        }
+//        System.out.println(board);
         Platform.runLater(() -> {
             if (HistoryRecord.addRecord(pane)) {
                 paneSwitchAnimation.setAnimation(ContainerAnimations.SWIPE_LEFT);
@@ -111,40 +118,7 @@ public class MyBoardController extends BoardController {
     }
 
     public void refresh() {
-        ((Refreshable) board.getChildren().get(0)).refresh(false);
-    }
-
-
-    private void notSupport() {
-        System.err.println("not support !!!!!!!!!!!!" +
-                "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" +
-                "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" +
-                "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" +
-                "!!!!!!!!!!!!!");
-    }
-
-
-    public void setAll(Node node) {
-        notSupport();
-        System.out.println("not support setAll");
-    }
-
-    // 这两个也不应该有，自己内部解决就可以了啊！！至少也可以private
-    // 但是这样不能测外面有没有用，所以先notSupport了
-    // 而且override不能throw exception
-    public void setLeftAnimation() {
-        notSupport();
-        System.out.println("not support setLeftAnimation");
-    }
-
-    public void setRightAnimation() {
-        notSupport();
-        System.out.println("not support setRightAnimation");
-    }
-
-    public void historicalSwitchTo(AnchorPane pane) {
-        notSupport();
-        System.out.println("not support historicalSwitchTo");
+        ((RefreshablePane) board.getChildren().get(0)).refresh(false);
     }
 
     public void goBack() {
@@ -170,10 +144,10 @@ public class MyBoardController extends BoardController {
     }
 
 
-    public static MyBoardController getMyBoardController() {
-        if (myBoardController == null) {
-            return myBoardController = new MyBoardController(BoardController.getBoardController());
-        }
+    /**
+     * static methods
+     */
+    public static BoardController getBoardController() {
         return myBoardController;
     }
 

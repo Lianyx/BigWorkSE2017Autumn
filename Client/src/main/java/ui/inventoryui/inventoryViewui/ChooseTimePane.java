@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import ui.util.BoardController;
+import ui.common.BoardController;
 
 import java.io.IOException;
 import java.time.LocalDate;

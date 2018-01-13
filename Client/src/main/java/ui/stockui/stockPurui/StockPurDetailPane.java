@@ -1,6 +1,6 @@
 package ui.stockui.stockPurui;
 
-import blService.checkblService.ReceiptblService;
+import blService.genericblService.ReceiptblService;
 import blService.stockblService.StockPurblService;
 import ui.stockui.StockReceiptPane;
 import vo.ListGoodsItemVO;

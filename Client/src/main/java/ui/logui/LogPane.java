@@ -3,17 +3,14 @@ package ui.logui;
 import blService.logblService.LogblService;
 import businesslogic.logbl.Logbl;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
 import po.LogPO;
-import ui.common.GatePane;
+import ui.common.bigPane.GatePane;
 import ui.util.ArrowFactory;
-import ui.util.Refreshable;
 import util.EventCategory;
 
 import java.net.MalformedURLException;

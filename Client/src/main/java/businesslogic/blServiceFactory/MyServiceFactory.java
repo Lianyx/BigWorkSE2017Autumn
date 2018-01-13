@@ -1,4 +1,4 @@
-package businesslogic.checkbl;
+package businesslogic.blServiceFactory;
 
 import blService.businessblservice.BusinessConditionInfo;
 import blService.businessblservice.BusinessConditionblService;

@@ -4,7 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
-import ui.common.FXMLAnchorPane;
+import ui.common.bigPane.FXMLAnchorPane;
 import util.ReceiptSearchCondition;
 
 import java.time.LocalDate;

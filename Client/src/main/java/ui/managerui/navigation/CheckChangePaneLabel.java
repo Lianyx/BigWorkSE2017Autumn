@@ -1,11 +1,11 @@
 package ui.managerui.navigation;
 
 import ui.managerui.checkui.CheckListPane;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 
 public class CheckChangePaneLabel extends ChangePaneLabel {
     @Override
-    public Refreshable getPane() {
+    public RefreshablePane getPane() {
         return new CheckListPane();
     }
 }

@@ -16,9 +16,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
-import ui.common.MyBoardController;
-import ui.common.MyOneButtonDialog;
-import ui.common.MyTwoButtonDialog;
+import ui.common.BoardController;
+import ui.common.dialog.MyOneButtonDialog;
+import ui.common.dialog.MyTwoButtonDialog;
 import ui.util.*;
 import util.UserCategory;
 import vo.UserVO;
@@ -30,7 +30,7 @@ import java.time.LocalDate;
 
 import static ui.util.ValidatorDecorator.RequireValid;
 
-public class UserDetailPane extends Refreshable {
+public class UserDetailPane extends RefreshablePane {
     @FXML
     private ModifyButton modify;
     @FXML
@@ -240,7 +240,7 @@ public class UserDetailPane extends Refreshable {
     }
 
     private void saveTask() {
-        MyBoardController boardController = MyBoardController.getMyBoardController();
+        BoardController boardController = BoardController.getBoardController();
         boardController.Loading();
 
         setVO();
@@ -267,7 +267,7 @@ public class UserDetailPane extends Refreshable {
     @FXML
     private void delete() {
         new MyTwoButtonDialog("请确认删除", () -> {
-            MyBoardController boardController = MyBoardController.getMyBoardController();
+            BoardController boardController = BoardController.getBoardController();
             boardController.Loading();
 
             StringProperty prompt = new SimpleStringProperty(); // 为了避免lambda的final限制。
@@ -300,7 +300,7 @@ public class UserDetailPane extends Refreshable {
      */
     @Override
     public void refresh(boolean toSwitch) {
-        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        BoardController myBoardController = BoardController.getBoardController();
         myBoardController.Loading();
 
         MyTwoButtonDialog dialog = new MyTwoButtonDialog("连接错误", () -> refresh(false), myBoardController::Ret);

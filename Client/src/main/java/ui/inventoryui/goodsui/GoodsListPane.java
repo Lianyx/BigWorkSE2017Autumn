@@ -5,7 +5,7 @@ import businesslogic.goodsbl.Goodsbl;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.BorderPane;
 
-import ui.common.MyBoardController;
+import ui.common.BoardController;
 import ui.util.*;
 import vo.inventoryVO.GoodSearchVO;
 import vo.inventoryVO.GoodsVO;
@@ -72,7 +72,7 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO> {
                         receiptTreeTable.createPage(0);
                         borderpane.setBottom(pagination);
 //                        switchPane(toSwitch);
-                        MyBoardController.getMyBoardController().switchTo(this);
+                        BoardController.getBoardController().switchTo(this);
                     }, buttonDialog, p);
 
             new Thread(getTask).start();
@@ -122,7 +122,7 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO> {
             receiptTreeTable.createPage(0);
             borderpane.setBottom(pagination);
 //            switchPane(false);
-            MyBoardController.getMyBoardController().switchTo(this);
+            BoardController.getBoardController().switchTo(this);
         }
 
     }

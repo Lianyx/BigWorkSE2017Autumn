@@ -1,7 +1,7 @@
 package businesslogic.inventorybl;
 
 import blService.inventoryblService.InventoryWarningReceiptblService;
-import businesslogic.checkbl.Receiptbl;
+import businesslogic.genericbl.Receiptbl;
 import businesslogic.goodsbl.goodsUpdate.GoodsSalesUpdate;
 import blService.goodsblService.GoodsSalesUpdateInfo;
 import po.receiptPO.InventoryWarningReceiptPO;

@@ -15,7 +15,7 @@ import javafx.util.Duration;
 import java.util.List;
 import java.util.function.Function;
 
-public class PaneSwitchAnimation{
+public class PaneSwitchAnimation {
 
     private StackPane view;
     private Duration duration;
@@ -24,7 +24,7 @@ public class PaneSwitchAnimation{
     private ImageView placeholder;
 
     public PaneSwitchAnimation(Duration duration, StackPane view) {
-        this.view=view;
+        this.view = view;
         this.duration = duration;
         placeholder = new ImageView();
         placeholder.setPreserveRatio(true);
@@ -45,8 +45,6 @@ public class PaneSwitchAnimation{
         animation.getKeyFrames().add(new KeyFrame(duration, (e) -> clearPlaceholder()));
         animation.play();
     }
-
-
 
 
     public ImageView getPlaceholder() {
@@ -71,6 +69,7 @@ public class PaneSwitchAnimation{
     }
 
     private void updatePlaceholder(Node newView) {
+//        System.out.println(newView);
         if (view.getWidth() > 0 && view.getHeight() > 0) {
             SnapshotParameters parameters = new SnapshotParameters();
             parameters.setFill(Color.TRANSPARENT);
@@ -87,7 +86,6 @@ public class PaneSwitchAnimation{
         view.getChildren().setAll(placeholder, newView);
         placeholder.toFront();
     }
-
 
 
 }

@@ -1,13 +1,5 @@
-package businesslogic.promotionbl;
+package businesslogic.blServiceFactory;
 
-import blService.promotionblService.*;
-import vo.promotionVO.CombinePromotionVO;
-import vo.promotionVO.MemberPromotionVO;
-import vo.promotionVO.TotalPromotionVO;
-
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
 

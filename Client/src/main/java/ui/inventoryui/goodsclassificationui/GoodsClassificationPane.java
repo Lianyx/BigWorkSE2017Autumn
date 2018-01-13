@@ -14,16 +14,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import ui.common.MyBoardController;
-import ui.util.BoardController;
-import ui.util.Refreshable;
+import ui.common.BoardController;
+import ui.util.RefreshablePane;
 import vo.inventoryVO.GoodsClassificationVO;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.util.List;
 
-public class GoodsClassificationPane extends Refreshable{
+public class GoodsClassificationPane extends RefreshablePane {
     @FXML
     BorderPane borderpane;
 
@@ -31,7 +30,7 @@ public class GoodsClassificationPane extends Refreshable{
 
     List<GoodsClassificationVO> list;
 
-    BoardController boardController;
+    BoardController myBoardController;
 
     public static GoodsClassificationblService goodsClassficationblService;
 
@@ -55,16 +54,16 @@ public class GoodsClassificationPane extends Refreshable{
 
 
 
-    public GoodsClassificationPane(BoardController boardController, StackPane mainpane) throws IOException, NotBoundException {
+    public GoodsClassificationPane(BoardController myBoardController, StackPane mainpane) throws IOException, NotBoundException {
         this();
-        this.boardController = boardController;
+        this.myBoardController = myBoardController;
         this.mainpane = mainpane;
 
      //  goodsClassficationblService = ServiceFactory_Stub.getService(GoodsClassificationblService.class.getName());
         goodsClassficationblService = new GoodsClassificationbl();
 
         treeView = new GoodsClassificationTreeView();
-        treeView.setBoardController(boardController);
+        treeView.setBoardController(myBoardController);
         treeView.setMainpane(mainpane);
         treeView.setGoodsClassificationblService(goodsClassficationblService);
         treeView.setGoodsClassificationVO(goodsClassficationblService.show());
@@ -84,13 +83,13 @@ public class GoodsClassificationPane extends Refreshable{
 //    public void switchPane(boolean toSwtich){
 //        if(toSwtich==true){
 //            System.out.println("??/**/");
-//            boardController.switchTo(this);
+//            myBoardController.switchTo(this);
 //        }else{
 //            if(historyAdd){
 //                HistoricalRecord.addPane(this);
 //                historyAdd=false;
 //            }
-//            boardController.setAll(this);
+//            myBoardController.setAll(this);
 //        }
 //
 //    }
@@ -110,7 +109,7 @@ public class GoodsClassificationPane extends Refreshable{
 
     @Override
     public void refresh(boolean toSwitch) {
-        boardController.Loading();
+        myBoardController.Loading();
         try {
             LoadingTask task = new LoadingTask();
             task.valueProperty().addListener(new ChangeListener<Boolean>() {
@@ -121,7 +120,7 @@ public class GoodsClassificationPane extends Refreshable{
                             treeView.setGoodsClassificationVO(goodsClassficationblService.show());
                             borderpane.setCenter((BorderPane)treeView.getPane());
 //                            switchPane(toSwitch);
-                            MyBoardController.getMyBoardController().switchTo(GoodsClassificationPane.this);
+                            BoardController.getBoardController().switchTo(GoodsClassificationPane.this);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -135,7 +134,7 @@ public class GoodsClassificationPane extends Refreshable{
                             JFXDialog dialog = new JFXDialog(mainpane, jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
                             button.setOnAction(e -> {
                                 dialog.close();
-                                boardController.Ret();
+                                myBoardController.Ret();
                             });
                             re.setOnAction(e -> {
                                 dialog.close();

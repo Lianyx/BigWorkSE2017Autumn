@@ -1,7 +1,7 @@
 package ui.managerui.promotionui.promotionDetailPane;
 
 import blService.promotionblService.PromotionblService;
-import businesslogic.promotionbl.MyblServiceFactory;
+import businesslogic.blServiceFactory.MyblServiceFactory;
 import com.jfoenix.controls.*;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import exceptions.ItemNotFoundException;
@@ -16,13 +16,13 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import ui.common.BoardController;
 import ui.inventoryui.goodsui.GoodChoose;
-import ui.common.MyBoardController;
-import ui.common.MyOneButtonDialog;
-import ui.common.MyTwoButtonDialog;
+import ui.common.dialog.MyOneButtonDialog;
+import ui.common.dialog.MyTwoButtonDialog;
 import ui.managerui.promotionui.GoodsTreeTable;
 import ui.util.GetTask;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 import util.PromotionState;
 import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 import vo.promotionVO.PromotionVO;
@@ -32,7 +32,7 @@ import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public abstract class PromotionDetailPane<T extends PromotionVO> extends Refreshable {
+public abstract class PromotionDetailPane<T extends PromotionVO> extends RefreshablePane {
     @FXML
     protected GoodsTreeTable goodsTreeTable;
     @FXML
@@ -136,7 +136,7 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
     }
 
     protected void saveTask() {
-        MyBoardController boardController = MyBoardController.getMyBoardController();
+        BoardController boardController = BoardController.getBoardController();
         boardController.Loading();
 
         updatePromotionVO();
@@ -193,7 +193,7 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
     }
 
     private void deleteTask() {
-        MyBoardController boardController = MyBoardController.getMyBoardController();
+        BoardController boardController = BoardController.getBoardController();
         boardController.Loading();
 
         StringProperty prompt = new SimpleStringProperty(); // 为了避免lambda的final限制。
@@ -231,7 +231,7 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
 
     @Override
     public void refresh(boolean toSwitch) {
-        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        BoardController myBoardController = BoardController.getBoardController();
         myBoardController.Loading();
 
         MyTwoButtonDialog dialog = new MyTwoButtonDialog("连接错误", () -> refresh(false), myBoardController::Ret);

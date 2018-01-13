@@ -3,9 +3,8 @@ package businesslogic.billbl;
 import blService.billblservice.PaymentBillReceiptblService;
 import blService.memberblService.MemberInfo;
 import businesslogic.accountbl.Accountbl;
-import businesslogic.checkbl.Receiptbl;
+import businesslogic.genericbl.Receiptbl;
 import businesslogic.memberbl.MemberInfo_Impl;
-import businesslogic.memberbl.Memberbl;
 import po.receiptPO.PaymentBillReceiptPO;
 import util.ReceiptState;
 import util.ResultMessage;
@@ -15,7 +14,6 @@ import vo.billReceiptVO.TransferItemVO;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentBillReceiptbl extends Receiptbl<PaymentReceiptVO,PaymentBillReceiptPO> implements PaymentBillReceiptblService {

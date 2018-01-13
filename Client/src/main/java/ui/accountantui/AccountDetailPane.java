@@ -10,7 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.StackPane;
 
-import ui.common.MyBoardController;
+import ui.common.BoardController;
 import ui.util.*;
 import vo.AccountListVO;
 
@@ -21,7 +21,7 @@ import static ui.util.ValidatorDecorator.DoubleValid;
 import static ui.util.ValidatorDecorator.RequireValid;
 import static ui.util.ValidatorDecorator.isDouble;
 
-public class AccountDetailPane extends Refreshable{
+public class AccountDetailPane extends RefreshablePane {
 
     BoardController boardController;
 
@@ -160,7 +160,7 @@ public class AccountDetailPane extends Refreshable{
                             id.setText(String.valueOf(vo.getID()));
                             name.setText(vo.getName());
                             balance.setText(String.valueOf(vo.getBalance()));
-                            MyBoardController.getMyBoardController().switchTo(this);
+                            BoardController.getBoardController().switchTo(this);
                         }, buttonDialog, p);
 
                 new Thread(task).start();
@@ -174,11 +174,11 @@ public class AccountDetailPane extends Refreshable{
     }
 
     public void switchPane(boolean toSwtich) {
-        if (toSwtich == true) {
+//        if (toSwtich == true) {
             boardController.switchTo(this);
-        } else {
-            boardController.setAll(this);
-        }
+//        } else {
+//            boardController.setAll(this);
+//        }
     }
 
     @FXML
@@ -239,7 +239,7 @@ public class AccountDetailPane extends Refreshable{
 
     public void setBack(){
 
-        MyBoardController.getMyBoardController().goBack();
+        BoardController.getBoardController().goBack();
     }
 
 }

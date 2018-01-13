@@ -2,6 +2,7 @@ package businesslogic.checkbl;
 
 import blService.checkblService.CheckInfo;
 import blService.checkblService.CheckblService;
+import businesslogic.blServiceFactory.MyServiceFactory;
 import util.ResultMessage;
 import vo.billReceiptVO.CashReceiptVO;
 import vo.billReceiptVO.ChargeReceiptVO;

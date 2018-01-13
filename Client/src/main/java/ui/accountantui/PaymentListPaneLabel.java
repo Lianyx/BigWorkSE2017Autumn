@@ -1,12 +1,11 @@
 package ui.accountantui;
 
 import ui.managerui.navigation.ChangePaneLabel;
-import ui.accountantui.MyPaymentReceiptListPane;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 
 public class PaymentListPaneLabel extends ChangePaneLabel {
     @Override
-    public Refreshable getPane() {
+    public RefreshablePane getPane() {
         return new MyPaymentReceiptListPane();
     }
 }

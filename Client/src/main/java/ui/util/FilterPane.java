@@ -1,4 +1,5 @@
 package ui.util;
+
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import javafx.fxml.FXML;
@@ -6,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.PopOver;
+import ui.common.BoardController;
 import ui.salesui.SalesListPane;
 import util.ReceiptState;
 import util.RespectiveReceiptSearchCondition;
@@ -30,7 +32,7 @@ public class FilterPane extends AnchorPane {
 
     PopOver popOver;
 
-    public FilterPane(){
+    public FilterPane() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/util/filter.fxml"));
             fxmlLoader.setRoot(this);
@@ -50,22 +52,20 @@ public class FilterPane extends AnchorPane {
     }
 
 
-
-
     @FXML
     public void save() {
         respectiveReceiptSearchCondition.setReceiptState(ReceiptState.map.get(state.getValue().getText().toUpperCase()));
-        if(from.getValue()!=null)
-        respectiveReceiptSearchCondition.setCreateTimeFloor(from.getValue().atStartOfDay());
-        if(to.getValue()!=null)
-        respectiveReceiptSearchCondition.setCreateTimeCeil(to.getValue().atStartOfDay());
+        if (from.getValue() != null)
+            respectiveReceiptSearchCondition.setCreateTimeFloor(from.getValue().atStartOfDay());
+        if (to.getValue() != null)
+            respectiveReceiptSearchCondition.setCreateTimeCeil(to.getValue().atStartOfDay());
         popOver.hide();
         BoardController.getBoardController().refresh();
 
     }
 
     @FXML
-    public void cancel(){
+    public void cancel() {
         popOver.hide();
     }
 

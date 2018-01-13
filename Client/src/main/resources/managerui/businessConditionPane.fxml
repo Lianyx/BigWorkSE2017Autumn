@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import ui.util.Refreshable?>
+<?import ui.util.RefreshablePane?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import com.jfoenix.controls.JFXRippler?>
 <?import com.jfoenix.controls.JFXDatePicker?>
@@ -14,7 +14,7 @@
 <?import javafx.scene.chart.PieChart?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXButton?>
-<fx:root type="Refreshable" id="BusinessConditionPane4" xmlns="http://javafx.com/javafx"
+<fx:root type="RefreshablePane" id="BusinessConditionPane4" xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
          prefHeight="560.0" prefWidth="640.0">
 

@@ -1,12 +1,10 @@
 package businesslogic.promotionbl.testprmt;
 
-import blService.businessblservice.BusinessConditionblService;
 import blService.businessblservice.BusinessProgressblService;
-import businesslogic.promotionbl.MyblServiceFactory;
+import businesslogic.blServiceFactory.MyblServiceFactory;
 import util.ReceiptSearchCondition;
 
 import java.rmi.RemoteException;
-import java.time.LocalDateTime;
 
 public class TestBusinessProgress {
     public static void main(String[] args) {

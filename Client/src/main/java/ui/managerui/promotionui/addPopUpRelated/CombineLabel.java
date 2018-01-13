@@ -1,7 +1,7 @@
 package ui.managerui.promotionui.addPopUpRelated;
 
 import ui.managerui.promotionui.promotionDetailPane.CombinePromotionDetailPane;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 
 public class CombineLabel extends addButton {
     public CombineLabel() {
@@ -9,7 +9,7 @@ public class CombineLabel extends addButton {
     }
 
     @Override
-    public Refreshable getPane() {
+    public RefreshablePane getPane() {
         return new CombinePromotionDetailPane();
     }
 }
