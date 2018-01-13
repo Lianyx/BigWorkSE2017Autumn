@@ -5,18 +5,23 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import vo.ListGoodsItemVO;
 
 import java.io.Serializable;
 
 public class ReceiptGoodsItemVO extends RecursiveTreeObject<ReceiptGoodsItemVO> implements Serializable {
     private StringProperty goodsName;
-    private  StringProperty goodsId;
-    private  StringProperty goodsType;
+    private StringProperty goodsId;
+    private StringProperty goodsType;
     private IntegerProperty inventoryNum;
     private IntegerProperty factNum;
     private IntegerProperty sendNum;
     private IntegerProperty warningNum;
+    private double price;
 
+    /**
+     * construtors
+     * */
     public ReceiptGoodsItemVO() {
         this.goodsName = new SimpleStringProperty();
         this.goodsId = new SimpleStringProperty();
@@ -38,11 +43,22 @@ public class ReceiptGoodsItemVO extends RecursiveTreeObject<ReceiptGoodsItemVO> 
         this.warningNum = new SimpleIntegerProperty(warningNum);
     }
 
-    public ReceiptGoodsItemVO(String goodsName, String goodsId, Integer inventoryNum,Integer sendNum) {
+    public ReceiptGoodsItemVO(String goodsName, String goodsId, Integer inventoryNum, Integer sendNum) {
         this.goodsName = new SimpleStringProperty(goodsName);
         this.goodsId = new SimpleStringProperty(goodsId);
         this.inventoryNum = new SimpleIntegerProperty(inventoryNum);
         this.sendNum = new SimpleIntegerProperty(sendNum);
+    }
+
+    /**
+     * toOtherVO
+     * */
+    public ListGoodsItemVO toListGoodsItemVO() {
+        ListGoodsItemVO result = new ListGoodsItemVO();
+        result.setGoodsName(goodsName.get());
+        result.setGoodsId(goodsId.get());
+        result.setPrice(price);
+        return null;
     }
 
 
@@ -128,5 +144,13 @@ public class ReceiptGoodsItemVO extends RecursiveTreeObject<ReceiptGoodsItemVO> 
 
     public void setWarningNum(int warningNum) {
         this.warningNum.set(warningNum);
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

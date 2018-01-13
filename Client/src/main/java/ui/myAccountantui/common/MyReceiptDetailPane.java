@@ -13,6 +13,7 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import ui.common.SomeParameter;
 import ui.managerui.common.MyBoardController;
 import ui.managerui.common.MyOneButtonDialog;
 import ui.managerui.common.MyTwoButtonDialog;
@@ -32,7 +33,7 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
     @FXML
     protected Label idLabel;
 
-    private boolean isRedCredit = false;
+
 
 
     protected ReceiptblService<TV> receiptblService;
@@ -83,10 +84,14 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
                 saveAsDraft.setVisible(false);
                 delete.setVisible(false);
             }
-            if (receiptVO.getReceiptState() == ReceiptState.APPROVED && isRedCredit
-                    && UserInfomation.usertype == UserCategory.Accountant) {
+            // TODO 红冲这里的组合问题还很多
+            if (receiptVO.getReceiptState() == ReceiptState.REJECTED //&& SomeParameter.isRedCreditable
+                    && UserInfomation.usertype == UserCategory.GeneralManager) {
                 redCredit.setVisible(true);
-                redCreditCopy.setVisible(false);
+                redCreditCopy.setVisible(true);
+                save.setVisible(false);
+                saveAsDraft.setVisible(false);
+                reset.setVisible(false);
             }
 
             if (UserInfomation.usertype == UserCategory.GeneralManager && receiptVO.getReceiptState() == ReceiptState.PENDING) { // 如果是总经理肯定只能是pending的
@@ -349,4 +354,5 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
         });
         new Thread(task).start();
     }
+
 }

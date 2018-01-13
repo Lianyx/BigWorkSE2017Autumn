@@ -13,7 +13,7 @@ create table goods(
      salePrice double(8,2) unsigned,
      recentPurPrice double(8,2) unsigned,
      recentSalePrice double(8,2) unsigned,
-     alarmNumber int，
+     alarmNumber int,
      isDelete bool
 )character set = utf8;
 
