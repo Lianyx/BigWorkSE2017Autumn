@@ -18,10 +18,8 @@ import java.util.List;
 
 public class GoodsSalesUpdate implements GoodsSalesUpdateInfo {
     Goodsbl goodsbl;
-    InventoryWarningReceiptbl inventoryWarningReceiptbl;
     public GoodsSalesUpdate() throws RemoteException, NotBoundException, MalformedURLException {
         goodsbl = new Goodsbl();
-        inventoryWarningReceiptbl = new InventoryWarningReceiptbl();
     }
 
 
