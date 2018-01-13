@@ -76,7 +76,7 @@ public class InventoryOverflowDetailPane extends MyReceiptDetailPane<InventoryOv
         int index = 0;
         for (ReceiptGoodsItemVO vo:list) {
             vo.setInventoryNum(vo.getInventoryNum()*(-1));
-            vo.setSendNum(vo.getFactNum()*(-1));
+            vo.setFactNum(vo.getFactNum()*(-1));
             list.set(index++,vo);
         }
         redCreditVO.setItems(list);
