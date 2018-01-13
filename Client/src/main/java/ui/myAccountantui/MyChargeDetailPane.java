@@ -40,6 +40,15 @@ public class MyChargeDetailPane extends MyReceiptDetailPane<ChargeReceiptVO> {
 
 
     public MyChargeDetailPane() {
+        operator.setDisable(true);
+        sumField.setDisable(true);
+        createtime.setDisable(true);
+        lastmodifiedtime.setDisable(true);
+
+        clientField.disableProperty().bind(modifyState.not());
+        addTransferButton.visibleProperty().bind(modifyState);
+
+        chargeItemTreeTable.sumProperty().addListener(t->{sumField.setText(chargeItemTreeTable.getSum()+"");});
     }
 
     public MyChargeDetailPane(ChargeReceiptVO receiptVO) {

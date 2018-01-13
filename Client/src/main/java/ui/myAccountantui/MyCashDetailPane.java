@@ -112,6 +112,7 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
     @Override
     protected void updateReceiptVO() {
         super.updateReceiptVO();
+
         receiptVO.setTotal(Double.parseDouble(sumField.getText()));
         receiptVO.setAccountID(Integer.parseInt(accountField.getText()));
         receiptVO.setCashList(cashItemTreeTable.getList());

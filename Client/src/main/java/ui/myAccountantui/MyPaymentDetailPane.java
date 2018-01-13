@@ -42,6 +42,15 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
     private TextField lastmodifiedtime;
 
     public MyPaymentDetailPane() {
+        operator.setDisable(true);
+        sumField.setDisable(true);
+        createtime.setDisable(true);
+        lastmodifiedtime.setDisable(true);
+
+        clientField.disableProperty().bind(modifyState.not());
+        addTransferButton.visibleProperty().bind(modifyState);
+
+        paymentItemTreeTable.sumProperty().addListener(t->{sumField.setText(paymentItemTreeTable.getSum()+"");});
     }
 
     public MyPaymentDetailPane(PaymentReceiptVO receiptVO) {
