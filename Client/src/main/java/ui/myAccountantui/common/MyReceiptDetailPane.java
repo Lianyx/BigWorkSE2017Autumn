@@ -126,6 +126,8 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
     }
 
     protected void setRedCredit(TV redCreditVO) {
+        redCreditVO.setReceiptState(receiptVO.getReceiptState());
+        redCreditVO.setOperatorId(receiptVO.getOperatorId());
     }
 
     @FXML
