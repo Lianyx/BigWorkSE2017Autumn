@@ -19,22 +19,25 @@ import java.util.List;
 
 public class PaymentBillReceiptbl extends Receiptbl<PaymentReceiptVO,PaymentBillReceiptPO> implements PaymentBillReceiptblService {
 
+    MemberInfo memberInfo;
+    Accountbl accountbl;
     public PaymentBillReceiptbl() throws RemoteException, NotBoundException, MalformedURLException {
         super(PaymentReceiptVO.class, PaymentBillReceiptPO.class);
+        memberInfo = new MemberInfo_Impl();
+        accountbl = new Accountbl();
+
     }
 
     @Override
     public ResultMessage approve(PaymentReceiptVO receiptVO) throws RemoteException {
-        new MemberInfo_Impl().updateCredit(receiptVO.getclientID(),receiptVO.getSum());
+
+        memberInfo.updateCredit(receiptVO.getclientID(), receiptVO.getSum());
+
         List<TransferItemVO> temp = receiptVO.getTransferList();
-        try{
-            Accountbl accountbl = new Accountbl();
-            for(int i=0;i<temp.size();i++){
-                accountbl.decBalance(temp.get(i).getAccountID(),temp.get(i).getSum());
-            }
-        }catch (Exception e){
-            e.printStackTrace();
+        for (int i = 0; i < temp.size(); i++) {
+            accountbl.decBalance(temp.get(i).getAccountID(), temp.get(i).getSum());
         }
         return ResultMessage.SUCCESS;
+
     }
 }

@@ -2,20 +2,24 @@ package ui.myAccountantui;
 
 import blService.billblservice.PaymentBillReceiptblService;
 import blService.checkblService.ReceiptblService;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import ui.memberui.ChooseList;
 import ui.myAccountantui.common.MyReceiptDetailPane;
 import ui.util.OneButtonDialog;
 import ui.util.PaneFactory;
 import ui.util.UserInfomation;
+import vo.MemberVO;
 import vo.billReceiptVO.PaymentReceiptVO;
 import vo.billReceiptVO.TransferItemVO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
@@ -109,6 +113,19 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
 
     }
 
+    @Override
+    protected void setRedCredit(PaymentReceiptVO redCreditVO) {
+        super.setRedCredit(redCreditVO);
+        redCreditVO.setSum(-redCreditVO.getSum());
+        List<TransferItemVO> list = redCreditVO.getTransferList();
+        for(TransferItemVO vo:list){
+            vo.setSum(-vo.getSum());
+        }
+        redCreditVO.setTransferList(list);
+    }
+
+
+
     @FXML
     @Override
     protected void reset() {
@@ -121,6 +138,15 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
         lastmodifiedtime.setText(receiptVO.getLastModifiedTime().toString());
     }
 
+
+    @FXML
+    private void selectMember() {
+        MemberVO memberVO = new MemberVO();
+        ChooseList chooseList = new ChooseList(memberVO,()->{clientField.setText(memberVO.getMemberId()+"");});
+        JFXDialog dialog = new JFXDialog(PaneFactory.getMainPane(),chooseList, JFXDialog.DialogTransition.CENTER);
+        chooseList.setDialog(dialog);
+        dialog.show();
+    }
 
     @FXML
     private void addTransfer() {
@@ -138,5 +164,7 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
         if(!flag)
         paymentItemTreeTable.add(new TransferItemVO(-1,0,"TODO"));
     }
+
+
 
 }
