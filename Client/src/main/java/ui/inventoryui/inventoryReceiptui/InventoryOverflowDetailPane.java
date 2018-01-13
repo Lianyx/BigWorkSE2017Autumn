@@ -7,12 +7,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import ui.inventoryui.GoodsChooseInfo;
+import ui.inventoryui.goodsui.GoodChoose;
 import ui.myAccountantui.common.MyReceiptDetailPane;
 import vo.inventoryVO.inventoryReceiptVO.InventoryDamageReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.InventoryOverflowReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.List;
 
 public class InventoryOverflowDetailPane extends MyReceiptDetailPane<InventoryOverflowReceiptVO> {
@@ -64,35 +69,33 @@ public class InventoryOverflowDetailPane extends MyReceiptDetailPane<InventoryOv
 
     }
 
-  /*  @Override
-    protected void setRedCredit(InventoryDamageReceiptVO redCreditVO) {
+    @Override
+    protected void setRedCredit(InventoryOverflowReceiptVO redCreditVO) {
         List<ReceiptGoodsItemVO> list = redCreditVO.getItems();
 
         int index = 0;
         for (ReceiptGoodsItemVO vo:list) {
             vo.setInventoryNum(vo.getInventoryNum()*(-1));
-            vo.setSendNum(vo.getSendNum()*(-1));
+            vo.setSendNum(vo.getFactNum()*(-1));
             list.set(index++,vo);
         }
         redCreditVO.setItems(list);
-    }*/
+    }
 
     @FXML
     @Override
     protected void reset() {
-        operator.setText("");
-        commentArea.setText("");
-       // stateField.setText("");
-        overflowItemTreeTable.clear();
+        operator.setText(String.valueOf(receiptVO.getOperatorId()));
+        commentArea.setText(receiptVO.getComment());
+        stateField.setText(receiptVO.getReceiptState().toString());
+
+        overflowItemTreeTable.setList(observableList);
     }
 
     @FXML
-    public void addGoods(){
-        ReceiptGoodsItemVO receiptGoodsItemVO = new ReceiptGoodsItemVO();
-        receiptGoodsItemVO.setGoodsName("please");
-        receiptGoodsItemVO.setGoodsId("please");
-        receiptGoodsItemVO.setInventoryNum(0);
-        receiptGoodsItemVO.setFactNum(0);
-        overflowItemTreeTable.addGood(receiptGoodsItemVO);
+    public void addGoods() throws RemoteException, NotBoundException, MalformedURLException {
+        GoodsChooseInfo goodsChooseInfo = new GoodChoose();
+
+        goodsChooseInfo.choose(observableList);
     }
 }
