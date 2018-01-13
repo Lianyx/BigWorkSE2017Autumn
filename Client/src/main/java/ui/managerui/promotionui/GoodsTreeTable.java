@@ -54,6 +54,8 @@ public class GoodsTreeTable extends JFXTreeTableView<PromotionGoodsItemVO> {
     public void setAll(Collection<PromotionGoodsItemVO> newGifts) {
         gifts.clear();
         gifts.setAll(newGifts);
+        TreeItem<PromotionGoodsItemVO> root = new RecursiveTreeItem<>(gifts, RecursiveTreeObject::getChildren);
+        setRoot(root);
     }
     public ObservableList<PromotionGoodsItemVO> getGifts() {
         return gifts;

@@ -17,8 +17,14 @@ public class StockRetbl extends Receiptbl<StockRetReceiptVO, StockRetReceiptPO> 
     }
 
     @Override
-    public ResultMessage approve(StockRetReceiptVO receiptVO) throws RemoteException, MalformedURLException, NotBoundException {
-        new GoodsSalesUpdate().goodsUpdateStorckRet(receiptVO.getItems());
+    public ResultMessage approve(StockRetReceiptVO receiptVO) throws RemoteException {
+        try {
+            new GoodsSalesUpdate().goodsUpdateStorckRet(receiptVO.getItems());
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
         return ResultMessage.SUCCESS;
     }

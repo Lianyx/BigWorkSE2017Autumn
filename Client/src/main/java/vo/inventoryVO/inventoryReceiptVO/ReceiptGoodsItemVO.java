@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import vo.ListGoodsItemVO;
+import vo.promotionVO.PromotionGoodsItemVO;
 
 import java.io.Serializable;
 
@@ -58,7 +59,17 @@ public class ReceiptGoodsItemVO extends RecursiveTreeObject<ReceiptGoodsItemVO> 
         result.setGoodsName(goodsName.get());
         result.setGoodsId(goodsId.get());
         result.setPrice(price);
-        return null;
+        result.setGoodsNum(0);
+        return result;
+    }
+
+    public PromotionGoodsItemVO toPromotionGoodsItemVO() {
+        PromotionGoodsItemVO result = new PromotionGoodsItemVO();
+        result.setId(goodsId.get());
+        result.setName(goodsName.get());
+        result.setUnitPrice(price);
+        result.setNum(0);
+        return result;
     }
 
 

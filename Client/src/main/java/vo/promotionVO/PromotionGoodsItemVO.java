@@ -16,7 +16,7 @@ public class PromotionGoodsItemVO extends RecursiveTreeObject<PromotionGoodsItem
     private String id;
     private String name;
     private double unitPrice;
-    private IntegerProperty num;
+    private IntegerProperty num = new SimpleIntegerProperty();
 
     public PromotionGoodsItemVO() {
     }
@@ -24,16 +24,16 @@ public class PromotionGoodsItemVO extends RecursiveTreeObject<PromotionGoodsItem
     public PromotionGoodsItemVO(PromotionGoodsItemPO promotionGoodsItemPO) {
         id = promotionGoodsItemPO.getId();
         num = new SimpleIntegerProperty(promotionGoodsItemPO.getNum());
-//        try {
-//            GoodsVO goodsVO = MyServiceFactory.getGoodsSearchInfo().getGoodById(id);
-//            name = goodsVO.getGoodName();
-//            unitPrice = goodsVO.getSalePrice();
-//        } catch (NotBoundException | MalformedURLException | RemoteException e) {
+        try {
+            GoodsVO goodsVO = MyServiceFactory.getGoodsSearchInfo().getGoodById(id);
+            name = goodsVO.getGoodName();
+            unitPrice = goodsVO.getSalePrice();
+        } catch (NotBoundException | MalformedURLException | RemoteException e) {
             // 不管了，就这么写了…
-//            e.printStackTrace();
+            e.printStackTrace();
             name = "连接错误";
             unitPrice = -99999;
-//        }
+        }
     }
 
     public PromotionGoodsItemVO(String id, String name, int unitPrice, IntegerProperty num) {

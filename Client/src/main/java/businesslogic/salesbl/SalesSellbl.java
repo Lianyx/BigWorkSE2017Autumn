@@ -19,8 +19,14 @@ public class SalesSellbl extends Receiptbl<SalesSellReceiptVO, SalesSellReceiptP
     }
 
     @Override
-    public ResultMessage approve(SalesSellReceiptVO receiptVO) throws RemoteException, MalformedURLException, NotBoundException {
-        new GoodsSalesUpdate().goodsUpdateSalesSel(receiptVO.getItems());
+    public ResultMessage approve(SalesSellReceiptVO receiptVO) throws RemoteException {
+        try {
+            new GoodsSalesUpdate().goodsUpdateSalesSel(receiptVO.getItems());
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         return ResultMessage.SUCCESS;
     }
 }

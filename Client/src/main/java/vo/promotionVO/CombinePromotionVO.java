@@ -3,10 +3,12 @@ package vo.promotionVO;
 import blService.promotionblService.CombinePromotionblService;
 import blService.promotionblService.PromotionblService;
 import businesslogic.promotionbl.MyblServiceFactory;
+import javafx.scene.control.Label;
 import po.promotionPO.PromotionGoodsItemPO;
 import po.promotionPO.CombinePromotionPO;
 import ui.managerui.promotionui.promotionDetailPane.CombinePromotionDetailPane;
 import ui.managerui.promotionui.promotionDetailPane.PromotionDetailPane;
+import vo.receiptVO.SalesSellReceiptVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -51,6 +53,18 @@ public class CombinePromotionVO extends PromotionVO {
     @Override
     public PromotionDetailPane getDetailPane() {
         return new CombinePromotionDetailPane(this);
+    }
+
+    @Override
+    public Label getInfoLabel() {
+        String content = "特价包促销\n"
+                + "降价总额：" + discountAmount * count + "元\n";
+        return new Label(content);
+    }
+
+    @Override
+    public void modifySalesSell(SalesSellReceiptVO salesSellReceiptVO) {
+        salesSellReceiptVO.setDiscountAmount(discountAmount * count);
     }
 
     public ArrayList<PromotionGoodsItemVO> getGoodsCombination() {

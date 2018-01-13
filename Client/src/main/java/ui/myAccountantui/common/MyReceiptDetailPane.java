@@ -139,7 +139,7 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
      */
 
     @FXML
-    private void save() { // 这里的save相当于提交，但是不想改名了…
+    protected void save() { // 这里的save相当于提交，但是不想改名了…
         if (validate()) {
             receiptVO.setReceiptState(ReceiptState.PENDING);
             saveTask();
@@ -157,7 +157,7 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
         }
     }
 
-    private void saveTask() {
+    protected void saveTask() {
         MyBoardController boardController = MyBoardController.getMyBoardController();
         boardController.Loading();
 

@@ -2,12 +2,13 @@ package ui.managerui.promotionui.promotionDetailPane;
 
 import blService.promotionblService.PromotionblService;
 import businesslogic.promotionbl.MyblServiceFactory;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXRippler;
+import com.jfoenix.controls.*;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import exceptions.ItemNotFoundException;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -16,13 +17,18 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import ui.inventoryui.GoodsChooseInfo;
+import ui.inventoryui.goodsui.ChoosePane;
+import ui.inventoryui.goodsui.GoodChoose;
 import ui.managerui.common.MyBoardController;
 import ui.managerui.common.MyOneButtonDialog;
 import ui.managerui.common.MyTwoButtonDialog;
 import ui.managerui.promotionui.GoodsTreeTable;
 import ui.util.GetTask;
+import ui.util.PaneFactory;
 import ui.util.Refreshable;
 import util.PromotionState;
+import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 import vo.promotionVO.PromotionGoodsItemVO;
 import vo.promotionVO.PromotionVO;
 
@@ -30,6 +36,8 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public abstract class PromotionDetailPane<T extends PromotionVO> extends Refreshable {
     @FXML
@@ -50,6 +58,10 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
     protected T promotionVO;
     protected PromotionblService<T> promotionblService;
     protected BooleanProperty modifyState = new SimpleBooleanProperty(true);
+
+
+    // 这个不是很好，但是先这样再说了
+    protected ObservableList<ReceiptGoodsItemVO> observableList = FXCollections.observableArrayList();
 
     /**
      * Constructors related
@@ -156,9 +168,25 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
     }
 
     @FXML
-    protected void addGift() { // TODO
+    protected void addGift() {
         System.out.println("add is called");
-        goodsTreeTable.add(new PromotionGoodsItemVO("12432", "无所谓", 986, new SimpleIntegerProperty(3)));
+//        goodsTreeTable.add(new PromotionGoodsItemVO("12432", "无所谓", 986, new SimpleIntegerProperty(3)));
+
+        IntegerProperty toBeListened = new SimpleIntegerProperty(0);
+        try {
+            GoodChoose goodsChoose = new GoodChoose();
+            goodsChoose.choose(observableList, toBeListened);
+        } catch (Exception e) { // TODO 异常先不管了，而且下面这样写现在好像是一次性的，也没有回设num，不过先不管了
+            e.printStackTrace();
+        }
+
+
+        toBeListened.addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals(1)) {
+                observableList.stream().map(ReceiptGoodsItemVO::toPromotionGoodsItemVO)
+                        .forEach(i -> goodsTreeTable.add(i));
+            }
+        });
     }
 
     @FXML
@@ -196,6 +224,7 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
 
     @FXML
     protected void reset() {
+        System.out.println("PromotionDetail pane reset called");
         idLabel.setText(promotionVO.getId());
         if (promotionVO.getBeginTime() != null) {
             beginTimePicker.setValue(promotionVO.getBeginTime().toLocalDate());
@@ -204,6 +233,7 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
             endTimePicker.setValue(promotionVO.getEndTime().toLocalDate());
         }
         commentArea.setText(promotionVO.getComment());
+
     }
 
     @Override
