@@ -16,7 +16,7 @@
 
         <JFXTextField fx:id="keywordField" focusColor="#8CA2F6" layoutX="27.0" layoutY="28.0" prefHeight="30.0" prefWidth="150.0" />
 
-        <JFXButton fx:id="filter" layoutX="427.0" layoutY="35.0" mnemonicParsing="false" text="Filter">
+        <JFXButton fx:id="filter" layoutX="427.0" layoutY="35.0" mnemonicParsing="false" text="过滤">
             <graphic>
                 <HBox>
                     <children>
@@ -30,14 +30,14 @@
             </graphic>
         </JFXButton>
 
-        <JFXRippler fx:id="search" layoutX="177" layoutY="22" maskType="CIRCLE" position="BACK" onMouseClicked="#search" ripplerFill="#03A9F4" styleClass="icons-rippler">
+        <JFXRippler fx:id="search" layoutX="177" layoutY="22" maskType="CIRCLE" onMouseClicked="#search" position="BACK" ripplerFill="#03A9F4" styleClass="icons-rippler">
             <StackPane style="-fx-padding: 8;" translateY="5">
                 <OctIconView glyphName="SEARCH" size="1.5em" styleClass="icon" />
             </StackPane>
         </JFXRippler>
 
 
-        <JFXButton fx:id="deleted" layoutX="557.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#deleteList" text="Delete">
+        <JFXButton fx:id="deleted" layoutX="557.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#deleteList" text="删除">
             <graphic>
                 <HBox>
                     <children>
@@ -52,7 +52,7 @@
         </JFXButton>
 
 
-        <JFXButton fx:id="add" layoutX="494.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#add" text="Add">
+        <JFXButton fx:id="add" layoutX="494.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#add" text="新增">
             <graphic>
                 <HBox>
                     <children>

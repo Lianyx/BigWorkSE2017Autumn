@@ -19,18 +19,15 @@ import vo.billReceiptVO.CashItemVO;
 public class ItemTreeTable extends MyListItemTablePane<ListGoodsItemVO>{
     private SimpleDoubleProperty sum = new SimpleDoubleProperty(0);
 
+
+
+
     public ItemTreeTable() {
         super();
-        observableList.addListener(new ListChangeListener<ListGoodsItemVO>() {
-            @Override
-            public void onChanged(Change<? extends ListGoodsItemVO> c) {
-                sum.set(0);
-                for(ListGoodsItemVO listGoodsItemVO:c.getList()){
-                    sum.add(listGoodsItemVO.getSum());
-                }
 
-            }
-        });
+
+
+
         JFXTreeTableColumn<ListGoodsItemVO, String> goodsid = new JFXTreeTableColumn<>("ID");
         goodsid.setCellValueFactory(p->new ReadOnlyObjectWrapper<>(p.getValue().getValue().getGoodsId()));
         goodsid.setPrefWidth(100);
@@ -40,7 +37,6 @@ public class ItemTreeTable extends MyListItemTablePane<ListGoodsItemVO>{
         JFXTreeTableColumn<ListGoodsItemVO, Double> price = new JFXTreeTableColumn<>("价格");
         price.setCellValueFactory(p->new ReadOnlyObjectWrapper<>(p.getValue().getValue().getPrice()));
         price.setPrefWidth(100);
-
         this.getColumns().setAll(goodsid,name,price);
         TreeItem<ListGoodsItemVO> root = new RecursiveTreeItem<>(observableList, RecursiveTreeObject::getChildren);
         this.setRoot(root);
@@ -51,6 +47,13 @@ public class ItemTreeTable extends MyListItemTablePane<ListGoodsItemVO>{
     @Override
     public void initial(ListGoodsItemVO vo) {
         myListItemPane = new ListItemPane(vo,this);
+    }
+
+    @Override
+    public void refresh() {
+        for(ListGoodsItemVO listGoodsItemVO : observableList){
+            sum.set(listGoodsItemVO.getSum()+sum.get());
+        }
     }
 
     public double getSum() {

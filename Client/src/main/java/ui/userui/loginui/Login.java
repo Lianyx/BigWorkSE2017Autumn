@@ -169,8 +169,6 @@ public class Login implements Initializable{
     public void changeTo(String url) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource(url));
         Stage stage = (Stage) pane.getScene().getWindow();
-        System.out.println("first time login");
-        System.out.println(url);
         StackPane stackPane = PaneFactory.getMainPane();
         stackPane.getChildren().setAll(root);
         Scene scene = new Scene(stackPane);

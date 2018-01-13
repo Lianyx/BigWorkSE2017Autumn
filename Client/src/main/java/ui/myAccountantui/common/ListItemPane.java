@@ -27,6 +27,7 @@ public class ListItemPane extends MyListItemPane<ListGoodsItemVO>{
     JFXTextArea comment;
 
 
+
     public ListItemPane(ListGoodsItemVO listGoodsItemVO, MyListItemTablePane myListItmeTablePane) {
         super(getURL(), listGoodsItemVO, myListItmeTablePane);
         RequireValid(num);
@@ -59,8 +60,10 @@ public class ListItemPane extends MyListItemPane<ListGoodsItemVO>{
     @Override
     public void saveItem() {
         vo.setGoodsNum(Integer.parseInt(num.getText()));
+        System.out.println(vo.getGoodsNum()+"   /.."+vo.getPrice());
         sum.setText(""+vo.getSum());
         vo.setComment(comment.getText());
+        myListItmeTablePane.refresh();
     }
 
     @Override

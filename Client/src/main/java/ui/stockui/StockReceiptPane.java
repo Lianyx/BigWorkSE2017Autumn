@@ -96,6 +96,9 @@ public abstract class StockReceiptPane<T extends StockReceiptVO> extends MyRecei
         receiptVO.setStockName(stock.getText());
         receiptVO.setSum(Double.parseDouble(sum.getText()));
         receiptVO.setItems(itemTreeTable.getList());
+        System.out.println("this is the killer");
+        System.out.println(itemTreeTable.getList());
+
         receiptVO.setComment(comment.getText());
     }
 
@@ -107,6 +110,7 @@ public abstract class StockReceiptPane<T extends StockReceiptVO> extends MyRecei
         stock.setText(receiptVO.getStockName());
         comment.setText(receiptVO.getComment());
         sum.setText(receiptVO.getSum() + "");
+        itemTreeTable.setList(receiptVO.getItems());
     }
 
     @Override
@@ -126,6 +130,8 @@ public abstract class StockReceiptPane<T extends StockReceiptVO> extends MyRecei
         integerProperty.addListener((b,o,n)->{
             if(n.intValue()==1){
                 itemTreeTable.setList(observableList.stream().map(t->t.toListGoodsItemVO()).collect(Collectors.toCollection(ArrayList::new)));
+                sum.setText(String.valueOf(itemTreeTable.getSum()));
+
             }
         });
 

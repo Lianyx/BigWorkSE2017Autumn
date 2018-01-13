@@ -143,7 +143,6 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
         operator.setText(UserInfomation.username);
         stock.setText(receiptVO.getStockName());
         comment.setText(receiptVO.getComment());
-        idLabel.setText(receiptVO.getId());
         clerk.setText(receiptVO.getClerkName());
         sum.setText((receiptVO.getOriginSum()-receiptVO.getTokenAmount())+"");
         token.setText(receiptVO.getTokenAmount()+"");
@@ -182,8 +181,10 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
         integerProperty.addListener((b,o,n)->{
             if(n.intValue()==1){
                 itemTreeTable.setList(observableList.stream().map(t->t.toListGoodsItemVO()).collect(Collectors.toCollection(ArrayList::new)));
+                original.setText(String.valueOf(itemTreeTable.getSum()));
             }
         });
+
 
     }
     @FXML

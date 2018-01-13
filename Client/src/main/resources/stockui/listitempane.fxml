@@ -12,7 +12,6 @@
 
 <fx:root prefHeight="357.0" prefWidth="300.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXButton fx:id="deleted" layoutX="160.0" layoutY="320.0" onMouseClicked="#deleted" text="deleted" textFill="WHITE"/>
       <Label layoutX="89.0" layoutY="61.0" text="GoodID" textFill="#a1adbc">
          <font>
             <Font name="System Bold" size="12.0" />
