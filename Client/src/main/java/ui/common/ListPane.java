@@ -3,7 +3,7 @@ package ui.common;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.fxml.FXML;
-import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
+import ui.common.treeTableRelated.MyTreeTableBorderPane;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;

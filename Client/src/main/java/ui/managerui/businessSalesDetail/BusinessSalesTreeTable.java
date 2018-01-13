@@ -3,11 +3,9 @@ package ui.managerui.businessSalesDetail;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableRow;
 import javafx.beans.property.StringProperty;
-import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
-import ui.managerui.common.treeTableRelated.SearchableStringColumn;
+import ui.common.treeTableRelated.MyTreeTableBorderPane;
+import ui.common.treeTableRelated.SearchableStringColumn;
 import vo.ListGoodsItemVO;
-
-import java.util.Set;
 
 public class BusinessSalesTreeTable extends MyTreeTableBorderPane<ListGoodsItemVO>{
     public BusinessSalesTreeTable(StringProperty keywordProperty) {

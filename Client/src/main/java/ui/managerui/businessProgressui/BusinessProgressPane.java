@@ -1,6 +1,5 @@
 package ui.managerui.businessProgressui;
 
-import blService.businessblservice.BusinessConditionblService;
 import blService.businessblservice.BusinessProgressblService;
 import businesslogic.promotionbl.MyblServiceFactory;
 import javafx.fxml.FXML;
@@ -9,10 +8,8 @@ import jxl.write.WriteException;
 import org.controlsfx.control.PopOver;
 import ui.common.FilterableListPane;
 import ui.common.mixer.ExcelExportableMixer;
-import ui.managerui.checkui.CheckTable;
-import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
+import ui.common.treeTableRelated.MyTreeTableBorderPane;
 import util.ReceiptSearchCondition;
-import vo.promotionVO.PromotionVO;
 import vo.receiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;

@@ -1,12 +1,8 @@
 package ui.memberui;
 
-import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.memberblService.MemberblService;
-import blService.userblService.UserManagerblService;
 import businesslogic.memberbl.Memberbl;
-import businesslogic.userbl.Userbl;
 import com.jfoenix.controls.*;
-import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import exceptions.ItemNotFoundException;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -17,27 +13,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Paint;
-import javafx.stage.FileChooser;
 import org.controlsfx.control.Rating;
-import ui.managerui.common.MyBoardController;
-import ui.managerui.common.MyOneButtonDialog;
-import ui.managerui.common.MyTwoButtonDialog;
+import ui.common.MyBoardController;
+import ui.common.MyOneButtonDialog;
+import ui.common.MyTwoButtonDialog;
 import ui.util.*;
 import util.MemberCategory;
-import util.UserCategory;
-import vo.MemberListVO;
 import vo.MemberVO;
-import vo.UserVO;
 
-import java.io.File;
 import java.io.IOException;
 import java.rmi.RemoteException;
-import java.time.LocalDate;
-import java.util.function.Predicate;
 
 import static ui.util.ValidatorDecorator.DoubleValid;
 import static ui.util.ValidatorDecorator.RequireValid;

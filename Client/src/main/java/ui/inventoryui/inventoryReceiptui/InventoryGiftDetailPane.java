@@ -8,18 +8,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import ui.inventoryui.GoodsChooseInfo;
 import ui.inventoryui.goodsui.GoodChoose;
-import ui.myAccountantui.common.MyReceiptDetailPane;
-import vo.inventoryVO.inventoryReceiptVO.InventoryDamageReceiptVO;
+import ui.common.MyReceiptDetailPane;
 import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
-import vo.receiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftReceiptVO> {
@@ -99,6 +95,6 @@ public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftRe
     public void addGoods() throws RemoteException, NotBoundException, MalformedURLException {
         GoodChoose goodsChooseInfo = new GoodChoose();
 
-        goodsChooseInfo.choose(observableList,new SimpleIntegerProperty(0));
+        goodsChooseInfo.choose(observableList,new SimpleIntegerProperty());
     }
 }

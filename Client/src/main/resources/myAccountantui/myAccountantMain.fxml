@@ -5,16 +5,16 @@
 <?import javafx.scene.image.Image?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import ui.managerui.common.navigation.PromotionChangePaneLabel?>
-<?import ui.managerui.common.navigation.CheckChangePaneLabel?>
-<?import ui.managerui.common.MyTopBar?>
-<?import ui.managerui.common.navigation.BusinessConditionChangePaneLabel?>
-<?import ui.managerui.common.navigation.BusinessProgressChangePaneLabel?>
-<?import ui.myAccountantui.MyPaymentReceiptListPane?>
-<?import ui.myAccountantui.navigation.PaymentListPaneLabel?>
+<?import ui.managerui.navigation.PromotionChangePaneLabel?>
+<?import ui.managerui.navigation.CheckChangePaneLabel?>
+<?import ui.common.MyTopBar?>
+<?import ui.managerui.navigation.BusinessConditionChangePaneLabel?>
+<?import ui.managerui.navigation.BusinessProgressChangePaneLabel?>
+<?import ui.accountantui.MyPaymentReceiptListPane?>
+<?import ui.accountantui.PaymentListPaneLabel?>
 <StackPane fx:id="mainpane"
            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-           fx:controller="ui.myAccountantui.MyAccountantUIController"
+           fx:controller="ui.accountantui.MyAccountantUIController"
            prefHeight="600" prefWidth="800"
            stylesheets="@../css/tempInNeed.css">
     <AnchorPane fx:id="mainAnchorPane" prefHeight="600" prefWidth="800">

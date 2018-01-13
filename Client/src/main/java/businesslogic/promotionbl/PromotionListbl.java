@@ -61,14 +61,15 @@ public class PromotionListbl implements PromotionListblService, PromotionInfo {
     public ArrayList<PromotionVO> getMatch(SalesSellReceiptVO salesSellReceiptVO) throws RemoteException {
         ArrayList<PromotionVO> resultList = new ArrayList<>();
         resultList.addAll(combinePromotionblService.selectInEffect().stream().filter(c -> {
-            for (PromotionGoodsItemVO pvo :
-                    c.getGoodsCombination()) {
+            for (PromotionGoodsItemVO pvo: c.getGoodsCombination()) {
+                int numSum = 0;
                 if (salesSellReceiptVO.getItems().stream()
-                        .anyMatch(ii -> ii.getGoodsId().equals(pvo.getId()) && ii.getGoodsNum() > pvo.getNum())) {
-                    return true;
+                        .filter(lg -> lg.getGoodsId().equals(c.getId()))
+                        .mapToInt(ListGoodsItemVO::getGoodsNum).sum() < pvo.getNum()) {
+                    return false;
                 }
             }
-            return false;
+            return true;
         }).collect(Collectors.toCollection(ArrayList::new)));
 
         resultList.addAll(memberPromotionblService.selectInEffect().stream()

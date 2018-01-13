@@ -15,7 +15,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.layout.HBox?>
-<?import ui.managerui.common.MyTopBar?>
+<?import ui.common.MyTopBar?>
 <AnchorPane fx:id="mainAnchorpane" fx:controller="ui.inventoryui.InventoryUIController"
            stylesheets="@../css/list.css" xmlns="http://javafx.com/javafx/8.0.121"
            xmlns:fx="http://javafx.com/fxml/1">

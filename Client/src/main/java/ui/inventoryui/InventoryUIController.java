@@ -1,6 +1,5 @@
 package ui.inventoryui;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXListView;
@@ -17,9 +16,8 @@ import ui.inventoryui.inventoryReceiptui.InventoryGiftListPane;
 import ui.inventoryui.inventoryReceiptui.InventoryOverflowListPane;
 import ui.inventoryui.inventoryReceiptui.InventoryWarningListPane;
 import ui.inventoryui.inventoryViewui.ChooseTimePane;
-import ui.inventoryui.inventoryViewui.InventoryViewListPane;
-import ui.managerui.common.MyBoardController;
-import ui.managerui.common.MyTopBar;
+import ui.common.MyBoardController;
+import ui.common.MyTopBar;
 import ui.util.BoardController;
 import ui.util.PaneFactory;
 

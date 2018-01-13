@@ -1,7 +1,7 @@
 package ui.salesui;
 
 import javafx.beans.property.SimpleStringProperty;
-import ui.myAccountantui.common.MyReceiptListPane;
+import ui.common.MyReceiptListPane;
 import vo.receiptVO.SalesReceiptListVO;
 import vo.receiptVO.SalesReceiptVO;
 

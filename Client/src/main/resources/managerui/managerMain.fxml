@@ -5,12 +5,12 @@
 <?import javafx.scene.image.Image?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import ui.managerui.common.navigation.PromotionChangePaneLabel?>
-<?import ui.managerui.common.navigation.CheckChangePaneLabel?>
-<?import ui.managerui.common.MyTopBar?>
-<?import ui.managerui.common.navigation.BusinessConditionChangePaneLabel?>
-<?import ui.managerui.common.navigation.BusinessProgressChangePaneLabel?>
-<?import ui.managerui.common.navigation.BusinessSalesDetailChangePaneLabel?>
+<?import ui.managerui.navigation.PromotionChangePaneLabel?>
+<?import ui.managerui.navigation.CheckChangePaneLabel?>
+<?import ui.common.MyTopBar?>
+<?import ui.managerui.navigation.BusinessConditionChangePaneLabel?>
+<?import ui.managerui.navigation.BusinessProgressChangePaneLabel?>
+<?import ui.managerui.navigation.BusinessSalesDetailChangePaneLabel?>
 <AnchorPane fx:id="mainpane"
            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
            fx:controller="ui.managerui.ManagerUIController"

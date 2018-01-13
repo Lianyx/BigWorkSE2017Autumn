@@ -3,14 +3,10 @@ package ui.salesui;
 import com.jfoenix.controls.JFXListView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.util.Duration;
-import po.LogPO;
-import ui.logui.LogPane;
-import ui.managerui.common.MyBoardController;
-import ui.managerui.common.MyTopBar;
+import ui.common.MyBoardController;
+import ui.common.MyTopBar;
 import ui.memberui.MemberListPane;
 import ui.salesui.salesRetui.SalesRetListPane;
 import ui.salesui.salesSellui.SalesSellListPane;
@@ -18,14 +14,9 @@ import ui.stockui.StockListPane;
 import ui.stockui.stockPurui.StockPurListPane;
 import ui.stockui.stockRetui.StockRetListPane;
 import ui.util.BoardController;
-import ui.util.PaneFactory;
-import ui.util.PaneSwitchAnimation;
-import ui.util.TopBar;
-import vo.UserListVO;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class SalesUIController implements Initializable{
 

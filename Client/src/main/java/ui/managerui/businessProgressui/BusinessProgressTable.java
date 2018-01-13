@@ -3,15 +3,12 @@ package ui.managerui.businessProgressui;
 import com.jfoenix.controls.*;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.StringProperty;
-import ui.managerui.common.treeTableRelated.ChooseColumn;
-import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
-import ui.managerui.common.treeTableRelated.SearchableStringColumn;
-import ui.myAccountantui.common.MyReceiptDetailPane;
+import ui.common.treeTableRelated.ChooseColumn;
+import ui.common.treeTableRelated.MyTreeTableBorderPane;
+import ui.common.treeTableRelated.SearchableStringColumn;
 import ui.util.ButtonCell;
 import ui.util.Refreshable;
-import ui.util.UserInfomation;
 import util.ReceiptState;
-import util.UserCategory;
 import vo.receiptVO.ReceiptVO;
 
 import java.util.List;

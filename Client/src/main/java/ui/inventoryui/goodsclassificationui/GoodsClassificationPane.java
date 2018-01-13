@@ -1,6 +1,5 @@
 package ui.inventoryui.goodsclassificationui;
 
-import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.goodsClassificationblService.GoodsClassificationblService;
 import businesslogic.goodsClassificationbl.GoodsClassificationbl;
 import com.jfoenix.controls.JFXButton;
@@ -15,9 +14,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import ui.managerui.common.MyBoardController;
+import ui.common.MyBoardController;
 import ui.util.BoardController;
-import ui.util.HistoricalRecord;
 import ui.util.Refreshable;
 import vo.inventoryVO.GoodsClassificationVO;
 

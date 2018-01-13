@@ -1,6 +1,5 @@
 package ui.common;
 
-import ui.managerui.common.MyBoardController;
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;
 import ui.util.PaneFactory;
@@ -8,7 +7,6 @@ import ui.util.PaneFactory;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 public abstract class GatePane extends FXMLRefreshableAnchorPane {
     private boolean firstLoad = true;

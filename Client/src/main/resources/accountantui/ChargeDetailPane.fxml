@@ -17,8 +17,8 @@
 <?import ui.util.ModifyButton?>
 
 <?import ui.salesui.SalesListItemTreeTable?>
-<?import ui.myAccountantui.PaymentItemTreeTable?>
-<?import ui.myAccountantui.ChargeItemTreeTable?>
+<?import ui.accountantui.PaymentItemTreeTable?>
+<?import ui.accountantui.ChargeItemTreeTable?>
 <fx:root fx:id="chargereceipt" prefHeight="560.0" prefWidth="640.0" stylesheets="@../css/receipt.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane fx:id="pane" layoutX="90.0" layoutY="55.0" prefHeight="287.0" prefWidth="462.0">

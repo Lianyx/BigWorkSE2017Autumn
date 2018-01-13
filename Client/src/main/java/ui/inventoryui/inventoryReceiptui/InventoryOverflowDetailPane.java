@@ -8,11 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import ui.inventoryui.GoodsChooseInfo;
 import ui.inventoryui.goodsui.GoodChoose;
-import ui.myAccountantui.common.MyReceiptDetailPane;
-import vo.inventoryVO.inventoryReceiptVO.InventoryDamageReceiptVO;
-import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;
+import ui.common.MyReceiptDetailPane;
 import vo.inventoryVO.inventoryReceiptVO.InventoryOverflowReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 

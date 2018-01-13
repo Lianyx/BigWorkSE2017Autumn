@@ -1,36 +1,24 @@
 package ui.userui.usermanagerui;
 
-import blService.blServiceFactory.ServiceFactory_Stub;
-import blService.checkblService.ReceiptblService;
 import blService.userblService.UserManagerblService;
 import businesslogic.userbl.Userbl;
 import com.jfoenix.controls.*;
-import com.jfoenix.validation.NumberValidator;
-import com.sun.org.apache.regexp.internal.RE;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import exceptions.ItemNotFoundException;
 import javafx.beans.property.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Task;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
-import ui.managerui.common.MyBoardController;
-import ui.managerui.common.MyOneButtonDialog;
-import ui.managerui.common.MyTwoButtonDialog;
+import ui.common.MyBoardController;
+import ui.common.MyOneButtonDialog;
+import ui.common.MyTwoButtonDialog;
 import ui.util.*;
 import util.UserCategory;
 import vo.UserVO;
@@ -39,8 +27,6 @@ import java.io.File;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.function.Predicate;
 
 import static ui.util.ValidatorDecorator.RequireValid;
 

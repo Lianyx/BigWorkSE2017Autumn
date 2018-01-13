@@ -15,7 +15,7 @@
 
 
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<?import ui.managerui.common.MyTopBar?>
+<?import ui.common.MyTopBar?>
 
 <AnchorPane
            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
