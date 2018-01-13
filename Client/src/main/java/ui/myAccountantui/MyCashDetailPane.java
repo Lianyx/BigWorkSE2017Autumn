@@ -41,6 +41,15 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
 
 
     public MyCashDetailPane() {
+        operator.setDisable(true);
+        sumField.setDisable(true);
+        createtime.setDisable(true);
+        lastmodifiedtime.setDisable(true);
+
+        accountField.disableProperty().bind(modifyState.not());
+        addCashButton.visibleProperty().bind(modifyState);
+
+        cashItemTreeTable.sumProperty().addListener(t->{sumField.setText(cashItemTreeTable.getSum()+"");});
     }
 
     public MyCashDetailPane(CashReceiptVO receiptVO) {
