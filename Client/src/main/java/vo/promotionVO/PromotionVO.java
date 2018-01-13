@@ -1,10 +1,12 @@
 package vo.promotionVO;
 
 import blService.promotionblService.PromotionblService;
+import javafx.scene.control.Label;
 import po.promotionPO.PromotionPO;
 import ui.managerui.promotionui.promotionDetailPane.PromotionDetailPane;
 import util.PromotionState;
 import vo.abstractVO.ReceipishVO;
+import vo.receiptVO.SalesSellReceiptVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -15,6 +17,8 @@ public abstract class PromotionVO extends ReceipishVO<PromotionVO> {
     protected LocalDateTime beginTime, endTime;
     protected String comment;
     protected PromotionState promotionState;
+
+    public double totalReduce;
 
     public int count; // 为了计算达到几重这个促销策略，比如买三送一，买六送二。
 
@@ -44,6 +48,10 @@ public abstract class PromotionVO extends ReceipishVO<PromotionVO> {
     public abstract <T extends PromotionVO> PromotionblService<T> getService() throws RemoteException, NotBoundException, MalformedURLException;
 
     public abstract PromotionDetailPane getDetailPane();
+
+    // TODO
+    public abstract Label getInfoLabel();
+    public abstract void modifySalesSell(SalesSellReceiptVO salesSellReceiptVO);
 
 
     public LocalDateTime getBeginTime() {

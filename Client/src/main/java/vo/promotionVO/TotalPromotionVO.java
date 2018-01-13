@@ -3,10 +3,12 @@ package vo.promotionVO;
 import blService.promotionblService.PromotionblService;
 import blService.promotionblService.TotalPromotionblService;
 import businesslogic.promotionbl.MyblServiceFactory;
+import javafx.scene.control.Label;
 import po.promotionPO.PromotionGoodsItemPO;
 import po.promotionPO.TotalPromotionPO;
 import ui.managerui.promotionui.promotionDetailPane.PromotionDetailPane;
 import ui.managerui.promotionui.promotionDetailPane.TotalPromotionDetailPane;
+import vo.receiptVO.SalesSellReceiptVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -55,6 +57,24 @@ public class TotalPromotionVO extends PromotionVO {
     public PromotionDetailPane getDetailPane() {
         return new TotalPromotionDetailPane(this);
     }
+
+    @Override
+    public Label getInfoLabel() {
+        String content = "总价促销\n"
+                + "代金券金额：" + tokenAmount + "元\n"
+                + "赠品总额：" + gifts.stream().mapToDouble(g -> g.getNum() * g.getUnitPrice()).sum() + "元";
+        return new Label(content);
+    }
+
+    @Override
+    public void modifySalesSell(SalesSellReceiptVO salesSellReceiptVO) {
+        salesSellReceiptVO.setGiveTokenAmount(tokenAmount);
+        salesSellReceiptVO.setGifts(gifts.stream().map(PromotionGoodsItemVO::toPO).toArray(PromotionGoodsItemPO[]::new));
+    }
+
+    /**
+     * getters and setters
+     * */
 
     public double getRequiredTotal() {
         return requiredTotal;

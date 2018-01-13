@@ -18,6 +18,7 @@ public class ListGoodsItemVO extends RecursiveTreeObject<ListGoodsItemVO> implem
     private LocalDate time;
 
     public ListGoodsItemVO() {
+        this.sum.bind(this.goodsNum.multiply(price));
     }
 
     public ListGoodsItemVO(String goodsName, String goodsId, String type, int price, int goodsNum, String comment) {

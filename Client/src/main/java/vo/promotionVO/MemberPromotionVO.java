@@ -3,10 +3,12 @@ package vo.promotionVO;
 import blService.promotionblService.MemberPromotionblService;
 import blService.promotionblService.PromotionblService;
 import businesslogic.promotionbl.MyblServiceFactory;
+import javafx.scene.control.Label;
 import po.promotionPO.MemberPromotionPO;
 import po.promotionPO.PromotionGoodsItemPO;
 import ui.managerui.promotionui.promotionDetailPane.MemberPromotionDetailPane;
 import ui.managerui.promotionui.promotionDetailPane.PromotionDetailPane;
+import vo.receiptVO.SalesSellReceiptVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -60,6 +62,27 @@ public class MemberPromotionVO extends PromotionVO {
     public PromotionDetailPane getDetailPane() {
         return new MemberPromotionDetailPane(this);
     }
+
+    @Override
+    public Label getInfoLabel() {
+        String content = "会员促销\n"
+                + "折扣：" + discountFraction + "\n"
+                + "代金卷：" + tokenAmount + "元\n"
+                + "赠品总值：" + gifts.stream().mapToDouble(g -> g.getNum() * g.getUnitPrice()).sum() + "元";
+
+        return new Label(content);
+    }
+
+    @Override
+    public void modifySalesSell(SalesSellReceiptVO salesSellReceiptVO) {
+        salesSellReceiptVO.setDiscountAmount(salesSellReceiptVO.getOriginSum() * (1 - discountFraction));
+        salesSellReceiptVO.setGiveTokenAmount(tokenAmount);
+        salesSellReceiptVO.setGifts(gifts.stream().map(PromotionGoodsItemVO::toPO).toArray(PromotionGoodsItemPO[]::new));
+    }
+
+    /**
+     * getter and setter.
+     * */
 
     public int getRequiredLevel() {
         return requiredLevel;
