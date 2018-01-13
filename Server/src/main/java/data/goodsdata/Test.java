@@ -15,8 +15,8 @@ public class Test {
       /*  GoodsPO goodsPO = new GoodsPO("121","花灯1","美国灯","12212",0,1,1,1,1,23);
 
         goodsData.update(goodsPO);*/
-      // goodsData.insert(new GoodsPO("121","花灯1","中国灯","12212",12,1,1,1,1,23));
-     /*  goodsData.insert(new GoodsPO("122","花灯2","小灯1","12212",122,29,12,12,54,23));
+//       goodsData.insert(new GoodsPO("121","花灯1","中国灯","12212",12,1,1,1,1,23));
+     goodsData.insert(new GoodsPO("122","花灯2","小灯1","12212",122,29,12,12,54,23));
        goodsData.insert(new GoodsPO("123","花灯3","大灯2","12212",123,29,11,14,34,23));
        goodsData.insert(new GoodsPO("124","花灯4","中灯2","12212",142,29.0,3,13,23,23));
        goodsData.insert(new GoodsPO("125","花灯5","中灯2","12212",12,40,45,15,24,231));

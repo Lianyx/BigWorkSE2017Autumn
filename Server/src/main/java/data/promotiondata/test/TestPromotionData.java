@@ -1,5 +1,10 @@
-package data.promotiondata;
+package data.promotiondata.test;
 
+import data.promotiondata.CombinePromotionData;
+import data.promotiondata.MemberPromotionData;
+import data.promotiondata.PromotionData;
+import data.promotiondata.TotalPromotionData;
+import dataService.promotiondataService.PromotionDataService;
 import mapper.CombinePromotionPOMapper;
 import mapper.MemberPromotionPOMapper;
 import mapper.TotalPromotionPOMapper;
@@ -110,10 +115,13 @@ public class TestPromotionData {
     }
 
     public static void main(String[] args) throws RemoteException{
-        testM();
-        testT();
-        testC();
+//        testM();
+//        testT();
+//        testC();
+//
+//        System.out.println("end Main");
 
-        System.out.println("end Main");
+        PromotionDataService<CombinePromotionPO> pd = new CombinePromotionData();
+        System.out.println(pd.selectInEffect().get(0).getGoodsCombination()[0].getId());
     }
 }

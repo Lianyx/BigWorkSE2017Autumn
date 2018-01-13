@@ -117,4 +117,17 @@ public class InventoryCheckItemVO extends SelectableVO<InventoryCheckItemVO> {
     public int hashCode() {
         return goodId != null ? goodId.hashCode() : 0;
     }
+
+    @Override
+    public String toString() {
+        return "InventoryCheckItemVO{" +
+                "goodName='" + goodName + '\'' +
+                ", goodId='" + goodId + '\'' +
+                ", inventoryNum=" + inventoryNum +
+                ", avePrice=" + avePrice +
+                ", StockOutDate='" + StockOutDate + '\'' +
+                ", batch='" + batch + '\'' +
+                ", batchNum='" + batchNum + '\'' +
+                '}';
+    }
 }

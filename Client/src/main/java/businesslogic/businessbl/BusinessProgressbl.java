@@ -56,44 +56,44 @@ public class BusinessProgressbl implements BusinessProgressblService {
     @Override
     public ArrayList<ReceiptVO> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
         // TODO 这个要根据是否contain，来决定是否需要调这个SearchInfo。以及，这里还缺stock和sales
-        // TODO 只能初始化，不能搜索。
+        // TODO 目前只能初始化，不能搜索。
         ArrayList<ReceiptVO> resultList = new ArrayList<>();
 
-//        if (receiptSearchCondition.getBillTypes().contains(BillType.SalesSell)) {
-//            resultList.addAll(getApprovedReceipt(salesSellReceiptVOBusinessSearchInfo, receiptSearchCondition));
-//        }
-//        if (receiptSearchCondition.getBillTypes().contains(BillType.SalesRet)) {
-//            resultList.addAll(getApprovedReceipt(salesRetReceiptVOBusinessSearchInfo, receiptSearchCondition));
-//        }
-//        if (receiptSearchCondition.getBillTypes().contains(BillType.StockPur)) {
-//            resultList.addAll(getApprovedReceipt(stockPurReceiptVOBusinessSearchInfo, receiptSearchCondition));
-//        }
-//        if (receiptSearchCondition.getBillTypes().contains(BillType.StockRet)) {
-//            resultList.addAll(getApprovedReceipt(stockRetReceiptVOBusinessSearchInfo, receiptSearchCondition));
-//        }
+        if (receiptSearchCondition.getBillTypes().contains(BillType.SalesSell)) {
+            resultList.addAll(getApprovedReceipt(salesSellReceiptVOBusinessSearchInfo, receiptSearchCondition));
+        }
+        if (receiptSearchCondition.getBillTypes().contains(BillType.SalesRet)) {
+            resultList.addAll(getApprovedReceipt(salesRetReceiptVOBusinessSearchInfo, receiptSearchCondition));
+        }
+        if (receiptSearchCondition.getBillTypes().contains(BillType.StockPur)) {
+            resultList.addAll(getApprovedReceipt(stockPurReceiptVOBusinessSearchInfo, receiptSearchCondition));
+        }
+        if (receiptSearchCondition.getBillTypes().contains(BillType.StockRet)) {
+            resultList.addAll(getApprovedReceipt(stockRetReceiptVOBusinessSearchInfo, receiptSearchCondition));
+        }
 
-//        if (receiptSearchCondition.getBillTypes().contains(BillType.InventoryDamage)) {
-//            resultList.addAll(getApprovedReceipt(inventoryDamageReceiptVOBusinessSearchInfo, receiptSearchCondition));
-//        }
-//        if (receiptSearchCondition.getBillTypes().contains(BillType.InventoryGift)) {
-//            resultList.addAll(getApprovedReceipt(inventoryGiftReceiptVOBusinessSearchInfo, receiptSearchCondition));
-//        }
-//        if (receiptSearchCondition.getBillTypes().contains(BillType.InventoryOverflow)) {
-//            resultList.addAll(getApprovedReceipt(inventoryOverflowReceiptVOBusinessSearchInfo, receiptSearchCondition));
-//        }
-//        if (receiptSearchCondition.getBillTypes().contains(BillType.InventoryWarning)) {
-//            resultList.addAll(getApprovedReceipt(inventoryWarningReceiptVOBusinessSearchInfo, receiptSearchCondition));
-//        }
+        if (receiptSearchCondition.getBillTypes().contains(BillType.InventoryDamage)) {
+            resultList.addAll(getApprovedReceipt(inventoryDamageReceiptVOBusinessSearchInfo, receiptSearchCondition));
+        }
+        if (receiptSearchCondition.getBillTypes().contains(BillType.InventoryGift)) {
+            resultList.addAll(getApprovedReceipt(inventoryGiftReceiptVOBusinessSearchInfo, receiptSearchCondition));
+        }
+        if (receiptSearchCondition.getBillTypes().contains(BillType.InventoryOverflow)) {
+            resultList.addAll(getApprovedReceipt(inventoryOverflowReceiptVOBusinessSearchInfo, receiptSearchCondition));
+        }
+        if (receiptSearchCondition.getBillTypes().contains(BillType.InventoryWarning)) {
+            resultList.addAll(getApprovedReceipt(inventoryWarningReceiptVOBusinessSearchInfo, receiptSearchCondition));
+        }
 
-//        if (receiptSearchCondition.getBillTypes().contains(BillType.Cash)) {
+        if (receiptSearchCondition.getBillTypes().contains(BillType.Cash)) {
             resultList.addAll(getApprovedReceipt(cashReceiptVOBusinessSearchInfo, receiptSearchCondition));
-//        }
-//        if (receiptSearchCondition.getBillTypes().contains(BillType.BillCharge)) {
+        }
+        if (receiptSearchCondition.getBillTypes().contains(BillType.BillCharge)) {
             resultList.addAll(getApprovedReceipt(chargeReceiptVOBusinessSearchInfo, receiptSearchCondition));
-//        }
-//        if (receiptSearchCondition.getBillTypes().contains(BillType.BillPay)) {
+        }
+        if (receiptSearchCondition.getBillTypes().contains(BillType.BillPay)) {
             resultList.addAll(getApprovedReceipt(paymentReceiptVOBusinessSearchInfo, receiptSearchCondition));
-//        }
+        }
 
         return resultList;
     }
@@ -103,7 +103,7 @@ public class BusinessProgressbl implements BusinessProgressblService {
      * */
     private <T extends ReceiptVO> ArrayList<T> getApprovedReceipt(BusinessSearchInfo<T> businessSearchInfo, ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
         // TODO
-//        return businessSearchInfo.search(receiptSearchCondition).stream().filter(r -> r.getReceiptState() == ReceiptState.APPROVED).collect(Collectors.toCollection(ArrayList::new));
-        return businessSearchInfo.search(receiptSearchCondition);
+        return businessSearchInfo.search(receiptSearchCondition).stream().filter(r -> r.getReceiptState() == ReceiptState.APPROVED).collect(Collectors.toCollection(ArrayList::new));
+//        return businessSearchInfo.search(receiptSearchCondition);
     }
 }

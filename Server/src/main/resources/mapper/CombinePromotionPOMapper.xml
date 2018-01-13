@@ -29,7 +29,7 @@
         select * from combinePromotion where dayId=#{dayId} and createTime=#{createTime}
     </select>
     <select id="selectInEffect" resultMap="resultMap">
-        select * from combinePromotion where beginTime &lt;= #{begin} and endTime &gt;= #{end} amd promotionState = #{promotionState}
+        select * from combinePromotion where beginTime &lt;= #{begin} and endTime &gt;= #{end} and promotionState=#{promotionState}
     </select>
     <select id="search" resultMap="resultMap">
         select * from combinePromotion

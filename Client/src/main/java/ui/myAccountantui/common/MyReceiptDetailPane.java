@@ -340,6 +340,7 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
                     receiptblService = MyblServiceFactory.getService(getServiceClass());
                     if (receiptVO == null) {
                         receiptVO = receiptblService.getNew();
+                        receiptVO.setOperatorId(UserInfomation.userid);
                     }
                     if (checkInfo == null) {
                         checkInfo = receiptVO.getService();

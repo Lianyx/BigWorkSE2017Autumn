@@ -153,6 +153,21 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
 
         CheckBoxTreeItem<String> parent =(CheckBoxTreeItem<String>)  son.getParent();
 
+        if(son.getChildren()!=null){
+            JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
+            jfxDialogLayout.setPrefWidth(220.0);
+            jfxDialogLayout.setHeading(new Label("GoodsClassificationName"));
+            Label label = new Label("该分类下有子类！无法删除");
+            jfxDialogLayout.setBody(label);
+            JFXButton cancel = new JFXButton("返回");
+            JFXDialog dialog = new JFXDialog(mainpane, jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
+
+            cancel.setOnAction(e->{
+                dialog.close();
+            });
+        }
+
+
         //连同changeList中的数据也要删掉，否则会报错
         parent.getChildren().remove(son);
         list.remove(son);
@@ -184,6 +199,29 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
 
     protected void addItem(ObservableList<? extends TreeItem<String>> list){
         CheckBoxTreeItem<String> item = (CheckBoxTreeItem<String>) list.get(0);
+
+        String classifyname = item.getValue();
+
+        for (GoodsClassificationVO vo:classificationList) {
+            if(vo.getName().equals(classifyname)){
+
+                String clssifyId = vo.getID();
+
+                if(vo.getGoodsID().size() != 0){
+                    JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
+                    jfxDialogLayout.setPrefWidth(220.0);
+                    jfxDialogLayout.setHeading(new Label("GoodsClassificationName"));
+                    Label label = new Label("该分类下有商品！无法添加");
+                    jfxDialogLayout.setBody(label);
+                    JFXButton cancel = new JFXButton("返回");
+                    JFXDialog dialog = new JFXDialog(mainpane, jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
+
+                    cancel.setOnAction(e->{
+                        dialog.close();
+                    });
+                }
+            }
+        }
 
 
 
