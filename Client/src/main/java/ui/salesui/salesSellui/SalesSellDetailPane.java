@@ -8,6 +8,7 @@ import businesslogic.checkbl.MyServiceFactory;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import ui.managerui.common.MyOneButtonDialog;
@@ -57,20 +58,21 @@ public class SalesSellDetailPane extends SalesReceiptPane<SalesSellReceiptVO> {
             receiptVO.setReceiptState(ReceiptState.PENDING);
             try { // TODO 和上面同理
                 ArrayList<PromotionVO> promotions = promotionInfo.getMatch(receiptVO);
+                // 这个目前只可能是0个元素或者1个元素
 
-                JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
-                jfxDialogLayout.setPrefWidth(220.0);
+                if (! promotions.isEmpty()) {
+                    PromotionVO promotionVO = promotions.get(0);
 
-                VBox vBox = new VBox();
-                vBox.getChildren().addAll(promotions.stream().map(PromotionVO::getInfoLabel).collect(Collectors.toList()));
-                jfxDialogLayout.setBody(vBox);
+                    Label label = promotionVO.getInfoLabel();
+                    String content = label.getText();
 
-                JFXButton save = new JFXButton("Save");
-                JFXDialog dialog = new JFXDialog(PaneFactory.getMainPane(), jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
+                    new MyOneButtonDialog(content, () -> {
+                        promotionVO.modifySalesSell(receiptVO);
+                        saveTask();
+                    }).show();
+                }
 
-                JFXButton button = new JFXButton("确认");
-
-                dialog.show();
+                saveTask();
             } catch (RemoteException e) {
                 e.printStackTrace();
             }

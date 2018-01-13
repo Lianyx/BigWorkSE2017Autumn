@@ -64,7 +64,7 @@ public class CombinePromotionVO extends PromotionVO {
 
     @Override
     public void modifySalesSell(SalesSellReceiptVO salesSellReceiptVO) {
-        salesSellReceiptVO.setDiscountAmount(discountAmount * count);
+        salesSellReceiptVO.setDiscountAmount(discountAmount);
     }
 
     public ArrayList<PromotionGoodsItemVO> getGoodsCombination() {
