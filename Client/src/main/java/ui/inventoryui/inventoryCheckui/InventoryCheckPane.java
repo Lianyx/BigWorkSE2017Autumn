@@ -10,6 +10,9 @@ import ui.util.*;
 import vo.inventoryVO.InventoryCheckItemVO;
 import vo.inventoryVO.InventoryCheckVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -97,9 +100,17 @@ public class InventoryCheckPane extends ReceiptListPane<InventoryCheckItemVO> im
             buttonDialog.setButtonTwo(() -> boardController.Ret());
             buttonDialog.setButtonTwo(() -> refresh(false));
             Predicate<Integer> p = (s) -> {
-                if ((set = inventoryCheckblService.inventoryCheck().getCheckList()) != null) {
-                    System.out.println(set.size());
-                    return true;
+                try {
+                    if ((set = inventoryCheckblService.inventoryCheck().getCheckList()) != null) {
+                        System.out.println(set.size());
+                        return true;
+                    }
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                } catch (NotBoundException e) {
+                    e.printStackTrace();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
                 }
                 return false;
             };

@@ -8,6 +8,9 @@ import ui.util.GetTask;
 import ui.util.ReceiptListPane;
 import vo.inventoryVO.InventoryViewItemVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.function.Predicate;
 
@@ -55,9 +58,17 @@ public class InventoryViewListPane extends ReceiptListPane<InventoryViewItemVO> 
                 System.out.println("In View"+startTime.toString());
                 System.out.println(endTime.toString());
 
-                if ((set = inventoryViewblService.inventoryView(startTime,endTime).getViewList()) != null) {
-                    System.out.println(set.size());
-                    return true;
+                try {
+                    if ((set = inventoryViewblService.inventoryView(startTime,endTime).getViewList()) != null) {
+                        System.out.println(set.size());
+                        return true;
+                    }
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                } catch (NotBoundException e) {
+                    e.printStackTrace();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
                 }
                 return false;
             };

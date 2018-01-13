@@ -40,7 +40,7 @@ public class SalesSellDetailPane extends SalesReceiptPane<SalesSellReceiptVO> {
     public void initiate() {
         super.initiate();
 
-        try { // TODO 如果不是因为大作业来不及……这样的肯定不行
+        try { // 这样的try catch 不行
             promotionInfo = MyServiceFactory.getPromotionInfo();
         } catch (RemoteException | NotBoundException | MalformedURLException e) {
             e.printStackTrace();
@@ -56,7 +56,7 @@ public class SalesSellDetailPane extends SalesReceiptPane<SalesSellReceiptVO> {
     protected void save() {
         if (validate()) {
             receiptVO.setReceiptState(ReceiptState.PENDING);
-            try { // TODO 和上面同理
+            try { // 这样的try catch不行
                 ArrayList<PromotionVO> promotions = promotionInfo.getMatch(receiptVO);
                 // 这个目前只可能是0个元素或者1个元素
 

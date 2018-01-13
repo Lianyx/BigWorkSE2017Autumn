@@ -195,5 +195,18 @@
          </font>
       </JFXButton>
 
+        <JFXButton fx:id="redCredit" layoutX="564.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#clickRedCredit"
+                   text="红冲">
+            <font>
+                <Font size="12.0"/>
+            </font>
+        </JFXButton>
+        <JFXButton fx:id="redCreditCopy" layoutX="517" layoutY="17" mnemonicParsing="false" onMouseClicked="#clickRedCreditCopy"
+                   text="红冲复制">
+            <font>
+                <Font size="12.0"/>
+            </font>
+        </JFXButton>
+
     </children>
 </fx:root>
