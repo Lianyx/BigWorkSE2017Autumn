@@ -85,6 +85,7 @@ public class GoodChoose implements GoodsChooseInfo {
                 vo.setGoodsName(goodsVO.getGoodName());
                 vo.setGoodsId(id);
                 vo.setInventoryNum(goodsVO.getInventoryNum());
+                vo.setPrice(goodsVO.getRecentSalePrice());
 
                 observableList.add(vo);
             }
