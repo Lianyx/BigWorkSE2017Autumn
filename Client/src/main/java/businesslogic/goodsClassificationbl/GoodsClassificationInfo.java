@@ -18,6 +18,12 @@ public class GoodsClassificationInfo implements GoodsClassification_Goods {
         dataService = (GoodsClassificationDataService) Naming.lookup("rmi://localhost:1099/GoodsClassificationData");
     }
 
+    /**
+     * 当添加商品的时候也需要更新商品分类的属性
+     * @param classifyId
+     * @param goodId
+     * @throws RemoteException
+     */
     @Override
     public void addGoods(String classifyId ,String goodId) throws RemoteException {
         GoodsClassificationPO po = dataService.getById(classifyId);
@@ -29,6 +35,12 @@ public class GoodsClassificationInfo implements GoodsClassification_Goods {
         dataService.update(po);
     }
 
+    /**
+     * 当删除商品的时候需要更新商品分类的goodsId属性
+     * @param classifyId
+     * @param goodsId
+     * @throws RemoteException
+     */
     @Override
     public void deleteGoods(String classifyId ,String goodsId) throws RemoteException{
         GoodsClassificationPO po = dataService.getById(classifyId);

@@ -23,6 +23,11 @@ public class GoodsSalesUpdate implements GoodsSalesUpdateInfo {
     }
 
 
+    /**
+     * 用于在SaleRet审批后更新商品相关数据
+     * @param list
+     * @throws RemoteException
+     */
     @Override
     public void goodsUpdateSaleRet(List<ListGoodsItemVO> list) throws RemoteException {
 
@@ -38,6 +43,11 @@ public class GoodsSalesUpdate implements GoodsSalesUpdateInfo {
         }
     }
 
+    /**
+     * |当SaleSel得到审批之后更新相关的商品界面
+     * @param list
+     * @throws RemoteException
+     */
     @Override
     public void goodsUpdateSalesSel(List<ListGoodsItemVO> list) throws RemoteException {
 
@@ -53,6 +63,12 @@ public class GoodsSalesUpdate implements GoodsSalesUpdateInfo {
         }
     }
 
+
+    /**
+     * 用于StockPur审批后更新相关商品数据
+     * @param list
+     * @throws RemoteException
+     */
     @Override
     public void goodsUpdateStockPur(List<ListGoodsItemVO> list) throws RemoteException {
         for (ListGoodsItemVO vo:list) {
@@ -67,6 +83,11 @@ public class GoodsSalesUpdate implements GoodsSalesUpdateInfo {
 
     }
 
+    /**
+     * 用于StockRet审批后更新相关数据
+     * @param list
+     * @throws RemoteException
+     */
     @Override
     public void goodsUpdateStorckRet(List<ListGoodsItemVO> list) throws RemoteException {
 

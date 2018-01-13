@@ -99,6 +99,6 @@ public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftRe
     public void addGoods() throws RemoteException, NotBoundException, MalformedURLException {
         GoodChoose goodsChooseInfo = new GoodChoose();
 
-        goodsChooseInfo.choose(observableList,new SimpleIntegerProperty(0));
+        goodsChooseInfo.choose(observableList,new SimpleIntegerProperty());
     }
 }

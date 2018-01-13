@@ -116,7 +116,7 @@ public class GoodsClassificationbl implements GoodsClassificationblService{
         return goodsClassificationData.getById(id);
     }
 
-    //经过初步处理的商品分类树，每一层的商品分类是在一起的，root后面跟着他的所有孩子leve1，level后面跟着他们的孩子level2
+    //经过初步处理的商品分类树，每一层的商品分类是在一起的，root后面跟着他的所有孩子leve1，level后面跟着他们的孩子level2，建树
     private List<GoodsClassificationVO> getTree(List<GoodsClassificationPO> POList) throws RemoteException{
         List<GoodsClassificationVO> VOList = new ArrayList<>(POList.size());
 

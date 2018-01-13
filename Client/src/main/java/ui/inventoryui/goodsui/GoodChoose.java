@@ -1,25 +1,25 @@
 package ui.inventoryui.goodsui;
 
-import businesslogic.goodsbl.Goodsbl;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.JFXTextField;
-import javafx.beans.property.IntegerProperty;
-import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
-import ui.inventoryui.GoodsChooseInfo;
-import ui.util.PaneFactory;
-import vo.inventoryVO.GoodsVO;
-import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
+        import businesslogic.goodsbl.Goodsbl;
+        import com.jfoenix.controls.JFXButton;
+        import com.jfoenix.controls.JFXDialog;
+        import com.jfoenix.controls.JFXDialogLayout;
+        import com.jfoenix.controls.JFXTextField;
+        import javafx.beans.property.IntegerProperty;
+        import javafx.collections.ObservableList;
+        import javafx.scene.control.Label;
+        import ui.inventoryui.GoodsChooseInfo;
+        import ui.util.PaneFactory;
+        import vo.inventoryVO.GoodsVO;
+        import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+        import java.net.MalformedURLException;
+        import java.rmi.NotBoundException;
+        import java.rmi.RemoteException;
+        import java.util.ArrayList;
+        import java.util.HashSet;
+        import java.util.List;
+        import java.util.Set;
 
 public class GoodChoose{
     List<String> goodsId;
@@ -49,10 +49,11 @@ public class GoodChoose{
         JFXButton save = new JFXButton("Save");
         JFXDialog dialog = new JFXDialog(PaneFactory.getMainPane(), jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
 
-        JFXButton button = new JFXButton("确认");
+        JFXButton button = new JFXButton("чбошод");
 
         choosePane.setDialog(dialog);
 
+        //  GoodChooseui_stub stub = new GoodChooseui_stub();
         Set<GoodsVO> goodsList = null;
         try {
             goodsList = goodsbl.show();

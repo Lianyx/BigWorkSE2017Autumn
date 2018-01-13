@@ -55,6 +55,12 @@ public class Goodsbl implements GoodsblService{
         return ResultMessage.SUCCESS;
     }
 
+    /**
+     * 删除商品
+     * @param goodsVO
+     * @return
+     * @throws RemoteException
+     */
     public ResultMessage deleteGoods(GoodsVO goodsVO) throws RemoteException {
         dataService.delete(goodsVO.getId());
 
@@ -63,12 +69,24 @@ public class Goodsbl implements GoodsblService{
         return ResultMessage.SUCCESS;
     }
 
+    /**
+     * 根据id删除商品
+     * @param goodId
+     * @return
+     * @throws RemoteException
+     */
     public ResultMessage deleteGoods(String goodId) throws RemoteException{
         dataService.delete(goodId);
 
         return ResultMessage.SUCCESS;
     }
 
+    /**
+     * 更新商品
+     * @param goodsVO
+     * @return
+     * @throws RemoteException
+     */
     public ResultMessage updateGoods(GoodsVO goodsVO) throws RemoteException {
         GoodsPO po = changer.oneToPO(goodsVO);
         dataService.update(po);
@@ -98,6 +116,13 @@ public class Goodsbl implements GoodsblService{
         return id;
     }
 
+
+    /**
+     * 通过商品id查找商品
+     * @param id
+     * @return
+     * @throws RemoteException
+     */
     @Override
     public GoodsVO showDetail(String id) throws RemoteException {
         GoodsPO goodsPO = dataService.selectById(id);
