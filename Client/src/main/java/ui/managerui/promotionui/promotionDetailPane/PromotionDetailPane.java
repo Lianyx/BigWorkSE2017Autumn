@@ -169,7 +169,7 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
 
     @FXML
     protected void addGift() {
-        System.out.println("add is called");
+//        System.out.println("add is called");
 //        goodsTreeTable.add(new PromotionGoodsItemVO("12432", "无所谓", 986, new SimpleIntegerProperty(3)));
 
         IntegerProperty toBeListened = new SimpleIntegerProperty(0);

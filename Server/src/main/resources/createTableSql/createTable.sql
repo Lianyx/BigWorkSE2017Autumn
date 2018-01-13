@@ -237,3 +237,22 @@ credit double DEFAULT 0,
 isDeleted integer DEFAULT 0,
 comment varchar(100) DEFAULT ''
 );
+
+insert into Member (memberId,memberCategory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDeleted,comment)
+values (5,0,4,'林冰','阳光仓库','139000013313','四明街525号','00013','lb131311@qq.com',1004,300,273,0,'常客');
+insert into Member (memberId,memberCategory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDeleted,comment)
+values (6,0,2,'连奚','阳光仓库','139206612365','四明街613号','00013','lx131rrr@sina.com',521,210,101,0,'无');
+insert into Member (memberId,memberCategory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDeleted,comment)
+values (7,0,1,'若欣','阳光仓库','139000013313','贝尔街525号','00014','rx1390013@qq.com',136,200,4,0,'无');
+insert into Member (memberId,memberCategory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDeleted,comment)
+values (8,0,4,'李若冰','李星仓库','139000013313','贝尔街5号','00014','lrb--139000@qq.com',204,300,123,0,'无');
+insert into Member (memberId,memberCategory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDeleted,comment)
+values (9,1,4,'盛利冰','阳光仓库','139000013313','贝尔街13号','00014','lsbqqq11@qq.com',114,300,912,0,'无');
+insert into Member (memberId,memberCategory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDeleted,comment)
+values (10,1,4,'王水','阳光仓库','139000013313','思明区小明街32号','00032','lb1zxc311@qq.com',190,300,166,0,'无');
+insert into Member (memberId,memberCategory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDeleted,comment)
+values (11,1,4,'王青花','阳光仓库','139000013313','思明区小明街55号','00032','wqh1311@qq.com',588,300,213,0,'无');
+insert into Member (memberId,memberCategory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDeleted,comment)
+values (12,1,5,'陈小','李星仓库','139000013313','若林街99号','00010','cx131311@qq.com',912,300,271,0,'常客');
+insert into Member (memberId,memberCategory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDeleted,comment)
+values (13,0,4,'伏请','阳光仓库','139000013313','四明街25号','00013','fq1adw311@qq.com',1500,300,531,0,'常客');

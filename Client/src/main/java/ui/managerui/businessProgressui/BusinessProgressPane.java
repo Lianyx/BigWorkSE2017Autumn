@@ -26,7 +26,7 @@ public class BusinessProgressPane extends FilterableListPane<ReceiptVO> implemen
     private Set<ReceiptVO> chosenItems = new HashSet<>(); // chosenItems这个都是自己的?
     private BusinessProgressblService businessProgressblService;
 
-    private ReceiptSearchCondition searchCondition = new ReceiptSearchCondition();
+    private ReceiptSearchCondition searchCondition;
 
     public BusinessProgressPane() {
     }
@@ -37,7 +37,7 @@ public class BusinessProgressPane extends FilterableListPane<ReceiptVO> implemen
 
     @Override
     protected void initiateService() throws RemoteException, NotBoundException, MalformedURLException {
-//        businessProgressblService = MyblServiceFactory.getService(BusinessProgressblService.class);
+        businessProgressblService = MyblServiceFactory.getService(BusinessProgressblService.class);
     }
 
     @Override
@@ -58,6 +58,12 @@ public class BusinessProgressPane extends FilterableListPane<ReceiptVO> implemen
     @Override
     protected String getURL() {
         return "/managerui/businessProgressPane.fxml";
+    }
+
+    @Override
+    protected void initiateFields() {
+        super.initiateFields();
+        searchCondition = new ReceiptSearchCondition();
     }
 
     /**
