@@ -3,8 +3,11 @@ package businesslogic.inventorybl;
 import blService.businessblservice.BusinessSearchInfo;
 import blService.inventoryblService.InventoryCheckblService;
 import businesslogic.checkbl.MyServiceFactory;
+import businesslogic.goodsbl.Goodsbl;
+import po.GoodsPO;
 import util.ReceiptSearchCondition;
 import vo.ListGoodsItemVO;
+import vo.inventoryVO.GoodsVO;
 import vo.inventoryVO.InventoryCheckItemVO;
 import vo.inventoryVO.InventoryCheckVO;
 import vo.receiptVO.*;
@@ -19,6 +22,11 @@ import java.util.List;
 import java.util.Set;
 
 public class InventoryCheckbl implements InventoryCheckblService{
+    Goodsbl goodsbl;
+    public InventoryCheckbl() throws RemoteException, NotBoundException, MalformedURLException {
+        goodsbl = new Goodsbl();
+    }
+
     @Override
     public InventoryCheckVO inventoryCheck() throws RemoteException, NotBoundException, MalformedURLException {
         //销售单
@@ -42,11 +50,13 @@ public class InventoryCheckbl implements InventoryCheckblService{
                 InventoryCheckItemVO itemVO = new InventoryCheckItemVO();
 
                 itemVO.setGoodId(goodsItemVO.getGoodsId());
-                itemVO.setGoodName(goodsItemVO.getGoodsName());
+                GoodsVO goodsVO = goodsbl.showDetail(goodsItemVO.getGoodsId());
+                itemVO.setGoodName(goodsVO.getGoodName());
                 itemVO.setAvePrice(goodsItemVO.getPrice());
                 itemVO.setInventoryNum(goodsItemVO.getGoodsNum());
-                itemVO.setBatch(sellReceiptVO.getId().substring(sellReceiptVO.getId().length()-2));
-                itemVO.setBatchinventoryNum(goodsItemVO.getType());
+                itemVO.setStockOutDate(sellReceiptVO.getLastModifiedTime().toLocalDate().toString());
+                itemVO.setBatch(sellReceiptVO.getId().charAt(17)+"");
+                itemVO.setBatchinventoryNum(goodsVO.getGoodType());
 
                 int size = set.size();
 

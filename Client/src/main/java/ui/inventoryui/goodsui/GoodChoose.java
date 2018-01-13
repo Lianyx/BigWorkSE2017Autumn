@@ -53,7 +53,6 @@ public class GoodChoose{
 
         choosePane.setDialog(dialog);
 
-      //  GoodChooseui_stub stub = new GoodChooseui_stub();
         Set<GoodsVO> goodsList = null;
         try {
             goodsList = goodsbl.show();
