@@ -10,8 +10,7 @@ import vo.inventoryVO.inventoryReceiptVO.InventoryDamageReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.InventoryOverflowReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.InventoryWarningReceiptVO;
-import vo.receiptVO.ReceiptVO;
-import vo.receiptVO.SalesSellReceiptVO;
+import vo.receiptVO.*;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -20,6 +19,9 @@ import java.util.ArrayList;
 
 public class Checkbl implements CheckblService {
     private CheckInfo<SalesSellReceiptVO> salesSellReceiptVOCheckInfo;
+    private CheckInfo<SalesRetReceiptVO> salesRetReceiptVOCheckInfo;
+    private CheckInfo<StockPurReceiptVO> stockPurReceiptVOCheckInfo;
+    private CheckInfo<StockRetReceiptVO> stockRetReceiptVOCheckInfo;
 
     private CheckInfo<InventoryDamageReceiptVO> inventoryDamageReceiptVOCheckInfo;
     private CheckInfo<InventoryGiftReceiptVO> inventoryGiftReceiptVOCheckInfo;
@@ -33,6 +35,9 @@ public class Checkbl implements CheckblService {
 
     public Checkbl() throws RemoteException, NotBoundException, MalformedURLException {
         salesSellReceiptVOCheckInfo = MyServiceFactory.getSalesSellReceiptVOCheckInfo();
+        salesRetReceiptVOCheckInfo = MyServiceFactory.getSalesRetReceiptVOCheckInfo();
+        stockPurReceiptVOCheckInfo = MyServiceFactory.getStockPurReceiptVOCheckInfo();
+        stockRetReceiptVOCheckInfo = MyServiceFactory.getStockRetReceiptVOCheckInfo();
 
         inventoryDamageReceiptVOCheckInfo = MyServiceFactory.getInventoryDamageReceiptVOCheckInfo();
         inventoryGiftReceiptVOCheckInfo = MyServiceFactory.getInventoryGiftReceiptVOCheckInfo();
@@ -49,15 +54,18 @@ public class Checkbl implements CheckblService {
         ArrayList<ReceiptVO> resultList = new ArrayList<>();
 
         resultList.addAll(salesSellReceiptVOCheckInfo.selectPending());
+        resultList.addAll(salesRetReceiptVOCheckInfo.selectPending());
+        resultList.addAll(stockPurReceiptVOCheckInfo.selectPending());
+        resultList.addAll(stockRetReceiptVOCheckInfo.selectPending());
 
-//        resultList.addAll(inventoryDamageReceiptVOCheckInfo.selectPending());
-//        resultList.addAll(inventoryGiftReceiptVOCheckInfo.selectPending());
-//        resultList.addAll(inventoryOverflowReceiptVOCheckInfo.selectPending());
-//        resultList.addAll(inventoryWarningReceiptVOCheckInfo.selectPending());
-//
-//        resultList.addAll(cashReceiptVOCheckInfo.selectPending());
-//        resultList.addAll(chargeReceiptVOCheckInfo.selectPending());
-//        resultList.addAll(paymentReceiptVOCheckInfo.selectPending());
+        resultList.addAll(inventoryDamageReceiptVOCheckInfo.selectPending());
+        resultList.addAll(inventoryGiftReceiptVOCheckInfo.selectPending());
+        resultList.addAll(inventoryOverflowReceiptVOCheckInfo.selectPending());
+        resultList.addAll(inventoryWarningReceiptVOCheckInfo.selectPending());
+
+        resultList.addAll(cashReceiptVOCheckInfo.selectPending());
+        resultList.addAll(chargeReceiptVOCheckInfo.selectPending());
+        resultList.addAll(paymentReceiptVOCheckInfo.selectPending());
 
         return resultList;
     }
@@ -77,8 +85,4 @@ public class Checkbl implements CheckblService {
         return receiptVO.getService().update(receiptVO);
     }
 
-//    public static void main(String[] args) throws Exception{
-//        Checkbl checkbl = new Checkbl();
-//        System.out.println(checkbl.initCheck());
-//    }
 }

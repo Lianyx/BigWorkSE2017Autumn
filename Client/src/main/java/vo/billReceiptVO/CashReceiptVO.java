@@ -62,6 +62,7 @@ public class CashReceiptVO extends ReceiptVO {
             temp[i] = cashList.get(i).toPO();
         }
         result.setItemList(temp);
+        result.setTotal(total);
         return result;
     }
 
