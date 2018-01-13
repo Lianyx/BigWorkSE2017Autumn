@@ -121,8 +121,8 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
     @Override
     protected void setRedCredit(CashReceiptVO redCreditVO) {
         super.setRedCredit(redCreditVO);
-        redCreditVO.setTotal(-redCreditVO.getTotal());
-        List<CashItemVO> list = redCreditVO.getCashList();
+        redCreditVO.setTotal(-receiptVO.getTotal());
+        List<CashItemVO> list = receiptVO.getCashList();
         for(CashItemVO vo:list){
             vo.setPrice(-vo.getPrice());
         }
