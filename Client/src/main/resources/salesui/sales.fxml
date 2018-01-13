@@ -20,6 +20,8 @@
 <?import ui.util.TopBar?>
 <?import ui.managerui.common.MyTopBar?>
 <?import ui.managerui.common.navigation.CheckChangePaneLabel?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.text.Font?>
 <AnchorPane fx:id="mainAnchorPane" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@../css/tempInNeed.css" fx:controller="ui.salesui.SalesUIController">
 
     <AnchorPane fx:id="logopane" prefHeight="40" prefWidth="160" style="-fx-background-color: white">
@@ -30,6 +32,17 @@
     </AnchorPane>
 
     <MyTopBar fx:id="bar" layoutX="160"/>
+
+    <JFXButton fx:id="redCreditCopy" layoutX="397.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#clickRedCreditCopy" text="红冲复制" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+        <font>
+            <Font size="12.0" />
+        </font>
+    </JFXButton>
+    <JFXButton fx:id="redCredit" layoutX="357.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#clickRedCredit" text="红冲">
+        <font>
+            <Font size="12.0" />
+        </font>
+    </JFXButton>
 
     <fx:include source="/util/board.fxml" fx:id="board" layoutX="160" layoutY="40"/> <!--为什么报错？-->
 

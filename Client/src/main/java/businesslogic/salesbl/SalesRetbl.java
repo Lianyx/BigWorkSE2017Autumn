@@ -1,9 +1,12 @@
 package businesslogic.salesbl;
 
+import blService.memberblService.MemberInfo;
 import blService.salesblService.SalesRetblService;
 import businesslogic.checkbl.Receiptbl;
 import businesslogic.goodsbl.goodsUpdate.GoodsSalesUpdate;
-import businesslogic.inventorybl.inventoryInfo.WarningReceiptInfoImpl;
+import businesslogic.inventorybl.inventoryInfo.GiftReceiptInfoImpl;
+import businesslogic.inventorybl.inventoryInfo.InventoryGiftReceiptInfo;
+import businesslogic.memberbl.MemberInfo_Impl;
 import po.receiptPO.SalesRetReceiptPO;
 import util.ResultMessage;
 import vo.receiptVO.SalesRetReceiptVO;
@@ -18,11 +21,14 @@ public class SalesRetbl extends Receiptbl<SalesRetReceiptVO, SalesRetReceiptPO> 
         super(SalesRetReceiptVO.class, SalesRetReceiptPO.class);
     }
 
+
+
     @Override
     public ResultMessage approve(SalesRetReceiptVO receiptVO) throws RemoteException {
         try {
-            new WarningReceiptInfoImpl().checkSaleRet(receiptVO.getItems());
             new GoodsSalesUpdate().goodsUpdateSaleRet(receiptVO.getItems());
+            MemberInfo memberInfo = new MemberInfo_Impl();
+            memberInfo.updateCredit(receiptVO.getMemberId(),receiptVO.getOriginSum()-receiptVO.getDiscountAmount());
         }catch (Exception e){
             e.printStackTrace();
         }

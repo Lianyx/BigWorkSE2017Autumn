@@ -75,6 +75,7 @@ public class MemberVO {
         memberPO.setComment(comment);
         memberPO.setPhoneNumber(phone);
         memberPO.setZipCode(zipCode);
+        memberPO.setMemberName(name);
         return memberPO;
     }
 
