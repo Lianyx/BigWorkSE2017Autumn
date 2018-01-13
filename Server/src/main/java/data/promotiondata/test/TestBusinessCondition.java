@@ -1,5 +1,6 @@
-package data.businessdata;
+package data.promotiondata.test;
 
+import data.businessdata.BusinessConditionData;
 import po.BusinessConditionPO;
 
 import java.rmi.RemoteException;
@@ -11,7 +12,7 @@ public class TestBusinessCondition {
 
         BusinessConditionPO bpo = new BusinessConditionPO();
         bpo.setDate(LocalDateTime.now());
-        bpo.setGiftCost(5);
+        bpo.setPurCost(110);
 
         bdao.insert(bpo);
 

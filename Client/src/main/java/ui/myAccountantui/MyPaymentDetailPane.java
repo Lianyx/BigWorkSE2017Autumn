@@ -42,6 +42,15 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
     private TextField lastmodifiedtime;
 
     public MyPaymentDetailPane() {
+        operator.setDisable(true);
+        sumField.setDisable(true);
+        createtime.setDisable(true);
+        lastmodifiedtime.setDisable(true);
+
+        clientField.disableProperty().bind(modifyState.not());
+        addTransferButton.visibleProperty().bind(modifyState);
+
+        paymentItemTreeTable.sumProperty().addListener(t->{sumField.setText(paymentItemTreeTable.getSum()+"");});
     }
 
     public MyPaymentDetailPane(PaymentReceiptVO receiptVO) {
@@ -116,12 +125,14 @@ public class MyPaymentDetailPane extends MyReceiptDetailPane<PaymentReceiptVO> {
     @Override
     protected void setRedCredit(PaymentReceiptVO redCreditVO) {
         super.setRedCredit(redCreditVO);
+        redCreditVO.setclientID(receiptVO.getclientID());
         redCreditVO.setSum(-redCreditVO.getSum());
         List<TransferItemVO> list = redCreditVO.getTransferList();
+        List<TransferItemVO> temp = new ArrayList<>();
         for(TransferItemVO vo:list){
-            vo.setSum(-vo.getSum());
+            temp.add(new TransferItemVO(vo.getAccountID(),-vo.getSum(),vo.getComment()));
         }
-        redCreditVO.setTransferList(list);
+        redCreditVO.setTransferList(temp);
     }
 
 

@@ -4,6 +4,7 @@ import blService.businessblservice.BusinessSearchInfo;
 import blService.businessblservice.SalesDetailblService;
 import businesslogic.checkbl.MyServiceFactory;
 import util.ReceiptSearchCondition;
+import util.ReceiptState;
 import vo.ListGoodsItemVO;
 import vo.receiptVO.SalesSellReceiptVO;
 
@@ -23,7 +24,8 @@ public class SalesDetailbl implements SalesDetailblService {
     @Override
     public ArrayList<ListGoodsItemVO> searchSalesDetail(ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
         return salesSellSearchInfo.search(receiptSearchCondition) // TODO 这个还要filter approved，可能再加下sort按时间也不错
-                .stream().flatMap(r -> r.getItems().stream())
+                .stream()//.filter(r -> r.getReceiptState() == ReceiptState.APPROVED)
+                .flatMap(r -> r.getItems().stream())
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 }

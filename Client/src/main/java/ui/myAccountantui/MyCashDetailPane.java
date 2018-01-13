@@ -112,6 +112,7 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
     @Override
     protected void updateReceiptVO() {
         super.updateReceiptVO();
+
         receiptVO.setTotal(Double.parseDouble(sumField.getText()));
         receiptVO.setAccountID(Integer.parseInt(accountField.getText()));
         receiptVO.setCashList(cashItemTreeTable.getList());
@@ -120,12 +121,15 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
     @Override
     protected void setRedCredit(CashReceiptVO redCreditVO) {
         super.setRedCredit(redCreditVO);
-        redCreditVO.setTotal(-redCreditVO.getTotal());
-        List<CashItemVO> list = redCreditVO.getCashList();
+        redCreditVO.setTotal(-receiptVO.getTotal());
+        redCreditVO.setAccountID(receiptVO.getAccountID());
+
+        List<CashItemVO> list = receiptVO.getCashList();
+        List<CashItemVO> temp = new ArrayList<>();
         for(CashItemVO vo:list){
-            vo.setPrice(-vo.getPrice());
+            temp.add(new CashItemVO(vo.getName(),-vo.getPrice(),vo.getComment()));
         }
-        redCreditVO.setCashList(list);
+        redCreditVO.setCashList(temp);
 
     }
 
