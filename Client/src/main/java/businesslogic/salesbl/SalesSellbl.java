@@ -2,6 +2,7 @@ package businesslogic.salesbl;
 
 import blService.salesblService.SalesSellblService;
 import businesslogic.checkbl.Receiptbl;
+import businesslogic.goodsbl.goodsUpdate.GoodsSalesUpdate;
 import po.receiptPO.SalesSellReceiptPO;
 import util.ResultMessage;
 import vo.receiptVO.SalesSellReceiptVO;
@@ -18,7 +19,8 @@ public class SalesSellbl extends Receiptbl<SalesSellReceiptVO, SalesSellReceiptP
     }
 
     @Override
-    public ResultMessage approve(SalesSellReceiptVO receiptVO) throws RemoteException {
-        return null;
+    public ResultMessage approve(SalesSellReceiptVO receiptVO) throws RemoteException, MalformedURLException, NotBoundException {
+        new GoodsSalesUpdate().goodsUpdateSalesSel(receiptVO.getItems());
+        return ResultMessage.SUCCESS;
     }
 }

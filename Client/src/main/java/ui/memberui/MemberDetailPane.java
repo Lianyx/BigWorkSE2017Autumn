@@ -155,6 +155,7 @@ public class MemberDetailPane extends Refreshable{
             get.setText(String.valueOf(memberVO.getGet()));
             imageview.setImage(memberVO.getImage());
             memberId.setText(String.valueOf(memberVO.getMemberId()));
+            zipcode.setText(memberVO.getZipCode());
         }
     }
 
@@ -173,6 +174,7 @@ public class MemberDetailPane extends Refreshable{
         if(memberCategory.getValue()!=null)
         memberVO.setMemberCategory(MemberCategory.map.get(memberCategory.getValue().getId()));
         memberVO.setName(memberName.getText());
+        memberVO.setZipCode(zipcode.getText());
 
     }
 

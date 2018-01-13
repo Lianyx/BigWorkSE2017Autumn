@@ -2,6 +2,7 @@ package businesslogic.stockbl;
 
 import blService.stockblService.StockRetblService;
 import businesslogic.checkbl.Receiptbl;
+import businesslogic.goodsbl.goodsUpdate.GoodsSalesUpdate;
 import po.receiptPO.StockRetReceiptPO;
 import util.ResultMessage;
 import vo.receiptVO.*;
@@ -16,8 +17,10 @@ public class StockRetbl extends Receiptbl<StockRetReceiptVO, StockRetReceiptPO> 
     }
 
     @Override
-    public ResultMessage approve(StockRetReceiptVO receiptVO) throws RemoteException {
-        return null;
+    public ResultMessage approve(StockRetReceiptVO receiptVO) throws RemoteException, MalformedURLException, NotBoundException {
+        new GoodsSalesUpdate().goodsUpdateStorckRet(receiptVO.getItems());
+
+        return ResultMessage.SUCCESS;
     }
 
 

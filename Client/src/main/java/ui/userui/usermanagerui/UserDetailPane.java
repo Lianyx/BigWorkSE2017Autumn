@@ -238,7 +238,7 @@ public class UserDetailPane extends Refreshable {
         userVO.setPassword(password.getText());
         userVO.setPhone(phone.getText());
         userVO.setUsername(username.getText());
-        userVO.setUsertype(UserCategory.map.get(usertype.getValue().getText()));
+        userVO.setUsertype(UserCategory.map.get(usertype.getValue().getId()));
     }
 
 
