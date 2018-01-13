@@ -2,26 +2,35 @@ package ui.inventoryui.inventoryReceiptui;
 
 import blService.checkblService.ReceiptblService;
 import blService.inventoryblService.InventoryDamageReceiptblService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import ui.inventoryui.GoodsChooseInfo;
+import ui.inventoryui.goodsui.GoodChoose;
 import ui.myAccountantui.common.MyReceiptDetailPane;
 import vo.inventoryVO.inventoryReceiptVO.InventoryDamageReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.InventoryDamageReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.List;
 
 public class InventoryDamageDetailPane extends MyReceiptDetailPane<InventoryDamageReceiptVO> {
     @FXML
     InventoryOverflowDamageTreeTable damageItemTreeTable;
 
+    ObservableList<ReceiptGoodsItemVO> observableList = FXCollections.observableArrayList();
+
     @FXML
     private TextArea commentArea;
     @FXML
     private TextField operator;
-   /* @FXML
-    private TextField stateField;*/
+    @FXML
+    private TextField stateField;
 
 
     public InventoryDamageDetailPane() {
@@ -31,9 +40,7 @@ public class InventoryDamageDetailPane extends MyReceiptDetailPane<InventoryDama
 
     public InventoryDamageDetailPane(InventoryDamageReceiptVO receiptVO) {
         super(receiptVO);
-        operator.setText(String.valueOf(receiptVO.getOperatorId()));
-        commentArea.setText(receiptVO.getComment());
-     //   stateField.setText(receiptVO.getReceiptState().toString());
+        stateField.setDisable(true);
         damageItemTreeTable.setList(receiptVO.getItems());
         damageItemTreeTable.setEditable(true);
     }
@@ -68,22 +75,33 @@ public class InventoryDamageDetailPane extends MyReceiptDetailPane<InventoryDama
         // TODO 我没管transferList相关的（下面的reset同理）。而且这个vo里面没有comment………
     }
 
-    @FXML
     @Override
-    protected void reset() {
-        operator.setText("");
-        commentArea.setText("");
-        //stateField.setText("");
-        damageItemTreeTable.clear();
+    protected void setRedCredit(InventoryDamageReceiptVO redCreditVO) {
+        List<ReceiptGoodsItemVO> list = redCreditVO.getItems();
+
+        int index = 0;
+        for (ReceiptGoodsItemVO vo:list) {
+            vo.setInventoryNum(vo.getInventoryNum()*(-1));
+            vo.setFactNum(vo.getFactNum()*(-1));
+            list.set(index++,vo);
+        }
+        redCreditVO.setItems(list);
     }
 
     @FXML
-    public void addGoods() {
-        ReceiptGoodsItemVO receiptGoodsItemVO = new ReceiptGoodsItemVO();
-        receiptGoodsItemVO.setGoodsName("please");
-        receiptGoodsItemVO.setGoodsId("please");
-        receiptGoodsItemVO.setInventoryNum(0);
-        receiptGoodsItemVO.setFactNum(0);
-        damageItemTreeTable.addGood(receiptGoodsItemVO);
+    @Override
+    protected void reset() {
+        operator.setText(String.valueOf(receiptVO.getOperatorId()));
+        commentArea.setText(receiptVO.getComment());
+        stateField.setText(receiptVO.getReceiptState().toString());
+
+        damageItemTreeTable.setList(observableList);
+    }
+
+    @FXML
+    public void addGoods() throws RemoteException, NotBoundException, MalformedURLException {
+        GoodsChooseInfo goodsChooseInfo = new GoodChoose();
+
+        goodsChooseInfo.choose(observableList);
     }
 }

@@ -13,6 +13,11 @@ public interface GoodsSalesUpdateInfo {
      * 提供给销售人员单据审批之后用来修改商品属性的方法
      */
 
-    public void goodsUpdate(List<ListGoodsItemVO> list) throws RemoteException;
+    public void goodsUpdateSaleRet(List<ListGoodsItemVO> list) throws RemoteException;
 
+    public void goodsUpdateSalesSel(List<ListGoodsItemVO> list) throws RemoteException;
+
+    public void goodsUpdateStockPur(List<ListGoodsItemVO> list) throws RemoteException;
+
+    public void goodsUpdateStorckRet(List<ListGoodsItemVO> list) throws RemoteException;
 }

@@ -8,13 +8,14 @@ import ui.managerui.common.MyTopBar;
 import ui.managerui.common.navigation.ChangePaneLabel;
 import ui.managerui.promotionui.PromotionListPane;
 import ui.util.*;
+import util.UserCategory;
 
 
 public class ManagerUIController {
     @FXML
     private JFXListView<ChangePaneLabel> navigation;
-    @FXML
-    private StackPane mainpane;
+//    @FXML
+//    private StackPane mainpane;
     @FXML
     private MyTopBar bar;
     @FXML
@@ -24,7 +25,10 @@ public class ManagerUIController {
 
     @FXML
     public void initialize() {
-        PaneFactory.setMainPane(mainpane);
+//        PaneFactory.setMainPane(mainpane);
+
+        // TODO
+        UserInfomation.usertype = UserCategory.GeneralManager;
 
         BoardController.setBoardController(boardController);
         // 这样再set回去，以后从boardController里面拿的就都是MyBoardController了，但是以后仍然需要强转

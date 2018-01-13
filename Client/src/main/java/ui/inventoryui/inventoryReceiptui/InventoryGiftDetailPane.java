@@ -10,17 +10,22 @@ import javafx.scene.control.TextField;
 import ui.inventoryui.GoodsChooseInfo;
 import ui.inventoryui.goodsui.GoodChoose;
 import ui.myAccountantui.common.MyReceiptDetailPane;
+import vo.inventoryVO.inventoryReceiptVO.InventoryDamageReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 import vo.receiptVO.ReceiptVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftReceiptVO> {
     @FXML
     InventoryListItemTreeTable giftItemTreeTable;
 
-    ObservableList<String> observableList = FXCollections.observableArrayList();
+    ObservableList<ReceiptGoodsItemVO> observableList = FXCollections.observableArrayList();
 
     @FXML
     private TextArea commentArea;
@@ -35,8 +40,7 @@ public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftRe
 
     public InventoryGiftDetailPane(InventoryGiftReceiptVO receiptVO) {
         super(receiptVO);
-        operator.setText(String.valueOf(receiptVO.getOperatorId()));
-        commentArea.setText(receiptVO.getComment());
+        stateField.setDisable(true);
         giftItemTreeTable.setList(receiptVO.getItems());
         giftItemTreeTable.setEditable(true);
     }
@@ -65,23 +69,34 @@ public class InventoryGiftDetailPane extends MyReceiptDetailPane<InventoryGiftRe
         // TODO 我没管transferList相关的（下面的reset同理）。而且这个vo里面没有comment………
     }
 
+    @Override
+    protected void setRedCredit(InventoryGiftReceiptVO redCreditVO) {
+        List<ReceiptGoodsItemVO> list = redCreditVO.getItems();
+
+        int index = 0;
+        for (ReceiptGoodsItemVO vo:list) {
+            vo.setInventoryNum(vo.getInventoryNum()*(-1));
+            vo.setSendNum(vo.getSendNum()*(-1));
+            list.set(index++,vo);
+        }
+        redCreditVO.setItems(list);
+    }
+
     @FXML
     @Override
     protected void reset() {
         //super.reset();
-        operator.setText("");
-        commentArea.setText("");
-        stateField.setText("");
-        giftItemTreeTable.clear();
+        operator.setText(String.valueOf(receiptVO.getOperatorId()));
+        commentArea.setText(receiptVO.getComment());
+        stateField.setText(receiptVO.getReceiptState().toString());
+
+        giftItemTreeTable.setList(observableList);
     }
 
     @FXML
-    public void addGoods(){
+    public void addGoods() throws RemoteException, NotBoundException, MalformedURLException {
         GoodsChooseInfo goodsChooseInfo = new GoodChoose();
 
         goodsChooseInfo.choose(observableList);
-
-        System.out.println(observableList.toString());
-        //giftItemTreeTable.addGood(new ReceiptGoodsItemVO("please","please",0,0));
     }
 }

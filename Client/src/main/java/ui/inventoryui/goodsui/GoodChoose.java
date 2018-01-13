@@ -10,19 +10,27 @@ import javafx.scene.control.Label;
 import ui.inventoryui.GoodsChooseInfo;
 import ui.util.PaneFactory;
 import vo.inventoryVO.GoodsVO;
+import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GoodChoose implements GoodsChooseInfo {
     List<String> goodsId;
 
     Goodsbl goodsbl;
 
+    public GoodChoose() throws RemoteException, NotBoundException, MalformedURLException {
+        this.goodsbl = new Goodsbl();
+    }
+
     @Override
-    public List<String> choose(ObservableList<String> list) {
+    public List<String> choose(ObservableList<ReceiptGoodsItemVO> observableList) {
         ChoosePane choosePane = new ChoosePane();
         try {
             goodsbl = new Goodsbl();
@@ -36,8 +44,6 @@ public class GoodChoose implements GoodsChooseInfo {
 
         JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
         jfxDialogLayout.setPrefWidth(220.0);
-        //jfxDialogLayout.setHeading(new Label("GoodsCl"));
-        //JFXTextField name = new JFXTextField();
         jfxDialogLayout.setBody(choosePane);
         JFXButton save = new JFXButton("Save");
         JFXDialog dialog = new JFXDialog(PaneFactory.getMainPane(), jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
@@ -46,18 +52,42 @@ public class GoodChoose implements GoodsChooseInfo {
 
         choosePane.setDialog(dialog);
 
-        GoodChooseui_stub stub = new GoodChooseui_stub();
+      //  GoodChooseui_stub stub = new GoodChooseui_stub();
+        Set<GoodsVO> goodsList = null;
+        try {
+            goodsList = goodsbl.show();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
 
-        choosePane.setObservableList(stub.getGoods());
+        Set<String> sourceList = new HashSet<>();
+
+        for (GoodsVO vo:goodsList) {
+            sourceList.add(vo.getId()+" "+vo.getGoodName());
+        }
+
+        choosePane.setObservableList(sourceList);
 
         button.setOnAction(e -> {
             goodsId = choosePane.getChooseList();
 
-            System.out.println(goodsId.toString());
+            for (String str:goodsId) {
+                String id = str.split(" ")[0];
 
-            list.addAll(goodsId);
+                GoodsVO goodsVO = null;
+                try {
+                    goodsVO = goodsbl.showDetail(id);
+                } catch (RemoteException e1) {
+                    e1.printStackTrace();
+                }
 
-            System.out.println(list.toString());
+                ReceiptGoodsItemVO vo = new ReceiptGoodsItemVO();
+                vo.setGoodsName(goodsVO.getGoodName());
+                vo.setGoodsId(id);
+                vo.setInventoryNum(goodsVO.getInventoryNum());
+
+                observableList.add(vo);
+            }
             dialog.close();
         });
         jfxDialogLayout.setActions(button);

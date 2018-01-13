@@ -18,6 +18,7 @@ import vo.billReceiptVO.ChargeReceiptVO;
 import vo.billReceiptVO.TransferItemVO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
     @FXML
@@ -105,6 +106,18 @@ public class MyCashDetailPane extends MyReceiptDetailPane<CashReceiptVO> {
         receiptVO.setTotal(Double.parseDouble(sumField.getText()));
         receiptVO.setAccountID(Integer.parseInt(accountField.getText()));
         receiptVO.setCashList(cashItemTreeTable.getList());
+    }
+
+    @Override
+    protected void setRedCredit(CashReceiptVO redCreditVO) {
+        super.setRedCredit(redCreditVO);
+        redCreditVO.setTotal(-redCreditVO.getTotal());
+        List<CashItemVO> list = redCreditVO.getCashList();
+        for(CashItemVO vo:list){
+            vo.setPrice(-vo.getPrice());
+        }
+        redCreditVO.setCashList(list);
+
     }
 
     @FXML

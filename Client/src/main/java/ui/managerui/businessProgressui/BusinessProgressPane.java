@@ -41,7 +41,7 @@ public class BusinessProgressPane extends FilterableListPane<ReceiptVO> implemen
 
     @Override
     protected MyTreeTableBorderPane<ReceiptVO> getInitialTreeTable() {
-        return new CheckTable(chosenItems, keywordField.textProperty(), new ArrayList<>());
+        return new BusinessProgressTable(chosenItems, keywordField.textProperty(), new ArrayList<>());
     }
 
     @Override

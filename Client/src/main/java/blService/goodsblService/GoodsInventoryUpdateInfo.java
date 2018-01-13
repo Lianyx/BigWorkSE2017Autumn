@@ -12,5 +12,9 @@ public interface GoodsInventoryUpdateInfo {
      * @param list
      * @throws RemoteException
      */
-    public void goodsUpdate(List<ReceiptGoodsItemVO> list) throws RemoteException;
+    public void goodsGiftUpdate(List<ReceiptGoodsItemVO> list) throws RemoteException;
+
+    public void goodsOverflowUpdate(List<ReceiptGoodsItemVO> list) throws RemoteException;
+
+    public void goodsDamageUpdate(List<ReceiptGoodsItemVO> list) throws RemoteException;
 }

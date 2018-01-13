@@ -44,7 +44,7 @@ public class BusinessProgressbl implements BusinessProgressblService {
 
     @Override
     public ArrayList<ReceiptVO> search(ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
-        // TODO 这个要根据是否contain，来决定是否需要调这个SearchInfo
+        // TODO 这个要根据是否contain，来决定是否需要调这个SearchInfo。以及，这里还缺stock和sales
         ArrayList<ReceiptVO> resultList = new ArrayList<>();
 
         resultList.addAll(getApprovedReceipt(inventoryDamageReceiptVOBusinessSearchInfo, receiptSearchCondition));
@@ -63,6 +63,8 @@ public class BusinessProgressbl implements BusinessProgressblService {
      * private search, in order to filter only saved receipt.
      * */
     private <T extends ReceiptVO> ArrayList<T> getApprovedReceipt(BusinessSearchInfo<T> businessSearchInfo, ReceiptSearchCondition receiptSearchCondition) throws RemoteException {
-        return businessSearchInfo.search(receiptSearchCondition).stream().filter(r -> r.getReceiptState() == ReceiptState.APPROVED).collect(Collectors.toCollection(ArrayList::new));
+        // TODO
+//        return businessSearchInfo.search(receiptSearchCondition).stream().filter(r -> r.getReceiptState() == ReceiptState.APPROVED).collect(Collectors.toCollection(ArrayList::new));
+        return businessSearchInfo.search(receiptSearchCondition);
     }
 }

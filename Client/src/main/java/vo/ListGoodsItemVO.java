@@ -17,6 +17,9 @@ public class ListGoodsItemVO extends RecursiveTreeObject<ListGoodsItemVO> implem
     private StringProperty comment = new SimpleStringProperty();
     private LocalDate time;
 
+    public ListGoodsItemVO() {
+    }
+
     public ListGoodsItemVO(String goodsName, String goodsId, String type, int price, int goodsNum, String comment) {
         this.goodsName = new SimpleStringProperty(goodsName);
         this.goodsId = new SimpleStringProperty(goodsId);

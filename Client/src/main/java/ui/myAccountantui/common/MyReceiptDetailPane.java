@@ -2,6 +2,7 @@ package ui.myAccountantui.common;
 
 import blService.checkblService.CheckInfo;
 import blService.checkblService.ReceiptblService;
+import blService.userblService.UserInfo;
 import businesslogic.promotionbl.MyblServiceFactory;
 import com.jfoenix.controls.JFXButton;
 import exceptions.ItemNotFoundException;
@@ -12,6 +13,7 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import ui.common.SomeParameter;
 import ui.managerui.common.MyBoardController;
 import ui.managerui.common.MyOneButtonDialog;
 import ui.managerui.common.MyTwoButtonDialog;
@@ -27,9 +29,11 @@ import java.rmi.RemoteException;
 
 public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refreshable {
     @FXML
-    protected JFXButton modify, reset, save, saveAsDraft, delete, approve, reject;
+    protected JFXButton modify, reset, save, saveAsDraft, delete, approve, reject, redCredit, redCreditCopy;
     @FXML
     protected Label idLabel;
+
+
 
 
     protected ReceiptblService<TV> receiptblService;
@@ -61,14 +65,17 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
 
         approve.setVisible(false);
         reject.setVisible(false);
+        redCredit.setVisible(false);
+        redCreditCopy.setVisible(false);
 
         if (receiptVO != null) {
+            // 默认是草稿的状态，如果执行到下面说明不是。
             if (receiptVO.getReceiptState() != ReceiptState.DRAFT) {
                 saveAsDraft.setVisible(false);
                 reset.setLayoutX(saveAsDraft.getLayoutX());
             }
 
-            // 如果不是总经理提交或者就只能看
+            // 如果不是总经理，提交后的单据只能看。如果是审批通过的或者就只能看
             if (receiptVO.getReceiptState() == ReceiptState.APPROVED
                     || UserInfomation.usertype != UserCategory.GeneralManager && receiptVO.getReceiptState() == ReceiptState.PENDING) {
                 modify.setVisible(false); // 这句还是个问题
@@ -76,6 +83,15 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
                 save.setVisible(false);
                 saveAsDraft.setVisible(false);
                 delete.setVisible(false);
+            }
+            // TODO 红冲这里的组合问题还很多
+            if (receiptVO.getReceiptState() == ReceiptState.REJECTED //&& SomeParameter.isRedCreditable
+                    && UserInfomation.usertype == UserCategory.GeneralManager) {
+                redCredit.setVisible(true);
+                redCreditCopy.setVisible(true);
+                save.setVisible(false);
+                saveAsDraft.setVisible(false);
+                reset.setVisible(false);
             }
 
             if (UserInfomation.usertype == UserCategory.GeneralManager && receiptVO.getReceiptState() == ReceiptState.PENDING) { // 如果是总经理肯定只能是pending的
@@ -99,7 +115,6 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
 
     protected abstract Class<? extends ReceiptblService<TV>> getServiceClass();
 
-
     /**
      * to be overriden
      */
@@ -109,6 +124,9 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
     }
 
     protected void updateReceiptVO() {
+    }
+
+    protected void setRedCredit(TV redCreditVO) {
     }
 
     @FXML
@@ -251,6 +269,57 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
         modifyState.set(!modifyState.get());
     }
 
+    @FXML
+    private void clickRedCredit() {
+        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        myBoardController.Loading();
+
+        updateReceiptVO();
+
+        MyTwoButtonDialog dialog = new MyTwoButtonDialog("连接错误", () -> refresh(false), myBoardController::Ret);
+
+        new Thread(new GetTask(() -> {
+            new MyOneButtonDialog("红冲成功", myBoardController::goBack).show();
+        }, dialog, woid -> {
+            try {
+                TV redCreditVO = receiptblService.getNew();
+                setRedCredit(redCreditVO);
+                receiptblService.update(redCreditVO);
+                return true;
+            } catch (RemoteException e) {
+                e.printStackTrace();
+                return false;
+            }
+        })).start();
+
+    }
+
+    @FXML
+    protected void clickRedCreditCopy() {
+        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        myBoardController.Loading();
+
+        updateReceiptVO();
+
+        MyTwoButtonDialog dialog = new MyTwoButtonDialog("连接错误", () -> refresh(false), myBoardController::Ret);
+
+        new Thread(new GetTask(() -> {
+            new MyOneButtonDialog("红冲成功", myBoardController::goBack).show();
+        }, dialog, woid -> {
+            try {
+                TV redCreditVO = receiptblService.getNew();
+                setRedCredit(redCreditVO);
+                receiptblService.update(redCreditVO);
+
+                receiptVO = redCreditVO; //
+                return true;
+            } catch (RemoteException e) {
+                e.printStackTrace();
+                return false;
+            }
+        })).start();
+    }
+
     /**
      * refresh
      */
@@ -285,4 +354,5 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
         });
         new Thread(task).start();
     }
+
 }

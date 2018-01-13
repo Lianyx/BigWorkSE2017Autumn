@@ -27,8 +27,9 @@ public class InventoryWarningReceiptbl extends Receiptbl<InventoryWarningReceipt
         receiptPO.setReceiptState(ReceiptState.APPROVED);
         receiptDataService.update(receiptPO);
 
-        return ResultMessage.SUCCESS;*/
-        return null;
+        return ResultMessage.SUCCESS;
+        return*/
+        return ResultMessage.SUCCESS;
 
     }
 }
