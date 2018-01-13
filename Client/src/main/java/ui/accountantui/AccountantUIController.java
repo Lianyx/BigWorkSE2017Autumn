@@ -36,8 +36,6 @@ public class AccountantUIController implements Initializable{
     @FXML
     JFXListView<HBox> navigation;
 
-    @FXML
-    StackPane mainpane;
 
     @FXML
     MyTopBar bar;
@@ -61,7 +59,6 @@ public class AccountantUIController implements Initializable{
     public void initialize(URL location, ResourceBundle resources){
 
 
-        PaneFactory.setMainPane(mainpane);
 
         BoardController.setBoardController(boardController);
         boardController = MyBoardController.getMyBoardController();

@@ -2,6 +2,7 @@ package ui.userui.loginui;
 
 import blService.userblService.LoginblService;
 import blServiceStub.loginblservice_Stub.LoginblService_Stub;
+import businesslogic.userbl.Loginbl;
 import com.jfoenix.controls.*;
 import java.io.*;
 
@@ -20,6 +21,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import ui.util.*;
 import util.ResultMessage;
+import util.UserCategory;
+import vo.UserVO;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,7 +46,7 @@ public class Login implements Initializable{
     @FXML
     JFXCheckBox keep;
 
-    LoginblService ls =new LoginblService_Stub();
+    LoginblService ls;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -101,9 +104,32 @@ public class Login implements Initializable{
                             outputStream.writeChars("");
                             outputStream.close();
                         }
+                        UserVO userVO = ls.getCategory(account.getText());
+                        UserInfomation.userid = userVO.getId();
+                        UserInfomation.userimage = userVO.getImage();
+                        UserInfomation.usertype = userVO.getUsertype();
+                        UserInfomation.username = userVO.getUsername();
+                        switch (userVO.getUsertype()){
+                            case UserManager:
+                                changeToUserManger();
+                                break;
+                            case Salesman:
+                                changeToSales();
+                                break;
+                            case SalesManager:
+                                changeToSales();
+                                break;
+                            case Accountant:
+                                changetoAccountant();
+                                break;
+                            case GeneralManager:
+                                changetoGeneralManager();
+                                break;
+                            case InventoryManager:
+                                changetoInventory();
+                                break;
+                        }
 
-
-                        changeToSales();
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -131,7 +157,7 @@ public class Login implements Initializable{
         Parent root = FXMLLoader.load(getClass().getResource("/userui/login.fxml"));
         Stage stage = (Stage) pane.getScene().getWindow();
         StackPane stackPane = PaneFactory.getLoginPane();
-        stackPane.getChildren().add(root);
+        stackPane.getChildren().setAll(root);
         Scene scene = new Scene(stackPane);
         stage.setScene(scene);
         setDraggable(scene,stage);
@@ -144,8 +170,10 @@ public class Login implements Initializable{
     public void changeTo(String url) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource(url));
         Stage stage = (Stage) pane.getScene().getWindow();
+        System.out.println("first time login");
+        System.out.println(url);
         StackPane stackPane = PaneFactory.getMainPane();
-        stackPane.getChildren().add(root);
+        stackPane.getChildren().setAll(root);
         Scene scene = new Scene(stackPane);
         NodeHolder nodeHolder = new NodeHolder(stage,Duration.millis(1000), NodeAnimation.FADE);
         nodeHolder.apply();
@@ -161,7 +189,16 @@ public class Login implements Initializable{
         changeTo("/salesui/sales.fxml");
     }
 
+    public void changetoAccountant() throws Exception{
+        changeTo("/accountantui/accountantMain.fxml");
+    }
 
+    public void changetoInventory() throws Exception{
+        changeTo("/inventoryui/inventoryMain.fxml");
+    }
+    public void changetoGeneralManager() throws Exception{
+        changeTo("/managerui/managerMain.fxml");
+    }
 
 
     public String deleteEven(String str){
@@ -195,6 +232,9 @@ public class Login implements Initializable{
 
         @Override
         protected Boolean call() throws Exception {
+
+            if(ls==null)
+                ls = new Loginbl();
 
             if(ls.login(account,password)== ResultMessage.SUCCESS){
                 Thread.sleep(2000);

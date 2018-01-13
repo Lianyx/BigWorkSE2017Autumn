@@ -9,6 +9,7 @@ import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import po.UserPO;
 import util.ResultMessage;
+import util.UserCategory;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -23,11 +24,20 @@ public class LoginData extends UnicastRemoteObject implements LoginDataService {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             UserDataPOMapper mapper = session.getMapper(UserDataPOMapper.class);
             UserPO userPO = mapper.getPassword(username);
-            if(userPO.getPassword()==password){
+            if(userPO.getPassword().equals(password)){
                 return ResultMessage.SUCCESS;
             }else{
                 return ResultMessage.FAIL;
             }
         }
+    }
+
+    @Override
+    public UserPO getCategory(String username) {
+            try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+                UserDataPOMapper mapper = session.getMapper(UserDataPOMapper.class);
+                UserPO userPO = mapper.getPassword(username);
+                return userPO;
+            }
     }
 }

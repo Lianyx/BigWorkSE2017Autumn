@@ -103,22 +103,7 @@
                         <Font size="12.0" />
                     </font>
                 </Label>
-                <JFXButton fx:id="choose" layoutX="55.0" layoutY="181.0" mnemonicParsing="false" onMouseClicked="#choosefile" text="Choose">
-                    <font>
-                        <Font size="12.0" />
-                    </font>
-                    <graphic>
-                        <HBox>
-                            <children>
-                                <JFXRippler position="BACK" styleClass="icons-rippler">
-                                    <StackPane>
-                                        <MaterialDesignIconView glyphName="FOLDER_OUTLINE" size="1em" styleClass="icon" />
-                                    </StackPane>
-                                </JFXRippler>
-                            </children>
-                        </HBox>
-                    </graphic>
-                </JFXButton>
+
             <Rating fx:id="rating" layoutX="307.0" layoutY="79.0" />
             <Label layoutX="35.0" layoutY="284.0" text="Address" textFill="#a1adbc">
                <font>

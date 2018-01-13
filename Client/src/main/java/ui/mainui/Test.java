@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import po.LogPO;
 import ui.logui.LogPane;
-import ui.memberui.ChoosePane;
 import util.EventCategory;
 import util.UserCategory;
 
@@ -25,9 +24,9 @@ public class Test extends Application {
     @Override
     public void start(Stage primaryStage) {
         StackPane root = new StackPane();
-        root.getChildren().add(new LogPane());
-        Scene scene=new Scene(root);
 
+        Scene scene=new Scene(root);
+/*
         try{
             Logbl logbl = new Logbl();
             logbl.insert(new LogPO(1, LocalDateTime.now(),"sabi", UserCategory.UserManager, EventCategory.CreateSalesReceipt,"sbbbb"));
@@ -35,7 +34,7 @@ public class Test extends Application {
             e.printStackTrace();
         }
 
-
+*/
         primaryStage.setScene(scene);
         primaryStage.show();
     }

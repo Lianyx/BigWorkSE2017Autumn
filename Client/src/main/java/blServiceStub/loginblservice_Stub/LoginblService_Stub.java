@@ -2,9 +2,11 @@ package blServiceStub.loginblservice_Stub;
 
 import blService.userblService.LoginblService;
 import javafx.scene.image.Image;
+import po.UserPO;
 import ui.util.UserInfomation;
 import util.ResultMessage;
 import util.UserCategory;
+import vo.UserVO;
 
 public class LoginblService_Stub implements LoginblService {
     @Override
@@ -19,6 +21,11 @@ public class LoginblService_Stub implements LoginblService {
             return ResultMessage.SUCCESS;
         }
         return ResultMessage.FAIL;
+    }
+
+    @Override
+    public UserVO getCategory(String username) {
+        return null;
     }
 
 

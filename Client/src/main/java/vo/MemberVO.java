@@ -8,8 +8,8 @@ import util.MemberCategory;
 public class MemberVO {
     int memberId;
     MemberCategory memberCategory;
-    Image image;
     int degree;
+    Image image;
     String name;
     String phone;
     String address;
@@ -23,23 +23,6 @@ public class MemberVO {
     MemberPO memberPO;
 
     public MemberVO() {
-    }
-
-    public MemberVO(int memberId, MemberCategory memberCategory, Image image, int degree, String name, String phone, String address, String email, String zipCode, double receiableAmount, double give, double get, String clerkName, String comment) {
-        this.memberId = memberId;
-        this.memberCategory = memberCategory;
-        this.degree = degree;
-        this.image = image;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-        this.email = email;
-        this.zipCode = zipCode;
-        this.receiableAmount = receiableAmount;
-        this.give = give;
-        this.get = get;
-        this.clerkName = clerkName;
-        this.comment = comment;
     }
 
     public MemberVO(int memberId, MemberCategory memberCategory, int degree, String name, String phone, String address, String email, String zipCode, double receiableAmount, double give, double get, String clerkName, String comment) {
@@ -58,15 +41,14 @@ public class MemberVO {
         this.comment = comment;
     }
 
+
+
     public MemberVO(MemberPO memberPO){
         this.memberId = memberPO.getMemberId();
         this.name = memberPO.getMemberName();
         this.zipCode = memberPO.getZipCode();
         this.comment = memberPO.getComment();
-        if(memberPO.getImage()==null)
         this.image = new Image("/default/timg.jpg");
-        else
-            this.image= ImageConvertor.getFXImage(ImageConvertor.getImage(memberPO.getImage()));
         this.address = memberPO.getAddress();
         this.clerkName = memberPO.getClerkName();
         this.degree = memberPO.getVIPgrade();
@@ -89,7 +71,6 @@ public class MemberVO {
         memberPO.setCredit(get);
         memberPO.setDebt(give);
         memberPO.setDebtCeiling(receiableAmount);
-        memberPO.setImage(ImageConvertor.getByte(ImageConvertor.getBuffered(image)));
         memberPO.setVIPgrade(degree);
         memberPO.setComment(comment);
         memberPO.setPhoneNumber(phone);
@@ -214,5 +195,11 @@ public class MemberVO {
         this.clerkName = clerkName;
     }
 
+    public String getZipCode() {
+        return zipCode;
+    }
 
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
 }

@@ -2,6 +2,7 @@ package businesslogic.memberbl;
 
 import blService.memberblService.MemberblService;
 import dataService.memberdataService.MemberdataService;
+import javafx.scene.image.Image;
 import po.MemberPO;
 import util.MemberSearchCondition;
 import util.ResultMessage;
@@ -27,7 +28,9 @@ public class Memberbl implements MemberblService{
 
     @Override
     public MemberVO getNew() throws RemoteException {
-        return new MemberVO(memberdataService.getNew());
+        MemberVO memberVO = new MemberVO(memberdataService.getNew());
+        memberVO.setImage(new Image("/default/timg.jpg"));
+        return memberVO;
     }
 
     @Override

@@ -7,7 +7,6 @@ import java.io.Serializable;
 public class MemberPO implements Serializable{
     private int memberId;
     private MemberCategory memberCategory; // 分为进货商和销售商
-    private byte[] image;
     private int VIPgrade; // 1~5
     private String memberName;
     private String clerkName;
@@ -24,7 +23,7 @@ public class MemberPO implements Serializable{
     }
 
 
-    public MemberPO(int memberId, MemberCategory memberCategory, int VIPgrade, String memberName, String clerkName, String phoneNumber, String address, String zipCode, String emailAddress, double debtCeiling, double debt, double credit, String comment) {
+    public MemberPO(int memberId, MemberCategory memberCategory,int VIPgrade, String memberName, String clerkName, String phoneNumber, String address, String zipCode, String emailAddress, double debtCeiling, double debt, double credit, String comment) {
         this.memberId = memberId;
         this.memberCategory = memberCategory;
         this.VIPgrade = VIPgrade;
@@ -71,14 +70,6 @@ public class MemberPO implements Serializable{
 
     public void setMemberCategory(MemberCategory memberCategory) {
         this.memberCategory = memberCategory;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
     }
 
     public int getVIPgrade() {

@@ -1,8 +1,15 @@
 package blService.userblService;
 
+import com.sun.org.apache.regexp.internal.RE;
 import util.ResultMessage;
+import util.UserCategory;
 import vo.RegisterVO;
+import vo.UserVO;
 
-public interface LoginblService {
-    public ResultMessage login(String id, String password);
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface LoginblService extends Remote{
+    public ResultMessage login(String id, String password) throws RemoteException;
+    public UserVO getCategory(String username) throws RemoteException;
 }
