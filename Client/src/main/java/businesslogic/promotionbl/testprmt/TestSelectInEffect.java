@@ -1,16 +1,19 @@
 package businesslogic.promotionbl.testprmt;
 
 import blService.promotionblService.CombinePromotionblService;
+import blService.promotionblService.MemberPromotionblService;
 import blService.promotionblService.PromotionInfo;
 import blService.promotionblService.PromotionblService;
 import blService.salesblService.SalesSellblService;
 import businesslogic.checkbl.MyServiceFactory;
 import businesslogic.promotionbl.MyblServiceFactory;
 import businesslogic.salesbl.SalesSellbl;
+import util.PromotionSearchCondition;
 import util.ReceiptState;
 import util.RespectiveReceiptSearchCondition;
 import vo.ListGoodsItemVO;
 import vo.promotionVO.CombinePromotionVO;
+import vo.promotionVO.MemberPromotionVO;
 import vo.promotionVO.PromotionVO;
 import vo.receiptVO.SalesSellReceiptVO;
 
@@ -20,14 +23,9 @@ import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class TestSalesSell {
+public class TestSelectInEffect {
 
     public static void main(String[] args) {
-        ArrayList<ListGoodsItemVO> list = new ArrayList<>();
-        ListGoodsItemVO r1 = new ListGoodsItemVO("花灯2", "122", "小灯1", 54, 2, "nishisabi");
-        ListGoodsItemVO r2 = new ListGoodsItemVO("花灯2", "122", "小灯1", 54, 2, "nishisabi");
-        list.add(r1);
-        list.add(r2);
 //        list.add(new ListGoodsItemVO("sabi", "4", "SABI", 50, 2, "nishisabi"));
 
 //        SalesSellReceiptVO salesSellReceiptVO = new SalesSellReceiptVO("JHT-20170101-00023", 12, LocalDateTime.now(), LocalDateTime.now().plusDays(1), ReceiptState.PENDING, -1, "linyuchao", "awb", "awd", list, "awd", 1200000, 12, 12, null, 123);
@@ -38,18 +36,38 @@ public class TestSalesSell {
 //        SalesSellReceiptVO salesSellReceiptVO5 = new SalesSellReceiptVO("JHT-20170101-11515", 12, LocalDateTime.now(), LocalDateTime.now().plusDays(1), ReceiptState.PENDING, -1, "linyuchao", "", "", list, "2", 12, 12, 1882, null, 112223);
 
         try {
-//            SalesSellblService salesSellblService= new SalesSellbl();
-//
-//            SalesSellReceiptVO ssr = salesSellblService.getNew();
-//            ssr.setItems(list);
-//
-//            PromotionInfo promotionInfo = MyServiceFactory.getPromotionInfo();
-//            ArrayList<PromotionVO> promotionVOS =  promotionInfo.getMatch(ssr);
-//            System.out.println(promotionVOS.get(0));
+            // 这里测试match
+            ArrayList<ListGoodsItemVO> list = new ArrayList<>();
+            ListGoodsItemVO r1 = new ListGoodsItemVO("花灯2", "122", "小灯1", 54, 2, "nishisabi");
+            ListGoodsItemVO r2 = new ListGoodsItemVO("花灯2", "122", "小灯1", 54, 2, "nishisabi");
+            ListGoodsItemVO r3 = new ListGoodsItemVO("花灯2", "122", "小灯1", 54, 2, "nishisabi");
+            ListGoodsItemVO r4 = new ListGoodsItemVO("花灯2", "122", "小灯1", 54, 2, "nishisabi");
+            list.add(r1);
+            list.add(r2);
+            list.add(r3);
+            list.add(r4);
+
+            SalesSellblService salesSellblService= new SalesSellbl();
+            SalesSellReceiptVO ssr = salesSellblService.getNew();
+            ssr.setMemberLevel(4);
+            ssr.setItems(list);
+
+            PromotionInfo promotionInfo = MyServiceFactory.getPromotionInfo();
+            ArrayList<PromotionVO> promotionVOS =  promotionInfo.getMatch(ssr);
+            System.out.println(promotionVOS.size());
+            System.out.println(promotionVOS.get(0).totalReduce);
 
 
-            PromotionblService<CombinePromotionVO> cpbl = MyblServiceFactory.getService(CombinePromotionblService.class);
-            cpbl.selectInEffect();
+
+            // 这只是测试select in effect。但是后来发现好像用promotionSearchCondition比较好…那个selectInEffect未知错误
+//            PromotionblService<CombinePromotionVO> cpbl = MyblServiceFactory.getService(CombinePromotionblService.class);
+//            PromotionblService<MemberPromotionVO> mpbl = MyblServiceFactory.getService(MemberPromotionblService.class);
+//            cpbl.selectInEffect();
+//            PromotionSearchCondition promotionSearchCondition = new PromotionSearchCondition();
+//            promotionSearchCondition.setBeginCeil(LocalDateTime.now());
+//            promotionSearchCondition.setEndFloor(LocalDateTime.now());
+//            System.out.println(mpbl.search(promotionSearchCondition).get(0).getGifts().get(0).getId());
+//            System.out.println(mpbl.selectInEffect().get(0).getGifts().get(0).getId());
         } catch (Exception e) {
             e.printStackTrace();
         }

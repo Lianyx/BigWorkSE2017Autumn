@@ -228,7 +228,7 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
                 try {
                     checkInfo.approve(receiptVO);
                     return true;
-                } catch (RemoteException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     return false;
                 }

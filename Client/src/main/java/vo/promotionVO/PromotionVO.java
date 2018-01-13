@@ -18,9 +18,9 @@ public abstract class PromotionVO extends ReceipishVO<PromotionVO> {
     protected String comment;
     protected PromotionState promotionState;
 
-    public double totalReduce;
+    public double totalReduce; // 这个还是不用了……
 
-    public int count; // 为了计算达到几重这个促销策略，比如买三送一，买六送二。
+    public int count; // 为了计算达到几重这个促销策略，比如买三送一，买六送二。这个还是不用了…不知为什么有点麻烦…
 
     public PromotionVO() {
     }

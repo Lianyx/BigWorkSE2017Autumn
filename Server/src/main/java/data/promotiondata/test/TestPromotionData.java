@@ -122,6 +122,6 @@ public class TestPromotionData {
 //        System.out.println("end Main");
 
         PromotionDataService<CombinePromotionPO> pd = new CombinePromotionData();
-        System.out.println(pd.selectInEffect().get(0));
+        System.out.println(pd.selectInEffect().get(0).getGoodsCombination()[0].getId());
     }
 }
