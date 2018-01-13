@@ -94,10 +94,10 @@ public class InventoryListItemTreeTable extends JFXTreeTableView<ReceiptGoodsIte
 
     public void setList(List<ReceiptGoodsItemVO> goods) {
         observableList.setAll(goods);
-        System.out.println("tree 双击"+observableList.toString());
+      //  System.out.println("tree 双击"+observableList.toString());
     }
 
- //   public void setList(ObservableList<ReceiptGoodsItemVO> list){observableList.setAll(list);}
+    public void setList(ObservableList<ReceiptGoodsItemVO> list){observableList.setAll(list);}
 
     public void removeGood(ReceiptGoodsItemVO good) {
         observableList.remove(good);
