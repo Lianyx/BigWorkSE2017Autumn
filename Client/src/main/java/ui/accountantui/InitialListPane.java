@@ -7,12 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import ui.managerui.common.MyBoardController;
+import ui.common.MyBoardController;
 import ui.util.*;
 
-import java.rmi.RemoteException;
 import java.util.Calendar;
-import java.util.function.Predicate;
 
 
 public class InitialListPane extends Refreshable {

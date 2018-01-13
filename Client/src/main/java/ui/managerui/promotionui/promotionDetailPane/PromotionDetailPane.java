@@ -7,7 +7,6 @@ import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import exceptions.ItemNotFoundException;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,27 +16,21 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import ui.inventoryui.GoodsChooseInfo;
-import ui.inventoryui.goodsui.ChoosePane;
 import ui.inventoryui.goodsui.GoodChoose;
-import ui.managerui.common.MyBoardController;
-import ui.managerui.common.MyOneButtonDialog;
-import ui.managerui.common.MyTwoButtonDialog;
+import ui.common.MyBoardController;
+import ui.common.MyOneButtonDialog;
+import ui.common.MyTwoButtonDialog;
 import ui.managerui.promotionui.GoodsTreeTable;
 import ui.util.GetTask;
-import ui.util.PaneFactory;
 import ui.util.Refreshable;
 import util.PromotionState;
 import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
-import vo.promotionVO.PromotionGoodsItemVO;
 import vo.promotionVO.PromotionVO;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public abstract class PromotionDetailPane<T extends PromotionVO> extends Refreshable {
     @FXML

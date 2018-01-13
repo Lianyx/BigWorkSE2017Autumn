@@ -1,38 +1,19 @@
 package ui.accountantui;
 
 import blService.accountblService.AccountblService;
-import blService.blServiceFactory.ServiceFactory_Stub;
-import blService.memberblService.MemberblService;
 import businesslogic.accountbl.Accountbl;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
-import ui.managerui.common.MyBoardController;
-import ui.userui.usermanagerui.UserDetailPane;
+import ui.common.MyBoardController;
 import ui.util.*;
-import util.MemberCategory;
 import vo.AccountListVO;
-import vo.MemberVO;
-import vo.UserVO;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.function.Predicate;
 

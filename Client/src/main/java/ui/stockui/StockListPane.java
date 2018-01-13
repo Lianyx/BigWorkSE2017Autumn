@@ -1,6 +1,6 @@
 package ui.stockui;
 
-import ui.myAccountantui.common.MyReceiptListPane;
+import ui.common.MyReceiptListPane;
 import vo.receiptVO.StockReceiptListVO;
 import vo.receiptVO.StockReceiptVO;
 

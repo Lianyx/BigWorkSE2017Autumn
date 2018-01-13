@@ -1,26 +1,17 @@
 package ui.inventoryui.goodsui;
 
-import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.goodsblService.GoodsblService;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
-import ui.managerui.common.MyBoardController;
+import ui.common.MyBoardController;
 import ui.util.*;
 import vo.inventoryVO.GoodsVO;
 
 
-import java.io.File;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.function.Predicate;

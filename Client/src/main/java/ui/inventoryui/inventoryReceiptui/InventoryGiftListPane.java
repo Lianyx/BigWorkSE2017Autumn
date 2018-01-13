@@ -2,7 +2,7 @@ package ui.inventoryui.inventoryReceiptui;
 
 import blService.checkblService.ReceiptblService;
 import blService.inventoryblService.InventoryGiftReceiptblService;
-import ui.myAccountantui.common.MyReceiptListPane;
+import ui.common.MyReceiptListPane;
 import ui.util.Refreshable;
 import vo.inventoryVO.inventoryReceiptVO.InventoryGiftListVO;
 import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;

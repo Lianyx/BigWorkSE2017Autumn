@@ -1,6 +1,5 @@
 package ui.managerui.promotionui.addPopUpRelated;
 
-import ui.managerui.common.navigation.ChangePaneLabel;
 import ui.managerui.promotionui.promotionDetailPane.CombinePromotionDetailPane;
 import ui.util.Refreshable;
 

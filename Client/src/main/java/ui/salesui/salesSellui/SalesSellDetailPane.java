@@ -2,29 +2,14 @@ package ui.salesui.salesSellui;
 
 import blService.checkblService.ReceiptblService;
 import blService.promotionblService.PromotionInfo;
-import blService.salesblService.SalesRetblService;
 import blService.salesblService.SalesSellblService;
 import businesslogic.checkbl.MyServiceFactory;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
-import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
-import ui.managerui.common.MyOneButtonDialog;
-import ui.myAccountantui.common.MyReceiptDetailPane;
 import ui.salesui.SalesReceiptPane;
-import ui.util.PaneFactory;
-import util.ReceiptState;
-import vo.promotionVO.PromotionVO;
-import vo.receiptVO.SalesRetReceiptVO;
 import vo.receiptVO.SalesSellReceiptVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class SalesSellDetailPane extends SalesReceiptPane<SalesSellReceiptVO> {
     private PromotionInfo promotionInfo;

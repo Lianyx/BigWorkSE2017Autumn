@@ -5,7 +5,7 @@ import businesslogic.checkbl.MyServiceFactory;
 import javafx.scene.Node;
 import po.CashItemPO;
 import po.receiptPO.CashBillReceiptPO;
-import ui.myAccountantui.MyCashDetailPane;
+import ui.accountantui.MyCashDetailPane;
 import util.ReceiptState;
 import vo.receiptVO.ReceiptVO;
 

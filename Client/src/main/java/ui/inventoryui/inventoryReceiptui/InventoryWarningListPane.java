@@ -2,8 +2,7 @@ package ui.inventoryui.inventoryReceiptui;
 
 import blService.checkblService.ReceiptblService;
 import blService.inventoryblService.InventoryWarningReceiptblService;
-import businesslogic.inventorybl.InventoryWarningReceiptbl;
-import ui.myAccountantui.common.MyReceiptListPane;
+import ui.common.MyReceiptListPane;
 import ui.util.Refreshable;
 import vo.inventoryVO.inventoryReceiptVO.InventoryWarningListVO;
 import vo.inventoryVO.inventoryReceiptVO.InventoryWarningReceiptVO;

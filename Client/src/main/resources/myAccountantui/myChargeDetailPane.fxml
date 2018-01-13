@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import ui.util.ModifyButton?>
-<?import ui.myAccountantui.ChargeItemTreeTable?>
+<?import ui.accountantui.ChargeItemTreeTable?>
 <fx:root type="AnchorPane" fx:id="chargereceipt" prefHeight="560.0" prefWidth="640.0" stylesheets="@../css/receipt.css"
          xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
 

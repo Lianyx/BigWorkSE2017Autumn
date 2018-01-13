@@ -5,18 +5,14 @@ import businesslogic.promotionbl.MyblServiceFactory;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.PopOver;
 import ui.common.FilterableListPane;
-import ui.common.ListPane;
-import ui.managerui.common.MyBoardController;
-import ui.managerui.common.MyTwoButtonDialog;
-import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
+import ui.common.MyBoardController;
+import ui.common.MyTwoButtonDialog;
+import ui.common.treeTableRelated.MyTreeTableBorderPane;
 import ui.managerui.promotionui.addPopUpRelated.CombineLabel;
 import ui.managerui.promotionui.addPopUpRelated.MemberLabel;
 import ui.managerui.promotionui.addPopUpRelated.TotalLabel;
@@ -27,7 +23,6 @@ import vo.promotionVO.PromotionVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 
 public class PromotionListPane extends FilterableListPane<PromotionVO> { // TODO Refreshable改成接口吧？

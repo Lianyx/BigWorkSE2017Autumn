@@ -4,9 +4,9 @@ import com.jfoenix.controls.*;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.StringProperty;
 
-import ui.managerui.common.treeTableRelated.ChooseColumn;
-import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
-import ui.managerui.common.treeTableRelated.SearchableStringColumn;
+import ui.common.treeTableRelated.ChooseColumn;
+import ui.common.treeTableRelated.MyTreeTableBorderPane;
+import ui.common.treeTableRelated.SearchableStringColumn;
 import ui.util.*;
 import util.ReceiptState;
 import vo.receiptVO.StockReceiptListVO;

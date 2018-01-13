@@ -5,10 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import javafx.util.Duration;
-import ui.managerui.common.MyBoardController;
-import ui.managerui.common.MyTopBar;
-import ui.managerui.common.navigation.ChangePaneLabel;
+import ui.common.MyBoardController;
+import ui.common.MyTopBar;
 import ui.util.*;
 
 import java.net.URL;

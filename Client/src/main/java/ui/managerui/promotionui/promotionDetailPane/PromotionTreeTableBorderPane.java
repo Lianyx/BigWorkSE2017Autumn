@@ -4,10 +4,10 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableRow;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.StringProperty;
-import ui.managerui.common.treeTableRelated.ChooseColumn;
-import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
-import ui.managerui.common.treeTableRelated.SearchableStringColumn;
-import ui.managerui.common.treeTableRelated.StateCell;
+import ui.common.treeTableRelated.ChooseColumn;
+import ui.common.treeTableRelated.MyTreeTableBorderPane;
+import ui.common.treeTableRelated.SearchableStringColumn;
+import ui.common.treeTableRelated.StateCell;
 import util.PromotionState;
 import vo.promotionVO.PromotionVO;
 

@@ -2,7 +2,6 @@ package ui.salesui.salesRetui;
 
 import com.jfoenix.controls.JFXTreeTableRow;
 import javafx.beans.property.StringProperty;
-import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
 import ui.salesui.SalesTreeTable;
 import ui.util.Refreshable;
 import vo.receiptVO.SalesRetListVO;

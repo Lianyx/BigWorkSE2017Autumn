@@ -2,26 +2,20 @@ package ui.managerui.businessSalesDetail;
 
 import blService.businessblservice.SalesDetailblService;
 import businesslogic.promotionbl.MyblServiceFactory;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import jxl.write.WriteException;
 import org.controlsfx.control.PopOver;
 import ui.common.FilterableListPane;
 import ui.common.mixer.ExcelExportableMixer;
-import ui.managerui.common.treeTableRelated.MyTreeTableBorderPane;
+import ui.common.treeTableRelated.MyTreeTableBorderPane;
 import util.ReceiptSearchCondition;
 import vo.ListGoodsItemVO;
-import vo.receiptVO.ReceiptVO;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.IntStream;
 
 public class BusinessSalesListPane extends FilterableListPane<ListGoodsItemVO> implements ExcelExportableMixer {
     private SalesDetailblService salesDetailblService;

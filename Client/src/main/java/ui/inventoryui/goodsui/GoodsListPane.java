@@ -1,37 +1,18 @@
 package ui.inventoryui.goodsui;
 
-import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.goodsblService.GoodsblService;
-import blServiceStub.goodsblservice_Stub.GoodsblService_Stub;
 import businesslogic.goodsbl.Goodsbl;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.JFXTreeTableRow;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Task;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.control.Pagination;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 
-import org.controlsfx.control.PopOver;
-import po.GoodsPO;
-import ui.managerui.common.MyBoardController;
+import ui.common.MyBoardController;
 import ui.util.*;
 import vo.inventoryVO.GoodSearchVO;
 import vo.inventoryVO.GoodsVO;
 
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 

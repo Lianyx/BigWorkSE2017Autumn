@@ -18,8 +18,8 @@
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 
 <?import ui.util.TopBar?>
-<?import ui.managerui.common.MyTopBar?>
-<?import ui.managerui.common.navigation.CheckChangePaneLabel?>
+<?import ui.common.MyTopBar?>
+<?import ui.managerui.navigation.CheckChangePaneLabel?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.text.Font?>
 <AnchorPane fx:id="mainAnchorPane" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@../css/tempInNeed.css" fx:controller="ui.salesui.SalesUIController">
