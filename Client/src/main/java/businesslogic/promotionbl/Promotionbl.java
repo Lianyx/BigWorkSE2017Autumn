@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -57,7 +58,11 @@ public abstract class Promotionbl<TV extends PromotionVO, TP extends PromotionPO
 
     @Override
     public ArrayList<TV> selectInEffect() throws RemoteException {
-        return promotionDataService.selectInEffect().stream().map(this::convertToVO).collect(Collectors.toCollection(ArrayList::new));
+        PromotionSearchCondition promotionSearchCondition = new PromotionSearchCondition();
+        promotionSearchCondition.setBeginCeil(LocalDateTime.now());
+        promotionSearchCondition.setEndFloor(LocalDateTime.now());
+//        return promotionDataService.selectInEffect().stream().map(this::convertToVO).collect(Collectors.toCollection(ArrayList::new));
+        return search(promotionSearchCondition);
     }
 
     @Override
