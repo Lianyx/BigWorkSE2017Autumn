@@ -2,12 +2,16 @@ package ui.inventoryui.inventoryViewui;
 
 import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.inventoryblService.InventoryViewblService;
+import businesslogic.inventorybl.InventoryViewbl;
 import javafx.scene.layout.BorderPane;
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;
 import ui.util.ReceiptListPane;
 import vo.inventoryVO.InventoryViewItemVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.function.Predicate;
 
@@ -20,7 +24,7 @@ public class InventoryViewListPane extends ReceiptListPane<InventoryViewItemVO> 
 
     public InventoryViewListPane() throws Exception {
         super("/inventoryui/inventoryviewui/inventoryviewlistpane.fxml");
-        this.inventoryViewblService = ServiceFactory_Stub.getService(InventoryViewblService.class.getName());
+        this.inventoryViewblService = new InventoryViewbl();//ServiceFactory_Stub.getService(InventoryViewblService.class.getName());
         receiptTreeTable = new InventoryViewTreeTable();
         receiptTreeTable.setPrefSize(600,435);
       //  receiptTreeTable.keywordProperty().bind(match);
@@ -55,9 +59,17 @@ public class InventoryViewListPane extends ReceiptListPane<InventoryViewItemVO> 
                 System.out.println("In View"+startTime.toString());
                 System.out.println(endTime.toString());
 
-                if ((set = inventoryViewblService.inventoryView(startTime,endTime).getViewList()) != null) {
-                    System.out.println(set.size());
-                    return true;
+                try {
+                    if ((set = inventoryViewblService.inventoryView(startTime,endTime).getViewList()) != null) {
+                        System.out.println(set.size());
+                        return true;
+                    }
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                } catch (NotBoundException e) {
+                    e.printStackTrace();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
                 }
                 return false;
             };

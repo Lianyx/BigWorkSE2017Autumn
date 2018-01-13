@@ -39,8 +39,8 @@ public class InventoryUIController implements Initializable {
     @FXML
     BoardController boardController;
 
-    @FXML
-    StackPane mainpane;
+//    @FXML
+//    StackPane mainpane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,7 +49,7 @@ public class InventoryUIController implements Initializable {
         bar.setBoardController(boardController);
 
         boardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150), board));*/
-        PaneFactory.setMainPane(mainpane);
+//        PaneFactory.setMainPane(mainpane);
 
         BoardController.setBoardController(boardController);
         boardController = MyBoardController.getMyBoardController();

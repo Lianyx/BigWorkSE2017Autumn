@@ -11,8 +11,8 @@
     </insert>
 
     <insert id="initialMember">
-        insert into initialmember(year,dayId,createTime,lastModifiedTime,operatorId,receiptState,memberId,memberCatogory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDelete)
-        select #{year},dayId,createTime,lastModifiedTime,operatorId,receiptState,memberId,memberCatogory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDelete
+        insert into initialmember(year,memberId,memberCategory,VIPgrade ,memberName ,clerkName ,phoneNumber ,address ,zipCode,emailAddress ,debtCeiling ,debt,credit,isDeleted,COMMENT)
+        select #{year},memberId,memberCategory,VIPgrade ,memberName ,clerkName ,phoneNumber ,address ,zipCode,emailAddress ,debtCeiling ,debt,credit,isDeleted,COMMENT
         from member
     </insert>
 

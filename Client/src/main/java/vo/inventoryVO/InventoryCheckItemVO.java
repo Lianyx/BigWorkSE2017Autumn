@@ -33,6 +33,8 @@ public class InventoryCheckItemVO extends SelectableVO<InventoryCheckItemVO> {
     /* 批号*/
     private String batchNum;
 
+    public InventoryCheckItemVO() {
+    }
 
     public InventoryCheckItemVO(String goodName, String id, int inventoryNum, double avePrice, String date, String batch, String batchNum) {
         this.goodName = goodName;

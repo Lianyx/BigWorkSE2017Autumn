@@ -47,6 +47,7 @@ public class BusinessProgressFilterPane extends FXMLAnchorPane {
     }
 
     private void updateSearchCondition() {
+        System.out.println(receiptSearchCondition);
         receiptSearchCondition.setBegin(LocalDateTime.of(beginTime.getValue(), LocalTime.MIN));
         receiptSearchCondition.setEnd(LocalDateTime.of(endTime.getValue(), LocalTime.MIN));
 

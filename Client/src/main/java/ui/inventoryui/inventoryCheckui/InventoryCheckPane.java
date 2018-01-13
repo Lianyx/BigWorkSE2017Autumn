@@ -2,6 +2,7 @@ package ui.inventoryui.inventoryCheckui;
 
 import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.inventoryblService.InventoryCheckblService;
+import businesslogic.inventorybl.InventoryCheckbl;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 import jxl.write.WriteException;
@@ -10,6 +11,9 @@ import ui.util.*;
 import vo.inventoryVO.InventoryCheckItemVO;
 import vo.inventoryVO.InventoryCheckVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -22,7 +26,7 @@ public class InventoryCheckPane extends ReceiptListPane<InventoryCheckItemVO> im
 
     public InventoryCheckPane() throws Exception {
         super("/inventoryui/inventorycheckpane.fxml");
-        this.inventoryCheckblService = ServiceFactory_Stub.getService(InventoryCheckblService.class.getName());
+        this.inventoryCheckblService = new InventoryCheckbl();//ServiceFactory_Stub.getService(InventoryCheckblService.class.getName());
         inventoryCheckVO = inventoryCheckblService.inventoryCheck();
         receiptTreeTable = new InventoryCheckTreeTable();
         receiptTreeTable.setPrefSize(600,435);
@@ -85,7 +89,8 @@ public class InventoryCheckPane extends ReceiptListPane<InventoryCheckItemVO> im
 
     @FXML
     public void exportExcel(){
-        exportExcelMixer();
+
+
     }
 
     @Override
@@ -97,9 +102,17 @@ public class InventoryCheckPane extends ReceiptListPane<InventoryCheckItemVO> im
             buttonDialog.setButtonTwo(() -> boardController.Ret());
             buttonDialog.setButtonTwo(() -> refresh(false));
             Predicate<Integer> p = (s) -> {
-                if ((set = inventoryCheckblService.inventoryCheck().getCheckList()) != null) {
-                    System.out.println(set.size());
-                    return true;
+                try {
+                    if ((set = inventoryCheckblService.inventoryCheck().getCheckList()) != null) {
+                        System.out.println(set.size());
+                        return true;
+                    }
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                } catch (NotBoundException e) {
+                    e.printStackTrace();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
                 }
                 return false;
             };
