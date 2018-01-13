@@ -20,9 +20,7 @@ public class StockRetbl extends Receiptbl<StockRetReceiptVO, StockRetReceiptPO> 
     public ResultMessage approve(StockRetReceiptVO receiptVO) throws RemoteException {
         try {
             new GoodsSalesUpdate().goodsUpdateStorckRet(receiptVO.getItems());
-        } catch (NotBoundException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
 

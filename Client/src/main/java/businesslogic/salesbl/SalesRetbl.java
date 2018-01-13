@@ -21,9 +21,7 @@ public class SalesRetbl extends Receiptbl<SalesRetReceiptVO, SalesRetReceiptPO> 
     public ResultMessage approve(SalesRetReceiptVO receiptVO) throws RemoteException {
         try {
             new GoodsSalesUpdate().goodsUpdateSaleRet(receiptVO.getItems());
-        } catch (NotBoundException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
         return ResultMessage.SUCCESS;
