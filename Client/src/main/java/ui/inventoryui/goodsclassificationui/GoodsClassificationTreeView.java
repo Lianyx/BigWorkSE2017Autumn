@@ -185,12 +185,14 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
     protected void addItem(ObservableList<? extends TreeItem<String>> list){
         CheckBoxTreeItem<String> item = (CheckBoxTreeItem<String>) list.get(0);
 
+
+
         JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
         jfxDialogLayout.setPrefWidth(220.0);
         jfxDialogLayout.setHeading(new Label("GoodsClassificationName"));
         JFXTextField name = new JFXTextField();
         jfxDialogLayout.setBody(name);
-        JFXButton save = new JFXButton("Save");
+        JFXButton save = new JFXButton("保存");
         JFXDialog dialog = new JFXDialog(mainpane, jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
 
         save.setOnAction(e -> {
@@ -279,12 +281,12 @@ public class GoodsClassificationTreeView extends CheckTreeView<String>{
 
         JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
         jfxDialogLayout.setPrefWidth(220.0);
-        jfxDialogLayout.setHeading(new Label("GoodsClassificationName"));
+        jfxDialogLayout.setHeading(new Label("商品分类名"));
         JFXTextField name = new JFXTextField();
         name.setText(item.getValue());
         name.setPrefWidth(210);
         jfxDialogLayout.setBody(name);
-        JFXButton save = new JFXButton("Save");
+        JFXButton save = new JFXButton("保存");
         JFXDialog dialog = new JFXDialog(mainpane, jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
 
         String oldName = item.getValue();

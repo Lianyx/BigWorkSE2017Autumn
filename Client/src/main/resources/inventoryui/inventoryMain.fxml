@@ -32,7 +32,7 @@
                         <padding>
                             <Insets bottom="8" left="5" top="8"/>
                         </padding>
-                        GoodsClassification
+                        商品分类
                         <graphic>
                             <StackPane styleClass="custom-jfx-list-view-icon-container">
                                 <MaterialDesignIconView glyphName="ACCOUNT" size="1.5em"
@@ -46,7 +46,7 @@
                         <padding>
                             <Insets bottom="8" left="5" top="8"/>
                         </padding>
-                        Goods
+                        商品管理
                         <graphic>
                             <StackPane styleClass="custom-jfx-list-view-icon-container">
                                 <MaterialDesignIconView glyphName="ACCOUNT" size="1.5em"
@@ -60,7 +60,7 @@
                         <padding>
                             <Insets bottom="8" left="5" top="8"/>
                         </padding>
-                        InventoryView
+                        库存查看
                         <graphic>
                             <StackPane styleClass="custom-jfx-list-view-icon-container">
                                 <MaterialDesignIconView glyphName="ACCOUNT" size="1.5em"
@@ -74,7 +74,7 @@
                         <padding>
                             <Insets bottom="8" left="5" top="8"/>
                         </padding>
-                        InventoryCheck
+                        库存盘点
                         <graphic>
                             <StackPane styleClass="custom-jfx-list-view-icon-container">
                                 <MaterialDesignIconView glyphName="ACCOUNT" size="1.5em"
@@ -88,7 +88,7 @@
                         <padding>
                             <Insets bottom="8" left="5" top="8"/>
                         </padding>
-                        Receipt
+                        单据
                         <graphic>
                             <StackPane styleClass="custom-jfx-list-view-icon-container">
                                 <MaterialDesignIconView glyphName="RECEIPT" size="1.5em"
@@ -101,25 +101,25 @@
                     <padding>
                         <Insets bottom="8" left="18" top="8"/>
                     </padding>
-                    <Label>InventoryGift</Label>
+                    <Label>库存赠送单</Label>
                 </HBox>
                 <HBox fx:id="inventoryDamage">
                     <padding>
                         <Insets bottom="8" left="18" top="8"/>
                     </padding>
-                    <Label>InventoryDamage</Label>
+                    <Label>库存报损单</Label>
                 </HBox>
                 <HBox fx:id="inventoryOverflow">
                     <padding>
                         <Insets bottom="8" left="18" top="8"/>
                     </padding>
-                    <Label>InventoryOverflow</Label>
+                    <Label>库存报溢单</Label>
                 </HBox>
                 <HBox fx:id="inventoryWarning">
                     <padding>
                         <Insets bottom="8" left="18" top="8"/>
                     </padding>
-                    <Label>InventoryWarning</Label>
+                    <Label>库存报警单</Label>
                 </HBox>
 
             </JFXListView>

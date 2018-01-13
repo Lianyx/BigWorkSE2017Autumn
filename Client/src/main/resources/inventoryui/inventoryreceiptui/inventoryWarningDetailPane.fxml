@@ -66,7 +66,7 @@
                 <Font name="Arial" size="24.0" />
             </font>
         </Label>
-        <Label layoutX="22.0" layoutY="48.0" text="The basic information of the receipt" textFill="#a1adbc">
+        <Label layoutX="22.0" layoutY="48.0" text="单据基本信息" textFill="#a1adbc">
             <font>
                 <Font size="12.0" />
             </font>
@@ -82,7 +82,7 @@
                 </StackPane>
             </graphic>
         </JFXButton>
-        <JFXButton fx:id="delete" layoutX="386.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#delete" text="Delete">
+        <JFXButton fx:id="delete" layoutX="386.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#delete" text="删除">
             <graphic>
                 <StackPane>
                     <MaterialDesignIconView fill="white" glyphName="DELETE" size="1em" styleClass="icon" />
@@ -97,7 +97,7 @@
         </Label>
 
 
-        <Label layoutX="219.0" layoutY="74.0" text="ReceiptState" textFill="#a1adbc">
+        <Label layoutX="219.0" layoutY="74.0" text="单据状态" textFill="#a1adbc">
             <font>
                 <Font name="System Bold" size="10.0" />
             </font>
@@ -113,7 +113,7 @@
                 <Font name="System Bold" size="10.0" />
             </font>
         </Label>
-        <Label layoutX="332.0" layoutY="74.0" text="Operator" textFill="#a1adbc">
+        <Label layoutX="332.0" layoutY="74.0" text="操作员" textFill="#a1adbc">
             <font>
                 <Font name="System Bold" size="10.0" />
             </font>
@@ -124,7 +124,7 @@
             </font>
         </TextField>
 
-        <Label layoutX="18.0" layoutY="137.0" text="Comment" textFill="#a1adbc">
+        <Label layoutX="18.0" layoutY="137.0" text="评论" textFill="#a1adbc">
             <font>
                 <Font name="System Bold" size="10.0" />
             </font>
@@ -133,7 +133,7 @@
 
     </AnchorPane>
 
-    <Label layoutX="90.0" layoutY="350.0" text="GoodsList">
+    <Label layoutX="90.0" layoutY="350.0" text="商品列表">
         <font>
             <Font size="20.0" />
         </font>
