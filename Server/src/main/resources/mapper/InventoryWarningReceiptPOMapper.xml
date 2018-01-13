@@ -15,7 +15,7 @@
         values(#{dayId}, #{operatorId}, #{createTime}, #{lastModifiedTime}, #{receiptState}, #{clerkName}, #{goodsList, typeHandler=MyJsonHandler},  #{comment})
     </insert>
     <update id="update">
-        update inventorywarningreceipt set lastModifiedTime=#{lastModifiedTime}, receiptState=#{receiptState}, clerkName=#{clerkName}, goodsList=#{goodsList, typeHandler=MyJsonHandler},  comment=#{comment}
+        update inventorywarningreceipt set lastModifiedTime=#{lastModifiedTime}, receiptState=#{receiptState},operatorId=#{operatorId}, clerkName=#{clerkName}, goodsList=#{goodsList, typeHandler=MyJsonHandler},  comment=#{comment}
         where dayId=#{dayId} and createTime=#{createTime}
     </update>
     <delete id="delete">

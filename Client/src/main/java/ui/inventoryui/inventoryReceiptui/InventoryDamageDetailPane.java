@@ -2,6 +2,7 @@ package ui.inventoryui.inventoryReceiptui;
 
 import blService.checkblService.ReceiptblService;
 import blService.inventoryblService.InventoryDamageReceiptblService;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -100,8 +101,8 @@ public class InventoryDamageDetailPane extends MyReceiptDetailPane<InventoryDama
 
     @FXML
     public void addGoods() throws RemoteException, NotBoundException, MalformedURLException {
-        GoodsChooseInfo goodsChooseInfo = new GoodChoose();
+        GoodChoose goodsChooseInfo = new GoodChoose();
 
-        goodsChooseInfo.choose(observableList);
+        goodsChooseInfo.choose(observableList,new SimpleIntegerProperty());
     }
 }
