@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXRippler?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
@@ -18,7 +19,6 @@
 <?import org.controlsfx.control.Rating?>
 <?import ui.util.ModifyButton?>
 
-<?import javafx.collections.FXCollections?>
 <fx:root fx:id="memberdetail" prefHeight="560.0" prefWidth="640.0" stylesheets="@../css/userdetail.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane fx:id="pane" layoutX="70.0" layoutY="55.0" prefHeight="487.0" prefWidth="500.0">
@@ -34,7 +34,7 @@
                 </JFXTextField>
                 <ModifyButton fx:id="modify" layoutX="365.0" layoutY="12.0" text="" />
                 <Separator layoutX="157.0" layoutY="114.0" prefHeight="4.0" prefWidth="320.0" />
-                <JFXButton fx:id="delete" layoutX="409.0" layoutY="12.0" mnemonicParsing="false" text="Delete">
+                <JFXButton fx:id="delete" layoutX="409.0" layoutY="12.0" mnemonicParsing="false" text="删除">
                     <graphic>
                         <HBox>
                             <children>
@@ -47,12 +47,12 @@
                         </HBox>
                     </graphic>
                 </JFXButton>
-                <Label layoutX="176.0" layoutY="138.0" text="MemberId" textFill="#a1adbc">
+                <Label layoutX="176.0" layoutY="138.0" text="客户ID" textFill="#a1adbc">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Label>
                 <Label fx:id="memberId" layoutX="271.0" layoutY="131.0" text="00001" />
-                <Label layoutX="176.0" layoutY="168.0" text="MemberCategory" textFill="#a1adbc">
+                <Label layoutX="176.0" layoutY="168.0" text="客户类型" textFill="#a1adbc">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Label>
@@ -61,7 +61,7 @@
                     <font>
                         <Font size="14.0" />
                     </font></TextField>
-                <Label layoutX="35.0" layoutY="228.0" text="Email" textFill="#a1adbc">
+                <Label layoutX="35.0" layoutY="228.0" text="邮件" textFill="#a1adbc">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Label>
@@ -69,7 +69,7 @@
                     <font>
                         <Font size="14.0" />
                     </font></TextField>
-                <Label layoutX="271.0" layoutY="228.0" prefHeight="4.0" prefWidth="45.0" text="Phone" textAlignment="CENTER" textFill="#a1adbc">
+                <Label layoutX="271.0" layoutY="228.0" prefHeight="4.0" prefWidth="45.0" text="电话" textAlignment="CENTER" textFill="#a1adbc">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Label>
@@ -77,35 +77,35 @@
                     <font>
                         <Font size="12.0" />
                     </font></TextArea>
-                <Label layoutX="37.0" layoutY="389.0" text="Intro" textFill="#a1adbc">
+                <Label layoutX="37.0" layoutY="389.0" text="介绍" textFill="#a1adbc">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Label>
-                <Label layoutX="29.0" layoutY="14.0" text="Basic Info">
+                <Label layoutX="29.0" layoutY="14.0" text="基本信息">
                     <font>
                         <Font size="24.0" />
                     </font>
                 </Label>
-                <JFXComboBox fx:id="memberCategory" layoutX="307.0" layoutY="164.0" prefHeight="23.0" prefWidth="132.0" >
+                <JFXComboBox fx:id="memberCategory" layoutX="307.0" layoutY="164.0" prefHeight="23.0" prefWidth="132.0">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
-                        <Label fx:id="SELLER" text="销售商"/>
-                        <Label fx:id="SUPPLIER" text="供货商"/>
+                        <Label fx:id="SELLER" text="销售商" />
+                        <Label fx:id="SUPPLIER" text="供货商" />
                         </FXCollections>
                     </items>
                 </JFXComboBox>
-                <Label layoutX="29.0" layoutY="46.0" text="The basic information of the member" textFill="#a1adbc">
+                <Label layoutX="29.0" layoutY="46.0" text="客户的基本信息（包括id与姓名）" textFill="#a1adbc">
                     <font>
                         <Font size="12.0" />
                     </font></Label>
-                <Label layoutX="28.0" layoutY="207.0" text="The contact information of the user" textFill="#a1adbc">
+                <Label layoutX="28.0" layoutY="207.0" text="客户的联系方式以及客户的关联信息" textFill="#a1adbc">
                     <font>
                         <Font size="12.0" />
                     </font>
                 </Label>
 
             <Rating fx:id="rating" layoutX="307.0" layoutY="79.0" />
-            <Label layoutX="35.0" layoutY="284.0" text="Address" textFill="#a1adbc">
+            <Label layoutX="35.0" layoutY="284.0" text="地址" textFill="#a1adbc">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -115,7 +115,7 @@
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label layoutX="35.0" layoutY="335.0" text="ClerkName" textFill="#a1adbc">
+            <Label layoutX="35.0" layoutY="335.0" text="业务员" textFill="#a1adbc">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -125,25 +125,25 @@
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label layoutX="150.0" layoutY="335.0" text="ReceiableAmoun" textFill="#a1adbc">
+            <Label layoutX="150.0" layoutY="335.0" text="应收额度" textFill="#a1adbc">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
             <JFXTextField fx:id="receiableAmount" layoutX="150.0" layoutY="357.0" prefWidth="100.0" />
-            <Label layoutX="270.0" layoutY="335.0" text="Give" textFill="#a1adbc">
+            <Label layoutX="270.0" layoutY="335.0" text="应付" textFill="#a1adbc">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
             <JFXTextField fx:id="give" disable="true" editable="false" layoutX="270.0" layoutY="357.0" prefWidth="100.0" />
-            <Label layoutX="390.0" layoutY="335.0" text="Get" textFill="#a1adbc">
+            <Label layoutX="390.0" layoutY="335.0" text="应收" textFill="#a1adbc">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
             <JFXTextField fx:id="get" disable="true" editable="false" layoutX="390.0" layoutY="357.0" prefWidth="100.0" />
-            <Label layoutX="368.0" layoutY="284.0" prefHeight="15.0" prefWidth="64.0" text="ZipCode" textAlignment="CENTER" textFill="#a1adbc">
+            <Label layoutX="368.0" layoutY="284.0" prefHeight="15.0" prefWidth="64.0" text="邮编" textAlignment="CENTER" textFill="#a1adbc">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -155,13 +155,13 @@
             </TextField>
             </children>
         </AnchorPane>
-        <Label layoutX="24.0" layoutY="12.0" text="Member Info">
+        <Label layoutX="24.0" layoutY="12.0" text="客户信息">
             <font>
                 <Font size="24.0" />
             </font>
         </Label>
         <Separator layoutX="24.0" layoutY="44.0" prefHeight="4.0" prefWidth="593.0" />
-        <JFXButton fx:id="save" layoutX="564.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#save" text="Save">
+        <JFXButton fx:id="save" layoutX="564.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#save" text="保存">
             <font>
                 <Font size="12.0" />
             </font>

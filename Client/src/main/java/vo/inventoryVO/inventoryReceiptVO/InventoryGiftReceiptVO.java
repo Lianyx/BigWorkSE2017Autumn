@@ -109,4 +109,12 @@ public class InventoryGiftReceiptVO extends ReceiptVO {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    @Override
+    public String toString() {
+        return "InventoryGiftReceiptVO{" +
+                "items=" + items +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
 }

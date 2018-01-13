@@ -164,4 +164,12 @@ public class ReceiptGoodsItemVO extends RecursiveTreeObject<ReceiptGoodsItemVO> 
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "ReceiptGoodsItemVO{" +
+                "goodsName=" + goodsName +
+                ", goodsId=" + goodsId +
+                '}';
+    }
 }

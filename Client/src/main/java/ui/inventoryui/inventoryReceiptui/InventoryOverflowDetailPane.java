@@ -86,11 +86,12 @@ public class InventoryOverflowDetailPane extends MyReceiptDetailPane<InventoryOv
     @FXML
     @Override
     protected void reset() {
+        super.reset();
         operator.setText(String.valueOf(receiptVO.getOperatorId()));
         commentArea.setText(receiptVO.getComment());
         stateField.setText(receiptVO.getReceiptState().toString());
 
-        overflowItemTreeTable.setList(observableList);
+        overflowItemTreeTable.setList(receiptVO.getItems());
     }
 
     @FXML

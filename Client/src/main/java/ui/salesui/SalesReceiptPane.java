@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -30,7 +29,9 @@ import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 import vo.receiptVO.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static ui.util.ValidatorDecorator.DoubleValid;
 import static ui.util.ValidatorDecorator.RequireValid;
@@ -62,14 +63,14 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
     TextField clerk;
 
     @FXML
+    ModifyButton modify;
+    @FXML
     TextArea comment;
 
     SimpleDoubleProperty textSum;
 
     @FXML
     ItemTreeTable itemTreeTable;
-
-    protected ObservableList<ReceiptGoodsItemVO> observableList = FXCollections.observableArrayList();
 
     public SalesReceiptPane() {
     }
@@ -105,6 +106,8 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
         RequireValid(clerk);
         DoubleValid(token);
         DoubleValid(discount);
+
+        modifyState.bind(modify.modifyProperty());
 
         original.setText("0");
         sum.setText("0");
@@ -171,25 +174,18 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
     }
 
     @FXML
-    public void addTransfer(){
-        itemTreeTable.add((new ListGoodsItemVO("a", "54", "a", 1, 1, "a")));
-//        IntegerProperty toBeListened = new SimpleIntegerProperty(0);
-//        try {
-//            GoodChoose goodsChoose = new GoodChoose();
-//            goodsChoose.choose(observableList, toBeListened);
-//        } catch (Exception e) { // TODO 异常先不管了，而且下面这样写现在好像是一次性的，也没有回设num，不过先不管了
-//            e.printStackTrace();
-//        }
-//
-//
-//        toBeListened.addListener((observable, oldValue, newValue) -> {
-//            if (newValue.equals(1)) {
-//                observableList.stream().map(ReceiptGoodsItemVO::toListGoodsItemVO)
-//                        .forEach(i -> itemTreeTable.add(i));
-//            }
-//        });
-    }
+    public void addTransfer() throws Exception {
+        GoodChoose goodChoose = new GoodChoose();
+        ObservableList<ReceiptGoodsItemVO> observableList = FXCollections.observableArrayList();
+        SimpleIntegerProperty integerProperty = new SimpleIntegerProperty(0);
+        goodChoose.choose(observableList,integerProperty);
+        integerProperty.addListener((b,o,n)->{
+            if(n.intValue()==1){
+                itemTreeTable.setList(observableList.stream().map(t->t.toListGoodsItemVO()).collect(Collectors.toCollection(ArrayList::new)));
+            }
+        });
 
+    }
     @FXML
     private void selectMember() {
         MemberVO memberVO = new MemberVO();

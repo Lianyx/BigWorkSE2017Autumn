@@ -16,6 +16,7 @@ import java.util.Set;
 public abstract class SalesTreeTable<T extends SalesReceiptListVO<T>> extends MyTreeTableBorderPane<T> {
 
 
+
     public SalesTreeTable(Set<T> chosenItems, StringProperty keywordProperty) {
 
         JFXTreeTableColumn<T, Boolean> choose = new ChooseColumn<>(chosenItems);
