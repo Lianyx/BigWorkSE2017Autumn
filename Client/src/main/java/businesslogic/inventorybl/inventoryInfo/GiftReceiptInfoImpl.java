@@ -2,7 +2,14 @@ package businesslogic.inventorybl.inventoryInfo;
 
 import businesslogic.inventorybl.InventoryGiftReceiptbl;
 import po.GoodsPO;
+import po.ReceiptGoodsItemPO;
+import ui.util.UserInfomation;
+import vo.ListGoodsItemVO;
+import vo.inventoryVO.inventoryReceiptVO.InventoryGiftReceiptVO;
+import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +20,27 @@ public class GiftReceiptInfoImpl implements InventoryGiftReceiptInfo {
     /*
     这里有问题，等salesellreceipt再看，少的那个PO的构造方法也许能用
      */
-    public GiftReceiptInfoImpl() {
+    public GiftReceiptInfoImpl() throws RemoteException, NotBoundException, MalformedURLException {
+        giftReceiptbl = new InventoryGiftReceiptbl();
 
     }
 
     @Override
-    public void addInventoryGiftReceipt(List<GoodsPO> goodsList) throws RemoteException {
+    public void addInventoryGiftReceipt(List<ListGoodsItemVO> goodsList) throws RemoteException {
+        List<ReceiptGoodsItemVO> list = new ArrayList<>();
+        for (ListGoodsItemVO vo: goodsList) {
+            ReceiptGoodsItemVO receiptVO = new ReceiptGoodsItemVO();
+            receiptVO.setGoodsId(vo.getGoodsId());
+            receiptVO.setGoodsName(vo.getGoodsName());
+            receiptVO.setSendNum(vo.getGoodsNum());
 
+            list.add(receiptVO);
+        }
+
+        InventoryGiftReceiptVO receiptVO = giftReceiptbl.getNew();
+        receiptVO.setItems(list);
+        receiptVO.setOperatorId(UserInfomation.userid);
+        giftReceiptbl.update(receiptVO);
     }
 
     /*

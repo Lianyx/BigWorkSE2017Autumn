@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
+import javafx.beans.property.IntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import ui.inventoryui.GoodsChooseInfo;
@@ -20,7 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class GoodChoose implements GoodsChooseInfo {
+public class GoodChoose{
     List<String> goodsId;
 
     Goodsbl goodsbl;
@@ -29,8 +30,8 @@ public class GoodChoose implements GoodsChooseInfo {
         this.goodsbl = new Goodsbl();
     }
 
-    @Override
-    public List<String> choose(ObservableList<ReceiptGoodsItemVO> observableList) {
+
+    public List<String> choose(ObservableList<ReceiptGoodsItemVO> observableList, IntegerProperty integerProperty) {
         ChoosePane choosePane = new ChoosePane();
         try {
             goodsbl = new Goodsbl();
@@ -89,6 +90,7 @@ public class GoodChoose implements GoodsChooseInfo {
 
                 observableList.add(vo);
             }
+            integerProperty.setValue(1);
             dialog.close();
         });
         jfxDialogLayout.setActions(button);

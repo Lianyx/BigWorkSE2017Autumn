@@ -1,45 +1,44 @@
 package businesslogic.inventorybl.inventoryInfo;
 
+import businesslogic.goodsbl.Goodsbl;
 import businesslogic.inventorybl.InventoryWarningReceiptbl;
 import po.GoodsPO;
+import vo.ListGoodsItemVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class WarningReceiptInfoImpl implements InventoryWarningReceiptInfo{
     InventoryWarningReceiptbl receiptbl;
+    Goodsbl goodsbl;
 
     /*
     构造inventoryWarningReceiptbl的时候有问题
      */
-    public WarningReceiptInfoImpl() {
-        //receiptbl = new InventoryWarningReceiptbl();
+    public WarningReceiptInfoImpl() throws RemoteException, NotBoundException, MalformedURLException {
+        receiptbl = new InventoryWarningReceiptbl();
     }
 
     @Override
-    public boolean checkIsWarning(List<GoodsPO> list) throws RemoteException {
+    public boolean checkSaleRet(List<ListGoodsItemVO> list) throws RemoteException {
         return false;
     }
 
-  /*  @Override
-    public boolean checkIsWarning(List<GoodsPO> goodsList) throws RemoteException {
-        List<InventoryWarningGoodsItemVO>  list = new ArrayList<>(goodsList.size());
+    @Override
+    public boolean checkSaleSel(List<ListGoodsItemVO> list) throws RemoteException {
+        return false;
+    }
 
-        for (GoodsPO po:goodsList) {
-            if(po.getInventoryNum() < po.getAlarmNumber())
-                list.add(new InventoryWarningGoodsItemVO(po.getId(),po.getGoodName(),po.getGoodType(),po.getInventoryNum(),
-                po.getAlarmNumber()));
-        }
+    @Override
+    public boolean checkStockPur(List<ListGoodsItemVO> list) throws RemoteException {
+        return false;
+    }
 
-        *//*
-        同样，构造参数有同样的问题需要考虑
-         *//*
-      *//*  InventoryWarningReceiptVO receiptVO = new InventoryWarningReceiptVO(null,0,null,null,
-                ReceiptState.PENDING,list);*//*
-
-      //  receiptbl.insert(receiptVO);
-
-        return !list.isEmpty();
-    }*/
+    @Override
+    public boolean checkStorckRet(List<ListGoodsItemVO> list) throws RemoteException {
+        return false;
+    }
 }
