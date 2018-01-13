@@ -205,11 +205,11 @@ public class MemberDetailPane extends Refreshable{
                 return true;
             } catch (ItemNotFoundException e) {
                 e.printStackTrace();
-                prompt.set("sabi");
+                prompt.set("未找到对应id");
                 return false;
             } catch (RemoteException e) {
                 e.printStackTrace();
-                prompt.set("jiushisabi");
+                prompt.set("网络错误");
                 return false;
             }
         })).start();

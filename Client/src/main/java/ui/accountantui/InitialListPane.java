@@ -1,17 +1,17 @@
 package ui.accountantui;
 
+import blService.initialblservice.InitialblService;
+import businesslogic.initialbl.Initialbl;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import ui.managerui.common.MyBoardController;
-import ui.util.DoubleButtonDialog;
-import ui.util.GetTask;
-import ui.util.PaneFactory;
-import ui.util.Refreshable;
+import ui.util.*;
 
 import java.rmi.RemoteException;
+import java.util.Calendar;
 import java.util.function.Predicate;
 
 
@@ -25,7 +25,7 @@ public class InitialListPane extends Refreshable {
     StackPane mainpane;
 
     @FXML
-    JFXButton accountinitial;
+    JFXButton filter;
 
     public InitialListPane()throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/accountantui/InitialListPane.fxml"));
@@ -34,6 +34,22 @@ public class InitialListPane extends Refreshable {
         fxmlLoader.load();
         this.myBoardController = MyBoardController.getMyBoardController();
         this.mainpane = PaneFactory.getMainPane();
+        filter.setText("Initial Account");
+    }
+
+    @FXML
+    public void initialAccount(){
+        try{
+            InitialblService initialblService = new Initialbl();
+            Calendar a=Calendar.getInstance();
+            String year = String.valueOf(a.get(Calendar.YEAR));
+            initialblService.initial(year);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        OneButtonDialog oneButtonDialog = new OneButtonDialog(PaneFactory.getMainPane(),"","期初建账成功","返回");
+        oneButtonDialog.setButtonOne(()->{});
+        oneButtonDialog.show();
     }
 
     public void refresh(boolean toSwitch){

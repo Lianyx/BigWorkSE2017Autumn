@@ -33,6 +33,7 @@ public class CashItemTreeTable extends JFXTreeTableView<CashItemVO>{
     public CashItemTreeTable(){
         super();
 
+        this.cashItemTreeTable  =this;
         mainpane = PaneFactory.getMainPane();
 
         ColumnDecorator columnDecorator = new ColumnDecorator();
@@ -79,7 +80,7 @@ public class CashItemTreeTable extends JFXTreeTableView<CashItemVO>{
                     popup.show(row, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT);
                 }
                 if(event.getClickCount() == 2){
-                    CashItemPane cashItemPane = new CashItemPane(cashItemVO, observableList,cashItemTreeTable);
+                    CashItemPane cashItemPane = new CashItemPane(cashItemVO, observableList,this);
                     JFXDialog dialog = new JFXDialog(mainpane, cashItemPane, JFXDialog.DialogTransition.CENTER);
                     cashItemPane.setDialog(dialog);
                     dialog.show();

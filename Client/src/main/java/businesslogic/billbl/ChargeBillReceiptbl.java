@@ -6,6 +6,7 @@ import businesslogic.accountbl.Accountbl;
 import businesslogic.checkbl.Receiptbl;
 import businesslogic.memberbl.MemberInfo_Impl;
 import po.receiptPO.ChargeBillReceiptPO;
+import util.ReceiptState;
 import util.ResultMessage;
 import vo.billReceiptVO.ChargeReceiptVO;
 import vo.billReceiptVO.TransferItemVO;
@@ -37,6 +38,8 @@ public class ChargeBillReceiptbl extends Receiptbl<ChargeReceiptVO,ChargeBillRec
             for(int i=0;i<temp.size();i++){
                 accountbl.incBalance(temp.get(i).getAccountID(),temp.get(i).getSum());
             }
+            receiptVO.setReceiptState(ReceiptState.APPROVED);
+        update(receiptVO);
 
         return ResultMessage.SUCCESS;
     }

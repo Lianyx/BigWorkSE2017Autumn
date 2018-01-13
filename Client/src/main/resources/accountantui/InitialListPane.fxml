@@ -11,24 +11,8 @@
 
 
 
-    <JFXButton fx:id="accountinitial" text="Account Initial" layoutX="27" layoutY="28"
-               mnemonicParsing="false" >
-        <graphic>
-            <HBox>
-                <children>
-                    <JFXRippler position="BACK" styleClass="icons-rippler">
-                        <StackPane>
-                            <FontAwesomeIconView fill="white" glyphName="NAVICON" size="1em" styleClass="icon" />
-                        </StackPane>
-                    </JFXRippler>
-                </children>
-            </HBox>
-        </graphic>
-    </JFXButton>
-
-
     <JFXButton fx:id="filter" text="Filter" layoutX="420.0" layoutY="35.0"
-               mnemonicParsing="false" >
+               mnemonicParsing="false" onMouseClicked="#initialAccount" >
         <graphic>
             <HBox>
                 <children>

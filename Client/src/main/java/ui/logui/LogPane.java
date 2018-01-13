@@ -27,6 +27,7 @@ public class LogPane extends GatePane {
     @FXML
     CodeArea codeArea;
 
+
     LogblService logblService;
 
     ArrayList<LogPO> list;

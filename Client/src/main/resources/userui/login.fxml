@@ -58,12 +58,12 @@
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font></JFXButton>
-      <JFXButton fx:id="forget" layoutX="71.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#forgetpassword" text="Forget the password?" textFill="#bcb8b8">
+      <JFXButton fx:id="forget" layoutX="91.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#forgetpassword" text="忘记密码?" textFill="#bcb8b8">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </JFXButton>
-      <JFXCheckBox fx:id="keep" layoutX="50.0" layoutY="239.0" mnemonicParsing="false" prefWidth="142.0" text="Keep me signed in" textFill="#7c7878">
+      <JFXCheckBox fx:id="keep" layoutX="50.0" layoutY="239.0" mnemonicParsing="false" prefWidth="142.0" text="请记住我" textFill="#7c7878">
          <font>
             <Font name="Arial" size="14.0" />
          </font></JFXCheckBox>

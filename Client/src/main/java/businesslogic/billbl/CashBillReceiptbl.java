@@ -4,6 +4,7 @@ import blService.billblservice.CashBillReceiptblService;
 import businesslogic.accountbl.Accountbl;
 import businesslogic.checkbl.Receiptbl;
 import po.receiptPO.CashBillReceiptPO;
+import util.ReceiptState;
 import util.ResultMessage;
 import vo.billReceiptVO.CashItemVO;
 import vo.billReceiptVO.CashReceiptVO;
@@ -32,6 +33,8 @@ public class CashBillReceiptbl extends Receiptbl<CashReceiptVO,CashBillReceiptPO
         }
 
         accountbl.decBalance(id,sum);
+        receiptVO.setReceiptState(ReceiptState.APPROVED);
+        update(receiptVO);
 
         return ResultMessage.SUCCESS;
     }
