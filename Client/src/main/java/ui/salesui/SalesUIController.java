@@ -52,7 +52,7 @@ public class SalesUIController implements Initializable{
         // 这个是不得不set，因为是同时生成的，但是这样很不好，希望可以改掉
         bar.setBoardController(boardController);
 
-        LogPane init = new LogPane();
+        StockListPane init = new StockPurListPane();
         init.refresh(true);
 
 

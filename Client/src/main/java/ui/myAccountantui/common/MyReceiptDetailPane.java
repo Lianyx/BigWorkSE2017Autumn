@@ -84,9 +84,8 @@ public abstract class MyReceiptDetailPane<TV extends ReceiptVO> extends Refresha
                 saveAsDraft.setVisible(false);
                 delete.setVisible(false);
             }
-            // TODO 红冲这里的组合问题还很多
-            if (receiptVO.getReceiptState() == ReceiptState.REJECTED //&& SomeParameter.isRedCreditable
-                    && UserInfomation.usertype == UserCategory.GeneralManager) {
+            if (receiptVO.getReceiptState() == ReceiptState.APPROVED //&& SomeParameter.isRedCreditable
+                    && UserInfomation.usertype == UserCategory.Accountant) {
                 redCredit.setVisible(true);
                 redCreditCopy.setVisible(true);
                 save.setVisible(false);

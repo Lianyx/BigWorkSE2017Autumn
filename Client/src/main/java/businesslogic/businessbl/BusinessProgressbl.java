@@ -60,29 +60,29 @@ public class BusinessProgressbl implements BusinessProgressblService {
         ArrayList<ReceiptVO> resultList = new ArrayList<>();
 
 //        if (receiptSearchCondition.getBillTypes().contains(BillType.SalesSell)) {
-            resultList.addAll(getApprovedReceipt(salesSellReceiptVOBusinessSearchInfo, receiptSearchCondition));
+//            resultList.addAll(getApprovedReceipt(salesSellReceiptVOBusinessSearchInfo, receiptSearchCondition));
 //        }
 //        if (receiptSearchCondition.getBillTypes().contains(BillType.SalesRet)) {
-            resultList.addAll(getApprovedReceipt(salesRetReceiptVOBusinessSearchInfo, receiptSearchCondition));
+//            resultList.addAll(getApprovedReceipt(salesRetReceiptVOBusinessSearchInfo, receiptSearchCondition));
 //        }
 //        if (receiptSearchCondition.getBillTypes().contains(BillType.StockPur)) {
-            resultList.addAll(getApprovedReceipt(stockPurReceiptVOBusinessSearchInfo, receiptSearchCondition));
+//            resultList.addAll(getApprovedReceipt(stockPurReceiptVOBusinessSearchInfo, receiptSearchCondition));
 //        }
 //        if (receiptSearchCondition.getBillTypes().contains(BillType.StockRet)) {
-            resultList.addAll(getApprovedReceipt(stockRetReceiptVOBusinessSearchInfo, receiptSearchCondition));
+//            resultList.addAll(getApprovedReceipt(stockRetReceiptVOBusinessSearchInfo, receiptSearchCondition));
 //        }
 
 //        if (receiptSearchCondition.getBillTypes().contains(BillType.InventoryDamage)) {
-            resultList.addAll(getApprovedReceipt(inventoryDamageReceiptVOBusinessSearchInfo, receiptSearchCondition));
+//            resultList.addAll(getApprovedReceipt(inventoryDamageReceiptVOBusinessSearchInfo, receiptSearchCondition));
 //        }
 //        if (receiptSearchCondition.getBillTypes().contains(BillType.InventoryGift)) {
-            resultList.addAll(getApprovedReceipt(inventoryGiftReceiptVOBusinessSearchInfo, receiptSearchCondition));
+//            resultList.addAll(getApprovedReceipt(inventoryGiftReceiptVOBusinessSearchInfo, receiptSearchCondition));
 //        }
 //        if (receiptSearchCondition.getBillTypes().contains(BillType.InventoryOverflow)) {
-            resultList.addAll(getApprovedReceipt(inventoryOverflowReceiptVOBusinessSearchInfo, receiptSearchCondition));
+//            resultList.addAll(getApprovedReceipt(inventoryOverflowReceiptVOBusinessSearchInfo, receiptSearchCondition));
 //        }
 //        if (receiptSearchCondition.getBillTypes().contains(BillType.InventoryWarning)) {
-            resultList.addAll(getApprovedReceipt(inventoryWarningReceiptVOBusinessSearchInfo, receiptSearchCondition));
+//            resultList.addAll(getApprovedReceipt(inventoryWarningReceiptVOBusinessSearchInfo, receiptSearchCondition));
 //        }
 
 //        if (receiptSearchCondition.getBillTypes().contains(BillType.Cash)) {

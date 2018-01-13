@@ -12,7 +12,7 @@ public class TestBusinessCondition {
 
         BusinessConditionPO bpo = new BusinessConditionPO();
         bpo.setDate(LocalDateTime.now());
-        bpo.setDiscount(10);
+        bpo.setPurCost(110);
 
         bdao.insert(bpo);
 
