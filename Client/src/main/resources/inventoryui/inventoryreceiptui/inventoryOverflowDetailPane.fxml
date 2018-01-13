@@ -15,7 +15,7 @@
 
 <fx:root fx:id="overflowdamgereceipt" prefHeight="560.0" prefWidth="640.0" stylesheets="@../css/receipt.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
 
-    <Label layoutX="24.0" layoutY="12.0" text="InventoryOverflowReceipt">
+    <Label layoutX="24.0" layoutY="12.0" text="库存报溢单">
         <font>
             <Font size="24.0" />
         </font>
@@ -62,12 +62,12 @@
 
 
     <AnchorPane fx:id="pane" layoutX="90.0" layoutY="55.0" prefHeight="287.0" prefWidth="462.0">
-        <Label layoutX="22.0" layoutY="20.0" text="Receipt">
+        <Label layoutX="22.0" layoutY="20.0" text="单据">
             <font>
                 <Font name="Arial" size="24.0" />
             </font>
         </Label>
-        <Label layoutX="22.0" layoutY="48.0" text="The basic information of the receipt" textFill="#a1adbc">
+        <Label layoutX="22.0" layoutY="48.0" text="单据基本信息" textFill="#a1adbc">
             <font>
                 <Font size="12.0" />
             </font>
@@ -83,7 +83,7 @@
                 </StackPane>
             </graphic>
         </JFXButton>
-        <JFXButton fx:id="delete" layoutX="386.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#delete" text="Delete">
+        <JFXButton fx:id="delete" layoutX="386.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#delete" text="删除">
             <graphic>
                 <StackPane>
                     <MaterialDesignIconView fill="white" glyphName="DELETE" size="1em" styleClass="icon" />
@@ -98,7 +98,7 @@
         </Label>
 
 
-        <Label layoutX="219.0" layoutY="74.0" text="ReceiptState" textFill="#a1adbc">
+        <Label layoutX="219.0" layoutY="74.0" text="单据状态" textFill="#a1adbc">
             <font>
                 <Font name="System Bold" size="10.0" />
             </font>
@@ -109,12 +109,12 @@
             </font>
         </TextField>
 
-        <Label layoutX="19.0" layoutY="74.0" text="ID" textFill="#a1adbc">
+        <Label layoutX="19.0" layoutY="74.0" text="编号" textFill="#a1adbc">
             <font>
                 <Font name="System Bold" size="10.0" />
             </font>
         </Label>
-        <Label layoutX="332.0" layoutY="74.0" text="Operator" textFill="#a1adbc">
+        <Label layoutX="332.0" layoutY="74.0" text="操作员" textFill="#a1adbc">
             <font>
                 <Font name="System Bold" size="10.0" />
             </font>
@@ -125,7 +125,7 @@
             </font>
         </TextField>
 
-        <Label layoutX="18.0" layoutY="137.0" text="Comment" textFill="#a1adbc">
+        <Label layoutX="18.0" layoutY="137.0" text="评论" textFill="#a1adbc">
             <font>
                 <Font name="System Bold" size="10.0" />
             </font>
@@ -134,7 +134,7 @@
 
     </AnchorPane>
 
-    <Label layoutX="90.0" layoutY="350.0" text="GoodsList">
+    <Label layoutX="90.0" layoutY="350.0" text="商品列表t">
         <font>
             <Font size="20.0" />
         </font>
