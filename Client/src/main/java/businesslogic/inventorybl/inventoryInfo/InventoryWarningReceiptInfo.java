@@ -15,7 +15,5 @@ public interface InventoryWarningReceiptInfo {
 
     public boolean checkSaleSel(List<ListGoodsItemVO> list) throws RemoteException;
 
-    public boolean checkStockPur(List<ListGoodsItemVO> list) throws RemoteException;
-
     public boolean checkStorckRet(List<ListGoodsItemVO> list) throws RemoteException;
 }

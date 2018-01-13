@@ -3,6 +3,7 @@ package businesslogic.stockbl;
 import blService.stockblService.StockRetblService;
 import businesslogic.checkbl.Receiptbl;
 import businesslogic.goodsbl.goodsUpdate.GoodsSalesUpdate;
+import businesslogic.inventorybl.inventoryInfo.WarningReceiptInfoImpl;
 import po.receiptPO.StockRetReceiptPO;
 import util.ResultMessage;
 import vo.receiptVO.*;
@@ -19,6 +20,7 @@ public class StockRetbl extends Receiptbl<StockRetReceiptVO, StockRetReceiptPO> 
     @Override
     public ResultMessage approve(StockRetReceiptVO receiptVO) throws RemoteException {
         try {
+            new WarningReceiptInfoImpl().checkStorckRet(receiptVO.getItems());
             new GoodsSalesUpdate().goodsUpdateStorckRet(receiptVO.getItems());
         }catch (Exception e){
             e.printStackTrace();

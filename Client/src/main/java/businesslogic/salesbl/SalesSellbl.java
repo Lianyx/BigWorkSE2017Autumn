@@ -3,6 +3,7 @@ package businesslogic.salesbl;
 import blService.salesblService.SalesSellblService;
 import businesslogic.checkbl.Receiptbl;
 import businesslogic.goodsbl.goodsUpdate.GoodsSalesUpdate;
+import businesslogic.inventorybl.inventoryInfo.WarningReceiptInfoImpl;
 import po.receiptPO.SalesSellReceiptPO;
 import util.ResultMessage;
 import vo.receiptVO.SalesSellReceiptVO;
@@ -21,6 +22,7 @@ public class SalesSellbl extends Receiptbl<SalesSellReceiptVO, SalesSellReceiptP
     @Override
     public ResultMessage approve(SalesSellReceiptVO receiptVO) throws RemoteException{
         try{
+            new WarningReceiptInfoImpl().checkSaleSel(receiptVO.getItems());
         new GoodsSalesUpdate().goodsUpdateSalesSel(receiptVO.getItems());}
         catch (Exception e){
             e.printStackTrace();
