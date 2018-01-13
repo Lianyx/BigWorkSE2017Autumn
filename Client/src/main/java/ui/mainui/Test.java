@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import po.LogPO;
 import ui.logui.LogPane;
-import ui.memberui.ChoosePane;
 import util.EventCategory;
 import util.UserCategory;
 

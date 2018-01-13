@@ -16,8 +16,10 @@ import java.util.List;
 
 public class CashBillReceiptbl extends Receiptbl<CashReceiptVO,CashBillReceiptPO> implements CashBillReceiptblService {
 
+    Accountbl accountbl;
     public CashBillReceiptbl() throws RemoteException, NotBoundException, MalformedURLException {
         super(CashReceiptVO.class, CashBillReceiptPO.class);
+        accountbl = new Accountbl();
     }
 
     @Override
@@ -28,11 +30,8 @@ public class CashBillReceiptbl extends Receiptbl<CashReceiptVO,CashBillReceiptPO
         for(CashItemVO vo:list){
             sum+=vo.getPrice();
         }
-        try{
-            new Accountbl().decBalance(id,sum);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
+        accountbl.decBalance(id,sum);
 
         return ResultMessage.SUCCESS;
     }

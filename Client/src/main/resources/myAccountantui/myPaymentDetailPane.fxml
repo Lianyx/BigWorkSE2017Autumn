@@ -119,7 +119,7 @@
                 <Font size="10.0"/>
             </font>
         </TextField>
-        <JFXButton fx:id="member" layoutX="190.0" layoutY="150.0">
+        <JFXButton fx:id="member" layoutX="190.0" layoutY="150.0" onMouseClicked="#selectMember">
             <graphic>
                 <StackPane>
                     <children>
