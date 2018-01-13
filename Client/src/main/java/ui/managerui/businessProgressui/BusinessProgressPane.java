@@ -1,5 +1,6 @@
 package ui.managerui.businessProgressui;
 
+import blService.businessblservice.BusinessConditionblService;
 import blService.businessblservice.BusinessProgressblService;
 import businesslogic.promotionbl.MyblServiceFactory;
 import javafx.fxml.FXML;
@@ -36,7 +37,7 @@ public class BusinessProgressPane extends FilterableListPane<ReceiptVO> implemen
 
     @Override
     protected void initiateService() throws RemoteException, NotBoundException, MalformedURLException {
-        businessProgressblService = MyblServiceFactory.getService(BusinessProgressblService.class);
+//        businessProgressblService = MyblServiceFactory.getService(BusinessProgressblService.class);
     }
 
     @Override

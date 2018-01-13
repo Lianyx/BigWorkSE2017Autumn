@@ -44,6 +44,9 @@ public class InventoryViewItemVO extends SelectableVO<InventoryViewItemVO>{
         this.stockPurMoney = stockPurMoney;
     }
 
+    public InventoryViewItemVO() {
+    }
+
     public String getGoodId() {
         return goodId;
     }
@@ -123,6 +126,7 @@ public class InventoryViewItemVO extends SelectableVO<InventoryViewItemVO>{
     public void setStockPurMoney(double stockPurMoney) {
         this.stockPurMoney = stockPurMoney;
     }
+
 
 
 }

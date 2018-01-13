@@ -101,4 +101,18 @@ public class InventoryCheckItemVO extends SelectableVO<InventoryCheckItemVO> {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        InventoryCheckItemVO that = (InventoryCheckItemVO) o;
+
+        return goodId != null ? goodId.equals(that.goodId) : that.goodId == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return goodId != null ? goodId.hashCode() : 0;
+    }
 }
