@@ -205,7 +205,7 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
     }
 
     private static String getUserImageURL(){
-        return "E:\\ERPnju\\Server\\src\\main\\resources\\image";
+        return "C:\\Users\\林鹏\\git\\ERPnju\\Server\\src\\main\\resources\\image";
     }
 
 }
