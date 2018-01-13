@@ -5,6 +5,9 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -13,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import ui.inventoryui.goodsui.GoodChoose;
 import ui.memberui.ChooseList;
 import ui.myAccountantui.common.ItemTreeTable;
 import ui.myAccountantui.common.MyReceiptDetailPane;
@@ -21,10 +25,13 @@ import vo.ListGoodsItemVO;
 import vo.MemberVO;
 import vo.billReceiptVO.PaymentReceiptVO;
 import vo.billReceiptVO.TransferItemVO;
+import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 import vo.receiptVO.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static ui.util.ValidatorDecorator.DoubleValid;
 import static ui.util.ValidatorDecorator.RequireValid;
@@ -55,6 +62,8 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
     @FXML
     TextField clerk;
 
+    @FXML
+    ModifyButton modify;
     @FXML
     TextArea comment;
 
@@ -97,6 +106,8 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
         RequireValid(clerk);
         DoubleValid(token);
         DoubleValid(discount);
+
+        modifyState.bind(modify.modifyProperty());
 
         original.setText("0");
         sum.setText("0");
@@ -163,10 +174,18 @@ public abstract class SalesReceiptPane<T extends SalesReceiptVO> extends MyRecei
     }
 
     @FXML
-    public void addTransfer(){
-        itemTreeTable.add((new ListGoodsItemVO("a", "54", "a", 1, 1, "a")));
-    }
+    public void addTransfer() throws Exception {
+        GoodChoose goodChoose = new GoodChoose();
+        ObservableList<ReceiptGoodsItemVO> observableList = FXCollections.observableArrayList();
+        SimpleIntegerProperty integerProperty = new SimpleIntegerProperty(0);
+        goodChoose.choose(observableList,integerProperty);
+        integerProperty.addListener((b,o,n)->{
+            if(n.intValue()==1){
+                itemTreeTable.setList(observableList.stream().map(t->t.toListGoodsItemVO()).collect(Collectors.toCollection(ArrayList::new)));
+            }
+        });
 
+    }
     @FXML
     private void selectMember() {
         MemberVO memberVO = new MemberVO();
