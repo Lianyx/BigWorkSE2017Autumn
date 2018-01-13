@@ -194,7 +194,7 @@
             </StackPane>
         </JFXRippler>
         <ItemTreeTable fx:id="itemTreeTable" layoutX="95" layoutY="380" prefHeight="170" />
-      <JFXButton fx:id="approve" layoutX="400.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#approve" text="重置">
+      <JFXButton fx:id="approve" layoutX="400.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#approve" text="批准">
          <font>
             <Font size="12.0" />
          </font>

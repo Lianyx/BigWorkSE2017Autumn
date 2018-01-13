@@ -1,11 +1,9 @@
 package data.salesdata;
 
-import data.checkdata.ReceiptData;
-import mapper.SalesSellReceiptPOMapper;
+import data.generic.ReceiptData;
 import po.promotionPO.PromotionGoodsItemPO;
 import po.ReceiptGoodsItemPO;
 import po.receiptPO.SalesSellReceiptPO;
-import util.ReceiptSearchCondition;
 import util.ReceiptState;
 import util.RespectiveReceiptSearchCondition;
 

@@ -63,7 +63,7 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
     protected PromotionDetailPane() {
         initialize();
     }
-    // TODO 现在这样就是必须第一次new的时候call完这个就call refresh。虽然感觉这样不好唉
+    // 现在这样就是必须第一次new的时候call完这个就call refresh。虽然感觉这样有点问题
     protected PromotionDetailPane(T promotionVO) {
         initialize();
         this.promotionVO = promotionVO;

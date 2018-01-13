@@ -1,10 +1,8 @@
 package data.salesdata;
 
 import annotations.RMIRemote;
-import data.checkdata.ReceiptData;
-import mapper.InventoryWarningReceiptPOMapper;
+import data.generic.ReceiptData;
 import mapper.SalesRetReceiptPOMapper;
-import mapper.SalesSellReceiptPOMapper;
 import po.receiptPO.SalesRetReceiptPO;
 
 import java.rmi.RemoteException;

@@ -22,6 +22,7 @@ public MemberTreeTable(Set<MemberListVO> chosenItems, StringProperty keywordProp
         JFXTreeTableColumn image = new ImageColumn("姓名");
         JFXTreeTableColumn<MemberListVO, String> name = new SearchableStringColumn<>(" ", 100, keywordProperty, p -> p.getName());
         JFXTreeTableColumn<MemberListVO, String> clerk = new SearchableStringColumn<>("业务员", 100, keywordProperty, p -> p.getClerkName());
+
         JFXTreeTableColumn<MemberListVO, String> stateColumn = new JFXTreeTableColumn<>("类型");
         stateColumn.setPrefWidth(100);
         stateColumn.setCellValueFactory(param ->param.getValue()==null? new ReadOnlyObjectWrapper<>(""):new ReadOnlyObjectWrapper<>(param.getValue().getValue().getMemberCategory().name()));
@@ -35,7 +36,7 @@ public void updateItem(String item, boolean empty) {
         }
         });
 
-        myTreeTable.getColumns().addAll(choose,image,name, stateColumn);
+        myTreeTable.getColumns().addAll(choose,image,name,clerk ,stateColumn);
         }
 @Override
 protected void clickTwiceAftermath(JFXTreeTableRow<MemberListVO> row) {

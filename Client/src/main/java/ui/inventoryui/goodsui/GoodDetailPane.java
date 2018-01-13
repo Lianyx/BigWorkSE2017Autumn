@@ -135,7 +135,7 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
 
     @Override
     public void delete() {
-        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Delete", "sabi", "Yes", "No");
+        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Delete good", "Are you sure?", "Yes", "No");
         doubleButtonDialog.setButtonOne(() -> {
         });
         doubleButtonDialog.setButtonTwo(() -> {
@@ -164,7 +164,7 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
     public void save() {
         if (valid()) {
             modify.modifyProperty().set(false);
-            DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Pending?", "sabi", "Yes", "No");
+            DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "增加商品", "确定增加吗", "是", "否");
             doubleButtonDialog.setButtonTwo(() -> {
             });
             doubleButtonDialog.setButtonOne(() -> {
