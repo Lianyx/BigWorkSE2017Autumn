@@ -24,6 +24,7 @@ public class WarningReceiptInfoImpl implements InventoryWarningReceiptInfo{
      */
     public WarningReceiptInfoImpl() throws RemoteException, NotBoundException, MalformedURLException {
         inventoryWarningReceiptbl = new InventoryWarningReceiptbl();
+        goodsbl = new Goodsbl();
     }
 
     @Override
@@ -40,7 +41,7 @@ public class WarningReceiptInfoImpl implements InventoryWarningReceiptInfo{
                 goodsItemVO.setGoodsName(goodsVO.getGoodName());
                 goodsItemVO.setInventoryNum(inventoryNum);
                 goodsItemVO.setWarningNum(goodsItemVO.getWarningNum());
-                warningList.add(new ReceiptGoodsItemVO());
+                warningList.add(goodsItemVO);
             }
         }
 
@@ -67,7 +68,7 @@ public class WarningReceiptInfoImpl implements InventoryWarningReceiptInfo{
                 goodsItemVO.setGoodsName(goodsVO.getGoodName());
                 goodsItemVO.setInventoryNum(inventoryNum);
                 goodsItemVO.setWarningNum(goodsItemVO.getWarningNum());
-                warningList.add(new ReceiptGoodsItemVO());
+                warningList.add(goodsItemVO);
             }
 
 
@@ -99,7 +100,7 @@ public class WarningReceiptInfoImpl implements InventoryWarningReceiptInfo{
                 goodsItemVO.setGoodsName(goodsVO.getGoodName());
                 goodsItemVO.setInventoryNum(inventoryNum);
                 goodsItemVO.setWarningNum(goodsItemVO.getWarningNum());
-                warningList.add(new ReceiptGoodsItemVO());
+                warningList.add(goodsItemVO);
             }
         }
 
