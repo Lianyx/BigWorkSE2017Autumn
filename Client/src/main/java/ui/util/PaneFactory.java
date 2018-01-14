@@ -15,7 +15,6 @@ public class PaneFactory {
     }
 
     public synchronized static StackPane getMainPane() {
-        System.out.println("aaa");
         if(mainPane==null) {
             mainPane = new StackPane();
             mainPane.setPrefSize(800,600);
