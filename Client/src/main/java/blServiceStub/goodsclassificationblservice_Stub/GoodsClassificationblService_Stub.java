@@ -1,7 +1,6 @@
 package blServiceStub.goodsclassificationblservice_Stub;
 
 import blService.goodsClassificationblService.GoodsClassificationblService;
-import exception.ExistException;
 import util.ResultMessage;
 import vo.inventoryVO.GoodsClassificationVO;
 

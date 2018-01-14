@@ -77,12 +77,6 @@ public class GoodsClassificationVO implements Comparable<GoodsClassificationVO>{
 
     @Override
     public String toString() {
-        return "GoodsClassificationVO{" +
-                "ID='" + ID + '\'' +
-                ", name='" + name + '\'' +
-                ", fatherID='" + fatherID + '\'' +
-                ", childrenId=" + childrenId +
-                ", goodsID=" + goodsID +
-                '}';
+        return name;
     }
 }

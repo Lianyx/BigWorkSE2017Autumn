@@ -3,7 +3,6 @@ package businesslogic.goodsClassificationbl;
 import blService.goodsClassificationblService.GoodsClassificationblService;
 import com.sun.org.apache.regexp.internal.RE;
 import dataService.goodsdataService.GoodsClassificationDataService;
-import exception.ExistException;
 import po.GoodsClassificationPO;
 import util.ResultMessage;
 import vo.inventoryVO.GoodsClassificationVO;
@@ -69,7 +68,7 @@ public class GoodsClassificationbl implements GoodsClassificationblService{
      *
      */
     public ResultMessage deleteGoodsClassification(GoodsClassificationVO vo) throws RemoteException{
-        boolean hasGoods = vo.getGoodsID().isEmpty();
+     /*   boolean hasGoods = vo.getGoodsID().isEmpty();
         boolean isLeaf = vo.getChildrenId().isEmpty();
 
         String id = vo.getID();
@@ -79,9 +78,9 @@ public class GoodsClassificationbl implements GoodsClassificationblService{
         }else if(hasGoods && isLeaf){
             //是叶节点且有商品，这个时候要把其下面的商品也删除，需要提供的接口
             goodsClassificationData.delete(id);
-            /**
+            *//**
              * .....
-             */
+             *//*
         }else if (!hasGoods && !isLeaf){
             //中间节点，删除该分类后，用递归一一删除其子分类
             goodsClassificationData.delete(id);
@@ -95,6 +94,7 @@ public class GoodsClassificationbl implements GoodsClassificationblService{
                 deleteGoodsClassification(tmpVO);
             }
         }
+        return ResultMessage.SUCCESS;*/
         return ResultMessage.SUCCESS;
     }
 
@@ -104,7 +104,7 @@ public class GoodsClassificationbl implements GoodsClassificationblService{
         return ResultMessage.SUCCESS;
     }
 
-    public boolean hasLeaf(String fatherId) throws RemoteException{
+    private boolean hasLeaf(String fatherId) throws RemoteException{
         GoodsClassificationPO po = goodsClassificationData.getById(fatherId);
         String[] goodsID = po.getGoodsId();
         return !(goodsID.length == 0);
