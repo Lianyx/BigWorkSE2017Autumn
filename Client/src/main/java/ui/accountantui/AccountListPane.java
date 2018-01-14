@@ -1,110 +1,92 @@
 package ui.accountantui;
 
 import blService.accountblService.AccountblService;
+import blService.businessblservice.BusinessProgressblService;
 import businesslogic.accountbl.Accountbl;
+import businesslogic.blServiceFactory.MyblServiceFactory;
 import com.jfoenix.controls.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
 import ui.common.BoardController;
+import ui.common.bigPane.ListPane;
+import ui.common.treeTableRelated.MyTreeTableBorderPane;
+import ui.managerui.businessProgressui.BusinessProgressTable;
 import ui.util.*;
+import util.ReceiptSearchCondition;
 import vo.AccountListVO;
+import vo.receiptVO.ReceiptVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class AccountListPane extends RefreshablePane {
+public class AccountListPane extends ListPane<AccountListVO> {
 
-    AccountTreeTable receiptTreeTable;
-
-    @FXML
-    BorderPane borderPane;
-
-    BoardController myBoardController;
+    private Set<AccountListVO> chosenItems;
 
     Set<AccountListVO> set;
 
-    Pagination pagination;
-
-    StackPane mainpane;
-
-    public boolean historyAdd = false;
-
-    PopOver filterPopOver = new PopOver();
-
-    @FXML
-    JFXButton filter;
+    AccountblService accountblService;
 
     @FXML
     JFXRippler search;
 
-    @FXML
-    JFXTextField searchField;
+    Pagination pagination;
 
-    AccountblService accountblService;
 
     SimpleStringProperty match = new SimpleStringProperty("");
 
-    List<AccountListVO> list;
-
     public AccountListPane() throws Exception{
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/accountantui/accountListPane.fxml"));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
-        fxmlLoader.load();
-        this.myBoardController = BoardController.getBoardController();
-        this.mainpane = PaneFactory.getMainPane();
-        pagination = new Pagination();
-        pagination.currentPageIndexProperty().addListener((b,o,n)->{
-            receiptTreeTable.createPage(n.intValue());
-        });
-        borderPane.setBottom(pagination);
-
-        this.accountblService = new Accountbl();
-        receiptTreeTable = new AccountTreeTable();
-        receiptTreeTable.setPrefSize(600,435);
-        receiptTreeTable.keywordProperty().bind(match);
-        borderPane.setTop(new BorderPane(receiptTreeTable));
-
     }
+
     @FXML
     public void deleteList(){
-        if(receiptTreeTable.chosenItem.getSet().size()==0){
-            OneButtonDialog oneButtonDialog = new OneButtonDialog(mainpane,"","请选择账户","继续");
+
+        if(chosenItems.size()==0){
+            OneButtonDialog oneButtonDialog = new OneButtonDialog(PaneFactory.getMainPane(),"","请选择账户","继续");
             oneButtonDialog.setButtonOne(()->{});
             oneButtonDialog.show();
         }else {
-            DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "", "请确定是否删除", "是", "否");
+            DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(PaneFactory.getMainPane(), "", "请确定是否删除", "是", "否");
             doubleButtonDialog.setButtonOne(() -> {
-                receiptTreeTable.delete(pagination);
+                for(AccountListVO vo:chosenItems) {
+                    try{
+                        accountblService.delete(vo.getID());
+                    }catch (RemoteException e){
+                        e.printStackTrace();
+                    }
+                }
             });
             doubleButtonDialog.setButtonTwo(() -> {
             });
             doubleButtonDialog.show();
+            refresh(true);
         }
+
     }
 
     @FXML
     public void search(){
-        if (searchField.getText() != ""&&searchField.getText() != null) {
-            match.setValue(searchField.getText().toLowerCase());
+        if (keywordField.getText() != ""&&keywordField.getText() != null) {
+            match.setValue(keywordField.getText().toLowerCase());
             Set<AccountListVO> hashSet;
             hashSet = set.stream().filter(
                     s -> s.getName().contains(match.get())
             ).collect(Collectors.toSet());
-            receiptTreeTable.setReceipts(hashSet);
-            pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
-            receiptTreeTable.createPage(0);
-            borderPane.setBottom(pagination);
-            myBoardController.switchTo(this);
+            receiptListTreeTable.refresh(new ArrayList<>(set));
+
         }
     }
 
@@ -113,42 +95,35 @@ public class AccountListPane extends RefreshablePane {
         AccountDetailPane accountDetailPane =new AccountDetailPane(true);
     }
 
-
+    @Override
+    protected ArrayList<AccountListVO> getNewListData() throws RemoteException {
+        return new ArrayList<>(accountblService.getAll());
+    }
 
     public void refresh(boolean toSwitch) {
-        myBoardController.Loading();
-        try {
-            DoubleButtonDialog buttonDialog =
-                    new DoubleButtonDialog(mainpane, "Wrong", "sabi", "Last", "Ret");
-            buttonDialog.setButtonTwo(() -> myBoardController.Ret());
-            buttonDialog.setButtonTwo(() -> refresh(false));
-            Predicate<Integer> p = (s) -> {
-                try{
-                    if((set=accountblService.getAll())!=null) {
-                        System.out.print(set.size());
-                        return true;
-                    }
-                }catch (RemoteException e){
-                    e.printStackTrace();
-                }
-                return false;
-            };
-            GetTask getTask =
-                    new GetTask(() -> {
-                        receiptTreeTable.setReceipts(set);
-                        pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
-                        receiptTreeTable.createPage(0);
-                        borderPane.setBottom(pagination);
-                        myBoardController.switchTo(this);
-                    }, buttonDialog, p);
+        super.refresh(toSwitch);
+    }
 
-            new Thread(getTask).start();
-        } catch (Exception e) {
-            System.exit(1);
-            e.printStackTrace();
+    @Override
+    protected MyTreeTableBorderPane<AccountListVO> getInitialTreeTable() {
+        return new AccountTreeTable(chosenItems, keywordField.textProperty());
+    }
 
-        }
+    @Override
+    protected String getURL() {
+        return "/accountantui/accountListPane.fxml";
+    }
 
+    @Override
+    protected void initiateService() throws RemoteException, NotBoundException, MalformedURLException {
+        accountblService = MyblServiceFactory.getService(AccountblService.class);
+    }
+
+
+    @Override
+    protected void initiateFields() {
+        super.initiateFields();
+        chosenItems = new HashSet<>();
     }
 
 }
