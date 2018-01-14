@@ -18,12 +18,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import ui.exception.LoginRMIException;
 import ui.util.*;
 import util.ResultMessage;
 import util.UserCategory;
 import vo.UserVO;
 
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 
 import static ui.util.SetDraggable.setDraggable;
@@ -41,14 +43,22 @@ public class Login implements Initializable{
     JFXTextField account;
     @FXML
     JFXPasswordField password;
+    @FXML
+    StackPane mainPane;
+
+
 
     @FXML
     JFXCheckBox keep;
 
-    LoginblService ls;
+    private LoginblService ls;
+
+    private SimpleIntegerProperty state = new SimpleIntegerProperty(-1);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        PaneFactory.setLoginPane(mainPane);
+
         try {
             DataInputStream dataInputStream = new DataInputStream(new FileInputStream(new File(getClass().getResource("/default/userinfo").toURI())));
             String accounttext = dataInputStream.readLine();
@@ -62,12 +72,14 @@ public class Login implements Initializable{
                 password.setText(passwordtext);
                 keep.selectedProperty().setValue(true);
             }
-
             dataInputStream.close();
         }catch (Exception e){
             e.printStackTrace();
         }
     }
+
+
+
     @FXML
     public void close(){
         Stage stage = (Stage) close.getScene().getWindow();
@@ -77,22 +89,15 @@ public class Login implements Initializable{
     @FXML
     public void login() throws Exception{
         LoginTask task = new LoginTask(account.getText(),password.getText());
-
         pane.getChildren().remove(3,8);
         Loading loading = new Loading();
         loading.setLayoutX(95);
-        loading.setLayoutY(170);
+        loading.setLayoutY(160);
         pane.getChildren().add(loading);
         task.valueProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(task.getIntegerProperty()==0){
-                    try{
-                        changeToLogin();
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }else if(task.getIntegerProperty()==1){
+               if(state.getValue()==0){
                     try{
                         DataOutputStream outputStream = new DataOutputStream(new FileOutputStream(new File(getClass().getResource("/default/userinfo").toURI())));
                         if(keep.selectedProperty().getValue()==true){
@@ -103,11 +108,16 @@ public class Login implements Initializable{
                             outputStream.writeChars("");
                             outputStream.close();
                         }
+
+
+
                         UserVO userVO = ls.getCategory(account.getText());
                         UserInfomation.userid = userVO.getId();
                         UserInfomation.userimage = userVO.getImage();
                         UserInfomation.usertype = userVO.getUsertype();
                         UserInfomation.username = userVO.getUsername();
+
+
                         switch (userVO.getUsertype()){
                             case UserManager:
                                 changeToUserManger();
@@ -132,7 +142,13 @@ public class Login implements Initializable{
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                }
+                }else{
+                   try{
+                       changeToLogin();
+                   }catch (Exception e){
+                       e.printStackTrace();
+                   }
+               }
             }
         });
 
@@ -143,8 +159,22 @@ public class Login implements Initializable{
 
     @FXML
     public void forgetpassword(){
-
+        TextFieldPane textFieldPane = new TextFieldPane();
+        JFXDialog dialog = new JFXDialog(PaneFactory.getLoginPane(), textFieldPane, JFXDialog.DialogTransition.CENTER);
+        textFieldPane.cencel(() -> {
+            dialog.close();
+        });
+        textFieldPane.save(() -> {
+            dialog.close();
+            OneButtonDialog oneButtonDialog = new OneButtonDialog(PaneFactory.getLoginPane(),"","我们已经联系用户管理员，请等候相应信息","接受");
+            oneButtonDialog.setButtonOne(()->{});
+            oneButtonDialog.show();
+        });
+        textFieldPane.setPrompt("你的用户ID");
+        dialog.show();
     }
+
+
     @FXML
     public void hide() throws Exception{
         Stage stage=(Stage)hide.getScene().getWindow();
@@ -154,21 +184,29 @@ public class Login implements Initializable{
 
     public void changeToLogin() throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/userui/login.fxml"));
-        Stage stage = (Stage) pane.getScene().getWindow();
-        StackPane stackPane = PaneFactory.getLoginPane();
-        stackPane.getChildren().setAll(root);
-        Scene scene = new Scene(stackPane);
+        Stage stage = (Stage) mainPane.getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
+
+        if(state.getValue()==2) {
+            OneButtonDialog dialog = new OneButtonDialog(PaneFactory.getLoginPane(), "错误", "您输入错误的账号或者密码", "接受");
+            dialog.setButtonOne(() -> {
+            });
+            dialog.show();
+        }else if(state.getValue()==1){
+            OneButtonDialog dialog = new OneButtonDialog(PaneFactory.getLoginPane(), "错误", "网络错误", "接受");
+            dialog.setButtonOne(() -> {
+            });
+            dialog.show();
+        }
+
         setDraggable(scene,stage);
-        OneButtonDialog dialog = new OneButtonDialog(stackPane,"Wrong","Wrong account or password...","Accept");
-        dialog.setButtonOne(()->{});
-        dialog.show();
     }
 
 
     public void changeTo(String url) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource(url));
-        Stage stage = (Stage) pane.getScene().getWindow();
+        Stage stage = (Stage) mainPane.getScene().getWindow();
         StackPane stackPane = PaneFactory.getMainPane();
         stackPane.getChildren().setAll(root);
         Scene scene = new Scene(stackPane);
@@ -206,8 +244,6 @@ public class Login implements Initializable{
         return s;
     }
     private class LoginTask extends Task<Boolean> {
-
-        private SimpleIntegerProperty integerProperty = new SimpleIntegerProperty(-1);
         private String account;
         private String password;
 
@@ -215,31 +251,34 @@ public class Login implements Initializable{
         public LoginTask(String account,String password){
             this.account = account;
             this.password = password;
-
-
         }
-
-        public int getIntegerProperty() {
-            return integerProperty.get();
-        }
-
-        public SimpleIntegerProperty integerPropertyProperty() {
-            return integerProperty;
-        }
-
         @Override
-        protected Boolean call() throws Exception {
+        protected Boolean call() {
 
-            if(ls==null)
-                ls = new Loginbl();
+            if(ls==null) {
+                try {
+                    ls = new Loginbl();
+                }catch (Exception e){
+                    state.set(1);
+                    return false;
+                }
+            }
 
-            if(ls.login(account,password)== ResultMessage.SUCCESS){
-                Thread.sleep(2000);
-                integerProperty.setValue(1);
+            ResultMessage resultMessage = null;
+            try{
+                resultMessage = ls.login(account,password);
+            }catch (Exception e){
+                state.set(1);
+                return false;
+            }
+
+            if(resultMessage == ResultMessage.SUCCESS){
+                state.setValue(0);
+                System.out.println("SUCCESS");
                 return true;
             }else {
-                Thread.sleep(2000);
-                integerProperty.set(0);
+                state.set(2);
+                System.out.println("FAIL");
                 return false;
             }
         }
