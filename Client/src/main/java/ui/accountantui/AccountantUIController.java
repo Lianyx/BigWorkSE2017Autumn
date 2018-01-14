@@ -69,8 +69,7 @@ public class AccountantUIController implements Initializable{
 //            myBoardController.setPaneSwitchAnimation(new PaneSwitchAnimation(Duration.millis(150),  board));
 
             AccountListPane tempaccountListPane = new AccountListPane();
-            tempaccountListPane.historyAdd = true;
-            tempaccountListPane.refresh(false);
+            tempaccountListPane.refresh(true);
 
             navigation.getSelectionModel().selectedItemProperty().addListener((o, oldVal, newVal) -> {
                         try {
