@@ -15,6 +15,7 @@ public class PaneFactory {
     }
 
     public synchronized static StackPane getMainPane() {
+        System.out.println("aaa");
         if(mainPane==null) {
             mainPane = new StackPane();
             mainPane.setPrefSize(800,600);
@@ -24,6 +25,11 @@ public class PaneFactory {
     }
 
     public synchronized static void setMainPane(StackPane mainpane) {
+        System.out.println("not support!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         PaneFactory.mainPane = mainpane;
+    }
+
+    public synchronized static void setLoginPane(StackPane loginPane) {
+        PaneFactory.loginPane = loginPane;
     }
 }
