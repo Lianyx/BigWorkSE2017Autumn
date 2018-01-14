@@ -112,7 +112,7 @@ public class Goodsbl implements GoodsblService{
      * @return
      */
     public String getID(String upID, int order) throws RemoteException{
-        String id = upID+order;
+        String id = upID+"-"+order;
         return id;
     }
 
