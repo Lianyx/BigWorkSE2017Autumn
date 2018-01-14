@@ -69,8 +69,8 @@ public class GoodsClassificationPane extends Refreshable{
         treeView.setGoodsClassificationblService(goodsClassficationblService);
         treeView.setGoodsClassificationVO(goodsClassficationblService.show());
 
-        BorderPane pane = (BorderPane) treeView.getPane();
-        borderpane.setCenter(pane);
+        StackPane stackPane = (StackPane) treeView.getPane();
+        borderpane.setCenter(stackPane);
     }
 
     public void setGoodsClassficationblService(GoodsClassificationblService goodsClassficationblService) {
@@ -81,32 +81,9 @@ public class GoodsClassificationPane extends Refreshable{
         this.mainpane = mainpane;
     }
 
-//    public void switchPane(boolean toSwtich){
-//        if(toSwtich==true){
-//            System.out.println("??/**/");
-//            boardController.switchTo(this);
-//        }else{
-//            if(historyAdd){
-//                HistoricalRecord.addPane(this);
-//                historyAdd=false;
-//            }
-//            boardController.setAll(this);
-//        }
-//
-//    }
-
     /**
      * 要将fxml所有的命名空间表示出来
      */
-    @FXML
-    public void delete(){
-
-    }
-
-    @FXML
-    public void add(){
-
-    }
 
     @Override
     public void refresh(boolean toSwitch) {
@@ -119,7 +96,7 @@ public class GoodsClassificationPane extends Refreshable{
                     if (task.getIntegerProperty() == 1) {
                         try {
                             treeView.setGoodsClassificationVO(goodsClassficationblService.show());
-                            borderpane.setCenter((BorderPane)treeView.getPane());
+                            borderpane.setCenter((StackPane)treeView.getPane());
 //                            switchPane(toSwitch);
                             MyBoardController.getMyBoardController().switchTo(GoodsClassificationPane.this);
                         } catch (Exception e) {

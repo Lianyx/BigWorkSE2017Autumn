@@ -89,8 +89,7 @@ public class InventoryCheckPane extends ReceiptListPane<InventoryCheckItemVO> im
 
     @FXML
     public void exportExcel(){
-
-
+        exportExcel();
     }
 
     @Override
