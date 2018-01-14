@@ -1,7 +1,7 @@
 package vo.inventoryVO.inventoryReceiptVO;
 
 import blService.checkblService.CheckInfo;
-import businesslogic.checkbl.MyServiceFactory;
+import businesslogic.blServiceFactory.MyServiceFactory;
 import javafx.scene.Node;
 import po.receiptPO.InventoryReceiptGoodsItemPO;
 import po.receiptPO.InventoryWarningReceiptPO;

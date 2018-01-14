@@ -1,10 +1,8 @@
 package data.inventorydata;
 
 import annotations.RMIRemote;
-import data.checkdata.ReceiptData;
+import data.generic.ReceiptData;
 import mapper.InventoryOverflowReceiptPOMapper;
-import mapper.generic.ReceiptPOMapper;
-import po.receiptPO.InventoryGiftReceiptPO;
 import po.receiptPO.InventoryOverflowReceiptPO;
 
 import java.rmi.RemoteException;

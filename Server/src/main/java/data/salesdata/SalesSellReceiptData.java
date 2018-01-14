@@ -1,7 +1,7 @@
 package data.salesdata;
 
 import annotations.RMIRemote;
-import data.checkdata.ReceiptData;
+import data.generic.ReceiptData;
 import mapper.SalesSellReceiptPOMapper;
 import po.receiptPO.SalesSellReceiptPO;
 

@@ -1,8 +1,9 @@
-package ui.common;
+package ui.common.bigPane;
 
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.fxml.FXML;
+import ui.common.bigPane.GatePane;
 import ui.common.treeTableRelated.MyTreeTableBorderPane;
 
 import java.net.MalformedURLException;

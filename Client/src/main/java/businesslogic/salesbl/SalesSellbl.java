@@ -3,7 +3,7 @@ package businesslogic.salesbl;
 import blService.memberblService.MemberInfo;
 import blService.salesblService.SalesSellblService;
 import businesslogic.businessbl.BusinessConditionbl;
-import businesslogic.checkbl.Receiptbl;
+import businesslogic.genericbl.Receiptbl;
 import businesslogic.goodsbl.goodsUpdate.GoodsSalesUpdate;
 import businesslogic.inventorybl.inventoryInfo.GiftReceiptInfoImpl;
 import businesslogic.inventorybl.inventoryInfo.InventoryGiftReceiptInfo;
@@ -13,7 +13,6 @@ import po.receiptPO.SalesSellReceiptPO;
 import util.ResultMessage;
 import vo.receiptVO.SalesSellReceiptVO;
 
-import java.lang.reflect.Member;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;

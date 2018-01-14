@@ -3,7 +3,7 @@ package businesslogic.stockbl;
 import blService.memberblService.MemberInfo;
 import blService.stockblService.StockPurblService;
 import businesslogic.businessbl.BusinessConditionbl;
-import businesslogic.checkbl.Receiptbl;
+import businesslogic.genericbl.Receiptbl;
 import businesslogic.goodsbl.Goodsbl;
 import businesslogic.goodsbl.goodsUpdate.GoodsSalesUpdate;
 import businesslogic.memberbl.MemberInfo_Impl;

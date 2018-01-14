@@ -1,9 +1,8 @@
 package data.billreceiptdata;
 
 import annotations.RMIRemote;
-import data.checkdata.ReceiptData;
+import data.generic.ReceiptData;
 import mapper.ChargeBillReceiptPOMapper;
-import mapper.generic.ReceiptPOMapper;
 import po.receiptPO.ChargeBillReceiptPO;
 
 import java.rmi.RemoteException;

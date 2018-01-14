@@ -16,7 +16,7 @@ import javafx.scene.input.KeyEvent;
 import ui.inventoryui.goodsui.GoodChoose;
 import ui.memberui.ChooseList;
 import ui.common.ItemTreeTable;
-import ui.common.MyReceiptDetailPane;
+import ui.common.bigPane.MyReceiptDetailPane;
 import ui.util.*;
 import vo.MemberVO;
 import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;

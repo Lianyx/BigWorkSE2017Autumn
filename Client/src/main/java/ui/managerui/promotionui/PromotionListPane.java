@@ -1,7 +1,7 @@
 package ui.managerui.promotionui;
 
 import blService.promotionblService.PromotionListblService;
-import businesslogic.promotionbl.MyblServiceFactory;
+import businesslogic.blServiceFactory.MyblServiceFactory;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
@@ -9,9 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.PopOver;
-import ui.common.FilterableListPane;
-import ui.common.MyBoardController;
-import ui.common.MyTwoButtonDialog;
+import ui.common.BoardController;
+import ui.common.bigPane.FilterableListPane;
+import ui.common.dialog.MyTwoButtonDialog;
 import ui.common.treeTableRelated.MyTreeTableBorderPane;
 import ui.managerui.promotionui.addPopUpRelated.CombineLabel;
 import ui.managerui.promotionui.addPopUpRelated.MemberLabel;
@@ -101,7 +101,7 @@ public class PromotionListPane extends FilterableListPane<PromotionVO> { // TODO
     }
 
     private void deleteTask() {
-        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        BoardController myBoardController = BoardController.getBoardController();
         myBoardController.Loading();
         ArrayList<PromotionVO> tempList = new ArrayList<>();
 

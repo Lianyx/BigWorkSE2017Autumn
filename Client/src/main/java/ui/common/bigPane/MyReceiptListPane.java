@@ -1,18 +1,22 @@
-package ui.common;
+package ui.common.bigPane;
 
-import blService.checkblService.ReceiptblService;
-import businesslogic.promotionbl.MyblServiceFactory;
+import blService.genericblService.ReceiptblService;
+import businesslogic.blServiceFactory.MyblServiceFactory;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import org.controlsfx.control.PopOver;
+import ui.common.BoardController;
+import ui.common.MyFilterPane;
+import ui.common.dialog.MyOneButtonDialog;
+import ui.common.dialog.MyTwoButtonDialog;
 import ui.common.treeTableRelated.MyTreeTableBorderPane;
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;
 import ui.util.PaneFactory;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 import util.ReceiptState;
 import util.RespectiveReceiptSearchCondition;
 import vo.receiptVO.ReceiptListVO;
@@ -25,7 +29,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends ReceiptVO> extends Refreshable {
+public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends ReceiptVO> extends RefreshablePane {
     @FXML
     protected JFXRippler search;
     @FXML
@@ -75,7 +79,7 @@ public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends
      */
     protected abstract void initiateTreeTable();
     protected abstract Class<? extends ReceiptblService<TV>> getServiceClass();
-    protected abstract Refreshable getNewDetailPane();
+    protected abstract RefreshablePane getNewDetailPane();
 
 
     /**
@@ -96,7 +100,7 @@ public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends
             }
         }
         new MyTwoButtonDialog("请确认删除", () -> {
-            MyBoardController myBoardController = MyBoardController.getMyBoardController();
+            BoardController myBoardController = BoardController.getBoardController();
             myBoardController.Loading();
             ArrayList<TL> tempList = new ArrayList<>();
 
@@ -148,7 +152,7 @@ public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends
      */
     @Override
     public void refresh(boolean toSwitch) {
-        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        BoardController myBoardController = BoardController.getBoardController();
         myBoardController.Loading();
 
         ArrayList<TL> tempList = new ArrayList<>();

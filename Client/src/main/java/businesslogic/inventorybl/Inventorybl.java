@@ -1,6 +1,6 @@
 package businesslogic.inventorybl;
 
-import businesslogic.checkbl.Receiptbl;
+import businesslogic.genericbl.Receiptbl;
 import po.receiptPO.ReceiptPO;
 
 import vo.receiptVO.ReceiptVO;

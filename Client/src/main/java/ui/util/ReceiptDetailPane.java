@@ -1,26 +1,17 @@
 package ui.util;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import ui.common.BoardController;
 
 
-import java.util.function.Predicate;
-
-import static ui.util.ValidatorDecorator.NumberValid;
 import static ui.util.ValidatorDecorator.RequireValid;
 
-public abstract class ReceiptDetailPane<T> extends Refreshable {
+public abstract class ReceiptDetailPane<T> extends RefreshablePane {
 
 
     protected T vo;
@@ -108,11 +99,11 @@ public abstract class ReceiptDetailPane<T> extends Refreshable {
 
 
     public void switchPane(boolean toSwtich) {
-        if (toSwtich == true) {
+//        if (toSwtich == true) {
             boardController.switchTo(this);
-        } else {
-            boardController.setAll(this);
-        }
+//        } else {
+//            boardController.setAll(this);
+//        }
     }
 
     @FXML
@@ -141,11 +132,11 @@ public abstract class ReceiptDetailPane<T> extends Refreshable {
 
     public abstract boolean valid();
 
-    public void setBack(){
-        boardController.setRightAnimation();
-        boardController.historicalSwitchTo((Refreshable) HistoricalRecord.pop());
-        boardController.refresh();
-        HistoricalRecord.removeAndPop();
-    }
+//    public void setBack(){ // TODO 这个setBack可能会有点用
+//        boardController.setRightAnimation();
+//        boardController.historicalSwitchTo((RefreshablePane) HistoricalRecord.pop());
+//        boardController.refresh();
+//        HistoricalRecord.removeAndPop();
+//    }
 
 }

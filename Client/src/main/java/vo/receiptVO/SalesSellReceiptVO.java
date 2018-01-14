@@ -1,7 +1,7 @@
 package vo.receiptVO;
 
 import blService.checkblService.CheckInfo;
-import businesslogic.checkbl.MyServiceFactory;
+import businesslogic.blServiceFactory.MyServiceFactory;
 import javafx.scene.Node;
 import po.promotionPO.PromotionGoodsItemPO;
 import po.receiptPO.SalesSellReceiptPO;

@@ -2,9 +2,8 @@ package businesslogic.inventorybl;
 
 import blService.businessblservice.BusinessSearchInfo;
 import blService.inventoryblService.InventoryCheckblService;
-import businesslogic.checkbl.MyServiceFactory;
+import businesslogic.blServiceFactory.MyServiceFactory;
 import businesslogic.goodsbl.Goodsbl;
-import po.GoodsPO;
 import util.ReceiptSearchCondition;
 import vo.ListGoodsItemVO;
 import vo.inventoryVO.GoodsVO;
@@ -16,7 +15,6 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

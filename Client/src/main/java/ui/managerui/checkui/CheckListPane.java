@@ -1,18 +1,18 @@
 package ui.managerui.checkui;
 
 import blService.checkblService.CheckblService;
-import businesslogic.promotionbl.MyblServiceFactory;
+import businesslogic.blServiceFactory.MyblServiceFactory;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
+import ui.common.BoardController;
 import ui.common.ExceptionRunnable;
-import ui.common.MyBoardController;
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;
 import ui.util.PaneFactory;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 import vo.receiptVO.ReceiptVO;
 
 import java.io.IOException;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CheckListPane extends Refreshable {
+public class CheckListPane extends RefreshablePane {
     @FXML
     private JFXButton approve, reject;
     @FXML
@@ -74,7 +74,7 @@ public class CheckListPane extends Refreshable {
     }
 
     private void approveRejectPattern(ExceptionRunnable runnable) {
-        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        BoardController myBoardController = BoardController.getBoardController();
         myBoardController.Loading();
         ArrayList<ReceiptVO> tempList = new ArrayList<>();
 
@@ -106,7 +106,7 @@ public class CheckListPane extends Refreshable {
 
     @Override
     public void refresh(boolean toSwitch) {
-        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        BoardController myBoardController = BoardController.getBoardController();
         myBoardController.Loading();
         ArrayList<ReceiptVO> tempList = new ArrayList<>();
 

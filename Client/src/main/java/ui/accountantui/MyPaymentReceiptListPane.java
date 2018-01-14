@@ -1,9 +1,9 @@
 package ui.accountantui;
 
 import blService.billblservice.PaymentBillReceiptblService;
-import blService.checkblService.ReceiptblService;
-import ui.common.MyReceiptListPane;
-import ui.util.Refreshable;
+import blService.genericblService.ReceiptblService;
+import ui.common.bigPane.MyReceiptListPane;
+import ui.util.RefreshablePane;
 import vo.billReceiptVO.PaymentReceiptListVO;
 import vo.billReceiptVO.PaymentReceiptVO;
 
@@ -20,7 +20,7 @@ public class MyPaymentReceiptListPane extends MyReceiptListPane<PaymentReceiptLi
     }
 
     @Override
-    protected Refreshable getNewDetailPane() {
+    protected RefreshablePane getNewDetailPane() {
         return new MyPaymentDetailPane();
     }
 }

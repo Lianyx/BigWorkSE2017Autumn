@@ -7,7 +7,7 @@ import ui.common.treeTableRelated.ChooseColumn;
 import ui.common.treeTableRelated.MyTreeTableBorderPane;
 import ui.common.treeTableRelated.SearchableStringColumn;
 import ui.util.ButtonCell;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 import util.ReceiptState;
 import vo.receiptVO.ReceiptVO;
 
@@ -48,6 +48,6 @@ public class BusinessProgressTable extends MyTreeTableBorderPane<ReceiptVO> {
 
     @Override
     protected void clickTwiceAftermath(JFXTreeTableRow<ReceiptVO> row) {
-        ((Refreshable)row.getTreeItem().getValue().getDetailPane()).refresh(false);
+        ((RefreshablePane)row.getTreeItem().getValue().getDetailPane()).refresh(false);
     }
 }

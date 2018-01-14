@@ -1,4 +1,4 @@
-package data.checkdata;
+package data.generic;
 
 import data.generic.ReceipishData;
 import dataService.checkdataService.ReceiptDataService;

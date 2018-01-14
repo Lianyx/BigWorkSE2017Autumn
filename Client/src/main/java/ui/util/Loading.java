@@ -1,21 +1,10 @@
 package ui.util;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
+import ui.common.bigPane.FXMLAnchorPane;
 
-public class Loading extends AnchorPane {
-
-    public Loading(){
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/util/loading.fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
+public class Loading extends FXMLAnchorPane {
+    @Override
+    protected String getURL() {
+        return "/util/loading.fxml";
     }
-
-
 }

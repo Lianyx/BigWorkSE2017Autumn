@@ -7,7 +7,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import ui.common.MyBoardController;
+import ui.common.BoardController;
 import ui.util.*;
 import vo.inventoryVO.GoodsVO;
 
@@ -108,7 +108,7 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
         if (isAdd) {
             updateState.set(true);
 //            switchPane(true);
-            MyBoardController.getMyBoardController().switchTo(this);
+            BoardController.getBoardController().switchTo(this);
         }
 
         reset.setOnMouseClicked(t -> {
@@ -135,11 +135,13 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
 
     @Override
     public void delete() {
-        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Delete", "sabi", "Yes", "No");
+        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Delete good", "Are you sure?", "Yes", "No");
         doubleButtonDialog.setButtonOne(() -> {
         });
         doubleButtonDialog.setButtonTwo(() -> {
-            setBack();
+//            setBack();
+            // TODO by 连。
+            BoardController.getBoardController().goBack();
         });
         doubleButtonDialog.show();
 
@@ -164,7 +166,7 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
     public void save() {
         if (valid()) {
             modify.modifyProperty().set(false);
-            DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Pending?", "sabi", "Yes", "No");
+            DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "增加商品", "确定增加吗", "是", "否");
             doubleButtonDialog.setButtonTwo(() -> {
             });
             doubleButtonDialog.setButtonOne(() -> {
@@ -197,7 +199,7 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
                     }
                 }
 //                setBack();
-                MyBoardController.getMyBoardController().goBack();
+                BoardController.getBoardController().goBack();
             });
 
             doubleButtonDialog.show();
@@ -235,13 +237,13 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
                             //date.setText(vo.getDate());
 
 //                            switchPane(toSwitch);
-                            MyBoardController.getMyBoardController().switchTo(this);
+                            BoardController.getBoardController().switchTo(this);
                         }, buttonDialog, p);
 
                 new Thread(task).start();
             } else {
 //                switchPane(toSwitch);
-                MyBoardController.getMyBoardController().switchTo(this);
+                BoardController.getBoardController().switchTo(this);
             }
         } catch (Exception e) {
             e.printStackTrace();

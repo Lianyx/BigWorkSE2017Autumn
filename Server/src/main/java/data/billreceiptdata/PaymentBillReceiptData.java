@@ -1,14 +1,9 @@
 package data.billreceiptdata;
 
 import annotations.RMIRemote;
-import data.checkdata.ReceiptData;
+import data.generic.ReceiptData;
 import mapper.PaymentBillReceiptPOMapper;
-import mapper.generic.ReceipishPOMapper;
-import mapper.generic.ReceiptPOMapper;
-import mybatis.MyBatisUtil;
-import org.apache.ibatis.session.SqlSession;
 import po.receiptPO.PaymentBillReceiptPO;
-import util.ResultMessage;
 
 import java.rmi.RemoteException;
 

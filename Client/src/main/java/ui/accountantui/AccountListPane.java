@@ -10,7 +10,7 @@ import javafx.scene.control.Pagination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
-import ui.common.MyBoardController;
+import ui.common.BoardController;
 import ui.util.*;
 import vo.AccountListVO;
 
@@ -20,14 +20,14 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class AccountListPane extends Refreshable{
+public class AccountListPane extends RefreshablePane {
 
     AccountTreeTable receiptTreeTable;
 
     @FXML
     BorderPane borderPane;
 
-    MyBoardController myBoardController;
+    BoardController myBoardController;
 
     Set<AccountListVO> set;
 
@@ -60,7 +60,7 @@ public class AccountListPane extends Refreshable{
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         fxmlLoader.load();
-        this.myBoardController = MyBoardController.getMyBoardController();
+        this.myBoardController = BoardController.getBoardController();
         this.mainpane = PaneFactory.getMainPane();
         pagination = new Pagination();
         pagination.currentPageIndexProperty().addListener((b,o,n)->{

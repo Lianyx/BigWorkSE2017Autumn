@@ -1,10 +1,7 @@
 package blService.billblservice;
 
-import blService.checkblService.ReceiptblService;
-import util.ResultMessage;
+import blService.genericblService.ReceiptblService;
 import vo.billReceiptVO.*;
-
-import java.util.Set;
 
 public interface ChargeBillReceiptblService extends ReceiptblService<ChargeReceiptVO>{
 

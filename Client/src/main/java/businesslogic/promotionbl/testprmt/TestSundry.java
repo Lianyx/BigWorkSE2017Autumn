@@ -1,8 +1,7 @@
 package businesslogic.promotionbl.testprmt;
 
 import blService.businessblservice.BusinessProgressblService;
-import businesslogic.checkbl.MyServiceFactory;
-import businesslogic.promotionbl.MyblServiceFactory;
+import businesslogic.blServiceFactory.MyblServiceFactory;
 
 public class TestSundry {
     public static void main(String[] args) {

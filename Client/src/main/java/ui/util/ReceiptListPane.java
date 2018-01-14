@@ -5,18 +5,16 @@ import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
+import ui.common.BoardController;
 import vo.abstractVO.SelectableVO;
 
 import java.util.Set;
 
-public abstract class ReceiptListPane<T extends SelectableVO<T>> extends Refreshable{
+public abstract class ReceiptListPane<T extends SelectableVO<T>> extends RefreshablePane {
 
     protected ReceiptTreeTable<T> receiptTreeTable;
 
@@ -81,16 +79,16 @@ public abstract class ReceiptListPane<T extends SelectableVO<T>> extends Refresh
 
 
     public void switchPane(boolean toSwtich){
-        if(toSwtich==true){
+//        if(toSwtich==true){
             boardController.switchTo(this);
-        }else{
-            if(historyAdd){
-                System.out.println("nishidasabi");
-                HistoricalRecord.addPane(this);
-                historyAdd=false;
-            }
-            boardController.setAll(this);
-        }
+//        }else{
+//            if(historyAdd){
+//                System.out.println("nishidasabi");
+//                HistoricalRecord.addPane(this);
+//                historyAdd=false;
+//            }
+//            boardController.setAll(this);
+//        }
     }
 
 

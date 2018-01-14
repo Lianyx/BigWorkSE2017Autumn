@@ -17,7 +17,6 @@
 <?import javafx.scene.control.Separator?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 
-<?import ui.util.TopBar?>
 <?import ui.common.MyTopBar?>
 <?import ui.managerui.navigation.CheckChangePaneLabel?>
 <?import com.jfoenix.controls.JFXButton?>

@@ -1,9 +1,9 @@
 package ui.salesui.salesSellui;
 
-import blService.checkblService.ReceiptblService;
+import blService.genericblService.ReceiptblService;
 import blService.promotionblService.PromotionInfo;
 import blService.salesblService.SalesSellblService;
-import businesslogic.checkbl.MyServiceFactory;
+import businesslogic.blServiceFactory.MyServiceFactory;
 import ui.salesui.SalesReceiptPane;
 import vo.receiptVO.SalesSellReceiptVO;
 

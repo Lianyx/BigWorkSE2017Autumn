@@ -44,6 +44,7 @@ public class GoodsClassificationInfo implements GoodsClassification_Goods {
     @Override
     public void deleteGoods(String classifyId ,String goodsId) throws RemoteException{
         GoodsClassificationPO po = dataService.getById(classifyId);
+
         String[] oldGoodsId = po.getGoodsId();
 
         String[] newGoodsId = new String[oldGoodsId.length-1];

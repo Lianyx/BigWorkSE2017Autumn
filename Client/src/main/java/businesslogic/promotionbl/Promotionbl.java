@@ -1,7 +1,7 @@
 package businesslogic.promotionbl;
 
 import blService.promotionblService.PromotionblService;
-import businesslogic.generic.Receipishbl;
+import businesslogic.genericbl.Receipishbl;
 import dataService.generic.ReceipishDataService;
 import dataService.promotiondataService.PromotionDataService;
 import po.promotionPO.PromotionPO;

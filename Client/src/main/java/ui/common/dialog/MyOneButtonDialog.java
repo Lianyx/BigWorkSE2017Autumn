@@ -1,4 +1,4 @@
-package ui.common;
+package ui.common.dialog;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -6,12 +6,13 @@ import com.jfoenix.controls.JFXDialogLayout;
 import javafx.scene.control.Label;
 import ui.util.PaneFactory;
 
-public class MyTwoButtonDialog extends JFXDialog {
-    public MyTwoButtonDialog(String content, Runnable confirmAction) {
-        this(content, confirmAction, ()->{});
+public class MyOneButtonDialog extends JFXDialog {
+    public MyOneButtonDialog(String content) {
+        this(content, () -> {
+        });
     }
 
-    public MyTwoButtonDialog(String content, Runnable confirmAction, Runnable cancelAction) {
+    public MyOneButtonDialog(String content, Runnable confirmAction) {
         JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
         jfxDialogLayout.setBody(new Label(content));
 
@@ -19,17 +20,11 @@ public class MyTwoButtonDialog extends JFXDialog {
         setContent(jfxDialogLayout);
 
         JFXButton button = new JFXButton("确认");
-        JFXButton re = new JFXButton("取消");
 
         button.setOnAction(e -> {
             close();
             confirmAction.run();
         });
-        re.setOnAction(e -> {
-            close();
-            cancelAction.run();
-        });
-        jfxDialogLayout.setActions(button, re);
+        jfxDialogLayout.setActions(button);
     }
-
 }

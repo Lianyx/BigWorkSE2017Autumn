@@ -13,7 +13,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import ui.util.BoardController;
+import ui.common.BoardController;
 import ui.util.ColumnDecorator;
 import ui.util.ListPopup;
 import ui.util.PaneFactory;

@@ -1,12 +1,12 @@
 package ui.managerui.navigation;
 
 import ui.managerui.promotionui.PromotionListPane;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 
 public class PromotionChangePaneLabel extends ChangePaneLabel {
 
     @Override
-    public Refreshable getPane() {
+    public RefreshablePane getPane() {
         return new PromotionListPane();
     }
 }

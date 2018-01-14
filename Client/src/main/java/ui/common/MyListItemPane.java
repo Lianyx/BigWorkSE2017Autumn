@@ -5,12 +5,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
-public abstract class MyListItemPane<T> extends AnchorPane{
+public abstract class MyListItemPane<T> extends AnchorPane {
     protected MyListItemTablePane myListItmeTablePane;
     private JFXDialog dialog;
     protected T vo;
 
-    public MyListItemPane(String url,T vo,MyListItemTablePane myListItmeTablePane){
+    public MyListItemPane(String url, T vo, MyListItemTablePane myListItmeTablePane) {
         super();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(url));
@@ -30,10 +30,9 @@ public abstract class MyListItemPane<T> extends AnchorPane{
     }
 
 
-
     @FXML
     private void save() {
-        if(validate()){
+        if (validate()) {
             saveItem();
         }
     }

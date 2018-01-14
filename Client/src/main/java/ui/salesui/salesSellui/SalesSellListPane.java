@@ -1,13 +1,9 @@
 package ui.salesui.salesSellui;
 
-import blService.checkblService.ReceiptblService;
-import blService.salesblService.SalesRetblService;
+import blService.genericblService.ReceiptblService;
 import blService.salesblService.SalesSellblService;
 import ui.salesui.SalesListPane;
-import ui.salesui.salesRetui.SalesRetTablePane;
-import ui.util.Refreshable;
-import vo.receiptVO.SalesRetListVO;
-import vo.receiptVO.SalesRetReceiptVO;
+import ui.util.RefreshablePane;
 import vo.receiptVO.SalesSellListVO;
 import vo.receiptVO.SalesSellReceiptVO;
 
@@ -26,7 +22,7 @@ public class SalesSellListPane extends SalesListPane<SalesSellListVO,SalesSellRe
     }
 
     @Override
-    protected Refreshable getNewDetailPane() {
+    protected RefreshablePane getNewDetailPane() {
         return new SalesSellDetailPane();
     }
 }

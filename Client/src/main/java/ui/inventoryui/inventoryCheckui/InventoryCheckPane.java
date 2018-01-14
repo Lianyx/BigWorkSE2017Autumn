@@ -1,6 +1,5 @@
 package ui.inventoryui.inventoryCheckui;
 
-import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.inventoryblService.InventoryCheckblService;
 import businesslogic.inventorybl.InventoryCheckbl;
 import javafx.fxml.FXML;
@@ -89,7 +88,7 @@ public class InventoryCheckPane extends ReceiptListPane<InventoryCheckItemVO> im
 
     @FXML
     public void exportExcel(){
-        exportExcel();
+        exportExcelMixer();
     }
 
     @Override

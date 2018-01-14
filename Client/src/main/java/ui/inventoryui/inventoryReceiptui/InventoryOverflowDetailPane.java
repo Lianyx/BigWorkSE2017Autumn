@@ -1,6 +1,6 @@
 package ui.inventoryui.inventoryReceiptui;
 
-import blService.checkblService.ReceiptblService;
+import blService.genericblService.ReceiptblService;
 import blService.inventoryblService.InventoryOverflowReceiptblService;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ui.inventoryui.goodsui.GoodChoose;
-import ui.common.MyReceiptDetailPane;
+import ui.common.bigPane.MyReceiptDetailPane;
 import vo.inventoryVO.inventoryReceiptVO.InventoryOverflowReceiptVO;
 import vo.inventoryVO.inventoryReceiptVO.ReceiptGoodsItemVO;
 

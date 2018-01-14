@@ -1,8 +1,8 @@
 package ui.accountantui;
 
-import blService.checkblService.ReceiptblService;
-import ui.common.MyReceiptListPane;
-import ui.util.Refreshable;
+import blService.genericblService.ReceiptblService;
+import ui.common.bigPane.MyReceiptListPane;
+import ui.util.RefreshablePane;
 import vo.billReceiptVO.ChargeReceiptListVO;
 import vo.billReceiptVO.ChargeReceiptVO;
 
@@ -18,7 +18,7 @@ public class MyChargeReceiptListPane extends MyReceiptListPane<ChargeReceiptList
     }
 
     @Override
-    protected Refreshable getNewDetailPane() {
+    protected RefreshablePane getNewDetailPane() {
         return new MyChargeDetailPane();
     }
 }

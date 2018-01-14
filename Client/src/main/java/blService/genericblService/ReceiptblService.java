@@ -1,4 +1,4 @@
-package blService.checkblService;
+package blService.genericblService;
 
 import util.ReceiptSearchCondition;
 import util.RespectiveReceiptSearchCondition;

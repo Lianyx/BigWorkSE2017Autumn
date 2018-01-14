@@ -2,7 +2,7 @@ package businesslogic.stockbl;
 
 import blService.memberblService.MemberInfo;
 import blService.stockblService.StockRetblService;
-import businesslogic.checkbl.Receiptbl;
+import businesslogic.genericbl.Receiptbl;
 import businesslogic.goodsbl.goodsUpdate.GoodsSalesUpdate;
 import businesslogic.memberbl.MemberInfo_Impl;
 import po.receiptPO.StockRetReceiptPO;

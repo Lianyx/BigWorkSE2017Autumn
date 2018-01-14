@@ -1,4 +1,4 @@
-package ui.common;
+package ui.common.bigPane;
 
 import javafx.scene.layout.AnchorPane;
 import ui.common.mixer.FXMLLoadableMixer;

@@ -1,6 +1,5 @@
 package ui.inventoryui.inventoryCheckui;
 
-import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.inventoryblService.InventoryCheckblService;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import javafx.beans.property.ReadOnlyObjectWrapper;

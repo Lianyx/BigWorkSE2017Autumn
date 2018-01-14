@@ -1,8 +1,7 @@
 package ui.managerui.promotionui.addPopUpRelated;
 
-import com.jfoenix.controls.JFXButton;
 import ui.managerui.promotionui.promotionDetailPane.TotalPromotionDetailPane;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 
 public class TotalLabel extends addButton {
     public TotalLabel() {
@@ -10,7 +9,7 @@ public class TotalLabel extends addButton {
     }
 
     @Override
-    public Refreshable getPane() {
+    public RefreshablePane getPane() {
         return new TotalPromotionDetailPane();
     }
 }

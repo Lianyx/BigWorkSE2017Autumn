@@ -1,14 +1,14 @@
 package ui.accountantui;
 
 import blService.billblservice.ChargeBillReceiptblService;
-import blService.checkblService.ReceiptblService;
+import blService.genericblService.ReceiptblService;
 import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import ui.common.MyReceiptDetailPane;
+import ui.common.bigPane.MyReceiptDetailPane;
 import ui.util.OneButtonDialog;
 import ui.util.PaneFactory;
 import ui.util.UserInfomation;

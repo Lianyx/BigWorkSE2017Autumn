@@ -1,7 +1,7 @@
 package ui.managerui.promotionui.addPopUpRelated;
 
 import ui.managerui.promotionui.promotionDetailPane.MemberPromotionDetailPane;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 
 public class MemberLabel extends addButton {
     public MemberLabel() {
@@ -9,7 +9,7 @@ public class MemberLabel extends addButton {
     }
 
     @Override
-    public Refreshable getPane() {
+    public RefreshablePane getPane() {
         return new MemberPromotionDetailPane();
     }
 }

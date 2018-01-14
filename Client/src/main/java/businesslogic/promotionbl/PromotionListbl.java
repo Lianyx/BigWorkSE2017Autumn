@@ -1,8 +1,7 @@
 package businesslogic.promotionbl;
 
 import blService.promotionblService.*;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import businesslogic.blServiceFactory.MyblServiceFactory;
 import util.PromotionSearchCondition;
 import util.PromotionType;
 import util.ResultMessage;
@@ -14,9 +13,6 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class PromotionListbl implements PromotionListblService, PromotionInfo {

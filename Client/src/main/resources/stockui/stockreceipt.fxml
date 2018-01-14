@@ -151,7 +151,7 @@
              <MaterialDesignIconView glyphName="PLUS" size="1.5em" styleClass="icon" />
          </StackPane>
         </JFXRippler>
-      <JFXButton fx:id="approve" layoutX="392.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#approve" text="通过">
+      <JFXButton fx:id="approve" layoutX="392.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#approve" text="批准">
          <font>
             <Font size="12.0" />
          </font>

@@ -7,18 +7,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import ui.common.MyBoardController;
+import ui.common.BoardController;
 import ui.util.*;
 
 import java.util.Calendar;
 
 
-public class InitialListPane extends Refreshable {
+public class InitialListPane extends RefreshablePane {
 
     @FXML
     BorderPane borderPane;
 
-    MyBoardController myBoardController;
+    BoardController myBoardController;
 
     StackPane mainpane;
 
@@ -30,7 +30,7 @@ public class InitialListPane extends Refreshable {
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         fxmlLoader.load();
-        this.myBoardController = MyBoardController.getMyBoardController();
+        this.myBoardController = BoardController.getBoardController();
         this.mainpane = PaneFactory.getMainPane();
         filter.setText("Initial Account");
     }

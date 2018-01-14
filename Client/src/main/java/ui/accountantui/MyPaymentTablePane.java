@@ -8,7 +8,7 @@ import ui.common.treeTableRelated.ChooseColumn;
 import ui.common.treeTableRelated.MyTreeTableBorderPane;
 import ui.common.treeTableRelated.SearchableStringColumn;
 import ui.util.ButtonCell;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 import util.ReceiptState;
 import vo.billReceiptVO.PaymentReceiptListVO;
 
@@ -41,6 +41,6 @@ public class MyPaymentTablePane extends MyTreeTableBorderPane<PaymentReceiptList
     @Override
     protected void clickTwiceAftermath(JFXTreeTableRow<PaymentReceiptListVO> row) {
         // TODO 这里本来不应该有强转的，接口没定义好，所以先这么将就着
-        ((Refreshable)row.getTreeItem().getValue().toVO().getDetailPane()).refresh(true);
+        ((RefreshablePane)row.getTreeItem().getValue().toVO().getDetailPane()).refresh(true);
     }
 }

@@ -9,12 +9,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import org.controlsfx.control.PopOver;
-import ui.common.MyBoardController;
-import ui.common.MyTwoButtonDialog;
+import ui.common.BoardController;
+import ui.common.dialog.MyTwoButtonDialog;
 import ui.util.DoubleButtonDialog;
 import ui.util.GetTask;
 import ui.util.PaneFactory;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 import util.MemberSearchCondition;
 import vo.MemberListVO;
 import vo.UserListVO;
@@ -25,7 +25,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class MemberListPane extends Refreshable{
+public class MemberListPane extends RefreshablePane {
     @FXML
     private JFXRippler search;
     @FXML
@@ -100,7 +100,7 @@ public class MemberListPane extends Refreshable{
     private void deleteList() {
 
         new MyTwoButtonDialog("请确认删除", () -> {
-            MyBoardController myBoardController = MyBoardController.getMyBoardController();
+            BoardController myBoardController = BoardController.getBoardController();
             myBoardController.Loading();
             ArrayList<UserListVO> tempList = new ArrayList<>();
 
@@ -157,7 +157,7 @@ public class MemberListPane extends Refreshable{
      */
     @Override
     public void refresh(boolean toSwitch) {
-        MyBoardController myBoardController = MyBoardController.getMyBoardController();
+        BoardController myBoardController = BoardController.getBoardController();
         myBoardController.Loading();
 
         DoubleButtonDialog buttonDialog = new DoubleButtonDialog(PaneFactory.getMainPane(), "错误", "连接失败", "重试", "返回");

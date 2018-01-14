@@ -1,10 +1,9 @@
 package ui.stockui.stockRetui;
 
-import blService.checkblService.ReceiptblService;
+import blService.genericblService.ReceiptblService;
 import blService.stockblService.StockRetblService;
 import ui.stockui.StockReceiptPane;
 import vo.ListGoodsItemVO;
-import vo.receiptVO.StockPurReceiptVO;
 import vo.receiptVO.StockRetReceiptVO;
 
 import java.util.ArrayList;

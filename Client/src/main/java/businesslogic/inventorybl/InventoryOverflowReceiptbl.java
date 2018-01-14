@@ -2,11 +2,9 @@ package businesslogic.inventorybl;
 
 import blService.goodsblService.GoodsInventoryUpdateInfo;
 import blService.inventoryblService.InventoryOverflowReceiptblService;
-import businesslogic.checkbl.Receiptbl;
+import businesslogic.genericbl.Receiptbl;
 import businesslogic.goodsbl.Goodsbl;
 import businesslogic.goodsbl.goodsUpdate.GoodsInventoryUpdate;
-import businesslogic.goodsbl.goodsUpdate.GoodsSalesUpdate;
-import blService.goodsblService.GoodsSalesUpdateInfo;
 import po.receiptPO.InventoryOverflowReceiptPO;
 import util.ReceiptState;
 import util.ResultMessage;

@@ -2,10 +2,9 @@ package businesslogic.inventorybl;
 
 import blService.businessblservice.BusinessSearchInfo;
 import blService.inventoryblService.InventoryViewblService;
-import businesslogic.checkbl.MyServiceFactory;
+import businesslogic.blServiceFactory.MyServiceFactory;
 import util.ReceiptSearchCondition;
 import vo.ListGoodsItemVO;
-import vo.inventoryVO.InventoryCheckItemVO;
 import vo.inventoryVO.InventoryViewItemVO;
 import vo.inventoryVO.InventoryViewVO;
 import vo.receiptVO.SalesRetReceiptVO;

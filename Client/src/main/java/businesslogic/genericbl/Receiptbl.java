@@ -1,9 +1,9 @@
-package businesslogic.checkbl;
+package businesslogic.genericbl;
 
 import blService.businessblservice.BusinessSearchInfo;
 import blService.checkblService.CheckInfo;
-import blService.checkblService.ReceiptblService;
-import businesslogic.generic.Receipishbl;
+import blService.genericblService.ReceiptblService;
+import businesslogic.genericbl.Receipishbl;
 import businesslogic.salesbl.SalesSellbl;
 import dataService.checkdataService.ReceiptDataService;
 import dataService.generic.ReceipishDataService;

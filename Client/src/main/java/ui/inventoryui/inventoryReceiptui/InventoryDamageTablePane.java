@@ -8,7 +8,7 @@ import ui.common.treeTableRelated.ChooseColumn;
 import ui.common.treeTableRelated.MyTreeTableBorderPane;
 import ui.common.treeTableRelated.SearchableStringColumn;
 import ui.util.ButtonCell;
-import ui.util.Refreshable;
+import ui.util.RefreshablePane;
 import util.ReceiptState;
 import vo.inventoryVO.inventoryReceiptVO.InventoryDamageListVO;
 
@@ -43,6 +43,6 @@ public class InventoryDamageTablePane extends MyTreeTableBorderPane<InventoryDam
 
     @Override
     protected void clickTwiceAftermath(JFXTreeTableRow<InventoryDamageListVO> row) {
-        ((Refreshable)row.getTreeItem().getValue().toVO().getDetailPane()).refresh(true);
+        ((RefreshablePane)row.getTreeItem().getValue().toVO().getDetailPane()).refresh(true);
     }
 }

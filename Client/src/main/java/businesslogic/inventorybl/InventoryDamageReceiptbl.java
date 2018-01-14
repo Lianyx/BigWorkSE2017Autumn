@@ -2,8 +2,7 @@ package businesslogic.inventorybl;
 
 import blService.goodsblService.GoodsInventoryUpdateInfo;
 import blService.inventoryblService.InventoryDamageReceiptblService;
-import businesslogic.checkbl.Receiptbl;
-import blService.goodsblService.GoodsSalesUpdateInfo;
+import businesslogic.genericbl.Receiptbl;
 import businesslogic.goodsbl.goodsUpdate.GoodsInventoryUpdate;
 import po.receiptPO.InventoryDamageReceiptPO;
 import util.ReceiptState;

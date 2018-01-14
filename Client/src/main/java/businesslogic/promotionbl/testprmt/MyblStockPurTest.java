@@ -2,15 +2,9 @@ package businesslogic.promotionbl.testprmt;
 
 import blService.stockblService.StockPurblService;
 import blService.stockblService.StockRetblService;
-import businesslogic.checkbl.MyServiceFactory;
-import businesslogic.promotionbl.MyblServiceFactory;
-import businesslogic.stockbl.StockPurbl;
-import po.receiptPO.StockPurReceiptPO;
+import businesslogic.blServiceFactory.MyblServiceFactory;
 import util.RespectiveReceiptSearchCondition;
-import vo.receiptVO.StockPurReceiptVO;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 public class MyblStockPurTest {

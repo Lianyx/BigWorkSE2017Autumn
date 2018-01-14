@@ -1,26 +1,13 @@
 package businesslogic.promotionbl.testprmt;
 
-import blService.promotionblService.CombinePromotionblService;
-import blService.promotionblService.MemberPromotionblService;
 import blService.promotionblService.PromotionInfo;
-import blService.promotionblService.PromotionblService;
 import blService.salesblService.SalesSellblService;
-import businesslogic.checkbl.MyServiceFactory;
-import businesslogic.promotionbl.MyblServiceFactory;
+import businesslogic.blServiceFactory.MyServiceFactory;
 import businesslogic.salesbl.SalesSellbl;
-import util.PromotionSearchCondition;
-import util.ReceiptState;
-import util.RespectiveReceiptSearchCondition;
 import vo.ListGoodsItemVO;
-import vo.promotionVO.CombinePromotionVO;
-import vo.promotionVO.MemberPromotionVO;
 import vo.promotionVO.PromotionVO;
 import vo.receiptVO.SalesSellReceiptVO;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TestSelectInEffect {

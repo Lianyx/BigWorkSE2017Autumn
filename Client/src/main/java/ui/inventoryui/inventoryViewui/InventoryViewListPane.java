@@ -1,6 +1,5 @@
 package ui.inventoryui.inventoryViewui;
 
-import blService.blServiceFactory.ServiceFactory_Stub;
 import blService.inventoryblService.InventoryViewblService;
 import businesslogic.inventorybl.InventoryViewbl;
 import javafx.scene.layout.BorderPane;

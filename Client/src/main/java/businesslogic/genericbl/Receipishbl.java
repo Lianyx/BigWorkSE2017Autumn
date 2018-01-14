@@ -1,4 +1,4 @@
-package businesslogic.generic;
+package businesslogic.genericbl;
 
 import dataService.generic.ReceipishDataService;
 import po.generic.ReceipishPO;
