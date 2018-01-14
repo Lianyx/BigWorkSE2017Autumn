@@ -13,7 +13,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
-<AnchorPane fx:id="pane" prefHeight="424.0" prefWidth="274.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.userui.loginui.Login">
+<StackPane fx:id="mainPane" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.userui.loginui.Login">
+<AnchorPane fx:id="pane" prefHeight="424.0" prefWidth="274.0">
 <children>
 
       <JFXRippler fx:id="close" ripplerFill="#03A9F4" layoutX="240" maskType="RECT" onMouseClicked="#close" position="BACK" styleClass="icons-rippler">
@@ -69,3 +70,4 @@
          </font></JFXCheckBox>
    </children>
 </AnchorPane>
+</StackPane>
