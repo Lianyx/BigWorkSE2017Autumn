@@ -4,14 +4,12 @@
 <?import com.jfoenix.controls.JFXRippler?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
-
-<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 
 <fx:root fx:id="goodslist" prefHeight="560.0" prefWidth="640.0" stylesheets="@../css/receipt.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
 <children>
@@ -31,7 +29,7 @@
             </HBox>
         </graphic>
     </JFXButton>
-    <JFXRippler fx:id="search" onMouseClicked="#search" layoutX="177" layoutY="22" maskType="CIRCLE" position="BACK" ripplerFill="#03A9F4" styleClass="icons-rippler">
+    <JFXRippler fx:id="search" layoutX="177" layoutY="22" maskType="CIRCLE" onMouseClicked="#search" position="BACK" ripplerFill="#03A9F4" styleClass="icons-rippler">
         <StackPane style="-fx-padding: 8;" translateY="5">
             <OctIconView glyphName="SEARCH" size="1.5em" styleClass="icon" />
         </StackPane>
@@ -45,21 +43,6 @@
                     <JFXRippler position="BACK" styleClass="icons-rippler">
                         <StackPane>
                             <MaterialDesignIconView fill="white" glyphName="DELETE" size="1em" styleClass="icon" />
-                        </StackPane>
-                    </JFXRippler>
-                </children>
-            </HBox>
-        </graphic>
-    </JFXButton>
-
-
-    <JFXButton fx:id="add" layoutX="494.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#add" text="增加">
-        <graphic>
-            <HBox>
-                <children>
-                    <JFXRippler position="BACK" styleClass="icons-rippler">
-                        <StackPane>
-                            <FontAwesomeIconView fill="white" glyphName="PLUS" size="1em" styleClass="icon" />
                         </StackPane>
                     </JFXRippler>
                 </children>

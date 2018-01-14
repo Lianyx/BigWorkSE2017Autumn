@@ -12,9 +12,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckTreeView;
 import ui.common.BoardController;
 import ui.inventoryui.goodsui.GoodDetailPane;
@@ -41,6 +44,7 @@ public class GoodsClassificationTreeView extends CheckTreeView<GoodsClassificati
     private JFXButton modify = new JFXButton("修改");
     private Goodsbl goodsbl = new Goodsbl();
 
+    private ImageView imageView;
     public GoodsClassificationTreeView() throws RemoteException, NotBoundException, MalformedURLException {
         super();
         root.setExpanded(true);
@@ -50,7 +54,12 @@ public class GoodsClassificationTreeView extends CheckTreeView<GoodsClassificati
     }
 
     public Node getPane() throws RemoteException {
+        imageView = new ImageView(new Image(getClass().getResourceAsStream("/default/light.jpg")));
+        imageView.setFitWidth(16);
+        imageView.setFitHeight(16);
+
         root.setIndependent(true);
+        root.setGraphic(imageView);
         root = buildTree();
         root.setExpanded(true);
         this.setRoot(root);
@@ -78,14 +87,13 @@ public class GoodsClassificationTreeView extends CheckTreeView<GoodsClassificati
                     }
                 });
 
-              /*  add.setOnAction(new EventHandler<ActionEvent>() {
+                add.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
                         addItem(change.getList());
                     }
                 });
-*/
-              /*  modify.setOnAction(new EventHandler<ActionEvent>() {
+                modify.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
                         try {
@@ -96,12 +104,10 @@ public class GoodsClassificationTreeView extends CheckTreeView<GoodsClassificati
 
                     }
                 });
-*/
 
-               /* addGood.setOnAction(new EventHandler<ActionEvent>() {
+                addGood.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        // goodDetailPane = new GoodDetailPane(true);
                         try {
                             addGoodItem(change.getList());
                         } catch (RemoteException e) {
@@ -113,12 +119,11 @@ public class GoodsClassificationTreeView extends CheckTreeView<GoodsClassificati
                         }
                     }
                 });
-*/
             }
         });
 
 
-        HBox buttons = new HBox();
+        VBox buttons = new VBox();
         buttons.getChildren().addAll(add, delete, modify, addGood);
 
         borderPane.setRight(buttons);
@@ -156,47 +161,52 @@ public class GoodsClassificationTreeView extends CheckTreeView<GoodsClassificati
             return;
         }
 
-        sureDialog("确定要删除该分类？");
+        JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
+        jfxDialogLayout.setPrefWidth(220.0);
+        jfxDialogLayout.setHeading(new Label("警告"));
+        JFXTextField name = new JFXTextField();
+        jfxDialogLayout.setBody(new JFXTextField("确定删除吗"));
+        JFXButton back = new JFXButton("确定");
+        JFXDialog dialog = new JFXDialog(mainpane, jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
 
+        back.setOnAction(e -> {
+            //连同changeList中的数据也要删掉，否则会报错
+            parent.getChildren().remove(item);
+            list.remove(item);
+            dialog.close();
 
-        //连同changeList中的数据也要删掉，否则会报错
-        parent.getChildren().remove(item);
-        list.remove(item);
+            GoodsClassificationVO son = item.getValue();
+            GoodsClassificationVO father = parent.getValue();
 
-        GoodsClassificationVO son = item.getValue();
-        GoodsClassificationVO father = parent.getValue();
+            try {
+                goodsClassificationblService.deleteGoodsClassification(son);
+            } catch (RemoteException e1) { e1.printStackTrace(); }
 
-        goodsClassificationblService.deleteGoodsClassification(son);
+            List<String> childrensId = father.getChildrenId();
 
-        List<String> childrensId = father.getChildrenId();
+            childrensId.remove(son.getID());
 
-        childrensId.remove(son.getID());
+            father.setChildrenId(childrensId);
 
-/*
-        GoodsClassificationVO fatherVO = null;
-        GoodsClassificationVO sonVO = null;*/
-/*
-        for (GoodsClassificationVO vo : classificationList) {
-            if (vo.getName().equals(fatherName)) {
-                fatherVO = vo;
-                continue;
+            try {
+                goodsClassificationblService.updateGoodsClassification(father);
+            } catch (RemoteException e1) {
+                e1.printStackTrace();
             }
-            if (vo.getName().equals(sonName)) {
-                sonVO = vo;
-            }
-        }*/
-/*
-        String sonId = sonVO.getID();
-        fatherVO.getChildrenId().remove(sonId);
-        goodsClassificationblService.updateGoodsClassification(fatherVO);
-        goodsClassificationblService.deleteGoodsClassification(sonVO);*/
+        });
+        jfxDialogLayout.setActions(back);
+        dialog.show();
     }
 
-    protected void addItem(ObservableList<? extends TreeItem<String>> list) {
-        CheckBoxTreeItem<String> item = (CheckBoxTreeItem<String>) list.get(0);
+    protected void addItem(ObservableList<? extends TreeItem<GoodsClassificationVO>> list) {
+        CheckBoxTreeItem<GoodsClassificationVO> item = (CheckBoxTreeItem<GoodsClassificationVO>) list.get(0);
 
-        String classifyname = item.getValue();
+        GoodsClassificationVO vo = item.getValue();
 
+        if(vo.getGoodsID().size() != 0){
+            warningDialog("该分类下有商品，不能添加新分类");
+            return;
+        }
 
         JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
         jfxDialogLayout.setPrefWidth(220.0);
@@ -210,53 +220,49 @@ public class GoodsClassificationTreeView extends CheckTreeView<GoodsClassificati
             String classifyName = name.getText();
 
             CheckBoxTreeItem<String> son = new CheckBoxTreeItem<>(classifyName);
-            item.getChildren().add(son);
+
+            GoodsClassificationVO goodsClassificationVO = new GoodsClassificationVO();
+            goodsClassificationVO.setName(classifyName);
+
+            String sonId = vo.getID()+vo.getChildrenId().size();
+            goodsClassificationVO.setID(sonId);
+            goodsClassificationVO.setFatherID(vo.getID());
+
+            List<String> childrenId = vo.getChildrenId();
+            childrenId.add(sonId);
 
             try {
-                System.out.println(classifyName + " " + item.getValue());
-                addGoodsClassificationVO(classifyName, item.getValue());
+                goodsClassificationblService.addGoodsClassification(goodsClassificationVO);
+                goodsClassificationblService.updateGoodsClassification(vo);
             } catch (RemoteException e1) {
                 e1.printStackTrace();
             }
-
             dialog.close();
+
+            BoardController.getBoardController().refresh();
         });
         jfxDialogLayout.setActions(save);
         dialog.show();
 
-
     }
 
-    protected void addGoodItem(ObservableList<? extends TreeItem<String>> list) throws RemoteException, MalformedURLException, NotBoundException {
-        CheckBoxTreeItem<String> son = (CheckBoxTreeItem<String>) list.get(0);
-
-        String classifyName = son.getValue();
-        String clssifyId = null;
-
-        for (GoodsClassificationVO vo : classificationList) {
-            if (vo.getName().equals(classifyName)) {
-                goodDetailPane = new GoodDetailPane(true);
-
-                System.out.println("set first");
-
-                clssifyId = vo.getID();
-                System.out.println(clssifyId);
-                goodDetailPane.setClassifyId(clssifyId);
+    protected void addGoodItem(ObservableList<? extends TreeItem<GoodsClassificationVO>> list) throws RemoteException, MalformedURLException, NotBoundException {
+        CheckBoxTreeItem<GoodsClassificationVO> son = (CheckBoxTreeItem<GoodsClassificationVO>) list.get(0);
 
 
-                List<String> goodsId = vo.getGoodsID();
+        GoodsClassificationVO vo = son.getValue();
 
-                int order = goodsId.size() + 1;
-                goodDetailPane.setOrder(order);
 
-                goodsId.add(new Goodsbl().getID(clssifyId, order));
-
-                vo.setGoodsID(goodsId);
-
-                goodsClassificationblService.updateGoodsClassification(vo);
-                break;
-            }
+        if(vo.getChildrenId().size() != 0){
+            warningDialog("该分类下有分类，不能添加商品");
+            return;
         }
+
+        goodDetailPane = new GoodDetailPane(true);
+
+        String classifyId = vo.getID();
+        goodDetailPane.setClassifyId(classifyId);
+        goodDetailPane.setOrder(vo.getGoodsID().size()+1);
 
 
     }
@@ -264,55 +270,41 @@ public class GoodsClassificationTreeView extends CheckTreeView<GoodsClassificati
     /**
      * 传入子分类名和父分类名，更新数据库
      *
-     * @param sonName
-     * @param fatherName
      * @throws
      */
-    private void addGoodsClassificationVO(String sonName, String fatherName) throws RemoteException {
-        for (GoodsClassificationVO vo : classificationList) {
-            //  System.out.println(vo.getName());
-            if (vo.getName().equals(fatherName)) {
-                List<String> childernId = vo.getChildrenId();
-
-                String classifyId = vo.getFatherID() + "/" + Integer.toString(childernId.size());
-                GoodsClassificationVO goodsClassificationVO = new GoodsClassificationVO(classifyId, sonName, vo.getID());
-                //  System.out.println(goodsClassificationVO);
-                goodsClassificationblService.addGoodsClassification(goodsClassificationVO);
-
-                childernId.add(classifyId);
-                vo.setChildrenId(childernId);
-                goodsClassificationblService.updateGoodsClassification(vo);
-
-                break;
-            }
-        }
-    }
-
-    protected void modifyItem(ObservableList<? extends TreeItem<String>> list) throws RemoteException {
-        CheckBoxTreeItem<String> item = (CheckBoxTreeItem<String>) list.get(0);
+    protected void modifyItem(ObservableList<? extends TreeItem<GoodsClassificationVO>> list) throws RemoteException {
+        CheckBoxTreeItem<GoodsClassificationVO> item = (CheckBoxTreeItem<GoodsClassificationVO>) list.get(0);
 
         JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
         jfxDialogLayout.setPrefWidth(220.0);
         jfxDialogLayout.setHeading(new Label("商品分类名"));
         JFXTextField name = new JFXTextField();
-        name.setText(item.getValue());
+        name.setText(item.getValue().toString());
         name.setPrefWidth(210);
         jfxDialogLayout.setBody(name);
         JFXButton save = new JFXButton("保存");
         JFXDialog dialog = new JFXDialog(mainpane, jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
 
-        String oldName = item.getValue();
+       // String oldName = item.getValue();
 
         save.setOnAction(e -> {
             String classifyName = name.getText();
-            item.setValue(classifyName);
+
+            GoodsClassificationVO goodsClassificationVO = item.getValue();
+
+            goodsClassificationVO.setName(classifyName);
+
+            item.setValue(goodsClassificationVO);
+
             dialog.close();
 
             try {
-                updateGoodsClassificationVO(classifyName, oldName);
+                goodsClassificationblService.updateGoodsClassification(goodsClassificationVO);
             } catch (RemoteException e1) {
                 e1.printStackTrace();
             }
+
+            BoardController.getBoardController().refresh();
         });
         jfxDialogLayout.setActions(save);
         dialog.show();
@@ -365,6 +357,7 @@ public class GoodsClassificationTreeView extends CheckTreeView<GoodsClassificati
                 if (son.getFatherID().equals(fatherId)) {
                     CheckBoxTreeItem<GoodsClassificationVO> sonTreeItem = new CheckBoxTreeItem<>(son);
                     sonTreeItem.setIndependent(true);
+                    sonTreeItem.setGraphic(imageView);
 
                     item.getChildren().add(sonTreeItem);
                     que.offer(son);
@@ -384,7 +377,13 @@ public class GoodsClassificationTreeView extends CheckTreeView<GoodsClassificati
         List<String> goodsId = son.getGoodsID();
         for (String goodId : goodsId) {
             System.out.println(goodId);
-            GoodsVO goodsVO = goodsbl.showDetail(goodId);
+
+            GoodsVO goodsVO = new GoodsVO();
+            if(goodId.equals(""))
+                continue;
+
+            System.out.println(goodId);
+            goodsVO = goodsbl.showDetail(goodId);
 
             GoodsClassificationVO goodsClassificationVO = new GoodsClassificationVO();
             goodsClassificationVO.setName(goodId);
@@ -422,25 +421,8 @@ public class GoodsClassificationTreeView extends CheckTreeView<GoodsClassificati
         jfxDialogLayout.setHeading(new Label("警告"));
         JFXTextField name = new JFXTextField();
         jfxDialogLayout.setBody(new JFXTextField(infomation));
-        JFXButton back = new JFXButton("取消删除");
+        JFXButton back = new JFXButton("取消");
         JFXDialog dialog = new JFXDialog(PaneFactory.getMainPane(), jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
-
-        back.setOnAction(e -> {
-            dialog.close();
-        });
-        jfxDialogLayout.setActions(back);
-        dialog.show();
-    }
-
-    private void sureDialog(String infomation){
-
-        JFXDialogLayout jfxDialogLayout = new JFXDialogLayout();
-        jfxDialogLayout.setPrefWidth(220.0);
-        jfxDialogLayout.setHeading(new Label("警告"));
-        JFXTextField name = new JFXTextField();
-        jfxDialogLayout.setBody(new JFXTextField(infomation));
-        JFXButton back = new JFXButton("确定");
-        JFXDialog dialog = new JFXDialog(mainpane, jfxDialogLayout, JFXDialog.DialogTransition.CENTER);
 
         back.setOnAction(e -> {
             dialog.close();

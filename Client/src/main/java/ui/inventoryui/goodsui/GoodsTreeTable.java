@@ -10,6 +10,8 @@ import ui.util.*;
 import vo.inventoryVO.GoodSearchVO;
 import vo.inventoryVO.GoodsVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Set;
 
@@ -67,7 +69,18 @@ public class GoodsTreeTable extends ReceiptTreeTable<GoodsVO> {
             @Override
             public TreeTableCell<GoodsVO, Boolean> call(TreeTableColumn<GoodsVO, Boolean> param) {
                 MultiCell multiCell = new MultiCell();
-                multiCell.setRunnable1(()->{GoodDetailPane goodDetailPane = new GoodDetailPane(((GoodsVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getId()); goodDetailPane.refresh(true);});
+                multiCell.setRunnable1(()->{
+                    GoodDetailPane goodDetailPane = null;
+                    try {
+                        goodDetailPane = new GoodDetailPane(((GoodsVO)multiCell.getTreeTableRow().getTreeItem().getValue()).getId());
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    } catch (NotBoundException e) {
+                        e.printStackTrace();
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                    goodDetailPane.refresh(true);});
                 multiCell.setRunnable2(()->{
                     try {
                         goodsblService.deleteGoods(((GoodsVO)multiCell.getTreeTableRow().getTreeItem().getValue()));
@@ -82,7 +95,16 @@ public class GoodsTreeTable extends ReceiptTreeTable<GoodsVO> {
         this.setRowFactory(tableView-> {
             JFXTreeTableRow<GoodsVO> row = new JFXTreeTableRow();
             RowSetter(row,()->{
-                GoodDetailPane goodDetailPane = new GoodDetailPane(row.getTreeItem().getValue().getId());
+                GoodDetailPane goodDetailPane = null;
+                try {
+                    goodDetailPane = new GoodDetailPane(row.getTreeItem().getValue().getId());
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                } catch (NotBoundException e) {
+                    e.printStackTrace();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
                 goodDetailPane.refresh(true);});
             return row;
         });

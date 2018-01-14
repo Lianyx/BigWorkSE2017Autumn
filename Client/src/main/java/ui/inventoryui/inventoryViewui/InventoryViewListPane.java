@@ -69,6 +69,8 @@ public class InventoryViewListPane extends ReceiptListPane<InventoryViewItemVO> 
                     e.printStackTrace();
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 return false;
             };

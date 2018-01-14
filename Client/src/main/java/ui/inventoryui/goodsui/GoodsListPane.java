@@ -2,6 +2,7 @@ package ui.inventoryui.goodsui;
 
 import blService.goodsblService.GoodsblService;
 import businesslogic.goodsbl.Goodsbl;
+import com.jfoenix.controls.JFXTreeTableRow;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.BorderPane;
 
@@ -10,6 +11,8 @@ import ui.util.*;
 import vo.inventoryVO.GoodSearchVO;
 import vo.inventoryVO.GoodsVO;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,7 +30,7 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO> {
 
     public GoodsListPane() throws Exception {
         super("/inventoryui/goodui/goodslistpane.fxml");
-        this.goodsblService = new Goodsbl();//ServiceFactory_Stub.getService(GoodsblService.class.getName());// new Goodsbl();
+        this.goodsblService = new Goodsbl();
         receiptTreeTable = new GoodsTreeTable();
         receiptTreeTable.setPrefSize(600, 435);
         receiptTreeTable.keywordProperty().bind(match);
@@ -47,7 +50,7 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO> {
         boardController.Loading();
         try {
             DoubleButtonDialog buttonDialog =
-                    new DoubleButtonDialog(mainpane, "Wrong", "sabi", "Last", "Ret");
+                    new DoubleButtonDialog(mainpane, "错误", "！！！！", "返回", "取消");
             buttonDialog.setButtonTwo(() -> boardController.Ret());
             buttonDialog.setButtonTwo(() -> refresh(false));
 
@@ -71,7 +74,7 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO> {
                         pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
                         receiptTreeTable.createPage(0);
                         borderpane.setBottom(pagination);
-//                        switchPane(toSwitch);
+
                         BoardController.getBoardController().switchTo(this);
                     }, buttonDialog, p);
 
@@ -86,24 +89,20 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO> {
 
     @Override
     public void deleteList() {
-        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Delete", "sabi", "Yes", "No");
-        doubleButtonDialog.setButtonOne(() -> {
-            receiptTreeTable.delete(pagination);
- /*                   JFXTreeTableRow<GoodsVO> row = new JFXTreeTableRow();
-                    // RowSetter(row,()->{
-                    String goodId = row.getTreeItem().getValue().getId();
-                    System.out.println(goodId);
-         *//*   try {
-                goodsblService.deleteGoods(new GoodsVO(goodId));
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }*//*
-                    // return row;*/
-        });
+       /* if(receiptTreeTable.chosenItem.getSet().size()==0){
+            OneButtonDialog oneButtonDialog = new OneButtonDialog(mainpane,"","请选择商品","继续");
+            oneButtonDialog.setButtonOne(()->{});
+            oneButtonDialog.show();
+        }else {*/
+            DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "警告", "确认删除？", "确认", "取消");
+            doubleButtonDialog.setButtonOne(() -> {
+                receiptTreeTable.delete(pagination);
+            });
 
-        doubleButtonDialog.setButtonTwo(() -> {
-        });
-        doubleButtonDialog.show();
+            doubleButtonDialog.setButtonTwo(() -> {
+            });
+            doubleButtonDialog.show();
+      /*  }*/
     }
 
     @Override
@@ -121,15 +120,15 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO> {
             pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
             receiptTreeTable.createPage(0);
             borderpane.setBottom(pagination);
-//            switchPane(false);
+
             BoardController.getBoardController().switchTo(this);
         }
 
     }
 
     @Override
-    public void add() {
-        System.out.println("????");
-        GoodDetailPane goodDetailPane = new GoodDetailPane(true);
+    public void add() throws RemoteException, NotBoundException, MalformedURLException {
+
     }
+
 }
