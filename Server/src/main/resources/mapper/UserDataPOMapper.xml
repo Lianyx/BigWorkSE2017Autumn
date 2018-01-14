@@ -5,7 +5,7 @@
 <mapper namespace="mapper.UserDataPOMapper">
     <resultMap id="resultMap" type="po.UserPO">
         <result column="userId" property="userId"/>
-
+        <result column="image" property="image" jdbcType="BLOB" typeHandler="org.apache.ibatis.type.BlobTypeHandler"/>
     </resultMap>
 
     <select id="getId" resultType="int">
@@ -16,12 +16,12 @@
     SELECT * from user where username like #{username}
     </select>
     <insert id="insert">
-        INSERT INTO User(userId,username,usertype,createTime,facebook,github,twitter,email,phone,comment,password,isDeleted)
-        VALUES (#{userId},#{username},#{usertype},#{createTime},#{facebook},#{github},#{twitter},#{email},#{phone},#{comment},#{password},#{isDeleted})
+        INSERT INTO User(userId,username,image,usertype,createTime,facebook,github,twitter,email,phone,comment,password,isDeleted)
+        VALUES (#{userId},#{username},#{image},#{usertype},#{createTime},#{facebook},#{github},#{twitter},#{email},#{phone},#{comment},#{password},#{isDeleted})
     </insert>
 
     <update id="update">
-        update User set username=#{username},usertype=#{usertype},createTime=#{createTime},facebook=#{facebook},github=#{github},twitter=#{twitter},email=#{email},phone=#{phone},comment=#{comment},password=#{password},isDeleted=#{isDeleted}
+        update User set username=#{username},image=#{image},usertype=#{usertype},createTime=#{createTime},facebook=#{facebook},github=#{github},twitter=#{twitter},email=#{email},phone=#{phone},comment=#{comment},password=#{password},isDeleted=#{isDeleted}
         where userId = #{userId}
     </update>
 

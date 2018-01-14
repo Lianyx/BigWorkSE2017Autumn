@@ -23,7 +23,6 @@ public class Userbl implements UserManagerblService {
     private UserDataService userDataService;
 
     public Userbl() throws RemoteException, MalformedURLException, NotBoundException {
-        System.out.println(url+"UserData");
         userDataService = (UserDataService) Naming.lookup( url+"UserData");
     }
 

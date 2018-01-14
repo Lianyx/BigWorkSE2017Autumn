@@ -132,13 +132,12 @@ public class UserListPane extends RefreshablePane {
     @FXML
     private void search() {
         if (!searchField.getText().equals("")) {
-            match.setValue(searchField.getText().toLowerCase());
-            ArrayList<UserListVO> templist = new ArrayList<>();
+            match.setValue(searchField.getText());
+            ArrayList<UserListVO> templist = list;
             templist = templist.stream().filter(
                     s -> s.getUserCategory().name().contains(match.get()) ||
                             s.getUserName().contains(match.get())||
-                            s.getPhone().contains(match.get())||
-                            s.getEmail().contains(match.get())
+                            String.valueOf(s.getUserID()).contains(match.get())
             ).collect(Collectors.toCollection(ArrayList::new));
             userTreeTablePane.refresh(templist);
         }
@@ -179,97 +178,5 @@ public class UserListPane extends RefreshablePane {
             }
         })).start();
     }
-    /*
-    UserManagerblService userManagerblService;
 
-    private static UserSearchCondition userSearchVO = new UserSearchCondition();
-
-    private static UserFilterPane userFilterPane;
-
-    SimpleStringProperty match = new SimpleStringProperty("");
-
-    public UserListPane() throws Exception{
-        super("/userui/userlistpane.fxml");
-        this.userManagerblService = new Userbl();
-        receiptTreeTable = new UserTreeTable();
-        receiptTreeTable.setPrefSize(600,435);
-        receiptTreeTable.keywordProperty().bind(match);
-        borderpane.setTop(new BorderPane(receiptTreeTable));
-
-        userFilterPane = new UserFilterPane(filterPopOver, userSearchVO);
-        filterPopOver.setDetachable(false);
-        filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
-        filterPopOver.setContentNode(userFilterPane);
-        filter.setOnMouseClicked(e -> filterPopOver.show(filter));
-    }
-
-
-    @FXML
-    public void deleteList(){
-        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane,"Delete","sabi","Yes","No");
-        doubleButtonDialog.setButtonOne(()->{receiptTreeTable.delete(pagination); });
-        doubleButtonDialog.setButtonTwo(()->{});
-        doubleButtonDialog.show();
-    }
-
-    @Override
-    public void search() {
-        if (!searchField.getText().equals("")) {
-            match.setValue(searchField.getText().toLowerCase());
-            Set<UserListVO> hashSet;
-            hashSet = set.stream().filter(
-                    s -> s.getUserCategory().name().contains(match.get()) ||
-                            s.getUsername().contains(match.get())||
-                            s.getPhone().contains(match.get())||
-                            s.getEmail().contains(match.get())
-            ).collect(Collectors.toSet());
-            receiptTreeTable.setReceipts(hashSet);
-            pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
-            receiptTreeTable.createPage(0);
-            borderpane.setBottom(pagination);
-            switchPane(false);
-        }
-    }
-    @Override
-    public void add()
-    {
-        System.out.println("????");
-        UserDetailPane userDetailPane = new UserDetailPane(true);
-    }
-
-    @Override
-    public void refresh(boolean toSwitch) {
-        boardController.Loading();
-        try {
-            DoubleButtonDialog buttonDialog =
-                    new DoubleButtonDialog(mainpane, "Wrong", "sabi", "Last", "Ret");
-            buttonDialog.setButtonTwo(() -> boardController.Ret());
-            buttonDialog.setButtonTwo(() -> refresh(false));
-            Predicate<Integer> p = (s) -> {
-                try{
-                if((set = userManagerblService.search(userSearchVO)) != null)
-                    return true;
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return false;
-            };
-            GetTask getTask =
-                    new GetTask(() -> {
-                        receiptTreeTable.setReceipts(set);
-                        pagination.setPageCount(receiptTreeTable.getObservableList().size() / receiptTreeTable.getRowsPerPage() + 1);
-                        receiptTreeTable.createPage(0);
-                        borderpane.setBottom(pagination);
-                        switchPane(toSwitch);
-                    }, buttonDialog, p);
-
-            new Thread(getTask).start();
-        } catch (Exception e) {
-            System.exit(1);
-            e.printStackTrace();
-
-        }
-
-    }
-*/
 }

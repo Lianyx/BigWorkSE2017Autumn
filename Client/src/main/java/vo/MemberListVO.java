@@ -5,35 +5,18 @@ import util.MemberCategory;
 import vo.abstractVO.SelectableVO;
 
 public class MemberListVO extends SelectableVO<MemberListVO>{
-    int degree;
-    String name;
-    Image image;
-    int memberId;
-    MemberCategory memberCategory;
-    String clerkName;
+    private int degree;
+    private String name;
+    private Image image;
+    private int memberId;
+    private MemberCategory memberCategory;
+    private String clerkName;
+    private double debt;
+    private double credit;
     boolean multiple = true;
     MemberVO memberVO;
 
     public MemberListVO() {
-    }
-
-
-    public MemberListVO(int degree, String name, Image image, int memberId, MemberCategory memberCategory, String clerk) {
-        this.degree = degree;
-        this.name = name;
-        this.image = image;
-        this.memberId = memberId;
-        this.memberCategory = memberCategory;
-        this.clerkName = clerk;
-    }
-
-    public MemberListVO(int degree, String name, int memberId, MemberCategory memberCategory, String clerkName) {
-        this.degree = degree;
-        this.name = name;
-        this.image = new Image("/default/timg.jpg");
-        this.memberId = memberId;
-        this.memberCategory = memberCategory;
-        this.clerkName = clerkName;
     }
 
     public MemberVO toVO(){
@@ -108,8 +91,19 @@ public class MemberListVO extends SelectableVO<MemberListVO>{
     }
 
 
-    public MemberChooseVO toChooseVO(){
-        return new MemberChooseVO(this.name,this.memberId);
+    public double getDebt() {
+        return debt;
     }
 
+    public void setDebt(double debt) {
+        this.debt = debt;
+    }
+
+    public double getCredit() {
+        return credit;
+    }
+
+    public void setCredit(double credit) {
+        this.credit = credit;
+    }
 }

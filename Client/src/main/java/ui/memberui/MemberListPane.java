@@ -11,10 +11,7 @@ import javafx.fxml.FXMLLoader;
 import org.controlsfx.control.PopOver;
 import ui.common.BoardController;
 import ui.common.dialog.MyTwoButtonDialog;
-import ui.util.DoubleButtonDialog;
-import ui.util.GetTask;
-import ui.util.PaneFactory;
-import ui.util.RefreshablePane;
+import ui.util.*;
 import util.MemberSearchCondition;
 import vo.MemberListVO;
 import vo.UserListVO;
@@ -102,12 +99,9 @@ public class MemberListPane extends RefreshablePane {
         new MyTwoButtonDialog("请确认删除", () -> {
             BoardController myBoardController = BoardController.getBoardController();
             myBoardController.Loading();
-            ArrayList<UserListVO> tempList = new ArrayList<>();
-
-            DoubleButtonDialog buttonDialog = new DoubleButtonDialog(PaneFactory.getMainPane(), "Wrong", "连接失败", "重试", "返回");
+            DoubleButtonDialog buttonDialog = new DoubleButtonDialog(PaneFactory.getMainPane(), "错误", "连接失败", "重试", "返回");
             buttonDialog.setButtonOne(this::deleteList);
             buttonDialog.setButtonTwo(myBoardController::Ret);
-
             GetTask getTask = new GetTask(() -> {
                 memberTreeTable.refresh(list);
                 myBoardController.switchTo(this);
@@ -140,7 +134,6 @@ public class MemberListPane extends RefreshablePane {
             templist = templist.stream().filter(
                     s -> s.getMemberCategory().name().contains(match.get()) ||
                             s.getName().contains(match.get())||
-                            s.getClerkName().contains(match.get())||
                             String.valueOf(s.getMemberId()).contains(match.get())
             ).collect(Collectors.toCollection(ArrayList::new));
             memberTreeTable.refresh(templist);

@@ -33,13 +33,5 @@ public class Loginbl implements LoginblService{
         return new UserVO(loginDataService.getCategory(username));
     }
 
-    public static void main(String args[]){
-        try {
-            Loginbl loginbl = new Loginbl();
-            System.out.println(loginbl.login("admin","admin"));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
 }

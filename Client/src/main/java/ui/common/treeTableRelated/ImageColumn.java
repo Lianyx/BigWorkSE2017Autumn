@@ -9,5 +9,6 @@ public class ImageColumn extends JFXTreeTableColumn {
         this.setPrefWidth(60);
         this.setCellValueFactory(new TreeItemPropertyValueFactory<>("image"));
         this.setCellFactory(p->new ImageCell());
+        this.setText(head);
     }
 }

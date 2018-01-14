@@ -8,6 +8,7 @@ public class MemberPO implements Serializable{
     private int memberId;
     private MemberCategory memberCategory; // 分为进货商和销售商
     private int VIPgrade; // 1~5
+    private byte[] image;
     private String memberName;
     private String clerkName;
     private String phoneNumber;
@@ -23,9 +24,10 @@ public class MemberPO implements Serializable{
     }
 
 
-    public MemberPO(int memberId, MemberCategory memberCategory,int VIPgrade, String memberName, String clerkName, String phoneNumber, String address, String zipCode, String emailAddress, double debtCeiling, double debt, double credit, String comment) {
+    public MemberPO(int memberId, MemberCategory memberCategory,byte[] image,int VIPgrade, String memberName, String clerkName, String phoneNumber, String address, String zipCode, String emailAddress, double debtCeiling, double debt, double credit, String comment) {
         this.memberId = memberId;
         this.memberCategory = memberCategory;
+        this.image = image;
         this.VIPgrade = VIPgrade;
         this.memberName = memberName;
         this.clerkName = clerkName;
@@ -39,9 +41,10 @@ public class MemberPO implements Serializable{
         this.comment = comment;
     }
 
-    public MemberPO(int memberId, MemberCategory memberCategory, int VIPgrade, String memberName, String clerkName, String phoneNumber, String address, String zipCode, String emailAddress, double debtCeiling, double debt, double credit, int isDeleted, String comment) {
+    public MemberPO(int memberId, MemberCategory memberCategory,byte[] image,int VIPgrade, String memberName, String clerkName, String phoneNumber, String address, String zipCode, String emailAddress, double debtCeiling, double debt, double credit, int isDeleted, String comment) {
         this.memberId = memberId;
         this.memberCategory = memberCategory;
+        this.image = image;
         this.VIPgrade = VIPgrade;
         this.memberName = memberName;
         this.clerkName = clerkName;
@@ -159,6 +162,7 @@ public class MemberPO implements Serializable{
     public void setIsDeleted(int isDeleted) {
         this.isDeleted = isDeleted;
     }
+
     public String getComment() {
         return comment;
     }
@@ -167,4 +171,11 @@ public class MemberPO implements Serializable{
         this.comment = comment;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 }

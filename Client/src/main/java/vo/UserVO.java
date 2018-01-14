@@ -2,6 +2,7 @@ package vo;
 
 import javafx.scene.image.Image;
 import po.UserPO;
+import ui.userui.usermanagerui.UserDetailPane;
 import util.ImageConvertor;
 import util.UserCategory;
 
@@ -29,9 +30,6 @@ public class UserVO {
 
     public UserVO(UserPO po){
         this.id=po.getUserId();
-        if(po.getImage()==null)
-            this.setImage(new Image("/default/timg.jpg"));
-        else
         this.image = ImageConvertor.getFXImage(ImageConvertor.getImage(po.getImage()));
         this.username = po.getUsername();
         this.usertype = po.getUsertype();
@@ -43,37 +41,6 @@ public class UserVO {
         this.comment = po.getComment();
         this.password = po.getPassword();
 
-    }
-
-    public UserVO(int id, String username, UserCategory usertype, LocalDateTime createTime, String facebook, String github, String twitter, String email, String phone, String comment, String password, boolean isDeleted) {
-        this.id = id;
-        this.username = username;
-        this.usertype = usertype;
-        this.createTime = createTime;
-        this.facebook = facebook;
-        this.github = github;
-        this.twitter = twitter;
-        this.email = email;
-        this.phone = phone;
-        this.comment = comment;
-        this.password = password;
-        this.isDeleted = isDeleted;
-    }
-
-
-    public UserVO(int id, Image image, String username, UserCategory usertype, LocalDateTime createTime, String facebook, String github, String twitter, String email, String phone, String comment, String password) {
-        this.id = id;
-        this.image = image;
-        this.username = username;
-        this.usertype = usertype;
-        this.createTime = createTime;
-        this.facebook = facebook;
-        this.github = github;
-        this.twitter = twitter;
-        this.email = email;
-        this.phone = phone;
-        this.comment = comment;
-        this.password = password;
     }
 
     public LocalDateTime getCreateTime() {
@@ -210,6 +177,9 @@ public class UserVO {
         return userListVO;
     }
 
+    public UserDetailPane getDetailPane(){
+        return new UserDetailPane(this);
+    }
 
 
 }

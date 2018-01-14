@@ -5,6 +5,7 @@
 <mapper namespace="mapper.MemberPOMapper">
     <resultMap id="resultMap" type="po.MemberPO">
         <result column="memberId" property="memberId"/>
+        <result column="image" property="image" jdbcType="BLOB" typeHandler="org.apache.ibatis.type.BlobTypeHandler"/>
     </resultMap>
 
     <select id="getId" resultType="int">
@@ -12,12 +13,12 @@
     </select>
 
     <insert id="insert">
-        INSERT INTO Member(memberId,memberCategory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDeleted,comment)
-        VALUES (#{memberId},#{memberCategory},#{VIPgrade},#{memberName},#{clerkName},#{phoneNumber},#{address},#{zipCode},#{emailAddress},#{debtCeiling},#{debt},#{credit},#{isDeleted},#{comment})
+        INSERT INTO Member(memberId,memberCategory,image,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDeleted,comment)
+        VALUES (#{memberId},#{memberCategory},#{image},#{VIPgrade},#{memberName},#{clerkName},#{phoneNumber},#{address},#{zipCode},#{emailAddress},#{debtCeiling},#{debt},#{credit},#{isDeleted},#{comment})
     </insert>
 
     <update id="update">
-        update Member set memberId=#{memberId},memberCategory=#{memberCategory},VIPgrade=#{VIPgrade},memberName=#{memberName},clerkName=#{clerkName},phoneNumber=#{phoneNumber},address=#{address},zipCode=#{zipCode},emailAddress=#{emailAddress},debtCeiling=#{debtCeiling},debt=#{debt},credit=#{credit},isDeleted=#{isDeleted},comment=#{comment}
+        update Member set memberId=#{memberId},memberCategory=#{memberCategory},image=#{image},VIPgrade=#{VIPgrade},memberName=#{memberName},clerkName=#{clerkName},phoneNumber=#{phoneNumber},address=#{address},zipCode=#{zipCode},emailAddress=#{emailAddress},debtCeiling=#{debtCeiling},debt=#{debt},credit=#{credit},isDeleted=#{isDeleted},comment=#{comment}
         where memberId = #{memberId}
     </update>
 
@@ -35,7 +36,7 @@
                 memberCategory = #{memberCategory}
             </if>
             <if test="degree != 0">
-                AND VIPgrade &gt;= #{degree}
+                AND VIPgrade = #{degree}
             </if>
         </where>
     </select>

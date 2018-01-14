@@ -48,7 +48,7 @@ public class MemberVO {
         this.name = memberPO.getMemberName();
         this.zipCode = memberPO.getZipCode();
         this.comment = memberPO.getComment();
-        this.image = new Image("/default/timg.jpg");
+        this.image = ImageConvertor.getFXImage(ImageConvertor.getImage(memberPO.getImage()));
         this.address = memberPO.getAddress();
         this.clerkName = memberPO.getClerkName();
         this.degree = memberPO.getVIPgrade();
@@ -70,6 +70,7 @@ public class MemberVO {
         memberPO.setEmailAddress(email);
         memberPO.setCredit(get);
         memberPO.setDebt(give);
+        memberPO.setImage(ImageConvertor.getByte(ImageConvertor.getBuffered(image)));
         memberPO.setDebtCeiling(receiableAmount);
         memberPO.setVIPgrade(degree);
         memberPO.setComment(comment);
@@ -89,6 +90,8 @@ public class MemberVO {
         memberListVO.setName(name);
         memberListVO.setMemberId(memberId);
         memberListVO.setMemberVO(this);
+        memberListVO.setDebt(give);
+        memberListVO.setCredit(get);
         return memberListVO;
     }
 

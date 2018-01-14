@@ -24,7 +24,7 @@ public class LoginData extends UnicastRemoteObject implements LoginDataService {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             UserDataPOMapper mapper = session.getMapper(UserDataPOMapper.class);
             UserPO userPO = mapper.getPassword(username);
-            if(userPO.getPassword().equals(password)){
+            if(userPO!=null&&userPO.getPassword().equals(password)){
                 return ResultMessage.SUCCESS;
             }else{
                 return ResultMessage.FAIL;
@@ -34,7 +34,7 @@ public class LoginData extends UnicastRemoteObject implements LoginDataService {
 
     @Override
     public UserPO getCategory(String username) {
-            try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
                 UserDataPOMapper mapper = session.getMapper(UserDataPOMapper.class);
                 UserPO userPO = mapper.getPassword(username);
                 return userPO;

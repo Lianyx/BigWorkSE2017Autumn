@@ -28,11 +28,15 @@ public class MemberData extends UnicastRemoteObject implements MemberdataService
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             MemberPOMapper mapper = session.getMapper(MemberPOMapper.class);
             int i = mapper.getId();
-            System.out.println(i);
             MemberPO memberPO = new MemberPO();
             memberPO.setMemberId(i);
             memberPO.setIsDeleted(0);
             memberPO.setMemberCategory(MemberCategory.SELLER);
+            try {
+                memberPO.setImage(ImageConvertor.getByte(ImageIO.read(getClass().getResource("/default/timg.jpg"))));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             insert(memberPO);
             return memberPO;
         }
