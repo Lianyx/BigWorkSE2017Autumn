@@ -2,6 +2,8 @@ package vo;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.Node;
+import ui.accountantui.AccountDetailPane;
 import vo.abstractVO.SelectableVO;
 
 import java.io.Serializable;
@@ -65,5 +67,9 @@ public class AccountListVO extends SelectableVO<AccountListVO> implements Serial
 
     public void setMultiple(boolean multiple) {
         this.multiple = multiple;
+    }
+
+    public  AccountDetailPane getDetailPane(){
+        return new AccountDetailPane(this);
     }
 }

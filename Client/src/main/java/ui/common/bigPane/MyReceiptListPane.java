@@ -89,7 +89,7 @@ public abstract class MyReceiptListPane<TL extends ReceiptListVO<TL>, TV extends
     @FXML
     private void deleteList() {
         if (chosenItems.isEmpty()) {
-            new MyOneButtonDialog("请选择删除单据").show();
+            new MyOneButtonDialog("请选择删除项目").show();
             return;
         }
         for (TL chosenItem : new ArrayList<>(chosenItems)) {

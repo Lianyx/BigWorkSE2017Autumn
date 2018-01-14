@@ -1,11 +1,16 @@
 package businesslogic.promotionbl.testprmt;
 
-import blService.promotionblService.PromotionInfo;
+import blService.promotionblService.*;
 import blService.salesblService.SalesSellblService;
 import businesslogic.blServiceFactory.MyServiceFactory;
+import businesslogic.blServiceFactory.MyblServiceFactory;
+import businesslogic.promotionbl.PromotionListbl;
 import businesslogic.salesbl.SalesSellbl;
 import vo.ListGoodsItemVO;
+import vo.promotionVO.CombinePromotionVO;
+import vo.promotionVO.MemberPromotionVO;
 import vo.promotionVO.PromotionVO;
+import vo.promotionVO.TotalPromotionVO;
 import vo.receiptVO.SalesSellReceiptVO;
 
 import java.util.ArrayList;
@@ -25,10 +30,10 @@ public class TestSelectInEffect {
         try {
             // 这里测试match
             ArrayList<ListGoodsItemVO> list = new ArrayList<>();
-            ListGoodsItemVO r1 = new ListGoodsItemVO("花灯2", "122", "小灯1", 54, 2, "nishisabi");
-            ListGoodsItemVO r2 = new ListGoodsItemVO("花灯2", "122", "小灯1", 54, 2, "nishisabi");
-            ListGoodsItemVO r3 = new ListGoodsItemVO("花灯2", "122", "小灯1", 54, 2, "nishisabi");
-            ListGoodsItemVO r4 = new ListGoodsItemVO("花灯2", "122", "小灯1", 54, 2, "nishisabi");
+            ListGoodsItemVO r1 = new ListGoodsItemVO("花灯3", "123", "大灯2", 29, 2, "nishisabi");
+            ListGoodsItemVO r2 = new ListGoodsItemVO("花灯3", "123", "大灯2", 29, 2, "nishisabi");
+            ListGoodsItemVO r3 = new ListGoodsItemVO("花灯3", "123", "大灯2", 29, 2, "nishisabi");
+            ListGoodsItemVO r4 = new ListGoodsItemVO("花灯3", "123", "大灯2", 29, 2, "nishisabi");
             list.add(r1);
             list.add(r2);
             list.add(r3);
@@ -36,8 +41,16 @@ public class TestSelectInEffect {
 
             SalesSellblService salesSellblService= new SalesSellbl();
             SalesSellReceiptVO ssr = salesSellblService.getNew();
-            ssr.setMemberLevel(4);
+//            ssr.setMemberLevel(4);
             ssr.setItems(list);
+
+            PromotionListblService plist = MyblServiceFactory.getService(PromotionListblService.class);
+
+            PromotionblService<CombinePromotionVO> combinePromotionblService = MyblServiceFactory.getService(CombinePromotionblService.class);;
+            PromotionblService<MemberPromotionVO> memberPromotionblService = MyblServiceFactory.getService(MemberPromotionblService.class);
+            PromotionblService<TotalPromotionVO> totalPromotionblService = MyblServiceFactory.getService(TotalPromotionblService.class);
+
+            combinePromotionblService.selectInEffect().forEach(x -> x.getGoodsCombination().forEach(c -> System.out.println(c.getName())));
 
             PromotionInfo promotionInfo = MyServiceFactory.getPromotionInfo();
             ArrayList<PromotionVO> promotionVOS =  promotionInfo.getMatch(ssr);

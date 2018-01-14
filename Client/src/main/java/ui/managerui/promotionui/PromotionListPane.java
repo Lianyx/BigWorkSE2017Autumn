@@ -23,6 +23,7 @@ import vo.promotionVO.PromotionVO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 public class PromotionListPane extends FilterableListPane<PromotionVO> { // TODO Refreshable改成接口吧？
@@ -85,6 +86,7 @@ public class PromotionListPane extends FilterableListPane<PromotionVO> { // TODO
     protected void initiateFields() {
         super.initiateFields();
         promotionSearchVO = new PromotionSearchVO();
+        chosenItems = new HashSet<>();
     }
 
     /**

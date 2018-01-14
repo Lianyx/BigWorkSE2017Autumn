@@ -20,7 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class BusinessProgressPane extends FilterableListPane<ReceiptVO> implements ExcelExportableMixer {
-    private Set<ReceiptVO> chosenItems = new HashSet<>(); // chosenItems这个都是自己的?
+    private Set<ReceiptVO> chosenItems;// chosenItems这个都是自己的?
     private BusinessProgressblService businessProgressblService;
 
     private ReceiptSearchCondition searchCondition;
@@ -61,6 +61,7 @@ public class BusinessProgressPane extends FilterableListPane<ReceiptVO> implemen
     protected void initiateFields() {
         super.initiateFields();
         searchCondition = new ReceiptSearchCondition();
+        chosenItems = new HashSet<>();
     }
 
     /**
