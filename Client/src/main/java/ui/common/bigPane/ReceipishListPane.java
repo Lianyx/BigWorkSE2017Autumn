@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class ReceipishPane<TR extends ReceipishVO<TR>> extends FilterableListPane<TR> {
-    protected Set<PromotionVO> chosenItems;
+public abstract class ReceipishListPane<TR extends ReceipishVO<TR>> extends FilterableListPane<TR> {
+    protected Set<TR> chosenItems;
 
 //    @Override
 //    protected AnchorPane getInitialFilterPane(PopOver filterPopOver) {
