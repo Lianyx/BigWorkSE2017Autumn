@@ -64,6 +64,8 @@ public class AccountListPane extends ListPane<AccountListVO> {
                 for(AccountListVO vo:chosenItems) {
                     try{
                         accountblService.delete(vo.getID());
+                        chosenItems.remove(vo);
+                        refresh(true);
                     }catch (RemoteException e){
                         e.printStackTrace();
                     }
@@ -72,7 +74,7 @@ public class AccountListPane extends ListPane<AccountListVO> {
             doubleButtonDialog.setButtonTwo(() -> {
             });
             doubleButtonDialog.show();
-            refresh(true);
+
         }
 
     }
