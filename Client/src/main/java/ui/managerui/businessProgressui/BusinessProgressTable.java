@@ -25,7 +25,6 @@ public class BusinessProgressTable extends MyTreeTableBorderPane<ReceiptVO> {
 //        myTreeTable.getColumns().addAll(choose, idColumn, lastModifiedTimeColumn, operatorColumn);
 
         // TODO 这个是checkTable复制过来的
-
         JFXTreeTableColumn<ReceiptVO, Boolean> choose = new ChooseColumn<>(chosenItems);
         JFXTreeTableColumn<ReceiptVO, String> idColumn = new SearchableStringColumn<>("编号", 200, keywordProperty, ReceiptVO::getId);
         JFXTreeTableColumn<ReceiptVO, String> lastModifiedTimeColumn = new SearchableStringColumn<>("提交时间", 100, keywordProperty, p -> p.getLastModifiedTime().toLocalDate().toString());

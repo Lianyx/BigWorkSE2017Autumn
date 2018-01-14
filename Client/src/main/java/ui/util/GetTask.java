@@ -17,13 +17,9 @@ public class GetTask extends Task<Boolean> {
 
     private SimpleIntegerProperty integerProperty = new SimpleIntegerProperty(-1);
 
-    Runnable business;
+    private Runnable business;
 
-    Predicate<Integer> p;
-
-    public int getIntegerProperty() {
-        return integerProperty.get();
-    }
+    private Predicate<Integer> p;
 
     /**
      * @Author: Lin Yuchao
@@ -35,9 +31,9 @@ public class GetTask extends Task<Boolean> {
         this.business = business;
         this.p = p;
         this.valueProperty().addListener((b, o, n) -> {
-            if (getIntegerProperty() == 1) {
+            if (integerProperty.get() == 1) {
                 Platform.runLater(runnable);
-            } else if (getIntegerProperty() == 0) {
+            } else if (integerProperty.get() == 0) {
                 dialog.show();
             }
         });

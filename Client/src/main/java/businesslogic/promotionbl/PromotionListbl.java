@@ -56,12 +56,13 @@ public class PromotionListbl implements PromotionListblService, PromotionInfo {
     @Override
     public ArrayList<PromotionVO> getMatch(SalesSellReceiptVO salesSellReceiptVO) throws RemoteException {
         ArrayList<PromotionVO> resultList = new ArrayList<>();
+
         resultList.addAll(combinePromotionblService.selectInEffect().stream().filter(c -> {
-            for (PromotionGoodsItemVO pvo: c.getGoodsCombination()) {
-                int numSum = 0;
-                if (salesSellReceiptVO.getItems().stream()
-                        .filter(lg -> lg.getGoodsId().equals(c.getId()))
-                        .mapToInt(ListGoodsItemVO::getGoodsNum).sum() < pvo.getNum()) {
+            for (PromotionGoodsItemVO pvo : c.getGoodsCombination()) {
+                int numSum = salesSellReceiptVO.getItems().stream()
+                        .filter(lg -> lg.getGoodsId().equals(pvo.getId()))
+                        .mapToInt(ListGoodsItemVO::getGoodsNum).sum();
+                if (numSum < pvo.getNum()) {
                     return false;
                 }
             }
@@ -69,9 +70,11 @@ public class PromotionListbl implements PromotionListblService, PromotionInfo {
         }).collect(Collectors.toCollection(ArrayList::new)));
 
         resultList.addAll(memberPromotionblService.selectInEffect().stream()
-                .filter(m -> salesSellReceiptVO.getMemberLevel() >= m.getRequiredLevel()).collect(Collectors.toCollection(ArrayList::new)));
+                .filter(m -> salesSellReceiptVO.getMemberLevel() >= m.getRequiredLevel())
+                .collect(Collectors.toCollection(ArrayList::new)));
         resultList.addAll(totalPromotionblService.selectInEffect().stream()
-                .filter(t -> salesSellReceiptVO.getOriginSum() >= t.getRequiredTotal()).collect(Collectors.toCollection(ArrayList::new)));
+                .filter(t -> salesSellReceiptVO.getOriginSum() >= t.getRequiredTotal())
+                .collect(Collectors.toCollection(ArrayList::new)));
         return resultList;
 //        ArrayList<ListGoodsItemVO> boughtGoods = salesSellReceiptVO.getItems();
 //
