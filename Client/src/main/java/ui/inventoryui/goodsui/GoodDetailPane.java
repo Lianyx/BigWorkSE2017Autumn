@@ -1,6 +1,7 @@
 package ui.inventoryui.goodsui;
 
 import blService.goodsblService.GoodsblService;
+import businesslogic.goodsbl.Goodsbl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
@@ -12,6 +13,8 @@ import ui.util.*;
 import vo.inventoryVO.GoodsVO;
 
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.function.Predicate;
@@ -55,7 +58,7 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
     @FXML
     Label date;
 
-    public GoodDetailPane(String id) {
+    public GoodDetailPane(String id) throws RemoteException, NotBoundException, MalformedURLException {
         this(false);
         this.goodId = id;
 
@@ -73,7 +76,7 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
             }
         });
 
-        goodName.disableProperty().bind(modifyState.not());
+      //  goodName.disableProperty().bind(modifyState.not());
 
 
         reset.visibleProperty().bind(modifyState);
@@ -88,19 +91,16 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
         return goodId;
     }
 
-    public GoodDetailPane(boolean isAdd) {
+    public GoodDetailPane(boolean isAdd) throws RemoteException, NotBoundException, MalformedURLException {
         super("/inventoryui/goodui/goodsdetail.fxml");
-        this.goodsblService = GoodsListPane.goodsblService;//ServiceFactory_Stub.getService(GoodsblService.class.getName());
-        //this.goodsblService = ServiceFactory_Stub.getService(GoodsblService.class.getName());
+        this.goodsblService = new Goodsbl();
+
 
         goodTextId.setDisable(true);
         classifyTextId.setDisable(true);
 
         delete.setVisible(false);
         date.setText(LocalDate.now().toString());
-
-       /* goodId = goodsblService.getID()
-        goodTextId.setText();*/
 
         RequireValid(goodName);
 
@@ -120,9 +120,7 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
             });
             textFieldPane.save(() -> {
                 dialog.close();
-                //password.setText(textFieldPane.getText());
             });
-            //  textFieldPane.setText(password.getText());
             textFieldPane.setPrompt("Password");
             dialog.show();
         });
@@ -135,16 +133,24 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
 
     @Override
     public void delete() {
-        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "Delete good", "Are you sure?", "Yes", "No");
+        System.out.println("dialog");
+        DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "删除商品", "确定删除？", "确定", "取消");
         doubleButtonDialog.setButtonOne(() -> {
+            GoodsVO goodsVO = new GoodsVO();
+            goodsVO.setId(goodTextId.getText());
+            goodsVO.setClassifyId(classifyTextId.getText());
+
+            try {
+                goodsblService.deleteGoods(goodsVO);
+                BoardController.getBoardController().goBack();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         });
         doubleButtonDialog.setButtonTwo(() -> {
-//            setBack();
-            // TODO by 连。
             BoardController.getBoardController().goBack();
         });
         doubleButtonDialog.show();
-
     }
 
     @Override
@@ -166,15 +172,13 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
     public void save() {
         if (valid()) {
             modify.modifyProperty().set(false);
-            DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "增加商品", "确定增加吗", "是", "否");
+            DoubleButtonDialog doubleButtonDialog = new DoubleButtonDialog(mainpane, "增加/更新商品", "确定增加吗/更新", "是", "否");
             doubleButtonDialog.setButtonTwo(() -> {
             });
             doubleButtonDialog.setButtonOne(() -> {
                 if (goodId.equals("-1")) {
                     try {
-                        System.out.println("save first");
                         goodId = goodsblService.getID(classifyId,order);
-                        System.out.println("isNull"+goodId);
                         goodTextId.setText(goodId);
                         goodsblService.addGoods(new GoodsVO(goodId, goodName.getText(), goodType.getText(), classifyId,
                                 Integer.parseInt(inventoryNum.getText()),
@@ -198,7 +202,6 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
                         e.printStackTrace();
                     }
                 }
-//                setBack();
                 BoardController.getBoardController().goBack();
             });
 
@@ -233,10 +236,16 @@ public class GoodDetailPane extends ReceiptDetailPane<GoodsVO> {
                 GetTask task =
                         new GetTask(() -> {
                             goodName.setText(vo.getGoodName());
+                            goodTextId.setText(vo.getId());
+                            classifyTextId.setText(vo.getClassifyId());
+                            goodType.setText(vo.getGoodType());
+                            inventoryNum.setText(String.valueOf(vo.getInventoryNum()));
+                            salePrice.setText(String.valueOf(vo.getSalePrice()));
+                            purPrice.setText(String.valueOf(vo.getPurPrice()));
+                            recentPurPrice.setText(String.valueOf(vo.getRecentPurPrice()));
+                            recentSalePrice.setText(String.valueOf(vo.getRecentSalePrice()));
+                            alarmNum.setText(String.valueOf(vo.getAlarmNumber()));
 
-                            //date.setText(vo.getDate());
-
-//                            switchPane(toSwitch);
                             BoardController.getBoardController().switchTo(this);
                         }, buttonDialog, p);
 

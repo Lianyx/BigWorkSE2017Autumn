@@ -29,8 +29,15 @@ public class GoodsClassificationInfo implements GoodsClassification_Goods {
         GoodsClassificationPO po = dataService.getById(classifyId);
         String[] oldGoodsId = po.getGoodsId();
 
-        String[] newGoodsId = Arrays.copyOf(oldGoodsId,oldGoodsId.length+1);
-        newGoodsId[oldGoodsId.length] = goodId;
+        String[] newGoodsId;
+        if(oldGoodsId == null)
+            newGoodsId = new String[]{goodId};
+        else {
+            newGoodsId = Arrays.copyOf(oldGoodsId, oldGoodsId.length + 1);
+            newGoodsId[oldGoodsId.length] = goodId;
+        }
+
+        po.setGoodsId(newGoodsId);
 
         dataService.update(po);
     }
@@ -47,15 +54,14 @@ public class GoodsClassificationInfo implements GoodsClassification_Goods {
 
         String[] oldGoodsId = po.getGoodsId();
 
-        String[] newGoodsId = new String[oldGoodsId.length-1];
-        for (int i = 0, j = 0; i < newGoodsId.length; i++,j++) {
-            if(oldGoodsId[j].equals(goodsId)){
-                j++;
+        for (int i = 0; i < oldGoodsId.length; i++) {
+            if(goodsId.equals(oldGoodsId[i])) {
+                oldGoodsId[i] = "";
+                break;
             }
-            newGoodsId[i] = oldGoodsId[j];
         }
 
-        po.setGoodsId(newGoodsId);
+        po.setGoodsId(oldGoodsId);
         dataService.update(po);
     }
 }

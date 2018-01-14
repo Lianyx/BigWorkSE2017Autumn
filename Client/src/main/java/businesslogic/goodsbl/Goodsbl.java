@@ -25,7 +25,6 @@ public class Goodsbl implements GoodsblService{
 
     public Goodsbl() throws RemoteException, NotBoundException, MalformedURLException {
         changer = new GoodsPOVOChanger();
-       // Remote remote = Naming.lookup("rmi://localhost:1099/GoodsData");
         dataService = (GoodsDataService) Naming.lookup("rmi://localhost:1099/GoodsData");
     }
 
@@ -35,10 +34,14 @@ public class Goodsbl implements GoodsblService{
      */
     public Set<GoodsVO> show() throws RemoteException {
         List<GoodsPO> POList = dataService.show();
-        System.out.println(POList.toString());
+
+        for (int i = 0; i < POList.size(); i++) {
+            GoodsPO goodsPO = POList.get(i);
+
+            if(goodsPO.getIsDelete() == 1)
+                POList.remove(i);
+        }
         List<GoodsVO> VOList = changer.allToVO(POList);
-        System.out.println("---------");
-        System.out.println(VOList.toString());
         return new HashSet<>(VOList);
     }
 
@@ -49,6 +52,8 @@ public class Goodsbl implements GoodsblService{
      */
     public ResultMessage addGoods(GoodsVO goodsVO) throws RemoteException {
         GoodsPO po = changer.oneToPO(goodsVO);
+
+        info.addGoods(goodsVO.getClassifyId(),goodsVO.getId());
 
         dataService.insert(po);
 

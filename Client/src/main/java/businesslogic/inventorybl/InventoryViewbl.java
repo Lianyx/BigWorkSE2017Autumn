@@ -3,6 +3,7 @@ package businesslogic.inventorybl;
 import blService.businessblservice.BusinessSearchInfo;
 import blService.inventoryblService.InventoryViewblService;
 import businesslogic.blServiceFactory.MyServiceFactory;
+import ui.salesui.ViewInfo;
 import util.ReceiptSearchCondition;
 import vo.ListGoodsItemVO;
 import vo.inventoryVO.InventoryViewItemVO;
@@ -25,7 +26,10 @@ import java.util.Set;
 
 public class InventoryViewbl implements InventoryViewblService {
     @Override
-    public InventoryViewVO inventoryView(LocalDate beginDate, LocalDate endDate) throws RemoteException, NotBoundException, MalformedURLException {
+    public InventoryViewVO inventoryView(LocalDate beginDate, LocalDate endDate) throws Exception {
+        ViewInfo viewInfo = new ViewInfo();
+
+
         //进货单
         BusinessSearchInfo<StockPurReceiptVO> stockPurReceiptVOBusinessSearchInfo = MyServiceFactory.getStockPurSearchInfo();
         //进货退货单
