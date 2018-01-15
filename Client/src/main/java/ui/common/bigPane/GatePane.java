@@ -18,24 +18,26 @@ public abstract class GatePane extends FXMLRefreshableAnchorPane {
 
     /**
      * abstract methods
-     * */
+     */
 
     protected abstract void refreshAfterMath();
+
     protected abstract void initiateService() throws RemoteException, NotBoundException, MalformedURLException;
+
     protected abstract void updateDataFromBl() throws RemoteException;
 
     /**
      * to be overridden
-     * */
+     */
 
-    /** The method is aimed to designate fields before super constructors are called */
+    // The method is aimed to designate fields before super constructors are called
     protected void initiateFields() {
     }
 
 
     /**
      * refresh
-     * */
+     */
     @Override
     public void refresh(boolean toSwitch) { // toSwitch没用
         BoardController myBoardController = BoardController.getBoardController();

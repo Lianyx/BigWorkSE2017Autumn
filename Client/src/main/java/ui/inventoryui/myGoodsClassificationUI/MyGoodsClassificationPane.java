@@ -34,4 +34,14 @@ public class MyGoodsClassificationPane extends GatePane {
     protected String getURL() {
         return "/inventoryui/goodui/myGoodsClassificationPane.fxml";
     }
+
+
+    @Override
+    protected void initiateFields() {
+        super.initiateFields();
+        myGoodsClasssificationTreeTableView = new MyGoodsClasssificationTreeTableView();
+        myGoodsClasssificationTreeTableView.setLayoutX(50);
+        myGoodsClasssificationTreeTableView.setLayoutY(60);
+        this.getChildren().add(myGoodsClasssificationTreeTableView);
+    }
 }

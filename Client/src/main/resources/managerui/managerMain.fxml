@@ -11,11 +11,13 @@
 <?import ui.managerui.businessConditionui.BusinessConditionChangePaneLabel?>
 <?import ui.managerui.businessProgressui.BusinessProgressChangePaneLabel?>
 <?import ui.managerui.businessSalesDetail.BusinessSalesDetailChangePaneLabel?>
+<?import ui.inventoryui.myGoodsClassificationUI.MyGoodsClassificationPane?>
+<?import ui.inventoryui.myGoodsClassificationUI.MyGoodsClassificationChangePaneLabel?>
 <AnchorPane fx:id="mainpane"
-           xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-           fx:controller="ui.managerui.ManagerUIController"
-           prefHeight="600" prefWidth="800"
-           stylesheets="@../css/tempInNeed.css">
+            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.managerui.ManagerUIController"
+            prefHeight="600" prefWidth="800"
+            stylesheets="@../css/tempInNeed.css">
     <!--<AnchorPane fx:id="mainAnchorPane" prefHeight="600" prefWidth="800">-->
 
         <AnchorPane fx:id="logopane" prefHeight="40" prefWidth="160" style="-fx-background-color: white">
@@ -65,6 +67,14 @@
                     </StackPane>
                 </graphic>
             </BusinessSalesDetailChangePaneLabel>
+            <MyGoodsClassificationChangePaneLabel fx:id="myGoodsClassificationList" text="商品" style="-fx-padding: 8 0 8 10;">
+                <graphic>
+                    <StackPane style="-fx-padding: 0 10 0 0;">
+                        <FontAwesomeIconView fx:id="myGoodsClassificationListIcon" size="1em"/>
+                    </StackPane>
+                </graphic>
+            </MyGoodsClassificationChangePaneLabel>
+
         </JFXListView>
 
     <!--</AnchorPane>-->

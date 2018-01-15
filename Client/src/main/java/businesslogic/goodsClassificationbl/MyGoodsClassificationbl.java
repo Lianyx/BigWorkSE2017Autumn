@@ -5,6 +5,8 @@ import businesslogic.goodsbl.GoodsPOVOChanger;
 import dataService.goodsdataService.GoodsClassificationDataService;
 import dataService.goodsdataService.GoodsDataService;
 import po.GoodsClassificationPO;
+import po.GoodsPO;
+import vo.inventoryVO.GoodsVO;
 import vo.inventoryVO.MyGoodsClassificationVO;
 
 import java.net.MalformedURLException;
@@ -32,16 +34,22 @@ public class MyGoodsClassificationbl implements MyGoodsClassificationblService {
         GoodsClassificationPO gcpo = goodsClassificationData.getById(id);
         MyGoodsClassificationVO result = new MyGoodsClassificationVO(gcpo);
 
-        if (gcpo.getGoodsId() != null && gcpo.getChildrenId().length != 0) {
+
+        if (gcpo.getGoodsId() != null && gcpo.getGoodsId().length != 0) {
             for (String s : gcpo.getGoodsId()) {
-                result.getGoods().add(goodsPOVOChanger.oneToVO(goodsDataService.selectById(s)));
+                GoodsPO goodsPO = goodsDataService.selectById(s);
+                result.getGoods().add(goodsPOVOChanger.oneToVO(goodsPO));
             }
             return result;
         }
 
         if (gcpo.getChildrenId() != null) {
             for (String s : gcpo.getChildrenId()) {
-                result.getChildren().add(selectById(s));
+                MyGoodsClassificationVO node = selectById(s);
+                node.setFather(result);
+                // 我怎么感觉不set也是可以的
+                // 这个方法如果不是root调用那么返回值也不会赋father
+                result.getChildren().add(node);
             }
         }
         return result;
