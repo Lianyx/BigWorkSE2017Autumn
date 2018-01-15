@@ -60,7 +60,8 @@ create table CombinePromotion(
   promotionState integer,
 
   discountAmount double,
-  goodsCombination varchar(1000)
+
+  Combination varchar(1000)
 ) character set = utf8;
 
 create table SalesSellReceipt(
@@ -209,6 +210,7 @@ comment varchar(150)
 create table User(
   userId integer,
   username varchar(30),
+  image MEDIUMBLOB,
   usertype integer DEFAULT 0,
   createTime bigint,
   facebook varchar(50),
@@ -218,25 +220,26 @@ create table User(
   phone varchar(100),
   comment varchar(100),
   password varchar(100),
-  isDeleted integer DEFAULT 0
+  isDeleted integer
 )character set = utf8;
 
 create table Member(
 memberId integer,
-memberCategory integer DEFAULT 0,
-VIPgrade integer DEFAULT 0,
-memberName varchar(100) DEFAULT '',
-clerkName varchar(100) DEFAULT '',
-phoneNumber varchar(100) DEFAULT '',
-address varchar(100) DEFAULT '',
-zipCode varchar(100) DEFAULT  '',
-emailAddress varchar(100) DEFAULT '',
-debtCeiling double DEFAULT 0,
-debt double DEFAULT 0,
-credit double DEFAULT 0,
-isDeleted integer DEFAULT 0,
-comment varchar(100) DEFAULT ''
-);
+memberCategory integer,
+image MEDIUMBLOB,
+VIPgrade integer,
+memberName varchar(100),
+clerkName varchar(100),
+phoneNumber varchar(100),
+address varchar(100),
+zipCode varchar(100),
+emailAddress varchar(100),
+debtCeiling double,
+debt double,
+credit double,
+isDeleted integer,
+comment varchar(100)
+)character set = utf8;
 
 insert into Member (memberId,memberCategory,VIPgrade,memberName,clerkName,phoneNumber,address,zipCode,emailAddress,debtCeiling,debt,credit,isDeleted,comment)
 values (5,0,4,'林冰','阳光仓库','139000013313','四明街525号','00013','lb131311@qq.com',1004,300,273,0,'常客');
