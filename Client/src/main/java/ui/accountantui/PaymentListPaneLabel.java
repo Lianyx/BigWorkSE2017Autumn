@@ -1,6 +1,6 @@
 package ui.accountantui;
 
-import ui.managerui.navigation.ChangePaneLabel;
+import ui.common.ChangePaneLabel;
 import ui.util.RefreshablePane;
 
 public class PaymentListPaneLabel extends ChangePaneLabel {

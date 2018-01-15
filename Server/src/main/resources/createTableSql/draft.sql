@@ -20,3 +20,18 @@ credit double ,
 isDeleted integer ,
 comment varchar(100)
 );
+
+insert into User(userid, userName, usertype, password)
+values (11, 'lianyuanxiang', 4, 123456);
+
+insert into User(userid, userName, usertype, password)
+values (12, 'liuhanyi', 0, 123456);
+
+insert into User(userid, userName, usertype, password)
+values (13, 'linyuchao', 2, 123456);
+
+insert into User(userid, userName, usertype, password)
+values (14, 'linpeng', 3, 123456);
+
+insert into User(userid, userName, usertype, password)
+values (1, '11111', 5, 11111);

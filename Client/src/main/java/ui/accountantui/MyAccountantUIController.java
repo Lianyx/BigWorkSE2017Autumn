@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import ui.common.BoardController;
 import ui.common.MyTopBar;
-import ui.managerui.navigation.ChangePaneLabel;
+import ui.common.ChangePaneLabel;
 
 public class MyAccountantUIController {
     @FXML

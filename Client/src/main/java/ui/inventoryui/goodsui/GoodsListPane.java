@@ -126,9 +126,13 @@ public class GoodsListPane extends ReceiptListPane<GoodsVO> {
 
     }
 
+//    @Override
+//    public void add() throws RemoteException, NotBoundException, MalformedURLException {
+//
+//    }
+
     @Override
-    public void add() throws RemoteException, NotBoundException, MalformedURLException {
+    public void add() {
 
     }
-
 }

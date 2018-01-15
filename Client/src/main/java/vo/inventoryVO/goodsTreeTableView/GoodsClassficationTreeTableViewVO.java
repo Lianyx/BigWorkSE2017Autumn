@@ -1,17 +1,23 @@
 package vo.inventoryVO.goodsTreeTableView;
 
 import vo.inventoryVO.GoodsClassificationVO;
+import vo.inventoryVO.MyGoodsClassificationVO;
 
 public class GoodsClassficationTreeTableViewVO extends AbstractGoodsTreeTableViewVO {
-    private GoodsClassificationVO goodsClassificationVO;
+    private MyGoodsClassificationVO goodsClassificationVO;
 
-    public GoodsClassficationTreeTableViewVO(GoodsClassificationVO goodsClassificationVO) {
+    public GoodsClassficationTreeTableViewVO(MyGoodsClassificationVO goodsClassificationVO) {
         this.goodsClassificationVO = goodsClassificationVO;
     }
 
     @Override
     public String getName() {
         return goodsClassificationVO.getName();
+    }
+
+    @Override
+    public String getType() {
+        return "";
     }
 
     @Override

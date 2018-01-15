@@ -1,5 +1,6 @@
-package ui.managerui.navigation;
+package ui.managerui.businessSalesDetail;
 
+import ui.common.ChangePaneLabel;
 import ui.managerui.businessSalesDetail.BusinessSalesListPane;
 import ui.util.RefreshablePane;
 

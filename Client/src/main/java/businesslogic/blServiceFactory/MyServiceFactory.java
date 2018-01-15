@@ -4,6 +4,7 @@ import blService.businessblservice.BusinessConditionInfo;
 import blService.businessblservice.BusinessConditionblService;
 import blService.businessblservice.BusinessSearchInfo;
 import blService.checkblService.CheckInfo;
+import blService.goodsClassificationblService.MyGoodsClassificationblService;
 import blService.goodsblService.goodsSearchInfo;
 import blService.promotionblService.PromotionInfo;
 import businesslogic.billbl.CashBillReceiptbl;

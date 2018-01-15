@@ -14,6 +14,11 @@ public class GoodsTreeTableViewVO extends AbstractGoodsTreeTableViewVO {
     }
 
     @Override
+    public String getType() {
+        return goodsVO.getGoodType();
+    }
+
+    @Override
     public String getNum() {
         return String.valueOf(goodsVO.getInventoryNum());
     }
@@ -31,5 +36,11 @@ public class GoodsTreeTableViewVO extends AbstractGoodsTreeTableViewVO {
     @Override
     public String getAlarmNumber() {
         return String.valueOf(goodsVO.getAlarmNumber());
+    }
+
+    @Override
+    public void clickTwiceAftermath() {
+        super.clickTwiceAftermath();
+        // TODO getGoodsDetailPane
     }
 }

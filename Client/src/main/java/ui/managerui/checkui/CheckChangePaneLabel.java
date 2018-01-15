@@ -1,5 +1,6 @@
-package ui.managerui.navigation;
+package ui.managerui.checkui;
 
+import ui.common.ChangePaneLabel;
 import ui.managerui.checkui.CheckListPane;
 import ui.util.RefreshablePane;
 

@@ -1,5 +1,6 @@
-package ui.managerui.navigation;
+package ui.managerui.promotionui;
 
+import ui.common.ChangePaneLabel;
 import ui.managerui.promotionui.PromotionListPane;
 import ui.util.RefreshablePane;
 

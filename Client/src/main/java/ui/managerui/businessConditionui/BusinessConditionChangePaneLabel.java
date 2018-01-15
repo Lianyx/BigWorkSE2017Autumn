@@ -1,5 +1,6 @@
-package ui.managerui.navigation;
+package ui.managerui.businessConditionui;
 
+import ui.common.ChangePaneLabel;
 import ui.managerui.businessConditionui.BusinessConditionPane;
 import ui.util.RefreshablePane;
 

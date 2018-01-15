@@ -28,7 +28,7 @@ public abstract class MyTreeTableBorderPane<T extends RecursiveTreeObject<T>> ex
             row.setPrefHeight(55);
             row.setStyle("-fx-border-color: rgb(233,237,239); -fx-border-width: 0.3;");
             row.setOnMouseClicked(e -> {
-                if (e.getClickCount() == 2) {
+                if (row.getTreeItem().getValue() != null && e.getClickCount() == 2) {
                     clickTwiceAftermath(row);
                 }
             });

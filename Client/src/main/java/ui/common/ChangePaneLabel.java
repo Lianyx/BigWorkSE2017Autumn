@@ -1,4 +1,4 @@
-package ui.managerui.navigation;
+package ui.common;
 
 import javafx.scene.control.Label;
 import ui.util.RefreshablePane;

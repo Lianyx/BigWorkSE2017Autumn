@@ -18,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import ui.exception.LoginRMIException;
+//import ui.exception.LoginRMIException;
 import ui.util.*;
 import util.ResultMessage;
 import util.UserCategory;

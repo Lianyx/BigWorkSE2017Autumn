@@ -17,6 +17,5 @@ public interface UserDataService extends Remote {
     public ResultMessage update(UserPO UserPO) throws RemoteException;
     public UserPO showDetail(int id) throws RemoteException;
     public ArrayList<UserPO> search(UserSearchCondition userSearchCondition) throws RemoteException;
-    public UserPO checkPassword(String username,String password) throws RemoteException;
 
 }
