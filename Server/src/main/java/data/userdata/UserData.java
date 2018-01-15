@@ -90,6 +90,13 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             UserDataPOMapper mapper = session.getMapper(UserDataPOMapper.class);
             UserPO userPO = mapper.showDetail(id);
+            if(userPO!=null&&userPO.getImage()==null){
+                try {
+                    userPO.setImage(ImageConvertor.getByte(ImageIO.read(getClass().getResource("/default/timg.jpg"))));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
             session.commit();
 
             return userPO;
@@ -101,25 +108,18 @@ public class UserData extends UnicastRemoteObject implements UserDataService {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             UserDataPOMapper mapper = session.getMapper(UserDataPOMapper.class);
             ArrayList<UserPO> userPOs = mapper.search(userSearchCondition);
-            userPOs = userPOs.stream().filter(userPO -> userPO.getIsDeleted()==0).collect(Collectors.toCollection(ArrayList::new));
+            userPOs = userPOs.stream().filter(userPO -> {
+                    if(userPO.getImage()==null){
+                        try {
+                            userPO.setImage(ImageConvertor.getByte(ImageIO.read(getClass().getResource("/default/timg.jpg"))));
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+            return userPO.getIsDeleted()==0;}).collect(Collectors.toCollection(ArrayList::new));
             session.commit();
             return userPOs;
         }
-    }
-
-
-    @Override
-    public UserPO checkPassword(String username, String password) throws RemoteException {
-        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
-            UserDataPOMapper mapper = session.getMapper(UserDataPOMapper.class);
-            UserPO userPO = mapper.getPassword(username);
-            if(userPO == null)
-                return null;
-            if(userPO.getPassword() == password)
-                return userPO;
-            session.commit();
-        }
-        return null;
     }
 
 

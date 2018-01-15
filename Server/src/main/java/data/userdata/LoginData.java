@@ -8,9 +8,11 @@ import mapper.UserDataPOMapper;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import po.UserPO;
+import util.ImageConvertor;
 import util.ResultMessage;
 import util.UserCategory;
 
+import javax.imageio.ImageIO;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -37,6 +39,13 @@ public class LoginData extends UnicastRemoteObject implements LoginDataService {
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
                 UserDataPOMapper mapper = session.getMapper(UserDataPOMapper.class);
                 UserPO userPO = mapper.getPassword(username);
+                if(userPO.getImage()==null){
+                    try {
+                        userPO.setImage(ImageConvertor.getByte(ImageIO.read(getClass().getResource("/default/timg.jpg"))));
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
                 return userPO;
             }
     }

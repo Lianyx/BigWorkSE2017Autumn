@@ -14,6 +14,7 @@ import util.ResultMessage;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -78,6 +79,13 @@ public class MemberData extends UnicastRemoteObject implements MemberdataService
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             MemberPOMapper mapper = session.getMapper(MemberPOMapper.class);
             MemberPO memberPO = mapper.showDetail(id);
+            if(memberPO!=null&&memberPO.getImage()==null){
+                try {
+                    memberPO.setImage(ImageConvertor.getByte(ImageIO.read(getClass().getResource("/default/timg.jpg"))));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
             return memberPO;
         }
     }
@@ -87,7 +95,16 @@ public class MemberData extends UnicastRemoteObject implements MemberdataService
         try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
             MemberPOMapper mapper = session.getMapper(MemberPOMapper.class);
             ArrayList<MemberPO> memberPOS = mapper.search(memberSearchCondition);
-            memberPOS = memberPOS.stream().filter(userPO -> userPO.getIsDeleted()==0).collect(Collectors.toCollection(ArrayList::new));
+            memberPOS = memberPOS.stream().filter(memberPO -> {
+                        if(memberPO.getImage()==null){
+                            try {
+                                memberPO.setImage(ImageConvertor.getByte(ImageIO.read(getClass().getResource("/default/timg.jpg"))));
+                            }catch (IOException e){
+                                e.printStackTrace();
+                            }
+                        }
+             return memberPO.getIsDeleted()==0;}
+            ).collect(Collectors.toCollection(ArrayList::new));
             System.out.println(memberPOS.size());
             session.commit();
             return memberPOS;

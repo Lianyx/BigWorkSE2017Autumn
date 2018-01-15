@@ -2,7 +2,7 @@ package data.accountdata;
 
 
 import annotations.RMIRemote;
-import dataService.accountDataService.AccountDataService;
+import dataService.accountdataService.AccountDataService;
 import mapper.AccountPOMapper;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
