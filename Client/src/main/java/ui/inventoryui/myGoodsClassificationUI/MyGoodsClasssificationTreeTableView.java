@@ -14,12 +14,12 @@ import vo.inventoryVO.goodsTreeTableView.GoodsTreeTableViewVO;
 
 public class MyGoodsClasssificationTreeTableView extends TreeTableView<AbstractGoodsTreeTableViewVO> {
     public MyGoodsClasssificationTreeTableView() {
-        TreeTableColumn<AbstractGoodsTreeTableViewVO, String> nameColumn = new OrdinaryStringColumn<>("名称", 80, AbstractGoodsTreeTableViewVO::getName);
-        TreeTableColumn<AbstractGoodsTreeTableViewVO, String> typeColumn = new OrdinaryStringColumn<>("型号", 60, AbstractGoodsTreeTableViewVO::getType);
-        TreeTableColumn<AbstractGoodsTreeTableViewVO, String> numColumn = new OrdinaryStringColumn<>("数量", 50, AbstractGoodsTreeTableViewVO::getNum);
-        TreeTableColumn<AbstractGoodsTreeTableViewVO, String> purPriceColumn = new OrdinaryStringColumn<>("进价", 50, AbstractGoodsTreeTableViewVO::getPurPrice);
-        TreeTableColumn<AbstractGoodsTreeTableViewVO, String> salePriceColumn = new OrdinaryStringColumn<>("售价", 50, AbstractGoodsTreeTableViewVO::getSalePrice);
-        TreeTableColumn<AbstractGoodsTreeTableViewVO, String> alarmNumColumn = new OrdinaryStringColumn<>("报警数量", 50, AbstractGoodsTreeTableViewVO::getAlarmNumber);
+        TreeTableColumn<AbstractGoodsTreeTableViewVO, String> nameColumn = new OrdinaryStringColumn<>("名称", 200, AbstractGoodsTreeTableViewVO::getName);
+        TreeTableColumn<AbstractGoodsTreeTableViewVO, String> typeColumn = new OrdinaryStringColumn<>("型号", 70, AbstractGoodsTreeTableViewVO::getType);
+        TreeTableColumn<AbstractGoodsTreeTableViewVO, String> numColumn = new OrdinaryStringColumn<>("数量", 70, AbstractGoodsTreeTableViewVO::getNum);
+        TreeTableColumn<AbstractGoodsTreeTableViewVO, String> purPriceColumn = new OrdinaryStringColumn<>("进价", 70, AbstractGoodsTreeTableViewVO::getPurPrice);
+        TreeTableColumn<AbstractGoodsTreeTableViewVO, String> salePriceColumn = new OrdinaryStringColumn<>("售价", 70, AbstractGoodsTreeTableViewVO::getSalePrice);
+        TreeTableColumn<AbstractGoodsTreeTableViewVO, String> alarmNumColumn = new OrdinaryStringColumn<>("报警数量", 70, AbstractGoodsTreeTableViewVO::getAlarmNumber);
 
         this.getColumns().setAll(nameColumn, typeColumn, numColumn, purPriceColumn, salePriceColumn, alarmNumColumn);
         this.setShowRoot(false);
@@ -28,9 +28,16 @@ public class MyGoodsClasssificationTreeTableView extends TreeTableView<AbstractG
             TreeTableRow<AbstractGoodsTreeTableViewVO> row = new TreeTableRow<>();
 
             // set style, maybe selectedProperty? todo
+            row.selectedProperty().addListener(e -> {
+                if (row.isSelected()) {
+                    row.toFront();
+                } else {
+                    row.setEffect(null);
+                }
+            });
 
             row.setOnMouseClicked(e -> {
-                if (row.getTreeItem().getValue() != null && e.getClickCount() == 2) {
+                if (row.getTreeItem() != null && e.getClickCount() == 2) {
                     row.getTreeItem().getValue().clickTwiceAftermath();
                 }
             });
@@ -54,7 +61,7 @@ public class MyGoodsClasssificationTreeTableView extends TreeTableView<AbstractG
         }
 
         if (root.getChildren() != null) {
-            root.getChildren().forEach(gc -> result.getChildren().add(new TreeItem<>(new GoodsClassficationTreeTableViewVO(gc))));
+            root.getChildren().forEach(gc -> result.getChildren().add(makeTreeItemRoot(gc)));
         }
         return result;
     }

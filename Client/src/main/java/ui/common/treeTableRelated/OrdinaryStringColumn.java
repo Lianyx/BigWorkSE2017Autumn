@@ -13,5 +13,6 @@ public class OrdinaryStringColumn<T> extends TreeTableColumn<T, String> {
         setCellValueFactory(param -> {
             return new ReadOnlyStringWrapper(getter.apply(param.getValue().getValue()));
         });
+//        setCellFactory(param -> new OrdinaryTreeTableCell<>());
     }
 }

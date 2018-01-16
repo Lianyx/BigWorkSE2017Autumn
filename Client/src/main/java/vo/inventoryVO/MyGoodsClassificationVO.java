@@ -4,6 +4,7 @@ import businesslogic.goodsbl.GoodsPOVOChanger;
 import po.GoodsClassificationPO;
 import po.GoodsPO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyGoodsClassificationVO {
@@ -23,6 +24,8 @@ public class MyGoodsClassificationVO {
     public MyGoodsClassificationVO(GoodsClassificationPO goodsClassificationPO) {
         id = goodsClassificationPO.getId();
         name = goodsClassificationPO.getName();
+        children = new ArrayList<>();
+        goods = new ArrayList<>();
     }
 
     public GoodsClassificationPO toPO() {

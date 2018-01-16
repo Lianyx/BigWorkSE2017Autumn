@@ -23,12 +23,13 @@ public abstract class MyTreeTableBorderPane<T extends RecursiveTreeObject<T>> ex
     protected Pagination pagination = new Pagination();
 
     public MyTreeTableBorderPane() {
+        myTreeTable.getStyleClass().add("whileBackgroundTreeTable");
         myTreeTable.setRowFactory(tableView -> {
             JFXTreeTableRow<T> row = new JFXTreeTableRow<>();
             row.setPrefHeight(55);
             row.setStyle("-fx-border-color: rgb(233,237,239); -fx-border-width: 0.3;");
             row.setOnMouseClicked(e -> {
-                if (row.getTreeItem().getValue() != null && e.getClickCount() == 2) {
+                if (row.getTreeItem() != null && e.getClickCount() == 2) {
                     clickTwiceAftermath(row);
                 }
             });

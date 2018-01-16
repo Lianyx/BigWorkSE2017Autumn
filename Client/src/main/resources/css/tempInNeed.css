@@ -92,7 +92,7 @@
 }
 
 /* TODO 这个是background总是感觉很怪 */
-.tree-table-view .tree-table-row-cell {
+.whileBackgroundTreeTable .tree-table-row-cell {
     -fx-background-color: white;
 }
 
