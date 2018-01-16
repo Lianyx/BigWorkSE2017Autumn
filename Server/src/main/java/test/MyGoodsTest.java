@@ -91,13 +91,13 @@ public class MyGoodsTest {
         // 这里的string[]是null还是空，多种情况都要尝试一下…
 
 //        GoodsClassificationPO root = new GoodsClassificationPO();
-//        root.set_name("root");
+//        root.set_name("全部商品分类");
 //        root.setFatherId(null);
 //        root.setId("root");
 //        root.setChildrenId(new String[]{"root/1", "root/2", "root/3"});
 //        root.setGoodsId(new String[]{});
 //
-//        goodsClassificationData.update(root);
+//        goodsClassificationData.insert(root);
 
 //        GoodsClassificationPO iPhone = new GoodsClassificationPO();
 //        iPhone.set_name("iPhone");

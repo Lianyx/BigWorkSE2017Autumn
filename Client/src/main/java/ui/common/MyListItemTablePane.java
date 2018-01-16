@@ -37,25 +37,25 @@ public abstract class MyListItemTablePane<T extends RecursiveTreeObject<T>> exte
             row.setOnMouseClicked((MouseEvent event) -> {
                 T vo = (T) row.getTreeItem().getValue();
                 if (event.getButton() == MouseButton.SECONDARY) {
-                    ListPopup listPopup = new ListPopup();
-                    JFXPopup popup = new JFXPopup(listPopup);
-                    listPopup.getListview().setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-                            initial(vo);
-                            JFXDialog dialog = new JFXDialog(mainpane, myListItemPane, JFXDialog.DialogTransition.CENTER);
-                            myListItemPane.setDialog(dialog);
-                            dialog.show();
-                            popup.hide();
-                        }
-                    });
-                    listPopup.getListdelete().setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-                            observableList.remove(vo);
-                        }
-                    });
-                    popup.show(row, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT);
+//                    ListPopup listPopup = new ListPopup();
+//                    JFXPopup popup = new JFXPopup(listPopup);
+//                    listPopup.getListview().setOnMouseClicked(new EventHandler<MouseEvent>() {
+//                        @Override
+//                        public void handle(MouseEvent event) {
+//                            initial(vo);
+//                            JFXDialog dialog = new JFXDialog(mainpane, myListItemPane, JFXDialog.DialogTransition.CENTER);
+//                            myListItemPane.setDialog(dialog);
+//                            dialog.show();
+//                            popup.hide();
+//                        }
+//                    });
+//                    listPopup.getListdelete().setOnMouseClicked(new EventHandler<MouseEvent>() {
+//                        @Override
+//                        public void handle(MouseEvent event) {
+//                            observableList.remove(vo);
+//                        }
+//                    });
+//                    popup.show(row, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT);
                 }
                 if (event.getClickCount() == 2) {
                     initial(vo);

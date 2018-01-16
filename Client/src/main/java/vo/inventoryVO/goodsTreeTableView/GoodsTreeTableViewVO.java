@@ -1,5 +1,6 @@
 package vo.inventoryVO.goodsTreeTableView;
 
+import ui.inventoryui.myGoodsClassificationUI.GoodsPopUpListView;
 import vo.inventoryVO.GoodsVO;
 
 public class GoodsTreeTableViewVO extends AbstractGoodsTreeTableViewVO {
@@ -36,6 +37,12 @@ public class GoodsTreeTableViewVO extends AbstractGoodsTreeTableViewVO {
     @Override
     public String getAlarmNumber() {
         return String.valueOf(goodsVO.getAlarmNumber());
+    }
+
+    @Override
+    public GoodsPopUpListView clickSecondaryPopUpList() {
+        GoodsPopUpListView result = new GoodsPopUpListView();
+        return result;
     }
 
     @Override
