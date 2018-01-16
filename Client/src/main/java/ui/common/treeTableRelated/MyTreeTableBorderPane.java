@@ -23,6 +23,7 @@ public abstract class MyTreeTableBorderPane<T extends RecursiveTreeObject<T>> ex
     protected Pagination pagination = new Pagination();
 
     public MyTreeTableBorderPane() {
+        myTreeTable.getStyleClass().add("whileBackgroundTreeTable");
         myTreeTable.setRowFactory(tableView -> {
             JFXTreeTableRow<T> row = new JFXTreeTableRow<>();
             row.setPrefHeight(55);

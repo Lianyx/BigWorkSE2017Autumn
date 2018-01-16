@@ -15,7 +15,7 @@
 <?import ui.inventoryui.myGoodsClassificationUI.MyGoodsClassificationChangePaneLabel?>
 <AnchorPane fx:id="mainpane"
             xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ui.managerui.ManagerUIController"
+            fx:controller="ui.common.RespectiveMainUIControlelr"
             prefHeight="600" prefWidth="800"
             stylesheets="@../css/tempInNeed.css">
     <!--<AnchorPane fx:id="mainAnchorPane" prefHeight="600" prefWidth="800">-->
