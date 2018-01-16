@@ -3,9 +3,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import org.controlsfx.control.MasterDetailPane?>
 
-
-<fx:root prefHeight="250.0" prefWidth="450.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="350.0" prefWidth="450.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MasterDetailPane fx:id="pane" detailSide="BOTTOM" dividerPosition="0.6" layoutX="-1.0" layoutY="-2.0" prefHeight="222.0" prefWidth="413.0" />
+      <MasterDetailPane fx:id="pane" detailSide="BOTTOM" dividerPosition="0.6" layoutX="-1.0" layoutY="-2.0" prefHeight="350.0" prefWidth="450.0" stylesheets="@../css/promotionList.css" />
    </children>
 </fx:root>

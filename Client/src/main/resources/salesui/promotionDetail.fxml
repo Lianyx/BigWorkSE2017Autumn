@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root prefHeight="100.0" prefWidth="450.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="100.0" prefWidth="450.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Separator layoutX="222.0" layoutY="13.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="0.0" />
       <Label fx:id="detail" layoutX="14.0" layoutY="14.0" wrapText="true" />
    </children>
 </fx:root>
