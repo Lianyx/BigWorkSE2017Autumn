@@ -9,11 +9,13 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import po.LogPO;
 import ui.logui.LogPane;
+import ui.salesui.PromotionMasterDetail;
 import util.EventCategory;
 import util.UserCategory;
 
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Test extends Application {
 
@@ -24,17 +26,9 @@ public class Test extends Application {
     @Override
     public void start(Stage primaryStage) {
         StackPane root = new StackPane();
-
+        Carousel carousel = new Carousel();
+        root.getChildren().add(carousel);
         Scene scene=new Scene(root);
-/*
-        try{
-            Logbl logbl = new Logbl();
-            logbl.insert(new LogPO(1, LocalDateTime.now(),"sabi", UserCategory.UserManager, EventCategory.CreateSalesReceipt,"sbbbb"));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-*/
         primaryStage.setScene(scene);
         primaryStage.show();
     }
