@@ -1,7 +1,11 @@
 package ui.inventoryui.myGoodsClassificationUI;
 
 import blService.goodsClassificationblService.MyGoodsClassificationblService;
+import businesslogic.blServiceFactory.MessageObjectFactory;
 import businesslogic.blServiceFactory.MyblServiceFactory;
+import javafx.application.Platform;
+import javafx.scene.control.Button;
+import network.ServerInterface;
 import ui.common.bigPane.GatePane;
 import vo.inventoryVO.MyGoodsClassificationVO;
 
@@ -43,5 +47,18 @@ public class MyGoodsClassificationPane extends GatePane {
         myGoodsClasssificationTreeTableView.setLayoutX(50);
         myGoodsClasssificationTreeTableView.setLayoutY(60);
         this.getChildren().add(myGoodsClasssificationTreeTableView);
+
+        Button testButton = new Button("测试消息功能用的");
+        testButton.setOnAction(e -> {
+            try {
+                ServerInterface serverInterface = MessageObjectFactory.getServerInterface();
+                serverInterface.send("测试一下而己");
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
+        testButton.setLayoutX(100);
+        testButton.setLayoutY(40);
+        this.getChildren().add(testButton);
     }
 }

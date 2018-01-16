@@ -17,7 +17,7 @@ public class ServerMain {
 
             LocateRegistry.createRegistry(port);
 
-            Reflections reflections = new Reflections("data");
+            Reflections reflections = new Reflections("data", "network");
             Set<Class<?>> classesList = reflections.getTypesAnnotatedWith(RMIRemote.class);
             classesList.forEach(c -> {
                 try {
