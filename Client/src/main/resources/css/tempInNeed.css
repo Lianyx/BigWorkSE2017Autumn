@@ -91,11 +91,13 @@
     -fx-text-fill: rgb(120, 144, 156);
 }
 
-/* TODO 这个是background总是感觉很怪 */
-.whileBackgroundTreeTable .tree-table-row-cell {
+.tree-table-view .tree-table-row-cell {
     -fx-background-color: white;
 }
 
+.defaultTreeTableSelectRow .tree-table-row-cell:selected {
+    -fx-background-color: #03A9F4;
+}
 .tree-table-view:focused .tree-table-row-cell:selected {
     -fx-effect: dropshadow(one-pass-box, #999999, 30, 0.01, 0, 0);
     /*-fx-background-radius: 1.4;*/

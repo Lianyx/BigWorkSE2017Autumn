@@ -14,13 +14,15 @@ import vo.inventoryVO.goodsTreeTableView.GoodsTreeTableViewVO;
 
 public class MyGoodsClasssificationTreeTableView extends TreeTableView<AbstractGoodsTreeTableViewVO> {
     public MyGoodsClasssificationTreeTableView() {
+        this.getStyleClass().add("defaultTreeTableSelectRow"); // TODO 这里的css感觉还要加。
         TreeTableColumn<AbstractGoodsTreeTableViewVO, String> nameColumn = new OrdinaryStringColumn<>("名称", 200, "name");
         nameColumn.setCellFactory(param -> {
             TreeTableCell<AbstractGoodsTreeTableViewVO, String> cell = new GoodsAndGoodsClassificationNameCell();
             cell.setOnMouseClicked(e -> {
 //                cell.getTreeTableRow().getTreeItem().getValue()
                 if (e.getButton().equals(MouseButton.SECONDARY)) {
-                    JFXPopup popup = new JFXPopup(cell.getTreeTableRow().getTreeItem().getValue().clickSecondaryPopUpList());
+                    JFXPopup popup = new JFXPopup();
+                    popup.setPopupContent(cell.getTreeTableRow().getTreeItem().getValue().clickSecondaryPopUpList());
 //                    JFXPopup popup = new JFXPopup(new GoodsPopUpListView());
                     popup.show(cell, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.RIGHT);
                 }

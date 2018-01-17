@@ -2,15 +2,14 @@ package ui.memberui;
 
 import blService.memberblService.MemberblService;
 import businesslogic.memberbl.Memberbl;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXRippler;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import org.controlsfx.control.PopOver;
 import ui.common.BoardController;
 import ui.common.dialog.MyTwoButtonDialog;
+import ui.mainui.Carousel;
 import ui.util.*;
 import util.MemberSearchCondition;
 import vo.MemberListVO;
@@ -75,7 +74,11 @@ public class MemberListPane extends RefreshablePane {
         filterPopOver.setDetachable(false);
         filterPopOver.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
         filterPopOver.setContentNode(memberFilterPane);
-        filter.setOnMouseClicked(e -> filterPopOver.show(filter));
+      //  filter.setOnMouseClicked(e -> filterPopOver.show(filter));
+        filter.setOnMouseClicked(t->{
+            JFXDialog dialog = new JFXDialog(PaneFactory.getMainPane(),new Carousel(), JFXDialog.DialogTransition.CENTER);
+            dialog.show();
+        });
     }
 
     private static String getURL(){

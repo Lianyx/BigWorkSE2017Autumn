@@ -47,7 +47,7 @@ public class GoodsClassificationTreeTableViewVO extends AbstractGoodsTreeTableVi
         GoodsPopUpListView result = new GoodsPopUpListView();
 
         result.getItems().add(new AddGoodsClassificationLabel(goodsClassificationVO));
-        result.getItems().add(new AddGoodsLabel());
+        result.getItems().add(new AddGoodsLabel(goodsClassificationVO));
         result.getItems().add(new DeleteGoodsClassificationLabel());
         result.getItems().add(new DeleteGoodsLabel());
         result.getItems().add(new ModifyGoodsClassificationLabel());
