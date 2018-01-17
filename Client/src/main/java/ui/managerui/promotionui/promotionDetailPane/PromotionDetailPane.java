@@ -136,10 +136,10 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
     }
 
     protected void saveTask() {
+        updatePromotionVO();
+
         BoardController boardController = BoardController.getBoardController();
         boardController.Loading();
-
-        updatePromotionVO();
 
         StringProperty prompt = new SimpleStringProperty(); // 为了避免lambda的final限制。
         new Thread(new GetTask(() -> {
@@ -238,6 +238,7 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
 
         GetTask task = new GetTask(() -> {
             myBoardController.switchTo(this); // 感觉这个分两次来明显就是为了可以有等待…
+            reset();
         }, dialog, woid -> {
             try {
                 if (promotionblService == null) { // 这说明肯定是第一次
@@ -245,7 +246,6 @@ public abstract class PromotionDetailPane<T extends PromotionVO> extends Refresh
                     if (promotionVO == null) {
                         promotionVO = promotionblService.getNew();
                     }
-                    reset();
                 }
                 return true; // TODO 如果不是第一次refresh目前就是什么都不做，但是好像是希望去数据库刷新
             } catch (Exception e) {

@@ -1,10 +1,15 @@
 package ui.inventoryui.myGoodsClassificationUI.label;
 
 import ui.common.mixer.FXMLLoadableMixer;
+import vo.inventoryVO.MyGoodsClassificationVO;
 
 public class AddGoodsClassificationLabel extends GoodsPopUpListLabel implements FXMLLoadableMixer{
-    public AddGoodsClassificationLabel() {
+    private MyGoodsClassificationVO goodsClassificationVO;
+
+    public AddGoodsClassificationLabel(MyGoodsClassificationVO goodsClassificationVO) {
         load();
+
+        this.goodsClassificationVO = goodsClassificationVO;
     }
 
     @Override
@@ -15,5 +20,6 @@ public class AddGoodsClassificationLabel extends GoodsPopUpListLabel implements 
     @Override
     public void clickAction() {
         System.out.println("addGoodsClassification");
+//        if (goodsClassificationVO)
     }
 }
